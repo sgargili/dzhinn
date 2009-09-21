@@ -4,8 +4,6 @@
  */
 package httpPack;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import org.xmlpull.v1.XmlPullParserException;
@@ -24,7 +22,7 @@ public class NewClass {
 //        out.close();
 //        File outFile1 = new File("c://out1.xml");
 //        FileWriter out1 = new FileWriter(outFile1);
- //      hdao.DownloadContentPT("http://www.nix.ru/price/price.html");
+        //      hdao.DownloadContentPT("http://www.nix.ru/price/price.html");
 //        out1.close();
         //hdao.DownloadContentPTURL(hdao.DownloadContentPT("http://www.nix.ru/price/price.html"));
         hdao.DownloadContentCard();
