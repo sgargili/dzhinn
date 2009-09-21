@@ -378,23 +378,24 @@ public class HttpDAO {
                 eventType = xpp.next();
             }
 
-//        int i = 0;
-//        Pattern pat = Pattern.compile("(.)(.*)");
-//        Matcher mat;
-//        for (Iterator it = PTList.iterator(); it.hasNext();) {
-//            String str = (String) it.next();
-//            str = str.replaceAll("Все|Вся", "");
-//            str = str.trim();
-//            mat = pat.matcher(str);
-//            if (mat.find()) {
-//                System.out.println(i + " -> " + mat.group(1).toUpperCase() + mat.group(2));
-//            }
-//            i++;
-//        }
+            int i = 0;
+            Pattern pat = Pattern.compile("(.)(.*)");
+            Matcher mat;
+            for (Iterator it = outputList.iterator(); it.hasNext();) {
+                PTLinks str = (PTLinks) it.next();
+                str.setPT(str.getPT().replaceAll("Все|Вся", "").trim());
+                mat = pat.matcher(str.getPT());
+                if (mat.find()) {
+                  //  System.out.println(i + " -> " + mat.group(1).toUpperCase() + mat.group(2));
+                    str.setPT(mat.group(1).toUpperCase() + mat.group(2));
+                    outputList.set(i, str);
+                }
+                i++;
+            }
             List<String> strList = new ArrayList<String>();
 
 
-            int i = 0;
+            i = 0;
             for (Iterator it = PTLinklist.iterator(); it.hasNext();) {
                 PTLinks str = (PTLinks) it.next();
 //            strList.add(i + " -> " + str.getPT().replaceAll("NEW", "").trim() + "----->>>>" + str.getLink());
