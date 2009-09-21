@@ -4,6 +4,8 @@
  */
 package httpPack;
 
+import DAO.FactoryDAO;
+import Pojo.Nixlinks;
 import Pojo.PTLinks;
 import com.thoughtworks.xstream.XStream;
 import java.io.BufferedReader;
@@ -12,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -128,7 +131,7 @@ public class HttpDAO {
         return outputString;
     }
 
-    public String DownloadContentPT(String url) throws XmlPullParserException, IOException {
+    public List DownloadContentPT(String url) throws XmlPullParserException, IOException {
         client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         String inputLine = "";
         boolean tbool = false, abool = false;
@@ -170,7 +173,6 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
-
         List<String> PTList = new ArrayList<String>();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
@@ -212,32 +214,11 @@ public class HttpDAO {
                     abool = false;
                     PTLinklist.add(ptl);
                 }
-
             }
             eventType = xpp.next();
         }
         PTList.add(pt + ")");
-//        int i = 0;
-//        Pattern pat = Pattern.compile("(.)(.*)");
-//        Matcher mat;
-//        for (Iterator it = PTList.iterator(); it.hasNext();) {
-//            String str = (String) it.next();
-//            str = str.replaceAll("Все|Вся", "");
-//            str = str.trim();
-//            mat = pat.matcher(str);
-//            if (mat.find()) {
-//                System.out.println(i + " -> " + mat.group(1).toUpperCase() + mat.group(2));
-//            }
-//            i++;
-//        }
-//        i = 0;
-//        for (Iterator it = PTLinklist.iterator(); it.hasNext();) {
-//            PTLinks str = (PTLinks) it.next();
-//            System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
-//            i++;
-//        }
         List<PTLinks> outputList = new ArrayList<PTLinks>();
-
         for (Iterator it = PTList.iterator(); it.hasNext();) {
             String str = (String) it.next();
             str = str.replaceAll("[|][)]", ")");
@@ -259,7 +240,6 @@ public class HttpDAO {
                             break;
                         }
                     }
-
                 }
             } else {
                 pat = Pattern.compile("(.*)\\s\\(\\)");
@@ -268,34 +248,47 @@ public class HttpDAO {
                     for (Iterator iter = PTLinklist.iterator(); iter.hasNext();) {
                         PTLinks PTL = (PTLinks) iter.next();
                         PTLinks oPTL = new PTLinks();
-                        if ((PTL.getPT()).equals(mat.group(1))) {
-                            oPTL.setPT(mat.group(1));
+                        if ((PTL.getPT()).equals(mat.group(1).replaceAll("PDA", "(PDA)"))) {
+                            oPTL.setPT(mat.group(1).replaceAll("PDA", "(PDA)"));
                             oPTL.setLink(PTL.getLink());
                             outputList.add(oPTL);
                             break;
                         }
                     }
                 }
-
             }
-
         }
         int i = 0;
         for (Iterator it = outputList.iterator(); it.hasNext();) {
             PTLinks str = (PTLinks) it.next();
-            System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
+            for (Iterator itpt = PTList.iterator(); itpt.hasNext();) {
+                String temp = (String) itpt.next();
+                Pattern pat = Pattern.compile(str.getPT().toString());
+                Matcher mat = pat.matcher(temp);
+                if (mat.find()) {
+                    pat = Pattern.compile("(.*)\\s\\(.*\\)");
+                    mat = pat.matcher(temp);
+                    if (mat.find()) {
+                        str.setPT(mat.group(1));
+                        outputList.set(i, str);
+                    }
+                    break;
+                }
+            }
+            //System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
-        return outputString;
+        return outputList;
     }
 
-    public String DownloadContentPTURL(String url) throws XmlPullParserException, IOException {
+    public String DownloadContentPTURL(List lst) throws XmlPullParserException, IOException, SQLException {
         client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         String inputLine = "";
         boolean tbool = false, abool = false;
         String allString = "";
         String outputString = "";
-        GetMethod getMethod = new GetMethod(url);
+        List<PTLinks> outputList = lst;
+        GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(7).getLink());
         try {
             int getResult = client.executeMethod(getMethod);
             InputStream result = getMethod.getResponseBodyAsStream();
@@ -304,9 +297,34 @@ public class HttpDAO {
             while ((inputLine = in.readLine()) != null) {
                 allString += inputLine;
             }
-            String re = "id='ruler'.*?</table>";
+            String re = "<a\\shref='(/autocatalog.*)'>этот\\sраздел\\sв\\sархиве\\sописаний</a>";
             Pattern p = Pattern.compile(re);
             Matcher m = p.matcher(allString);
+            if (m.find()) {
+                outputString = "http://www.nix.ru" + m.group(1);
+            }
+            in.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        allString = "";
+        getMethod = new GetMethod(outputString);
+        // getMethod = new GetMethod("http://www.nix.ru/autocatalog/cc/computers_acer.html");
+        try {
+            int getResult = client.executeMethod(getMethod);
+            InputStream result = getMethod.getResponseBodyAsStream();
+            InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
+            BufferedReader in = new BufferedReader(isr);
+            while ((inputLine = in.readLine()) != null) {
+                allString += inputLine;
+            }
+
+            String re = "width='100%'\\sid='ruler'.*?</table>";
+            Pattern p = Pattern.compile(re);
+            Matcher m = p.matcher(allString);
+            outputString = "";
             if (m.find()) {
                 outputString = "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" +
                         "<table " +
@@ -323,7 +341,9 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
-//        FileUtils.writeStringToFile(new File("C://777.xml"), outputString);
+
+
+        //   FileUtils.writeStringToFile(new File("C://777.xml"), outputString);
 
         List<String> PTList = new ArrayList<String>();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
@@ -374,17 +394,21 @@ public class HttpDAO {
         int i = 0;
         for (Iterator it = PTLinklist.iterator(); it.hasNext();) {
             PTLinks str = (PTLinks) it.next();
-            strList.add(i + " -> " + str.getPT().replaceAll("NEW", "").trim() + "----->>>>" + str.getLink());
-            //System.out.println(i + " -> " + str.getPT().replaceAll("NEW", "").trim() + "----->>>>" + str.getLink());
+//            strList.add(i + " -> " + str.getPT().replaceAll("NEW", "").trim() + "----->>>>" + str.getLink());
+//            System.out.println(i + " -> " + outputList.get(3).getPT() + "----->>>> http://www.nix.ru" + str.getLink());
+            Nixlinks nixlink = new Nixlinks();
+            nixlink.setProductType(outputList.get(7).getPT());
+            nixlink.setProductUrl("http://www.nix.ru" + str.getLink());
+            FactoryDAO.getInstance().getNixlinksDAO().addNixlink(nixlink);
             i++;
         }
         // FileUtils.writeLines(new File("C://777.xml"), strList);
-        XStream xstream = new XStream();
-        xstream.alias("link", String.class);
-        xstream.alias("Url", List.class);
-
-        String xml = xstream.toXML(strList);
-        FileUtils.writeStringToFile(new File("C://7777.xml"), xml);
+//        XStream xstream = new XStream();
+//        xstream.alias("link", String.class);
+//        xstream.alias("Url", List.class);
+//
+//        String xml = xstream.toXML(strList);
+//        FileUtils.writeStringToFile(new File("C://7777.xml"), xml);
         return outputString;
     }
 }
