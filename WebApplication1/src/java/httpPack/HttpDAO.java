@@ -5,6 +5,7 @@
 package httpPack;
 
 import DAO.FactoryDAO;
+import Pojo.Nixdata;
 import Pojo.Nixlinks;
 import Pojo.PTLinks;
 import com.thoughtworks.xstream.XStream;
@@ -35,6 +36,14 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class HttpDAO {
 
     private HttpClient client = new HttpClient();
+    private String fullName;
+    private String manufacturer;
+    private String article;
+    private String productType;
+    private String pictureUrl;
+    private String groupe;
+    private String attribute;
+    private String attributeValue;
 
     public boolean Login4Value(String Login, String Password) {
         boolean output = false;
@@ -73,12 +82,10 @@ public class HttpDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String DownloadContent(String url, String filename) throws IOException {
+    public String DownloadContent(String url, String pt, String filename) throws IOException, XmlPullParserException, SQLException {
         client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         String inputLine = "";
         String allString = "";
-        String fullName = "";
-        String article = "";
         String outputString = "";
         GetMethod getMethod = new GetMethod(url);
         try {
@@ -128,7 +135,58 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
-        FileUtils.writeStringToFile(new File(filename), outputString);
+        fullName = "";
+        article = "";
+        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+        XmlPullParser xpp = factory.newPullParser();
+        xpp.setInput(new StringReader(outputString));
+        Nixdata ptl = new Nixdata();
+        boolean gbool = false, abool = false, vbool = false;
+        int eventType = xpp.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG) {
+                if (xpp.getName().equals("table")) {
+                    fullName = xpp.getAttributeValue(0);
+                    article = xpp.getAttributeValue(1);
+                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("e")) {
+                    gbool = true;
+                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_property")) {
+                    abool = true;
+                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_desc")) {
+                    vbool = true;
+                }
+            } else if (eventType == XmlPullParser.TEXT) {
+                if (gbool && !abool && !vbool) {
+                    groupe = xpp.getText();
+                } else if (abool) {
+                    attribute = xpp.getText();
+                } else if (vbool) {
+                    attributeValue = xpp.getText();
+                }
+            } else if (eventType == XmlPullParser.END_TAG) {
+                if (xpp.getName().equals("td") && gbool) {
+                    gbool = false;
+                } else if (xpp.getName().equals("td") && abool) {
+                    abool = false;
+                } else if (xpp.getName().equals("td") && vbool) {
+                    vbool = false;
+                    ptl.setFullName(fullName);
+                    ptl.setManufacturer("NoName");
+                    ptl.setArticle(article);
+                    ptl.setProductType(pt);
+                    ptl.setPictureUrl("NoPics");
+                    ptl.setGroupe(groupe);
+                    ptl.setAttribute(attribute);
+                    ptl.setAttributeValue(attributeValue);
+                    FactoryDAO.getInstance().getNixdataDAO().addNixdata(ptl);
+                }
+            }
+            eventType = xpp.next();
+        }
+
+
+
+//        FileUtils.writeStringToFile(new File(filename), outputString);
         return outputString;
     }
 
@@ -420,12 +478,12 @@ public class HttpDAO {
     }
 
     public void DownloadContentCard() throws XmlPullParserException, IOException, SQLException {
-        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(10);
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1);
         int i = 1;
         for (Iterator it = nixlist.iterator(); it.hasNext();) {
             Nixlinks str = (Nixlinks) it.next();
             System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
-            DownloadContent(str.getProductUrl(), "c://"+i+".xml");
+            DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
             i++;
         }
     }
