@@ -237,44 +237,48 @@ public class HttpDAO {
 //            i++;
 //        }
         List<PTLinks> outputList = new ArrayList<PTLinks>();
-        Pattern pat = Pattern.compile("(.*)\\s([(][)])");
-        Matcher mat;
+
         for (Iterator it = PTList.iterator(); it.hasNext();) {
             String str = (String) it.next();
-            // str = str.replaceAll("Все|Вся", "");
-            //str = str.trim();
+            str = str.replaceAll("[|][)]", ")");
+            str = str.replaceAll("\\(PDA\\)", "PDA");
+            Pattern pat;
+            Matcher mat;
+            pat = Pattern.compile("\\((.+)\\)");
             mat = pat.matcher(str);
             if (mat.find()) {
-                for (Iterator iter = PTLinklist.iterator(); iter.hasNext();) {
-                    PTLinks PTL = (PTLinks) iter.next();
-                    PTLinks oPTL = new PTLinks();
-                    if ((PTL.getPT()).equals(mat.group(1))) {
-                        oPTL.setPT(mat.group(1));
-                        oPTL.setLink(PTL.getLink());
-                        outputList.add(oPTL);
-                        break;
+                String[] strPT = mat.group(1).split("[|]");
+                for (int k = 0; k < strPT.length; k++) {
+                    for (Iterator iter = PTLinklist.iterator(); iter.hasNext();) {
+                        PTLinks PTL = (PTLinks) iter.next();
+                        PTLinks oPTL = new PTLinks();
+                        if ((PTL.getPT()).equals(strPT[k])) {
+                            oPTL.setPT(strPT[k]);
+                            oPTL.setLink(PTL.getLink());
+                            outputList.add(oPTL);
+                            break;
+                        }
                     }
+
                 }
             } else {
-                pat = Pattern.compile("[(](.*)[)]");
+                pat = Pattern.compile("(.*)\\s\\(\\)");
                 mat = pat.matcher(str);
                 if (mat.find()) {
-                    String[] strPT = mat.group(1).split("[|]");
-                    for (int k = 0; k < strPT.length; k++) {
-                        for (Iterator iter = PTLinklist.iterator(); iter.hasNext();) {
-                            PTLinks PTL = (PTLinks) iter.next();
-                            PTLinks oPTL = new PTLinks();
-                            if ((PTL.getPT()).equals(strPT[k])) {
-                                oPTL.setPT(strPT[k]);
-                                oPTL.setLink(PTL.getLink());
-                                outputList.add(oPTL);
-                                break;
-                            }
+                    for (Iterator iter = PTLinklist.iterator(); iter.hasNext();) {
+                        PTLinks PTL = (PTLinks) iter.next();
+                        PTLinks oPTL = new PTLinks();
+                        if ((PTL.getPT()).equals(mat.group(1))) {
+                            oPTL.setPT(mat.group(1));
+                            oPTL.setLink(PTL.getLink());
+                            outputList.add(oPTL);
+                            break;
                         }
-
                     }
                 }
+
             }
+
         }
         int i = 0;
         for (Iterator it = outputList.iterator(); it.hasNext();) {
@@ -282,9 +286,6 @@ public class HttpDAO {
             System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
-
-
-
         return outputString;
     }
 
