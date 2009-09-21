@@ -288,92 +288,95 @@ public class HttpDAO {
         String allString = "";
         String outputString = "";
         List<PTLinks> outputList = lst;
-        GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(7).getLink());
-        try {
-            int getResult = client.executeMethod(getMethod);
-            InputStream result = getMethod.getResponseBodyAsStream();
-            InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
-            BufferedReader in = new BufferedReader(isr);
-            while ((inputLine = in.readLine()) != null) {
-                allString += inputLine;
+        int k = 2;
+        for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
+
+            GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(k).getLink());
+            try {
+                int getResult = client.executeMethod(getMethod);
+                InputStream result = getMethod.getResponseBodyAsStream();
+                InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
+                BufferedReader in = new BufferedReader(isr);
+                while ((inputLine = in.readLine()) != null) {
+                    allString += inputLine;
+                }
+                String re = "<a\\shref='(/autocatalog.*)'>этот\\sраздел\\sв\\sархиве\\sописаний</a>";
+                Pattern p = Pattern.compile(re);
+                Matcher m = p.matcher(allString);
+                if (m.find()) {
+                    outputString = "http://www.nix.ru" + m.group(1);
+                }
+                in.close();
+            } catch (Exception e) {
+                System.err.println(e);
+            } finally {
+                getMethod.releaseConnection();
             }
-            String re = "<a\\shref='(/autocatalog.*)'>этот\\sраздел\\sв\\sархиве\\sописаний</a>";
-            Pattern p = Pattern.compile(re);
-            Matcher m = p.matcher(allString);
-            if (m.find()) {
-                outputString = "http://www.nix.ru" + m.group(1);
-            }
-            in.close();
-        } catch (Exception e) {
-            System.err.println(e);
-        } finally {
-            getMethod.releaseConnection();
-        }
-        allString = "";
-        getMethod = new GetMethod(outputString);
-        // getMethod = new GetMethod("http://www.nix.ru/autocatalog/cc/computers_acer.html");
-        try {
-            int getResult = client.executeMethod(getMethod);
-            InputStream result = getMethod.getResponseBodyAsStream();
-            InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
-            BufferedReader in = new BufferedReader(isr);
-            while ((inputLine = in.readLine()) != null) {
-                allString += inputLine;
+            allString = "";
+            getMethod = new GetMethod(outputString);
+            // getMethod = new GetMethod("http://www.nix.ru/autocatalog/cc/computers_acer.html");
+            try {
+                int getResult = client.executeMethod(getMethod);
+                InputStream result = getMethod.getResponseBodyAsStream();
+                InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
+                BufferedReader in = new BufferedReader(isr);
+                while ((inputLine = in.readLine()) != null) {
+                    allString += inputLine;
+                }
+
+                String re = "width='100%'\\sid='ruler'.*?</table>";
+                Pattern p = Pattern.compile(re);
+                Matcher m = p.matcher(allString);
+                outputString = "";
+                if (m.find()) {
+                    outputString = "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" +
+                            "<table " +
+                            m.group();
+                    outputString = outputString.replaceAll("(&nbsp;)|(&lt;)|(&gt;)", " ");
+                    outputString = outputString.replaceAll("&quot;", "inch ");
+                    outputString = outputString.replaceAll("\\s+", " ");
+                    outputString = outputString.replaceAll("<br>", " ");
+                    outputString = outputString.replaceAll("&", "and");
+                }
+                in.close();
+            } catch (Exception e) {
+                System.err.println(e);
+            } finally {
+                getMethod.releaseConnection();
             }
 
-            String re = "width='100%'\\sid='ruler'.*?</table>";
-            Pattern p = Pattern.compile(re);
-            Matcher m = p.matcher(allString);
-            outputString = "";
-            if (m.find()) {
-                outputString = "<?xml version=\"1.0\" encoding=\"WINDOWS-1251\"?>" +
-                        "<table " +
-                        m.group();
-                outputString = outputString.replaceAll("(&nbsp;)|(&lt;)|(&gt;)", " ");
-                outputString = outputString.replaceAll("&quot;", "inch ");
-                outputString = outputString.replaceAll("\\s+", " ");
-                outputString = outputString.replaceAll("<br>", " ");
-                outputString = outputString.replaceAll("&", "and");
-            }
-            in.close();
-        } catch (Exception e) {
-            System.err.println(e);
-        } finally {
-            getMethod.releaseConnection();
-        }
 
+            //   FileUtils.writeStringToFile(new File("C://777.xml"), outputString);
 
-        //   FileUtils.writeStringToFile(new File("C://777.xml"), outputString);
-
-        List<String> PTList = new ArrayList<String>();
-        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
-        XmlPullParser xpp = factory.newPullParser();
-        xpp.setInput(new StringReader(outputString));
-        PTLinks ptl = new PTLinks();
-        List<PTLinks> PTLinklist = new ArrayList<PTLinks>();
-        int eventType = xpp.getEventType();
-        String pt = "";
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            if (eventType == XmlPullParser.START_TAG) {
-                if (xpp.getName().equals("a")) {
-                    if (xpp.getAttributeCount() > 1 && xpp.getAttributeValue(2).equals("Посмотреть описание")) {
-                        ptl = new PTLinks();
-                        ptl.setLink(xpp.getAttributeValue(1));
-                        abool = true;
+            List<String> PTList = new ArrayList<String>();
+            XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new StringReader(outputString));
+            PTLinks ptl = new PTLinks();
+            List<PTLinks> PTLinklist = new ArrayList<PTLinks>();
+            int eventType = xpp.getEventType();
+            String pt = "";
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    if (xpp.getName().equals("a")) {
+                        if (xpp.getAttributeCount() > 1 && xpp.getAttributeValue(2).equals("Посмотреть описание")) {
+                            ptl = new PTLinks();
+                            ptl.setLink(xpp.getAttributeValue(1));
+                            abool = true;
+                        }
+                    }
+                } else if (eventType == XmlPullParser.TEXT) {
+                    if (abool) {
+                        ptl.setPT(xpp.getText());
+                    }
+                } else if (eventType == XmlPullParser.END_TAG) {
+                    if (abool && xpp.getName().equals("a")) {
+                        abool = false;
+                        PTLinklist.add(ptl);
                     }
                 }
-            } else if (eventType == XmlPullParser.TEXT) {
-                if (abool) {
-                    ptl.setPT(xpp.getText());
-                }
-            } else if (eventType == XmlPullParser.END_TAG) {
-                if (abool && xpp.getName().equals("a")) {
-                    abool = false;
-                    PTLinklist.add(ptl);
-                }
+                eventType = xpp.next();
             }
-            eventType = xpp.next();
-        }
 
 //        int i = 0;
 //        Pattern pat = Pattern.compile("(.)(.*)");
@@ -388,19 +391,21 @@ public class HttpDAO {
 //            }
 //            i++;
 //        }
-        List<String> strList = new ArrayList<String>();
+            List<String> strList = new ArrayList<String>();
 
 
-        int i = 0;
-        for (Iterator it = PTLinklist.iterator(); it.hasNext();) {
-            PTLinks str = (PTLinks) it.next();
+            int i = 0;
+            for (Iterator it = PTLinklist.iterator(); it.hasNext();) {
+                PTLinks str = (PTLinks) it.next();
 //            strList.add(i + " -> " + str.getPT().replaceAll("NEW", "").trim() + "----->>>>" + str.getLink());
 //            System.out.println(i + " -> " + outputList.get(3).getPT() + "----->>>> http://www.nix.ru" + str.getLink());
-            Nixlinks nixlink = new Nixlinks();
-            nixlink.setProductType(outputList.get(7).getPT());
-            nixlink.setProductUrl("http://www.nix.ru" + str.getLink());
-            FactoryDAO.getInstance().getNixlinksDAO().addNixlink(nixlink);
-            i++;
+                Nixlinks nixlink = new Nixlinks();
+                nixlink.setProductType(outputList.get(k).getPT());
+                nixlink.setProductUrl("http://www.nix.ru" + str.getLink());
+                FactoryDAO.getInstance().getNixlinksDAO().addNixlink(nixlink);
+                i++;
+            }
+            k++;
         }
         // FileUtils.writeLines(new File("C://777.xml"), strList);
 //        XStream xstream = new XStream();
