@@ -140,7 +140,8 @@ public class HttpDAO {
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         xpp.setInput(new StringReader(outputString));
-        Nixdata ptl = new Nixdata();
+        Nixdata ptl;
+        List<Nixdata> nixdataList = new ArrayList<Nixdata>();
         boolean gbool = false, abool = false, vbool = false;
         int eventType = xpp.getEventType();
         while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -157,11 +158,11 @@ public class HttpDAO {
                 }
             } else if (eventType == XmlPullParser.TEXT) {
                 if (gbool && !abool && !vbool) {
-                    groupe = xpp.getText();
+                    groupe = xpp.getText().trim();
                 } else if (abool) {
-                    attribute = xpp.getText();
+                    attribute = xpp.getText().trim();
                 } else if (vbool) {
-                    attributeValue = xpp.getText();
+                    attributeValue = xpp.getText().trim();
                 }
             } else if (eventType == XmlPullParser.END_TAG) {
                 if (xpp.getName().equals("td") && gbool) {
@@ -170,6 +171,7 @@ public class HttpDAO {
                     abool = false;
                 } else if (xpp.getName().equals("td") && vbool) {
                     vbool = false;
+                    ptl = new Nixdata();
                     ptl.setFullName(fullName);
                     ptl.setManufacturer("NoName");
                     ptl.setArticle(article);
@@ -178,13 +180,29 @@ public class HttpDAO {
                     ptl.setGroupe(groupe);
                     ptl.setAttribute(attribute);
                     ptl.setAttributeValue(attributeValue);
-                    FactoryDAO.getInstance().getNixdataDAO().addNixdata(ptl);
+                    nixdataList.add(ptl);
                 }
             }
             eventType = xpp.next();
+
+
         }
-
-
+        manufacturer = "";
+        for (Iterator it = nixdataList.iterator(); it.hasNext();) {
+            Nixdata ndt = (Nixdata) it.next();
+            if (ndt.getAttribute().equals("Производитель")) {
+                manufacturer = ndt.getAttributeValue();
+                break;
+            }
+        }
+        int i = 0;
+        for (Iterator it = nixdataList.iterator(); it.hasNext();) {
+            Nixdata ndt = (Nixdata) it.next();
+            ndt.setManufacturer(manufacturer);
+            nixdataList.set(i, ndt);
+            FactoryDAO.getInstance().getNixdataDAO().addNixdata(nixdataList.get(i));
+            i++;
+        }
 
 //        FileUtils.writeStringToFile(new File(filename), outputString);
         return outputString;
