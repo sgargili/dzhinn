@@ -73,7 +73,7 @@ public class HttpDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public String DownloadContent(String url) {
+    public String DownloadContent(String url, String filename) throws IOException {
         client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         String inputLine = "";
         String allString = "";
@@ -128,6 +128,7 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
+        FileUtils.writeStringToFile(new File(filename), outputString);
         return outputString;
     }
 
@@ -386,7 +387,7 @@ public class HttpDAO {
                 str.setPT(str.getPT().replaceAll("Все|Вся", "").trim());
                 mat = pat.matcher(str.getPT());
                 if (mat.find()) {
-                  //  System.out.println(i + " -> " + mat.group(1).toUpperCase() + mat.group(2));
+                    //  System.out.println(i + " -> " + mat.group(1).toUpperCase() + mat.group(2));
                     str.setPT(mat.group(1).toUpperCase() + mat.group(2));
                     outputList.set(i, str);
                 }
@@ -416,5 +417,16 @@ public class HttpDAO {
 //        String xml = xstream.toXML(strList);
 //        FileUtils.writeStringToFile(new File("C://7777.xml"), xml);
         return outputString;
+    }
+
+    public void DownloadContentCard() throws XmlPullParserException, IOException, SQLException {
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(10);
+        int i = 1;
+        for (Iterator it = nixlist.iterator(); it.hasNext();) {
+            Nixlinks str = (Nixlinks) it.next();
+            System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+            DownloadContent(str.getProductUrl(), "c://"+i+".xml");
+            i++;
+        }
     }
 }

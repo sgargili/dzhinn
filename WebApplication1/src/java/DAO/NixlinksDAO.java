@@ -6,6 +6,7 @@ package DAO;
 
 import Pojo.Nixlinks;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,5 @@ import java.sql.SQLException;
 public interface NixlinksDAO {
 
     public void addNixlink(Nixlinks nixlinks) throws SQLException;
+    public List getAllNixlink(int maxresult) throws SQLException;
 }

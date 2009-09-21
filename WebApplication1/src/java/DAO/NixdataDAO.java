@@ -2,19 +2,22 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
 import Pojo.Nixdata;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
  * @author Admin4DB2
  */
 public interface NixdataDAO {
-    public void addCurrency(Nixdata nixdata) throws SQLException;
 
+
+    public void addNixdata(Nixdata nixdata) throws SQLException;
+
+    public List getAllNixdata(int maxresult) throws SQLException;
 //    public void updateCurrency(Currency currency) throws SQLException;
 //
 //    public boolean isCurrencyPresent(String ManufacturerName) throws SQLException;
@@ -30,5 +33,4 @@ public interface NixdataDAO {
 //    public Collection getAllCurrencys() throws SQLException;
 //
 //    public void deleteCurrency(Currency currency) throws SQLException;
-
 }

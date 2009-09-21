@@ -1,139 +1,119 @@
 <?xml version="1.0" encoding="WINDOWS-1251"?>
-<table fullname="hp iPAQ hx2190b FA673B#ABB/ACB (312MHz, 192MbROM, 64MbRAM, BT, CFII/SD/MMC/SDIO, 3.5inch 320x240@64K)" article="52417" id="PriceTable" border="0" cellpadding="0" cellspacing="0">
+<table fullname="Acer Aspire Revo R3600 92.G1EYZ.RUP Atom 230(1.6)/2048/320/WiFi/VistaHP" article="86687" id="PriceTable" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td class='e' colspan='3'>Основные</td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds2943' >Производитель</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa2943' >hp </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2943' >Acer </td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds2944' >Модель</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa2944' >iPAQ hx2190 </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2944' >Aspire Revo R3600 </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds934' >Описание</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa934' >Неттоп на платформе nVidia ION. </td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds578' >Цвета, использованные в оформлении</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa578' >Серый, черный, серебристый </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa578' >Черный, белый </td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds801' >Процессор</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa801' >Intel PXA270 312 МГц </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa801' >Intel Atom 230 1.6 ГГц </td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds1545' >Динамики</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1545' >Встроенный динамик </td>
+        <td class='e' colspan='3'>Процессор</td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds576' >Память</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa576' >192 Мб ROM, 64 Мб SDRAM; до 128 Мб памяти, постоянно доступной пользователю </td>
+        <td class='desc_property' width='25%' id='tds919' >Кэш L2</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa919' >512K </td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds1970' >Цветной дисплей</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1970' >64K цветов </td>
+        <td class='e' colspan='3'>Поддержка процессоров</td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds1681' >MP3-плеер</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1681' >Есть </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds969' >Встроенный микрофон</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa969' >Есть </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds1942' >Размеры (ширина х высота х глубина), см</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1942' >7,7 x 11,9 x 1,6 см </td>
+        <td class='desc_property' width='25%' id='tds843' >Частота шины</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa843' >533 МГц </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Конфигурация</td>
     </tr>
     <tr>
+        <td class='desc_property' width='25%' id='tds922' >Видео</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa922' >Встроенное, GeForce 9400M. Поддержка HD-видео 1080р. </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds949' >Оперативная память</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa949' >2048 Мб DDR2 </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2696' >Оптический привод</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2696' >Нет </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1589' >Беспроводная связь</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1589' >IEEE 802.11g, IEEE 802.11b </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds3122' >Объем HDD</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa3122' >320 Гб </td>
+    </tr>
+    <tr>
         <td class='desc_property' width='25%' id='tds1972' >Операционная система</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1972' >Windows Mobile 5.0 для карманных ПК, Premium Edition </td>
-    </tr>
-    <tr>
-        <td class='e' colspan='3'>Матрица LCD</td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds778' >Экран</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa778' >3.5" (8.9 см) TFT, 0.24 мм; сенсорный </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds2015' >Разрешение экрана</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa2015' >QVGA (240 x 320 пикселов) </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1972' >Windows Vista Home Premium (рус.) </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Интерфейс</td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds1082' >Слоты для карт памяти</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1082' >SD, MMC, CF Type I, CF Type II, SDIO </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1082' >SD, MMC, xD, MS </td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds722' >Разъемы</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa722' >Разъем 3.5 мм для подключения наушников </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa722' >6 x USB 2.0, VGA, RJ-45, HDMI </td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds567' >Интерфейс</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa567' >USB </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds1797' >Bluetooth</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1797' >Bluetooth 1.2 </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds1809' >Инфракрасный порт</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1809' >Есть </td>
+        <td class='desc_property' width='25%' id='tds2701' >Разъемы на передней панели</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2701' >eSATA, разъемы для подключения наушников и микрофона </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Питание</td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds723' >Питание</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa723' >Li-ion аккумулятор </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds2986' >Емкость аккумулятора</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa2986' >920 мАч </td>
+        <td class='desc_property' width='25%' id='tds699' >Блок питания</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa699' >Внешний; входит в комплект поставки </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Комплект поставки и опции</td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds798' >Комплект поставки</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa798' >Аккумулятор, блок питания, стилус, пластиковая откидная крышка, CD-диск, кабель USB </td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds909' >ПО в комплекте</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa909' >HP ProtectTools (спроектированное совместно с CREDANT Technologies), Bluetooth Phone Manager, iPAQ Wireless, Bluetooth Manager, iTask, HP Photosmart Premiere для карманных ПК </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa798' >Клавиатура USB, мышь USB, крепеж к монитору VESA 75x75 мм или 100x100 мм </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Прочее</td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds727' >Вес</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa727' >164.4 грамма </td>
+        <td class='desc_property' width='25%' id='tds1537' >Безопасность</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1537' >Слот для Kensington lock </td>
     </tr>
     <tr>
-        <td class='desc_property' width='25%' id='tds1779' >Рабочая температура</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1779' >0 ~ 40°C </td>
+        <td class='desc_property' width='25%' id='tds1539' >Размеры (ширина х высота х глубина)</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1539' >3.8 x 19.5 x 20 см </td>
     </tr>
     <tr>
         <td class='e' colspan='3'>Логистика</td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds1671' >Размеры упаковки (измерено в НИКСе)</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1671' >31.9 х 23.3 х 9.5 см </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1671' >38.5 x 22.5 x 13 см </td>
     </tr>
     <tr>
         <td class='desc_property' width='25%' id='tds1672' >Вес брутто (измерено в НИКСе)</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa1672' >1.18 кг </td>
-    </tr>
-    <tr>
-        <td class='e' colspan='3'>Внешние источники информации</td>
-    </tr>
-    <tr>
-        <td class='desc_property' width='25%' id='tds2612' >Горячая линия производителя</td>
-        <td class='desc_desc' width='75%' colspan='2' id='tdsa2612' >(495) 797-35-20. Пн-пт, с 9.00 до 18.00 (по московскому времени). Вас попросят подтвердить факт покупки продукта HP. </td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1672' >2.955 кг </td>
     </tr>
     <tr>
         <td class='desc_footer' colspan='3'> </td>

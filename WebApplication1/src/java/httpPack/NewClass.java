@@ -26,6 +26,7 @@ public class NewClass {
 //        FileWriter out1 = new FileWriter(outFile1);
  //      hdao.DownloadContentPT("http://www.nix.ru/price/price.html");
 //        out1.close();
-        hdao.DownloadContentPTURL(hdao.DownloadContentPT("http://www.nix.ru/price/price.html"));
+        //hdao.DownloadContentPTURL(hdao.DownloadContentPT("http://www.nix.ru/price/price.html"));
+        hdao.DownloadContentCard();
     }
 }
