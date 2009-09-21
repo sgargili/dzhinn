@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="WINDOWS-1251"?>
+<table fullname="hp iPAQ hx2190b FA673B#ABB/ACB (312MHz, 192MbROM, 64MbRAM, BT, CFII/SD/MMC/SDIO, 3.5inch 320x240@64K)" article="52417" id="PriceTable" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class='e' colspan='3'>Основные</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2943' >Производитель</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2943' >hp </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2944' >Модель</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2944' >iPAQ hx2190 </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds578' >Цвета, использованные в оформлении</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa578' >Серый, черный, серебристый </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds801' >Процессор</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa801' >Intel PXA270 312 МГц </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1545' >Динамики</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1545' >Встроенный динамик </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds576' >Память</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa576' >192 Мб ROM, 64 Мб SDRAM; до 128 Мб памяти, постоянно доступной пользователю </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1970' >Цветной дисплей</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1970' >64K цветов </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1681' >MP3-плеер</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1681' >Есть </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds969' >Встроенный микрофон</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa969' >Есть </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1942' >Размеры (ширина х высота х глубина), см</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1942' >7,7 x 11,9 x 1,6 см </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Конфигурация</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1972' >Операционная система</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1972' >Windows Mobile 5.0 для карманных ПК, Premium Edition </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Матрица LCD</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds778' >Экран</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa778' >3.5" (8.9 см) TFT, 0.24 мм; сенсорный </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2015' >Разрешение экрана</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2015' >QVGA (240 x 320 пикселов) </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Интерфейс</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1082' >Слоты для карт памяти</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1082' >SD, MMC, CF Type I, CF Type II, SDIO </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds722' >Разъемы</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa722' >Разъем 3.5 мм для подключения наушников </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds567' >Интерфейс</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa567' >USB </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1797' >Bluetooth</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1797' >Bluetooth 1.2 </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1809' >Инфракрасный порт</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1809' >Есть </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Питание</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds723' >Питание</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa723' >Li-ion аккумулятор </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2986' >Емкость аккумулятора</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2986' >920 мАч </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Комплект поставки и опции</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds798' >Комплект поставки</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa798' >Аккумулятор, блок питания, стилус, пластиковая откидная крышка, CD-диск, кабель USB </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds909' >ПО в комплекте</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa909' >HP ProtectTools (спроектированное совместно с CREDANT Technologies), Bluetooth Phone Manager, iPAQ Wireless, Bluetooth Manager, iTask, HP Photosmart Premiere для карманных ПК </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Прочее</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds727' >Вес</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa727' >164.4 грамма </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1779' >Рабочая температура</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1779' >0 ~ 40°C </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Логистика</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1671' >Размеры упаковки (измерено в НИКСе)</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1671' >31.9 х 23.3 х 9.5 см </td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds1672' >Вес брутто (измерено в НИКСе)</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa1672' >1.18 кг </td>
+    </tr>
+    <tr>
+        <td class='e' colspan='3'>Внешние источники информации</td>
+    </tr>
+    <tr>
+        <td class='desc_property' width='25%' id='tds2612' >Горячая линия производителя</td>
+        <td class='desc_desc' width='75%' colspan='2' id='tdsa2612' >(495) 797-35-20. Пн-пт, с 9.00 до 18.00 (по московскому времени). Вас попросят подтвердить факт покупки продукта HP. </td>
+    </tr>
+    <tr>
+        <td class='desc_footer' colspan='3'> </td>
+    </tr>
+    <tr>
+        <td colspan='3'> </td>
+    </tr>
+    <tr>
+        <td width='100%' id='c' colspan='3'></td>
+    </tr>
+</table>
