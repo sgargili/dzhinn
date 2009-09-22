@@ -519,15 +519,17 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${libs.ExAll.classpath}" iftldtodir="${build.web.dir}/WEB-INF" manifestproperty="manifest.libs.ExAll.classpath" todir="${dist.ear.dir}"/>
         <copyfiles files="${libs.hibernate-support.classpath}" iftldtodir="${build.web.dir}/WEB-INF" manifestproperty="manifest.libs.hibernate-support.classpath" todir="${dist.ear.dir}"/>
         <copyfiles files="${libs.ejb3-persistence.classpath}" iftldtodir="${build.web.dir}/WEB-INF" manifestproperty="manifest.libs.ejb3-persistence.classpath" todir="${dist.ear.dir}"/>
+        <copyfiles files="${libs.MySQLDriver.classpath}" iftldtodir="${build.web.dir}/WEB-INF" manifestproperty="manifest.libs.MySQLDriver.classpath" todir="${dist.ear.dir}"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update">
-            <attribute name="Class-Path" value="${manifest.libs.ExAll.classpath} ${manifest.libs.hibernate-support.classpath} ${manifest.libs.ejb3-persistence.classpath} "/>
+            <attribute name="Class-Path" value="${manifest.libs.ExAll.classpath} ${manifest.libs.hibernate-support.classpath} ${manifest.libs.ejb3-persistence.classpath} ${manifest.libs.MySQLDriver.classpath} "/>
         </manifest>
     </target>
     <target depends="init" name="library-inclusion-in-archive" unless="dist.ear.dir">
         <copyfiles files="${libs.ExAll.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.hibernate-support.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.ejb3-persistence.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${libs.MySQLDriver.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init,compile,compile-jsps,-pre-dist,library-inclusion-in-manifest" if="do.tmp.war.package" name="do-ear-dist">
         <dirname file="${dist.ear.war}" property="dist.jar.dir"/>

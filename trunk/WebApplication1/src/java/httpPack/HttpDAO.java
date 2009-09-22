@@ -8,6 +8,7 @@ import DAO.FactoryDAO;
 import Pojo.Nixdata;
 import Pojo.Nixlinks;
 import Pojo.PTLinks;
+import Proxy.IpChange;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -351,7 +352,7 @@ public class HttpDAO {
             }
             str.setPT(str.getPT().replaceAll("Расх.\\sматлы.+?\\)", "Все Расходные материалы").replaceAll("Звуковые карты.+", "Все Звуковые карты"));
             outputList.set(i, str);
-            System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
+          //  System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
         return outputList;
@@ -364,12 +365,19 @@ public class HttpDAO {
         String allString = "";
         String outputString = "";
         List<PTLinks> outputList = lst;
-        int k = 0;
+        IpChange ip = new IpChange();
+        int k = 3, bayan = 0;
+        PTLinks temp = new PTLinks();
         for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
+            temp = (PTLinks) iterat.next();
             Pattern pattern = Pattern.compile("НИКС");
-            Matcher match = pattern.matcher(outputList.get(k).getPT());
+            Matcher match = pattern.matcher(temp.getPT());
             if (match.find()) {
-                continue;
+                break;
+            }
+            if (bayan == 10) {
+                bayan = 0;
+                ip.setChange();
             }
             GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(k).getLink());
             try {
@@ -483,10 +491,12 @@ public class HttpDAO {
                 Nixlinks nixlink = new Nixlinks();
                 nixlink.setProductType(outputList.get(k).getPT());
                 nixlink.setProductUrl("http://www.nix.ru" + str.getLink());
+                System.out.println(k);
                 FactoryDAO.getInstance().getNixlinksDAO().addNixlink(nixlink);
                 i++;
             }
             k++;
+            bayan++;
         }
         // FileUtils.writeLines(new File("C://777.xml"), strList);
 //        XStream xstream = new XStream();
