@@ -349,7 +349,7 @@ public class HttpDAO {
                     break;
                 }
             }
-            str.setPT(str.getPT().replaceAll("Расх.\\sматлы.+?\\)", "Расходные материалы").replaceAll("Звуковые карты.+?\\)", "Звуковые карты"));
+            str.setPT(str.getPT().replaceAll("Расх.\\sматлы.+?\\)", "Все Расходные материалы").replaceAll("Звуковые карты.+", "Все Звуковые карты"));
             outputList.set(i, str);
             System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
