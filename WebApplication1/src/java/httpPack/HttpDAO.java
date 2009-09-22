@@ -352,7 +352,7 @@ public class HttpDAO {
             }
             str.setPT(str.getPT().replaceAll("Расх.\\sматлы.+?\\)", "Все Расходные материалы").replaceAll("Звуковые карты.+", "Все Звуковые карты"));
             outputList.set(i, str);
-          //  System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
+            //  System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
         return outputList;
@@ -366,14 +366,15 @@ public class HttpDAO {
         String outputString = "";
         List<PTLinks> outputList = lst;
         IpChange ip = new IpChange();
-        int k = 3, bayan = 0;
+        int k = 0, bayan = 0;
         PTLinks temp = new PTLinks();
         for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
             temp = (PTLinks) iterat.next();
             Pattern pattern = Pattern.compile("НИКС");
             Matcher match = pattern.matcher(temp.getPT());
             if (match.find()) {
-                break;
+                k++;
+                continue;
             }
             if (bayan == 10) {
                 bayan = 0;
