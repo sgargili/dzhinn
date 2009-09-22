@@ -510,7 +510,19 @@ public class HttpDAO {
     }
 
     public void DownloadContentCard() throws XmlPullParserException, IOException, SQLException {
-        System.out.println(FactoryDAO.getInstance().getNixlinksDAO().getAllNixlinkCount());
+        Long count = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlinkCount();
+        System.out.println(count);
+        Double num = new Double(0);
+        num = count / 50.;
+        String str = num.toString();
+        String[] strl = str.split("[.]");
+        long l = Long.parseLong(strl[0]);
+        long l2 = Long.parseLong(strl[1]);
+        System.out.println(l);
+        System.out.println(l2);
+//        for (int k = 0; k < strl.length; k++) {
+//            System.out.println(strl[k]);
+//        }
 //        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1000, 3);
 //        int i = 1;
 //        for (Iterator it = nixlist.iterator(); it.hasNext();) {
