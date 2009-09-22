@@ -340,7 +340,7 @@ public class HttpDAO {
                 Pattern pat = Pattern.compile(str.getPT().toString());
                 Matcher mat = pat.matcher(temp);
                 if (mat.find()) {
-                    pat = Pattern.compile("(.*)\\s\\(.*\\)");
+                    pat = Pattern.compile("(.*?)\\s\\(.*?\\)");
                     mat = pat.matcher(temp);
                     if (mat.find()) {
                         str.setPT(mat.group(1));
@@ -349,7 +349,7 @@ public class HttpDAO {
                     break;
                 }
             }
-          //  System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
+            System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
         return outputList;
