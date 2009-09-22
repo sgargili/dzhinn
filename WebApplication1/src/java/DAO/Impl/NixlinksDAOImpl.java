@@ -57,19 +57,20 @@ public class NixlinksDAOImpl implements NixlinksDAO {
         return result;
     }
 
-    public int getAllNixlinkCount() throws SQLException {
+    public Long getAllNixlinkCount() throws SQLException {
         Session session = null;
-        int count = 0;
+        Long count=0L;
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
-            Query getByLogin = session.createQuery("select count(*)from nixlinks");
-            count = (Integer)getByLogin.list().get(0);
+            Query getByLogin = session.createQuery("select count(*)from Nixlinks");
+            count = (Long)getByLogin.list().get(0);
 //            for (Iterator it = getByLogin.iterate(); it.hasNext();) {
 //                it.next();
 //                count++;
 //            }
         } catch (RuntimeException e) {
+            System.out.println(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
