@@ -10,6 +10,7 @@ import Pojo.Nixlinks;
 import Pojo.PTLinks;
 import Proxy.IpChange;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +24,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -133,57 +135,67 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
-        fullName = "";
-        article = "";
+        FileUtils.writeStringToFile(new File(filename), outputString);
+//        fullName = "";
+//        article = "";
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         xpp.setInput(new StringReader(outputString));
         Nixdata ptl;
         List<Nixdata> nixdataList = new ArrayList<Nixdata>();
         boolean gbool = false, abool = false, vbool = false;
-        int eventType = xpp.getEventType();
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            if (eventType == XmlPullParser.START_TAG) {
-                if (xpp.getName().equals("table")) {
-                    fullName = xpp.getAttributeValue(0);
-                    article = xpp.getAttributeValue(1);
-                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("e")) {
-                    gbool = true;
-                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_property")) {
-                    abool = true;
-                } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_desc")) {
-                    vbool = true;
+        try {
+            int eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG) {
+                    if (xpp.getName().equals("table")) {
+                        fullName = xpp.getAttributeValue(0);
+                        article = xpp.getAttributeValue(1);
+                    } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("e")) {
+                        gbool = true;
+                    } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_property")) {
+                        abool = true;
+                    } else if (xpp.getName().equals("td") && xpp.getAttributeValue(0).equals("desc_desc")) {
+                        vbool = true;
+                    }
+                } else if (eventType == XmlPullParser.TEXT) {
+                    if (gbool && !abool && !vbool) {
+                        groupe = xpp.getText().trim();
+                    } else if (abool) {
+                        attribute = xpp.getText().trim();
+                    } else if (vbool) {
+                        attributeValue = xpp.getText().trim();
+                    }
+                } else if (eventType == XmlPullParser.END_TAG) {
+                    if (xpp.getName().equals("td") && gbool) {
+                        gbool = false;
+                    } else if (xpp.getName().equals("td") && abool) {
+                        abool = false;
+                    } else if (xpp.getName().equals("td") && vbool) {
+                        vbool = false;
+                        ptl = new Nixdata();
+                        ptl.setFullName(fullName);
+                        ptl.setManufacturer("NoName");
+                        ptl.setArticle(article);
+                        ptl.setProductType(pt);
+                        ptl.setPictureUrl("NoPics");
+                        ptl.setGroupe(pt + " - " + groupe);
+                        ptl.setAttribute(attribute);
+                        ptl.setAttributeValue(attributeValue);
+                        nixdataList.add(ptl);
+                    }
                 }
-            } else if (eventType == XmlPullParser.TEXT) {
-                if (gbool && !abool && !vbool) {
-                    groupe = xpp.getText().trim();
-                } else if (abool) {
-                    attribute = xpp.getText().trim();
-                } else if (vbool) {
-                    attributeValue = xpp.getText().trim();
-                }
-            } else if (eventType == XmlPullParser.END_TAG) {
-                if (xpp.getName().equals("td") && gbool) {
-                    gbool = false;
-                } else if (xpp.getName().equals("td") && abool) {
-                    abool = false;
-                } else if (xpp.getName().equals("td") && vbool) {
-                    vbool = false;
-                    ptl = new Nixdata();
-                    ptl.setFullName(fullName);
-                    ptl.setManufacturer("NoName");
-                    ptl.setArticle(article);
-                    ptl.setProductType(pt);
-                    ptl.setPictureUrl("NoPics");
-                    ptl.setGroupe(pt + " - " + groupe);
-                    ptl.setAttribute(attribute);
-                    ptl.setAttributeValue(attributeValue);
-                    nixdataList.add(ptl);
-                }
+                eventType = xpp.next();
+
+
             }
-            eventType = xpp.next();
+        } catch (XmlPullParserException e) {
+            ptl = new Nixdata();
+            ptl.setFullName("Что то упало в парсере, смотри вот тут: " + e.getMessage());
+            ptl.setManufacturer(e.getMessage());
+            ptl.setArticle(article);
 
-
+            nixdataList.add(ptl);
         }
         manufacturer = "";
         for (Iterator it = nixdataList.iterator(); it.hasNext();) {
@@ -202,7 +214,7 @@ public class HttpDAO {
             i++;
         }
 
-//        FileUtils.writeStringToFile(new File(filename), outputString);
+
         return outputString;
     }
 
@@ -523,11 +535,11 @@ public class HttpDAO {
 //        for (int k = 0; k < strl.length; k++) {
 //            System.out.println(strl[k]);
 //        }
-        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 50850);
-        int i = 1;
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 51000);
+        int i = 0;
         int bayan = 0;
         IpChange ip = new IpChange();
-        System.out.println(nixlist.size());
+       // System.out.println(nixlist.size());
         for (Iterator it = nixlist.iterator(); it.hasNext();) {
             Nixlinks str = (Nixlinks) it.next();
             System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
@@ -535,6 +547,7 @@ public class HttpDAO {
             if (bayan == 10) {
                 bayan = 0;
                 ip.setChange();
+               // System.out.println("Ip Сменился...");
             }
             i++;
             bayan++;
