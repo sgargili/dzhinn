@@ -364,9 +364,13 @@ public class HttpDAO {
         String allString = "";
         String outputString = "";
         List<PTLinks> outputList = lst;
-        int k = 276;
+        int k = 0;
         for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
-
+            Pattern pattern = Pattern.compile("НИКС");
+            Matcher match = pattern.matcher(outputList.get(k).getPT());
+            if (match.find()) {
+                continue;
+            }
             GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(k).getLink());
             try {
                 int getResult = client.executeMethod(getMethod);
