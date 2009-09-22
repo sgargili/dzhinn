@@ -349,7 +349,7 @@ public class HttpDAO {
                     break;
                 }
             }
-            //System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
+          //  System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
         return outputList;
@@ -362,7 +362,7 @@ public class HttpDAO {
         String allString = "";
         String outputString = "";
         List<PTLinks> outputList = lst;
-        int k = 2;
+        int k = 276;
         for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
 
             GetMethod getMethod = new GetMethod("http://www.nix.ru/price/" + outputList.get(k).getLink());
