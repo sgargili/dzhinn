@@ -200,18 +200,24 @@ public class HttpDAO {
         manufacturer = "";
         for (Iterator it = nixdataList.iterator(); it.hasNext();) {
             Nixdata ndt = (Nixdata) it.next();
-            if (ndt.getAttribute().equals("Производитель")) {
-                manufacturer = ndt.getAttributeValue();
-                break;
+            try {
+                if (ndt.getAttribute().equals("Производитель")) {
+                    manufacturer = ndt.getAttributeValue();
+                    break;
+                }
+            } catch (Exception e) {
             }
         }
         int i = 0;
         for (Iterator it = nixdataList.iterator(); it.hasNext();) {
             Nixdata ndt = (Nixdata) it.next();
-            ndt.setManufacturer(manufacturer);
-            nixdataList.set(i, ndt);
-            FactoryDAO.getInstance().getNixdataDAO().addNixdata(nixdataList.get(i));
-            i++;
+            try {
+                ndt.setManufacturer(manufacturer);
+                nixdataList.set(i, ndt);
+                FactoryDAO.getInstance().getNixdataDAO().addNixdata(nixdataList.get(i));
+                i++;
+            } catch (Exception e) {
+            }
         }
 
 
@@ -535,11 +541,11 @@ public class HttpDAO {
 //        for (int k = 0; k < strl.length; k++) {
 //            System.out.println(strl[k]);
 //        }
-        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 51000);
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(87, 51000);
         int i = 0;
         int bayan = 0;
         IpChange ip = new IpChange();
-       // System.out.println(nixlist.size());
+        // System.out.println(nixlist.size());
         for (Iterator it = nixlist.iterator(); it.hasNext();) {
             Nixlinks str = (Nixlinks) it.next();
             System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
@@ -547,7 +553,7 @@ public class HttpDAO {
             if (bayan == 10) {
                 bayan = 0;
                 ip.setChange();
-               // System.out.println("Ip Сменился...");
+                // System.out.println("Ip Сменился...");
             }
             i++;
             bayan++;
