@@ -135,7 +135,7 @@ public class HttpDAO {
         } finally {
             getMethod.releaseConnection();
         }
-        FileUtils.writeStringToFile(new File(filename), outputString);
+       // FileUtils.writeStringToFile(new File(filename), outputString);
 //        fullName = "";
 //        article = "";
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
@@ -190,6 +190,14 @@ public class HttpDAO {
 
             }
         } catch (XmlPullParserException e) {
+            ptl = new Nixdata();
+            ptl.setFullName("Что то упало в парсере, смотри вот тут: " + e.getMessage());
+            ptl.setManufacturer(e.getMessage());
+            ptl.setArticle(article);
+
+            nixdataList.add(ptl);
+        }
+        catch (Exception e) {
             ptl = new Nixdata();
             ptl.setFullName("Что то упало в парсере, смотри вот тут: " + e.getMessage());
             ptl.setManufacturer(e.getMessage());
@@ -541,7 +549,7 @@ public class HttpDAO {
 //        for (int k = 0; k < strl.length; k++) {
 //            System.out.println(strl[k]);
 //        }
-        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(87, 51000);
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(124, 50726);
         int i = 0;
         int bayan = 0;
         IpChange ip = new IpChange();
