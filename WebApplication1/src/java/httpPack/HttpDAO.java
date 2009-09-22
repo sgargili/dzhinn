@@ -340,7 +340,7 @@ public class HttpDAO {
                 Pattern pat = Pattern.compile(str.getPT().toString());
                 Matcher mat = pat.matcher(temp);
                 if (mat.find()) {
-                    pat = Pattern.compile("(.*?)\\s\\(.*?\\)");
+                    pat = Pattern.compile("(.+?)\\s\\(.*\\)");
                     mat = pat.matcher(temp);
                     if (mat.find()) {
                         str.setPT(mat.group(1));
@@ -349,6 +349,8 @@ public class HttpDAO {
                     break;
                 }
             }
+            str.setPT(str.getPT().replaceAll("Расх.\\sматлы.+?\\)", "Расходные материалы").replaceAll("Звуковые карты.+?\\)", "Звуковые карты"));
+            outputList.set(i, str);
             System.out.println(i + " -> " + str.getPT() + " " + str.getLink());
             i++;
         }
