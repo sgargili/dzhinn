@@ -510,26 +510,34 @@ public class HttpDAO {
     }
 
     public void DownloadContentCard() throws XmlPullParserException, IOException, SQLException {
-        Long count = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlinkCount();
-        System.out.println(count);
-        Double num = new Double(0);
-        num = count / 50.;
-        String str = num.toString();
-        String[] strl = str.split("[.]");
-        long l = Long.parseLong(strl[0]);
-        long l2 = Long.parseLong(strl[1]);
-        System.out.println(l);
-        System.out.println(l2);
+//        Long count = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlinkCount();
+//        System.out.println(count);
+//        Double num = new Double(0);
+//        num = count / 50.;
+//        String str = num.toString();
+//        String[] strl = str.split("[.]");
+//        long l = Long.parseLong(strl[0]);
+//        long l2 = Long.parseLong(strl[1]);
+//        System.out.println(l);
+//        System.out.println(l2);
 //        for (int k = 0; k < strl.length; k++) {
 //            System.out.println(strl[k]);
 //        }
-//        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1000, 3);
-//        int i = 1;
-//        for (Iterator it = nixlist.iterator(); it.hasNext();) {
-//            Nixlinks str = (Nixlinks) it.next();
-//            System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
-//            DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
-//            i++;
-//        }
+        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 50850);
+        int i = 1;
+        int bayan = 0;
+        IpChange ip = new IpChange();
+        System.out.println(nixlist.size());
+        for (Iterator it = nixlist.iterator(); it.hasNext();) {
+            Nixlinks str = (Nixlinks) it.next();
+            System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+            DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
+            if (bayan == 10) {
+                bayan = 0;
+                ip.setChange();
+            }
+            i++;
+            bayan++;
+        }
     }
 }
