@@ -545,7 +545,7 @@ public class HttpDAO {
         int i = 0;
         int bayan = 0;
         IpChange ip = new IpChange();
-        // System.out.println(nixlist.size());
+         System.out.println(nixlist.size());
         for (Iterator it = nixlist.iterator(); it.hasNext();) {
             Nixlinks str = (Nixlinks) it.next();
             System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
