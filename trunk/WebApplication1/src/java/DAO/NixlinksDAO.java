@@ -18,5 +18,5 @@ public interface NixlinksDAO {
 
     public List getAllNixlink(int firstresult, int maxresult) throws SQLException;
 
-    public int getAllNixlinkCount() throws SQLException;
+    public Long getAllNixlinkCount() throws SQLException;
 }
