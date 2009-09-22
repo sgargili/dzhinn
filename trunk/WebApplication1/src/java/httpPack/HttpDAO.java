@@ -135,7 +135,7 @@ public class HttpDAO {
         }
         fullName = "";
         article = "";
-        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         xpp.setInput(new StringReader(outputString));
         Nixdata ptl;
@@ -175,7 +175,7 @@ public class HttpDAO {
                     ptl.setArticle(article);
                     ptl.setProductType(pt);
                     ptl.setPictureUrl("NoPics");
-                    ptl.setGroupe(groupe);
+                    ptl.setGroupe(pt + " - " + groupe);
                     ptl.setAttribute(attribute);
                     ptl.setAttributeValue(attributeValue);
                     nixdataList.add(ptl);
@@ -366,11 +366,11 @@ public class HttpDAO {
         String outputString = "";
         List<PTLinks> outputList = lst;
         IpChange ip = new IpChange();
-        int k = 0, bayan = 0;
+        int k = 385, bayan = 0;
         PTLinks temp = new PTLinks();
         for (Iterator iterat = outputList.iterator(); iterat.hasNext();) {
             temp = (PTLinks) iterat.next();
-            Pattern pattern = Pattern.compile("НИКС");
+            Pattern pattern = Pattern.compile("НИКС|ДЛЯ");
             Matcher match = pattern.matcher(temp.getPT());
             if (match.find()) {
                 k++;
@@ -448,7 +448,7 @@ public class HttpDAO {
             while (eventType != XmlPullParser.END_DOCUMENT) {
                 if (eventType == XmlPullParser.START_TAG) {
                     if (xpp.getName().equals("a")) {
-                        if (xpp.getAttributeCount() > 1 && xpp.getAttributeValue(2).equals("Посмотреть описание")) {
+                        if (xpp.getAttributeCount() > 2 && xpp.getAttributeValue(2).equals("Посмотреть описание")) {
                             ptl = new PTLinks();
                             ptl.setLink(xpp.getAttributeValue(1));
                             abool = true;
@@ -510,13 +510,14 @@ public class HttpDAO {
     }
 
     public void DownloadContentCard() throws XmlPullParserException, IOException, SQLException {
-        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1);
-        int i = 1;
-        for (Iterator it = nixlist.iterator(); it.hasNext();) {
-            Nixlinks str = (Nixlinks) it.next();
-            System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
-            DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
-            i++;
-        }
+        System.out.println(FactoryDAO.getInstance().getNixlinksDAO().getAllNixlinkCount());
+//        List<Nixlinks> nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1000, 3);
+//        int i = 1;
+//        for (Iterator it = nixlist.iterator(); it.hasNext();) {
+//            Nixlinks str = (Nixlinks) it.next();
+//            System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+//            DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
+//            i++;
+//        }
     }
 }

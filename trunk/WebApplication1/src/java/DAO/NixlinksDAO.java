@@ -15,5 +15,8 @@ import java.util.List;
 public interface NixlinksDAO {
 
     public void addNixlink(Nixlinks nixlinks) throws SQLException;
-    public List getAllNixlink(int maxresult) throws SQLException;
+
+    public List getAllNixlink(int firstresult, int maxresult) throws SQLException;
+
+    public int getAllNixlinkCount() throws SQLException;
 }

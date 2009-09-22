@@ -33,7 +33,7 @@ public class NixdataDAOImpl implements NixdataDAO {
         }
     }
 
-    public List getAllNixdata(int maxresult) throws SQLException {
+    public List getAllNixdata(int firstresult, int maxresult) throws SQLException {
         Session session = null;
         List<Nixdata> result = null;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -41,7 +41,7 @@ public class NixdataDAOImpl implements NixdataDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from Nixdata n").setMaxResults(maxresult).setFirstResult(12);
+                    "from Nixdata n").setMaxResults(maxresult).setFirstResult(firstresult);
             result = getByLogin.list();
         } catch (RuntimeException e) {
         } finally {

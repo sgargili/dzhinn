@@ -8,6 +8,7 @@ import DAO.NixlinksDAO;
 import Pojo.Nixlinks;
 import hUtil.HibernateUtil;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -37,7 +38,7 @@ public class NixlinksDAOImpl implements NixlinksDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public List getAllNixlink(int maxresult) throws SQLException {
+    public List getAllNixlink(int firstresult, int maxresult) throws SQLException {
         Session session = null;
         List<Nixlinks> result = null;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -45,9 +46,7 @@ public class NixlinksDAOImpl implements NixlinksDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from Nixlinks n")
-                    .setMaxResults(maxresult)
-                    .setFirstResult(12);
+                    "from Nixlinks n").setMaxResults(maxresult).setFirstResult(firstresult);
             result = getByLogin.list();
         } catch (RuntimeException e) {
         } finally {
@@ -56,5 +55,26 @@ public class NixlinksDAOImpl implements NixlinksDAO {
             }
         }
         return result;
+    }
+
+    public int getAllNixlinkCount() throws SQLException {
+        Session session = null;
+        int count = 0;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin = session.createQuery("select count(*)from nixlinks");
+            count = (Integer)getByLogin.list().get(0);
+//            for (Iterator it = getByLogin.iterate(); it.hasNext();) {
+//                it.next();
+//                count++;
+//            }
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return count;
     }
 }
