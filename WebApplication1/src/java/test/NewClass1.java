@@ -26,6 +26,9 @@ public class NewClass1 {
         CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
         String[] temp = new String[8];
         List<Nixdata> ndl = FactoryDAO.getInstance().getNixdataDAO().getAllNixdata();
+        if (ndl.equals(null)) {
+            System.exit(0);
+        }
         for (Iterator it = ndl.iterator(); it.hasNext();) {
             Nixdata ndt = (Nixdata) it.next();
             Pattern p = Pattern.compile("то\\sупало\\sв\\sпарсере");
@@ -43,7 +46,7 @@ public class NewClass1 {
             temp[7] = ndt.getAttributeValue();
             csvw.writeRecord(temp);
         }
-        csvw.flush();
+        //csvw.flush();
         csvw.close();
     }
 }
