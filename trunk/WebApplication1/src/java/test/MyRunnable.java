@@ -34,7 +34,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class MyRunnable implements Runnable {
 
-   // private HttpClient client = new HttpClient();
+    // private HttpClient client = new HttpClient();
     private String fullName;
     private String manufacturer;
     private String article;
@@ -206,30 +206,26 @@ public class MyRunnable implements Runnable {
 
     public void run() {
 
-        System.out.println(getName());
+       // System.out.println(getName());
         if (getName().equals("1")) {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 7);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 1);
             } catch (SQLException ex) {
-                Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-            System.out.println(nixlist.size());
+         //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-                System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+            //    System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
                     DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
                 } catch (IOException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (XmlPullParserException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (bayan == 10) {
                     bayan = 0;
@@ -237,9 +233,7 @@ public class MyRunnable implements Runnable {
                         ip.setChange();
                         // System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -251,25 +245,21 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(8, 7);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1, 1);
             } catch (SQLException ex) {
-                Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-            System.out.println(nixlist.size());
+         //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-                System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+            //    System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
                     DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
                 } catch (IOException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (XmlPullParserException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (bayan == 10) {
                     bayan = 0;
@@ -277,9 +267,7 @@ public class MyRunnable implements Runnable {
                         ip.setChange();
                         // System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -290,25 +278,21 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(15, 7);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(2, 1);
             } catch (SQLException ex) {
-                Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-            System.out.println(nixlist.size());
+          //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-                System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+          //      System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
                     DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
                 } catch (IOException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (XmlPullParserException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SQLException ex) {
-                    Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 if (bayan == 10) {
                     bayan = 0;
@@ -316,9 +300,7 @@ public class MyRunnable implements Runnable {
                         ip.setChange();
                         // System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     } catch (IOException ex) {
-                        Logger.getLogger(MyRunnable.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     // System.out.println("Ip Сменился...");
                 }
