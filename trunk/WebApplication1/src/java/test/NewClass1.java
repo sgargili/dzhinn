@@ -13,6 +13,8 @@ import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -21,11 +23,16 @@ import java.util.List;
 public class NewClass1 {
 
     public static void main(String[] args) throws IOException, SQLException {
-        CsvWriter csvw = new CsvWriter("C://testcsv.csv", ';', Charset.forName("UTF-8"));
+        CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
         String[] temp = new String[8];
         List<Nixdata> ndl = FactoryDAO.getInstance().getNixdataDAO().getAllNixdata();
         for (Iterator it = ndl.iterator(); it.hasNext();) {
             Nixdata ndt = (Nixdata) it.next();
+            Pattern p = Pattern.compile("то\\sупало\\sв\\sпарсере");
+            Matcher m = p.matcher(ndt.getFullName());
+            if (m.find()) {
+                continue;
+            }
             temp[0] = ndt.getFullName();
             temp[1] = ndt.getManufacturer();
             temp[2] = ndt.getArticle();
@@ -36,23 +43,7 @@ public class NewClass1 {
             temp[7] = ndt.getAttributeValue();
             csvw.writeRecord(temp);
         }
-
-
-//        String[] str = new String[100];
-//        str[0] = "Один";
-//        str[1] = "Два";
-//        str[2] = "Три";
-//        csvw.write("Столбец1,Столбец2,Столбец3");
-//        csvw.endRecord();
-//        for (int i = 0; i < 100; i++) {
-//            csvw.write(str[i]);
-//            csvw.endRecord();
-//        }
         csvw.flush();
         csvw.close();
-
-        //  CsvReader csvr = new CsvReader("C://testcsv.csv", ';', Charset.forName("UTF-8"));
-
-
     }
 }
