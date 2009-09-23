@@ -12,8 +12,10 @@ public class Main {
 
     public static void main(String args[]) throws Exception {
         Runnable r = new MyRunnable();
-        Thread t = new Thread(r);
-        t.start();
+        for (Integer i = 1; i <= 3; i++) {
+            Thread t = new Thread(r, i.toString());
+            t.start();
+        }
     }
 }
 
