@@ -87,8 +87,9 @@ public class HttpDAO {
         String inputLine = "";
         String allString = "";
         String outputString = "";
-        GetMethod getMethod = new GetMethod(url);
+        GetMethod getMethod = null;
         try {
+            getMethod = new GetMethod(url);
             int getResult = client.executeMethod(getMethod);
             InputStream result = getMethod.getResponseBodyAsStream();
             InputStreamReader isr = new InputStreamReader(result, "WINDOWS-1251");
