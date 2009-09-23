@@ -14,10 +14,11 @@ import java.util.List;
  */
 public interface NixdataDAO {
 
-
     public void addNixdata(Nixdata nixdata) throws SQLException;
 
     public List getAllNixdata(int firstresult, int maxresult) throws SQLException;
+
+    public List getAllNixdata() throws SQLException;
 //    public void updateCurrency(Currency currency) throws SQLException;
 //
 //    public boolean isCurrencyPresent(String ManufacturerName) throws SQLException;
