@@ -22,8 +22,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.httpclient.HttpClient;
@@ -38,12 +36,9 @@ public class MyRunnable implements Runnable {
     private String fullName;
     private String manufacturer;
     private String article;
-    private String productType;
-    private String pictureUrl;
     private String groupe;
     private String attribute;
     private String attributeValue;
-    private int j;
 
     private String DownloadContent(String url, String pt, String filename) throws IOException, XmlPullParserException, SQLException {
         HttpClient client = new HttpClient();
@@ -206,23 +201,23 @@ public class MyRunnable implements Runnable {
 
     public void run() {
 
-       // System.out.println(getName());
+        // System.out.println(getName());
         if (getName().equals("1")) {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 1);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-         //   System.out.println(nixlist.size());
+            //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-            //    System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                System.out.println("Поток 1 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
-                    DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "1");
                 } catch (IOException ex) {
                 } catch (XmlPullParserException ex) {
                 } catch (SQLException ex) {
@@ -245,18 +240,18 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(1, 1);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(5486, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-         //   System.out.println(nixlist.size());
+            //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-            //    System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                System.out.println("Поток 2 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
-                    DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "2");
                 } catch (IOException ex) {
                 } catch (XmlPullParserException ex) {
                 } catch (SQLException ex) {
@@ -278,18 +273,256 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(2, 1);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(10971, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
             int bayan = 0;
             IpChange ip = new IpChange();
-          //  System.out.println(nixlist.size());
+            //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
                 Nixlinks str = (Nixlinks) it.next();
-          //      System.out.println(i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                System.out.println("Поток 3 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
                 try {
-                    DownloadContent(str.getProductUrl(), str.getProductType(), "c://" + i + ".xml");
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "3");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("4")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(16456, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 4 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "4");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("5")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(24941, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 5 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "5");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("6")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(27426, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 6 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "6");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("7")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(32911, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 7 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "7");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("8")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(38396, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 8 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "8");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("9")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(43881, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 9 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "9");
+                } catch (IOException ex) {
+                } catch (XmlPullParserException ex) {
+                } catch (SQLException ex) {
+                }
+                if (bayan == 10) {
+                    bayan = 0;
+                    try {
+                        ip.setChange();
+                        // System.out.println("Ip Сменился...");
+                    } catch (UnknownHostException ex) {
+                    } catch (IOException ex) {
+                    }
+                    // System.out.println("Ip Сменился...");
+                }
+                i++;
+                bayan++;
+            }
+
+        } else if (getName().equals("10")) {
+
+            List<Nixlinks> nixlist = null;
+            try {
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(49336, 5485);
+            } catch (SQLException ex) {
+            }
+            int i = 0;
+            int bayan = 0;
+            IpChange ip = new IpChange();
+            //  System.out.println(nixlist.size());
+            for (Iterator it = nixlist.iterator(); it.hasNext();) {
+                Nixlinks str = (Nixlinks) it.next();
+                System.out.println("Поток 10 -> " + i + " -> " + str.getProductType() + " -> " + str.getProductUrl());
+                try {
+                    DownloadContent(str.getProductUrl(), str.getProductType(), "10");
                 } catch (IOException ex) {
                 } catch (XmlPullParserException ex) {
                 } catch (SQLException ex) {
