@@ -51,4 +51,23 @@ public class NixdataDAOImpl implements NixdataDAO {
         }
         return result;
     }
+
+    public List getAllNixdata() throws SQLException {
+        Session session = null;
+        List<Nixdata> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Nixdata n");
+            result = getByLogin.list();
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return result;
+    }
 }
