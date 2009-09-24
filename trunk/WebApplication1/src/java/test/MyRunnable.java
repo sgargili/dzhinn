@@ -39,6 +39,7 @@ public class MyRunnable implements Runnable {
     private String groupe;
     private String attribute;
     private String attributeValue;
+    static int bayan = 0;
 
     private String DownloadContent(String url, String pt, String filename) throws IOException, XmlPullParserException, SQLException {
         HttpClient client = new HttpClient();
@@ -210,7 +211,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -226,7 +227,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -244,7 +245,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //   System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -260,7 +261,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -277,7 +278,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -293,7 +294,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -311,7 +312,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -327,7 +328,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -345,7 +346,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -361,7 +362,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -379,7 +380,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -395,7 +396,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -413,7 +414,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -429,7 +430,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -447,7 +448,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -463,7 +464,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -481,7 +482,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -497,7 +498,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -515,7 +516,7 @@ public class MyRunnable implements Runnable {
             } catch (SQLException ex) {
             }
             int i = 0;
-            int bayan = 0;
+            //
             IpChange ip = new IpChange();
             //  System.out.println(nixlist.size());
             for (Iterator it = nixlist.iterator(); it.hasNext();) {
@@ -531,7 +532,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                        // System.out.println("Ip Сменился...");
+                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
