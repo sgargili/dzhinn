@@ -138,7 +138,8 @@ public class MyRunnable implements Runnable {
                         ptl.setFullName(fullName);
                         ptl.setManufacturer("NoName");
                         ptl.setArticle(article);
-                        ptl.setProductType(pt);
+                        byte[] utf8 = pt.getBytes("UTF-8");
+                        ptl.setProductType(new String(utf8, "UTF-8"));
                         ptl.setPictureUrl("NoPics");
                         ptl.setGroupe(pt + " - " + groupe);
                         ptl.setAttribute(attribute);
@@ -227,7 +228,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -261,7 +262,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -294,7 +295,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -328,7 +329,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -362,7 +363,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -396,7 +397,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -430,7 +431,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -464,7 +465,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -498,7 +499,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
@@ -532,7 +533,7 @@ public class MyRunnable implements Runnable {
                     bayan = 0;
                     try {
                         ip.setChange();
-                         System.out.println("Ip Сменился...");
+                        System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
                     }
