@@ -137,9 +137,8 @@ public class MyRunnable implements Runnable {
                         ptl = new Nixdata();
                         ptl.setFullName(fullName);
                         ptl.setManufacturer("NoName");
-                        ptl.setArticle(article);
-                        byte[] utf8 = pt.getBytes("UTF-8");
-                        ptl.setProductType(new String(utf8, "UTF-8"));
+                        ptl.setArticle(article);                      
+                        ptl.setProductType(pt);
                         ptl.setPictureUrl("NoPics");
                         ptl.setGroupe(pt + " - " + groupe);
                         ptl.setAttribute(attribute);
