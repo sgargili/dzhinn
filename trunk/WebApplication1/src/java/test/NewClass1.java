@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -32,26 +34,46 @@ public class NewClass1 {
         Long start = System.currentTimeMillis();
         CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
         String[] temp = new String[8];
-        List<Nixdata> ndl = FactoryDAO.getInstance().getNixdataDAO().getAllNixdata(0, 70000);
+        List<Nixdata> ndl = FactoryDAO.getInstance().getNixdataDAO().getAllNixdata();
         if (ndl.equals(null)) {
             System.exit(0);
         }
+        Collections.sort(ndl, new Comparator<Nixdata>() {
+
+            public int compare(Nixdata o1, Nixdata o2) {
+                try {
+                    String withoutEx1 = o1.getArticle();
+                    String withoutEx2 = o2.getArticle();
+                    return withoutEx1.compareTo(withoutEx2);
+                } catch (NullPointerException e) {
+                    return "".compareTo("");
+                }
+            }
+        });
+        long i = 0;
         for (Iterator it = ndl.iterator(); it.hasNext();) {
             Nixdata ndt = (Nixdata) it.next();
-            Pattern p = Pattern.compile("то\\sупало\\sв\\sпарсере");
+            Pattern p = Pattern.compile("(то\\sупало\\sв\\sпарсере)|(СЛИТО)");
             Matcher m = p.matcher(ndt.getFullName());
             if (m.find()) {
                 continue;
             }
-            temp[0] = ndt.getFullName().replaceAll("\\s+", " ");
-            temp[1] = ndt.getManufacturer().replaceAll("\\s+", " ");
-            temp[2] = ndt.getArticle();
-            temp[3] = ndt.getProductType().replaceAll("\\s+", " ");
-            temp[4] = ndt.getPictureUrl();
-            temp[5] = ndt.getGroupe().replaceAll("\\s+", " ");
-            temp[6] = ndt.getAttribute().replaceAll("\\s+", " ");
-            temp[7] = ndt.getAttributeValue().replaceAll("\\s+", " ");
-            csvw.writeRecord(temp);
+            try {
+                temp[0] = ndt.getFullName().replaceAll("\\s+", " ");
+                temp[1] = ndt.getManufacturer().replaceAll("\\s+", " ");
+                temp[2] = ndt.getArticle();
+                temp[3] = ndt.getProductType().replaceAll("\\s+", " ");
+                temp[4] = ndt.getPictureUrl();
+                temp[5] = ndt.getGroupe().replaceAll("\\s+", " ");
+                if (!(ndt.getAttribute() == null) && !ndt.getAttribute().equals("")) {
+                    temp[6] = ndt.getAttribute().replaceAll("\\s+", " ");
+                }
+                temp[7] = ndt.getAttributeValue().replaceAll("\\s+", " ");
+                csvw.writeRecord(temp);
+            } catch (NullPointerException e) {
+                System.out.println(i + " -> " + e + " -> " + ndt.getArticle());
+            }
+            i++;
         }
         //csvw.flush();
         csvw.close();
