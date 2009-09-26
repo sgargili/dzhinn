@@ -1,0 +1,57 @@
+{"name": "Combobox",
+         "type": "Dojo Dijit",
+         "image" : "images/dojo-dijit-combobox.jpg",
+         "jmakiVersion" : "1.8.1",
+         "version" : "1.8.1",
+         "docs" : {        	  "modelURL" : "http://wiki.java.net/bin/view/Projects/jMakiComboxModel"
+         },
+         "description": "This widget is dynamic combobox where the options that you can select are narrowed down as you type.",
+         "value": {
+             "required": true,
+             "type": "ARRAY",
+             "defaultValue":
+             [
+                              {"label" : "Alabama", "value" : "AL"},
+                              {"label" : "California", "value" : "CA"},
+                              {"label" : "New York", "value" : "NY", "selected" : true},
+                              {"label" : "Texas", "value" : "TX"}	           
+                              ],
+             "description":"An array of item objects that are added to the widget."
+     },
+          "config" : {
+          "type" :
+           { "id" : "dijit",
+               "themes" : [
+                   {"id" : "blue",
+                    "default" : true,
+                    "style" : "../resources/libs/dojo/v1.2.0/dijit/themes/tundra/tundra.css"
+                   }
+               ],
+             "libs" : [
+                   "../resources/libs/dojo/v1.2.0/dojo/dojo.js"
+               ],
+
+               "preload" : "djConfig={parseOnLoad: false, isDebug: false, extraLocale: [\"en-us\"]}",
+               "resources" : [
+                   "../resources/libs/dojo/v1.2.0/dojo",
+                   "../resources/libs/dojo/v1.2.0/dijit"
+               ]
+          }  
+        },
+       "topicInfo": {
+       "defaultPublish" : "/dojo/dijit/combobox",       "defaultSubscribe" : ["/dojo/dijit/combobox", "/combobox"],
+      "commands" : [
+          {"name" : "setValues",
+          "description" : "Clears the list and sets the values to the values provided."},
+          {"name" : "addItem",
+          "description" : "Adds item to the list of items in the combobox. "},
+          {"name" : "removeItem",
+          "description" : "Removes item to the list of items in the combobox. "},
+          {"name" : "select",
+          "description" : "The Label of the item provided will be set as the value of the text field."
+          },
+          {"name" : "clear",
+          "description" : "Clears the list."
+          }
+      ],       "events" : [           {"name" :  "onSelect",           "description" : "publish the value of the selected item"}         ]    }
+  }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02.09.2009 10:24:27 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="pricedb" name="Pojo.Supplierprice" table="supplierprice">
+    <id name="id" type="long">
+      <column name="Id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="supplierId" type="long">
+      <column name="Supplier_Id" not-null="true"/>
+    </property>
+    <property name="supplierArticleName" type="string">
+      <column length="100" name="Supplier_Article_Name" not-null="true"/>
+    </property>
+    <property name="supplierArticleDescription" type="string">
+      <column length="1024" name="Supplier_Article_Description"/>
+    </property>
+    <property name="supplierArticlePrice" type="java.lang.Double">
+      <column name="Supplier_Article_Price" precision="22" scale="0"/>
+    </property>
+    <property name="currencyId" type="java.lang.Integer">
+      <column name="Currency_Id"/>
+    </property>
+  </class>
+</hibernate-mapping>

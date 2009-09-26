@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02.09.2009 10:24:27 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="pricedb" name="Pojo.Currency" table="currency">
+    <id name="currencyId" type="int">
+      <column name="Currency_Id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="currencyName" type="string">
+      <column length="50" name="Currency_Name" not-null="true"/>
+    </property>
+    <property name="currencyRate" type="java.lang.Double">
+      <column name="Currency_Rate" precision="22" scale="0"/>
+    </property>
+  </class>
+</hibernate-mapping>

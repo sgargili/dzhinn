@@ -1,0 +1,65 @@
+	<div dojoType="dijit.layout.AccordionContainer" id="Xfilters" width=0px region="right" splitter="true" >
+
+		<div dojoType="dijit.layout.AccordionPane" title="Данные для экспорта" >
+<div align=center> Чё ты ввёл? :)</div>
+<br>
+	<table align=center>
+		<tr align=left>
+			<td><input type='radio' name='g134' id='g1rb234' value='ArticleID' dojoType='dijit.form.RadioButton' checked>
+				<label for='g1rb234' title="Хуячит как барбос!"><b>ArticleID</b>&nbsp;(Шустро!)</label>
+			</td>
+		</tr>
+		<tr align=left>
+			<td><input type='radio' name='g134' id='g1rb134' value='Article' dojoType='dijit.form.RadioButton'>
+				<label for='g1rb134' title="А этот не как барбос, но тоже шустрее чем Валуев4IT..."><b>Article</b>&nbsp;(По-медленее...)</label>
+			</td>
+		</tr>
+	</table>
+		</div>
+		<div dojoType="dijit.layout.AccordionPane" title="Языки">
+		<div align=center>Языки экспорта
+		</div>
+		<br>
+		<div align=center>
+			<input name="cb1" id="cb1" value="English" dojoType="dijit.form.CheckBox" checked=true onclick="valid()">
+			<label for="cb1">По умолчанию</label>
+</div>
+<br>
+	<table>
+	<tr>
+		<td align=left>
+			<input name="cb2" id="cb2" value="English" dojoType="dijit.form.CheckBox" disabled=true>
+			<label for="cb2">English</label>
+		</td>
+		<td align=left>
+			<input name="cb3" id="cb3" value="Russian" dojoType="dijit.form.CheckBox" disabled=true>
+			<label for="cb3">Russian</label>
+		</td>
+	</tr>	
+	<tr>
+		<td align=left>
+			<input name="cb4" id="cb4" value="Bulgarian" dojoType="dijit.form.CheckBox" disabled=true>
+			<label for="cb4">Bulgarian&nbsp;&nbsp;&nbsp;</label>
+		</td>
+		<td align=left>
+			<input name="cb5" id="cb5" value="Croatian" dojoType="dijit.form.CheckBox" disabled=true>
+			<label for="cb5">Croatian</label>
+		</td>
+	</tr>	
+	<tr>
+		<td align=left>
+			<input name="cb6" id="cb6" value="Polish" dojoType="dijit.form.CheckBox" disabled=true>
+			<label for="cb6">Polish</label>
+		</td>
+		<td align=left>
+			<input name="cb7" id="cb7" value="Slovenian" dojoType="dijit.form.CheckBox"disabled=true>
+			<label for="cb7">Slovenian</label>
+		</td>
+	</tr>
+</table>
+		</div>
+		<div dojoType="dijit.layout.AccordionPane" title="Статус">
+
+		</div>
+
+	</div>
