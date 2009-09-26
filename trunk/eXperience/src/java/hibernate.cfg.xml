@@ -6,5 +6,20 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/PriceDB</property>
     <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Pass4root</property>
+    <!--<property name="hibernate.show_sql">true</property>-->
+    <property name="hibernate.current_session_context_class">thread</property>
+    <mapping resource="Pojo/Shopbundle.hbm.xml"/>
+    <mapping resource="Pojo/ProductType.hbm.xml"/>
+    <mapping resource="Pojo/Manufacturer.hbm.xml"/>
+    <mapping resource="Pojo/Outputprice.hbm.xml"/>
+    <mapping resource="Pojo/Pricerules.hbm.xml"/>
+    <mapping resource="Pojo/It4articles.hbm.xml"/>
+    <mapping resource="Pojo/Shop.hbm.xml"/>
+    <mapping resource="Pojo/Supplierprice.hbm.xml"/>
+    <mapping resource="Pojo/Supplier.hbm.xml"/>
+    <mapping resource="Pojo/Pricerule.hbm.xml"/>
+    <mapping resource="Pojo/Matching.hbm.xml"/>
+    <mapping resource="Pojo/Currency.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

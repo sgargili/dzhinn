@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 23.08.2009 19:03:49 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="yandexdb" name="Yandex.Yandexprices" table="yandexprices">
+    <id name="id" type="int">
+      <column name="Id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="productName" type="string">
+      <column length="1024" name="ProductName"/>
+    </property>
+    <property name="concurent" type="string">
+      <column name="Concurent"/>
+    </property>
+    <property name="delivery" type="string">
+      <column length="512" name="Delivery"/>
+    </property>
+    <property name="opinion" type="string">
+      <column name="Opinion"/>
+    </property>
+    <property name="price" type="java.lang.Double">
+      <column name="Price" precision="22" scale="0"/>
+    </property>
+    <property name="url" type="string">
+      <column length="1024" name="URL"/>
+    </property>
+    <property name="data" type="date">
+      <column length="10" name="Data" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

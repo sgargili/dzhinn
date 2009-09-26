@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Simple Text Generation Demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type='text/javascript' src='tabs/tabs.js'> </script>
+        <script type='text/javascript' src='dwr/engine.js'> </script>
+        <script type='text/javascript' src='dwr/util.js'> </script>
+        <script type='text/javascript' src='dwr/interface/Demo.js'> </script>
+        <script type="text/javascript" src='text.js'> </script>
+        <link rel="stylesheet" type="text/css" href="tabs/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="generic.css" />
+    </head>
+    <body onload="dwr.util.useLoadingMessage();Tabs.init('tabList', 'tabContents');">
+        <div id="page-title">[
+            <a href="http://getahead.org/dwr/">DWR Website</a> |
+            <a href="..">Web Application Index</a>
+            ]</div>
+
+        <h1>Dynamically Updating Text</h1>
+
+        <p>This is a simple demonstration of how to dynamically update a web-page with
+            text fetched from a web server.</p>
+
+        <ul id="tabList">
+            <li><a href="#" tabId="demoDiv">Demo</a></li>
+            <li><a href="#" tabId="explainDiv">Поиск</a></li>
+            <li><a href="#" tabId="sourceDiv">Source</a></li>
+        </ul>
+
+        <div id="tabContents">
+
+            <div id="demoDiv">
+
+                <p>
+                    Name:
+                    <input type="text" id="demoName" value="Joe"/>
+                    <input type="button" id="demoSend" value="Send" onclick="update()"/>
+                    <br/>
+                    Reply: <span id="demoReply" style="background:#eeffdd; padding-left:4px; padding-right:4px;">&nbsp;</span>
+                </p>
+
+            </div>
+
+            <div id="explainDiv">
+                <script type="text/javascript"
+                        src="dojo/dojo/dojo.js"
+                djConfig="parseOnLoad: true"></script>
+                <script type="text/javascript">
+                    dojo.require("dojox.data.GoogleSearchStore");
+                    dojo.require("dijit.form.Button");
+
+                    function doSearch() {
+                        var queryString = dojo.byId("searchText").value;
+
+                        var store = new dojox.data.GoogleWebSearchStore();
+                        var list = dojo.byId("searchOutput");
+
+                        //Clean up any previous searches
+                        while(list.firstChild){
+                            list.removeChild(list.firstChild);
+                        }
+
+                        store.fetch({
+                            query:{text: queryString},
+                            count: 20,
+                            onComplete: function(items, request) {
+                                //Print out the search results as an unordered
+                                //list
+                                var delay = 0;
+                                dojo.forEach(items, function(item){
+                                    var li = document.createElement("li");
+                                    li.innerHTML =
+                                        "<a href=\"" +
+                                        store.getValue(item, "url")  +
+                                        "\">" +
+                                        store.getValue(item, "title") +
+                                        "</a>";
+                                    dojo.style(li, "opacity", "0");
+                                    list.appendChild(li);
+
+                                    //Fade in the results.
+                                    delay += 100;
+                                    dojo.fadeIn({node:li}).play(delay);
+                                });
+                            }
+                        });
+                    }
+                </script>
+
+                Че искать будем --->>>
+                <input type="text" size="40" value="text to find"
+                       id="searchText"/>
+
+                <input type="button" id="demoSend" value="Send" onclick="doSearch();"/>
+                <ul id="searchOutput" class="link-list"></ul>
+
+            </div>
+
+            <div id="sourceDiv">
+
+
+            </div>
+
+        </div>
+
+    </body>
+</html>
