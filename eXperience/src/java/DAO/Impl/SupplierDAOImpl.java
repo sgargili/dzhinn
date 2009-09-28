@@ -11,7 +11,7 @@ package DAO.Impl;
 import DAO.SupplierDAO;
 import Pojo.Supplier;
 import Pojo.Supplierprice;
-import Util.HibernateUtil;
+import Util.HibernatePriceConUtil;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -28,7 +28,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     public void addSupplier(Supplier supplier) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(supplier);
             session.getTransaction().commit();
@@ -44,7 +44,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     public void updateSupplier(Supplier supplier) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(supplier);
             session.getTransaction().commit();
@@ -62,7 +62,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         Supplier result = null;
         String out = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Supplier s where Supplier_Id = :SupplierId ").setLong("SupplierId", Supplier_Id);
             List resultList = query.list();
@@ -82,7 +82,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     public Collection getAllSuppliers() throws SQLException {
         Session session = null;
         List<Supplier> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -103,7 +103,7 @@ public class SupplierDAOImpl implements SupplierDAO {
     public void deleteSupplier(Supplier supplier) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(supplier);
             session.getTransaction().commit();
@@ -121,7 +121,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         Supplier result = null;
         Long out = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Supplier s where Supplier_Name = :SupplierName ").setString("SupplierName", Supplier_Name);
             List resultList = query.list();
@@ -144,7 +144,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         Session session = null;
         Supplierprice result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Supplierprice s where Supplier_Article_Name = :SupplierArticleName ").setString("SupplierArticleName", Article);
             List resultList = query.list();

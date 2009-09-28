@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.CurrencyDAO;
 import Pojo.Currency;
-import Util.HibernateUtil;
+import Util.HibernatePriceConUtil;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -44,7 +44,7 @@ public class CurrencyDAOImpl implements CurrencyDAO {
         Session session = null;
         Currency result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Currency c where Currency_Id = :CurrencyId").setInteger("CurrencyId", Currency_Id);
             List resultList = query.list();
@@ -64,7 +64,7 @@ public class CurrencyDAOImpl implements CurrencyDAO {
         Session session = null;
         Currency result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Currency c where Currency_Name = :CurrencyName").setString("CurrencyName", CurrencyName);
             List resultList = query.list();
@@ -84,7 +84,7 @@ public class CurrencyDAOImpl implements CurrencyDAO {
         Session session = null;
         Currency result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Currency c where Currency_Id = :CurrencyId").setInteger("CurrencyId", Currency_Id);
             List resultList = query.list();

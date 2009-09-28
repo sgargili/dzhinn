@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.MatchingDAO;
 import Pojo.Matching;
-import Util.HibernateUtil;
+import Util.HibernatePriceConUtil;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +23,7 @@ public class MatchingDAOImpl implements MatchingDAO {
     public void addMatching(Matching matching) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(matching);
             session.getTransaction().commit();
@@ -39,7 +39,7 @@ public class MatchingDAOImpl implements MatchingDAO {
     public void updateMatching(Matching matching) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(matching);
             session.getTransaction().commit();
@@ -56,7 +56,7 @@ public class MatchingDAOImpl implements MatchingDAO {
         Session session = null;
         Matching result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Matching m where Supplier_Id = :SupplierId ").setLong("SupplierId", Supplier_Id);
             List resultList = query.list();
@@ -75,7 +75,7 @@ public class MatchingDAOImpl implements MatchingDAO {
     public Collection getAllMatching() throws SQLException {
         Session session = null;
         List<Matching> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -95,7 +95,7 @@ public class MatchingDAOImpl implements MatchingDAO {
     public void deleteMatching(Matching matching) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(matching);
             session.getTransaction().commit();
@@ -113,7 +113,7 @@ public class MatchingDAOImpl implements MatchingDAO {
         String result = null;
         Matching mtch = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Matching m where Supplier_Article_Name = :SupplierArticleName ").setString("SupplierArticleName", SupplierArticleName);
             List resultList = query.list();
@@ -140,7 +140,7 @@ public class MatchingDAOImpl implements MatchingDAO {
         Session session = null;
         List result = null;
         boolean out = false;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin;

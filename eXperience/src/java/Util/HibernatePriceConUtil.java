@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
  *
  * @author Admin4DB2
  */
-public class HibernateUtil {
+public class HibernatePriceConUtil {
     private static final SessionFactory sessionFactory;
 
     static {
