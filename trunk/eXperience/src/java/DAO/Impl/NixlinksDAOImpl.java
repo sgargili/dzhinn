@@ -37,7 +37,8 @@ public class NixlinksDAOImpl implements NixlinksDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public List getAllNixlink(int firstresult, int maxresult) throws SQLException {
+    @Override
+    public List getAllNixlinkByCounts(int firstresult, int maxresult) throws SQLException {
         Session session = null;
         List<Nixlinks> result = null;
         session = HibernateNixUtil.getSessionFactory().openSession();
@@ -56,14 +57,15 @@ public class NixlinksDAOImpl implements NixlinksDAO {
         return result;
     }
 
+    @Override
     public Long getAllNixlinkCount() throws SQLException {
         Session session = null;
-        Long count=0L;
+        Long count = 0L;
         session = HibernateNixUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin = session.createQuery("select count(*)from Nixlinks");
-            count = (Long)getByLogin.list().get(0);
+            count = (Long) getByLogin.list().get(0);
 //            for (Iterator it = getByLogin.iterate(); it.hasNext();) {
 //                it.next();
 //                count++;
@@ -76,5 +78,25 @@ public class NixlinksDAOImpl implements NixlinksDAO {
             }
         }
         return count;
+    }
+
+    @Override
+    public List getAllNixlink() throws SQLException {
+        Session session = null;
+        List<Nixlinks> result = null;
+        session = HibernateNixUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Nixlinks n");
+            result = getByLogin.list();
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return result;
     }
 }
