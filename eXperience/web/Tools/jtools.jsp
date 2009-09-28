@@ -60,8 +60,7 @@
         <script type='text/javascript' src='../dwr/interface/ManufacturerAll.js'></script>
         <script type='text/javascript' src='../dwr/interface/UploadDownload.js'></script>
         <script type='text/javascript' src='../dwr/interface/SupplierAll.js'></script>
-
-
+        <script type='text/javascript' src='../dwr/interface/Nix.js'></script>
 
         <link id="themeStyles" rel="stylesheet" href="../dojo/dijit/themes/tundra/tundra.css">
         <link id="themeStyles" rel="stylesheet" href="css/Xport.css">
@@ -110,7 +109,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <button>Watch All PT</button>
+                                            <button onclick="Watch_All_PT_Nix()">Watch All PT</button>
                                         </td>
                                         <td>
                                             <button>Update Pt/Links</button>
@@ -118,11 +117,21 @@
                                         <td align=right>
                                             <font color="white" size="2">Updating Process:</font>
                                         </td>
+                                        <td>
+                                            <div id="nixGrabPT_Process">
+                                            </div>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
                     </table>
+                </div>
+                <br>
+                <div dojoType="dijit.TooltipDialog" id="TablenixPT_Out_All">
+                    <p align="center" id="TablenixPT_Out">
+                        Just press 'Watch All PT' button.
+                    </p>
                 </div>
             </div>
             <div id="nixGrabCont">

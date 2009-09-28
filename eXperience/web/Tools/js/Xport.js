@@ -253,7 +253,7 @@ function ManufacturerAdd(){
     });
 }
 function ManufacturerAllAdd(){
-     Show("Updating");
+    Show("Updating");
     dojo.byId("Updating").innerHTML ="Updating <img src='images/loading-balls.gif'/>";
     ManufacturerAll.updateManPT(function(data) {
         dojo.byId("Updating").innerHTML = "Updating is " + data;
@@ -292,6 +292,7 @@ function uploadFileMatch() {
 dojo.addOnLoad( function() {
     SuppUpd();
     ManufUpd();
+    NixProcess();
 });
 
 
@@ -303,6 +304,11 @@ function SuppUpd() {
         data = str.replace(re, "selSupplMatch");
 
         dojo.byId("SupplSelectMatch").innerHTML = data;
+    });
+}
+function NixProcess() {
+    Nix.getPTStatus(function(data) {
+        dojo.byId("nixGrabPT_Process").innerHTML = data;
     });
 }
 
@@ -353,5 +359,12 @@ function UpdateManPT(){
     UploadDownload.createUpdateManPt(function(data) {
         dojo.byId('Test').innerHTML = data;
         alert(data);
+    });
+}
+function Watch_All_PT_Nix(){
+    dojo.byId('TablenixPT_Out').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    Nix.getAllPT(function(data) {
+        dojo.byId('TablenixPT_Out').innerHTML = data;
+    //        Show("AllDialog_Suppliers_Out");
     });
 }

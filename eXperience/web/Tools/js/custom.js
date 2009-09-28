@@ -46,7 +46,8 @@ var nix = {
     },
     items:[{
         title: 'Product Types/Links',
-        contentEl: 'nixGrabPT'
+        contentEl: 'nixGrabPT',
+        autoScroll: true
     },{
         title: 'Content',
         contentEl: 'nixGrabCont'
