@@ -31,7 +31,7 @@ Ext.onReady(function(){
         // from basic.js:
         start,
         // from custom.js:
-        a2Zmall, euromall, magento,
+        nix, a2Zmall, euromall, magento,
         // from combination.js:
         yandex, price_Concentrator
         ]

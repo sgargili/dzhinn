@@ -1,4 +1,11 @@
 [{
+    text:'Grabli™',
+    children:[{
+        text:'Nix.ru',
+        id:'Nix',
+        leaf:true
+    }]
+},{
     text:'Export for Shops',
     children:[{
         text:'Euromall.ru',

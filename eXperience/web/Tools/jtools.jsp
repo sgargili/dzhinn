@@ -75,7 +75,7 @@
                         <h1>Shop Tools...</h1>
                     </td>
                     <td>
-                        
+
                     </td>
                 </tr>
             </table>
@@ -101,6 +101,35 @@
             </div>          
             <div id="Yandex-details">
                 <h2>Система управления сравнения цен Yandex Market.</h2>
+            </div>
+            <div id="nixGrabPT">
+                <div dojoType="dijit.TooltipDialog" id="nixGrabPT_PT">
+                    <table id="TablenixPT" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #cfcdcd>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <button>Watch All PT</button>
+                                        </td>
+                                        <td>
+                                            <button>Update Pt/Links</button>
+                                        </td>
+                                        <td align=right>
+                                            <font color="white" size="2">Updating Process:</font>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="nixGrabCont">
+
+            </div>
+            <div id="nixGrabOut">
+
             </div>
             <div id="www">
                 <input type="button" onclick="Manufacturer()" value="Посмареть всех!"/>
@@ -269,6 +298,9 @@
             </div>
             <div id="A2Zmall-details">
                 <h2>A2ZMall</h2>
+            </div>
+            <div id="Nix-details">
+                <h2>Грабилка сайта Nix.ru</h2>
             </div>
             <div id="Euromall-details">
                 <h2>Euromall</h2>
