@@ -35,6 +35,26 @@ var euromall = {
     }]
 };
 
+var nix = {
+
+    xtype: 'tabpanel',
+    id: 'Nix-panel',
+    plain: true,  //remove the header border
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+    },
+    items:[{
+        title: 'Product Types/Links',
+        contentEl: 'nixGrabPT'
+    },{
+        title: 'Content',
+        contentEl: 'nixGrabCont'
+    },{
+        title: 'Output',
+        contentEl: 'nixGrabOut'
+    }]
+};
 
 
 
