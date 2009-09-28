@@ -28,7 +28,7 @@ public interface SupplierPriceDAO {
 
     public Collection getAllSupplierprice() throws SQLException;
 
-    public Collection getAllSupplierpriceById(Long Supplierprice_Id, String Article) throws SQLException;
+    public Collection getAllSupplierpriceById(Long Supplierprice_Id, String Article, int Start, int Count) throws SQLException;
 
     public void deleteSupplierprice(Supplierprice supplierprice) throws SQLException;
 }

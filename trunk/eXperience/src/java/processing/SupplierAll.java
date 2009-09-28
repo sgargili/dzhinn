@@ -70,11 +70,14 @@ public class SupplierAll {
     @SuppressWarnings("static-access")
     public String getPricesBySuppliersId(String str, String art) throws SQLException {
         String output = "<table bgcolor=black align=center cellspacing='1' cellpadding='1' border=0 width=100%>";
-        output += "<tr bgcolor = #2d4491 align=center><td><font color=white>№</font></td><td><font color=white>Supplier</font></td><td><font color=white>Article</font></td><td><font color=white>Description</font></td><td><font color=white>Price</font></td><td><font color=white>Currency</font></td></tr>";
+        // output += "<tr bgcolor = #2d4491 align=center><td><a href=\"http://www.sozdaysait.com\"><font color=white>1-1000</font></a></td></tr>";
 
         Long Id = FactoryDAO.getInstance().getSupplierDAO().getIdBySupplier(str);
 
-        Collection supprice = FactoryDAO.getInstance().getSupplierPriceDAO().getAllSupplierpriceById(Id, art);
+        Collection supprice = FactoryDAO.getInstance().getSupplierPriceDAO().getAllSupplierpriceById(Id, art, 0, 100);
+        output += "<tr bgcolor = #2d4491 align=center><td><font color=white>" + supprice.size() + "</font></td></tr>";
+        output += "<tr bgcolor = #2d4491 align=center><td><font color=white>№</font></td><td><font color=white>Supplier</font></td><td><font color=white>Article</font></td><td><font color=white>Description</font></td><td><font color=white>Price</font></td><td><font color=white>Currency</font></td></tr>";
+
 
         List<SupplierPriceSearch> lst = new <SupplierPriceSearch>ArrayList();
 
@@ -87,7 +90,7 @@ public class SupplierAll {
             //artDesc = FactoryDAO.getInstance().getMatchingDAO().getDescriptionBySupplierArticleName(supplierprice.getSupplierArticleName());
             artDesc = supplierprice.getSupplierArticleDescription();
             Cur = FactoryDAO.getInstance().getCurrencyDAO().getCurrencyNameById(supplierprice.getCurrencyId());
-            lst.add(new SupplierPriceSearch(FactoryDAO.getInstance().getSupplierDAO().getSupplierById(FactoryDAO.getInstance().getSupplierDAO().getSupplierIdByArticle(supplierprice.getSupplierArticleName())), supplierprice.getSupplierArticleName(), artDesc, supplierprice.getSupplierArticlePrice(),Cur));
+            lst.add(new SupplierPriceSearch(FactoryDAO.getInstance().getSupplierDAO().getSupplierById(FactoryDAO.getInstance().getSupplierDAO().getSupplierIdByArticle(supplierprice.getSupplierArticleName())), supplierprice.getSupplierArticleName(), artDesc, supplierprice.getSupplierArticlePrice(), Cur));
         }
 
         Collections.sort(lst, new Comparator<SupplierPriceSearch>() {
