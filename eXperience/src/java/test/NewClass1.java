@@ -4,7 +4,7 @@
  */
 package test;
 
-import DAO.FactoryDAO;
+import DAO.FactoryNixDAO;
 import Pojo.Nixdata;
 import SevenZip.Compression.LZMA.Decoder;
 import SevenZip.Compression.LZMA.Encoder;
@@ -34,7 +34,7 @@ public class NewClass1 {
         Long start = System.currentTimeMillis();
         CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
         String[] temp = new String[8];
-        List<Nixdata> ndl = FactoryDAO.getInstance().getNixdataDAO().getAllNixdata();
+        List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata();
         if (ndl.equals(null)) {
             System.exit(0);
         }

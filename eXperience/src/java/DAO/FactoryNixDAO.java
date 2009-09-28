@@ -15,11 +15,11 @@ public class FactoryNixDAO {
 
     private static NixlinksDAO nixlinksDAO = null;
     private static NixdataDAO nixdataDAO = null;
-    private static FactoryDAO instance = null;
+    private static FactoryNixDAO instance = null;
 
-    public static synchronized FactoryDAO getInstance() {
+    public static synchronized FactoryNixDAO getInstance() {
         if (instance == null) {
-            instance = new FactoryDAO();
+            instance = new FactoryNixDAO();
         }
         return instance;
     }

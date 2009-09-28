@@ -8,7 +8,7 @@ package test;
  *
  * @author APopov
  */
-import DAO.FactoryDAO;
+import DAO.FactoryNixDAO;
 import Pojo.Nixlinks;
 import Proxy.IpChange;
 import Threads.DownloadContent;
@@ -38,7 +38,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(0, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -73,7 +73,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(5486, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(5486, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -107,7 +107,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(10971, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(10971, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -142,7 +142,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(16456, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(16456, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -177,7 +177,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(24941, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(24941, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -212,7 +212,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(27426, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(27426, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -247,7 +247,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(32911, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(32911, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -282,7 +282,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(38396, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(38396, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -317,7 +317,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(43881, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(43881, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -352,7 +352,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(49336, 5485);
+                nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(49336, 5485);
             } catch (SQLException ex) {
             }
             int i = 0;
