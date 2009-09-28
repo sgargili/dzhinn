@@ -5,7 +5,7 @@
 package DAO.Impl;
 
 import DAO.SupplierPriceDAO;
-import Pojo.Supplierprice;
+import Pojo.Supplierprice; 
 import Util.HibernateUtil;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -108,7 +108,7 @@ public class SupplierPriceDAOImpl implements SupplierPriceDAO {
     }
 
     @Override
-    public Collection getAllSupplierpriceById(Long Supplierprice_Id, String Article) throws SQLException {
+    public Collection getAllSupplierpriceById(Long Supplierprice_Id, String Article, int Start, int Count) throws SQLException {
         Session session = null;
         List result = null;
         session = HibernateUtil.getSessionFactory().openSession();
@@ -117,19 +117,19 @@ public class SupplierPriceDAOImpl implements SupplierPriceDAO {
             Query getByLogin;
             if (Article.equals("") || Article.equals(null)) {
                 if (Supplierprice_Id == 7) {
-                    getByLogin = session.createQuery("from Supplierprice s");
+                    getByLogin = session.createQuery("from Supplierprice s").setMaxResults(Count).setFirstResult(Start);
                 } else {
                     getByLogin = session.createQuery("from Supplierprice s where Supplier_Id = :SupplierId ");
-                    getByLogin.setLong("SupplierId", Supplierprice_Id);
+                    getByLogin.setLong("SupplierId", Supplierprice_Id).setMaxResults(Count).setFirstResult(Start);
                 }
             } else {
                 if (Supplierprice_Id == 7) {
                     getByLogin = session.createQuery("from Supplierprice s where Supplier_Article_Name like :SupplierArticleName");
-                    getByLogin.setString("SupplierArticleName", "%" + Article + "%");
+                    getByLogin.setString("SupplierArticleName", "%" + Article + "%").setMaxResults(Count).setFirstResult(Start);
                 } else {
                     getByLogin = session.createQuery("from Supplierprice s where Supplier_Id = :SupplierId and Supplier_Article_Name like :SupplierArticleName");
                     getByLogin.setLong("SupplierId", Supplierprice_Id);
-                    getByLogin.setString("SupplierArticleName", "%" + Article + "%");
+                    getByLogin.setString("SupplierArticleName", "%" + Article + "%").setMaxResults(Count).setFirstResult(Start);
                 }
             }
             result = getByLogin.list();
