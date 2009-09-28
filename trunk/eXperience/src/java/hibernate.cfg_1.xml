@@ -11,5 +11,6 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="Pojo/Nixlinks.hbm.xml"/>
         <mapping resource="Pojo/Nixdata.hbm.xml"/>
+        <mapping resource="Pojo/Processes.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
