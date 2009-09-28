@@ -550,7 +550,7 @@ public class HttpDAO {
 //        for (int k = 0; k < strl.length; k++) {
 //            System.out.println(strl[k]);
 //        }
-        List<Nixlinks> nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlink(124, 50726);
+        List<Nixlinks> nixlist = FactoryNixDAO.getInstance().getNixlinksDAO().getAllNixlinkByCounts(124, 50726);
         int i = 0;
         int bayan = 0;
         IpChange ip = new IpChange();
