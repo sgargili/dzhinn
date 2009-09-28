@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.NixdataDAO;
 import Pojo.Nixdata;
-import hUtil.HibernateUtil;
+import Util.HibernateNixUtil;
 import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Query;
@@ -21,7 +21,7 @@ public class NixdataDAOImpl implements NixdataDAO {
     public void addNixdata(Nixdata nixdata) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateNixUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(nixdata);
             session.getTransaction().commit();
@@ -36,7 +36,7 @@ public class NixdataDAOImpl implements NixdataDAO {
     public List getAllNixdata(int firstresult, int maxresult) throws SQLException {
         Session session = null;
         List<Nixdata> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateNixUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -55,7 +55,7 @@ public class NixdataDAOImpl implements NixdataDAO {
     public List getAllNixdata() throws SQLException {
         Session session = null;
         List<Nixdata> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateNixUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =

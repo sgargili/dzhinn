@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.NixlinksDAO;
 import Pojo.Nixlinks;
-import hUtil.HibernateUtil;
+import Util.HibernateNixUtil;
 import java.sql.SQLException;
 import java.util.List;
 import org.hibernate.Query;
@@ -21,7 +21,7 @@ public class NixlinksDAOImpl implements NixlinksDAO {
     public void addNixlink(Nixlinks nixlinks) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateNixUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(nixlinks);
             session.getTransaction().commit();
@@ -40,7 +40,7 @@ public class NixlinksDAOImpl implements NixlinksDAO {
     public List getAllNixlink(int firstresult, int maxresult) throws SQLException {
         Session session = null;
         List<Nixlinks> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateNixUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -59,7 +59,7 @@ public class NixlinksDAOImpl implements NixlinksDAO {
     public Long getAllNixlinkCount() throws SQLException {
         Session session = null;
         Long count=0L;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateNixUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin = session.createQuery("select count(*)from Nixlinks");

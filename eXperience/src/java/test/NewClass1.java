@@ -34,7 +34,7 @@ public class NewClass1 {
         Long start = System.currentTimeMillis();
         CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
         String[] temp = new String[8];
-        List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata();
+        List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata(0, 1000);
         if (ndl.equals(null)) {
             System.exit(0);
         }
