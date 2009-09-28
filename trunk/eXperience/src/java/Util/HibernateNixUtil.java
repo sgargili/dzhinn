@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package hUtil;
+package Util;
 
 
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -14,14 +14,14 @@ import org.hibernate.SessionFactory;
  *
  * @author APopov
  */
-public class HibernateUtil {
+public class HibernateNixUtil {
     private static final SessionFactory sessionFactory;
 
     static {
         try {
             // Create the SessionFactory from standard (hibernate.cfg.xml) 
             // config file.
-            sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+            sessionFactory = new AnnotationConfiguration().configure("hibernate.cfg_1.xml").buildSessionFactory();
         } catch (Throwable ex) {
             // Log the exception. 
             System.err.println("Initial SessionFactory creation failed." + ex);
