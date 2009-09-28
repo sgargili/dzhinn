@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.Product_TypeDAO;
 import Pojo.ProductType;
-import Util.HibernateUtil;
+import Util.HibernatePriceConUtil;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
     public void addProduct_Type(ProductType productType) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(productType);
             session.getTransaction().commit();
@@ -39,7 +39,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
     public void updateProduct_Type(ProductType productType) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(productType);
             session.getTransaction().commit();
@@ -56,7 +56,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
         Session session = null;
         ProductType result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from ProductType p where ProductType_Id_Id = :ProductTypeId").setLong("ProductTypeId", ProductTypeId);
             List resultList = query.list();
@@ -75,7 +75,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
     public Collection getAllProduct_Types() throws SQLException {
         Session session = null;
         List<ProductType> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -95,7 +95,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
     public void deleteProduct_Type(ProductType productType) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(productType);
             session.getTransaction().commit();
@@ -112,7 +112,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
         Session session = null;
         List result = null;
         boolean out = false;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin;
@@ -138,7 +138,7 @@ public class Product_TypeDAOImpl implements Product_TypeDAO {
         Session session = null;
         ProductType result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from ProductType p where Product_Type_Id = :ProductTypeId").setLong("ProductTypeId", ProductTypeId);
             List resultList = query.list();

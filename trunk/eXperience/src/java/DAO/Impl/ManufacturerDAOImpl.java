@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.ManufacturerDAO;
 import Pojo.Manufacturer;
-import Util.HibernateUtil;
+import Util.HibernatePriceConUtil;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
     public void addManufacturer(Manufacturer manufacturer) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(manufacturer);
             session.getTransaction().commit();
@@ -37,7 +37,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
     public void updateManufacturer(Manufacturer manufacturer) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.update(manufacturer);
             session.getTransaction().commit();
@@ -53,7 +53,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
         Session session = null;
         Manufacturer result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernatePriceConUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from Manufacturer m where Manufacturer_Id = :ManufacturerId ").setLong("ManufacturerId", Manufacturer_Id);
             List resultList = query.list();
@@ -71,7 +71,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
     public Collection getAllManufacturers() throws SQLException {
         Session session = null;
         List<Manufacturer> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -91,7 +91,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
     public void deleteManufacturer(Manufacturer manufacturer) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernatePriceConUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.delete(manufacturer);
             session.getTransaction().commit();
@@ -109,7 +109,7 @@ public class ManufacturerDAOImpl implements ManufacturerDAO {
         Session session = null;
         List result = null;
         boolean out = false;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernatePriceConUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin;
