@@ -83,6 +83,7 @@
 
             <!-- Start page content -->
             <div id="start-div" style="background-color:#e1e8ff; width:100%; height:100%">
+                Привет!
             </div>
             <div id="Yandex_Comporator" style="background-color:#e1e8ff; width:100%; height:100%">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_Yandex" execute="alert(dojo.toJson(arguments[0], false))">
@@ -286,6 +287,9 @@
                     <h1 id="Updating" align="right"></h1>
                 </div>
             </div>
+            <div id ="eCsv">
+                Привет!
+            </div>
             <div id="Price_Concentrator-details">
                 <h2>Small Price Concentrator.</h2>
                 <p>Система расчета цен для шопов относительно цен поставщиков.</p>
@@ -313,6 +317,9 @@
             </div>
             <div id="Euromall-details">
                 <h2>Euromall</h2>
+            </div>
+            <div id="eCsv-details">
+                <h2>Пертрубации форматов файлов...</h2>
             </div>
         </div>
     </body>
