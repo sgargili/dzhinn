@@ -33,7 +33,7 @@ Ext.onReady(function(){
         // from custom.js:
         nix, a2Zmall, euromall, magento,
         // from combination.js:
-        yandex, price_Concentrator
+        yandex, price_Concentrator, ecsv
         ]
     };
    
@@ -87,9 +87,9 @@ Ext.onReady(function(){
         region: 'center',
         bodyStyle: 'padding-bottom:15px;background:#eee;',
         autoScroll: true,
-        height: 500,
+        height: 400,
         width: 150,
-        html: '<p class="details-info">When you select a layout from the tree, additional details will display here.</p>'
+        html: '<p class="details-info">Выберите нужную функцию...</p>'
     };
 	
     // Finally, build the main layout once all the pieces are ready.  This is also a good
