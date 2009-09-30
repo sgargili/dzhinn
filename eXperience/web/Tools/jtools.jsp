@@ -83,7 +83,7 @@
 
             <!-- Start page content -->
             <div id="start-div" style="background-color:#e1e8ff; width:100%; height:100%">
-                Привет!
+                <img style="position:absolute; top:20%; left:20%" src="/eXperience/Tools/images/vovka.jpg"/>
             </div>
             <div id="Yandex_Comporator" style="background-color:#e1e8ff; width:100%; height:100%">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_Yandex" execute="alert(dojo.toJson(arguments[0], false))">

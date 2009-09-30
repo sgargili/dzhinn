@@ -53,7 +53,7 @@ var yandex = {
 
 var ecsv = {
     id: 'eCsv-panel',
-    title: 'Преобразование файла из формата xls и csv(Excel) в нормальный!!! csv. ',
+    title: 'Преобразование файла из форматов XLS и CSV(Excel) в нормальный CSV!',
     layout: 'fit',
     bodyStyle: 'padding:17px; background-color:#e1e8ff; width:100%; height:100%',
     //	bodyStyle: 'padding:25px',
