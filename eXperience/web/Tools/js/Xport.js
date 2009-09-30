@@ -354,6 +354,15 @@ function UploadManPT(){
     });
 }
 
+function UploadeCsv(){
+    var fileName = dojo.byId('uploadFileeCsv').value;
+    var file = dwr.util.getValue('uploadFileeCsv');
+    var encoding = dojo.byId('eCsvEncoding').value;
+    UploadDownload.convertXLSCSV(file, fileName, encoding, function(data) {
+        dwr.engine.openInDownload(data);
+    });
+}
+
 function UpdateManPT(){
     dojo.byId('Test').innerHTML = "Loading...";
     UploadDownload.createUpdateManPt(function(data) {

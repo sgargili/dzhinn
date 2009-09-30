@@ -288,7 +288,35 @@
                 </div>
             </div>
             <div id ="eCsv">
-                Привет!
+                <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
+                    <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #cfcdcd align=left>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <font color="white" size="2">Encoding:</font>
+                                            <select id="eCsvEncoding">
+                                                <option value="WINDOWS-1251">ANSI
+                                                <option value="UTF-8">UTF-8
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <font color="white" size="2">Upload XLS or CSV File:</font>
+                                        </td>
+                                        <td>
+                                            <input type="file" id="uploadFileeCsv"/>
+                                        </td>
+                                        <td>
+                                            <button onclick="UploadeCsv()">Upload</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <h1 id="Updating" align="right"></h1>
+                </div>
             </div>
             <div id="Price_Concentrator-details">
                 <h2>Small Price Concentrator.</h2>
@@ -319,7 +347,7 @@
                 <h2>Euromall</h2>
             </div>
             <div id="eCsv-details">
-                <h2>Пертрубации форматов файлов...</h2>
+                <h2 class="details-info">Пертрубации форматов файлов...</h2>
             </div>
         </div>
     </body>
