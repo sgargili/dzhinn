@@ -356,10 +356,14 @@ function UploadManPT(){
 
 function UploadeCsv(){
     var fileName = dojo.byId('uploadFileeCsv').value;
+    var checkSeparator = dojo.byId('eCsvSeparator').checked;
+    var checkZip = dojo.byId('eCsvZip').checked;
     var file = dwr.util.getValue('uploadFileeCsv');
     var encoding = dojo.byId('eCsvEncoding').value;
-    UploadDownload.convertXLSCSV(file, fileName, encoding, function(data) {
+    dojo.byId('eCsvLoadingProcess').innerHTML = "Converting process <img src='images/loading-balls.gif'/>";
+    UploadDownload.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, function(data) {
         dwr.engine.openInDownload(data);
+        dojo.byId('eCsvLoadingProcess').innerHTML = "";
     });
 }
 
