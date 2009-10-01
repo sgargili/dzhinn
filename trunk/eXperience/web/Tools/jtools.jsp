@@ -295,11 +295,43 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <font color="white" size="2">Encoding:</font>
-                                            <select id="eCsvEncoding">
-                                                <option value="WINDOWS-1251">ANSI
-                                                <option value="UTF-8">UTF-8
-                                            </select>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <font color="white" size="2">Encoding:</font>
+                                                    </td>
+                                                    <td>
+                                                        <select id="eCsvEncoding">
+                                                            <option value="WINDOWS-1251">ANSI
+                                                            <option value="UTF-8">UTF-8
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <font color="white" size="2">Only separator:</font>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" id="eCsvSeparator" dojoType="dijit.form.CheckBox">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <font color="white" size="2">Compress to Zip:</font>
+                                                    </td>
+                                                    <td>
+                                                        <input type="checkbox" id="eCsvZip" dojoType="dijit.form.CheckBox">
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
                                         <td>
                                             <font color="white" size="2">Upload XLS or CSV File:</font>
@@ -309,6 +341,10 @@
                                         </td>
                                         <td>
                                             <button onclick="UploadeCsv()">Upload</button>
+                                        </td>
+                                        <td>
+                                            <div id="eCsvLoadingProcess">
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>

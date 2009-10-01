@@ -34,7 +34,7 @@
 },{
     text:'Useful Functions',
     children:[{
-        text:'(XLS, CSV(Excel)) to CSV',
+        text:'Convert XLS,CSV(Excel) to CSV',
         id:'eCsv',
         leaf:true
     }]
