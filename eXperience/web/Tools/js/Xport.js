@@ -360,8 +360,10 @@ function UploadeCsv(){
     var checkZip = dojo.byId('eCsvZip').checked;
     var file = dwr.util.getValue('uploadFileeCsv');
     var encoding = dojo.byId('eCsvEncoding').value;
+    var engine = dojo.byId('eCsvEngine').value;
+
     dojo.byId('eCsvLoadingProcess').innerHTML = "Converting process <img src='images/loading-balls.gif'/>";
-    UploadDownload.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, function(data) {
+    UploadDownload.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, engine, function(data) {
         dwr.engine.openInDownload(data);
         dojo.byId('eCsvLoadingProcess').innerHTML = "";
         if(data==null){

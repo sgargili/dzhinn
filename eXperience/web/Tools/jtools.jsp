@@ -334,6 +334,21 @@
                                             </table>
                                         </td>
                                         <td>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <font color="white" size="2">Engine:</font>
+                                                    </td>
+                                                    <td>
+                                                        <select id="eCsvEngine">
+                                                            <option value="Jexcel">Jexcel
+                                                            <option value="Apache POI">Apache POI
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
                                             <font color="white" size="2">Upload XLS or CSV File:</font>
                                         </td>
                                         <td>
