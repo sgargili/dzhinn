@@ -340,7 +340,7 @@
                                             <input type="file" id="uploadFileeCsv"/>
                                         </td>
                                         <td>
-                                            <button onclick="UploadeCsv()">Upload</button>
+                                            <button onclick="UploadeCsv()">Convert</button>
                                         </td>
                                         <td>
                                             <div id="eCsvLoadingProcess">
