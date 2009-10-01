@@ -313,7 +313,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <font color="white" size="2">Only separator:</font>
+                                                        <font color="white" size="2">Only separator(CSV):</font>
                                                     </td>
                                                     <td>
                                                         <input type="checkbox" id="eCsvSeparator" dojoType="dijit.form.CheckBox">
