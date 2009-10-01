@@ -364,6 +364,9 @@ function UploadeCsv(){
     UploadDownload.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, function(data) {
         dwr.engine.openInDownload(data);
         dojo.byId('eCsvLoadingProcess').innerHTML = "";
+        if(data==null){
+            alert("Не верный формат файла. Поддерживаемые форматы: csv и xls.");
+        }
     });
 }
 
