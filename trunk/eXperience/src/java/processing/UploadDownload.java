@@ -43,16 +43,21 @@ public class UploadDownload {
     }
 
     public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)|(\\.xls)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return null;
+        }
         Xls2Csv x2c = new Xls2Csv();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         File fl;
-        Pattern p = Pattern.compile("\\.csv");
-        Matcher m = p.matcher(fileName);
+        p = Pattern.compile("\\.csv");
+        m = p.matcher(fileName);
         if (m.find()) {
-            fileName = fileName.replaceAll(".*\\\\(.*)\\.csv|xls", "$1");
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
             fl = x2c.convertCsv2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
         } else {
-            fileName = fileName.replaceAll(".*\\\\(.*)\\.csv|xls", "$1");
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xls", "$2");
             fl = x2c.convertXls2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
         }
         buffer.write(FileUtils.readFileToByteArray(fl));
