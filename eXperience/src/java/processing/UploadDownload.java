@@ -40,11 +40,11 @@ public class UploadDownload {
         // return "Обновлено за: " + (time2 - time1) / 1000 + " сек.";
     }
 
-    public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding) throws Exception {
+    public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws Exception {
         Xls2Csv x2c = new Xls2Csv();
-        File fl = x2c.convert(uploadFile, fileName, encoding);
+        File fl = x2c.convert(uploadFile, fileName, encoding, checkSeparator, checkZip);
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(fl));
-        return new FileTransfer(fileName, "", buffer.toByteArray());
+        return new FileTransfer(fileName, "csv/text", buffer.toByteArray());
     }
 }
