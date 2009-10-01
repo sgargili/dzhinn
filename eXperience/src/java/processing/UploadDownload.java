@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipException;
 import org.apache.commons.io.FileUtils;
 import org.directwebremoting.io.FileTransfer;
@@ -42,9 +44,22 @@ public class UploadDownload {
 
     public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws Exception {
         Xls2Csv x2c = new Xls2Csv();
-        File fl = x2c.convert(uploadFile, fileName, encoding, checkSeparator, checkZip);
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        File fl;
+        Pattern p = Pattern.compile("\\.csv");
+        Matcher m = p.matcher(fileName);
+        if (m.find()) {
+            fileName = fileName.replaceAll(".*\\\\(.*)\\.csv|xls", "$1");
+            fl = x2c.convertCsv2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
+        } else {
+            fileName = fileName.replaceAll(".*\\\\(.*)\\.csv|xls", "$1");
+            fl = x2c.convertXls2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
+        }
         buffer.write(FileUtils.readFileToByteArray(fl));
-        return new FileTransfer(fileName, "csv/text", buffer.toByteArray());
+        if (checkZip.equals("true")) {
+            return new FileTransfer(fileName + ".zip", "application/x-zip-compressed", buffer.toByteArray());
+        } else {
+            return new FileTransfer(fileName + ".csv", "csv/text", buffer.toByteArray());
+        }
     }
 }
