@@ -27,6 +27,10 @@ import org.apache.commons.compress.archivers.ArchiveOutputStream;
 import org.apache.commons.compress.archivers.ArchiveStreamFactory;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.io.*;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class Xls2Csv {
 
@@ -98,7 +102,7 @@ public class Xls2Csv {
         }
     }
 
-    public File convertXls2Csv(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws IOException, ArchiveException {
+    public File convertXls2CsvV1(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws IOException, ArchiveException {
         long start = System.currentTimeMillis();
         File file = new File("temp.xls");
         File outputFile = new File(fileName + ".zip");
@@ -126,6 +130,46 @@ public class Xls2Csv {
         } catch (Exception ioe) {
             System.out.println("Error: " + ioe);
         }
+        if (zipbool) {
+            final OutputStream out = new FileOutputStream(outputFile);
+            ArchiveOutputStream os = new ArchiveStreamFactory().createArchiveOutputStream("zip", out);
+            os.putArchiveEntry(new ZipArchiveEntry(fileName + ".csv"));
+            IOUtils.copy(new FileInputStream(file2), os);
+            os.closeArchiveEntry();
+            os.close();
+            long end = System.currentTimeMillis();
+            System.out.println(end - start + " миллисекунд");
+            return outputFile;
+        } else {
+            long end = System.currentTimeMillis();
+            System.out.println(end - start + " миллисекунд");
+            return file2;
+        }
+    }
+
+    public File convertXls2CsvV2(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws IOException, ArchiveException, InvalidFormatException {
+        long start = System.currentTimeMillis();
+        // File file = new File("temp.xls");
+        File outputFile = new File(fileName + ".zip");
+        boolean zipbool = false;
+        if (checkZip.equals("true")) {
+            zipbool = true;
+        }
+        File file2 = new File(fileName);
+        CsvWriter csvw = new CsvWriter(file2.getAbsolutePath(), ',', Charset.forName(encoding));
+        org.apache.poi.ss.usermodel.Workbook wb = WorkbookFactory.create(uploadFile);
+        org.apache.poi.ss.usermodel.Sheet sheet = wb.getSheetAt(0);
+        String[] temp = null;
+        int rows = sheet.getPhysicalNumberOfRows(), columns;
+        for (int i = 0; i < rows; i++) {
+            columns = sheet.getRow(i).getPhysicalNumberOfCells();
+            for (int j = 0; j < columns; j++) {
+                temp = new String[columns];
+                temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+            }
+            csvw.writeRecord(temp);
+        }
+        csvw.close();
         if (zipbool) {
             final OutputStream out = new FileOutputStream(outputFile);
             ArchiveOutputStream os = new ArchiveStreamFactory().createArchiveOutputStream("zip", out);

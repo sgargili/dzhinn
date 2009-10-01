@@ -42,7 +42,7 @@ public class UploadDownload {
         // return "Обновлено за: " + (time2 - time1) / 1000 + " сек.";
     }
 
-    public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip) throws Exception {
+    public FileTransfer convertXLSCSV(InputStream uploadFile, String fileName, String encoding, String checkSeparator, String checkZip, String engine) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)|(\\.xls)");
         Matcher m = p.matcher(fileName);
         if (!m.find()) {
@@ -57,8 +57,13 @@ public class UploadDownload {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
             fl = x2c.convertCsv2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
         } else {
-            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xls", "$2");
-            fl = x2c.convertXls2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
+            if (engine.equals("Jexcel")) {
+                fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xls", "$2");
+                fl = x2c.convertXls2CsvV1(uploadFile, fileName, encoding, checkSeparator, checkZip);
+            } else {
+                fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xls", "$2");
+                fl = x2c.convertXls2CsvV2(uploadFile, fileName, encoding, checkSeparator, checkZip);
+            }
         }
         buffer.write(FileUtils.readFileToByteArray(fl));
         if (checkZip.equals("true")) {
