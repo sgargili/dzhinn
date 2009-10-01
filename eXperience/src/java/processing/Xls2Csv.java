@@ -160,11 +160,13 @@ public class Xls2Csv {
         org.apache.poi.ss.usermodel.Workbook wb = WorkbookFactory.create(uploadFile);
         org.apache.poi.ss.usermodel.Sheet sheet = wb.getSheetAt(0);
         String[] temp = null;
-        int rows = sheet.getPhysicalNumberOfRows(), columns;
+        int rows = sheet.getPhysicalNumberOfRows();
+        int columns = 0;
         for (int i = 0; i < rows; i++) {
             columns = sheet.getRow(i).getPhysicalNumberOfCells();
             for (int j = 0; j < columns; j++) {
                 temp = new String[columns];
+       //         System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getStringCellValue());
                 temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
             }
             csvw.writeRecord(temp);
