@@ -115,8 +115,8 @@ public class Xls2Csv {
             int rows = sheet.getRows();
             int columns = sheet.getColumns();
             String[] temp = new String[columns];
-            for (int row = 1; row < rows; row++) {
-                for (int column = 1; column < columns; column++) {
+            for (int row = 0; row < rows; row++) {
+                for (int column = 0; column < columns; column++) {
                     temp[column] = sheet.getCell(column, row).getContents();
                 }
                 csvw.writeRecord(temp);
