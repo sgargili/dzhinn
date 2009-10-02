@@ -44,8 +44,8 @@ public class elabXlsMatch {
                 supplierArticleDescription = sheet.getCell(2, row).getContents();
                 it4prifitArticleName = sheet.getCell(3, row).getContents();
                 it4prifitArticleDescription = sheet.getCell(4, row).getContents();
-                Matching mtch = new Matching(supplierId, supplierArticleName, supplierArticleDescription, it4prifitArticleName, l, it4prifitArticleDescription);
-                lst.add(mtch);
+              //  Matching mtch = new Matching(supplierId, supplierArticleName, supplierArticleDescription, it4prifitArticleName, l, it4prifitArticleDescription);
+              //  lst.add(mtch);
             }
             wb.close();
         } catch (Exception ioe) {

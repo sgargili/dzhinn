@@ -166,8 +166,20 @@ public class Xls2Csv {
             columns = sheet.getRow(i).getPhysicalNumberOfCells();
             for (int j = 0; j < columns; j++) {
                 temp = new String[columns];
-       //         System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getStringCellValue());
-                temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+               // System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getCellType());
+                if (sheet.getRow(i).getCell(j).getCellType() == 0) {
+                    temp[j] = sheet.getRow(i).getCell(j).getNumericCellValue() + "";
+                } else if (sheet.getRow(i).getCell(j).getCellType() == 1) {
+                    temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+                } else if (sheet.getRow(i).getCell(j).getCellType() == 2) {
+                    temp[j] = sheet.getRow(i).getCell(j).getCellFormula();
+                } else if (sheet.getRow(i).getCell(j).getCellType() == 3) {
+                    temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+                } else if (sheet.getRow(i).getCell(j).getCellType() == 4) {
+                    temp[j] = sheet.getRow(i).getCell(j).getBooleanCellValue() + "";
+                } else {
+                    temp[j] = "Ошибка в ячейке -> (" + i + "," + j + ")";
+                }
             }
             csvw.writeRecord(temp);
         }
