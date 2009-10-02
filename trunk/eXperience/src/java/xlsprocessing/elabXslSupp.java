@@ -40,8 +40,8 @@ public class elabXslSupp {
                 //  supplierId = 1L;
                 supplierArticleName = sheet.getCell(1, row).getContents();
                 supplierArticlePrice = Double.valueOf(sheet.getCell(2, row).getContents()).doubleValue();
-                Supplierprice sp = new Supplierprice(supplierId, supplierArticleName, supplierArticlePrice);
-                lst.add(sp);
+           //     Supplierprice sp = new Supplierprice(supplierId, supplierArticleName, supplierArticlePrice);
+              //  lst.add(sp);
             }
             wb.close();
         } catch (Exception ioe) {
@@ -50,11 +50,11 @@ public class elabXslSupp {
         Iterator iterator = lst.iterator();
         while (iterator.hasNext()) {
             Supplierprice supplierprice = (Supplierprice) iterator.next();
-            if (fDao.getSupplierPriceDAO().isSupplierArticlePresent(supplierprice.getSupplierArticleName())) {
-                fDao.getSupplierPriceDAO().updateSupplierprice(supplierprice);
-            } else {
-                fDao.getSupplierPriceDAO().addSupplierprice(supplierprice);
-            }
+//            if (fDao.getSupplierPriceDAO().isSupplierArticlePresent(supplierprice.getSupplierArticleName())) {
+//                fDao.getSupplierPriceDAO().updateSupplierprice(supplierprice);
+//            } else {
+//                fDao.getSupplierPriceDAO().addSupplierprice(supplierprice);
+//            }
         }
         Long time2 = System.currentTimeMillis();
         return "Залился Xls файл за: " + (time2 - time1) / 1000 + " сек.";
