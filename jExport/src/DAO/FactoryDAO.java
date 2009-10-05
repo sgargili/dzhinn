@@ -4,8 +4,8 @@
  */
 package DAO;
 
-import DAO.Impl.PcSyncProductsDescriptionImpl;
-import DAO.Impl.Pc_sync_productsDAOImpl;
+import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
+import DAO.Impl.PcSyncProductsDAOImpl;
 
 /**
  *
@@ -13,20 +13,20 @@ import DAO.Impl.Pc_sync_productsDAOImpl;
  */
 public class FactoryDAO {
 
-    private static Pc_sync_productsDAO pcSyncProducts = null;
+    private static PcSyncProductsDAO pcSyncProducts = null;
     private static PcSyncProductsDescriptionDAO pcSyncProductsDescriptionDAO = null;
     private static FactoryDAO instance = null;
 
-    public static Pc_sync_productsDAO getPcSyncProductsDAO() {
+    public static PcSyncProductsDAO getPcSyncProductsDAO() {
         if (pcSyncProducts == null) {
-            pcSyncProducts = new Pc_sync_productsDAOImpl();
+            pcSyncProducts = new PcSyncProductsDAOImpl();
         }
         return pcSyncProducts;
     }
 
     public static PcSyncProductsDescriptionDAO getPcSyncProductsDescriptionDAO() {
         if (pcSyncProductsDescriptionDAO == null) {
-            pcSyncProductsDescriptionDAO = new PcSyncProductsDescriptionImpl();
+            pcSyncProductsDescriptionDAO = new PcSyncProductsDescriptionDAOImpl();
         }
         return pcSyncProductsDescriptionDAO;
     }

@@ -12,7 +12,7 @@ import java.util.Collection;
  *
  * @author APopov
  */
-public interface Pc_sync_productsDAO {
+public interface PcSyncProductsDAO {
 
     public void addPcSyncProducts(PcSyncProducts pcSyncProducts) throws SQLException;
 

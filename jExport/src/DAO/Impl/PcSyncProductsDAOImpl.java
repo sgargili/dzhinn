@@ -4,7 +4,7 @@
  */
 package DAO.Impl;
 
-import DAO.Pc_sync_productsDAO;
+import DAO.PcSyncProductsDAO;
 import Pojo.PcSyncProducts;
 import Util.HibernateUtil;
 import java.sql.SQLException;
@@ -17,14 +17,14 @@ import org.hibernate.Session;
  *
  * @author APopov
  */
-public class Pc_sync_productsDAOImpl implements Pc_sync_productsDAO {
+public class PcSyncProductsDAOImpl implements PcSyncProductsDAO {
 
     public void addPcSyncProducts(PcSyncProducts pcSyncProducts) throws SQLException {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            session.save(pcSyncProducts);
+            session.saveOrUpdate(pcSyncProducts);
             session.getTransaction().commit();
         } catch (Exception e) {
         } finally {
