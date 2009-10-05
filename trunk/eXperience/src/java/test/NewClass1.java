@@ -32,9 +32,9 @@ public class NewClass1 {
 
     public static void main(String[] args) throws IOException, SQLException {
         Long start = System.currentTimeMillis();
-        CsvWriter csvw = new CsvWriter("C://testcsv.csv", ',', Charset.forName("UTF-8"));
+        CsvWriter csvw = new CsvWriter("C://Chassis.csv", ',', Charset.forName("WINDOWS-1251"));
         String[] temp = new String[8];
-        List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata(0, 1000);
+        List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata();
         if (ndl.equals(null)) {
             System.exit(0);
         }
@@ -58,20 +58,38 @@ public class NewClass1 {
             if (m.find()) {
                 continue;
             }
-            try {
-                temp[0] = ndt.getFullName().replaceAll("\\s+", " ");
-                temp[1] = ndt.getManufacturer().replaceAll("\\s+", " ");
-                temp[2] = ndt.getArticle();
-                temp[3] = ndt.getProductType().replaceAll("\\s+", " ");
-                temp[4] = ndt.getPictureUrl();
-                temp[5] = ndt.getGroupe().replaceAll("\\s+", " ");
-                if (!(ndt.getAttribute() == null) && !ndt.getAttribute().equals("")) {
-                    temp[6] = ndt.getAttribute().replaceAll("\\s+", " ");
+            p = Pattern.compile("Корпуса");
+            m = p.matcher(ndt.getProductType());
+            if (m.find()) {
+                try {
+                    temp[0] = ndt.getFullName().replaceAll("\\s+", " ").replaceAll("\\s/", "/");
+                    temp[1] = ndt.getManufacturer().replaceAll("\\s+", " ");
+                    temp[2] = ndt.getArticle();
+                    temp[3] = ndt.getProductType().replaceAll("\\s+", " ");
+                    temp[4] = ndt.getPictureUrl();
+                    temp[5] = ndt.getGroupe().replaceAll("\\s+", " ");
+                    if (!(ndt.getAttribute() == null) && !ndt.getAttribute().equals("")) {
+                        temp[6] = ndt.getAttribute().replaceAll("\\s+", " ");
+                    }
+//                    if (!ndt.getAttributeValue().equals("")) {
+                    temp[7] = ndt.getAttributeValue().replaceAll("\\s+", " ");
+//                    } else {
+//                        temp[0] = "";
+//                        temp[1] = "";
+//                        temp[2] = "";
+//                        temp[3] = "";
+//                        temp[4] = "";
+//                        temp[5] = "";
+//                        temp[6] = "";
+//                        temp[7] = "";
+//                    }
+                    if (temp[7].equals("")) {
+                        continue;
+                    }
+                    csvw.writeRecord(temp);
+                } catch (NullPointerException e) {
+                    System.out.println(i + " -> " + e + " -> " + ndt.getArticle());
                 }
-                temp[7] = ndt.getAttributeValue().replaceAll("\\s+", " ");
-                csvw.writeRecord(temp);
-            } catch (NullPointerException e) {
-                System.out.println(i + " -> " + e + " -> " + ndt.getArticle());
             }
             i++;
         }
