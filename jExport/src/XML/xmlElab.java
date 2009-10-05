@@ -32,15 +32,13 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class xmlElab {
 
     http http = new http();
-   // BufferedReader temp;
 
     @SuppressWarnings("static-access")
     public void xmlPcSyncProducts() throws XmlPullParserException, IOException, SQLException {
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-       // temp = http.DownloadManufacturersFromValue();
-        String xml = http.DownloadManufacturersFromValue();
-        xpp.setInput(new StringReader(xml));
+        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=71");
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml),"UTF-8"));
         int eventType = xpp.getEventType();
         PcSyncProducts pcSyncProducts = null;
         PcSyncProductsDescription pcSyncProductsDescription = null;
