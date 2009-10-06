@@ -19,6 +19,8 @@ import java.io.StringReader;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Iterator;
+import java.util.List;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParser;
@@ -37,8 +39,9 @@ public class xmlElab {
     public void xmlPcSyncProducts() throws XmlPullParserException, IOException, SQLException {
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=71");
-        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml),"UTF-8"));
+        //  File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=71");
+        File xml = new File("C://outFile.xml");
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
         int eventType = xpp.getEventType();
         PcSyncProducts pcSyncProducts = null;
         PcSyncProductsDescription pcSyncProductsDescription = null;
@@ -57,7 +60,7 @@ public class xmlElab {
                 //  System.out.println(i + " ---> " + pcSyncProducts.getProductsModel());
                 FactoryDAO.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
                 pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
-                pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6));
+                pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
                 pcSyncProductsDescription.setProductsDescription("");
                 FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
 
@@ -65,6 +68,21 @@ public class xmlElab {
             }
             i++;
             eventType = xpp.next();
+        }
+        System.out.println("Done...");
+    }
+
+    @SuppressWarnings("static-access")
+    public void xmlPcSyncProductsDescription() throws XmlPullParserException, IOException, SQLException {
+        @SuppressWarnings("static-access")
+        List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
+        // int i = 1;
+        for (Iterator it = lst.iterator(); it.hasNext();) {
+            PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
+            //System.out.println(i + " ---> " + str.getProductsModel());
+            str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
+            FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
+            // i++;
         }
         System.out.println("Done...");
     }

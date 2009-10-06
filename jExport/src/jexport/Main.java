@@ -33,7 +33,8 @@ public class Main {
 //            i++;
 //        }
         xmlElab xml = new xmlElab();
-        xml.xmlPcSyncProducts();
+       // xml.xmlPcSyncProducts();
+        xml.xmlPcSyncProductsDescription();
 
     }
 }

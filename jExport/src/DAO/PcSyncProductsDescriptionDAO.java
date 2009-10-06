@@ -6,6 +6,7 @@ package DAO;
 
 import Pojo.PcSyncProductsDescription;
 import java.sql.SQLException;
+import java.util.Collection;
 
 /**
  *
@@ -14,4 +15,6 @@ import java.sql.SQLException;
 public interface PcSyncProductsDescriptionDAO {
 
     public void addPcSyncProductsDescription(PcSyncProductsDescription pcSyncProductsDescription) throws SQLException;
+
+    public Collection getPcSyncProductsDescription() throws SQLException;
 }
