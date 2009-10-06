@@ -57,17 +57,19 @@ public class CategoriesDAOImpl implements CategoriesDAO {
 
     public Collection getAllCategoriesNew() throws SQLException {
         Session session = null;
-        List<oldCat> result = null;
+        List result = null;
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from CategoriesDescription cd join Categories cat");
+                    "select cd.categories_name, cat.categories_image" +
+                    "from categories_description cd" +
+                    "join categories cat on cd.categories_id = cat.categories_id");
             result = getByLogin.list();
             for (Iterator it = result.iterator(); it.hasNext();) {
-                oldCat str = (oldCat) it.next();
-                System.out.println(str.getCat() + " " + str.getPic());
+                Object str = (Object) it.next();
+                System.out.println(str.toString());
             }
         } catch (RuntimeException e) {
         } finally {
