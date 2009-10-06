@@ -17,4 +17,6 @@ public interface CategoriesDAO {
     public void addCategories(Categories categories) throws SQLException;
 
     public Collection getAllCategories() throws SQLException;
+
+    public Collection getAllCategoriesNew() throws SQLException;
 }

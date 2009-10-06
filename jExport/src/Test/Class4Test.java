@@ -29,22 +29,24 @@ public class Class4Test {
         @SuppressWarnings("static-access")
         FactoryDAO factory = FactoryDAO.getInstance();
         @SuppressWarnings("static-access")
-        List<Categories> lst = (List<Categories>) factory.getCategoriesDAO().getAllCategories();
+        List<oldCat> lst = (List<oldCat>) factory.getCategoriesDAO().getAllCategoriesNew();
         // int i = 1;
-        for (Iterator it = lst.iterator(); it.hasNext();) {
-            Categories str = (Categories) it.next();
-            try {
-                if (str.getCategoriesImage().equals(null)) {
-                    str.setCategoriesImage("Пусто...");
-                }
-            } catch (NullPointerException e) {
-                str.setCategoriesImage("Пусто...");
-            }
-            oc = new oldCat(factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName(), str.getCategoriesImage());
-            // System.out.println(i + " ---> " + factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName() + " " + str.getCategoriesImage());
-            oldList.add(oc);
-            //  i++;
-        }
+//        for (Iterator it = lst.iterator(); it.hasNext();) {
+//            Categories str = (Categories) it.next();
+//            try {
+//                if (str.getCategoriesImage().equals(null)) {
+//                    str.setCategoriesImage("Пусто...");
+//                }
+//            } catch (NullPointerException e) {
+//                str.setCategoriesImage("Пусто...");
+//            }
+//            oc = new oldCat(factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName(), str.getCategoriesImage());
+//            // System.out.println(i + " ---> " + factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName() + " " + str.getCategoriesImage());
+//            oldList.add(oc);
+//            //  i++;
+//        }
+
+
         XStream xstream = new XStream();
         xstream.alias("OldCat", oldCat.class);
         xstream.alias("OldCats", List.class);
@@ -53,6 +55,6 @@ public class Class4Test {
         //xstream.alias("phonenumber", PhoneNumber.class);
         String xml = xstream.toXML(oldList);
         System.out.println(xml);
-        FileUtils.writeStringToFile(new File("C://OldCategories.xml"), xml, "UTF-8");
+        FileUtils.writeStringToFile(new File("C://OldCategoriesnew.xml"), xml, "UTF-8");
     }
 }

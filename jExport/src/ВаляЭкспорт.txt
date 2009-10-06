@@ -56,7 +56,7 @@ FTP:
 MySQL:
 ------
    Сервер: u196802.mysql.masterhost.ru
-   Имя базы данных: u196802
+   �?мя базы данных: u196802
    Логин: u196802
    Пароль: cornicenti2l
 
@@ -65,3 +65,8 @@ MySQL:
 
 
 http://213.53.57.20/ShopIX/kaXML.jsp?shopId=71&amp;productId=45164
+
+
+select cd.categories_name, cat.categories_image
+from categories_description cd
+join categories cat on cd.categories_id = cat.categories_id
