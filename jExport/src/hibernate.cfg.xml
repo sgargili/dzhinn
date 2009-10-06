@@ -7,9 +7,13 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/u196802</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Pass4root</property>
+    <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>
+    <mapping resource="Pojo/CategoriesArticles.hbm.xml"/>
+    <mapping resource="Pojo/CategoriesDescription.hbm.xml"/>
+    <mapping resource="Pojo/Categories.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

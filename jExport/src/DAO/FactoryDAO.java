@@ -4,6 +4,8 @@
  */
 package DAO;
 
+import DAO.Impl.CategoriesDAOImpl;
+import DAO.Impl.CategoriesDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDAOImpl;
 
@@ -15,6 +17,8 @@ public class FactoryDAO {
 
     private static PcSyncProductsDAO pcSyncProducts = null;
     private static PcSyncProductsDescriptionDAO pcSyncProductsDescriptionDAO = null;
+    private static CategoriesDAO categoriesDAO = null;
+    private static CategoriesDescriptionDAO categoriesDescriptionDAO = null;
     private static FactoryDAO instance = null;
 
     public static PcSyncProductsDAO getPcSyncProductsDAO() {
@@ -36,5 +40,19 @@ public class FactoryDAO {
             instance = new FactoryDAO();
         }
         return instance;
+    }
+
+    public static CategoriesDAO getCategoriesDAO() {
+        if (categoriesDAO == null) {
+            categoriesDAO = new CategoriesDAOImpl();
+        }
+        return categoriesDAO;
+    }
+
+    public static CategoriesDescriptionDAO getCategoriesDescriptionDAO() {
+        if (categoriesDescriptionDAO == null) {
+            categoriesDescriptionDAO = new CategoriesDescriptionDAOImpl();
+        }
+        return categoriesDescriptionDAO;
     }
 }

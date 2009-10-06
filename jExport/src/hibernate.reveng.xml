@@ -6,4 +6,7 @@
   <table-filter match-name="pc_process_status"/>
   <table-filter match-name="pc_sync_products_to_categories"/>
   <table-filter match-name="pc_sync_products"/>
+  <table-filter match-name="categories_articles"/>
+  <table-filter match-name="categories_description"/>
+  <table-filter match-name="categories"/>
 </hibernate-reverse-engineering>
