@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jexport;
+package jimport;
 
 import DAO.FactoryDAO;
 import Pojo.PcSyncProducts;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.transform.TransformerException;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
@@ -23,7 +24,7 @@ public class Main {
      * @param args the command line arguments
      */
     @SuppressWarnings("static-access")
-    public static void main(String[] args) throws SQLException, XmlPullParserException, IOException {
+    public static void main(String[] args) throws SQLException, XmlPullParserException, IOException, TransformerException {
         // TODO code application logic here
 //        List<PcSyncProducts> lst = (List<PcSyncProducts>) FactoryDAO.getInstance().getPcSyncProductsDAO().getAllPcSyncProducts();
 //        int i = 1;

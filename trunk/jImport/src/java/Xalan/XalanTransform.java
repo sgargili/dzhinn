@@ -14,9 +14,9 @@ import javax.xml.transform.stream.StreamSource;
 public class XalanTransform {
 
     public File XSLProcessor(File infile) throws TransformerException, TransformerConfigurationException, FileNotFoundException, IOException {
-        File outfile = null;
+        File outfile = new File("temp.xml");
         TransformerFactory tFactory = TransformerFactory.newInstance();
-        Transformer transformer = tFactory.newTransformer(new StreamSource("birds.xsl"));
+        Transformer transformer = tFactory.newTransformer(new StreamSource("web/simple.xsl"));
         transformer.transform(new StreamSource(infile), new StreamResult(new FileOutputStream(outfile)));
         return outfile;
     }
