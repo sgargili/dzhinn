@@ -15,6 +15,7 @@ import Pojo.PcSyncProductsDescriptionId;
 import Pojo.ProductsToCategories;
 import Pojo.ProductsToCategoriesId;
 import Pojo.oldCat;
+import Xalan.XalanTransform;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,6 +25,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.xml.transform.TransformerException;
 import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -109,14 +111,17 @@ public class xmlElab {
     @SuppressWarnings("static-access")
     public void xmlPcSyncProductsDescription() throws XmlPullParserException,
             IOException,
-            SQLException {
+            SQLException,
+            TransformerException {
         @SuppressWarnings("static-access")
         List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
         // int i = 1;
         for (Iterator it = lst.iterator(); it.hasNext();) {
             PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
             //System.out.println(i + " ---> " + str.getProductsModel());
-            str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
+            //str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
+            XalanTransform xslt = new XalanTransform();
+            str.setProductsDescription(FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId())), "UTF-8"));
             FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
             // i++;
             }

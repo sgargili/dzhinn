@@ -5,13 +5,13 @@
         <xsl:apply-templates/>
     </xsl:template>
     <xsl:template match="itemCard">
-        <h2>Item card product=
+        <!--<h2>Item card product=
             <xsl:value-of select="@products_id"/>
-        </h2>
+        </h2>-->
 
         <xsl:apply-templates select="marketing" mode="itemCard"/>
         <xsl:apply-templates select="link" mode="itemCard"/>
-        <table border="1" cellpadding="1" cellspacing="0" width="100%">
+        <table class="spec_table">
             <tbody>
                 <xsl:apply-templates select="group" mode="itemCard"/>
             </tbody>
@@ -20,7 +20,7 @@
     <xsl:template match="group" mode="itemCard">
 
         <tr>
-            <th colspan="2">
+            <th colspan="2" class="spec_groupname">
                 <xsl:value-of select="@name"/>
             </th>
         </tr>
