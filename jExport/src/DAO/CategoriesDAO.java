@@ -19,4 +19,6 @@ public interface CategoriesDAO {
     public Collection getAllCategories() throws SQLException;
 
     public Collection getAllCategoriesNew() throws SQLException;
+
+    public String getCategoriesImageById(int id) throws SQLException;
 }

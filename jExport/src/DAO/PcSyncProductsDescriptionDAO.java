@@ -17,4 +17,5 @@ public interface PcSyncProductsDescriptionDAO {
     public void addPcSyncProductsDescription(PcSyncProductsDescription pcSyncProductsDescription) throws SQLException;
 
     public Collection getPcSyncProductsDescription() throws SQLException;
+
 }

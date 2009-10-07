@@ -12,6 +12,8 @@ import Pojo.CategoriesDescriptionId;
 import Pojo.PcSyncProducts;
 import Pojo.PcSyncProductsDescription;
 import Pojo.PcSyncProductsDescriptionId;
+import Pojo.ProductsToCategories;
+import Pojo.ProductsToCategoriesId;
 import Pojo.oldCat;
 import java.io.File;
 import java.io.IOException;
@@ -122,8 +124,9 @@ public class xmlElab {
     }
 
     @SuppressWarnings("static-access")
-    public void xmlCategoriesExport() throws XmlPullParserException, IOException, SQLException {
-        List<oldCat> oldXml = oldXML();
+    public String xmlCategoriesExport() throws XmlPullParserException, IOException, SQLException {
+        long start = System.currentTimeMillis();
+//        List<oldCat> oldXml = oldXML();
         FactoryDAO factoryDao = FactoryDAO.getInstance();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
@@ -136,28 +139,31 @@ public class xmlElab {
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("node")) {
                 categoriesDescription = new CategoriesDescription();
+                categories = new Categories();
                 if (xpp.getAttributeValue(0).length() > 9) {
                     categoriesDescription.setId(new CategoriesDescriptionId(Integer.parseInt(xpp.getAttributeValue(0).substring(8)), 1));
+                    categories.setCategoriesImage(factoryDao.getCategoriesDAO().getCategoriesImageById(Integer.parseInt(xpp.getAttributeValue(0).substring(8))));
                 } else {
                     categoriesDescription.setId(new CategoriesDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
+                    categories.setCategoriesImage(factoryDao.getCategoriesDAO().getCategoriesImageById(Integer.parseInt(xpp.getAttributeValue(0))));
                 }
                 categoriesDescription.setCategoriesName(xpp.getAttributeValue(4));
                 factoryDao.getCategoriesDescriptionDAO().addCategoriesDescription(categoriesDescription);
-                categories = new Categories();
                 if (xpp.getAttributeValue(0).length() > 9) {
                     categories.setCategoriesId(Integer.parseInt(xpp.getAttributeValue(0).substring(8)));
                 } else {
                     categories.setCategoriesId(Integer.parseInt(xpp.getAttributeValue(0)));
                 }
-                for (Iterator it = oldXml.iterator(); it.hasNext();) {
-                    oldCat str = (oldCat) it.next();
-                    if (str.getCat().trim().equals(xpp.getAttributeValue(4).trim())) {
-                        categories.setCategoriesImage(str.getPic());
-                        break;
-                    } else {
-                        categories.setCategoriesImage("");
-                    }
-                }
+//                for (Iterator it = oldXml.iterator(); it.hasNext();) {
+//                    oldCat str = (oldCat) it.next();
+//                    if (str.getCat().trim().equals(xpp.getAttributeValue(4).trim())) {
+//                        categories.setCategoriesImage(str.getPic());
+//                        break;
+//                    } else {
+//                        categories.setCategoriesImage("");
+//                    }
+//                }
+
 
                 if (xpp.getAttributeValue(1).length() > 9) {
                     categories.setParentId(Integer.parseInt(xpp.getAttributeValue(1).substring(8)));
@@ -171,6 +177,33 @@ public class xmlElab {
             i++;
             eventType = xpp.next();
         }
-        System.out.println("Done...");
+        long end = System.currentTimeMillis();
+        return ((end - start) / 1000 + " сек.");
+    }
+
+    @SuppressWarnings("static-access")
+    public String xmlProductsToCategoriesExport() throws XmlPullParserException, IOException, SQLException {
+        long start = System.currentTimeMillis();
+        FactoryDAO factoryDao = FactoryDAO.getInstance();
+        ProductsToCategories p2c;
+        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+        XmlPullParser xpp = factory.newPullParser();
+        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportNodeProdXML.jsp?shopId=74");
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
+        int eventType = xpp.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("nodeItem")) {
+                p2c = new ProductsToCategories();
+                if (xpp.getAttributeValue(3).length() > 9) {
+                    p2c.setId(new ProductsToCategoriesId(Integer.parseInt(xpp.getAttributeValue(0)), Integer.parseInt(xpp.getAttributeValue(3).substring(8))));
+                } else {
+                    p2c.setId(new ProductsToCategoriesId(Integer.parseInt(xpp.getAttributeValue(0)), Integer.parseInt(xpp.getAttributeValue(3))));
+                }
+                factoryDao.getproductsToCategoriesDAO().addProductsToCategories(p2c);
+            }
+            eventType = xpp.next();
+        }
+        long end = System.currentTimeMillis();
+        return ((end - start) / 1000 + " сек.");
     }
 }

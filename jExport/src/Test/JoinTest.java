@@ -23,14 +23,14 @@ public class JoinTest {
         try {
             session.beginTransaction();
             Query getByLogin =
-                    session.createQuery(
+                    session.createSQLQuery(
                     "select cd.categories_name, cat.categories_image" +
-                    "from CategoriesDescription as cd" +
-                    "join Categories as cat on cd.categories_id = cat.categories_id");
+                    " from Categories_Description cd" +
+                    " join Categories cat on cd.categories_id = cat.categories_id");
             result = getByLogin.list();
             for (Iterator it = result.iterator(); it.hasNext();) {
                 Object[] row = (Object[]) it.next();
-                System.out.println(row[0].toString());
+                System.out.println(row[0].toString()+" -> "+row[1].toString());
             }
         } catch (RuntimeException e) {
         } finally {

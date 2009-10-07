@@ -79,4 +79,26 @@ public class CategoriesDAOImpl implements CategoriesDAO {
         }
         return result;
     }
+
+    public String getCategoriesImageById(int id) throws SQLException {
+        Session session = null;
+        List<Categories> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        String out = "";
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Categories c where categories_id = :cat_id").setInteger("cat_id", id);
+            result = getByLogin.list();
+            out = result.get(0).getCategoriesImage();
+        } catch (RuntimeException e) {
+            out = "";
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
+    }
 }
