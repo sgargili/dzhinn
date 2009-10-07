@@ -1,0 +1,72 @@
+продукты
+http://213.53.57.20/CatExp/products.exml?shop=20
+
+производители
+http://213.53.57.20/CatExp/manufacturers.exml?shop=20
+
+дерево шопа(навигация)
+http://213.53.57.20/CatExp/trees.exml?shop=20&lang=ru
+
+привязка продуктов к дереву шопа
+http://213.53.57.20/CatExp/itemsInNode.exml?shop=20
+
+ключевые и их значения
+http://213.53.57.20/CatExp/katree.exml?shop=20&lang=en
+
+привязка продуктов к значениям ключевых
+http://213.53.57.20/CatExp/kalink.exml?shop=20&lang=en
+
+карточка продукта  $ARTICLE_ID - заменяется на реальный ид.
+http://213.53.57.20/CatExp/card.exml?shop=20&lang=en&product=$ARTICLE_ID
+
+картинки продукта
+http://213.53.57.20/CatExp/productimg.exml?shop=20&product=$ARTICLE_ID
+
+
+parent-relates
+http://213.53.57.20/CatExp/parentz.exml?shop=20
+
+
+compare attributes dictionary
+http://213.53.57.20/CatExp/compatr.exml?shop=20&lang=ru
+
+compare attributes template to node link
+
+http://213.53.57.20/CatExp/complink.exml?shop=20
+
+compare attributes values for product
+
+http://213.53.57.20/CatExp/compval.exml?shop=20&lang=ru&product=90525130012141897
+
+
+http://213.53.57.39/cfInfoWS/cfcode.exml?article=376638-B21
+
+SSH:
+----
+   Сервер: u196802.ssh.masterhost.ru
+   Логин: u196802
+   Пароль: 2nsurystephyd
+
+FTP:
+----
+   Сервер: u196802.ftp.masterhost.ru
+   Логин: u196802
+   Пароль: heolody2ess9y
+
+MySQL:
+------
+   Сервер: u196802.mysql.masterhost.ru
+   �?мя базы данных: u196802
+   Логин: u196802
+   Пароль: cornicenti2l
+
+   PHPMyAdmin: http://phpmyadmin.masterhost.ru/
+
+
+
+http://213.53.57.20/ShopIX/kaXML.jsp?shopId=71&amp;productId=45164
+
+
+select cd.categories_name, cat.categories_image
+from categories_description cd
+join categories cat on cd.categories_id = cat.categories_id
