@@ -75,8 +75,8 @@ public class xmlElab {
             SQLException {
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-        //  File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=71");
-        File xml = new File("C://outFile.xml");
+        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74");
+        //File xml = new File("C://outFile.xml");
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
         int eventType = xpp.getEventType();
         PcSyncProducts pcSyncProducts = null;
@@ -115,16 +115,18 @@ public class xmlElab {
             TransformerException {
         @SuppressWarnings("static-access")
         List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
-        // int i = 1;
+        int i = 1;
+        XalanTransform xslt = new XalanTransform();
         for (Iterator it = lst.iterator(); it.hasNext();) {
             PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
-            //System.out.println(i + " ---> " + str.getProductsModel());
+            System.out.println(i + " ---> " + str.getId().getProductsId());
             //str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
-            XalanTransform xslt = new XalanTransform();
-            str.setProductsDescription(FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId())), "UTF-8"));
+            str.setProductsDescription(FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId())), "UTF-8") //Далее обработка, а то шоп очень чувствителен на эту шнягу...
+                    .replaceAll("\\n", "") //Все в одну строку...
+                    .replaceAll(">\\s+<", "><")); //Удаляем лишние пробелы между тегами...
             FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
-            // i++;
-            }
+            i++;
+        }
         System.out.println("Done...");
     }
 

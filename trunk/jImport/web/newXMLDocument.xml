@@ -1,241 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="simple.xsl"?>
-<itemCard products_id="8988"
-	shop_id="71"
+<itemCard products_id="60837"
+	shop_id="74"
 	lang="ru" >
 
 
 
-    <marketing>&lt;p align=&#034;justify&#034;&gt;&lt;strong&gt;Prestigio Data Safe II&lt;/strong&gt; – компактный &lt;strong&gt;внешний жесткий диск&lt;/strong&gt; форм-фактора 2.5”, который привнесет в жизнь роскошь и легкость. &lt;strong&gt;Изюминка дизайна&lt;/strong&gt;, вызывающая восхищение - прочный алюминиевый &lt;strong&gt;корпус с покрытием из черной или коричневой кожи&lt;/strong&gt;. В дополнение к сверхстильному дизайну и высокой емкости Prestigio Data Safe II оснащен важными функциями обеспечения сохранности информации и облегчения резервного копирования. Специальное программное обеспечение позволяет разбивать диск на &lt;strong&gt;открытую и защищенную паролем области&lt;/strong&gt; для предотвращения несанкционированного доступа к личным данным. Функция &lt;strong&gt;One-Touch Backup&lt;/strong&gt; облегчает процесс создания на диске резервных копий с ПК. Предназначен Prestigio Data Safe II в первую очередь для тех мобильных профессионалов, которые ценят не только высокую функциональность, но и изысканный дизайн. &lt;strong&gt;Объема диска&lt;/strong&gt; достаточно для записи и хранения всей важной информации, фотографий, коллекций музыки, фильмов. &lt;/p&gt;
+	<marketing>&lt;b&gt;Компания Belkin&lt;/b&gt; – один из ведущих в мире производителей периферийных и соединительных устройств для компьютеров и бытовой электроники. &lt;b&gt;Продукты компании Belkin отличаются высокими рабочими характеристиками и качеством&lt;/b&gt;, они удобны в использовании, и сопровождаются быстрой и качественной консультативной и технической поддержкой. Основными интересами и приоритетом для &lt;b&gt;компании Belkin&lt;/b&gt; являются интересы потребителя. &lt;b&gt;Компания Belkin&lt;/b&gt; ежедневно осуществляет оценку и контроль качества, что обеспечивает высочайший уровень производства и услуг – от разработки и изготовления изделия до его поставки покупателю и послепродажного обслуживания. </marketing>
 
-&lt;li&gt;&lt;strong&gt;Интерфейс:&lt;/strong&gt; Высокоскоростной USB 2.0 интерфейс позволит быстро копировать большие объемы данных.
-&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Функция One-Touch Backup&lt;/strong&gt; позволит сохранить резервную копию данных одним нажатием.
-&lt;/li&gt;&lt;li&gt;&lt;strong&gt;Plug &amp;amp; Play:&lt;/strong&gt; устройство не требует установки дополнительных драйверов при подключении.
-    </marketing>
 
 
 
 
 
 
+<group  name="Основные характеристики"	sortOrder="0" >
 
-    <group  name="Конфигурация диска"	sortOrder="0" >
 
+<row sortOrder="1" >
+<name>Размещение устройства</name><value>Внешний </value>
+</row>
 
-        <row sortOrder="1" >
-            <name>Размещение устройства</name>
-            <value>Внешний </value>
-        </row>
+<row sortOrder="2" >
+<name>Подключение</name><value>Кабель </value>
+</row>
 
-        <row sortOrder="2" >
-            <name>Тип жесткого диска</name>
-            <value>Портативный </value>
+<row sortOrder="3" >
+<name>Интерфейс</name><value>USB </value>
+</row>
 
-        </row>
+<row sortOrder="4" >
+<name>Количество кнопок</name><value>3 </value>
+</row>
 
-        <row sortOrder="3" >
-            <name>Форм-фактор</name>
-            <value>2.5&#034; </value>
-        </row>
+<row sortOrder="5" >
+<name>Назначение кнопки</name><value>Прокрутка </value>
+</row>
 
-        <row sortOrder="4" >
-            <name>Емкость устройства памяти</name>
-            <value>320 GB</value>
-        </row>
+<row sortOrder="6" >
+<name>Технология указательного устройства</name><value>Оптическая </value>
+</row>
 
-        <row sortOrder="5" >
-            <name>Тип канала данных</name>
-            <value>USB 2.0 </value>
+<row sortOrder="7" >
+<name>Характеристики мыши</name><value>Убирающийся кабель</value>
+</row>
 
-        </row>
+</group>
+<group  name="Разное"	sortOrder="8" >
 
-        <row sortOrder="6" >
-            <name>HDD Enclosure Interface</name>
-            <value>Serial ATA-150 </value>
-        </row>
 
-        <row sortOrder="7" >
-            <name>Емкость сектора</name>
-            <value>512 Б</value>
-        </row>
+<row sortOrder="9" >
+<name>Цвет</name><value>Чёрный </value>
+</row>
 
-    </group>
-    <group  name="Производительность"	sortOrder="8" >
+<row sortOrder="10" >
+<name>Тип упаковки</name><value>Retail </value>
+</row>
 
-        <row sortOrder="9" >
-            <name>Внешняя скорость передачи данных</name>
-            <value>480 Мб/сек.</value>
-        </row>
+</group>
+<group  name="Input Devices - Mouse - Dimensions&amp;Weight"	sortOrder="11" >
 
-    </group>
-    <group  name="Имеющиеся интерфейсы"	sortOrder="10" >
 
+<row sortOrder="12" >
+<name>Глубина</name><value>30 мм</value>
+</row>
 
-        <row sortOrder="11" >
-            <name>Количество интерфейсов USB2.0</name>
-            <value>1 </value>
-        </row>
+<row sortOrder="13" >
+<name>Высота</name><value>40 мм</value>
+</row>
 
-    </group>
-    <group  name="Программное обеспечение"	sortOrder="12" >
+<row sortOrder="14" >
+<name>Ширина</name><value>75 мм</value>
+</row>
 
+<row sortOrder="15" >
+<name>Номинальный вес</name><value>0.18 кг</value>
+</row>
 
-        <row sortOrder="13" >
-            <name>Совместимые платформы</name>
-            <value>PC, Mac</value>
-        </row>
+</group>
+<group  name="Гарантия"	sortOrder="16" >
 
-    </group>
-    <group  name="Системные требования"	sortOrder="14" >
 
+<row sortOrder="17" >
+<name>Гарантийный срок</name><value>99999 месяцев</value>
+</row>
 
-        <row sortOrder="15" >
-            <name>Требуемая ОС</name>
-            <value>Apple Mac OS 10.X, Apple Mac OS 9.0 or Later, Microsoft Windows 2000, Microsoft Windows 98SE, Microsoft Windows Me, Microsoft Windows XP, Microsoft Windows Vista</value>
-
-        </row>
-
-    </group>
-    <group  name="Питание"	sortOrder="16" >
-
-
-        <row sortOrder="17" >
-            <name>Входное напряжение</name>
-            <value>DC 5 В</value>
-        </row>
-
-    </group>
-    <group  name="Дополнительная Информация"	sortOrder="18" >
-
-
-        <row sortOrder="19" >
-
-            <name>Аксессуары в комплекте</name>
-            <value>Сумка </value>
-        </row>
-
-        <row sortOrder="20" >
-            <name>Кабели в комплекте</name>
-            <value>USB Кабель </value>
-        </row>
-
-        <row sortOrder="21" >
-            <name>Цвет внешней поверхности</name>
-            <value>Чёрный </value>
-        </row>
-
-        <row sortOrder="22" >
-            <name>Тип упаковки</name>
-            <value>Retail </value>
-        </row>
-
-    </group>
-    <group  name="Габариты и вес"	sortOrder="23" >
-
-
-        <row sortOrder="24" >
-            <name>Глубина</name>
-            <value>17.5 мм</value>
-        </row>
-
-        <row sortOrder="25" >
-
-            <name>Высота</name>
-            <value>81.2 мм</value>
-        </row>
-
-        <row sortOrder="26" >
-            <name>Ширина</name>
-            <value>131 мм</value>
-        </row>
-
-        <row sortOrder="27" >
-            <name>Номинальный вес</name>
-            <value>0.242 kg</value>
-        </row>
-
-    </group>
-    <group  name="Гарантия"	sortOrder="28" >
-
-
-        <row sortOrder="29" >
-            <name>Гарантия</name>
-            <value>Да </value>
-        </row>
-
-        <row sortOrder="30" >
-            <name>Гарантийный срок</name>
-            <value>24 месяцев</value>
-        </row>
-
-        <row sortOrder="31" >
-
-            <name>Критерий оценки гарантии</name>
-            <value>Серийный номер </value>
-        </row>
-
-    </group>
-    <group  name="Логистика"	sortOrder="32" >
-
-
-        <row sortOrder="33" >
-            <name>Глубина коробки</name>
-            <value>470 мм</value>
-        </row>
-
-        <row sortOrder="34" >
-            <name>Высота коробки</name>
-            <value>180 мм</value>
-
-        </row>
-
-        <row sortOrder="35" >
-            <name>Вес коробки нетто</name>
-            <value>8 kg</value>
-        </row>
-
-        <row sortOrder="36" >
-            <name>Ширина коробки</name>
-            <value>400 мм</value>
-        </row>
-
-        <row sortOrder="37" >
-            <name>Глубина упаковки</name>
-            <value>135 мм</value>
-
-        </row>
-
-        <row sortOrder="38" >
-            <name>Высота упаковки</name>
-            <value>70 мм</value>
-        </row>
-
-        <row sortOrder="39" >
-            <name>Вес упаковки брутто</name>
-            <value>0.74 kg</value>
-        </row>
-
-        <row sortOrder="40" >
-            <name>Ширина упаковки</name>
-            <value>225 мм</value>
-
-        </row>
-
-        <row sortOrder="41" >
-            <name>Упаковок в коробке</name>
-            <value>10 </value>
-        </row>
-
-        <row sortOrder="42" >
-            <name>Штук в упаковке</name>
-            <value>1 </value>
-        </row>
-
-        <row sortOrder="43" >
-            <name>EAN Code</name>
-            <value>5291485330477</value>
-
-        </row>
-
-    </group>
+	</group>
 </itemCard>
