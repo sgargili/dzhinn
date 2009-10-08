@@ -1,35 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="simple.xsl"?> 
-<itemCard products_id="57480" 
+<itemCard products_id="46658" 
 	shop_id="74" 
 	lang="ru" >
+
+
+
+	<marketing>A4Tech X5-60MD – инновационная оптическая мини-мышь. Новая запатентованная технология с двойным фокусом позволяет оптической мышке эффективно работать на отражающих поверхностях, включая даже стекло.  Проводная мини-мышь легко умещается в сумке рядом с ноутбуком. Выдвигающийся кабель решает проблему спутывания проводов. При работе длину кабеля можно регулировать вручную. Компактная эргономичная форма мини-мыши будет удобна пользователям с любой «активной» рукой. Уникальная кнопка «Двойной клик», расположенная рядом с колесом прокрутки, повышает эффективность в работе и экономит рабочее время. С помощью «Двойного клика» вы откроете файлы и программы одним нажатием. Нажав однажды, кликнешь дважды!</marketing>
+
 
 
 
 	
 
 
-<group  name="Память"	sortOrder="0" >
+<group  name="Основные характеристики"	sortOrder="0" >
 
 
 <row sortOrder="1" >
-<name>Память</name><value>SODIMM DDR 400МГц(PC2-3200),  512 МБ</value>
+<name>Размещение устройства</name><value>Внешний </value>
 </row>
 
-</group>
-<group  name="Условия эксплуатации"	sortOrder="2" >
-
+<row sortOrder="2" >
+<name>Подключение</name><value>Кабель </value>
+</row>
 
 <row sortOrder="3" >
-<name>Напряжение</name><value>&lt;b&gt;2.5 В&lt;/b&gt;</value>
+<name>Интерфейс</name><value>USB </value>
+</row>
+
+<row sortOrder="4" >
+<name>Количество кнопок</name><value>4 </value>
+</row>
+
+<row sortOrder="5" >
+<name>Назначение кнопки</name><value>Программируемый </value>
+</row>
+
+<row sortOrder="6" >
+<name>Разрешение при движении</name><value>800 dpi</value>
+</row>
+
+<row sortOrder="7" >
+<name>Технология указательного устройства</name><value>Оптическая </value>
+</row>
+
+<row sortOrder="8" >
+<name>Характеристики мыши</name><value>Колесо прокрутки</value>
 </row>
 
 </group>
-<group  name="Логистика"	sortOrder="4" >
+<group  name="Системные требования"	sortOrder="9" >
 
 
-<row sortOrder="5" >
-<name>Штук в упаковке</name><value>1 </value>
+<row sortOrder="10" >
+<name>Совместимые платформы</name><value>PC </value>
+</row>
+
+<row sortOrder="11" >
+<name>Требуемая ОС</name><value>Microsoft Windows 2000 &lt;br/&gt;Microsoft Windows 98 &lt;br/&gt;Microsoft Windows Me &lt;br/&gt;Microsoft Windows Server 2003 &lt;br/&gt;Microsoft Windows XP &lt;br/&gt;Microsoft Windows XP Professional x64 Edition </value>
+</row>
+
+</group>
+<group  name="Разное"	sortOrder="12" >
+
+
+<row sortOrder="13" >
+<name>Цвет</name><value>Красный </value>
+</row>
+
+<row sortOrder="14" >
+<name>Тип упаковки</name><value>Retail </value>
 </row>
 
 	</group>

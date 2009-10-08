@@ -4,11 +4,7 @@
  */
 package HttpClient;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.io.IOUtils;
@@ -28,6 +24,7 @@ public class http {
         try {
             int getResult = client.executeMethod(getMethod);
             allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), "UTF-8");
+            allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
         } catch (Exception e) {
             System.err.println(e);
         } finally {
@@ -43,6 +40,7 @@ public class http {
         try {
             int getResult = client.executeMethod(getMethod);
             allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), encoding);
+            allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
         } catch (Exception e) {
             System.err.println(e);
         } finally {

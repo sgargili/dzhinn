@@ -19,7 +19,8 @@ public class XsltTest {
     public static void main(String[] arg) throws IOException, TransformerException {
         http th = new http();
         XalanTransform xslt = new XalanTransform();
-        String str = FileUtils.readFileToString(xslt.XSLProcessor(th.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=71&productId=41333")), "UTF-8");
+        String str = "";
+        str = FileUtils.readFileToString(xslt.XSLProcessor(th.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=52015")), "UTF-8");
         System.out.println(str);
     }
 }
