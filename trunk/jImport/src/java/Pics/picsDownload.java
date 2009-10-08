@@ -44,24 +44,39 @@ public class picsDownload {
 //
 //        ftpClient.disconnect();
         FTPClient ftp = new FTPClient();
-        FTPClientConfig ftpconf = new FTPClientConfig();
-        ftp.sendCommand("PWD");
-        System.out.println(ftp.getReplyString());
+
         int reply;
         try {
             ftp.connect("192.168.1.178", 20021);
-            ftp.login("x51xp", "Xcw67uQ", null);
-        
+            ftp.login("x51xp", "Xcw67uQ");
+            ftp.changeWorkingDirectory("/Fotos");
+            System.out.println(ftp.getReplyString());
+            //ftp.set
+           // ftp.sendCommand("SYST");
+            //System.out.println(ftp.getReplyString());
+            //ftp.sendCommand("FEAT");
+            //System.out.println(ftp.getReplyString());
+//            ftp.sendCommand("OPTS UTF8 ON");
+//            System.out.println(ftp.getReplyString());
+//            ftp.sendCommand("PWD");
+//            System.out.println(ftp.getReplyString());
+//            ftp.sendCommand("TYPE I");
+//            System.out.println(ftp.getReplyString());
+//            ftp.sendCommand("PASV");
+//            System.out.println(ftp.getReplyString());
+//            ftp.sendCommand("MLSD");
+//            System.out.println(ftp.getReplyString());
+
             reply = ftp.getReplyCode();
             if (FTPReply.isPositiveCompletion(reply)) {
                 in = new FileInputStream(fl);
                 System.out.println("Connected Success");
-                String[] names = ftp.listNames();
-                for (String name : names) {
-                    System.out.println("Name = " + name);
-                }
+//                String[] names = ftp.listNames();
+//                for (String name : names) {
+//                    System.out.println("Name = " + name);
+//                }
 
-                FTPFile[] ftpFiles = ftp.listFiles("//");
+                FTPFile[] ftpFiles = ftp.listFiles();
                 for (FTPFile ftpFile : ftpFiles) {
                     //
                     // Check if FTPFile is a regular file
