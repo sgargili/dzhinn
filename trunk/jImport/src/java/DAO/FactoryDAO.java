@@ -8,6 +8,7 @@ import DAO.Impl.CategoriesDAOImpl;
 import DAO.Impl.CategoriesDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDAOImpl;
+import DAO.Impl.ProductsDAOImpl;
 import DAO.Impl.ProductsToCategoriesDAOImpl;
 
 /**
@@ -17,6 +18,7 @@ import DAO.Impl.ProductsToCategoriesDAOImpl;
 public class FactoryDAO {
 
     private static PcSyncProductsDAO pcSyncProducts = null;
+    private static ProductsDAO products = null;
     private static PcSyncProductsDescriptionDAO pcSyncProductsDescriptionDAO = null;
     private static CategoriesDAO categoriesDAO = null;
     private static CategoriesDescriptionDAO categoriesDescriptionDAO = null;
@@ -35,6 +37,13 @@ public class FactoryDAO {
             pcSyncProductsDescriptionDAO = new PcSyncProductsDescriptionDAOImpl();
         }
         return pcSyncProductsDescriptionDAO;
+    }
+
+    public static ProductsDAO getProductsDAO() {
+        if (products == null) {
+            products = new ProductsDAOImpl();
+        }
+        return products;
     }
 
     public static ProductsToCategoriesDAO getproductsToCategoriesDAO() {
