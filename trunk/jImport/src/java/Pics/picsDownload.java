@@ -33,7 +33,7 @@ public class picsDownload {
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         //xpp.setInput(new InputStreamReader(FileUtils.openInputStream(new File("C:/test.xml")), "UTF-8"));
-        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(ht.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74")), "UTF-8"));
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(ht.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportProductsImgXML.jsp?shopId=74")), "UTF-8"));
         int eventType = xpp.getEventType();
         int sIndex = 0, mIndex = 0, bIndex = 0;
         while (eventType != XmlPullParser.END_DOCUMENT) {
