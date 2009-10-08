@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="simple.xsl"?> 
-<itemCard products_id="46658" 
+<itemCard products_id="29055" 
 	shop_id="74" 
 	lang="ru" >
 
 
 
-	<marketing>A4Tech X5-60MD – инновационная оптическая мини-мышь. Новая запатентованная технология с двойным фокусом позволяет оптической мышке эффективно работать на отражающих поверхностях, включая даже стекло.  Проводная мини-мышь легко умещается в сумке рядом с ноутбуком. Выдвигающийся кабель решает проблему спутывания проводов. При работе длину кабеля можно регулировать вручную. Компактная эргономичная форма мини-мыши будет удобна пользователям с любой «активной» рукой. Уникальная кнопка «Двойной клик», расположенная рядом с колесом прокрутки, повышает эффективность в работе и экономит рабочее время. С помощью «Двойного клика» вы откроете файлы и программы одним нажатием. Нажав однажды, кликнешь дважды!</marketing>
+	<marketing>По мере дальнейшего внедрения в повседневную жизнь цифрового содержимого (такого как музыка, видеофильмы, фотографии и игры) идея статичного хранения данных стремительно утрачивает свой смысл. В современном «мире по запросу» для доступа к персональному цифровому содержимому, совместного использования данных и обеспечения необходимой защиты требуются динамичные системы хранения данных, которые дают удобство ведения бизнеса, свободу творчества и взаимодействия в любое время и в любом месте. &lt;strong&gt;Компания Seagate выпускает передовые системы хранения данных&lt;/strong&gt;, позволяющие удовлетворить любые потребности современных и будущих пользователей — от защиты ценных семейных фотографий и личных музыкальных коллекций до разработки новых поколений устройств бытовой электроники и крупных корпоративных сетей.</marketing>
 
 
 
@@ -14,63 +14,91 @@
 	
 
 
-<group  name="Основные характеристики"	sortOrder="0" >
+<group  name="Конфигурация диска"	sortOrder="0" >
 
 
 <row sortOrder="1" >
-<name>Размещение устройства</name><value>Внешний </value>
+<name>Тип накопителя</name><value>Внутренний жесткий диск SATAII 3.5&#034; 120 GB 7200 об/мин. (2 МБ)</value>
 </row>
 
 <row sortOrder="2" >
-<name>Подключение</name><value>Кабель </value>
+<name>Емкость сектора</name><value>512 Б</value>
 </row>
 
-<row sortOrder="3" >
-<name>Интерфейс</name><value>USB </value>
-</row>
+</group>
+<group  name="Производительность"	sortOrder="3" >
+
 
 <row sortOrder="4" >
-<name>Количество кнопок</name><value>4 </value>
+<name>Скорость передачи данных (Внутр./Внешн.)</name><value>300 МБ/сек.(Внешняя)</value>
 </row>
 
 <row sortOrder="5" >
-<name>Назначение кнопки</name><value>Программируемый </value>
+<name>Время поиска (Средн./Макс.)</name><value>4.16 мс(Среднее)</value>
 </row>
 
-<row sortOrder="6" >
-<name>Разрешение при движении</name><value>800 dpi</value>
-</row>
+</group>
+<group  name="Надежность"	sortOrder="6" >
+
 
 <row sortOrder="7" >
-<name>Технология указательного устройства</name><value>Оптическая </value>
+<name>Вероятность ошибок (Исправимых/Не исправимых)</name><value>1 на 10&lt;sup&gt;14&lt;/sup&gt; (Не исправимых)</value>
 </row>
 
 <row sortOrder="8" >
-<name>Характеристики мыши</name><value>Колесо прокрутки</value>
+<name>Число циклов старт/cтоп</name><value>50000 </value>
 </row>
 
-</group>
-<group  name="Системные требования"	sortOrder="9" >
-
+<row sortOrder="9" >
+<name>Функциональные особенности жесткого диска</name><value>&lt;li&gt;Native Command Queuing (NCQ) </value>
+</row>
 
 <row sortOrder="10" >
-<name>Совместимые платформы</name><value>PC </value>
-</row>
-
-<row sortOrder="11" >
-<name>Требуемая ОС</name><value>Microsoft Windows 2000 &lt;br/&gt;Microsoft Windows 98 &lt;br/&gt;Microsoft Windows Me &lt;br/&gt;Microsoft Windows Server 2003 &lt;br/&gt;Microsoft Windows XP &lt;br/&gt;Microsoft Windows XP Professional x64 Edition </value>
+<name>Соответствие стандартам хранения</name><value>&lt;li&gt;S.M.A.R.T. </value>
 </row>
 
 </group>
-<group  name="Разное"	sortOrder="12" >
+<group  name="Имеющиеся интерфейсы"	sortOrder="11" >
 
 
-<row sortOrder="13" >
-<name>Цвет</name><value>Красный </value>
+<row sortOrder="12" >
+<name>Интерфейсы</name><value>SATA</value>
 </row>
 
+</group>
+<group  name="Условия эксплуатации"	sortOrder="13" >
+
+
 <row sortOrder="14" >
-<name>Тип упаковки</name><value>Retail </value>
+<name>Допустимая температура</name><value>В рабочем состоянии(0 °C - 60 °C), В нерабочем состоянии(-40 °C - 70 °C)</value>
+</row>
+
+<row sortOrder="15" >
+<name>Ударостойкость (При работе/При хранении)</name><value>63G @ 2ms /350G @ 2ms </value>
+</row>
+
+</group>
+<group  name="Габариты и вес"	sortOrder="16" >
+
+
+<row sortOrder="17" >
+<name>Габариты</name><value>101.6 мм x 19.99 мм x 146.99 мм</value>
+</row>
+
+<row sortOrder="18" >
+<name>Номинальный вес</name><value>380 г</value>
+</row>
+
+<row sortOrder="19" >
+<name>Тип упаковки</name><value>OEM </value>
+</row>
+
+</group>
+<group  name="Гарантия"	sortOrder="20" >
+
+
+<row sortOrder="21" >
+<name>Гарантийный срок</name><value>60 месяцев</value>
 </row>
 
 	</group>
