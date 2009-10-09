@@ -17,5 +17,7 @@
         <mapping resource="Pojo/Categories.hbm.xml"/>
         <mapping resource="Pojo/ProductsToCategories.hbm.xml"/>
         <mapping resource="Pojo/Products.hbm.xml"/>
+        <mapping resource="Pojo/PcProductTypes.hbm.xml"/>
+        <mapping resource="Pojo/PcProductsToPt.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

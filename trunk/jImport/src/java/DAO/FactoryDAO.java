@@ -6,6 +6,8 @@ package DAO;
 
 import DAO.Impl.CategoriesDAOImpl;
 import DAO.Impl.CategoriesDescriptionDAOImpl;
+import DAO.Impl.PcProductTypesDAOImpl;
+import DAO.Impl.PcProductsToPtDAOImpl;
 import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDAOImpl;
 import DAO.Impl.ProductsDAOImpl;
@@ -23,6 +25,8 @@ public class FactoryDAO {
     private static CategoriesDAO categoriesDAO = null;
     private static CategoriesDescriptionDAO categoriesDescriptionDAO = null;
     private static ProductsToCategoriesDAO productsToCategoriesDAO;
+    private static PcProductTypesDAO pcProductTypesDAO;
+    private static PcProductsToPtDAO pcProductsToPtDAO;
     private static FactoryDAO instance = null;
 
     public static PcSyncProductsDAO getPcSyncProductsDAO() {
@@ -32,11 +36,25 @@ public class FactoryDAO {
         return pcSyncProducts;
     }
 
+    public static PcProductTypesDAO getPcProductTypesDAO() {
+        if (pcProductTypesDAO == null) {
+            pcProductTypesDAO = new PcProductTypesDAOImpl();
+        }
+        return pcProductTypesDAO;
+    }
+
     public static PcSyncProductsDescriptionDAO getPcSyncProductsDescriptionDAO() {
         if (pcSyncProductsDescriptionDAO == null) {
             pcSyncProductsDescriptionDAO = new PcSyncProductsDescriptionDAOImpl();
         }
         return pcSyncProductsDescriptionDAO;
+    }
+
+    public static PcProductsToPtDAO getPcProductsToPtDAO() {
+        if (pcProductsToPtDAO == null) {
+            pcProductsToPtDAO = new PcProductsToPtDAOImpl();
+        }
+        return pcProductsToPtDAO;
     }
 
     public static ProductsDAO getProductsDAO() {
