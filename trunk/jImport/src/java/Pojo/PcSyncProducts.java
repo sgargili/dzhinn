@@ -13,7 +13,7 @@ public class PcSyncProducts  implements java.io.Serializable {
      private Integer productsId;
      private int productsQuantity;
      private String productsModel;
-     private BigDecimal productsPrice;
+     private BigDecimal productsPrice; 
      private String manufacturersName;
      private Integer manufacturersId;
 

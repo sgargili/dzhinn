@@ -9,7 +9,6 @@
         <property name="hibernate.connection.password">Pass4root</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
-        <mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
         <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
         <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>
         <mapping resource="Pojo/CategoriesArticles.hbm.xml"/>
@@ -19,5 +18,6 @@
         <mapping resource="Pojo/Products.hbm.xml"/>
         <mapping resource="Pojo/PcProductTypes.hbm.xml"/>
         <mapping resource="Pojo/PcProductsToPt.hbm.xml"/>
+        <mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

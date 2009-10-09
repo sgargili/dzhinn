@@ -5,7 +5,7 @@
   <class catalog="u196802" name="Pojo.PcSyncProducts" table="pc_sync_products">
     <id name="productsId" type="java.lang.Integer">
       <column name="products_id"/>
-      <!--<generator class="identity" />-->
+      <generator class="identity" />
     </id>
     <property name="productsQuantity" type="int">
       <column name="products_quantity" not-null="true"/>
