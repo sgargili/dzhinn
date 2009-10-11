@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : newXMLDocument1.xml
+    Created on : 5 Октябрь 2009 г., 22:17
+    Author     : Admin4DB2
+    Description:
+        Purpose of the document follows.
+-->
+
+<root>
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="simple.xsl"?>
+    <itemCard products_id="3591"
+	shop_id="74"
+	lang="ru" >
+
+
+
+        <marketing>Жесткий диск Seagate® Barracuda® 7200.11 относится к 11-му поколению этого отмеченного многими наградами семейства жестких дисков для настольных ПК. Благодаря сочетанию проверенных компонентов, самых современных технологий и опыта массового производства этот жесткий диск обеспечивает высокую производительность и экологичность систем хранения данных при емкости 1.5 ТБ. Жесткий диск Barracuda 7200.11 создан с использованием отмеченной многими наградами технологии перпендикулярной записи Seagate (PMR) и обладает лучшими в отрасли характеристиками уровня шума и энергопотребления. В этом жестком диске идеально сочетаются передовые технологии и низкая совокупная стоимость владения.</marketing>
+
+
+
+
+
+
+
+        <group  name="Конфигурация диска"	sortOrder="0" >
+
+
+            <row sortOrder="1" >
+                <name>Тип накопителя</name>
+                <value>Внутренний жесткий диск SATAII 3.5&#034; 1000 GB 7200 об/мин. (32 МБ)</value>
+            </row>
+
+            <row sortOrder="2" >
+                <name>Емкость сектора</name>
+                <value>512 Б</value>
+            </row>
+
+        </group>
+        <group  name="Производительность"	sortOrder="3" >
+
+            <row sortOrder="4" >
+                <name>Средняя задержка вращения</name>
+                <value>4.16 мс</value>
+            </row>
+
+            <row sortOrder="5" >
+                <name>Скорость передачи данных (Внутр./Внешн.)</name>
+                <value>300 МБ/сек.(Внешняя)</value>
+            </row>
+
+            <row sortOrder="6" >
+                <name>Время поиска (Средн./Макс.)</name>
+                <value>8.5 мс(Среднее)/10 мс(Максимальное)</value>
+
+            </row>
+
+        </group>
+        <group  name="Надежность"	sortOrder="7" >
+
+
+            <row sortOrder="8" >
+                <name>Средняя наработка на отказ</name>
+                <value>750000 ч</value>
+            </row>
+
+            <row sortOrder="9" >
+                <name>Число циклов старт/cтоп</name>
+                <value>50000 </value>
+            </row>
+
+            <row sortOrder="10" >
+                <name>Функциональные особенности жесткого диска</name>
+                <value>&lt;li&gt;Perpendicular recording </value>
+            </row>
+
+        </group>
+        <group  name="Имеющиеся интерфейсы"	sortOrder="11" >
+
+
+            <row sortOrder="12" >
+                <name>Интерфейсы</name>
+                <value>SATA</value>
+            </row>
+
+        </group>
+        <group  name="Условия эксплуатации"	sortOrder="13" >
+
+
+            <row sortOrder="14" >
+                <name>Допустимая температура</name>
+                <value>В рабочем состоянии(0 °C - 60 °C), В нерабочем состоянии(-40 °C - 70 °C)</value>
+            </row>
+
+        </group>
+        <group  name="Габариты и вес"	sortOrder="15" >
+
+
+            <row sortOrder="16" >
+                <name>Габариты</name>
+                <value>101.6 мм x 26.1 мм x 147 мм</value>
+
+            </row>
+
+            <row sortOrder="17" >
+                <name>Номинальный вес</name>
+                <value>0.64 кг</value>
+            </row>
+
+        </group>
+    </itemCard>
+
+
+</root>
