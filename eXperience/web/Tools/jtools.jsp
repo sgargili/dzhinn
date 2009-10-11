@@ -365,6 +365,23 @@
                                 </table>
                             </td>
                         </tr>
+                        <tr bgcolor = #cfcdcd align=left>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <font color="white" size="2">Fix It4Profit CSV File:</font>
+                                        </td>
+                                        <td>
+                                            <input type="file" id="uploadit4profitCsv"/>
+                                        </td>
+                                        <td>
+                                            <button onclick="UploadeCsv()">Convert</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
                     </table>
                     <h1 id="Updating" align="right"></h1>
                 </div>
