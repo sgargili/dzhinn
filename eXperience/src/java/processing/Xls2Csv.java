@@ -164,9 +164,9 @@ public class Xls2Csv {
         int columns = 0;
         for (int i = 0; i < rows; i++) {
             columns = sheet.getRow(i).getPhysicalNumberOfCells();
+            temp = new String[columns];
             for (int j = 0; j < columns; j++) {
-                temp = new String[columns];
-               // System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getCellType());
+//                System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getCellType());
                 if (sheet.getRow(i).getCell(j).getCellType() == 0) {
                     temp[j] = sheet.getRow(i).getCell(j).getNumericCellValue() + "";
                 } else if (sheet.getRow(i).getCell(j).getCellType() == 1) {
