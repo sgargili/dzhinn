@@ -1,29 +1,10 @@
 dojo.provide("dojox.image.MagnifierLite");
 dojo.experimental("dojox.image.MagnifierLite");
-
 dojo.require("dijit._Widget");
-
 dojo.declare("dojox.image.MagnifierLite", dijit._Widget,
 	{
-	// summary:	Adds magnification on a portion of an image element
-	//
-	// description: An unobtrusive way to add an unstyled overlay
-	// 		above the srcNode image element. The overlay/glass is a 
-	//		scaled version of the src image (so larger images sized down
-	//		are clearer).
-	//
-	//		The logic behind requiring the src image to be large is
-	//		"it's going to be downloaded, anyway" so this method avoids
-	//		having to make thumbnails and 2 http requests among other things.
-	//
-	// glassSize: Int
-	// 		the width and height of the bounding box
-	glassSize: 125,
-
-	// scale: Decimal
-	// 		the multiplier of the Mangification. 
+	glassSize: 180,
 	scale: 6,
-
 	postCreate: function(){
 		this.inherited(arguments);
 		

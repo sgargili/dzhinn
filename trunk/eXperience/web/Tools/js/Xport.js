@@ -362,12 +362,25 @@ function UploadeCsv(){
     var encoding = dojo.byId('eCsvEncoding').value;
     var engine = dojo.byId('eCsvEngine').value;
 
-    dojo.byId('eCsvLoadingProcess').innerHTML = "Converting process <img src='images/loading-balls.gif'/>";
+    dojo.byId('eCsvLoadingProcess').innerHTML = "<img src='images/loading-balls.gif'/>";
     UploadDownload.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, engine, function(data) {
         dwr.engine.openInDownload(data);
         dojo.byId('eCsvLoadingProcess').innerHTML = "";
         if(data==null){
             alert("Не верный формат файла. Поддерживаемые форматы: csv и xls.");
+        }
+    });
+}
+
+function FixProfitCsv(){
+    var fileName = dojo.byId('uploadit4profitCsv').value;
+    var file = dwr.util.getValue('uploadit4profitCsv');
+    dojo.byId('it4profitCsvLoadingProcess').innerHTML = "<img src='images/loading-balls.gif'/>";
+    UploadDownload.fixItprofitFile(file, fileName, function(data) {
+        dwr.engine.openInDownload(data);
+        dojo.byId('it4profitCsvLoadingProcess').innerHTML = "";
+        if(data==null){
+            alert("Не верный формат файла. Поддерживаемые форматы: csv и zip.");
         }
     });
 }
