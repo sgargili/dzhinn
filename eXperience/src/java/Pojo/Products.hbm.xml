@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 08.10.2009 12:04:25 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="Pojo.Products" table="products">
+    <id name="productsId" type="java.lang.Integer">
+      <column name="products_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="productsQuantity" type="int">
+      <column name="products_quantity" not-null="true"/>
+    </property>
+    <property name="productsModel" type="string">
+      <column name="products_model"/>
+    </property>
+    <property name="productsImage" type="string">
+      <column length="64" name="products_image"/>
+    </property>
+    <property name="productsImageMed" type="string">
+      <column length="64" name="products_image_med"/>
+    </property>
+    <property name="productsImageLrg" type="string">
+      <column length="64" name="products_image_lrg"/>
+    </property>
+    <property name="productsImageSm1" type="string">
+      <column length="64" name="products_image_sm_1"/>
+    </property>
+    <property name="productsImageXl1" type="string">
+      <column length="64" name="products_image_xl_1"/>
+    </property>
+    <property name="productsImageSm2" type="string">
+      <column length="64" name="products_image_sm_2"/>
+    </property>
+    <property name="productsImageXl2" type="string">
+      <column length="64" name="products_image_xl_2"/>
+    </property>
+    <property name="productsImageSm3" type="string">
+      <column length="64" name="products_image_sm_3"/>
+    </property>
+    <property name="productsImageXl3" type="string">
+      <column length="64" name="products_image_xl_3"/>
+    </property>
+    <property name="productsImageSm4" type="string">
+      <column length="64" name="products_image_sm_4"/>
+    </property>
+    <property name="productsImageXl4" type="string">
+      <column length="64" name="products_image_xl_4"/>
+    </property>
+    <property name="productsImageSm5" type="string">
+      <column length="64" name="products_image_sm_5"/>
+    </property>
+    <property name="productsImageXl5" type="string">
+      <column length="64" name="products_image_xl_5"/>
+    </property>
+    <property name="productsImageSm6" type="string">
+      <column length="64" name="products_image_sm_6"/>
+    </property>
+    <property name="productsImageXl6" type="string">
+      <column length="64" name="products_image_xl_6"/>
+    </property>
+    <property name="productsPrice" type="big_decimal">
+      <column name="products_price" precision="15" scale="4"/>
+    </property>
+    <property name="productsDateAdded" type="timestamp">
+      <column length="19" name="products_date_added" not-null="true"/>
+    </property>
+    <property name="productsLastModified" type="timestamp">
+      <column length="19" name="products_last_modified"/>
+    </property>
+    <property name="productsDateAvailable" type="timestamp">
+      <column length="19" name="products_date_available"/>
+    </property>
+    <property name="productsWeight" type="big_decimal">
+      <column name="products_weight" not-null="true" precision="5"/>
+    </property>
+    <property name="productsStatus" type="boolean">
+      <column name="products_status" not-null="true"/>
+    </property>
+    <property name="productsToXml" type="boolean">
+      <column name="products_to_xml" not-null="true"/>
+    </property>
+    <property name="productsTaxClassId" type="int">
+      <column name="products_tax_class_id" not-null="true"/>
+    </property>
+    <property name="manufacturersId" type="java.lang.Integer">
+      <column name="manufacturers_id"/>
+    </property>
+    <property name="productsOrdered" type="int">
+      <column name="products_ordered" not-null="true"/>
+    </property>
+    <property name="productsQuantityOrderMin" type="int">
+      <column name="products_quantity_order_min" not-null="true"/>
+    </property>
+    <property name="productsQuantityOrderUnits" type="int">
+      <column name="products_quantity_order_units" not-null="true"/>
+    </property>
+    <property name="productsSortOrder" type="int">
+      <column name="products_sort_order" not-null="true"/>
+    </property>
+    <property name="productsIsSync" type="int">
+      <column name="products_is_sync" not-null="true"/>
+    </property>
+    <property name="productsYmName" type="string">
+      <column length="64" name="products_ym_name" not-null="true"/>
+    </property>
+    <property name="productsBundle" type="string">
+      <column name="products_bundle"/>
+    </property>
+    <property name="productsDfg" type="int">
+      <column name="products_dfg" not-null="true"/>
+    </property>
+    <property name="productsIsExt" type="int">
+      <column name="products_is_ext" not-null="true"/>
+    </property>
+    <property name="altDescriptionStatus" type="int">
+      <column name="alt_description_status" not-null="true"/>
+    </property>
+    <property name="productAvailable" type="boolean">
+      <column name="product_available" not-null="true"/>
+    </property>
+    <property name="productsLogotype" type="string">
+      <column length="64" name="products_logotype"/>
+    </property>
+    <property name="productsHot" type="boolean">
+      <column name="products_hot" not-null="true"/>
+    </property>
+    <property name="productsDefend" type="java.lang.Boolean">
+      <column name="products_defend"/>
+    </property>
+    <property name="productsKit" type="java.lang.Integer">
+      <column name="products_kit"/>
+    </property>
+  </class>
+</hibernate-mapping>
