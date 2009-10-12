@@ -8,6 +8,7 @@ package processing;
  *
  * @author APopov
  */
+import Zip.UnZip;
 import csvprocessing.CsvWriter;
 import java.io.File;
 import java.io.FileInputStream;
@@ -167,18 +168,22 @@ public class Xls2Csv {
             temp = new String[columns];
             for (int j = 0; j < columns; j++) {
 //                System.out.println(i + " ---> " + j + " ---> " + sheet.getRow(i).getCell(j).getCellType());
-                if (sheet.getRow(i).getCell(j).getCellType() == 0) {
-                    temp[j] = sheet.getRow(i).getCell(j).getNumericCellValue() + "";
-                } else if (sheet.getRow(i).getCell(j).getCellType() == 1) {
-                    temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
-                } else if (sheet.getRow(i).getCell(j).getCellType() == 2) {
-                    temp[j] = sheet.getRow(i).getCell(j).getCellFormula();
-                } else if (sheet.getRow(i).getCell(j).getCellType() == 3) {
-                    temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
-                } else if (sheet.getRow(i).getCell(j).getCellType() == 4) {
-                    temp[j] = sheet.getRow(i).getCell(j).getBooleanCellValue() + "";
-                } else {
-                    temp[j] = "Ошибка в ячейке -> (" + i + "," + j + ")";
+                try {
+                    if (sheet.getRow(i).getCell(j).getCellType() == 0) {
+                        temp[j] = sheet.getRow(i).getCell(j).getNumericCellValue() + "";
+                    } else if (sheet.getRow(i).getCell(j).getCellType() == 1) {
+                        temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+                    } else if (sheet.getRow(i).getCell(j).getCellType() == 2) {
+                        temp[j] = sheet.getRow(i).getCell(j).getCellFormula();
+                    } else if (sheet.getRow(i).getCell(j).getCellType() == 3) {
+                        temp[j] = sheet.getRow(i).getCell(j).getStringCellValue();
+                    } else if (sheet.getRow(i).getCell(j).getCellType() == 4) {
+                        temp[j] = sheet.getRow(i).getCell(j).getBooleanCellValue() + "";
+                    } else {
+                        temp[j] = "Ошибка в ячейке -> (" + i + "," + j + ")";
+                    }
+                } catch (NullPointerException e) {
+                    temp[j] = "";
                 }
             }
             csvw.writeRecord(temp);
@@ -199,6 +204,67 @@ public class Xls2Csv {
             System.out.println(end - start + " миллисекунд");
             return file2;
         }
+    }
+
+    public File fixIt4profitFile(InputStream uploadFile, String fileName, boolean checkZip) throws IOException, ArchiveException {
+        long start = System.currentTimeMillis();
+        File file = new File("temp.csv");
+        File tempFile = new File("temp.zip");
+        File outputFile = new File(fileName + ".zip");
+        if (!checkZip) {
+            IOUtils.copyLarge(uploadFile, FileUtils.openOutputStream(file));
+        } else {
+            IOUtils.copyLarge(uploadFile, FileUtils.openOutputStream(tempFile));
+            file = new UnZip().unZip(tempFile);
+        }
+        File file2 = new File(fileName);
+        List lines = FileUtils.readLines(file, "UTF-8");
+        String re;
+        Pattern p;
+        Matcher m;
+        int i = 0;
+        for (Iterator it = lines.iterator(); it.hasNext();) {
+            String str = (String) it.next();
+            if (i == 0) {
+                lines.set(i++, str);
+                continue;
+            }
+            str = str.replaceAll("\",\"", "|>|");
+            re = "(^.)";
+            p = Pattern.compile(re);
+            m = p.matcher(str);
+            if (m.find()) {
+                str = m.replaceAll("|^|");
+            }
+            re = "(.$)";
+            p = Pattern.compile(re);
+            m = p.matcher(str);
+            if (m.find()) {
+                str = m.replaceAll("|^|");
+            }
+            str = str.replaceAll("\"", "\"\"");
+
+            str = str.replaceAll("\\|\\>\\|", "\",\"");
+            re = "\\|\\^\\|";
+            p = Pattern.compile(re);
+            m = p.matcher(str);
+            if (m.find()) {
+                str = m.replaceAll("\"");
+            }
+            str = str.trim();
+            lines.set(i, str);
+            i++;
+        }
+        FileUtils.writeLines(file2, "UTF-8", lines);
+        final OutputStream out = new FileOutputStream(outputFile);
+        ArchiveOutputStream os = new ArchiveStreamFactory().createArchiveOutputStream("zip", out);
+        os.putArchiveEntry(new ZipArchiveEntry(fileName + ".csv"));
+        IOUtils.copy(new FileInputStream(file2), os);
+        os.closeArchiveEntry();
+        os.close();
+        long end = System.currentTimeMillis();
+        System.out.println(end - start + " миллисекунд");
+        return outputFile;
     }
 }
 

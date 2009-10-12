@@ -72,4 +72,26 @@ public class UploadDownload {
             return new FileTransfer(fileName + ".csv", "csv/text", buffer.toByteArray());
         }
     }
+
+    public FileTransfer fixItprofitFile(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)|(\\.zip)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return null;
+        }
+        Xls2Csv x2c = new Xls2Csv();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        File fl = null;
+        p = Pattern.compile("\\.csv");
+        m = p.matcher(fileName);
+        if (m.find()) {
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
+            fl = x2c.fixIt4profitFile(uploadFile, fileName, false);
+        } else {
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.zip", "$2");
+            fl = x2c.fixIt4profitFile(uploadFile, fileName, true);
+        }
+        buffer.write(FileUtils.readFileToByteArray(fl));
+        return new FileTransfer(fileName + ".zip", "application/x-zip-compressed", buffer.toByteArray());
+    }
 }
