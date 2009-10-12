@@ -376,7 +376,11 @@
                                             <input type="file" id="uploadit4profitCsv"/>
                                         </td>
                                         <td>
-                                            <button onclick="UploadeCsv()">Convert</button>
+                                            <button onclick="FixProfitCsv()">Fix</button>
+                                        </td>
+                                        <td>
+                                            <div id="it4profitCsvLoadingProcess">
+                                            </div>
                                         </td>
                                     </tr>
                                 </table>
@@ -415,7 +419,7 @@
                 <h2>Euromall</h2>
             </div>
             <div id="eCsv-details">
-                <h2 class="details-info">Пертрубации форматов файлов...</h2>
+                <h2 class="details-info">Преобразование форматов файлов...</h2>
             </div>
         </div>
     </body>
