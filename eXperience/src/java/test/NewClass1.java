@@ -32,7 +32,7 @@ public class NewClass1 {
 
     public static void main(String[] args) throws IOException, SQLException {
         Long start = System.currentTimeMillis();
-        CsvWriter csvw = new CsvWriter("C://Chassis.csv", ',', Charset.forName("WINDOWS-1251"));
+        CsvWriter csvw = new CsvWriter("C://MonitorLCD.csv", ',', Charset.forName("WINDOWS-1251"));
         String[] temp = new String[8];
         List<Nixdata> ndl = FactoryNixDAO.getInstance().getNixdataDAO().getAllNixdata();
         if (ndl.equals(null)) {
@@ -58,7 +58,7 @@ public class NewClass1 {
             if (m.find()) {
                 continue;
             }
-            p = Pattern.compile("Корпуса");
+            p = Pattern.compile("LCD мониторы");
             m = p.matcher(ndt.getProductType());
             if (m.find()) {
                 try {
