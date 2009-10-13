@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.PcProductTypesDAO;
 import Pojo.PcProductTypes;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class PcProductTypesDAOImpl implements PcProductTypesDAO {
     public Collection getAllPcProductTypes() throws SQLException {
         Session session = null;
         List<PcProductTypes> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =

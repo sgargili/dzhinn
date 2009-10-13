@@ -4,7 +4,7 @@
  */
 package Pics;
 
-import DAO.FactoryDAO;
+import DAO.FactoryDAO4Imports;
 import Pojo.Products;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -19,12 +19,12 @@ public class picsFix {
     @SuppressWarnings("static-access")
     public static void main(String[] arg) throws SQLException {
         @SuppressWarnings("static-access")
-        List<Products> lst = (List<Products>) FactoryDAO.getInstance().getProductsDAO().getAllProducts();
+        List<Products> lst = (List<Products>) FactoryDAO4Imports.getInstance().getProductsDAO().getAllProducts();
         int i = 1;
         for (Iterator it = lst.iterator(); it.hasNext();) {
             Products temp = (Products) it.next();
             temp.setProductsImage("../imgLib/" + temp.getProductsId() + "_small_0.jpg");
-            FactoryDAO.getInstance().getProductsDAO().addProducts(temp);
+            FactoryDAO4Imports.getInstance().getProductsDAO().addProducts(temp);
             i++;
         }
         System.out.println("Done...");

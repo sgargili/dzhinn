@@ -12,7 +12,7 @@ import org.hibernate.SessionFactory;
  *
  * @author APopov
  */
-public class HibernateUtil {
+public class HibernateUtil4Imports {
 
     private static final SessionFactory sessionFactory;
 

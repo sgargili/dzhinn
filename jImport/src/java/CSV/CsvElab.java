@@ -8,7 +8,7 @@ package CSV;
  *
  * @author APopov
  */
-import DAO.FactoryDAO;
+import DAO.FactoryDAO4Imports;
 import Pojo.PcProductTypes;
 import Pojo.PcProductsToPt;
 import Pojo.PcSyncProducts;
@@ -27,7 +27,7 @@ public class CsvElab {
     public void CsvProdToPT() throws IOException, SQLException {
         File file = new File("C://articles.csv");
         int i = 0;
-        List<PcProductTypes> ptl = (List<PcProductTypes>) FactoryDAO.getPcProductTypesDAO().getAllPcProductTypes();
+        List<PcProductTypes> ptl = (List<PcProductTypes>) FactoryDAO4Imports.getPcProductTypesDAO().getAllPcProductTypes();
         System.out.println(ptl.size());
         Collections.sort(ptl, new Comparator<PcProductTypes>() {
 
@@ -37,7 +37,7 @@ public class CsvElab {
                 return withoutEx1.compareTo(withoutEx2);
             }
         });
-        List<PcSyncProducts> pspl = (List<PcSyncProducts>) FactoryDAO.getPcSyncProductsDAO().getAllPcSyncProducts();
+        List<PcSyncProducts> pspl = (List<PcSyncProducts>) FactoryDAO4Imports.getPcSyncProductsDAO().getAllPcSyncProducts();
         System.out.println(pspl.size());
 
         Collections.sort(pspl, new Comparator<PcSyncProducts>() {
@@ -76,7 +76,7 @@ public class CsvElab {
                 }
 //                if (ptpt.getProductsId() != 0) {
                 //System.out.println(i + " " + ptpt.getProductsId() + " -> " + ptpt.getPtId());
-                // FactoryDAO.getInstance().getPcProductsToPtDAO().addPcProductsToPt(ptpt);
+                // FactoryDAO4Imports.getInstance().getPcProductsToPtDAO().addPcProductsToPt(ptpt);
                 i++;
 //                }
             }

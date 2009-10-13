@@ -4,7 +4,7 @@
  */
 package XML;
 
-import DAO.FactoryDAO;
+import DAO.FactoryDAO4Imports;
 import HttpClient.http;
 import Pojo.Categories;
 import Pojo.CategoriesDescription;
@@ -94,11 +94,11 @@ public class xmlElab {
                 pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
                 pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
                 //  System.out.println(i + " ---> " + pcSyncProducts.getProductsModel());
-                FactoryDAO.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
+                FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
                 pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
                 pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
                 pcSyncProductsDescription.setProductsDescription("");
-                FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
+                FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
 
 //                }
                 }
@@ -114,7 +114,7 @@ public class xmlElab {
             SQLException,
             TransformerException {
         @SuppressWarnings("static-access")
-        List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
+        List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
         int i = 1;
         XalanTransform xslt = new XalanTransform();
         for (Iterator it = lst.iterator(); it.hasNext();) {
@@ -131,7 +131,7 @@ public class xmlElab {
             str.setProductsDescription(FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId())), "UTF-8") //Далее обработка, а то шоп очень чувствителен на эту шнягу...
                     .replaceAll("(\r\n)|(\r)|(\n)|(\n\r)", "") //Все в одну строку...
                     .replaceAll(">\\s+<", "><")); //Удаляем лишние пробелы между тегами... Блин, какие то японские смайлики получились... :)
-            FactoryDAO.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
+            FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
             i++;
         }
         System.out.println("Done...");
@@ -141,7 +141,7 @@ public class xmlElab {
     public String xmlCategoriesExport() throws XmlPullParserException, IOException, SQLException {
         long start = System.currentTimeMillis();
 //        List<oldCat> oldXml = oldXML();
-        FactoryDAO factoryDao = FactoryDAO.getInstance();
+        FactoryDAO4Imports factoryDao = FactoryDAO4Imports.getInstance();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         File xml = http.DownloadContentAsFile("http://213.53.57.20/CatExp/trees.exml?shop=74&lang=ru");
@@ -198,7 +198,7 @@ public class xmlElab {
     @SuppressWarnings("static-access")
     public String xmlProductsToCategoriesExport() throws XmlPullParserException, IOException, SQLException {
         long start = System.currentTimeMillis();
-        FactoryDAO factoryDao = FactoryDAO.getInstance();
+        FactoryDAO4Imports factoryDao = FactoryDAO4Imports.getInstance();
         ProductsToCategories p2c;
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();

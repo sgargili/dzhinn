@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.PcProductsToPtDAO;
 import Pojo.PcProductsToPt;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class PcProductsToPtDAOImpl implements PcProductsToPtDAO {
     public void addPcProductsToPt(PcProductsToPt pcProductsToPt) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(pcProductsToPt);
             session.getTransaction().commit();
@@ -37,7 +37,7 @@ public class PcProductsToPtDAOImpl implements PcProductsToPtDAO {
     public Collection getAllPcProductsToPt() throws SQLException {
         Session session = null;
         List<PcProductsToPt> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =

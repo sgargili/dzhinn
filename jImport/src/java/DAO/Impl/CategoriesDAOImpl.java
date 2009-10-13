@@ -7,7 +7,7 @@ package DAO.Impl;
 import DAO.CategoriesDAO;
 import Pojo.Categories;
 import Pojo.oldCat;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -24,7 +24,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     public void addCategories(Categories categories) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(categories);
             session.getTransaction().commit();
@@ -39,7 +39,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     public Collection getAllCategories() throws SQLException {
         Session session = null;
         List<Categories> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -58,7 +58,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     public Collection getAllCategoriesNew() throws SQLException {
         Session session = null;
         List result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -83,7 +83,7 @@ public class CategoriesDAOImpl implements CategoriesDAO {
     public String getCategoriesImageById(int id) throws SQLException {
         Session session = null;
         List<Categories> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         String out = "";
         try {
             session.beginTransaction();

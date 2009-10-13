@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.ProductsDAO;
 import Pojo.Products;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ProductsDAOImpl implements ProductsDAO {
     public void addProducts(Products products) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(products);
             session.getTransaction().commit();
@@ -37,7 +37,7 @@ public class ProductsDAOImpl implements ProductsDAO {
     public Collection getAllProducts() throws SQLException {
         Session session = null;
         List<Products> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
