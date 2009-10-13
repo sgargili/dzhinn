@@ -17,7 +17,7 @@ import DAO.Impl.ProductsToCategoriesDAOImpl;
  *
  * @author Admin4DB2
  */
-public class FactoryDAO {
+public class FactoryDAO4Imports {
 
     private static PcSyncProductsDAO pcSyncProducts = null;
     private static ProductsDAO products = null;
@@ -27,7 +27,7 @@ public class FactoryDAO {
     private static ProductsToCategoriesDAO productsToCategoriesDAO;
     private static PcProductTypesDAO pcProductTypesDAO;
     private static PcProductsToPtDAO pcProductsToPtDAO;
-    private static FactoryDAO instance = null;
+    private static FactoryDAO4Imports instance = null;
 
     public static PcSyncProductsDAO getPcSyncProductsDAO() {
         if (pcSyncProducts == null) {
@@ -71,9 +71,9 @@ public class FactoryDAO {
         return productsToCategoriesDAO;
     }
 
-    public static synchronized FactoryDAO getInstance() {
+    public static synchronized FactoryDAO4Imports getInstance() {
         if (instance == null) {
-            instance = new FactoryDAO();
+            instance = new FactoryDAO4Imports();
         }
         return instance;
     }

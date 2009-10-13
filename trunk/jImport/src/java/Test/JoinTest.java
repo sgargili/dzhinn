@@ -4,7 +4,7 @@
  */
 package Test;
 
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
@@ -19,7 +19,7 @@ public class JoinTest {
     public static void main(String[] args) {
         Session session = null;
         List result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =

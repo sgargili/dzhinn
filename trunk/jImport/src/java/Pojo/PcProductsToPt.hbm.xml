@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 09.10.2009 15:37:20 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.PcProductsToPt" table="pc_products_to_pt" catalog="u196802">
-        <id name="productsId" type="int">
-            <column name="products_id" />
-            <generator class="assigned" />
-        </id>
-        <property name="ptId" type="int">
-            <column name="pt_id" not-null="true" />
-        </property>
-    </class>
+  <class catalog="u196802" name="Pojo.PcProductsToPt" table="pc_products_to_pt">
+    <id name="productsId" type="int">
+      <column name="products_id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="ptId" type="int">
+      <column name="pt_id" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

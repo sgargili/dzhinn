@@ -4,7 +4,7 @@
  */
 package Test;
 
-import DAO.FactoryDAO;
+import DAO.FactoryDAO4Imports;
 import Pojo.Categories;
 import Pojo.oldCat;
 import com.thoughtworks.xstream.XStream;
@@ -27,7 +27,7 @@ public class Class4Test {
         List<oldCat> oldList = new ArrayList();
         oldCat oc;
         @SuppressWarnings("static-access")
-        FactoryDAO factory = FactoryDAO.getInstance();
+        FactoryDAO4Imports factory = FactoryDAO4Imports.getInstance();
         @SuppressWarnings("static-access")
         List<oldCat> lst = (List<oldCat>) factory.getCategoriesDAO().getAllCategoriesNew();
         // int i = 1;

@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.ProductsToCategoriesDAO;
 import Pojo.ProductsToCategories;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import org.hibernate.Session;
 
@@ -19,7 +19,7 @@ public class ProductsToCategoriesDAOImpl implements ProductsToCategoriesDAO {
     public void addProductsToCategories(ProductsToCategories productsToCategories) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(productsToCategories);
             session.getTransaction().commit();

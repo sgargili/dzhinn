@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.PcSyncProductsDAO;
 import Pojo.PcSyncProducts;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class PcSyncProductsDAOImpl implements PcSyncProductsDAO {
     public void addPcSyncProducts(PcSyncProducts pcSyncProducts) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(pcSyncProducts);
             session.getTransaction().commit();
@@ -49,7 +49,7 @@ public class PcSyncProductsDAOImpl implements PcSyncProductsDAO {
     public Collection getAllPcSyncProducts() throws SQLException {
         Session session = null;
         List<PcSyncProducts> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =

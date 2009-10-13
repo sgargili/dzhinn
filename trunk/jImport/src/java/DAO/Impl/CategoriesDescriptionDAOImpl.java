@@ -6,7 +6,7 @@ package DAO.Impl;
 
 import DAO.CategoriesDescriptionDAO;
 import Pojo.CategoriesDescription;
-import Util.HibernateUtil;
+import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -22,7 +22,7 @@ public class CategoriesDescriptionDAOImpl implements CategoriesDescriptionDAO {
     public void addCategoriesDescription(CategoriesDescription categoriesDescription) throws SQLException {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = HibernateUtil4Imports.getSessionFactory().openSession();
             session.beginTransaction();
             session.saveOrUpdate(categoriesDescription);
             session.getTransaction().commit();
@@ -37,7 +37,7 @@ public class CategoriesDescriptionDAOImpl implements CategoriesDescriptionDAO {
     public Collection getAllCategoriesDescription() throws SQLException {
         Session session = null;
         List<CategoriesDescription> result = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             Query getByLogin =
@@ -57,7 +57,7 @@ public class CategoriesDescriptionDAOImpl implements CategoriesDescriptionDAO {
         Session session = null;
         CategoriesDescription result = null;
         try {
-            session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session = HibernateUtil4Imports.getSessionFactory().getCurrentSession();
             session.beginTransaction();
             Query query = session.createQuery("from CategoriesDescription c where categories_id = :cat_id").setInteger("cat_id", id);
             List resultList = query.list();
