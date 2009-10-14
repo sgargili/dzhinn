@@ -77,6 +77,8 @@ public class xmlElab {
         XmlPullParser xpp = factory.newPullParser();
         File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74");
         //File xml = new File("C://outFile.xml");
+        File newxml = new File("C:/newXML.xml");
+        FileUtils.copyFile(xml, newxml);
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
         int eventType = xpp.getEventType();
         PcSyncProducts pcSyncProducts = null;
@@ -93,7 +95,7 @@ public class xmlElab {
                 pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(8)));
                 pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
                 pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
-                //  System.out.println(i + " ---> " + pcSyncProducts.getProductsModel());
+                System.out.println(i + " "+Integer.parseInt(xpp.getAttributeValue(0))+" ---> " + pcSyncProducts.getProductsModel());
                 FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
                 pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
                 pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));

@@ -6,6 +6,9 @@ package DAO;
 
 import DAO.Impl.CategoriesDAOImpl;
 import DAO.Impl.CategoriesDescriptionDAOImpl;
+import DAO.Impl.ManufacturersDAOImpl;
+import DAO.Impl.ManufacturersInfoDAOImpl;
+import DAO.Impl.PcManufacturePtDAOImpl;
 import DAO.Impl.PcProductTypesDAOImpl;
 import DAO.Impl.PcProductsToPtDAOImpl;
 import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
@@ -27,6 +30,9 @@ public class FactoryDAO4Imports {
     private static ProductsToCategoriesDAO productsToCategoriesDAO;
     private static PcProductTypesDAO pcProductTypesDAO;
     private static PcProductsToPtDAO pcProductsToPtDAO;
+    private static PcManufacturePtDAO pcManufacturePtDAO;
+    private static ManufacturersDAO manufacturersDAO;
+    private static ManufacturersInfoDAO manufacturersInfoDAO;
     private static FactoryDAO4Imports instance = null;
 
     public static PcSyncProductsDAO getPcSyncProductsDAO() {
@@ -41,6 +47,27 @@ public class FactoryDAO4Imports {
             pcProductTypesDAO = new PcProductTypesDAOImpl();
         }
         return pcProductTypesDAO;
+    }
+
+    public static ManufacturersInfoDAO getManufacturersInfoDAO() {
+        if (manufacturersInfoDAO == null) {
+            manufacturersInfoDAO = new ManufacturersInfoDAOImpl();
+        }
+        return manufacturersInfoDAO;
+    }
+
+    public static ManufacturersDAO getManufacturersDAO() {
+        if (manufacturersDAO == null) {
+            manufacturersDAO = new ManufacturersDAOImpl();
+        }
+        return manufacturersDAO;
+    }
+
+    public static PcManufacturePtDAO getPcManufacturePtDAO() {
+        if (pcManufacturePtDAO == null) {
+            pcManufacturePtDAO = new PcManufacturePtDAOImpl();
+        }
+        return pcManufacturePtDAO;
     }
 
     public static PcSyncProductsDescriptionDAO getPcSyncProductsDescriptionDAO() {
