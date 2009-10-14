@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import Pojo.PcProductTypes;
 import java.sql.SQLException;
 import java.util.Collection;
 
@@ -13,5 +14,9 @@ import java.util.Collection;
  */
 public interface PcProductTypesDAO {
 
+    public void addPcProductsToPt(PcProductTypes pcProductTypes) throws SQLException;
+
     public Collection getAllPcProductTypes() throws SQLException;
+
+    public int getPcProductTypesByName(String name) throws SQLException;
 }

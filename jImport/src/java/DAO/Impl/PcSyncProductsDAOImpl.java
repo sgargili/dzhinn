@@ -68,4 +68,25 @@ public class PcSyncProductsDAOImpl implements PcSyncProductsDAO {
     public void deletePcSyncProducts(PcSyncProducts pcSyncProducts) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public int getPcSyncProductsByModel(String model) throws SQLException {
+        Session session = null;
+        List<PcSyncProducts> result = null;
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
+        int out = 0;
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from PcSyncProducts p where products_model = :model").setString("model", model);
+            result = getByLogin.list();
+            out = result.get(0).getProductsId();
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
+    }
 }

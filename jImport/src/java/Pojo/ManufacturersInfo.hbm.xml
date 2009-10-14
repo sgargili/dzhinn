@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14.10.2009 15:47:45 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Pojo.ManufacturersInfo" table="manufacturers_info" catalog="u196802">
+        <composite-id name="id" class="Pojo.ManufacturersInfoId">
+            <key-property name="manufacturersId" type="int">
+                <column name="manufacturers_id" />
+            </key-property>
+            <key-property name="languagesId" type="int">
+                <column name="languages_id" />
+            </key-property>
+        </composite-id>
+        <property name="manufacturersName" type="string">
+            <column name="manufacturers_name" not-null="true" />
+        </property>
+        <property name="manufacturersDescription" type="string">
+            <column name="manufacturers_description" length="65535" not-null="true" />
+        </property>
+        <property name="manufacturersMetaTitle" type="string">
+            <column name="manufacturers_meta_title" length="65535" not-null="true" />
+        </property>
+        <property name="manufacturersMetaKeywords" type="string">
+            <column name="manufacturers_meta_keywords" length="65535" not-null="true" />
+        </property>
+        <property name="manufacturersMetaDescription" type="string">
+            <column name="manufacturers_meta_description" length="65535" not-null="true" />
+        </property>
+        <property name="manufacturersUrl" type="string">
+            <column name="manufacturers_url" not-null="true" />
+        </property>
+        <property name="urlClicked" type="int">
+            <column name="url_clicked" not-null="true" />
+        </property>
+        <property name="dateLastClick" type="timestamp">
+            <column name="date_last_click" length="19" />
+        </property>
+    </class>
+    <class catalog="u196802" name="Pojo.ManufacturersInfoId" table="ManufacturersInfo">
+        <id name="manufacturersId" type="java.lang.Integer">
+            <column name="manufacturers_id"/>
+            <generator class="assigned"/>
+        </id>
+    </class>
+</hibernate-mapping>

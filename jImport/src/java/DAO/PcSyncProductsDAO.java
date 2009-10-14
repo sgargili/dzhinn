@@ -24,5 +24,7 @@ public interface PcSyncProductsDAO {
 
     public Collection getAllPcSyncProducts() throws SQLException;
 
+    public int getPcSyncProductsByModel(String model) throws SQLException;
+
     public void deletePcSyncProducts(PcSyncProducts pcSyncProducts) throws SQLException;
 }

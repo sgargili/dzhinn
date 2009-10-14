@@ -19,5 +19,8 @@
         <mapping resource="Pojo/PcProductTypes.hbm.xml"/>
         <mapping resource="Pojo/PcProductsToPt.hbm.xml"/>
         <mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
+        <mapping resource="Pojo/PcManufacturePt.hbm.xml"/>
+        <mapping resource="Pojo/ManufacturersInfo.hbm.xml"/>
+        <mapping resource="Pojo/Manufacturers.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

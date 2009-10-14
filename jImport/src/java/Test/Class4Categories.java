@@ -17,8 +17,9 @@ public class Class4Categories {
 
     public static void main(String[] args) throws SQLException, IOException, XmlPullParserException {
         xmlElab xmle = new xmlElab();
+        xmle.xmlPcSyncProducts();
         //xmle.xmlCategoriesExport();
         //xmle.oldXML();
-        System.out.println(xmle.xmlProductsToCategoriesExport());
+        //System.out.println(xmle.xmlProductsToCategoriesExport());
     }
 }

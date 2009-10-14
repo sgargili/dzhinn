@@ -7,6 +7,7 @@ package Test;
 import CSV.CsvElab;
 import java.io.IOException;
 import java.sql.SQLException;
+import org.xmlpull.v1.XmlPullParserException;
 
 /**
  *
@@ -14,8 +15,11 @@ import java.sql.SQLException;
  */
 public class PtPT {
 
-    public static void main(String[] arg) throws IOException, SQLException {
+    public static void main(String[] arg) throws IOException, SQLException, XmlPullParserException {
         CsvElab csv = new CsvElab();
-        csv.CsvProdToPT();
+        //csv.realPT();
+        // csv.CsvProdToPT();
+        //csv.CsvManToPT();
+        csv.updateMan();
     }
 }
