@@ -17,7 +17,6 @@ import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import org.xmlpull.v1.XmlPullParserException;
 
 public class MyRunnable implements Runnable {
 
@@ -52,8 +51,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "1");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -62,7 +60,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
-                    } catch (Exception ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -88,8 +86,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "2");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -98,6 +95,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -122,8 +120,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "3");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -132,6 +129,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -157,8 +155,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "4");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -167,6 +164,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -192,8 +190,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "5");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -202,6 +199,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -227,8 +225,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "6");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -237,6 +234,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -262,8 +260,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "7");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -272,6 +269,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -297,8 +295,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "8");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -307,6 +304,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -332,8 +330,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "9");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -342,6 +339,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
@@ -353,7 +351,7 @@ public class MyRunnable implements Runnable {
 
             List<Nixlinks> nixlist = null;
             try {
-                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(49336, 5485);
+                nixlist = FactoryDAO.getInstance().getNixlinksDAO().getAllNixlink(49336, 8277);
             } catch (SQLException ex) {
             }
             int i = 0;
@@ -367,8 +365,7 @@ public class MyRunnable implements Runnable {
                     DownloadContent dc = new DownloadContent();
                     dc.DownloadContent(str.getProductUrl(), str.getProductType(), "10");
                 } catch (IOException ex) {
-                } catch (XmlPullParserException ex) {
-                } catch (SQLException ex) {
+                } catch (Exception e) {
                 }
                 if (bayan == 17) {
                     bayan = 0;
@@ -377,6 +374,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception e) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
