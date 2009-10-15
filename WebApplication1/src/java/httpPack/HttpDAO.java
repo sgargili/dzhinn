@@ -499,7 +499,7 @@ public class HttpDAO {
                 }
 
             } catch (Exception e) {
-                System.out.println("Что то упало вот тут: строка 496 - > " + e);
+                System.out.println("Что то упало вот тут: строка 502 - > " + e);
             }
             int i = 0;
             Pattern pat = Pattern.compile("(.)(.*)");
