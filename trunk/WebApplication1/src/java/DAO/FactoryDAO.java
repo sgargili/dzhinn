@@ -6,6 +6,7 @@ package DAO;
 
 import DAO.Impl.NixdataDAOImpl;
 import DAO.Impl.NixlinksDAOImpl;
+import DAO.Impl.PtDAOImpl;
 
 /**
  *
@@ -15,6 +16,7 @@ public class FactoryDAO {
 
     private static NixlinksDAO nixlinksDAO = null;
     private static NixdataDAO nixdataDAO = null;
+    private static PtDAO ptDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -29,6 +31,13 @@ public class FactoryDAO {
             nixlinksDAO = new NixlinksDAOImpl();
         }
         return nixlinksDAO;
+    }
+
+    public PtDAO getPtDAO() {
+        if (ptDAO == null) {
+            ptDAO = new PtDAOImpl();
+        }
+        return ptDAO;
     }
 
     public NixdataDAO getNixdataDAO() {
