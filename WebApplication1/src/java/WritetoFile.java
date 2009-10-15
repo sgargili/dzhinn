@@ -11,32 +11,45 @@ import org.apache.commons.io.*;
 public class WritetoFile {
 
     public static void main(String[] args) throws IOException {
-        File file = new File("C://111.xml");
-        File file2 = new File("C://softAllDone.csv");
+        File file = new File("C://articles.csv");
+        File file2 = new File("C://articlesAllDone.csv");
         XmlReader xr = new XmlReader(file);
         String encoding = xr.getEncoding();
         System.out.println(encoding);
-        List lines = FileUtils.readLines(file, "WINDOWS-1251");
+        List lines = FileUtils.readLines(file, "UTF-8");
         String re;
         Pattern p;
         Matcher m;
         int i = 0;
         for (Iterator it = lines.iterator(); it.hasNext();) {
             String str = (String) it.next();
-            str = str.replaceAll("\"", "\"\"");
-            str = str.replaceAll(";", "\",\"");
+            //str = str.replaceAll("\"", "\"\"");
+            str = str.replaceAll("\",\"", "|>|");
             re = "(^.)";
             p = Pattern.compile(re);
             m = p.matcher(str);
             if (m.find()) {
-                str = m.replaceAll("\"$1");
+                str = m.replaceAll("|^|");
             }
             re = "(.$)";
             p = Pattern.compile(re);
             m = p.matcher(str);
             if (m.find()) {
-                str = m.replaceAll("$1\"");
+                str = m.replaceAll("|^|");
             }
+            str = str.replaceAll("\"", "\"\"");
+
+            str = str.replaceAll("\\|\\>\\|", "\",\"");
+            re = "\\|\\^\\|";
+            p = Pattern.compile(re);
+            m = p.matcher(str);
+            if (m.find()) {
+                str = m.replaceAll("\"");
+            }
+
+
+
+
             str = str.trim();
             lines.set(i, str);
             i++;
