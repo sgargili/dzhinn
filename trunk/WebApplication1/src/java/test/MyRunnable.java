@@ -62,6 +62,7 @@ public class MyRunnable implements Runnable {
                         System.out.println("Ip Сменился...");
                     } catch (UnknownHostException ex) {
                     } catch (IOException ex) {
+                    } catch (Exception ex) {
                     }
                     // System.out.println("Ip Сменился...");
                 }
