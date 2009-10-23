@@ -8,6 +8,7 @@ import DAO.ProductsDAO;
 import Pojo.Products;
 import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import org.hibernate.Query;
@@ -51,5 +52,26 @@ public class ProductsDAOImpl implements ProductsDAO {
             }
         }
         return result;
+    }
+
+    public Products getProductById(int id) throws SQLException {
+        Session session = null;
+        List<Products> result = new ArrayList();
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
+        Products out = null;
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Products p where products_id = :id").setInteger("id", id);
+            result = getByLogin.list();
+            out = result.get(0);
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
     }
 }

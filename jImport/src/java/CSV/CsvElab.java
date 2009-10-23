@@ -102,11 +102,11 @@ public class CsvElab {
                     System.out.println(e);
                 }
                 if (ptpt.getProductsId() != 0) {
-                    //System.out.println(i + " " + ptpt.getProductsId() + " -> " + ptpt.getPtId());
+                    System.out.println(i + " " + ptpt.getProductsId() + " -> " + ptpt.getPtId());
                     FactoryDAO4Imports.getInstance().getPcProductsToPtDAO().addPcProductsToPt(ptpt);
                     i++;
                 } else {
-                    //  System.out.println(reader.get(2) + " - У нас нету такого...");
+                    //System.out.println(reader.get(2) + " - У нас нету такого...");
                 }
             }
             System.out.println(i);

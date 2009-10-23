@@ -22,8 +22,9 @@ public class Main {
     @SuppressWarnings("static-access")
     public static void main(String[] args) throws SQLException, XmlPullParserException, IOException, TransformerException {
         xmlElab xml = new xmlElab();
-        xml.xmlPcSyncProducts();
-        //xml.xmlPcSyncProductsDescription();
+       // xml.xmlPcSyncProducts();
+        //System.out.println("First Done...");
+        xml.xmlPcSyncProductsDescription();
 
     }
 }

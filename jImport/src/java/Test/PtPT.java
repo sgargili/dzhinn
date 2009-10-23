@@ -18,8 +18,8 @@ public class PtPT {
     public static void main(String[] arg) throws IOException, SQLException, XmlPullParserException {
         CsvElab csv = new CsvElab();
         //csv.realPT();
-        // csv.CsvProdToPT();
+         csv.CsvProdToPT();
         //csv.CsvManToPT();
-        csv.updateMan();
+       // csv.updateMan();
     }
 }
