@@ -17,4 +17,6 @@ public interface ProductsDAO {
     public void addProducts(Products products) throws SQLException;
 
     public Collection getAllProducts() throws SQLException;
+
+    public Products getProductById(int id) throws SQLException;
 }

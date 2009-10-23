@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 14.10.2009 14:15:38 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.PcManufacturePt" table="pc_manufacture_pt" catalog="u196802">
-        <id name="idManufacturePt" type="java.lang.Integer">
-            <column name="id_manufacture_pt" />
-            <generator class="identity" />
-        </id>
-        <property name="idManufacture" type="int">
-            <column name="id_manufacture" not-null="true" />
-        </property>
-        <property name="productType" type="int">
-            <column name="product_type" not-null="true" />
-        </property>
-        <property name="idCalc" type="int">
-            <column name="id_calc" not-null="true" />
-        </property>
-    </class>
+  <class catalog="u196802" name="Pojo.PcManufacturePt" table="pc_manufacture_pt">
+    <id name="idManufacturePt" type="java.lang.Integer">
+      <column name="id_manufacture_pt"/>
+      <generator class="identity"/>
+    </id>
+    <property name="idManufacture" type="int">
+      <column name="id_manufacture" not-null="true"/>
+    </property>
+    <property name="productType" type="int">
+      <column name="product_type" not-null="true"/>
+    </property>
+    <property name="idCalc" type="int">
+      <column name="id_calc" not-null="true"/>
+    </property>
+  </class>
 </hibernate-mapping>

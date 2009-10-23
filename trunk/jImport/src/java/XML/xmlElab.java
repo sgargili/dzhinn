@@ -95,7 +95,7 @@ public class xmlElab {
                 pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(8)));
                 pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
                 pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
-                System.out.println(i + " "+Integer.parseInt(xpp.getAttributeValue(0))+" ---> " + pcSyncProducts.getProductsModel());
+                System.out.println(i + " " + Integer.parseInt(xpp.getAttributeValue(0)) + " ---> " + pcSyncProducts.getProductsModel());
                 FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
                 pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
                 pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
@@ -122,7 +122,7 @@ public class xmlElab {
         for (Iterator it = lst.iterator(); it.hasNext();) {
             PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
 //            System.out.println(i + " ---> " + str.getId().getProductsId());
-            if (!str.getProductsDescription().equals("")) {
+            if (!str.getProductsDescription().equals("") || i < 17087) {
                 System.out.println(i + " ---> " + str.getId().getProductsId() + " Уже есть, дальше идем...");
                 i++;
                 continue;
