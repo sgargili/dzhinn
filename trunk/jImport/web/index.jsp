@@ -14,6 +14,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Экспорт на StoneAxe.ru</h1>
+        <h1>Импорт на StoneAxe.ru</h1>
     </body>
 </html>
