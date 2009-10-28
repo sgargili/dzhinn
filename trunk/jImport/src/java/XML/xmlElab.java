@@ -4,6 +4,7 @@
  */
 package XML;
 
+import CSV.CsvReader;
 import DAO.FactoryDAO4Imports;
 import HttpClient.http;
 import Pojo.Categories;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -73,9 +75,17 @@ public class xmlElab {
     public void xmlPcSyncProducts() throws XmlPullParserException,
             IOException,
             SQLException {
+        File file = new File("C://7777.csv");
+        List<String> art = new ArrayList();
+        CsvReader reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("UTF-8"));
+        reader.readHeaders();
+        while (reader.readRecord()) {
+            art.add(reader.get(0).trim());
+        }
+        System.out.println(art.size());
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74");
+        File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportFullXMLpk0.jsp?shopId=74");
         //File xml = new File("C://outFile.xml");
         File newxml = new File("C:/newXML.xml");
         FileUtils.copyFile(xml, newxml);
@@ -83,31 +93,45 @@ public class xmlElab {
         int eventType = xpp.getEventType();
         PcSyncProducts pcSyncProducts = null;
         PcSyncProductsDescription pcSyncProductsDescription = null;
-
+        String tempString = "";
         int i = 1;
+        int k = 0;
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("item")) {
-                pcSyncProducts = new PcSyncProducts();
-                pcSyncProductsDescription = new PcSyncProductsDescription();
-//                if (!xpp.getAttributeValue(0).equals("")) {
-                pcSyncProducts.setProductsId(Integer.parseInt(xpp.getAttributeValue(0)));
-                pcSyncProducts.setProductsModel(xpp.getAttributeValue(2));
-                pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(8)));
-                pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
-                pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
-                System.out.println(i + " " + Integer.parseInt(xpp.getAttributeValue(0)) + " ---> " + pcSyncProducts.getProductsModel());
-                FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
-                pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
-                pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
-                pcSyncProductsDescription.setProductsDescription("");
-                FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
+                k++;
+                try {
+                    for (Iterator artic = art.iterator(); artic.hasNext();) {
+                        String tempart = (String) artic.next();
+                        tempString = tempart;
+                        if (tempart.equals(xpp.getAttributeValue(2))) {
+                            //  if (true) {
+                            pcSyncProducts = new PcSyncProducts();
+                            pcSyncProductsDescription = new PcSyncProductsDescription();
+//                          if (!xpp.getAttributeValue(0).equals("")) {
+                            pcSyncProducts.setProductsId(Integer.parseInt(xpp.getAttributeValue(0)));
+                            pcSyncProducts.setProductsModel(xpp.getAttributeValue(2));
+                            pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(8)));
+                            pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
+                            pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
+                            System.out.println(i + " " + Integer.parseInt(xpp.getAttributeValue(0)) + " ---> " + pcSyncProducts.getProductsModel());
+                            FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
+                            pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
+                            pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
+                            pcSyncProductsDescription.setProductsDescription("");
+                            FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
 
+                        }
+                    }
+                } catch (Exception e) {
+
+                    System.out.println(tempString + " " + e);
+                }
 //                }
                 }
             i++;
             eventType = xpp.next();
         }
-        System.out.println("Done...");
+        System.out.println(k + " Done...");
     }
 
     @SuppressWarnings("static-access")
