@@ -1,25 +1,25 @@
-РїСЂРѕРґСѓРєС‚С‹
+продукты
 http://213.53.57.20/CatExp/products.exml?shop=20
 
-РїСЂРѕРёР·РІРѕРґРёС‚РµР»Рё
+производители
 http://213.53.57.20/CatExp/manufacturers.exml?shop=20
 
-РґРµСЂРµРІРѕ С€РѕРїР°(РЅР°РІРёРіР°С†РёСЏ)
+дерево шопа(навигация)
 http://213.53.57.20/CatExp/trees.exml?shop=20&lang=ru
 
-РїСЂРёРІСЏР·РєР° РїСЂРѕРґСѓРєС‚РѕРІ Рє РґРµСЂРµРІСѓ С€РѕРїР°
+привязка продуктов к дереву шопа
 http://213.53.57.20/CatExp/itemsInNode.exml?shop=20
 
-РєР»СЋС‡РµРІС‹Рµ Рё РёС… Р·РЅР°С‡РµРЅРёСЏ
+ключевые и их значения
 http://213.53.57.20/CatExp/katree.exml?shop=20&lang=en
 
-РїСЂРёРІСЏР·РєР° РїСЂРѕРґСѓРєС‚РѕРІ Рє Р·РЅР°С‡РµРЅРёСЏРј РєР»СЋС‡РµРІС‹С…
+привязка продуктов к значениям ключевых
 http://213.53.57.20/CatExp/kalink.exml?shop=20&lang=en
 
-РєР°СЂС‚РѕС‡РєР° РїСЂРѕРґСѓРєС‚Р°  $ARTICLE_ID - Р·Р°РјРµРЅСЏРµС‚СЃСЏ РЅР° СЂРµР°Р»СЊРЅС‹Р№ РёРґ.
+карточка продукта  $ARTICLE_ID - заменяется на реальный ид.
 http://213.53.57.20/CatExp/card.exml?shop=20&lang=en&product=$ARTICLE_ID
 
-РєР°СЂС‚РёРЅРєРё РїСЂРѕРґСѓРєС‚Р°
+картинки продукта
 http://213.53.57.20/CatExp/productimg.exml?shop=20&product=$ARTICLE_ID
 
 
@@ -43,22 +43,22 @@ http://213.53.57.39/cfInfoWS/cfcode.exml?article=376638-B21
 
 SSH:
 ----
-   РЎРµСЂРІРµСЂ: u196802.ssh.masterhost.ru
-   Р›РѕРіРёРЅ: u196802
-   РџР°СЂРѕР»СЊ: 2nsurystephyd
+   Сервер: u196802.ssh.masterhost.ru
+   Логин: u196802
+   Пароль: 2nsurystephyd
 
 FTP:
 ----
-   РЎРµСЂРІРµСЂ: u196802.ftp.masterhost.ru
-   Р›РѕРіРёРЅ: u196802
-   РџР°СЂРѕР»СЊ: heolody2ess9y
+   Сервер: u196802.ftp.masterhost.ru
+   Логин: u196802
+   Пароль: heolody2ess9y
 
 MySQL:
 ------
-   РЎРµСЂРІРµСЂ: u196802.mysql.masterhost.ru
-   Р?РјСЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…: u196802
-   Р›РѕРіРёРЅ: u196802
-   РџР°СЂРѕР»СЊ: cornicenti2l
+   Сервер: u196802.mysql.masterhost.ru
+   Имя базы данных: u196802
+   Логин: u196802
+   Пароль: cornicenti2l
 
    PHPMyAdmin: http://phpmyadmin.masterhost.ru/
 
@@ -66,7 +66,6 @@ MySQL:
 
 http://213.53.57.20/ShopIX/kaXML.jsp?shopId=71&amp;productId=45164
 
-
-select cd.categories_name, cat.categories_image
-from categories_description cd
-join categories cat on cd.categories_id = cat.categories_id
+select distinct pm.model
+from pc_matching pm, pc_prices pp
+where pm.supplier_model = pp.price_model

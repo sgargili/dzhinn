@@ -18,8 +18,8 @@ public class Class4Categories {
 
     public static void main(String[] args) throws SQLException, IOException, XmlPullParserException, TransformerException {
         xmlElab xmle = new xmlElab();
-       // xmle.xmlPcSyncProducts();
-        xmle.xmlCategoriesExport();
+        xmle.xmlPcSyncProducts();
+        //xmle.xmlCategoriesExport();
         //xmle.oldXML();
        // xmle.xmlPcSyncProductsDescription();
         //System.out.println(xmle.xmlProductsToCategoriesExport());
