@@ -52,4 +52,21 @@ public class PcSyncProductsDescriptionDAOImpl implements PcSyncProductsDescripti
         }
         return result;
     }
+
+    public void truncatePcSyncProductsDescription() throws SQLException {
+        Session session = null;
+        session = HibernateUtil4Imports.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createSQLQuery(
+                    "truncate pc_sync_products_description");
+            getByLogin.executeUpdate();
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 }
