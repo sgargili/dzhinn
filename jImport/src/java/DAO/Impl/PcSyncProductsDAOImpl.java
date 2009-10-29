@@ -69,11 +69,11 @@ public class PcSyncProductsDAOImpl implements PcSyncProductsDAO {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public int getPcSyncProductsByModel(String model) throws SQLException {
+    public long getPcSyncProductsByModel(String model) throws SQLException {
         Session session = null;
         List<PcSyncProducts> result = null;
         session = HibernateUtil4Imports.getSessionFactory().openSession();
-        int out = 0;
+        long out = 0;
         try {
             session.beginTransaction();
             Query getByLogin =

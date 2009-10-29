@@ -96,7 +96,7 @@ public class CsvElab {
 //                    }
 //                }
                 try {
-                    ptpt.setProductsId(FactoryDAO4Imports.getPcSyncProductsDAO().getPcSyncProductsByModel(reader.get(2).trim()));
+                    ptpt.setProductsId((int) FactoryDAO4Imports.getPcSyncProductsDAO().getPcSyncProductsByModel(reader.get(2).trim()));
                     ptpt.setPtId(FactoryDAO4Imports.getPcProductTypesDAO().getPcProductTypesByName(reader.get(0).trim()));
                 } catch (Exception e) {
                     System.out.println(e);

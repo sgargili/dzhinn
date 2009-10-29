@@ -18,7 +18,7 @@ public class XalanTransform {
         File outFile = new File("C://temp.xml");
         String errorInFileFix = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>";
         TransformerFactory tFactory = TransformerFactory.newInstance();
-        Transformer transformer = tFactory.newTransformer(new StreamSource("web/simple.xsl"));
+        Transformer transformer = tFactory.newTransformer(new StreamSource("web/simple_1.xsl"));
         try {
             transformer.transform(new StreamSource(inFile), new StreamResult(new FileOutputStream(outFile)));
         } catch (TransformerException e) {

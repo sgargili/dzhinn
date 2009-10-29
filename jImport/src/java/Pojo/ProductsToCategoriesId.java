@@ -9,22 +9,22 @@ package Pojo;
 public class ProductsToCategoriesId  implements java.io.Serializable {
 
 
-     private int productsId;
+     private Long productsId;
      private int categoriesId;
 
     public ProductsToCategoriesId() {
     }
 
-    public ProductsToCategoriesId(int productsId, int categoriesId) {
+    public ProductsToCategoriesId(Long productsId, int categoriesId) {
        this.productsId = productsId;
        this.categoriesId = categoriesId;
     }
    
-    public int getProductsId() {
+    public Long getProductsId() {
         return this.productsId;
     }
     
-    public void setProductsId(int productsId) {
+    public void setProductsId(Long productsId) {
         this.productsId = productsId;
     }
     public int getCategoriesId() {
@@ -46,13 +46,13 @@ public class ProductsToCategoriesId  implements java.io.Serializable {
  && (this.getCategoriesId()==castOther.getCategoriesId());
    }
    
-   public int hashCode() {
-         int result = 17;
-         
-         result = 37 * result + this.getProductsId();
-         result = 37 * result + this.getCategoriesId();
-         return result;
-   }   
+//   public int hashCode() {
+//         int result = 17;
+//
+//         result = (int) (37 * result + this.getProductsId());
+//         result = 37 * result + this.getCategoriesId();
+//         return result;
+//   }
 
 
 }
