@@ -27,8 +27,8 @@ public class Main {
      */
     @SuppressWarnings("static-access")
     public static void main(String[] args) throws SQLException, XmlPullParserException, IOException, TransformerException {
-        xmlElab xml = new xmlElab();
-        xml.xmlPcSyncProducts();
+        //xmlElab xml = new xmlElab();
+        // xml.xmlPcSyncProducts();
         //System.out.println("First Done...");
 //        //xml.xmlPcSyncProductsDescription();
 //        List lst = FactoryDAO4Imports.getInstance().getPcProductsAvailableDAO().getPcProductsAvailable();
@@ -37,6 +37,6 @@ public class Main {
 //            PcProductsAvailable str = (PcProductsAvailable) it.next();
 //            System.out.println(i++ + " -> " + str.getModel());
 //        }
-
+        FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().truncatePcSyncProductsDescription();
     }
 }
