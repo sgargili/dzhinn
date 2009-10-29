@@ -282,7 +282,7 @@ public class xmlElab {
                 }
                 categories.setSortOrder(Integer.parseInt(xpp.getAttributeValue(2)));
                 categories.setCategoriesStatus(true);
-                factoryDao.getCategoriesDAO().addCategories(categories);
+               // factoryDao.getCategoriesDAO().addCategories(categories);
             }
             i++;
             eventType = xpp.next();

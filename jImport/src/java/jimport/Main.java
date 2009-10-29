@@ -37,6 +37,7 @@ public class Main {
 //            PcProductsAvailable str = (PcProductsAvailable) it.next();
 //            System.out.println(i++ + " -> " + str.getModel());
 //        }
-        FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().truncatePcSyncProductsDescription();
+        // FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().truncatePcSyncProductsDescription();
+        System.out.println(FactoryDAO4Imports.getInstance().getTestHPDAO().getTestHP(8833));
     }
 }

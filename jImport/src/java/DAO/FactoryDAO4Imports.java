@@ -17,6 +17,7 @@ import DAO.Impl.PcSyncProductsDAOImpl;
 import DAO.Impl.ProductsDAOImpl;
 import DAO.Impl.ProductsImagesDAOImpl;
 import DAO.Impl.ProductsToCategoriesDAOImpl;
+import DAO.Impl.TestHPDAOImpl;
 
 /**
  *
@@ -36,6 +37,7 @@ public class FactoryDAO4Imports {
     private static ManufacturersDAO manufacturersDAO = null;
     private static ManufacturersInfoDAO manufacturersInfoDAO = null;
     private static ProductsImagesDAO productsImagesDAO = null;
+    private static TestHPDAO testHPDAO = null;
     private static PcProductsAvailableDAO pcProductsAvailableDAO = null;
     private static FactoryDAO4Imports instance = null;
 
@@ -44,6 +46,13 @@ public class FactoryDAO4Imports {
             pcSyncProducts = new PcSyncProductsDAOImpl();
         }
         return pcSyncProducts;
+    }
+
+    public static TestHPDAO getTestHPDAO() {
+        if (testHPDAO == null) {
+            testHPDAO = new TestHPDAOImpl();
+        }
+        return testHPDAO;
     }
 
     public static ProductsImagesDAO getProductsImagesDAO() {
