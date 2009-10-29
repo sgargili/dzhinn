@@ -10,6 +10,7 @@ import DAO.Impl.ManufacturersDAOImpl;
 import DAO.Impl.ManufacturersInfoDAOImpl;
 import DAO.Impl.PcManufacturePtDAOImpl;
 import DAO.Impl.PcProductTypesDAOImpl;
+import DAO.Impl.PcProductsAvailableDAOImpl;
 import DAO.Impl.PcProductsToPtDAOImpl;
 import DAO.Impl.PcSyncProductsDescriptionDAOImpl;
 import DAO.Impl.PcSyncProductsDAOImpl;
@@ -28,13 +29,14 @@ public class FactoryDAO4Imports {
     private static PcSyncProductsDescriptionDAO pcSyncProductsDescriptionDAO = null;
     private static CategoriesDAO categoriesDAO = null;
     private static CategoriesDescriptionDAO categoriesDescriptionDAO = null;
-    private static ProductsToCategoriesDAO productsToCategoriesDAO;
-    private static PcProductTypesDAO pcProductTypesDAO;
-    private static PcProductsToPtDAO pcProductsToPtDAO;
-    private static PcManufacturePtDAO pcManufacturePtDAO;
-    private static ManufacturersDAO manufacturersDAO;
-    private static ManufacturersInfoDAO manufacturersInfoDAO;
-    private static ProductsImagesDAO productsImagesDAO;
+    private static ProductsToCategoriesDAO productsToCategoriesDAO = null;
+    private static PcProductTypesDAO pcProductTypesDAO = null;
+    private static PcProductsToPtDAO pcProductsToPtDAO = null;
+    private static PcManufacturePtDAO pcManufacturePtDAO = null;
+    private static ManufacturersDAO manufacturersDAO = null;
+    private static ManufacturersInfoDAO manufacturersInfoDAO = null;
+    private static ProductsImagesDAO productsImagesDAO = null;
+    private static PcProductsAvailableDAO pcProductsAvailableDAO = null;
     private static FactoryDAO4Imports instance = null;
 
     public static PcSyncProductsDAO getPcSyncProductsDAO() {
@@ -49,6 +51,13 @@ public class FactoryDAO4Imports {
             productsImagesDAO = new ProductsImagesDAOImpl();
         }
         return productsImagesDAO;
+    }
+
+    public static PcProductsAvailableDAO getPcProductsAvailableDAO() {
+        if (pcProductsAvailableDAO == null) {
+            pcProductsAvailableDAO = new PcProductsAvailableDAOImpl();
+        }
+        return pcProductsAvailableDAO;
     }
 
     public static PcProductTypesDAO getPcProductTypesDAO() {
