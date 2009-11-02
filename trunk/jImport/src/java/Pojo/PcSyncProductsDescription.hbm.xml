@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 05.10.2009 11:25:51 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="u196803" name="Pojo.PcSyncProductsDescription" table="pc_sync_products_description">
+  <class catalog="u196802" name="Pojo.PcSyncProductsDescription" table="pc_sync_products_description">
     <composite-id class="Pojo.PcSyncProductsDescriptionId" name="id">
       <key-property name="productsId" type="java.lang.Long">
         <column name="products_id"/>

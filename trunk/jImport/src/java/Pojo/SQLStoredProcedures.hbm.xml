@@ -2,9 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 09.10.2009 15:37:20 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class catalog="u196802" name="Pojo.TestHP" table="procedure1">
-        <id name="Article" type="string">
-            <column name="Article"/>
-        </id>
-    </class>
+    <sql-query name="TestHP" callable="true" >
+        <return alias="TestHP" class="Pojo.TestHP">
+        </return>
+    { call procedure1(:id) }
+    </sql-query>
 </hibernate-mapping>

@@ -18,12 +18,12 @@ public class Class4Categories {
 
     public static void main(String[] args) throws SQLException, IOException, XmlPullParserException, TransformerException {
         xmlElab xmle = new xmlElab();
-       // xmle.xmlPcSyncProducts();
+        //xmle.xmlPcSyncProducts();
         //System.out.println("PCSyncProducts - Done!");
         //xmle.xmlCategoriesExport();
         //System.out.println("CategoriesExport - Done!");
         //System.out.println(xmle.xmlProductsToCategoriesExport());
         xmle.xmlPcSyncProductsDescription();
-        System.out.println("PcSyncProductsDescription - Done!");
+        //System.out.println("PcSyncProductsDescription - Done!");
     }
 }
