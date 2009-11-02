@@ -8,9 +8,9 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">Pass4root</property>
         <property name="hibernate.current_session_context_class">thread</property>
-    <!--<property name="hibernate.connection.characterEncoding">UTF-8</property>-->
-    <property name="hibernate.show_sql">true</property>
-        <!--<mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
+        <!--<property name="hibernate.connection.characterEncoding">UTF-8</property>-->
+        <!--<property name="hibernate.show_sql">true</property>-->
+        <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
         <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
         <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>
         <mapping resource="Pojo/CategoriesArticles.hbm.xml"/>
@@ -25,7 +25,8 @@
         <mapping resource="Pojo/ManufacturersInfo.hbm.xml"/>
         <mapping resource="Pojo/Manufacturers.hbm.xml"/>
         <mapping resource="Pojo/ProductsImages.hbm.xml"/>
-        <mapping resource="Pojo/PcProductsAvailable.hbm.xml"/>-->
+        <mapping resource="Pojo/PcProductsAvailable.hbm.xml"/>
         <mapping resource="Pojo/TestHP.hbm.xml"/>
+        <mapping resource="Pojo/SQLStoredProcedures.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
