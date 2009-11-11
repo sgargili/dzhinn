@@ -4,7 +4,6 @@
  */
 package XML;
 
-import CSV.CsvReader;
 import DAO.FactoryDAO4Imports;
 import HttpClient.http;
 import Pojo.Categories;
@@ -24,11 +23,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
-import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParser;
@@ -110,43 +110,8 @@ public class xmlElab {
         String tempString = "";
         int i = 1;
         int k = 0;
+        String tempName = "";
         while (eventType != XmlPullParser.END_DOCUMENT) {
-//            if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("item")) {
-//                k++;
-//                try {
-//                    for (Iterator artic = art.iterator(); artic.hasNext();) {
-//                        String tempart = (String) artic.next();
-//                        tempString = tempart;
-//                        if (tempart.equals(xpp.getAttributeValue(2))) {
-//                            //  if (true) {
-//                            pcSyncProducts = new PcSyncProducts();
-//                            pcSyncProductsDescription = new PcSyncProductsDescription();
-////                          if (!xpp.getAttributeValue(0).equals("")) {
-//                            pcSyncProducts.setProductsId(Integer.parseInt(xpp.getAttributeValue(0)));
-//                            pcSyncProducts.setProductsModel(xpp.getAttributeValue(2));
-//                            pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(8)));
-//                            pcSyncProducts.setManufacturersName(xpp.getAttributeValue(3));
-//                            pcSyncProducts.setProductsQuantity(Integer.parseInt(xpp.getAttributeValue(9)));
-//                            System.out.println(i + " " + Integer.parseInt(xpp.getAttributeValue(0)) + " ---> " + pcSyncProducts.getProductsModel());
-//                            FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
-//                            pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Integer.parseInt(xpp.getAttributeValue(0)), 1));
-//                            pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(6).substring(0, 255));
-//                            pcSyncProductsDescription.setProductsDescription("");
-//                            FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
-//
-//                        }
-//                    }
-//                } catch (Exception e) {
-//
-//                    System.out.println(tempString + " " + e);
-//                }
-////                }
-//                }
-//            i++;
-//            eventType = xpp.next();
-
-
-
             if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("product")) {
                 k++;
                 try {
@@ -154,15 +119,12 @@ public class xmlElab {
                         PcProductsAvailable tempart = (PcProductsAvailable) artic.next();
                         tempString = tempart.getModel();
                         if (tempString.equals(xpp.getAttributeValue(1))) {
-                            //  if (true) {
                             pcSyncProducts = new PcSyncProducts();
                             pcSyncProductsDescription = new PcSyncProductsDescription();
-//                          if (!xpp.getAttributeValue(0).equals("")) {
                             pcSyncProducts.setProductsId(Long.parseLong(xpp.getAttributeValue(0)));
                             System.out.println(Long.parseLong(xpp.getAttributeValue(0)) + " -> " + xpp.getAttributeValue(0).length());
                             pcSyncProducts.setProductsModel(xpp.getAttributeValue(1));
                             pcSyncProducts.setProductsPrice(new BigDecimal(xpp.getAttributeValue(6)));
-                            //pcSyncProducts.setManufacturersName("");
                             for (Iterator manuit = mbl.iterator(); manuit.hasNext();) {
                                 ManuBean tempmanu = (ManuBean) manuit.next();
                                 if (tempmanu.getId().equals(xpp.getAttributeValue(7))) {
@@ -170,7 +132,6 @@ public class xmlElab {
                                     break;
                                 }
                             }
-                            //pcSyncProducts.setManufacturersId(Integer.parseInt(xpp.getAttributeValue(7)));
                             if (xpp.getAttributeValue(7).length() > 9) {
                                 pcSyncProducts.setManufacturersId(Integer.parseInt(xpp.getAttributeValue(7).substring(8)));
                             } else {
@@ -180,14 +141,15 @@ public class xmlElab {
                             System.out.println(i + " " + Long.parseLong(xpp.getAttributeValue(0)) + " ---> " + pcSyncProducts.getProductsModel());
                             FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().addPcSyncProducts(pcSyncProducts);
                             pcSyncProductsDescription.setId(new PcSyncProductsDescriptionId(Long.parseLong(xpp.getAttributeValue(0)), 1));
-                            if (xpp.getAttributeValue(2).length() >= 255) {
-                                pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(2).substring(0, 255));
+                            tempName = xpp.getAttributeValue(2);
+                            tempName = tempName.equals(xpp.getAttributeValue(1)) ? "" : tempName;
+                            if (tempName.length() >= 255) {
+                                pcSyncProductsDescription.setProductsName(tempName.substring(0, 255));
                             } else {
-                                pcSyncProductsDescription.setProductsName(xpp.getAttributeValue(2));
+                                pcSyncProductsDescription.setProductsName(tempName);
                             }
                             pcSyncProductsDescription.setProductsDescription("");
                             FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(pcSyncProductsDescription);
-
                         }
                     }
                 } catch (Exception e) {
@@ -211,24 +173,50 @@ public class xmlElab {
         @SuppressWarnings("static-access")
         List<PcSyncProductsDescription> lst = (List<PcSyncProductsDescription>) FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
         int i = 1;
+        String tempDesc = "";
         XalanTransform xslt = new XalanTransform();
         for (Iterator it = lst.iterator(); it.hasNext();) {
-            PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
+            try {
+                PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
 //            System.out.println(i + " ---> " + str.getId().getProductsId()); 50409104041728059
-            if (!str.getProductsDescription().equals("")) {
-                System.out.println(i + " ---> " + str.getId().getProductsId() + " Уже есть, дальше идем...");
+                if (!str.getProductsDescription().equals("")) {
+                    System.out.println(i + " ---> " + str.getId().getProductsId() + " Уже есть, дальше идем...");
+                    i++;
+                    continue;
+                } else {
+                    System.out.println(i + " ---> " + str.getId().getProductsId());
+                }
+                //str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
+                tempDesc = FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/CatExp/card.exml?shop=74&lang=ru&product=" + str.getId().getProductsId())), "UTF-8") //Далее обработка, а то шоп очень чувствителен на эту шнягу...
+                        .replaceAll("(\r\n)|(\r)|(\n)|(\n\r)", "") //Все в одну строку...
+                        .replaceAll("\\s+<", "<") //
+                        .replaceAll(">\\s+<", "><");
+                String patt = "(\"marketing\")|(\"spec_groupname\")";
+                Pattern r = Pattern.compile(patt);
+                Matcher m = r.matcher(tempDesc);
+                if (!m.find()) {
+                    tempDesc = "";
+                }
+                patt = "(<div id=\"marketing\">.*?</div>)+(.*)";
+                r = Pattern.compile(patt);
+                m = r.matcher(tempDesc);
+                if (m.find()) {
+                    tempDesc = m.group(1) + m.group(2);
+                }
+                str.setProductsDescription(tempDesc); //Удаляем лишние пробелы между тегами... Блин, какие то японские смайлики получились... :)
+                FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
                 i++;
-                continue;
-            } else {
-                System.out.println(i + " ---> " + str.getId().getProductsId());
+            } catch (Exception ex) {
+                System.out.println(ex);
             }
-            //str.setProductsDescription(http.DownloadContentAsString("http://213.53.57.20/ShopIX/cardXML.jsp?shopId=74&productId=" + str.getId().getProductsId(), "UTF-8"));
-            str.setProductsDescription(FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/CatExp/card.exml?shop=74&lang=ru&product=" + str.getId().getProductsId())), "UTF-8") //Далее обработка, а то шоп очень чувствителен на эту шнягу...
-                    .replaceAll("(\r\n)|(\r)|(\n)|(\n\r)", "") //Все в одну строку...
-                    .replaceAll("\\s+<", "<") //
-                    .replaceAll(">\\s+<", "><")); //Удаляем лишние пробелы между тегами... Блин, какие то японские смайлики получились... :)
-            FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().addPcSyncProductsDescription(str);
-            i++;
+        }
+        List<PcSyncProductsDescription> lst2 = (List<PcSyncProductsDescription>) FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().getPcSyncProductsDescription();
+        for (Iterator it = lst2.iterator(); it.hasNext();) {
+            PcSyncProductsDescription str = (PcSyncProductsDescription) it.next();
+            if (str.getProductsName().equals("") || str.getProductsDescription().equals("")) {
+                FactoryDAO4Imports.getInstance().getPcSyncProductsDAO().deletePcSyncProductsById(str.getId().getProductsId());
+                FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().deletePcSyncProductsDescription(str);
+            }
         }
         System.out.println("Done...");
     }
@@ -282,7 +270,7 @@ public class xmlElab {
                 }
                 categories.setSortOrder(Integer.parseInt(xpp.getAttributeValue(2)));
                 categories.setCategoriesStatus(true);
-               // factoryDao.getCategoriesDAO().addCategories(categories);
+                // factoryDao.getCategoriesDAO().addCategories(categories);
             }
             i++;
             eventType = xpp.next();
@@ -298,7 +286,7 @@ public class xmlElab {
         ProductsToCategories p2c;
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-       // File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportNodeProdXML.jsp?shopId=74");
+        // File xml = http.DownloadContentAsFile("http://213.53.57.20/ShopIX/exportNodeProdXML.jsp?shopId=74");
         File xml = http.DownloadContentAsFile("http://213.53.57.20/CatExp/itemsInNode.exml?shop=74");
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
         int eventType = xpp.getEventType();
@@ -308,8 +296,8 @@ public class xmlElab {
                 if (xpp.getAttributeValue(0).length() > 9) {
                     p2c.setId(new ProductsToCategoriesId(Long.parseLong(xpp.getAttributeValue(1)), Integer.parseInt(xpp.getAttributeValue(0).substring(8))));
                 } else {
-                p2c.setId(new ProductsToCategoriesId(Long.parseLong(xpp.getAttributeValue(1)), Integer.parseInt(xpp.getAttributeValue(0))));
-                 }
+                    p2c.setId(new ProductsToCategoriesId(Long.parseLong(xpp.getAttributeValue(1)), Integer.parseInt(xpp.getAttributeValue(0))));
+                }
                 factoryDao.getproductsToCategoriesDAO().addProductsToCategories(p2c);
             }
             eventType = xpp.next();
