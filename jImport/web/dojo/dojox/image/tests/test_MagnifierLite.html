@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Testing image</title>
+        <style type="text/css">
+            @import "../resources/Magnifier.css";
+        </style>
+        <script type="text/javascript" src="../../../dojo/dojo.js" djConfig="isDebug: false, parseOnLoad:true"></script>
+        <script type="text/javascript" src="../MagnifierLite.js"></script>
+        <script type="text/javascript">
+            dojo.require("dojox.image.MagnifierLite");
+            dojo.require("dijit.form.Button");
+        </script>
+    </head>
+    <body>
+        <p>
+            <img id="testImage" dojoType="dojox.image.MagnifierLite" src="http://s2.bikewalls.com/pictures/KTM_990_Super_Duke_R-aa_2007_09_1024x768.jpg"
+                 style="width:25%; height:25%;" scale="2" />
+        </p>
+    </body>
+</html>

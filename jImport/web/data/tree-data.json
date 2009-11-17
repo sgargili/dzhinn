@@ -1,0 +1,46 @@
+[{
+//    text:'Grabliв„ў',
+//    children:[{
+//        text:'Nix.ru',
+//        id:'Nix',
+//        leaf:true
+//    }]
+//},
+//{
+    text:'Импорт',
+    children:[{
+        text:'StoneAxe.ru',
+        id:'Stoneaxe',
+        leaf:true
+    }
+//    ,{
+//        text:'A2Zmall.ru',
+//        id:'A2Zmall',
+//        leaf:true
+//    },{
+//        text:'Magento',
+//        id:'Magento',
+//        leaf:true
+//    }
+]
+},{
+    text:'Работа с ценами',
+    children:[{
+        text:'Яндекс маркет',
+        id:'Yandex',
+        leaf:true
+    }
+//    ,{
+//        text:'Price Concentrator',
+//        id:'Price_Concentrator',
+//        leaf:true
+//    }
+]
+},{
+    text:'Полезные функции',
+    children:[{
+        text:'XLS,CSV(Excel) -> CSV',
+        id:'eCsv',
+        leaf:true
+    }]
+}]
