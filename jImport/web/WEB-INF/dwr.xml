@@ -7,6 +7,9 @@
             <param name="class" value="dwr.Ajax"/>
         </create>
         <convert converter="bean" match="dwr.Message"/>
+        <create creator="new" scope="application">
+            <param name="class" value="CSV.CsvProcessing"/>
+        </create>
     </allow>
 
 </dwr>

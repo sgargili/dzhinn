@@ -22,6 +22,7 @@
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
+        <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
         <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css">
         <link id="themeStyles" rel="stylesheet" href="css/Xport.css">
     </head>
