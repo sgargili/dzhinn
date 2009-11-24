@@ -5,8 +5,6 @@ import CSV.CsvWriter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -15,9 +13,9 @@ import java.util.regex.Pattern;
 public class ProfitFix {
 
     public static void main(String[] arg) throws FileNotFoundException, IOException {
-        CsvWriter writer = new CsvWriter("C://awd.csv", ';', Charset.forName("UTF-8"));
+        CsvWriter writer = new CsvWriter("C://awd.csv", ',', Charset.forName("UTF-8"));
         CsvReader reader = new CsvReader("c://articles.csv", ',', Charset.forName("UTF-8"));
-        String[] mass = new String[4];
+        String[] mass = new String[9];
         reader.readHeaders();
         int i = 1;
 //        Pattern p;
@@ -29,10 +27,15 @@ public class ProfitFix {
             ss1 = reader.get(3).trim().substring(0, reader.get(3).trim().length() / 2);
             ss2 = reader.get(3).trim().substring(reader.get(3).trim().length() / 2);
             if (ss1.equals(ss2) && reader.get(1).trim().equals("MICROSOFT")) {
-                mass[0] = reader.get(1).trim();
-                mass[1] = reader.get(2).trim();
-                mass[2] = reader.get(3).trim();
+                mass[0] = reader.get(0).trim();
+                mass[1] = reader.get(1).trim();
+                mass[2] = reader.get(2).trim();
                 mass[3] = ss1;
+                mass[4] = ss1;
+                mass[5] = reader.get(5).trim();
+                mass[6] = reader.get(6).trim();
+                mass[7] = reader.get(7).trim();
+                mass[8] = reader.get(8).trim();
                 writer.writeRecord(mass);
                 writer.flush();
             }
