@@ -6,6 +6,8 @@ dojo.require("dijit.form.DateTextBox");
 dojo.require("dijit.form.Textarea");
 dojo.require("dijit.form.Button");
 dojo.require("dijit.Dialog");
+dojo.require("dijit.form.FilteringSelect");
+
 dojo.require("dojox.form.FileInput");
 function SwitchLanguages () {
     if (dojo.byId("LangAll").checked == false)
@@ -398,4 +400,12 @@ function Watch_All_PT_Nix(){
         dojo.byId('TablenixPT_Out').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
+}
+function ShowYandexFile(){
+    if(dojo.byId("yandexType").value =="Загрузить из файла"){
+        dojo.byId('tduploadYandexFile').style.display = "inline";
+    } else{
+        dojo.byId('tduploadYandexFile').style.display = "none";
+
+    }
 }

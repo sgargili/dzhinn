@@ -211,14 +211,32 @@
                 </div>
             </div>
             <div id="Yandex_Comporator" style="background-color:#e1e8ff; width:100%; height:100%">
-                <div dojoType="dijit.TooltipDialog" id="AllDialog_Yandex" execute="alert(dojo.toJson(arguments[0], false))">
-                    <input dojoType=dijit.form.TextBox type="text" id="user" name="User" />
-                    <button dojoType="dijit.form.Button" type="submit" onclick="this.submit;">
-                        &lt;&lt;&lt;Загрузить файл&gt;&gt;&gt;
-                    </button>
-                    <p class="tundra">
-                        <input dojoType="dojox.form.FileInput" id="default2" name="inputFile" />
-                    </p>
+                <div dojoType="dijit.TooltipDialog" id="AllDialog_Yandex">
+                    <table id="TableYandex" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #cfcdcd align=left>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <font color="white" size="2">Тип загрузки:</font>
+                                        </td>
+                                        <td>
+                                            <select id="yandexType" dojoType="dijit.form.FilteringSelect" style="width:170px" onchange="ShowYandexFile()">
+                                                <option value="file">Загрузить из файла
+                                                <option value="base">Загрузить из базы
+                                            </select>
+                                        </td>
+                                        <td style="display:inline" id="tduploadYandexFile">
+                                            <input type="file" id="uploadYandexFile"/>
+                                        </td>
+                                        <td>
+                                            <button onclick="">Загрузить/Обновить</button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>          
             <div id="www">
@@ -303,7 +321,7 @@
                                                         <font color="white" size="2">Encoding:</font>
                                                     </td>
                                                     <td>
-                                                        <select id="eCsvEncoding">
+                                                        <select id="eCsvEncoding" dojoType="dijit.form.FilteringSelect" style="width:100px">
                                                             <option value="WINDOWS-1251">ANSI
                                                             <option value="UTF-8">UTF-8
                                                         </select>
@@ -342,7 +360,7 @@
                                                         <font color="white" size="2">Engine:</font>
                                                     </td>
                                                     <td>
-                                                        <select id="eCsvEngine">
+                                                        <select id="eCsvEngine" dojoType="dijit.form.FilteringSelect" style="width:120px">
                                                             <option value="Jexcel">Jexcel
                                                             <option value="Apache POI">Apache POI
                                                         </select>
