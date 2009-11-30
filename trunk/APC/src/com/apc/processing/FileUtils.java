@@ -17,6 +17,15 @@ import java.io.UnsupportedEncodingException;
  */
 public class FileUtils {
 
+    private static FileUtils instance = null;
+
+    public static FileUtils getInstance() {
+        if (instance == null) {
+            instance = new FileUtils();
+        }
+        return instance;
+    }
+
     public String readFileToString(String fileName, String encoding, int beginIndex, int length) {
 
         FileInputStream fis;
@@ -35,7 +44,11 @@ public class FileUtils {
                     break;
                 }
             }
-            line = lines.substring(beginIndex, beginIndex + length);
+            if (lines.length() > beginIndex + length) {
+                line = lines.substring(beginIndex, beginIndex + length);
+            } else {
+                line = lines.toString();
+            }
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
         } catch (UnsupportedEncodingException ex) {

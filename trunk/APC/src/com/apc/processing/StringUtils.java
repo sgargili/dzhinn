@@ -10,6 +10,15 @@ package com.apc.processing;
  */
 public class StringUtils {
 
+    private static StringUtils instance = null;
+
+    public static StringUtils getInstance() {
+        if (instance == null) {
+            instance = new StringUtils();
+        }
+        return instance;
+    }
+
     public String[] getSortedStringData(String inputString) {
 
         String[] outputData = null;

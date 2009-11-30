@@ -4,6 +4,7 @@
  */
 package com.apc.cache;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Map;
 public class MemoryCache {
 
     private static MemoryCache instance = null;
-    private static Map cacheMap;
+    private static Map cacheMap = new HashMap();
 
     public static MemoryCache getInstance() {
         if (instance == null) {
@@ -27,6 +28,9 @@ public class MemoryCache {
     }
 
     public void putInMemory(String key, String value) {
+        if (cacheMap.size() > 1000) {
+            clearAllFromMemory();
+        }
         cacheMap.put(key, value);
     }
 
