@@ -22,7 +22,7 @@ public class Test {
         int a = 0, b = 1500;
         String tempKey = a + "|" + b;
         String temp = "";
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             tempKey = a + "|" + i;
             if (memoryCache.containsInMemory(tempKey)) {
                 temp = memoryCache.getFromMemory(tempKey);
@@ -38,6 +38,7 @@ public class Test {
                 System.out.println("Читаю из файла...");
             }
         }
+//        System.out.println(temp);
         String[] strs = stringUtils.getSortedStringData(temp);
         for (int i = 0; i < strs.length; i++) {
             System.out.println(strs[i]);

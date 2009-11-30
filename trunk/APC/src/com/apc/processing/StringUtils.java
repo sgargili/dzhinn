@@ -24,23 +24,27 @@ public class StringUtils {
         String[] outputData = null;
         int a, b;
         String tempStringData;
-
-        outputData = inputString //
+        inputString = inputString//
                 .replaceAll("\\d", "") //
-                .replaceAll("^\\s+", "") //
                 .replaceAll("\\s+", " ") //
-                .split("\\s");
-
-        for (a = 0; a < outputData.length - 1; ++a) {
-            for (b = 0; b < outputData.length - 1; ++b) {
-                if (outputData[b].compareTo(outputData[b + 1]) > 0) {
-                    tempStringData = outputData[b];
-                    outputData[b] = outputData[b + 1];
-                    outputData[b + 1] = tempStringData;
+                .trim();//
+        if (!inputString.equals("")) {
+            outputData = inputString.split("\\s");
+            for (a = 0; a < outputData.length - 1; ++a) {
+                for (b = 0; b < outputData.length - 1; ++b) {
+                    if (outputData[b].compareTo(outputData[b + 1]) > 0) {
+                        tempStringData = outputData[b];
+                        outputData[b] = outputData[b + 1];
+                        outputData[b + 1] = tempStringData;
+                    }
                 }
             }
+            return outputData;
+        } else {
+            outputData = new String[1];
+            outputData[0] = "";
+            return outputData;
         }
-        return outputData;
     }
 
     public long[] getSortedNumData(String inputString) {
@@ -49,39 +53,44 @@ public class StringUtils {
         String[] tempData = null;
         long tempNumData;
         boolean doMore = true;
-
-        tempData = inputString //
+        inputString = inputString //
                 .replaceAll("[^0-9\\s]", "") //
-                .replaceAll("^\\s+", "") //
                 .replaceAll("\\s+", " ") //
-                .split("\\s");
-
-        outputData = new long[tempData.length];
-
-        for (int i = 0; i < tempData.length; i++) {
-            try {
-                if (tempData[i].length() > 19) {
-                    outputData[i] = Long.parseLong(tempData[i].substring(0, 19));
-                } else {
-                    outputData[i] = Long.parseLong(tempData[i]);
-                }
-            } catch (NumberFormatException ex) {
-                ex.printStackTrace();
+                .trim();
+        if (!inputString.equals("")) {
+            tempData = inputString.split("\\s");
+            outputData = new long[tempData.length];
+            for (int i = 0; i < outputData.length; i++) {
+                System.out.println(outputData[i]);
             }
-        }
-
-        while (doMore) {
-            doMore = false;
-            for (int i = 0; i < outputData.length - 1; i++) {
-                if (outputData[i] > outputData[i + 1]) {
-                    tempNumData = outputData[i];
-                    outputData[i] = outputData[i + 1];
-                    outputData[i + 1] = tempNumData;
-                    doMore = true;
+            for (int i = 0; i < tempData.length; i++) {
+                try {
+                    if (tempData[i].length() > 19) {
+                        outputData[i] = Long.parseLong(tempData[i].substring(0, 19));
+                    } else if (!tempData[i].equals("")) {
+                        outputData[i] = Long.parseLong(tempData[i]);
+                    }
+                } catch (NumberFormatException ex) {
+                    ex.printStackTrace();
                 }
             }
-        }
 
-        return outputData;
+            while (doMore) {
+                doMore = false;
+                for (int i = 0; i < outputData.length - 1; i++) {
+                    if (outputData[i] > outputData[i + 1]) {
+                        tempNumData = outputData[i];
+                        outputData[i] = outputData[i + 1];
+                        outputData[i + 1] = tempNumData;
+                        doMore = true;
+                    }
+                }
+            }
+            return outputData;
+        } else {
+            outputData = new long[1];
+            outputData[0] = -1;
+            return outputData;
+        }
     }
 }
