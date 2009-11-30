@@ -17,7 +17,7 @@ public class FileCache {
 
     private static final String FILE_NAME = "cache.data";
     private static FileCache instance = null;
-    private static Properties prop = new Properties();
+    private static Properties data = new Properties();
     private static FileOutputStream out;
 
     public static FileCache getInstance() {
@@ -25,7 +25,7 @@ public class FileCache {
             instance = new FileCache();
         }
         try {
-            prop.load(new FileInputStream(FILE_NAME));
+            data.load(new FileInputStream(FILE_NAME));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class FileCache {
     }
 
     public boolean containsInFile(String key) {
-        if (prop.getProperty(key) == null) {
+        if (data.getProperty(key) == null) {
             return false;
         } else {
             return true;
@@ -41,10 +41,13 @@ public class FileCache {
     }
 
     public void putInFile(String key, String value) {
-        prop.put(key, value);
+        if (data.size() > 1000) {
+            clearAllFromFile();
+        }
+        data.put(key, value);
         try {
             out = new FileOutputStream(FILE_NAME);
-            prop.store(out, null);
+            data.store(out, null);
             out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -52,14 +55,14 @@ public class FileCache {
     }
 
     public String getFromFile(String key) {
-        return prop.getProperty(key);
+        return data.getProperty(key);
     }
 
     public void clearFromFile(String key) {
-        prop.remove(key);
+        data.remove(key);
         try {
             out = new FileOutputStream(FILE_NAME);
-            prop.store(out, null);
+            data.store(out, null);
             out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -67,10 +70,10 @@ public class FileCache {
     }
 
     public void clearAllFromFile() {
-        prop.clear();
+        data.clear();
         try {
             out = new FileOutputStream(FILE_NAME);
-            prop.store(out, null);
+            data.store(out, null);
             out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
