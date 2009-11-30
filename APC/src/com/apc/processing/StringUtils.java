@@ -60,9 +60,6 @@ public class StringUtils {
         if (!inputString.equals("")) {
             tempData = inputString.split("\\s");
             outputData = new long[tempData.length];
-            for (int i = 0; i < outputData.length; i++) {
-                System.out.println(outputData[i]);
-            }
             for (int i = 0; i < tempData.length; i++) {
                 try {
                     if (tempData[i].length() > 19) {
