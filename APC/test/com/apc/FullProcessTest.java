@@ -24,7 +24,7 @@ public class FullProcessTest {
      * Test of main method, of class Test.
      */
     @Test
-    public void testMain() {
+    public void testFullProcess() {
         System.out.println("Testing All Process... ---> ");
         FileCache fileCache = FileCache.getInstance();
         MemoryCache memoryCache = MemoryCache.getInstance();
