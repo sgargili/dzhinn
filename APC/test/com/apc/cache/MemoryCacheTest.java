@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Admin4DB2
+ * @author APopov
  */
 public class MemoryCacheTest {
 
