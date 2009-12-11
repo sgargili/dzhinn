@@ -21,12 +21,12 @@ import java.util.Locale;
 public class BusinessPlan {
 
     private static final String[] titles = {
-        "Article/Rival",
-        "Description",
-        "Price",
-        "Delivery",
-        "Link",
-        "Average Price by Rivals",
+        "Артикль/Конкурент",
+        "Описание",
+        "Цена",
+        "Доставка по Москве",
+        "Ссылка",
+        "Средняя цена по конкурентам",
         "%"};
 
     private static double format(double num, int col) {
@@ -82,9 +82,9 @@ public class BusinessPlan {
         Cell cell;
         int rownum = 1;
         double temp = 0;
-
+        boolean chet = false;
         for (int k = 0; k < artList.size(); k++) {
-
+            chet = k % 2 == 0 ? true : false;
             art = (Articles) artList.get(k);
             rdList = (List) FactoryDAO.getInstance().getRivalsDataDAO().getAllRivalsDataByArticleId(art.getId());
             row = sheet.createRow(rownum);
@@ -95,35 +95,45 @@ public class BusinessPlan {
                 boolean isHeader = true;
                 switch (j) {
                     case 0:
-                        if (isHeader) {
-                            styleName = "cell_b";
+                        if (isHeader && chet) {
+                            styleName = "grey_1_header";
                             cell.setCellValue(art.getArticle());
                         } else {
-                            styleName = "cell_normal";
+                            styleName = "grey_2_header";
                             cell.setCellValue(art.getArticle());
                         }
                         break;
                     case 1:
-                        if (isHeader) {
-                            styleName = "cell_bb";
+                        if (isHeader && chet) {
+                            styleName = "grey_1_header";
                         } else {
-                            styleName = "cell_indented";
+                            styleName = "grey_2_header";
                         }
                         cell.setCellValue(art.getDescription());
                         break;
                     case 2:
-                        styleName = isHeader ? "price_blue" : "cell_normal";
+                        if (isHeader && chet) {
+                            styleName = "price_blue";
+                        } else {
+                            styleName = "price_blue_2";
+                        }
                         cell.setCellValue(art.getPrice());
                         break;
                     case 3:
-                        styleName = isHeader ? "cell_g" : "cell_normal_centered";
+                        if (isHeader && chet) {
+                            styleName = "grey_1_header";
+                        } else {
+                            styleName = "grey_2_header";
+                        }
                         cell.setCellValue("");
                         break;
                     case 4: {
-                        // calendar.setTime(fmt.parse(data[i][j]));
-//                        calendar.set(Calendar.YEAR, year);
+                        if (isHeader && chet) {
+                            styleName = "grey_1_header";
+                        } else {
+                            styleName = "grey_2_header";
+                        }
                         cell.setCellValue("");
-                        styleName = isHeader ? "cell_g" : "cell_normal_date";
                         break;
                     }
                     case 5: {
@@ -164,14 +174,14 @@ public class BusinessPlan {
                     boolean isHeader = false;
                     switch (j) {
                         case 0:
-                            if (isHeader) {
-                                styleName = "cell_b";
+                            if (!isHeader && chet) {
+                                styleName = "grey_1_art";
                                 cell.setCellValue(FactoryDAO.getInstance().getRivalsDAO().getRivalsById(rivalData.getId().getRivalId()) +
                                         " (" +
                                         art.getArticle() +
                                         ")");
                             } else {
-                                styleName = "cell_normal";
+                                styleName = "grey_2_art";
                                 cell.setCellValue(FactoryDAO.getInstance().getRivalsDAO().getRivalsById(rivalData.getId().getRivalId()) +
                                         " (" +
                                         art.getArticle() +
@@ -179,28 +189,44 @@ public class BusinessPlan {
                             }
                             break;
                         case 1:
-                            if (isHeader) {
-                                styleName = i == 0 ? "cell_h" : "cell_bb";
+                            if (!isHeader && chet) {
+                                styleName = "grey_1_art";
                             } else {
-                                styleName = "cell_indented";
+                                styleName = "grey_2_art";
                             }
                             cell.setCellValue(rivalData.getRivalDescription());
                             break;
                         case 2:
-                            styleName = isHeader ? "price_blue" : "price_blue";
+                            if (!isHeader && chet) {
+                                styleName = "price_blue";
+                            } else {
+                                styleName = "price_blue_2";
+                            }
                             cell.setCellValue(rivalData.getRivalPrice());
                             break;
                         case 3:
-                            styleName = isHeader ? "cell_b_centered" : "cell_normal_centered";
+                            if (!isHeader && chet) {
+                                styleName = "grey_1";
+                            } else {
+                                styleName = "grey_2";
+                            }
                             cell.setCellValue(rivalData.getRivalDelivery());
                             break;
                         case 4: {
+                            if (!isHeader && chet) {
+                                styleName = "grey_1_art";
+                            } else {
+                                styleName = "grey_2_art";
+                            }
                             cell.setCellValue(rivalData.getRivalLink());
-                            styleName = isHeader ? "cell_b_date" : "cell_normal_date";
                             break;
                         }
                         case 5: {
-                            styleName = isHeader ? "cell_bg" : "cell_g";
+                            if (!isHeader && chet) {
+                                styleName = "grey_1";
+                            } else {
+                                styleName = "grey_2";
+                            }
                             break;
                         }
                         case 6: {
@@ -243,7 +269,7 @@ public class BusinessPlan {
         sheet.setColumnWidth(2, 256 * 10);
         sheet.setColumnWidth(3, 256 * 30);
         sheet.setColumnWidth(4, 256 * 20);
-        sheet.setColumnWidth(5, 256 * 22);
+        sheet.setColumnWidth(5, 256 * 30);
         sheet.setColumnWidth(6, 256 * 12);
 
         sheet.setZoom(3, 4);
@@ -284,6 +310,54 @@ public class BusinessPlan {
         style.setFont(headerFont);
         styles.put("percents_red", style);
 
+        Font headerFontBlack = wb.createFont();
+        headerFontBlack.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        headerFontBlack.setFontHeightInPoints((short) 12);
+        headerFontBlack.setColor(IndexedColors.BLACK.getIndex());
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFont(headerFontBlack);
+        styles.put("grey_1_header", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        //style.setWrapText(true);
+        // style.setFont(headerFont);
+        styles.put("grey_1_art", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        // style.setFont(headerFont);
+        styles.put("grey_1", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFont(headerFontBlack);
+        styles.put("grey_2_header", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        // style.setFont(headerFont);
+        //style.setWrapText(true);
+        styles.put("grey_2_art", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        //style.setFont(headerFont);
+        styles.put("grey_2", style);
+
         style = createBorderedStyle(wb);
         style.setAlignment(CellStyle.ALIGN_CENTER);
         style.setFillForegroundColor(IndexedColors.ORANGE.getIndex());
@@ -293,10 +367,17 @@ public class BusinessPlan {
 
         style = createBorderedStyle(wb);
         style.setAlignment(CellStyle.ALIGN_CENTER);
-        style.setFillForegroundColor(IndexedColors.BLUE_GREY.getIndex());
+        style.setFillForegroundColor(IndexedColors.ROYAL_BLUE.getIndex());
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setFont(headerFont);
         styles.put("price_blue", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_CENTER);
+        style.setFillForegroundColor(IndexedColors.BLUE_GREY.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        style.setFont(headerFont);
+        styles.put("price_blue_2", style);
 
         style = createBorderedStyle(wb);
         style.setAlignment(CellStyle.ALIGN_CENTER);

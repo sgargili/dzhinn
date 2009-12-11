@@ -46,7 +46,7 @@ public class newTestHTML {
         Rivalsdata rivalData;
         Rivals rival = null;
         RivalsdataId rId;
-        String src = "C:\\TS8GJFV90P2.html";
+        String src = "C:\\TS8GJFV90P3.html";
         String dst = "C:\\new.xhtml";
         OutputStream os = new FileOutputStream(dst);
         XMLReader r = new Parser();
@@ -81,7 +81,7 @@ public class newTestHTML {
         XmlPullParser xpp = factory.newPullParser();
         File xml = new File(dst);
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), theOutputEncoding));
-        boolean bool = false, bool2 = false, bool3 = false, bool4 = false;
+        boolean bool = false, bool2 = false, bool3 = false, bool4 = false, bool5 = false;
         Double rivalPrice = 0.0;
         String rivalDelivery = "";
         String rivalDescription = "";
@@ -116,6 +116,10 @@ public class newTestHTML {
                     (xpp.getAttributeValue(0).equals("b-offers__delivery"))) {
                 bool4 = true;
             }
+            if (eventType == XmlPullParser.START_TAG &&
+                    xpp.getName().equals("b") && bool4) {
+                bool5 = true;
+            }
             if (eventType == XmlPullParser.TEXT && bool) {
                 System.out.print(" - ");
                 System.out.print(xpp.getText().replaceAll(" ", ""));
@@ -130,7 +134,8 @@ public class newTestHTML {
                 rivalName = xpp.getText();
                 System.out.print(" - " + xpp.getText());
             }
-            if (eventType == XmlPullParser.TEXT && bool4 && i == 2) {
+//            if (eventType == XmlPullParser.TEXT && bool4 && i == 1) {
+            if (eventType == XmlPullParser.TEXT && bool5) {
                 System.out.print(" - " + xpp.getText());
                 rivalDelivery = xpp.getText();
                 System.out.println(" - " + rivalLink);
@@ -145,8 +150,11 @@ public class newTestHTML {
             if (eventType == XmlPullParser.END_TAG && (bool3) && xpp.getName().equals("a")) {
                 bool3 = false;
             }
+            if (eventType == XmlPullParser.END_TAG && (bool5) && xpp.getName().equals("b")) {
+                bool5 = false;
+            }
             if (eventType == XmlPullParser.END_TAG && (bool4) && xpp.getName().equals("span")) {
-                if (i++ == 3) {
+                if (i++ == 2) {
                     bool4 = false;
                     i = 0;
                     if (fc.getRivalsDAO().isRivalsPresent(rivalName)) {
