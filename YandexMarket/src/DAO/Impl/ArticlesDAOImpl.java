@@ -76,6 +76,7 @@ public class ArticlesDAOImpl implements ArticlesDAO {
         return out;
     }
 
+    @Override
     public long getIdByArticle(String article) throws SQLException {
         Session session = null;
         List<Articles> result = null;
