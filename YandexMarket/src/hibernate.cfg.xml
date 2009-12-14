@@ -9,7 +9,7 @@
     <property name="hibernate.connection.password">Pass4root</property>
     <property name="hibernate.connection.characterEncoding">UTF-8</property>
     <property name="hibernate.current_session_context_class">thread</property>
-    <property name="hibernate.show_sql">true</property>
+    <!--<property name="hibernate.show_sql">true</property>-->
     <mapping resource="Pojo/Articles.hbm.xml"/>
     <mapping resource="Pojo/Rivals.hbm.xml"/>
     <mapping resource="Pojo/Rivalsdata.hbm.xml"/>
