@@ -16,6 +16,8 @@ public interface It4articlesDAO {
 
     public void addIt4articles(It4articles it4articles) throws SQLException;
 
+    public void fillIt4articles(String fileName) throws SQLException;
+
     public Collection getAllIt4articles() throws SQLException;
 
     public String getIt4articleById(long id) throws SQLException;

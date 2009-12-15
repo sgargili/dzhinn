@@ -89,12 +89,13 @@ public class It4articlesDAOImpl implements It4articlesDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from It4articles a where it4article = :art")//
-                    .setString("art", it4article);
+                    "from It4articles a where it4article = :it4article")//
+                    .setString("it4article", it4article);
             result = getByLogin.list();
             out = result.get(0).getId();
         } catch (Exception e) {
-            out = 0L;
+            System.out.println(e);
+            out = 5L;
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -113,9 +114,10 @@ public class It4articlesDAOImpl implements It4articlesDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from It4articles a where it4article = :art")//
-                    .setString("art", it4article);
+                    "from It4articles a where it4article = :it4article")//
+                    .setString("it4article", it4article);
             result = getByLogin.list();
+            System.out.println(result.size());
             out = result.isEmpty() ? false : true;
         } catch (RuntimeException e) {
             out = false;
@@ -125,5 +127,29 @@ public class It4articlesDAOImpl implements It4articlesDAO {
             }
         }
         return out;
+    }
+
+    @Override
+    public void fillIt4articles(String fileName) throws SQLException {
+        Session session = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createSQLQuery(
+                    "load data local infile '" + fileName + "' "
+                    + "into table it4articles "
+                    + "fields terminated by ',' "
+                    + "lines terminated by '\n' "
+                    + "(it4article)");
+            getByLogin.executeUpdate();
+            session.getTransaction().commit();
+            // getByLogin.
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
     }
 }

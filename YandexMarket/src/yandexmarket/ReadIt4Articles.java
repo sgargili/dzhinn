@@ -20,16 +20,19 @@ public class ReadIt4Articles {
 
     public static void main(String[] args) throws FileNotFoundException, IOException, SQLException {
         FactoryDAO fd = FactoryDAO.getInstance();
-        CsvReader reader = new CsvReader("c://It4Articles.csv", ',', Charset.forName("UTF-8"));
-        reader.readHeaders();
-        int i = 1;
-        It4articles it;
-        while (reader.readRecord()) {
-            System.out.println(i++);
-            it = new It4articles();
-            it.setIt4article(reader.get(0));
-            fd.getIt4articlesDAO().addIt4articles(it);
-        }
+//        CsvReader reader = new CsvReader("c://It4Articles.csv", ',', Charset.forName("UTF-8"));
+//        reader.readHeaders();
+//        int i = 1;
+//        It4articles it;
+//        while (reader.readRecord()) {
+//          //  System.out.println(i++);
+//            it = new It4articles();
+//            it.setIt4article(reader.get(0));
+//            fd.getIt4articlesDAO().addIt4articles(it);
+//        }
+       // fd.getIt4articlesDAO().fillIt4articles("c:/it4articles.csv");
+        System.out.println(fd.getIt4articlesDAO().getIdByIt4article("222"));
+    System.out.println(fd.getIt4articlesDAO().isIt4articlePresent("222"));
     }
 }
 
