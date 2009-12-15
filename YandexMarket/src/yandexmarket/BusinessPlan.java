@@ -3,6 +3,7 @@ package yandexmarket;
 import DAO.FactoryDAO;
 import Pojo.Articles;
 import Pojo.Rivalsdata;
+import Pojo.RivalsdataId;
 import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,7 +33,11 @@ public class BusinessPlan {
     private static double format(double num, int col) {
         NumberFormat aFormat = NumberFormat.getNumberInstance(Locale.UK);
         aFormat.setMaximumFractionDigits(col);
-        return Double.parseDouble(aFormat.format(num));
+        try {
+            return Double.parseDouble(aFormat.format(num));
+        } catch (Exception ex) {
+            return 0.0;
+        }
     }
 
     @SuppressWarnings("static-access")
@@ -76,17 +81,19 @@ public class BusinessPlan {
         sheet.createFreezePane(0, 1);
         List rdList;
         List artList = (List) FactoryDAO.getInstance().getArticlesDAO().getAllArticles();
+        RivalsdataId rId;
         Rivalsdata rivalData;
         Articles art;
         Row row;
         Cell cell;
         int rownum = 1;
         double temp = 0;
-        boolean chet = false;
+        boolean chet = false, minPrice = false;
         for (int k = 0; k < artList.size(); k++) {
             chet = k % 2 == 0 ? true : false;
             art = (Articles) artList.get(k);
             rdList = (List) FactoryDAO.getInstance().getRivalsDataDAO().getAllRivalsDataByArticleId(art.getId());
+            rId = FactoryDAO.getInstance().getRivalsDataDAO().getId4MinimumPriceByArticleId(art.getId());
             row = sheet.createRow(rownum);
 
             for (int j = 0; j < 7; j++) {
@@ -162,10 +169,11 @@ public class BusinessPlan {
 
                 cell.setCellStyle(styles.get(styleName));
             }
+
             for (int i = 0; i < rdList.size(); i++) {
 
                 rivalData = (Rivalsdata) rdList.get(i);
-
+                minPrice = rivalData.getId().equals(rId) ? true : false;
                 row = sheet.createRow(rownum + i + 1);
 
                 for (int j = 0; j < 7; j++) {
@@ -174,12 +182,19 @@ public class BusinessPlan {
                     boolean isHeader = false;
                     switch (j) {
                         case 0:
-                            if (!isHeader && chet) {
+                            if (minPrice) {
+                                styleName = "min_price";
+                                cell.setCellValue(FactoryDAO.getInstance().getRivalsDAO().getRivalsById(rivalData.getId().getRivalId()) +
+                                        " (" +
+                                        art.getArticle() +
+                                        ")");
+                            } else if (!isHeader && chet) {
                                 styleName = "grey_1_art";
                                 cell.setCellValue(FactoryDAO.getInstance().getRivalsDAO().getRivalsById(rivalData.getId().getRivalId()) +
                                         " (" +
                                         art.getArticle() +
                                         ")");
+                                //cell.setCellComment(comment);
                             } else {
                                 styleName = "grey_2_art";
                                 cell.setCellValue(FactoryDAO.getInstance().getRivalsDAO().getRivalsById(rivalData.getId().getRivalId()) +
@@ -189,7 +204,9 @@ public class BusinessPlan {
                             }
                             break;
                         case 1:
-                            if (!isHeader && chet) {
+                            if (minPrice) {
+                                styleName = "min_price";
+                            } else if (!isHeader && chet) {
                                 styleName = "grey_1_art";
                             } else {
                                 styleName = "grey_2_art";
@@ -205,7 +222,9 @@ public class BusinessPlan {
                             cell.setCellValue(rivalData.getRivalPrice());
                             break;
                         case 3:
-                            if (!isHeader && chet) {
+                            if (minPrice) {
+                                styleName = "min_price";
+                            } else if (!isHeader && chet) {
                                 styleName = "grey_1";
                             } else {
                                 styleName = "grey_2";
@@ -213,7 +232,9 @@ public class BusinessPlan {
                             cell.setCellValue(rivalData.getRivalDelivery());
                             break;
                         case 4: {
-                            if (!isHeader && chet) {
+                            if (minPrice) {
+                                styleName = "min_price";
+                            } else if (!isHeader && chet) {
                                 styleName = "grey_1_art";
                             } else {
                                 styleName = "grey_2_art";
@@ -222,7 +243,9 @@ public class BusinessPlan {
                             break;
                         }
                         case 5: {
-                            if (!isHeader && chet) {
+                            if (minPrice) {
+                                styleName = "min_price";
+                            } else if (!isHeader && chet) {
                                 styleName = "grey_1";
                             } else {
                                 styleName = "grey_2";
@@ -315,7 +338,7 @@ public class BusinessPlan {
         headerFontBlack.setFontHeightInPoints((short) 12);
         headerFontBlack.setColor(IndexedColors.BLACK.getIndex());
         style = createBorderedStyle(wb);
-        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setAlignment(CellStyle.ALIGN_LEFT);
         style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setFont(headerFontBlack);
@@ -337,7 +360,7 @@ public class BusinessPlan {
         styles.put("grey_1", style);
 
         style = createBorderedStyle(wb);
-        style.setAlignment(CellStyle.ALIGN_FILL);
+        style.setAlignment(CellStyle.ALIGN_LEFT);
         style.setFillForegroundColor(IndexedColors.WHITE.getIndex());
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setFont(headerFontBlack);
@@ -385,6 +408,13 @@ public class BusinessPlan {
         style.setFillPattern(CellStyle.SOLID_FOREGROUND);
         style.setFont(headerFont);
         styles.put("percents_green", style);
+
+        style = createBorderedStyle(wb);
+        style.setAlignment(CellStyle.ALIGN_LEFT);
+        style.setFillForegroundColor(IndexedColors.SKY_BLUE.getIndex());
+        style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+        // style.setFont(headerFont);
+        styles.put("min_price", style);
 
         style = createBorderedStyle(wb);
         style.setAlignment(CellStyle.ALIGN_CENTER);

@@ -48,6 +48,11 @@ public class RivalsdataId implements java.io.Serializable {
         return (this.getRivalId() == castOther.getRivalId()) && (this.getArticleId() == castOther.getArticleId());
     }
 
+    @Override
+    public String toString() {
+        return "Id Поставщика -> " + this.getRivalId() + " Id Артикля -> " + this.getArticleId();
+    }
+
     public int hashCode() {
         int result = 17;
 

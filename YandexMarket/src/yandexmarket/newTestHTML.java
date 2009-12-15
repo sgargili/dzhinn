@@ -46,7 +46,7 @@ public class newTestHTML {
         Rivalsdata rivalData;
         Rivals rival = null;
         RivalsdataId rId;
-        String src = "C:\\TS8GJFV90P3.html";
+        String src = "C:\\PSLS3E-01H00XRU.htm";
         String dst = "C:\\new.xhtml";
         OutputStream os = new FileOutputStream(dst);
         XMLReader r = new Parser();
@@ -63,7 +63,7 @@ public class newTestHTML {
         File fl;
         File flN = new File(src);
         IpChange ip = new IpChange();
-        Pattern p = Pattern.compile("TS8GJFV90P");
+        Pattern p = Pattern.compile("PSLS3E-01H00XRU");
         Matcher m;
         while (true) {
             //fl = ht.DownloadContentAsFile("http://market.yandex.ru/search.xml?text=iphone&nopreciser=1");
@@ -72,7 +72,7 @@ public class newTestHTML {
                 break;
             }
             ip.setChange();
-            System.out.println("ֽמגûי Ip...");
+            System.out.println("????? Ip...");
         }
         //File fltest = new File(src);
         r.parse(flN.toURI().toString());
@@ -122,8 +122,8 @@ public class newTestHTML {
             }
             if (eventType == XmlPullParser.TEXT && bool) {
                 System.out.print(" - ");
-                System.out.print(xpp.getText().replaceAll(" ", ""));
-                rivalPrice = Double.parseDouble(xpp.getText().replaceAll(" ", ""));
+                System.out.print(xpp.getText().replaceAll("\\s", ""));
+                rivalPrice = Double.parseDouble(xpp.getText().replaceAll("[^\\d]", ""));
                 FileUtils.writeStringToFile(new File("C://posm.txt"), xpp.getText());
             }
             if (eventType == XmlPullParser.TEXT && bool2) {
@@ -158,11 +158,11 @@ public class newTestHTML {
                     bool4 = false;
                     i = 0;
                     if (fc.getRivalsDAO().isRivalsPresent(rivalName)) {
-                        rId = new RivalsdataId(fc.getRivalsDAO().getIdByRivals(rivalName), fc.getArticlesDAO().getIdByArticle("TS8GJFV90P"));
+                        rId = new RivalsdataId(fc.getRivalsDAO().getIdByRivals(rivalName), fc.getArticlesDAO().getIdByArticle("PSLS3E-01H00XRU"));
                     } else {
                         rival = new Rivals(rivalName);
                         fc.getRivalsDAO().addRivals(rival);
-                        rId = new RivalsdataId(fc.getRivalsDAO().getIdByRivals(rivalName), fc.getArticlesDAO().getIdByArticle("TS8GJFV90P"));
+                        rId = new RivalsdataId(fc.getRivalsDAO().getIdByRivals(rivalName), fc.getArticlesDAO().getIdByArticle("PSLS3E-01H00XRU"));
                     }
                     rivalData = new Rivalsdata();
                     rivalData.setId(rId);

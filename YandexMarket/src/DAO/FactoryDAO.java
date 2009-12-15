@@ -5,6 +5,7 @@
 package DAO;
 
 import DAO.Impl.ArticlesDAOImpl;
+import DAO.Impl.It4articlesDAOImpl;
 import DAO.Impl.RivalsDAOImpl;
 import DAO.Impl.RivalsdataDAOImpl;
 
@@ -17,6 +18,7 @@ public class FactoryDAO {
     private ArticlesDAO articlesDAO = null;
     private RivalsDAO rivalsDAO = null;
     private RivalsdataDAO rivalsDataDAO = null;
+    private It4articlesDAO it4articlesDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -45,5 +47,12 @@ public class FactoryDAO {
             rivalsDAO = new RivalsDAOImpl();
         }
         return rivalsDAO;
+    }
+
+    public It4articlesDAO getIt4articlesDAO() {
+        if (it4articlesDAO == null) {
+            it4articlesDAO = new It4articlesDAOImpl();
+        }
+        return it4articlesDAO;
     }
 }
