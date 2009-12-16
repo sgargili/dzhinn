@@ -117,7 +117,6 @@ public class It4articlesDAOImpl implements It4articlesDAO {
                     "from It4articles a where it4article = :it4article")//
                     .setString("it4article", it4article);
             result = getByLogin.list();
-            System.out.println(result.size());
             out = result.isEmpty() ? false : true;
         } catch (RuntimeException e) {
             out = false;
@@ -139,12 +138,11 @@ public class It4articlesDAOImpl implements It4articlesDAO {
                     session.createSQLQuery(
                     "load data local infile '" + fileName + "' "
                     + "into table it4articles "
-                    + "fields terminated by ',' "
-                    + "lines terminated by '\n' "
-                    + "(it4article)");
+                    + "fields terminated by ';' "
+                    + "lines terminated by '\r\n' "
+                    + "(it4article, description)");
             getByLogin.executeUpdate();
             session.getTransaction().commit();
-            // getByLogin.
         } catch (RuntimeException e) {
         } finally {
             if (session != null && session.isOpen()) {

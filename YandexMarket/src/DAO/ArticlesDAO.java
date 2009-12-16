@@ -16,6 +16,8 @@ public interface ArticlesDAO {
 
     public void addArticles(Articles articles) throws SQLException;
 
+    public void fillArticles(String fileName) throws SQLException;
+
     public Collection getAllArticles() throws SQLException;
 
     public String getArticleById(long id) throws SQLException;

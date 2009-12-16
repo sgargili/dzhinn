@@ -122,4 +122,27 @@ public class ArticlesDAOImpl implements ArticlesDAO {
         }
         return out;
     }
+
+    @Override
+    public void fillArticles(String fileName) throws SQLException {
+        Session session = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createSQLQuery(
+                    "load data local infile '" + fileName + "' "
+                    + "into table articles "
+                    + "fields terminated by ',' "
+                    + "lines terminated by '\r\n' "
+                    + "(article, description)");
+            getByLogin.executeUpdate();
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
 }

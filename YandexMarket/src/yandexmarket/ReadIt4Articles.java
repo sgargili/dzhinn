@@ -30,9 +30,9 @@ public class ReadIt4Articles {
 //            it.setIt4article(reader.get(0));
 //            fd.getIt4articlesDAO().addIt4articles(it);
 //        }
-       // fd.getIt4articlesDAO().fillIt4articles("c:/it4articles.csv");
-        System.out.println(fd.getIt4articlesDAO().getIdByIt4article("222"));
-    System.out.println(fd.getIt4articlesDAO().isIt4articlePresent("222"));
+        fd.getIt4articlesDAO().fillIt4articles("c:/pro.csv");
+        //System.out.println(fd.getIt4articlesDAO().getIdByIt4article("222"));
+        System.out.println(fd.getIt4articlesDAO().isIt4articlePresent("222"));
     }
 }
 
