@@ -136,11 +136,7 @@ public class It4articlesDAOImpl implements It4articlesDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createSQLQuery(
-                    "load data local infile '" + fileName + "' "
-                    + "into table it4articles "
-                    + "fields terminated by ';' "
-                    + "lines terminated by '\r\n' "
-                    + "(it4article, description)");
+                    "load data local infile '" + fileName + "' " + "into table it4articles " + "fields terminated by ';' " + "lines terminated by '\r\n' " + "(it4article, description)");
             getByLogin.executeUpdate();
             session.getTransaction().commit();
         } catch (RuntimeException e) {
@@ -149,5 +145,28 @@ public class It4articlesDAOImpl implements It4articlesDAO {
                 session.close();
             }
         }
+    }
+
+    @Override
+    public Collection getMatchedIt4articles() throws SQLException {
+        Session session = null;
+        List<It4articles> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        //String out = "";
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from It4articles a where keyarticle is not null");
+            result = getByLogin.list();
+            // out = result.get(0).getIt4article();
+        } catch (RuntimeException e) {
+            //out = "";
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return result;
     }
 }

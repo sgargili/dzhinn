@@ -43,6 +43,7 @@ public class ArticlesDAOImpl implements ArticlesDAO {
             Query getArticles =
                     session.createQuery(
                     "from Articles");
+            getArticles.setMaxResults(3);
             result = getArticles.list();
         } catch (RuntimeException e) {
         } finally {
@@ -131,11 +132,7 @@ public class ArticlesDAOImpl implements ArticlesDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createSQLQuery(
-                    "load data local infile '" + fileName + "' "
-                    + "into table articles "
-                    + "fields terminated by ',' "
-                    + "lines terminated by '\r\n' "
-                    + "(article, description)");
+                    "load data local infile '" + fileName + "' " + "into table articles " + "fields terminated by ',' " + "lines terminated by '\r\n' " + "(article, description)");
             getByLogin.executeUpdate();
             session.getTransaction().commit();
         } catch (RuntimeException e) {
@@ -144,5 +141,29 @@ public class ArticlesDAOImpl implements ArticlesDAO {
                 session.close();
             }
         }
+    }
+
+    @Override
+    public String getDescriptionByArticle(String article) throws SQLException {
+        Session session = null;
+        List<Articles> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        String out = "";
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Articles a where article = :art")//
+                    .setString("art", article);
+            result = getByLogin.list();
+            out = result.get(0).getDescription();
+        } catch (RuntimeException e) {
+            out = "";
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
     }
 }

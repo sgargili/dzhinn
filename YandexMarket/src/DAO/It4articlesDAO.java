@@ -20,6 +20,8 @@ public interface It4articlesDAO {
 
     public Collection getAllIt4articles() throws SQLException;
 
+    public Collection getMatchedIt4articles() throws SQLException;
+
     public String getIt4articleById(long id) throws SQLException;
 
     public long getIdByIt4article(String it4article) throws SQLException;

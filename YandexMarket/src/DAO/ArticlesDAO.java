@@ -22,6 +22,8 @@ public interface ArticlesDAO {
 
     public String getArticleById(long id) throws SQLException;
 
+    public String getDescriptionByArticle(String article) throws SQLException;
+
     public long getIdByArticle(String article) throws SQLException;
 
     public boolean isArticlePresent(String article) throws SQLException;

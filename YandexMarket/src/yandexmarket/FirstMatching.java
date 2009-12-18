@@ -31,20 +31,36 @@ public class FirstMatching {
         Matcher mat;
         Iterator profitIter;
         Iterator keyIter;
-        int i = 0, k = 0;
+        int i = 1, k = 1, j = 1;
         for (profitIter = profitList.iterator(); profitIter.hasNext();) {
+//            if (j++ < 131512) {
+//                k++;
+//                profit = (It4articles) profitIter.next();
+//                continue;
+//            }
             profit = (It4articles) profitIter.next();
             for (keyIter = keyList.iterator(); keyIter.hasNext();) {
-                key = (Articles) keyIter.next();
-                pat = Pattern.compile(profit.getIt4article());
-                mat = pat.matcher(key.getDescription());
-                if (mat.find()) {
-                    profit.setKeyarticle(key.getArticle());
-                    fd.getIt4articlesDAO().addIt4articles(profit);
-                    System.out.println(k + " Пройдено. Найдено - > " + i++);
-                    //System.out.println(profit.getIt4article() + " -> " + profit.getKeyarticle());
-                    keyList.remove(key);
-                    break;
+                try {
+                    key = (Articles) keyIter.next();
+                    pat = Pattern.compile(profit.getIt4article()//
+//                            .replaceAll("(", "[(]")//
+//                            .replaceAll(")", "[)]")//
+//                            .replaceAll("]", "\\]")//
+//                            .replaceAll("[", "\\[")//
+//                            .replaceAll("}", "[}]")//
+//                            .replaceAll("{", "[{]")//
+                            );
+                    mat = pat.matcher(key.getDescription());
+                    if (mat.find()) {
+                        profit.setKeyarticle(key.getArticle());
+                        fd.getIt4articlesDAO().addIt4articles(profit);
+                        System.out.println(k + " Пройдено. Найдено - > " + i++);
+                        //System.out.println(profit.getIt4article() + " -> " + profit.getKeyarticle());
+                        keyList.remove(key);
+                        break;
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex);
                 }
             }
             k++;

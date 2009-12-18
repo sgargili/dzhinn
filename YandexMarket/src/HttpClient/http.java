@@ -10,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -35,6 +36,32 @@ public class http {
             getMethod.releaseConnection();
         }
         return allString;
+    }
+
+    public void setCookie(String url) {
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            int getResult = client.executeMethod(getMethod);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+    }
+
+    public void setCookie(String url, boolean useProxy) {
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        if (useProxy) {
+            client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+        }
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            int getResult = client.executeMethod(getMethod);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
     }
 
     public String DownloadContentAsString(String url, String encoding) {
@@ -76,6 +103,7 @@ public class http {
     }
 
     public File DownloadContentAsFile(String url, boolean useProxy) {
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
@@ -84,7 +112,7 @@ public class http {
         GetMethod getMethod = new GetMethod(url);
         try {
             int getResult = client.executeMethod(getMethod);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "Windows-1251"));
             out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "UTF-8"));
 
             out.flush();
