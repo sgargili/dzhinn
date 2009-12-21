@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -43,12 +44,11 @@ public class YandexMarket4Key {
 
     public static void main(String[] arg) throws FileNotFoundException, UnsupportedEncodingException, IOException, SAXException, XmlPullParserException, SQLException {
         //String src = "C:\\hp.htm";
-        String dst = "C:\\new.xhtml";
-        OutputStream os = new FileOutputStream(dst);
-        XMLReader r = new Parser();
-        Writer w = new OutputStreamWriter(os, theOutputEncoding);
-        ContentHandler h = new XMLWriter(w);
-        r.setContentHandler(h);
+        String dst = "/root/new.xhtml";
+        OutputStream os = null;
+        XMLReader r;
+        Writer w = null;
+        ContentHandler h;
 
         http ht = new http();
         File fl;
@@ -68,12 +68,13 @@ public class YandexMarket4Key {
         int wordsCount = 1;
         String tempDesc = "";
         String yandexData = "";
-        Set<String> codes = new TreeSet<String>();
+        Set<String> codes;
         String code;
         String url;
         for (Iterator iter = articles.iterator(); iter.hasNext();) {
             Articles art = (Articles) iter.next();
             tempDesc = "";
+            codes = new TreeSet<String>();
             stringContent = art.getDescription().split("\\s");
             System.out.print(art.getDescription() + " -> ");
             System.out.print(wordsCount = stringContent.length);
@@ -112,9 +113,13 @@ public class YandexMarket4Key {
                 }
                 //File fltest = new File(src);
                 try {
-
+                    os = new FileOutputStream(dst);
+                    r = new Parser();
+                    w = new OutputStreamWriter(os, theOutputEncoding);
+                    h = new XMLWriter(w);
+                    r.setContentHandler(h);
                     r.parse(fl.toURI().toString());
-                    w.close();
+                    //w.close();
                     xml = new File(dst);
                     xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "WINDOWS-1251"));
                     boolean bool = false, pageBool = false;
@@ -166,25 +171,32 @@ public class YandexMarket4Key {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                xml.delete();
+//                xml.delete();
+                try {
+                    os.close();
+                    w.close();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
             try {
-                for (Iterator iter2 = codes.iterator(); iter2.hasNext();) {
-                    code = (String) iter2.next();
-                    if (fd.getIt4articlesDAO().isIt4articlePresent(code)) {
-                        mtch = new Matching();
-                        mtch.setKeyarticle(art.getArticle());
-                        mtch.setKeydesc(art.getDescription());
-                        mtch.setApparticle(code);
-                        codes.remove(code);
-                        for (Iterator iter3 = codes.iterator(); iter3.hasNext();) {
-                            yandexData += "|||" + (String) iter3.next();
-                        }
-                        mtch.setYadata(yandexData);
-                        fd.getMatchingDAO().addMatching(mtch);
-                        break;
-                    }
+//                for (Iterator iter2 = codes.iterator(); iter2.hasNext();) {
+//                    code = (String) iter2.next();
+//                    if (fd.getIt4articlesDAO().isIt4articlePresent(code)) {
+                yandexData = "";
+                mtch = new Matching();
+                mtch.setKeyarticle(art.getArticle());
+                mtch.setKeydesc(art.getDescription());
+//                        mtch.setApparticle(code);
+//                        codes.remove(code);
+                for (Iterator iter3 = codes.iterator(); iter3.hasNext();) {
+                    yandexData += "|||" + (String) iter3.next();
                 }
+                mtch.setYadata(URLDecoder.decode(yandexData, "UTF-8"));
+                fd.getMatchingDAO().addMatching(mtch);
+//                        break;
+//                    }
+//                }
             } catch (Exception ex) {
                 System.out.println(ex);
             }

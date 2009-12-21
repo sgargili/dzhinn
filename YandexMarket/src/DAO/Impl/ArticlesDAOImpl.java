@@ -34,6 +34,7 @@ public class ArticlesDAOImpl implements ArticlesDAO {
         }
     }
 
+    @Override
     public Collection getAllArticles() throws SQLException {
         Session session = null;
         List<Articles> result = null;
@@ -43,7 +44,8 @@ public class ArticlesDAOImpl implements ArticlesDAO {
             Query getArticles =
                     session.createQuery(
                     "from Articles");
-            getArticles.setMaxResults(3);
+            getArticles.setMaxResults(5);
+            getArticles.setFirstResult(189);
             result = getArticles.list();
         } catch (RuntimeException e) {
         } finally {
