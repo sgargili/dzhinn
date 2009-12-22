@@ -54,8 +54,10 @@ public class YandexMarket4Key {
         File fl;
         //File flN = new File(src);
         IpChange ip = new IpChange();
-        Pattern p = Pattern.compile("(Ограничение\\sдоступа)|(404 - Not Found)");
+        Pattern p = Pattern.compile("captcha.yandex.net");
         Matcher m;
+        Pattern p2 = Pattern.compile(".title.404");
+        Matcher m2;
         XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
         File xml = new File(dst);
@@ -71,6 +73,7 @@ public class YandexMarket4Key {
         Set<String> codes;
         String code;
         String url;
+        File temp;
         for (Iterator iter = articles.iterator(); iter.hasNext();) {
             Articles art = (Articles) iter.next();
             tempDesc = "";
@@ -79,8 +82,10 @@ public class YandexMarket4Key {
             System.out.print(art.getDescription() + " -> ");
             System.out.print(wordsCount = stringContent.length);
             if (wordsCount > 3) {
-                for (int wr = 0; wr < (wordsCount / 2) + 1; wr++) {
-                    tempDesc += " " + stringContent[wr];
+                for (int wr = 0; wr < (wordsCount / 2) + 2; wr++) {
+                    if (stringContent[wr].length() <= 16) {
+                        tempDesc += " " + stringContent[wr];
+                    }
                 }
             } else {
                 tempDesc = art.getDescription();
@@ -96,16 +101,29 @@ public class YandexMarket4Key {
                                 tempDesc//
                                 + "&nopreciser=1&page=" +//
                                 pageCounts;
-
+//Red_360x640/GSM/GPS/32G/microSD/WF/BT/Cam/
                         System.out.println(url);
-                        fl = ht.DownloadContentAsFile(url);
+                        fl = ht.DownloadContentAsFile(url, true);
                         m = p.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
                         //System.out.println(FileUtils.readFileToString(fl, theOutputEncoding));
-                        if (!m.find()) {
+//                        if (m.find()) {
+//                            System.out.println(m.group());
+//                        }
+                        //  temp = new File("/root/doc/");
+                        m2 = p2.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
+
+                        if (!m.find() & !m2.find()) {
+                            //temp = new File("/root/doc/" + art.getArticle() + ".xhtml");
+                            //FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
                             break;
                         }
+//                        if (!m2.find()) {
+//                            //temp = new File("/root/doc/" + art.getArticle() + ".xhtml");
+//                            //FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
+//                            break;
+//                        }
                         ip.setChange();
-                        System.out.println("Сменился Ip...");
+                        System.out.println("РЎРјРµРЅРёР»СЃСЏ Ip...");
 
                     } catch (Exception ex) {
                         System.out.println(ex);
@@ -124,7 +142,7 @@ public class YandexMarket4Key {
                     xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "WINDOWS-1251"));
                     boolean bool = false, pageBool = false;
                     int eventType = xpp.getEventType();
-                    p = Pattern.compile("Код.*теля:(.*)");
+                    p = Pattern.compile("РљРѕРґ.*С‚РµР»СЏ:(.*)");
                     while (eventType != XmlPullParser.END_DOCUMENT) {
                         if (eventType == XmlPullParser.START_TAG &&
                                 xpp.getName().equals("p") &&
@@ -141,17 +159,19 @@ public class YandexMarket4Key {
                         if (eventType == XmlPullParser.TEXT && bool) {
                             m = p.matcher(xpp.getText());
                             if (m.find()) {
-                                code = m.group(1).trim().replaceAll(" ", "");
+                                code = m.group(1).trim().replaceAll("в•ђ", "");
                                 codes.add(code);
+                                System.out.println(xpp.getText());
                             }
-                            System.out.println(xpp.getText());
+
                         }
                         if (eventType == XmlPullParser.TEXT && pageBool) {
-                            p = Pattern.compile("—\\s(\\d+)");
+                            p = Pattern.compile("в‰€\\s(\\d+)");
                             m = p.matcher(xpp.getText());
                             if (m.find()) {
                                 try {
-                                    pageCount = Integer.parseInt(m.group(1));
+                                    pageCount = (int) Math.round(Integer.parseInt(m.group(1)) / 10.0);
+                                    System.out.println(pageCount);
                                 } catch (Exception ex) {
                                     System.out.println(ex);
                                 }
