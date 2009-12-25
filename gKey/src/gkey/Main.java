@@ -89,7 +89,7 @@ public class Main {
 //                        codes.add(code);
 //                    }
                     tempString = xpp.getText();
-                    System.out.println(xpp.getText());
+                    System.out.println(xpp.getText()); 
                 }
 //                if (eventType == XmlPullParser.TEXT && pageBool) {
 //                    p = Pattern.compile("—\\s(\\d+)");
