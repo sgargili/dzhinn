@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.1.37-community
+-- Server version	5.5.0-m2-community
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -45,6 +45,46 @@ CREATE TABLE `keydata` (
 
 /*!40000 ALTER TABLE `keydata` DISABLE KEYS */;
 /*!40000 ALTER TABLE `keydata` ENABLE KEYS */;
+
+
+--
+-- Definition of table `keymarketing`
+--
+
+DROP TABLE IF EXISTS `keymarketing`;
+CREATE TABLE `keymarketing` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keyarticle` varchar(512) DEFAULT NULL,
+  `keymarketing` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `keymarketing`
+--
+
+/*!40000 ALTER TABLE `keymarketing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `keymarketing` ENABLE KEYS */;
+
+
+--
+-- Definition of table `keyprice`
+--
+
+DROP TABLE IF EXISTS `keyprice`;
+CREATE TABLE `keyprice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `keyarticle` varchar(512) DEFAULT NULL,
+  `keyprice` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `keyprice`
+--
+
+/*!40000 ALTER TABLE `keyprice` DISABLE KEYS */;
+/*!40000 ALTER TABLE `keyprice` ENABLE KEYS */;
 
 
 --

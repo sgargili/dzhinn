@@ -11,5 +11,7 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <mapping resource="pojo/Keydata.hbm.xml"/>
         <mapping resource="pojo/Matching.hbm.xml"/>
+        <mapping resource="pojo/Keyprice.hbm.xml"/>
+        <mapping resource="pojo/Keymarketing.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
