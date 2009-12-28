@@ -49,8 +49,8 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws XmlPullParserException {
-        String src = "C://key.html";
-        String dst = "C://new.xhtml";
+        //String src = "C://key.html";
+        String dst = "/root/new.xhtml";
         String fullName = "",
                 warranty = "",
                 manufacturer = "",
@@ -90,12 +90,12 @@ public class Main {
         Keywarranty kw;
         int j = 1;
         try {
-            for (int i = 12500; i < 12525; i++) {
+            for (int i = 480; i < 100000; i++) {
                 System.out.print("Продукт -> " + i);
                 if (j++ == 10) {
                     ip.setChange();
                     j = 1;
-                    System.out.println("Сменился IP...");
+                    System.out.print(" Сменился IP...");
                 }
                 fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true);
                 os = new FileOutputStream(dst);
