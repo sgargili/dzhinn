@@ -7,6 +7,7 @@ package dao;
 import dao.impl.KeyDataDAOImpl;
 import dao.impl.KeyMarketingDAOImpl;
 import dao.impl.KeyPriceDAOImpl;
+import dao.impl.KeyWarrantyDAOImpl;
 import dao.impl.MatchingDAOImpl;
 
 /**
@@ -19,6 +20,7 @@ public class FactoryDAO {
     private MatchingDAO matchingDAO = null;
     private KeyPriceDAO keyPrice = null;
     private KeyMarketingDAO keyMatching = null;
+    private KeyWarrantyDAO keyWarrantyDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -54,5 +56,12 @@ public class FactoryDAO {
             keyMatching = new KeyMarketingDAOImpl();
         }
         return keyMatching;
+    }
+
+    public KeyWarrantyDAO getKeyWarrantyDAO() {
+        if (keyWarrantyDAO == null) {
+            keyWarrantyDAO = new KeyWarrantyDAOImpl();
+        }
+        return keyWarrantyDAO;
     }
 }
