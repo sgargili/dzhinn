@@ -19,4 +19,6 @@ public interface KeyDataDAO {
     public List getAllKeydata(int firstResult, int maxResult) throws SQLException;
 
     public List getAllKeydata() throws SQLException;
+
+    public boolean isKeyArticlePresent(String article) throws SQLException;
 }

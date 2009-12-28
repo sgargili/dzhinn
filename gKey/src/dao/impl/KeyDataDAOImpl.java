@@ -72,4 +72,27 @@ public class KeyDataDAOImpl implements KeyDataDAO {
         }
         return result;
     }
+
+    public boolean isKeyArticlePresent(String article) throws SQLException {
+        Session session = null;
+        List<Keydata> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        boolean out = false;
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Keydata k where article = :art")//
+                    .setString("art", article);
+            result = getByLogin.list();
+            out = !result.isEmpty();
+        } catch (Exception e) {
+            out = false;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
+    }
 }

@@ -21,4 +21,6 @@ public interface KeyMarketingDAO {
     public List getAllKeydata() throws SQLException;
 
     public String getMarketingByArticle(String article) throws SQLException;
+
+    public boolean isMarketingPresent(String article) throws SQLException;
 }

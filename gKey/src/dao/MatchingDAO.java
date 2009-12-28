@@ -19,4 +19,6 @@ public interface MatchingDAO {
     public List getAllMatching() throws SQLException;
 
     public int getMatchingIdByArticle(String article) throws SQLException;
+
+    public boolean isMatchingPresent(String article) throws SQLException;
 }

@@ -21,4 +21,6 @@ public interface KeyPriceDAO {
     public List getKeyPrice() throws SQLException;
 
     public String getPriceByArticle(String article) throws SQLException;
+
+    public boolean isPricePresent(String article) throws SQLException;
 }

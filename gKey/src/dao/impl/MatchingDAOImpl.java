@@ -74,4 +74,27 @@ public class MatchingDAOImpl implements MatchingDAO {
         }
         return out;
     }
+
+    public boolean isMatchingPresent(String article) throws SQLException {
+        Session session = null;
+        List<Matching> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        boolean out = false;
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from Matching k where keyarticle = :art")//
+                    .setString("art", article);
+            result = getByLogin.list();
+            out = !result.isEmpty();
+        } catch (Exception e) {
+            out = false;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return out;
+    }
 }
