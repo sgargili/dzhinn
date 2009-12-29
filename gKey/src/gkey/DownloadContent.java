@@ -171,7 +171,7 @@ public class DownloadContent {
                         }
                     }
                     if (eventType == XmlPullParser.TEXT && valueBool) {
-                        value += xpp.getText();
+                        value += xpp.getText() + "; ";
                     }
 
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("div") && (fullNameBool)) {
