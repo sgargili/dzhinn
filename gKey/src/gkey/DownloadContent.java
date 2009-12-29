@@ -47,7 +47,7 @@ public class DownloadContent {
 
     public void load(String threadNum, int i) {
 
-        String dst = "/root/1.xhtml";
+        String dst = "/root/" + threadNum + ".xhtml";
         String fullName = "",
                 warranty = "",
                 manufacturer = "",
@@ -89,13 +89,13 @@ public class DownloadContent {
             //int j = 1;
             try {
                 // for (int i = 1500; i < 10000; i++) {
-                System.out.print("Поток 1 -> Продукт -> " + i);
-                if (bayan++ == 10) {
+                System.out.println("Поток " + threadNum + " -> Продукт -> " + i);
+                if (bayan++ == 17) {
                     ip.setChange();
                     bayan = 1;
-                    System.out.print(" Сменился IP...");
+                    System.out.println(" Сменился IP...");
                 }
-                fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true);
+                fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true, threadNum);
                 os = new FileOutputStream(dst);
                 r = new Parser();
                 w = new OutputStreamWriter(os, "UTF-8");
@@ -233,7 +233,7 @@ public class DownloadContent {
                     eventType = xpp.next();
                 }
                 fullName = "";
-                System.out.println(" -> Done.");
+                //System.out.println(" -> Done.");
                 // }
             } catch (Exception ex) {
                 ex.printStackTrace();

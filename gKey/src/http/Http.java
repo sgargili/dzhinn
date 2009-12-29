@@ -108,7 +108,31 @@ public class Http {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
         //String url = "Http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
-        File tempFile = new File("C://productsAll.xml");
+        File tempFile = new File("/root/productsAll.xml");
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            int getResult = client.executeMethod(getMethod);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
+            out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "WINDOWS-1251"));
+
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        return tempFile;
+    }
+
+    public File DownloadContentAsFile(String url, boolean useProxy, String tempFileName) {
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        if (useProxy) {
+            client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+        }
+        //String url = "Http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
+        File tempFile = new File("/root/" + tempFileName + ".xml");
         GetMethod getMethod = new GetMethod(url);
         try {
             int getResult = client.executeMethod(getMethod);
