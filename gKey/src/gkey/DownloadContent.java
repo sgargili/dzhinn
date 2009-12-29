@@ -83,7 +83,7 @@ public class DownloadContent {
         try {
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xpp = factory.newPullParser();
-            File xml = new File(dst);
+            File xml;
             FactoryDAO fd = FactoryDAO.getInstance();
             Matching mtch;
             Keydata kd;
@@ -255,6 +255,7 @@ public class DownloadContent {
                 fullName = "";
                 //System.out.println(" -> Done.");
                 // }
+                xml.delete();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -267,7 +268,5 @@ public class DownloadContent {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
-
     }
 }
