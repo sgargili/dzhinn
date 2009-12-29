@@ -1,0 +1,24 @@
+[{
+    text:'Экспорт',
+    children:[{
+        text:'Экспорт Value4IT',
+        id:'vExp',
+        leaf:true
+    }
+]
+//},{
+//    text:'Работа с ценами',
+//    children:[{
+//        text:'Яндекс маркет',
+//        id:'Yandex',
+//        leaf:true
+//    }
+//]
+},{
+    text:'Полезные функции',
+    children:[{
+        text:'XLS,CSV(Excel) -> CSV',
+        id:'eCsv',
+        leaf:true
+    }]
+}]
