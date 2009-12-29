@@ -33,6 +33,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.transform.TransformerException;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.FileUtils;
 import org.directwebremoting.Browser;
 import org.directwebremoting.ScriptSessions;
@@ -48,6 +51,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class XmlPro {
 
     http http = new http();
+    private HttpClient client = new HttpClient();
     private final LinkedList<Message> messages4Trees = new LinkedList<Message>();
     private final LinkedList<Message> messages4Products = new LinkedList<Message>();
     private static boolean checkTree = false, checkProducts = false;
@@ -58,6 +62,35 @@ public class XmlPro {
 
     public boolean checkProductsStatus() {
         return checkProducts;
+    }
+
+    private String login() {
+        String st_url = "http://cf.value4it.com/login/authorize2.jsp";
+        PostMethod method = new PostMethod(st_url);
+        method.setParameter("USERNAME", "apopov");
+        method.setParameter("PASSWORD", "Andrey1602");
+        method.setParameter("btlogin", "SIGN-IN");
+
+        try {
+            int returnCode = client.executeMethod(method);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            method.releaseConnection();
+        }
+        return "";
+    }
+
+    private void logout() {
+        String url = "http://cf.value4it.com/login/logout.jsp";
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            int getResult = client.executeMethod(getMethod);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
     }
 
     public List ManuList() throws XmlPullParserException, UnsupportedEncodingException, IOException {
@@ -430,5 +463,9 @@ public class XmlPro {
                 }
             }
         });
+    }
+
+    public String exportByProducts(String products, boolean ruEnBool) {
+        return products;
     }
 }

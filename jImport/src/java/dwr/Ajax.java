@@ -68,4 +68,9 @@ public class Ajax {
     public boolean checkProductsStatus() {
         return xmlp.checkProductsStatus();
     }
+
+    public String exportByProducts(String products, boolean ruEnBool) {
+        products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
+        return xmlp.exportByProducts(products, ruEnBool);
+    }
 }

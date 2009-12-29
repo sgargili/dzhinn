@@ -6,7 +6,6 @@ package DAO.Impl;
 
 import DAO.CategoriesDAO;
 import Pojo.Categories;
-import Pojo.oldCat;
 import Util.HibernateUtil4Imports;
 import java.sql.SQLException;
 import java.util.Collection;
