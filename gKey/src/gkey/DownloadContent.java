@@ -172,6 +172,7 @@ public class DownloadContent {
                     }
                     if (eventType == XmlPullParser.TEXT && valueBool) {
                         value += xpp.getText() + "; ";
+                        System.out.println(value);
                     }
 
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("div") && (fullNameBool)) {
@@ -255,7 +256,7 @@ public class DownloadContent {
                 fullName = "";
                 //System.out.println(" -> Done.");
                 // }
-                
+
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
