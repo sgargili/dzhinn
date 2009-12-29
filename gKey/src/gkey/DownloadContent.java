@@ -36,6 +36,7 @@ public class DownloadContent {
     final static String FULL_NAME2 = "white-space: nowrap;height:20px;vertical-align:middle;";
     final static String WARRANTY = "margin-top: 15px;";
     final static String MANUFACTURER = "width: 100px; height: 40px; border: 1px solid #aaa;";
+    final static String P_TYPE = "font-weight: bold;";
     final static String PRICE = "color: brown; font: normal 18px Helvetica,arial;";
     final static String MARKETING = "text-align:justify;";
     final static String PIC = "border: solid 1px #aaa; float: left; margin-right: 10px; ";
@@ -51,6 +52,7 @@ public class DownloadContent {
         String fullName = "",
                 warranty = "",
                 manufacturer = "",
+                pType = "",
                 price = "",
                 marketing = "",
                 matching = "",
@@ -58,11 +60,13 @@ public class DownloadContent {
                 description = "",
                 group = "",
                 attribute = "",
-                value = "";
+                value = "",
+                link = "";
         boolean fullNameBool = false,
                 warBool = false,
                 priceBool = false,
                 marBool = false,
+                pTypeBool = false,
                 matchBool = false,
                 groupBool = false,
                 atrBool = false,
@@ -115,6 +119,9 @@ public class DownloadContent {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("img") && xpp.getAttributeCount() == 4 && (xpp.getAttributeValue(3).equals(MANUFACTURER))) {
                         manufacturer = xpp.getAttributeValue(2);
                     }
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("span") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(P_TYPE))) {
+                        pTypeBool = true;
+                    }
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("span") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(PRICE))) {
                         priceBool = true;
                     }
@@ -133,12 +140,17 @@ public class DownloadContent {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 4 && (xpp.getAttributeValue(2).equals(TD_BODY_ATR)) && descBool) {
                         atrBool = true;
                     }
-                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 5 && (xpp.getAttributeValue(2).equals(TD_BODY_VALUE)) //                        && atrBool
-                            ) {
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 5 && (xpp.getAttributeValue(2).equals(TD_BODY_VALUE)) && atrBool) {
                         valueBool = true;
+                    }
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && xpp.getAttributeCount() == 1 && valueBool) {
+                        link = xpp.getAttributeValue(0);
                     }
                     if (eventType == XmlPullParser.TEXT && fullNameBool) {
                         fullName += xpp.getText();
+                    }
+                    if (eventType == XmlPullParser.TEXT && pTypeBool) {
+                        pType = xpp.getText();
                     }
                     if (eventType == XmlPullParser.TEXT && warBool) {
                         warranty += xpp.getText();
@@ -164,6 +176,9 @@ public class DownloadContent {
 
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("div") && (fullNameBool)) {
                         fullNameBool = false;
+                    }
+                    if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("span") && (pTypeBool)) {
+                        pTypeBool = false;
                     }
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("div") && (warBool)) {
                         warBool = false;
@@ -220,12 +235,17 @@ public class DownloadContent {
                         kd.setFullName(fullName);
                         kd.setManufacturer(manufacturer);
                         kd.setPictureUrl(pic);
+                        kd.setProductType(pType);
                         kd.setGroupe(group);
                         kd.setAttribute(attribute);
+                        if (value.equals("Ссылка") && !link.equals("")) {
+                            value = link;
+                        }
                         kd.setAttributeValue(value);
                         fd.getKeyDataDAO().addKeydata(kd);
                         //}
                         value = "";
+                        link = "";
                     }
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("table") && (descBool)) {
                         descBool = false;
