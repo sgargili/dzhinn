@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.ccil.cowan.tagsoup.Parser;
 import org.ccil.cowan.tagsoup.XMLWriter;
@@ -48,7 +50,9 @@ public class DownloadContent {
 
     public void load(String threadNum, int i) {
 
-        String dst = "/root/" + threadNum + ".xhtml";
+        String dst = "C://art/" + threadNum + ".xhtml";
+        Pattern p = Pattern.compile("Ссылка");
+        Matcher m;
         String fullName = "",
                 warranty = "",
                 manufacturer = "",
@@ -67,6 +71,8 @@ public class DownloadContent {
                 priceBool = false,
                 marBool = false,
                 pTypeBool = false,
+                pTypeBoolAll = false,
+                pTypeFindBool = true,
                 matchBool = false,
                 groupBool = false,
                 atrBool = false,
@@ -122,6 +128,9 @@ public class DownloadContent {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("span") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(P_TYPE))) {
                         pTypeBool = true;
                     }
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && pTypeBool) {
+                        pTypeBoolAll = true;
+                    }
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("span") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(PRICE))) {
                         priceBool = true;
                     }
@@ -140,17 +149,18 @@ public class DownloadContent {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 4 && (xpp.getAttributeValue(2).equals(TD_BODY_ATR)) && descBool) {
                         atrBool = true;
                     }
-                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 5 && (xpp.getAttributeValue(2).equals(TD_BODY_VALUE)) && atrBool) {
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 5 && (xpp.getAttributeValue(2).equals(TD_BODY_VALUE))) {
                         valueBool = true;
                     }
-                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && xpp.getAttributeCount() == 1 && valueBool) {
-                        link = xpp.getAttributeValue(0);
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && xpp.getAttributeCount() == 2 && valueBool) {
+                        link = xpp.getAttributeValue(1);
                     }
                     if (eventType == XmlPullParser.TEXT && fullNameBool) {
                         fullName += xpp.getText();
                     }
-                    if (eventType == XmlPullParser.TEXT && pTypeBool) {
+                    if (eventType == XmlPullParser.TEXT && pTypeBoolAll && pTypeFindBool) {
                         pType = xpp.getText();
+                        pTypeFindBool = false;
                     }
                     if (eventType == XmlPullParser.TEXT && warBool) {
                         warranty += xpp.getText();
@@ -172,7 +182,7 @@ public class DownloadContent {
                     }
                     if (eventType == XmlPullParser.TEXT && valueBool) {
                         value += xpp.getText() + "; ";
-                        System.out.println(value);
+                        //System.out.println(value);
                     }
 
                     if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("div") && (fullNameBool)) {
@@ -239,10 +249,11 @@ public class DownloadContent {
                         kd.setProductType(pType);
                         kd.setGroupe(group);
                         kd.setAttribute(attribute);
-                        if (value.equals("Ссылка") && !link.equals("")) {
+                        m = p.matcher(value);
+                        if (m.find() && !link.equals("")) {
                             value = link;
                         }
-                        kd.setAttributeValue(value);
+                        kd.setAttributeValue(value.replaceAll("(; )$", ""));
                         fd.getKeyDataDAO().addKeydata(kd);
                         //}
                         value = "";

@@ -132,7 +132,7 @@ public class Http {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
         //String url = "Http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
-        File tempFile = new File("/root/" + tempFileName + ".xml");
+        File tempFile = new File("C://art/" + tempFileName + ".xml");
         GetMethod getMethod = new GetMethod(url);
         try {
             int getResult = client.executeMethod(getMethod);
