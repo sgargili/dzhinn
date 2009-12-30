@@ -51,7 +51,7 @@ public class DownloadContent {
 
     public void load(String threadNum, int i) {
 
-        String dst = "C://art/" + threadNum + ".xhtml";
+        String dst = "/root/" + threadNum + ".xhtml";
         Pattern p = Pattern.compile("Ссылка");
         Matcher m;
         String fullName = "",

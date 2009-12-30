@@ -12,7 +12,7 @@ public class MultiThreadGKey extends Thread {
 
     public static void main(String args[]) throws Exception {
         Runnable r = new MyRunnable();
-        for (Integer i = 10; i <= 10; i++) {
+        for (Integer i = 1; i <= 10; i++) {
             Thread t = new Thread(r, i.toString());
             t.start();
         }
