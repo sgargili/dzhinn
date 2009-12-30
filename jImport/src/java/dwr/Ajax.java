@@ -12,6 +12,7 @@ import XML.XmlPro;
 import java.util.LinkedList;
 import org.directwebremoting.Browser;
 import org.directwebremoting.ui.dwr.Util;
+import value4it.ValuePro;
 
 /**
  * @author Joe Walker [joe at getahead dot ltd dot uk]
@@ -70,7 +71,8 @@ public class Ajax {
     }
 
     public String exportByProducts(String products, boolean ruEnBool) {
+        ValuePro vp = new ValuePro();
         products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
-        return xmlp.exportByProducts(products, ruEnBool);
+        return vp.exportByProducts(products, ruEnBool);
     }
 }

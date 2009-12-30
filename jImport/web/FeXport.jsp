@@ -52,9 +52,9 @@
                 <div dojoType="dijit.TooltipDialog" id="expByProdInput">
                     <h1 style="color:orange">Экспорт</h1>
                     <table id="expProdTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                        <tr bgcolor = #cfcdcd align=left>
+                        <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
-                                <table width='70%'>
+                                <table>
                                     <tr>
                                         <td>
                                             <textarea id='Articles' style='width:550px; height:150px'></textarea>
@@ -93,6 +93,7 @@
                 <br/>
                 <div dojoType="dijit.TooltipDialog" id="expProdLogs" style="text-align:left; overflow:visible scroll">
                     <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                    <br/>
                     <ul id="ulexpProdLog" style="min-height:500px">
                     </ul>
                 </div>
@@ -156,7 +157,7 @@
             <div id ="eCsv">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
                     <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
-                        <tr bgcolor = #cfcdcd align=left>
+                        <tr bgcolor = #e1e1e1 align=left>
                             <td>
                                 <table>
                                     <tr>
@@ -164,7 +165,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <font color="white" size="2">Encoding:</font>
+                                                        <font color="black" size="2">Encoding:</font>
                                                     </td>
                                                     <td>
                                                         <select id="eCsvEncoding" dojoType="dijit.form.FilteringSelect" style="width:100px">
@@ -179,7 +180,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <font color="white" size="2">Only separator(CSV):</font>
+                                                        <font color="black" size="2">Only separator(CSV):</font>
                                                     </td>
                                                     <td>
                                                         <input type="checkbox" id="eCsvSeparator" dojoType="dijit.form.CheckBox">
@@ -191,7 +192,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <font color="white" size="2">Compress to Zip:</font>
+                                                        <font color="black" size="2">Compress to Zip:</font>
                                                     </td>
                                                     <td>
                                                         <input type="checkbox" id="eCsvZip" dojoType="dijit.form.CheckBox">
@@ -203,7 +204,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                        <font color="white" size="2">Engine:</font>
+                                                        <font color="black" size="2">Engine:</font>
                                                     </td>
                                                     <td>
                                                         <select id="eCsvEngine" dojoType="dijit.form.FilteringSelect" style="width:120px">
@@ -215,7 +216,7 @@
                                             </table>
                                         </td>
                                         <td>
-                                            <font color="white" size="2">Upload XLS or CSV File:</font>
+                                            <font color="black" size="2">Upload XLS or CSV File:</font>
                                         </td>
                                         <td>
                                             <input type="file" id="uploadFileeCsv"/>
@@ -236,7 +237,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <font color="white" size="2">Fix It4Profit CSV File:</font>
+                                            <font color="black" size="2">Fix It4Profit CSV File:</font>
                                         </td>
                                         <td>
                                             <input type="file" id="uploadit4profitCsv"/>
