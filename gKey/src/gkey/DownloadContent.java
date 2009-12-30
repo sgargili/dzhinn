@@ -23,6 +23,7 @@ import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import pojo.Keydata;
+import pojo.Keyhtml;
 import pojo.Keymarketing;
 import pojo.Keyprice;
 import pojo.Keywarranty;
@@ -96,6 +97,7 @@ public class DownloadContent {
             Keyprice kp;
             Keymarketing km;
             Keywarranty kw;
+            Keyhtml kh;
             //int j = 1;
             try {
                 // for (int i = 1500; i < 10000; i++) {
@@ -106,6 +108,10 @@ public class DownloadContent {
                     System.out.println(" Сменился IP...");
                 }
                 fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true, threadNum);
+                kh = new Keyhtml();
+                kh.setKeyarticle(i + "");
+                kh.setKeyhtml(FileUtils.readFileToString(fl));
+                fd.getKeyHtmlDAO().addKeyHtml(kh);
                 os = new FileOutputStream(dst);
                 r = new Parser();
                 w = new OutputStreamWriter(os, "UTF-8");
