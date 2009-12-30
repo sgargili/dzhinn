@@ -124,7 +124,7 @@ public class XmlPro {
 
     }
 
-    private String ExportAll(String[] artID) {
+    private String exportAll(String[] artID) {
         String st_url = "http://cf.value4it.com/cf/admin/export_product.jsp";
         PostMethod method = new PostMethod(st_url);
         for (int k = 0; k < artID.length; k++) {
@@ -150,6 +150,15 @@ public class XmlPro {
             method.releaseConnection();
         }
         return "Отправленно... Смари...";
+    }
+
+    private String[] splitString(String inputString) {
+        String[] outputStringArray = null;
+        String splitPattern = "|||";
+        if (!inputString.equals("")) {
+            outputStringArray = inputString.split(splitPattern);
+        }
+        return outputStringArray;
     }
 
     public List ManuList() throws XmlPullParserException, UnsupportedEncodingException, IOException {
@@ -525,10 +534,11 @@ public class XmlPro {
     }
 
     public String exportByProducts(String products, boolean ruEnBool) {
-        String[] art = new String[1];
-        art[0] = products;
+//        String[] art = new String[1];
+//        art[0] = products;
+
         login();
-        String out = export(art);
+        String out = export(splitString(products));
         logout();
         return out;
     }
