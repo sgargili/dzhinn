@@ -34,6 +34,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.xml.transform.TransformerException;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.FileUtils;
@@ -91,6 +92,64 @@ public class XmlPro {
         } finally {
             getMethod.releaseConnection();
         }
+    }
+
+    private String export(String[] artID) {
+        String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
+        try {
+            PostMethod getMethod = new PostMethod(url);
+            NameValuePair[] req = new NameValuePair[11 + artID.length];
+            req[0] = new NameValuePair("referer", "");
+            req[1] = new NameValuePair("FACTORY_ID", "137");
+            req[2] = new NameValuePair("ACTION", "EXPORT");
+            req[3] = new NameValuePair("PN_RPP", "100");
+            req[4] = new NameValuePair("LANGS", "");
+            req[5] = new NameValuePair("LANG", "bg");
+            req[6] = new NameValuePair("LANG", "hr");
+            req[7] = new NameValuePair("LANG", "en");
+            req[8] = new NameValuePair("LANG", "pl");
+            req[9] = new NameValuePair("LANG", "ru");
+            req[10] = new NameValuePair("LANG", "sl");
+            for (int i = 0; i < artID.length; i++) {
+                req[11 + i] = new NameValuePair("ID_" + artID[i], artID[i]);
+            }
+            getMethod.setRequestBody(req);
+            int getResult = client.executeMethod(getMethod);
+            getMethod.releaseConnection();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return "Passed";
+
+    }
+
+    private String ExportAll(String[] artID) {
+        String st_url = "http://cf.value4it.com/cf/admin/export_product.jsp";
+        PostMethod method = new PostMethod(st_url);
+        for (int k = 0; k < artID.length; k++) {
+            method.setParameter("ID_" + artID[k], artID[k]);
+        }
+        method.setParameter("referer", "");
+        method.setParameter("FACTORY_ID", "137");
+        method.setParameter("ACTION", "EXPORT");
+        method.setParameter("PN_RPP", "100");
+        method.setParameter("LANGS", "");
+        method.setParameter("LANG", "bg");
+        method.setParameter("LANG", "hr");
+        method.setParameter("LANG", "en");
+        method.setParameter("LANG", "sl");
+        method.setParameter("LANG", "ru");
+        method.setParameter("LANG", "pl");
+
+        try {
+            int returnCode = client.executeMethod(method);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            method.releaseConnection();
+        }
+        return "Отправленно... Смари...";
     }
 
     public List ManuList() throws XmlPullParserException, UnsupportedEncodingException, IOException {
@@ -466,6 +525,11 @@ public class XmlPro {
     }
 
     public String exportByProducts(String products, boolean ruEnBool) {
-        return products;
+        String[] art = new String[1];
+        art[0] = products;
+        login();
+        String out = export(art);
+        logout();
+        return out;
     }
 }
