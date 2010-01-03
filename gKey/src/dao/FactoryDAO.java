@@ -10,6 +10,8 @@ import dao.impl.KeyMarketingDAOImpl;
 import dao.impl.KeyPriceDAOImpl;
 import dao.impl.KeyWarrantyDAOImpl;
 import dao.impl.MatchingDAOImpl;
+import dao.impl.TempPojoDAO2Impl;
+import dao.impl.TempPojoDAOImpl;
 
 /**
  *
@@ -23,6 +25,8 @@ public class FactoryDAO {
     private KeyMarketingDAO keyMatching = null;
     private KeyWarrantyDAO keyWarrantyDAO = null;
     private KeyHtmlDAO keyHtmlDAO = null;
+    private TempPojoDAO tempPojoDAO = null;
+    private TempPojoDAO2 tempPojoDAO2 = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -72,5 +76,18 @@ public class FactoryDAO {
             keyHtmlDAO = new KeyHtmlDAOImpl();
         }
         return keyHtmlDAO;
+    }
+
+    public TempPojoDAO getTempPojoDAO() {
+        if (tempPojoDAO == null) {
+            tempPojoDAO = new TempPojoDAOImpl();
+        }
+        return tempPojoDAO;
+    }
+    public TempPojoDAO2 getTempPojoDAO2() {
+        if (tempPojoDAO2 == null) {
+            tempPojoDAO2 = new TempPojoDAO2Impl();
+        }
+        return tempPojoDAO2;
     }
 }

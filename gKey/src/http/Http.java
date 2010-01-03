@@ -81,6 +81,24 @@ public class Http {
         return allString;
     }
 
+    public String DownloadContentAsString(String url, String encoding, boolean useProxy) {
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        if (useProxy) {
+            client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+        }
+        String allString = "";
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            int getResult = client.executeMethod(getMethod);
+            allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), encoding);
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        return allString;
+    }
+
     public File DownloadContentAsFile(String url) {
         client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         //String url = "Http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";

@@ -33,7 +33,7 @@ import pojo.Matching;
  *
  * @author Apopov
  */
-public class DownloadContent {
+public class DownloadContentv2 {
 
     final static String FULL_NAME1 = "margin-top: 10px; font: bold 18px Helvetica,arial;";
     final static String FULL_NAME2 = "white-space: nowrap;height:20px;vertical-align:middle;";
@@ -51,14 +51,16 @@ public class DownloadContent {
 
     public void load(String threadNum, int i) {
         FactoryDAO fd = FactoryDAO.getInstance();
-        try {
-            if (fd.getKeyHtmlDAO().isHtmlPresent(i + "")) {
-                System.out.println("Uzhe est' article -> " + i);
-                return;
-            }
-        } catch (Exception ex) {
-        }
+//        try {
+//            if (fd.getKeyHtmlDAO().isHtmlPresent(i + "")) {
+//                System.out.println("Uzhe est' article -> " + i);
+//                return;
+//            }
+//        } catch (Exception ex) {
+//        }
         String dst = "/root/" + threadNum + ".xhtml";
+        String tempFile = "/root/" + threadNum + ".html";
+        String htmlData;
         Pattern p = Pattern.compile("Ссылка");
         Matcher m;
         String fullName = "",
@@ -90,40 +92,43 @@ public class DownloadContent {
         XMLReader r;
         Writer w = null;
         ContentHandler h;
-        Http ht = new Http();
-        File fl;
+        //Http ht = new Http();
+        //File fl;
         //fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/12548", true);
-        IpChange ip = new IpChange();
+        //IpChange ip = new IpChange();
         try {
+            htmlData = fd.getKeyHtmlDAO().getHtmlByArticle(i + "");
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xpp = factory.newPullParser();
             File xml = null;
+            File html = new File(tempFile);
+            FileUtils.writeStringToFile(html, htmlData, "UTF-8");
             Matching mtch;
             Keydata kd;
             Keyprice kp;
             Keymarketing km;
             Keywarranty kw;
-            Keyhtml kh;
+            //Keyhtml kh;
             //int j = 1;
             try {
                 // for (int i = 1500; i < 10000; i++) {
                 System.out.println("Поток " + threadNum + " -> Продукт -> " + i);
-                if (bayan++ == 17) {
-                    ip.setChange();
-                    bayan = 1;
-                    System.out.println(" Сменился IP...");
-                }
-                fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true, threadNum);
-                kh = new Keyhtml();
-                kh.setKeyarticle(i + "");
-                kh.setKeyhtml(FileUtils.readFileToString(fl));
-                fd.getKeyHtmlDAO().addKeyHtml(kh);
+//                if (bayan++ == 17) {
+//                    ip.setChange();
+//                    bayan = 1;
+//                    System.out.println(" Сменился IP...");
+//                }
+//                fl = ht.DownloadContentAsFile("http://shop.key.ru/shop/goods/" + i, true, threadNum);
+//                kh = new Keyhtml();
+//                kh.setKeyarticle(i + "");
+//                kh.setKeyhtml(FileUtils.readFileToString(fl));
+//                fd.getKeyHtmlDAO().addKeyHtml(kh);
                 os = new FileOutputStream(dst);
                 r = new Parser();
                 w = new OutputStreamWriter(os, "UTF-8");
                 h = new XMLWriter(w);
                 r.setContentHandler(h);
-                r.parse(fl.toURI().toString());
+                r.parse(html.toURI().toString());
                 xml = new File(dst);
                 xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
                 int eventType = xpp.getEventType();
@@ -284,6 +289,7 @@ public class DownloadContent {
                 ex.printStackTrace();
             }
             xml.delete();
+            html.delete();
         } catch (Exception ex) {
             System.out.println(ex);
         }

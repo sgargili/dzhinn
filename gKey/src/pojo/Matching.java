@@ -16,27 +16,28 @@ public class Matching  implements java.io.Serializable {
     public Matching() {
     }
 
-	
     public Matching(int id) {
         this.id = id;
     }
+
     public Matching(int id, String keyarticle, String vendorarticle) {
-       this.id = id;
-       this.keyarticle = keyarticle;
-       this.vendorarticle = vendorarticle;
+        this.id = id;
+        this.keyarticle = keyarticle;
+        this.vendorarticle = vendorarticle;
     }
-   
+
     public int getId() {
         return this.id;
     }
-    
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getKeyarticle() {
         return this.keyarticle;
     }
-    
+
     public void setKeyarticle(String keyarticle) {
         this.keyarticle = keyarticle;
     }
