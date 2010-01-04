@@ -9,7 +9,8 @@ var value4export = {
     },
     items:[{
         title: 'Экспорт по продукту',
-        contentEl: 'expByProd'
+        contentEl: 'expByProd',
+        autoScroll: true
     },{
         title: 'Экспорт маркетинга',
         contentEl: 'expMark'

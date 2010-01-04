@@ -94,7 +94,7 @@
                 <div dojoType="dijit.TooltipDialog" id="expProdLogs" style="text-align:left; overflow:visible scroll">
                     <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
                     <br/>
-                    <ul id="ulexpProdLog" style="min-height:500px">
+                    <ul id="ulexpProdLog" style="min-height:350px">
                     </ul>
                 </div>
             </div>
