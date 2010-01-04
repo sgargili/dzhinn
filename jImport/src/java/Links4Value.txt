@@ -40,6 +40,7 @@ http://213.53.57.20/CatExp/compval.exml?shop=20&lang=ru&product=9052513001214189
 
 
 http://213.53.57.39/cfInfoWS/cfcode.exml?article=376638-B21
+http://213.53.57.39/cfInfoWS/cf.exml?article=51117120417124570
 
 SSH:
 ----

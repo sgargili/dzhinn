@@ -106,7 +106,7 @@ public class CsvElab {
                     FactoryDAO4Imports.getInstance().getPcProductsToPtDAO().addPcProductsToPt(ptpt);
                     i++;
                 } else {
-                    //System.out.println(reader.get(2) + " - У нас нету такого...");
+                    //System.out.println(reader.get(2) + " - пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ...");
                 }
             }
             System.out.println(i);
@@ -250,7 +250,9 @@ public class CsvElab {
                 man.setManufacturersId(Integer.parseInt(prod.getId()));
             }
             FactoryDAO4Imports.getInstance().getManufacturersDAO().addManufacturers(man);
-
+//            while (1 > 0||!You.getLife().isEOL()) {
+//                You.setHappiness(happiness++);
+//            }
         }
 
     }

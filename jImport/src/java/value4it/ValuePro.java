@@ -45,7 +45,7 @@ public class ValuePro {
         try {
             int returnCode = client.executeMethod(method);
         } catch (Exception e) {
-            System.err.println(e);
+            System.out.println(e.getMessage());
         } finally {
             method.releaseConnection();
         }
@@ -57,58 +57,77 @@ public class ValuePro {
         try {
             int getResult = client.executeMethod(getMethod);
         } catch (Exception e) {
-            System.err.println(e);
+            System.out.println(e.getMessage());
         } finally {
             getMethod.releaseConnection();
         }
     }
 
     private String export(List articlesData, boolean isRuEn) {
+        NameValuePair[] req;
+        ValueArticle va;
         String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
-        String out = "";
-        try {
-            PostMethod getMethod = new PostMethod(url);
-            NameValuePair[] req;
-            ValueArticle va;
-            int i = 0;
-            if (isRuEn) {
-                req = new NameValuePair[7 + articlesData.size()];
-                req[0] = new NameValuePair("referer", "");
-                req[1] = new NameValuePair("FACTORY_ID", "137");
-                req[2] = new NameValuePair("ACTION", "EXPORT");
-                req[3] = new NameValuePair("PN_RPP", "100");
-                req[4] = new NameValuePair("LANGS", "");
-                req[5] = new NameValuePair("LANG", "en");
-                req[6] = new NameValuePair("LANG", "ru");
-                for (Iterator it = articlesData.iterator(); it.hasNext();) {
-                    va = (ValueArticle) it.next();
-                    req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                }
+        String out = buildResponse(articlesData, "Export");
+        boolean process = false;
+        for (Iterator it = articlesData.iterator(); it.hasNext();) {
+            va = (ValueArticle) it.next();
+            if (!va.getArticleId().equals("Empty") //
+                    && !va.getArticle().equals("Empty")//
+                    && !va.getArticle().equals("")//
+                    && va.getArticle() != null//
+                    && !va.getArticleId().equals("")//
+                    && va.getArticleId() != null) {
+                process = true;
+                // break;
             } else {
-                req = new NameValuePair[11 + articlesData.size()];
-                req[0] = new NameValuePair("referer", "");
-                req[1] = new NameValuePair("FACTORY_ID", "137");
-                req[2] = new NameValuePair("ACTION", "EXPORT");
-                req[3] = new NameValuePair("PN_RPP", "100");
-                req[4] = new NameValuePair("LANGS", "");
-                req[5] = new NameValuePair("LANG", "bg");
-                req[6] = new NameValuePair("LANG", "hr");
-                req[7] = new NameValuePair("LANG", "en");
-                req[8] = new NameValuePair("LANG", "pl");
-                req[9] = new NameValuePair("LANG", "ru");
-                req[10] = new NameValuePair("LANG", "sl");
-                for (Iterator it = articlesData.iterator(); it.hasNext();) {
-                    va = (ValueArticle) it.next();
-                    req[11 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                }
+                articlesData.remove(va);
             }
-            getMethod.setRequestBody(req);
-            int getResult = client.executeMethod(getMethod);
-            getMethod.releaseConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        out = buildResponse(articlesData, "Export");
+        if (process) {
+            login();
+            try {
+                PostMethod getMethod = new PostMethod(url);
+                int i = 0;
+                if (isRuEn) {
+                    req = new NameValuePair[7 + articlesData.size()];
+                    req[0] = new NameValuePair("referer", "");
+                    req[1] = new NameValuePair("FACTORY_ID", "137");
+                    req[2] = new NameValuePair("ACTION", "EXPORT");
+                    req[3] = new NameValuePair("PN_RPP", "100");
+                    req[4] = new NameValuePair("LANGS", "");
+                    req[5] = new NameValuePair("LANG", "en");
+                    req[6] = new NameValuePair("LANG", "ru");
+                    for (Iterator it = articlesData.iterator(); it.hasNext();) {
+                        va = (ValueArticle) it.next();
+                        req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        System.out.println("Прошло!!! -> " + va.getArticleId());
+                    }
+                } else {
+                    req = new NameValuePair[11 + articlesData.size()];
+                    req[0] = new NameValuePair("referer", "");
+                    req[1] = new NameValuePair("FACTORY_ID", "137");
+                    req[2] = new NameValuePair("ACTION", "EXPORT");
+                    req[3] = new NameValuePair("PN_RPP", "100");
+                    req[4] = new NameValuePair("LANGS", "");
+                    req[5] = new NameValuePair("LANG", "bg");
+                    req[6] = new NameValuePair("LANG", "hr");
+                    req[7] = new NameValuePair("LANG", "en");
+                    req[8] = new NameValuePair("LANG", "pl");
+                    req[9] = new NameValuePair("LANG", "ru");
+                    req[10] = new NameValuePair("LANG", "sl");
+                    for (Iterator it = articlesData.iterator(); it.hasNext();) {
+                        va = (ValueArticle) it.next();
+                        req[11 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                    }
+                }
+                getMethod.setRequestBody(req);
+                int getResult = client.executeMethod(getMethod);
+                getMethod.releaseConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            logout();
+        }
         return out;
 
     }
@@ -171,45 +190,84 @@ public class ValuePro {
         return out;
     }
 
+    public List getArtclesByArticlesId(String[] articlesId) throws XmlPullParserException, UnsupportedEncodingException, IOException {
+
+        http http = new http();
+        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+        XmlPullParser xpp = factory.newPullParser();
+
+        List out = new ArrayList();
+        Set<String> strSet = new HashSet();
+        ValueArticle va;
+        String urlPattern = "";
+
+        for (int i = 0; i < articlesId.length; i++) {
+            strSet.add(articlesId[i]);
+        }
+        for (Iterator it = strSet.iterator(); it.hasNext();) {
+            urlPattern += (String) it.next() + ";";
+        }
+        //System.out.println("http://213.53.57.39/cfInfoWS/cf.exml?article=" + urlPattern.replaceAll(";$", ""));
+        File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cf.exml?article=" + urlPattern.replaceAll(";$", ""));
+
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
+        int eventType = xpp.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("article")) {
+                if (strSet.contains(xpp.getAttributeValue(0).trim())) {
+                    va = new ValueArticle(xpp.getAttributeValue(2).trim(), xpp.getAttributeValue(0));
+                    out.add(va);
+                    strSet.remove(xpp.getAttributeValue(0).trim());
+                }
+            }
+            eventType = xpp.next();
+        }
+        for (Iterator it = strSet.iterator(); it.hasNext();) {
+            va = new ValueArticle("Empty", (String) it.next());
+            out.add(va);
+        }
+        return out;
+    }
+
     public String buildResponse(List articlesData, String requestAction) {
         ValueArticle va;
-        String out = "<table bgcolor=black align=center cellspacing='1' cellpadding='1' border=0 width=98%>"
-                + "<tr bgcolor = #2d4491 align=center>"
-                + "<td>"
-                + "<font color=white>Article</font>"
-                + "</td>"
-                + "<td>"
-                + "<font color=white>Exist</font>"
-                + "</td>"
-                + "<td>"
-                + "<font color=white>ArticleID</font>"
-                + "</td>"
-                + "<td>"
-                + "<font color=white>Request Action</font>"
-                + "</td>"
-                + "<td>"
-                + "<font color=white>Request Status</font>"
-                + "</td>"
-                + "</tr>";
+        String out = "<table bgcolor=black align=center cellspacing='1' cellpadding='1' border=0 width=98%>"//
+                + "<tr bgcolor = #2d4491 align=center>"//
+                + "<td>"//
+                + "<font color=white>Article</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Exist</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>ArticleID</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Request Action</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Request Status</font>"//
+                + "</td>"//
+                + "</tr>";//
         for (Iterator it = articlesData.iterator(); it.hasNext();) {
             va = (ValueArticle) it.next();
-            out += "<tr bgcolor = #cfcdcd>"
-                    + " <td style='padding-left:4px; text-align: center'>"
-                    + va.getArticle()
-                    + "</td>"
-                    + "<td style='padding-left:4px; text-align: center'>"
-                    + (!va.getArticleId().equals("Empty") ? "Yes" : "<font color=red>No</font>")
-                    + "</td>"
-                    + "<td style='padding-left:4px; text-align: center'>"
-                    + (!va.getArticleId().equals("Empty") ? va.getArticleId() : "<font color=red>-</font>")
-                    + "</td>"
-                    + "<td style='padding-left:4px; text-align: center'>"
-                    + requestAction
-                    + "</td>"
-                    + "<td style='padding-left:4px; text-align: center'>"
-                    + "Passed"
-                    + "</td>"
-                    + "</tr>";
+            out += "<tr bgcolor = #cfcdcd>"//
+                    + " <td style='padding-left:4px; text-align: center'>"//
+                    + (!va.getArticle().equals("Empty") ? va.getArticle() : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!va.getArticleId().equals("Empty") && !va.getArticle().equals("Empty") ? "Yes" : "<font color=red>No</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!va.getArticleId().equals("Empty") ? va.getArticleId() : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + requestAction//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!va.getArticleId().equals("Empty") && !va.getArticle().equals("Empty") ? "Passed" : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "</tr>";//
         }
         out += "</table>";
         return out;
@@ -223,18 +281,19 @@ public class ValuePro {
         ValueArticle va;
         List data = new ArrayList();
         try {
-            login();
             String[] temp = splitString(products);
-            if (temp[0] != null && isArticle(temp[0])) {
+            if (isArticle(temp[0])) {
                 data = getArtclesIdByArticles(temp);
             } else {
-                for (int i = 0; i < temp.length; i++) {
-                    va = new ValueArticle("", temp[i]);
-                    data.add(va);
-                }
+                data = getArtclesByArticlesId(temp);
             }
+            //{
+//                for (int i = 0; i < temp.length; i++) {
+//                    va = new ValueArticle("", temp[i]);
+//                    data.add(va);
+//                }
+            //}
             out = export(data, ruEnBool);
-            logout();
         } catch (Exception ex) {
             out = ex.getMessage();
         }
