@@ -9,8 +9,12 @@ import dao.FactoryDAO;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import pojo.Keydata;
 import pojo.Keywarranty;
 
@@ -22,11 +26,17 @@ public class OutputData {
 
     public static void main(String[] args) throws SQLException, IOException {
         List data = FactoryDAO.getInstance().getKeyDataDAO().getAllKeydata();
-        //List warranty = FactoryDAO.getInstance().getKeyWarrantyDAO().getKeyWarranty();
+        List warranty = FactoryDAO.getInstance().getKeyWarrantyDAO().getKeyWarranty();
         Keydata kd;
         Keywarranty kw;
-//        boolean newArtBool = true;
-//        String warTemp = "";
+        //Set warData = new HashSet();
+        Map warMap = new HashMap();
+        for (Iterator it = warranty.iterator(); it.hasNext();) {
+            kw = (Keywarranty) it.next();
+            //warData.add(kw.getKeyarticle());
+            warMap.put(kw.getKeyarticle(), kw.getKeywarranty());
+        }
+
         String newArt = "10004";
         CsvWriter csv = new CsvWriter("C://keyData.csv", ',', Charset.forName("WINDOWS-1251"));
         String[] strMas = new String[8];
@@ -36,20 +46,28 @@ public class OutputData {
             kd = (Keydata) it.next();
             System.out.println(i++ + " " + kd.getArticle());
             if (!newArt.equals(kd.getArticle())) {
-                if (FactoryDAO.getInstance().getKeyWarrantyDAO().isWarrantyPresent(kd.getArticle())) {
+                if (warMap.containsKey(kd.getArticle())) {
                     strMas[0] = kd.getFullName();
-                    strMas[1] = kd.getManufacturer();
+                    if (kd.getManufacturer() == null || kd.getManufacturer().replaceAll("(\\n)|(\\r)(\\r\\n)|(\\n\\r)", "").equals("")) {
+                        strMas[1] = "NoName";
+                    } else {
+                        strMas[1] = kd.getManufacturer().replaceAll("(\\n)|(\\r)(\\r\\n)|(\\n\\r)", "");
+                    }
                     strMas[2] = kd.getArticle();
                     strMas[3] = kd.getProductType();
                     strMas[4] = kd.getPictureUrl();
                     strMas[5] = "Гарантия";
                     strMas[6] = "Срок гарантии";
-                    strMas[7] = FactoryDAO.getInstance().getKeyWarrantyDAO().getWarrantyByArticle(kd.getArticle());
+                    strMas[7] = (String) warMap.get(kd.getArticle());
                     csv.writeRecord(strMas);
                 }
             }
             strMas[0] = kd.getFullName();
-            strMas[1] = kd.getManufacturer();
+            if (kd.getManufacturer() == null || kd.getManufacturer().replaceAll("(\\n)|(\\r)(\\r\\n)|(\\n\\r)", "").equals("")) {
+                strMas[1] = "NoName";
+            } else {
+                strMas[1] = kd.getManufacturer().replaceAll("(\\n)|(\\r)(\\r\\n)|(\\n\\r)", "");
+            }
             strMas[2] = kd.getArticle();
             strMas[3] = kd.getProductType();
             strMas[4] = kd.getPictureUrl();
@@ -62,3 +80,4 @@ public class OutputData {
         csv.close();
     }
 }
+

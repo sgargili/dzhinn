@@ -4,9 +4,9 @@
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/keydb</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">Pass4root</property>
+    <property name="hibernate.connection.url">jdbc:mysql://192.168.1.177:3306/keydb</property>
+    <property name="hibernate.connection.username">apache</property>
+    <property name="hibernate.connection.password">apache</property>
     <property name="hibernate.connection.characterEncoding">UTF-8</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="pojo/Keydata.hbm.xml"/>
