@@ -18,7 +18,7 @@
         <script type="text/javascript" src="js/combination_1.js"></script>
         <script type="text/javascript" src="js/layout-browser_1.js"></script>
         <script type='text/javascript' src='js/Xport_1.js'> </script>
-        <script type="text/javascript" src="js/progress-bar_1.js"></script>
+        <%--<script type="text/javascript" src="js/progress-bar_1.js"></script>--%>
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
@@ -38,8 +38,6 @@
                     </td>
                 </tr>
             </table>
-        </div>
-        <div id="treeUpdateStatus" style="display:none">
         </div>
         <div style="display:none;">
             <div id="start-div" style="background-color:#e1e8ff; width:100%; height:100%">
@@ -99,48 +97,40 @@
                 </div>
             </div>
             <div id="expMark">
-                <div dojoType="dijit.TooltipDialog" id="AllDialogproducts_import">
-                    <h1 style="color:orange">Импорт по всем артиклям.</h1>
-                    <table id="Tableproducts_import" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                        <tr bgcolor = #cfcdcd align=left>
-                            <td>
+                <div dojoType="dijit.TooltipDialog" id="expMarkInput">
+                    <h1 style="color:orange">Экспорт маркетинга</h1>
+                    <table id="expMarkTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #e1e1e1 align=left>
+                            <td style="padding:7px">
                                 <table>
                                     <tr>
                                         <td>
-                                            <font color="white" size="2">Обновить все продукты:</font>
-                                        </td>
-                                        <td>
-                                            <button id="products_import_button" dojoType="dijit.form.Button" onclick="ImportAllProducts()">
-                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                            </button>
-                                        </td>
-                                        <td>
-                                            <font color="white" size="2">Autoname:</font>
-                                        </td>
-                                        <td>
-                                            <input id='productsAn' dojoType='dijit.form.CheckBox' checked/>
-                                        </td>
-                                        <td>
-                                            <font color="white" size="2">Card:</font>
-                                        </td>
-                                        <td>
-                                            <input id='productsCd' dojoType='dijit.form.CheckBox' checked/>
-                                        </td>
-                                        <td>
-                                            <font color="white" size="2">Логи сервера:</font>
-                                        </td>
-                                        <td>
-                                            <input id='productsSLC' dojoType='dijit.form.CheckBox' onclick="ProductsServerLogView()"/>
+                                            <textarea id='ArticlesExpMark' style='width:550px; height:150px'></textarea>
                                         </td>
                                         <td>
                                         </td>
                                         <td>
-                                            <font color="white" size="2">Статус обновления:</font>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <font color="green" size="2" id="productsUpdateStatus"></font>
+                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = #cfcdcd align=left>
+                                                    <td>
+                                              <%--          <table cellspacing='7' cellpadding='0'>
+                                                            <tr>
+                                                                <td>
+                                                                    <input id='ruEnOnlyExpMark' dojoType='dijit.form.CheckBox'/>
+                                                                </td>
+                                                                <td>
+                                                                    <label for="ruEnOnlyExpMark">ru/en language only...</label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>--%>
+                                                        <center>
+                                                            <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportByProduct()">
+                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
                                     </tr>
                                 </table>
@@ -148,9 +138,11 @@
                         </tr>
                     </table>
                 </div>
-                <div dojoType="dijit.TooltipDialog" id="logs_products_import" style="text-align:left; visibility:hidden; overflow:visible scroll">
+                <br/>
+                <div dojoType="dijit.TooltipDialog" id="expMarkLogs" style="text-align:left; overflow:visible scroll">
                     <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
-                    <ul id="ulProductsLog" style="min-height:250px">
+                    <br/>
+                    <ul id="ulexpMarkLog" style="min-height:350px">
                     </ul>
                 </div>
             </div>

@@ -409,12 +409,23 @@ function ShowYandexFile(){
 
     }
 }
+
 function exportByProduct(){
     dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data = dojo.byId('Articles').value;
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
         dojo.byId('ulexpProdLog').innerHTML = data;
+    //        Show("AllDialog_Suppliers_Out");
+    });
+}
+
+function exportMarketing(){
+    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = dojo.byId('ArticlesExpMark').value;
+    //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
+    Ajax.exportMarketing(data, function(data) {
+        dojo.byId('ulexpMarkLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
