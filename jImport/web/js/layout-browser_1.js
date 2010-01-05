@@ -10,20 +10,20 @@ Ext.onReady(function(){
         border: false,
         items: [
         // from basic.js:
-        start,
+        //start,
         // from custom.js:
-//        nix, a2Zmall,
+        //        nix, a2Zmall,
         value4export,
-//        magento,
+        //        magento,
         // from combination.js:
-//        yandex,
-//        price_Concentrator,
+        //        yandex,
+        //        price_Concentrator,
         ecsv
         ]
     };
     var treePanel = new Ext.tree.TreePanel({
         id: 'tree-panel',
-        title: 'Main Menu',
+        title: 'Меню',
         region:'north',
         split: true,
         height: 150,
@@ -58,7 +58,7 @@ Ext.onReady(function(){
     });
     var detailsPanel = {
         id: 'details-panel',
-        title: 'Details',
+        title: 'Инфо',
         region: 'center',
         bodyStyle: 'padding-bottom:15px;background:#eee;',
         autoScroll: true,

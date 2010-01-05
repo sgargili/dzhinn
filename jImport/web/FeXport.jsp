@@ -124,7 +124,7 @@
                                                             </tr>
                                                         </table>--%>
                                                         <center>
-                                                            <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportByProduct()">
+                                                            <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportMarketing()">
                                                                 &lt;&lt;&lt;Запуск&gt;&gt;&gt;
                                                             </button>
                                                         </center>
