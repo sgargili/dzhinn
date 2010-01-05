@@ -19,8 +19,8 @@ public class testXalan {
         XalanTransform xslt = new XalanTransform();
         http http = new http();
         String temp = FileUtils.readFileToString(xslt.XSLProcessor(http.DownloadContentAsFile("http://213.53.57.20/CatExp/card.exml?shop=74&lang=ru&product=90608064101374952")), "UTF-8")//
-                .replaceAll("(\r\n)|(\r)|(\n)|(\n\r)", "") //Все в одну строку...
-                .replaceAll(">\\s+<", "><"); //Удаляем лишние пробелы между тегами... Блин, какие то японские смайлики получились... :)
+                .replaceAll("(\r\n)|(\r)|(\n)|(\n\r)", "") //
+                .replaceAll(">\\s+<", "><");//
 
 
 

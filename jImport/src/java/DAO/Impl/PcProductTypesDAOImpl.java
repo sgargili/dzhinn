@@ -66,7 +66,6 @@ public class PcProductTypesDAOImpl implements PcProductTypesDAO {
             result = getByLogin.list();
             out = result.get(0).getPtId();
         } catch (RuntimeException e) {
-            System.out.println("Упал вызов с названием ПТ ->" + name + " - > " + e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

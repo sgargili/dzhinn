@@ -30,22 +30,6 @@ public class Class4Test {
         FactoryDAO4Imports factory = FactoryDAO4Imports.getInstance();
         @SuppressWarnings("static-access")
         List<oldCat> lst = (List<oldCat>) factory.getCategoriesDAO().getAllCategoriesNew();
-        // int i = 1;
-//        for (Iterator it = lst.iterator(); it.hasNext();) {
-//            Categories str = (Categories) it.next();
-//            try {
-//                if (str.getCategoriesImage().equals(null)) {
-//                    str.setCategoriesImage("Пусто...");
-//                }
-//            } catch (NullPointerException e) {
-//                str.setCategoriesImage("Пусто...");
-//            }
-//            oc = new oldCat(factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName(), str.getCategoriesImage());
-//            // System.out.println(i + " ---> " + factory.getCategoriesDescriptionDAO().getAllCategoriesDescriptionById(str.getCategoriesId()).getCategoriesName() + " " + str.getCategoriesImage());
-//            oldList.add(oc);
-//            //  i++;
-//        }
-
 
         XStream xstream = new XStream();
         xstream.alias("OldCat", oldCat.class);
