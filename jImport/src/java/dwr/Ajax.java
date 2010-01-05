@@ -75,4 +75,10 @@ public class Ajax {
         products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
         return vp.exportByProducts(products, ruEnBool);
     }
+
+    public String exportMarketing(String products) {
+        ValuePro vp = new ValuePro();
+        products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
+        return vp.exportMarketing(products);
+    }
 }

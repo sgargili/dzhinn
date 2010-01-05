@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +68,7 @@ public class ValuePro {
         String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
         String out = buildResponse(articlesData, "Export");
         boolean process = false;
+        List exportData = new ArrayList();
         for (Iterator it = articlesData.iterator(); it.hasNext();) {
             va = (ValueArticle) it.next();
             if (!va.getArticleId().equals("Empty") //
@@ -78,9 +78,7 @@ public class ValuePro {
                     && !va.getArticleId().equals("")//
                     && va.getArticleId() != null) {
                 process = true;
-                // break;
-            } else {
-                articlesData.remove(va);
+                exportData.add(va);
             }
         }
         if (process) {
@@ -89,7 +87,7 @@ public class ValuePro {
                 PostMethod getMethod = new PostMethod(url);
                 int i = 0;
                 if (isRuEn) {
-                    req = new NameValuePair[7 + articlesData.size()];
+                    req = new NameValuePair[7 + exportData.size()];
                     req[0] = new NameValuePair("referer", "");
                     req[1] = new NameValuePair("FACTORY_ID", "137");
                     req[2] = new NameValuePair("ACTION", "EXPORT");
@@ -97,13 +95,13 @@ public class ValuePro {
                     req[4] = new NameValuePair("LANGS", "");
                     req[5] = new NameValuePair("LANG", "en");
                     req[6] = new NameValuePair("LANG", "ru");
-                    for (Iterator it = articlesData.iterator(); it.hasNext();) {
+                    for (Iterator it = exportData.iterator(); it.hasNext();) {
                         va = (ValueArticle) it.next();
                         req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                         System.out.println("Прошло!!! -> " + va.getArticleId());
                     }
                 } else {
-                    req = new NameValuePair[11 + articlesData.size()];
+                    req = new NameValuePair[11 + exportData.size()];
                     req[0] = new NameValuePair("referer", "");
                     req[1] = new NameValuePair("FACTORY_ID", "137");
                     req[2] = new NameValuePair("ACTION", "EXPORT");
@@ -115,10 +113,60 @@ public class ValuePro {
                     req[8] = new NameValuePair("LANG", "pl");
                     req[9] = new NameValuePair("LANG", "ru");
                     req[10] = new NameValuePair("LANG", "sl");
-                    for (Iterator it = articlesData.iterator(); it.hasNext();) {
+                    for (Iterator it = exportData.iterator(); it.hasNext();) {
                         va = (ValueArticle) it.next();
                         req[11 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                     }
+                }
+                getMethod.setRequestBody(req);
+                int getResult = client.executeMethod(getMethod);
+                getMethod.releaseConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            logout();
+        }
+        return out;
+
+    }
+
+    private String exportMark(List articlesData) {
+        NameValuePair[] req;
+        ValueArticle va;
+        String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
+        String out = buildResponse(articlesData, "ExportMarketing");
+        boolean process = false;
+        List exportData = new ArrayList();
+        for (Iterator it = articlesData.iterator(); it.hasNext();) {
+            va = (ValueArticle) it.next();
+            if (!va.getArticleId().equals("Empty") //
+                    && !va.getArticle().equals("Empty")//
+                    && !va.getArticle().equals("")//
+                    && va.getArticle() != null//
+                    && !va.getArticleId().equals("")//
+                    && va.getArticleId() != null) {
+                process = true;
+                exportData.add(va);
+            }
+        }
+        if (process) {
+            login();
+            try {
+                PostMethod getMethod = new PostMethod(url);
+                int i = 0, tempI;
+                req = new NameValuePair[3 + 2 * exportData.size()];
+                req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
+                req[1] = new NameValuePair("SOURCE", "");
+                req[2] = new NameValuePair("NEW_OWNER_ID", "70919085040801266");
+                for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    va = (ValueArticle) it.next();
+                    tempI = 3 + i++;
+                    if (tempI % 2 == 0) {
+                        req[tempI] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                    } else {
+                        req[tempI] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                    }
+                    System.out.println("Прошло!!! -> " + va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
                 int getResult = client.executeMethod(getMethod);
@@ -149,6 +197,21 @@ public class ValuePro {
         } else {
             return true;
         }
+    }
+
+    public boolean isAllIds(String[] articles) {
+        boolean out = false;
+        Pattern p = Pattern.compile("\\d{17,18}");
+        Matcher m;
+        for (int i = 0; i < articles.length; i++) {
+            m = p.matcher(articles[i]);
+            if (m.matches()) {
+                out = true;
+            } else {
+                return false;
+            }
+        }
+        return out;
     }
 
     public List getArtclesIdByArticles(String[] articles) throws XmlPullParserException, UnsupportedEncodingException, IOException {
@@ -282,18 +345,39 @@ public class ValuePro {
         List data = new ArrayList();
         try {
             String[] temp = splitString(products);
+
             if (isArticle(temp[0])) {
                 data = getArtclesIdByArticles(temp);
-            } else {
+            } else if (isAllIds(temp)) {
                 data = getArtclesByArticlesId(temp);
+            } else {
+                return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
             }
-            //{
-//                for (int i = 0; i < temp.length; i++) {
-//                    va = new ValueArticle("", temp[i]);
-//                    data.add(va);
-//                }
-            //}
             out = export(data, ruEnBool);
+        } catch (Exception ex) {
+            out = ex.getMessage();
+        }
+        return out;
+    }
+
+    public String exportMarketing(String products) {
+        if (products == null || products.equals("")) {
+            return "Введите Articles или ArticlesId...";
+        }
+        String out = "Ошибка...";
+        ValueArticle va;
+        List data = new ArrayList();
+        try {
+            String[] temp = splitString(products);
+
+            if (isArticle(temp[0])) {
+                data = getArtclesIdByArticles(temp);
+            } else if (isAllIds(temp)) {
+                data = getArtclesByArticlesId(temp);
+            } else {
+                return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
+            }
+            out = exportMark(data);
         } catch (Exception ex) {
             out = ex.getMessage();
         }
