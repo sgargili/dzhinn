@@ -34,14 +34,14 @@ public class OutputData {
         for (Iterator it = warranty.iterator(); it.hasNext();) {
             kw = (Keywarranty) it.next();
             //warData.add(kw.getKeyarticle());
-            warMap.put(kw.getKeyarticle(), kw.getKeywarranty());
+            warMap.put(kw.getKeyarticle(), kw.getKeywarranty().replaceAll("Гарантия\\s:\\s", ""));
         }
 
         String newArt = "10004";
         CsvWriter csv = null;
         for (int r = 0; r < 25; r++) {
             List data = FactoryDAO.getInstance().getKeyDataDAO().getAllKeydata((25000 + 1) * r, 25000);
-            csv = new CsvWriter("/home/admin/keyData/keyData" + r + ".csv", ',', Charset.forName("WINDOWS-1251"));
+            csv = new CsvWriter("/smbRoot/keyData/keyData" + r + ".csv", ',', Charset.forName("WINDOWS-1251"));
             String[] strMas = new String[8];
             System.out.println(data.size());
             int i = 1;
@@ -74,7 +74,7 @@ public class OutputData {
                 strMas[2] = kd.getArticle();
                 strMas[3] = kd.getProductType();
                 strMas[4] = kd.getPictureUrl();
-                strMas[5] = kd.getGroupe();
+                strMas[5] = kd.getGroupe() + " - " + kd.getProductType();
                 strMas[6] = kd.getAttribute();
                 strMas[7] = kd.getAttributeValue().replaceAll("(\\n)|(\\r)(\\r\\n)|(\\n\\r)", "");
                 csv.writeRecord(strMas);

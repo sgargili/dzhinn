@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
+import pojo.Keyhtml;
 import pojo.TempPojo;
 import pojo.TempPojo2;
 
@@ -43,15 +44,31 @@ public class TorTest {
         //System.out.println(str);
 //        JustDownload jd = new JustDownload();
 //        jd.load("1", 49985);
-        List lst = FactoryDAO.getInstance().getTempPojoDAO2().getAllTempPojo2();
-        Set temp = new HashSet();
-        TempPojo2 tp;
-        for (Iterator it = lst.iterator(); it.hasNext();) {
-            tp = (TempPojo2) it.next();
-            temp.add(tp.getKeyarticle());
+//        List lst = FactoryDAO.getInstance().getTempPojoDAO2().getAllTempPojo2();
+//        Set temp = new HashSet();
+//        TempPojo2 tp;
+//        for (Iterator it = lst.iterator(); it.hasNext();) {
+//            tp = (TempPojo2) it.next();
+//            temp.add(tp.getKeyarticle());
+//        }
+//        System.out.println(lst.size());
+//        System.out.println(temp.size());
+//        System.out.println(temp.contains("49985"));
+
+        List lst;
+        Keyhtml tp;
+        DownloadContentv2 dc = new DownloadContentv2();
+        int j = 0;
+        for (int k = 0; k < 10; k++) {
+            lst = FactoryDAO.getInstance().getKeyHtmlDAO().getAllKeyHtml((10000 + 1) * k, 10000);
+            for (Iterator it = lst.iterator(); it.hasNext();) {
+                tp = (Keyhtml) it.next();
+                try {
+                    dc.load(j++ + "", Integer.parseInt(tp.getKeyarticle()), tp.getKeyhtml());
+                } catch (Exception ex) {
+                }
+            }
+            lst = null;
         }
-        System.out.println(lst.size());
-        System.out.println(temp.size());
-        System.out.println(temp.contains("49985"));
     }
 }
