@@ -26,6 +26,7 @@ public class CsvProcessing {
         m = p.matcher(fileName);
         if (m.find()) {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
+            encoding = encoding.equals("ANSI") ? "WINDOWS-1251" : encoding;
             fl = x2c.convertCsv2Csv(uploadFile, fileName, encoding, checkSeparator, checkZip);
         } else {
             if (engine.equals("Jexcel")) {

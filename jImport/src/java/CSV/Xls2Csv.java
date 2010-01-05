@@ -110,6 +110,7 @@ public class Xls2Csv {
         }
         IOUtils.copyLarge(uploadFile, FileUtils.openOutputStream(file));
         File file2 = new File(fileName);
+        encoding = encoding.equals("ANSI") ? "WINDOWS-1251" : encoding;
         CsvWriter csvw = new CsvWriter(file2.getAbsolutePath(), ',', Charset.forName(encoding));
         try {
             Workbook wb = Workbook.getWorkbook(file);
@@ -154,6 +155,8 @@ public class Xls2Csv {
             zipbool = true;
         }
         File file2 = new File(fileName);
+        encoding = encoding.equals("ANSI") ? "WINDOWS-1251" : encoding;
+
         CsvWriter csvw = new CsvWriter(file2.getAbsolutePath(), ',', Charset.forName(encoding));
         org.apache.poi.ss.usermodel.Workbook wb = WorkbookFactory.create(uploadFile);
         org.apache.poi.ss.usermodel.Sheet sheet = wb.getSheetAt(0);
