@@ -98,7 +98,7 @@ public class ValuePro {
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
                         va = (ValueArticle) it.next();
                         req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                        System.out.println("Прошло!!! -> " + va.getArticleId());
+                        // System.out.println("Прошло!!! -> " + va.getArticleId());
                     }
                 } else {
                     req = new NameValuePair[11 + exportData.size()];
@@ -133,8 +133,8 @@ public class ValuePro {
     private String exportMark(List articlesData) {
         NameValuePair[] req;
         ValueArticle va;
-        String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
-        String out = buildResponse(articlesData, "ExportMarketing");
+        String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
+        String out = buildResponse(articlesData, "Export Marketing");
         boolean process = false;
         List exportData = new ArrayList();
         for (Iterator it = articlesData.iterator(); it.hasNext();) {
@@ -153,20 +153,15 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int i = 0, tempI;
+                int i = 0;
                 req = new NameValuePair[3 + 2 * exportData.size()];
                 req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
                 req[1] = new NameValuePair("SOURCE", "");
                 req[2] = new NameValuePair("NEW_OWNER_ID", "70919085040801266");
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
                     va = (ValueArticle) it.next();
-                    tempI = 3 + i++;
-                    if (tempI % 2 == 0) {
-                        req[tempI] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                    } else {
-                        req[tempI] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
-                    }
-                    System.out.println("Прошло!!! -> " + va.getArticleId());
+                    req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                    req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
                 int getResult = client.executeMethod(getMethod);
@@ -231,7 +226,7 @@ public class ValuePro {
         for (Iterator it = strSet.iterator(); it.hasNext();) {
             urlPattern += (String) it.next() + ";";
         }
-        System.out.println("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern.replaceAll(";$", ""));
+        //System.out.println("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern.replaceAll(";$", ""));
         File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern);
 
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
@@ -294,8 +289,12 @@ public class ValuePro {
 
     public String buildResponse(List articlesData, String requestAction) {
         ValueArticle va;
+        int i = 1;
         String out = "<table bgcolor=black align=center cellspacing='1' cellpadding='1' border=0 width=98%>"//
                 + "<tr bgcolor = #2d4491 align=center>"//
+                + "<td>"//
+                + "<font color=white>#</font>"//
+                + "</td>"//
                 + "<td>"//
                 + "<font color=white>Article</font>"//
                 + "</td>"//
@@ -315,6 +314,9 @@ public class ValuePro {
         for (Iterator it = articlesData.iterator(); it.hasNext();) {
             va = (ValueArticle) it.next();
             out += "<tr bgcolor = #cfcdcd>"//
+                    + " <td style='padding-left:4px; text-align: center'>"//
+                    + i++//
+                    + "</td>"//
                     + " <td style='padding-left:4px; text-align: center'>"//
                     + (!va.getArticle().equals("Empty") ? va.getArticle() : "<font color=red>-</font>")//
                     + "</td>"//
