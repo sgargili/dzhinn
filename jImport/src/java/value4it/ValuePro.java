@@ -342,12 +342,19 @@ public class ValuePro {
         if (products == null || products.equals("")) {
             return "Введите Articles или ArticlesId...";
         }
+        String[] temp = splitString(products);
+        Pattern p = Pattern.compile("[А-Яа-я]");
+        Matcher m;
+        for (int i = 0; i < temp.length; i++) {
+            m = p.matcher(temp[i]);
+            if (m.find()) {
+                return "Русские символы в строке <b>" + (i+1) + "</b> -> <b>" + temp[i] + "</b>";
+            }
+        }
         String out = "Ошибка...";
         ValueArticle va;
         List data = new ArrayList();
         try {
-            String[] temp = splitString(products);
-
             if (isArticle(temp[0])) {
                 data = getArtclesIdByArticles(temp);
             } else if (isAllIds(temp)) {
@@ -366,12 +373,19 @@ public class ValuePro {
         if (products == null || products.equals("")) {
             return "Введите Articles или ArticlesId...";
         }
+        String[] temp = splitString(products);
+        Pattern p = Pattern.compile("[А-Яа-я]");
+        Matcher m;
+        for (int i = 0; i < temp.length; i++) {
+            m = p.matcher(temp[i]);
+            if (m.find()) {
+                return "Русские символы в строке <b>" + (i+1) + "</b> -> <b>" + temp[i] + "</b>";
+            }
+        }
         String out = "Ошибка...";
         ValueArticle va;
         List data = new ArrayList();
         try {
-            String[] temp = splitString(products);
-
             if (isArticle(temp[0])) {
                 data = getArtclesIdByArticles(temp);
             } else if (isAllIds(temp)) {

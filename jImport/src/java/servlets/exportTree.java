@@ -35,7 +35,7 @@ public class exportTree extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             xmlElab xmle = new xmlElab();
-            out.println("Готово за " + xmle.xmlCategoriesExport());
+            out.println(xmle.xmlCategoriesExport());
         } finally {
             out.close();
         }

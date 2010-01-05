@@ -35,7 +35,7 @@ public class exportProd2Cat extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             xmlElab xmle = new xmlElab();
-            out.println("Готово за " + xmle.xmlProductsToCategoriesExport());
+            out.println(xmle.xmlProductsToCategoriesExport());
         } finally {
             out.close();
         }
