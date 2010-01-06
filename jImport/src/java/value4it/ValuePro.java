@@ -4,7 +4,9 @@
  */
 package value4it;
 
+import DAO.FactoryDAO;
 import HttpClient.http;
+import Pojo.Cookies;
 import Pojo.ValueArticle;
 import java.io.File;
 import java.io.IOException;
@@ -17,11 +19,15 @@ import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -34,23 +40,27 @@ public class ValuePro {
 
     private HttpClient client = new HttpClient();
 
-    private void login() {
-        String st_url = "http://cf.value4it.com/login/authorize2.jsp";
-        PostMethod method = new PostMethod(st_url);
-        method.setParameter("USERNAME", "apopov");
-        method.setParameter("PASSWORD", "Andrey1602");
-        method.setParameter("btlogin", "SIGN-IN");
-
-        try {
-            int returnCode = client.executeMethod(method);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        } finally {
-            method.releaseConnection();
+    public void login() {
+        if (!isSessionAlive()) {
+            String st_url = "http://cf.value4it.com/login/authorize2.jsp";
+            PostMethod method = new PostMethod(st_url);
+            method.setParameter("USERNAME", "apopov");
+            method.setParameter("PASSWORD", "Andrey1602");
+            method.setParameter("btlogin", "SIGN-IN");
+            try {
+                int returnCode = client.executeMethod(method);
+                setCookie();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                method.releaseConnection();
+            }
+        } else {
+            getCookie();
         }
     }
 
-    private void logout() {
+    public void logout() {
         String url = "http://cf.value4it.com/login/logout.jsp";
         GetMethod getMethod = new GetMethod(url);
         try {
@@ -62,6 +72,88 @@ public class ValuePro {
         }
     }
 
+    private void updateSessionTime() {
+        setCookie();
+    }
+
+    public String setCookie() {
+        String cookie = "";
+        Cookie[] cookies = client.getState().getCookies();
+        for (int i = 0; i < cookies.length; i++) {
+            cookie += cookies[i];
+        }
+        if (!cookie.equals("") && cookie != null) {
+            Cookies cs = new Cookies();
+            cs.setId(1);
+            cs.setCookie(cookie);
+            cs.setTime(System.currentTimeMillis());
+            try {
+                FactoryDAO.getInstance().getCookiesDAO().addCookies(cs);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return cookie;
+    }
+
+    public boolean getCookie() {
+        boolean out = false;
+        try {
+            HttpState initialState = new HttpState();
+            Cookie mycookie = new Cookie();
+            mycookie.setDomain("cf.value4it.com");
+            mycookie.setPath("/");
+            mycookie.setName("JSESSIONID");
+            mycookie.setValue(FactoryDAO.getInstance().getCookiesDAO().getCookies(1)//
+                    .replaceAll("JSESSIONID=", "")//
+                    .replaceAll(":-1", ""));//
+            initialState.addCookie(mycookie);
+            client.setState(initialState);
+            out = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return out;
+    }
+
+    public boolean isSessionAlive() {
+        boolean out = false;
+        try {
+            long sessionTime = FactoryDAO.getInstance().getCookiesDAO().getCookiesTime(1);
+            long nowTime = System.currentTimeMillis();
+            if ((nowTime - sessionTime) < 1799999) {
+                out = true;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return out;
+    }
+
+//    public String DownloadContentAsString(String url, String encoding) {
+//        login();
+//        //String url = "http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
+//        String allString = "";
+//        GetMethod getMethod = new GetMethod(url);
+//        getMethod.setFollowRedirects(false);
+////        Cookie[] cookies = client.getState().getCookies();
+////        //System.out.println("Present cookies: ");
+////        for (int i = 0; i < cookies.length; i++) {
+////            System.out.println("\"" + cookies[i] + "\"");
+////        }
+//        try {
+//            int getResult = client.executeMethod(getMethod);
+//            System.out.println(getResult);
+//            System.out.println(HttpStatus.SC_TEMPORARY_REDIRECT);
+//            allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), encoding);
+//            allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
+//        } catch (Exception e) {
+//            System.err.println(e);
+//        } finally {
+//            getMethod.releaseConnection();
+//        }
+//        return allString;
+//    }
     private String export(List articlesData, boolean isRuEn) {
         NameValuePair[] req;
         ValueArticle va;
@@ -124,7 +216,7 @@ public class ValuePro {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            logout();
+            updateSessionTime();
         }
         return out;
 
@@ -169,7 +261,7 @@ public class ValuePro {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            logout();
+            updateSessionTime();
         }
         return out;
 
@@ -226,7 +318,6 @@ public class ValuePro {
         for (Iterator it = strSet.iterator(); it.hasNext();) {
             urlPattern += (String) it.next() + ";";
         }
-        //System.out.println("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern.replaceAll(";$", ""));
         File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern);
 
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
@@ -265,7 +356,6 @@ public class ValuePro {
         for (Iterator it = strSet.iterator(); it.hasNext();) {
             urlPattern += (String) it.next() + ";";
         }
-        //System.out.println("http://213.53.57.39/cfInfoWS/cf.exml?article=" + urlPattern.replaceAll(";$", ""));
         File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cf.exml?article=" + urlPattern.replaceAll(";$", ""));
 
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
@@ -348,7 +438,7 @@ public class ValuePro {
         for (int i = 0; i < temp.length; i++) {
             m = p.matcher(temp[i]);
             if (m.find()) {
-                return "Русские символы в строке <b>" + (i+1) + "</b> -> <b>" + temp[i] + "</b>";
+                return "Русские символы в строке <b>" + (i + 1) + "</b> -> <b>" + temp[i] + "</b>";
             }
         }
         String out = "Ошибка...";
@@ -379,7 +469,7 @@ public class ValuePro {
         for (int i = 0; i < temp.length; i++) {
             m = p.matcher(temp[i]);
             if (m.find()) {
-                return "Русские символы в строке <b>" + (i+1) + "</b> -> <b>" + temp[i] + "</b>";
+                return "Русские символы в строке <b>" + (i + 1) + "</b> -> <b>" + temp[i] + "</b>";
             }
         }
         String out = "Ошибка...";
