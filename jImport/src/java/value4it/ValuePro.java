@@ -267,6 +267,22 @@ public class ValuePro {
 
     }
 
+    public String clearCache() {
+        login();
+        String out = "<div>";
+        GetMethod getMethod = new GetMethod("https://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
+        try {
+            int getResult = client.executeMethod(getMethod);
+            out = IOUtils.toString(getMethod.getResponseBodyAsStream(), "UTF-8").trim();
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        updateSessionTime();
+        return out + "</div>";
+    }
+
     private String[] splitString(String inputString) {
         String[] outputStringArray = null;
         String splitPattern = "\\|\\|\\|";

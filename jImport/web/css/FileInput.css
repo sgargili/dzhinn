@@ -36,7 +36,7 @@
 	position:absolute;
 	top:0; left:0;
 	border:1px solid #333;
-	background:#cad2de url('../../../dijit/themes/tundra/images/dijitProgressBarAnim.gif') repeat-x top left;
+	background:#cad2de url('../dojo/dijit/themes/tundra/images/dijitProgressBarAnim.gif') repeat-x top left;
 	padding:2px;	
 }
 
@@ -48,7 +48,7 @@
 .tundra .dijitFakeInput input {
 	/*font-size: inherit;*/
 	padding: 0;
-	background:#fff url("../../../dijit/themes/tundra/images/validationInputBg.png") repeat-x top left;
+	background:#fff url("../dojo/dijit/themes/tundra/images/validationInputBg.png") repeat-x top left;
 	border:1px solid #9b9b9b;
 	line-height: normal;
 }
@@ -56,7 +56,7 @@
 .tundra .dijitFileInputText {
 	border:1px solid #9b9b9b;
 	padding:0px 12px 0px 12px; /* .3em .4em .2em .4em; */
-	background:#e9e9e9 url("../../../dijit/themes/tundra/images/buttonEnabled.png") repeat-x top;
+	background:#e9e9e9 url("../dojo/dijit/themes/tundra/images/buttonEnabled.png") repeat-x top;
 }
 
 /* Soria */
@@ -66,7 +66,7 @@
 }
 .soria .dijitFakeInput input {
 	border:1px solid #8BA0BD;
-	background:#fff url("../../../dijit/themes/soria/images/validationInputBg.png") repeat-x top left;
+	background:#fff url("../dojo/dijit/themes/soria/images/validationInputBg.png") repeat-x top left;
 	line-height:normal;
 	background-position:0 -30px; 
 	padding:0.2em 0.3em;
@@ -75,7 +75,7 @@
 .soria .dijitFileInputText {
 	border:1px solid #8BA0BD;
 	padding:2px 12px 2px 12px;
-	background:#b7cdee url('../../../dijit/themes/soria/images/buttonEnabled.png') repeat-x; 
+	background:#b7cdee url('../dojo/dijit/themes/soria/images/buttonEnabled.png') repeat-x;
 }
 
 /* Nihilo */
@@ -85,7 +85,7 @@
 }
 .nihilo .dijitFakeInput input {
 	border:1px solid #DEDEDE;
-	background:#fff url("../../../dijit/themes/nihilo/images/validationInputBg.png") repeat-x top left;
+	background:#fff url("../dojo/dijit/themes/nihilo/images/validationInputBg.png") repeat-x top left;
 	line-height:normal;
 	background-position:0 -30px; 
 	padding:0.2em 0.3em;
@@ -94,5 +94,5 @@
 .nihilo .dijitFileInputText {
 	border:1px solid #DEDEDE;
 	padding:2px 12px 2px 12px;
-	background:#b7cdee url('../../../dijit/themes/nihilo/images/buttonEnabled.png') repeat-x; 
+	background:#b7cdee url("../dojo/dijit/themes/nihilo/images/buttonEnabled.png") repeat-x;
 }

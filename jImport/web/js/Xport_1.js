@@ -429,3 +429,21 @@ function exportMarketing(){
     //        Show("AllDialog_Suppliers_Out");
     });
 }
+
+function clearCache(){
+    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    Ajax.clearCache(function(data) {
+        dojo.byId('ulexpProdLog').innerHTML = data;
+    });
+}
+
+function clearCacheMark(){
+    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    Ajax.clearCache(function(data) {
+        dojo.byId('ulexpMarkLog').innerHTML = data;
+    });
+}
+
+function showStatistics(){
+    window.open("https://cf.value4it.com/cf/export/stat.jsp","", config="");
+}

@@ -81,4 +81,9 @@ public class Ajax {
         products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
         return vp.exportMarketing(products);
     }
+
+    public String clearCache() {
+        ValuePro vp = new ValuePro();
+        return vp.clearCache();
+    }
 }

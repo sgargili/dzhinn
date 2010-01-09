@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css">
+        <%--<link rel="stylesheet" type="text/css" href="css/FileInput.css">--%>
         <script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>
         <script type="text/javascript" src="js/ext-base_1.js"></script>
         <script type="text/javascript" src="js/ext-all_1.js"></script>
@@ -63,19 +64,25 @@
                                             <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
                                                 <tr bgcolor = #cfcdcd align=left>
                                                     <td>
-                                                        <table cellspacing='7' cellpadding='0'>
-                                                            <tr>
-                                                                <td>
-                                                                    <input id='ruEnOnly' dojoType='dijit.form.CheckBox'/>
-                                                                </td>
-                                                                <td>
-                                                                    <label for="ruEnOnly">ru/en language only...</label>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
                                                         <center>
+                                                            <table cellspacing='7' cellpadding='0'>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input id='ruEnOnly' dojoType='dijit.form.CheckBox'/>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label for="ruEnOnly">ru/en language only...</label>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                             <button id="products_importByArticle_button" dojoType="dijit.form.Button" onclick="exportByProduct()">
                                                                 &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                            <button id="cache_button" dojoType="dijit.form.Button" onclick="clearCache()">
+                                                                &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
+                                                            </button>
+                                                            <button id="statistics_button" dojoType="dijit.form.Button" onclick="showStatistics()">
+                                                                &lt;&lt;&lt;Статистика&gt;&gt;&gt;
                                                             </button>
                                                         </center>
                                                     </td>
@@ -113,19 +120,22 @@
                                             <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
                                                 <tr bgcolor = #cfcdcd align=left>
                                                     <td>
-                                              <%--          <table cellspacing='7' cellpadding='0'>
-                                                            <tr>
-                                                                <td>
-                                                                    <input id='ruEnOnlyExpMark' dojoType='dijit.form.CheckBox'/>
-                                                                </td>
-                                                                <td>
-                                                                    <label for="ruEnOnlyExpMark">ru/en language only...</label>
-                                                                </td>
-                                                            </tr>
-                                                        </table>--%>
+                                                        <%--          <table cellspacing='7' cellpadding='0'>
+                                                                      <tr>
+                                                                          <td>
+                                                                              <input id='ruEnOnlyExpMark' dojoType='dijit.form.CheckBox'/>
+                                                                          </td>
+                                                                          <td>
+                                                                              <label for="ruEnOnlyExpMark">ru/en language only...</label>
+                                                                          </td>
+                                                                      </tr>
+                                                                  </table>--%>
                                                         <center>
                                                             <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportMarketing()">
                                                                 &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                            <button id="cache_Mark_button" dojoType="dijit.form.Button" onclick="clearCacheMark()">
+                                                                &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
                                                             </button>
                                                         </center>
                                                     </td>
@@ -175,7 +185,7 @@
                                                         <font color="black" size="1">Only separator(CSV):</font>
                                                     </td>
                                                     <td>
-                                                        <input type="checkbox" id="eCsvSeparator" dojoType="dijit.form.CheckBox">
+                                                        <input type="checkbox" id="eCsvSeparator" dojoType="dijit.form.CheckBox" checked="true">
                                                     </td>
                                                 </tr>
                                             </table>
@@ -214,7 +224,7 @@
                                             <input type="file" id="uploadFileeCsv"/>
                                         </td>
                                         <td>
-                                            <button onclick="UploadeCsv()">Convert</button>
+                                            <button onclick="UploadeCsv()" dojoType="dijit.form.Button">Convert</button>
                                         </td>
                                         <td>
                                             <div id="eCsvLoadingProcess">
@@ -235,7 +245,7 @@
                                             <input type="file" id="uploadit4profitCsv"/>
                                         </td>
                                         <td>
-                                            <button onclick="FixProfitCsv()">Fix</button>
+                                            <button onclick="FixProfitCsv()" dojoType="dijit.form.Button">Fix</button>
                                         </td>
                                         <td>
                                             <div id="it4profitCsvLoadingProcess">
