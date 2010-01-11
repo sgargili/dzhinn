@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.httpclient.Cookie;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpState;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
@@ -319,18 +318,51 @@ public class ValuePro {
         return out;
 
     }
-//    POST_ACTION=change_status
-//ID_71128130424717395=71128130424717395
-//ID_81215130524109851=81215130524109851
-//ID_90723074131250484=90723074131250484
-//TARGET_90723074131250484=90723074131250484
-//ID_70822103842440130=70822103842440130
-//ID_70905102734397916=70905102734397916
-//ID_70822104032059512=70822104032059512
-//ID_71031134301966972=71031134301966972
-//SOURCE=
-//NEW_STATUS=5
-//NEW_OWNER_ID=70919085040801266
+
+    private String cngOwn(List articlesData, String owner) {
+        NameValuePair[] req;
+        ValueArticle va;
+        String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
+        String out = buildResponse(articlesData, "Change Owner");
+        boolean process = false;
+        List changeData = new ArrayList();
+        for (Iterator it = articlesData.iterator(); it.hasNext();) {
+            va = (ValueArticle) it.next();
+            if (!va.getArticleId().equals("Empty") //
+                    && !va.getArticle().equals("Empty")//
+                    && !va.getArticle().equals("")//
+                    && va.getArticle() != null//
+                    && !va.getArticleId().equals("")//
+                    && va.getArticleId() != null) {
+                process = true;
+                changeData.add(va);
+            }
+        }
+        if (process) {
+            login();
+            try {
+                PostMethod getMethod = new PostMethod(url);
+                int i = 0;
+                req = new NameValuePair[3 + 2 * changeData.size()];
+                req[0] = new NameValuePair("POST_ACTION", "change_owner");
+                req[1] = new NameValuePair("SOURCE", "");
+                req[2] = new NameValuePair("NEW_OWNER_ID", owner);
+                for (Iterator it = changeData.iterator(); it.hasNext();) {
+                    va = (ValueArticle) it.next();
+                    req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                    req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                }
+                getMethod.setRequestBody(req);
+                int getResult = client.executeMethod(getMethod);
+                getMethod.releaseConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            updateSessionTime();
+        }
+        return out;
+
+    }
 
     public String clearCache() {
         login();
@@ -571,7 +603,7 @@ public class ValuePro {
         return out;
     }
 
-     public String changeStatus(String products, String status) {
+    public String changeStatus(String products, String status) {
         if (products == null || products.equals("")) {
             return "Введите Articles или ArticlesId...";
         }
@@ -596,6 +628,37 @@ public class ValuePro {
                 return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
             }
             out = cngStat(data, status);
+        } catch (Exception ex) {
+            out = ex.getMessage();
+        }
+        return out;
+    }
+
+    public String changeOwner(String products, String owner) {
+        if (products == null || products.equals("")) {
+            return "Введите Articles или ArticlesId...";
+        }
+        String[] temp = splitString(products);
+        Pattern p = Pattern.compile("[А-Яа-я]");
+        Matcher m;
+        for (int i = 0; i < temp.length; i++) {
+            m = p.matcher(temp[i]);
+            if (m.find()) {
+                return "Русские символы в строке <b>" + (i + 1) + "</b> -> <b>" + temp[i] + "</b>";
+            }
+        }
+        String out = "Ошибка...";
+        ValueArticle va;
+        List data = new ArrayList();
+        try {
+            if (isArticle(temp[0])) {
+                data = getArtclesIdByArticles(temp);
+            } else if (isAllIds(temp)) {
+                data = getArtclesByArticlesId(temp);
+            } else {
+                return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
+            }
+            out = cngOwn(data, owner);
         } catch (Exception ex) {
             out = ex.getMessage();
         }
