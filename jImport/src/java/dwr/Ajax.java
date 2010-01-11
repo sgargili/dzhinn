@@ -86,4 +86,9 @@ public class Ajax {
         ValuePro vp = new ValuePro();
         return vp.clearCache();
     }
+    public String changeStatus(String products, String status) {
+        products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
+        ValuePro vp = new ValuePro();
+        return vp.changeStatus(products, status);
+    }
 }
