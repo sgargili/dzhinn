@@ -444,6 +444,28 @@ function clearCacheMark(){
     });
 }
 
+function changeStatus(){
+    dojo.byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var status = "";
+    var data = dojo.byId('ArticlesStatusChange').value;
+    var rBool = dojo.byId('statusOne').checked;
+    var cBool = dojo.byId('statusTwo').checked;
+    var dBool = dojo.byId('statusThree').checked;
+    if(rBool){
+        status = dojo.byId('statusOne').value;
+    }
+    if(cBool){
+        status = dojo.byId('statusTwo').value;
+    }
+    if(dBool){
+        status = dojo.byId('statusThree').value;
+    }
+        Ajax.changeStatus(data, status, function(data) {
+            dojo.byId('ulstatusChangeLog').innerHTML = data;
+        });
+    
+}
+
 function showStatistics(){
     window.open("https://cf.value4it.com/cf/export/stat.jsp","", config="");
 }

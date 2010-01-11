@@ -14,13 +14,16 @@ var value4export = {
     },{
         title: 'Экспорт маркетинга',
         contentEl: 'expMark'
+    },{
+        title: 'Смена статуса',
+        contentEl: 'statusChange'
     }
     //    ,{
     //        title: 'Импорт изображений',
     //        contentEl: 'images_import'
     //    },{
     //        title: 'Дополнительно',
-    //        contentEl: 'add_import'
+    //        contentEl: 'add_import' statusChange
     //    }
     ]
 };

@@ -56,7 +56,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <textarea id='Articles' style='width:550px; height:150px'></textarea>
+                                            <textarea id='Articles' style='width:350px; height:150px'></textarea>
                                         </td>
                                         <td>
                                         </td>
@@ -156,6 +156,70 @@
                     </ul>
                 </div>
             </div>
+            <div id="statusChange">
+                <div dojoType="dijit.TooltipDialog" id="statusChangeInput">
+                    <h1 style="color:orange">Смена статуса</h1>
+                    <table id="statusChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #e1e1e1 align=left>
+                            <td style="padding:7px">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <textarea id='ArticlesStatusChange' style='width:350px; height:150px'></textarea>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = #cfcdcd align=left>
+                                                    <td>
+                                                        <table cellspacing='7' cellpadding='0'>
+                                                            <tr>
+                                                                <td>
+                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusOne" checked value="Research" />
+                                                                    <label for="statusOne">
+                                                                        Research
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusTwo"
+                                                                           value="Control" />
+                                                                    <label for="statusTwo">
+                                                                        Control
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusThree"
+                                                                           value="Done" />
+                                                                    <label for="statusThree">
+                                                                        Done
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <center>
+                                                            <button id="statusChange_button" dojoType="dijit.form.Button" onclick="changeStatus()">
+                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                <div dojoType="dijit.TooltipDialog" id="statusChangeLogs" style="text-align:left; overflow:visible scroll">
+                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                    <br/>
+                    <ul id="ulstatusChangeLog" style="min-height:350px">
+                    </ul>
+                </div>
+            </div>
             <div id ="eCsv">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
                     <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
@@ -210,8 +274,8 @@
                                                     </td>
                                                     <td>
                                                         <select id="eCsvEngine" dojoType="dijit.form.FilteringSelect" style="width:120px">
-                                                            <option value="Jexcel">Jexcel
                                                             <option value="Apache POI">Apache POI
+                                                            <option value="Jexcel">Jexcel
                                                         </select>
                                                     </td>
                                                 </tr>
