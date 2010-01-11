@@ -7,6 +7,7 @@ dojo.require("dijit.form.Textarea");
 dojo.require("dijit.form.Button");
 dojo.require("dijit.Dialog");
 dojo.require("dijit.form.FilteringSelect");
+dojo.require("dojo.data.ItemFileReadStore");
 
 dojo.require("dojox.form.FileInput");
 function SwitchLanguages () {
@@ -460,10 +461,18 @@ function changeStatus(){
     if(dBool){
         status = dojo.byId('statusThree').value;
     }
-        Ajax.changeStatus(data, status, function(data) {
-            dojo.byId('ulstatusChangeLog').innerHTML = data;
-        });
+    Ajax.changeStatus(data, status, function(data) {
+        dojo.byId('ulstatusChangeLog').innerHTML = data;
+    });
     
+}
+function changeOwner(){
+    dojo.byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var owner = dijit.byId('owner').attr('value');
+    var data = dojo.byId('ArticlesOwnerChange').value;
+    Ajax.changeOwner(data, owner, function(data) {
+        dojo.byId('ulownerChangeLog').innerHTML = data;
+    });
 }
 
 function showStatistics(){

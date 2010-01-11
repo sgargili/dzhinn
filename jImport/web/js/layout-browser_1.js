@@ -10,10 +10,11 @@ Ext.onReady(function(){
         border: false,
         items: [
         // from basic.js:
-        //start,
+        start,
         // from custom.js:
         //        nix, a2Zmall,
         value4export,
+        value4ovnerstatus,
         //        magento,
         // from combination.js:
         //        yandex,

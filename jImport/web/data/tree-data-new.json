@@ -4,6 +4,10 @@
         text:'Экспорт Value4IT',
         id:'vExp',
         leaf:true
+    },{
+        text:'Авторы и статусы',
+        id:'vStat',
+        leaf:true
     }
 ]
 //},{

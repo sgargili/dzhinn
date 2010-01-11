@@ -1,5 +1,5 @@
 [{
-//    text:'GrabliÐ²â€žÑž',
+//    text:'Grabliâ„¢',
 //    children:[{
 //        text:'Nix.ru',
 //        id:'Nix',
@@ -7,7 +7,7 @@
 //    }]
 //},
 //{
-    text:'Ð˜Ð¼Ð¿Ð¾Ñ€Ñ‚',
+    text:'Èìïîðò',
     children:[{
         text:'StoneAxe.ru',
         id:'Stoneaxe',
@@ -24,9 +24,9 @@
 //    }
 ]
 },{
-    text:'Ð Ð°Ð±Ð¾Ñ‚Ð° Ñ Ñ†ÐµÐ½Ð°Ð¼Ð¸',
+    text:'Ðàáîòà ñ öåíàìè',
     children:[{
-        text:'Ð¯Ð½Ð´ÐµÐºÑ Ð¼Ð°Ñ€ÐºÐµÑ‚',
+        text:'ßíäåêñ ìàðêåò',
         id:'Yandex',
         leaf:true
     }
@@ -37,7 +37,7 @@
 //    }
 ]
 },{
-    text:'ÐŸÐ¾Ð»ÐµÐ·Ð½Ñ‹Ðµ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ð¸',
+    text:'Ïîëåçíûå ôóíêöèè',
     children:[{
         text:'XLS,CSV(Excel) -> CSV',
         id:'eCsv',

@@ -32,13 +32,15 @@
             <table width="100%">
                 <tr>
                     <td>
-                        <h1>Fast Export</h1>
+                        <h1>Fast Export and so on...</h1>
                     </td>
                     <td>
 
                     </td>
                 </tr>
             </table>
+        </div>
+        <div dojoType="dojo.data.ItemFileReadStore" jsId="stateStore" url="data/owners.json">
         </div>
         <div style="display:none;">
             <div id="start-div" style="background-color:#e1e8ff; width:100%; height:100%">
@@ -220,6 +222,54 @@
                     </ul>
                 </div>
             </div>
+            <div id="ownerChange">
+                <div dojoType="dijit.TooltipDialog" id="ownerChangeInput">
+                    <h1 style="color:orange">Смена автора</h1>
+                    <table id="ownerChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #e1e1e1 align=left>
+                            <td style="padding:7px">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <textarea id='ArticlesOwnerChange' style='width:350px; height:150px'></textarea>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = #cfcdcd align=left>
+                                                    <td>
+                                                        <table cellspacing='7' cellpadding='0'>
+                                                            <tr>
+                                                                <td>
+                                                                    <input dojoType="dijit.form.FilteringSelect" store="stateStore" value="60511120540229999"
+                                                                           searchAttr="name" id="owner"/>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <center>
+                                                            <button id="ownerChange_button" dojoType="dijit.form.Button" onclick="changeOwner()">
+                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                <div dojoType="dijit.TooltipDialog" id="ownerChangeLogs" style="text-align:left; overflow:visible scroll">
+                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                    <br/>
+                    <ul id="ulownerChangeLog" style="min-height:350px">
+                    </ul>
+                </div>
+            </div>
             <div id ="eCsv">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
                     <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
@@ -328,6 +378,9 @@
             </div>
             <div id="eCsv-details">
                 <h2 class="details-info">Преобразование форматов файлов...</h2>
+            </div>
+            <div id="vStat-details">
+                <h2 class="details-info">Смена авторов и статусов в системе Content Factory</h2>
             </div>
         </div>
     </body>

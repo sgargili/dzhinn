@@ -13,18 +13,29 @@ var value4export = {
         autoScroll: true
     },{
         title: 'Экспорт маркетинга',
-        contentEl: 'expMark'
+        contentEl: 'expMark',
+        autoScroll: true
+    }
+    ]
+};
+var value4ovnerstatus = {
+
+    xtype: 'tabpanel',
+    id: 'vStat-panel',
+    plain: true,  //remove the header border
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+    },
+    items:[{
+        title: 'Смена автора',
+        contentEl: 'ownerChange',
+        autoScroll: true
     },{
         title: 'Смена статуса',
-        contentEl: 'statusChange'
+        contentEl: 'statusChange',
+        autoScroll: true
     }
-    //    ,{
-    //        title: 'Импорт изображений',
-    //        contentEl: 'images_import'
-    //    },{
-    //        title: 'Дополнительно',
-    //        contentEl: 'add_import' statusChange
-    //    }
     ]
 };
 
