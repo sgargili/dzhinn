@@ -10,7 +10,14 @@ package Pojo;
  */
 public class ValueLink {
 
-    private String article, classcatId, link;
+    private String article, classcatId, linkType, link;
+
+    public ValueLink(String article, String classcatId, String linkType, String link) {
+        this.article = article;
+        this.classcatId = classcatId;
+        this.linkType = linkType;
+        this.link = link;
+    }
 
     public ValueLink() {
     }
@@ -19,6 +26,14 @@ public class ValueLink {
         this.article = article;
         this.classcatId = classcatId;
         this.link = link;
+    }
+
+    public String getLinkType() {
+        return linkType;
+    }
+
+    public void setLinkType(String linkType) {
+        this.linkType = linkType;
     }
 
     public String getArticle() {

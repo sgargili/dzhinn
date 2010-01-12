@@ -132,30 +132,6 @@ public class ValuePro {
         return out;
     }
 
-//    public String DownloadContentAsString(String url, String encoding) {
-//        login();
-//        //String url = "http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
-//        String allString = "";
-//        GetMethod getMethod = new GetMethod(url);
-//        getMethod.setFollowRedirects(false);
-////        Cookie[] cookies = client.getState().getCookies();
-////        //System.out.println("Present cookies: ");
-////        for (int i = 0; i < cookies.length; i++) {
-////            System.out.println("\"" + cookies[i] + "\"");
-////        }
-//        try {
-//            int getResult = client.executeMethod(getMethod);
-//            System.out.println(getResult);
-//            System.out.println(HttpStatus.SC_TEMPORARY_REDIRECT);
-//            allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), encoding);
-//            allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
-//        } catch (Exception e) {
-//            System.err.println(e);
-//        } finally {
-//            getMethod.releaseConnection();
-//        }
-//        return allString;
-//    }
     private String export(List articlesData, boolean isRuEn) {
         NameValuePair[] req;
         ValueArticle va;
@@ -275,6 +251,7 @@ public class ValuePro {
         String url = "http://cf.value4it.com/cf/classcat/classcat_links.jsp";
         String out = buildResponse4Link(articlesData, "Add Links");
         boolean process = false;
+        String linkType = "1";
         List exportData = new ArrayList();
         for (Iterator it = articlesData.iterator(); it.hasNext();) {
             vl = (ValueLink) it.next();
@@ -294,11 +271,20 @@ public class ValuePro {
                 PostMethod getMethod = new PostMethod(url);
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
                     vl = (ValueLink) it.next();
+                    if (vl.getLinkType().trim().equalsIgnoreCase("Datasheet")) {
+                        linkType = "3";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Data sheet")) {
+                        linkType = "3";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Specifications")) {
+                        linkType = "2";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Specification")) {
+                        linkType = "2";
+                    }
                     req = new NameValuePair[6];
                     req[0] = new NameValuePair("LANG_CODE", "en");
-                    req[1] = new NameValuePair("TYPE_DOC", "1");
+                    req[1] = new NameValuePair("TYPE_DOC", linkType);
                     req[2] = new NameValuePair("INFO_ID", "");
-                    req[3] = new NameValuePair("TEXT", "Product Information");
+                    req[3] = new NameValuePair("TEXT", vl.getLinkType());
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
                     getMethod.setRequestBody(req);
@@ -506,7 +492,8 @@ public class ValuePro {
 
     public List getClasscatIdByArticles(String[] articles) throws XmlPullParserException, UnsupportedEncodingException, IOException {
         String[] data;
-        Map articleMap = new HashMap();
+        Map articleLinkMap = new HashMap();
+        Map articleLinkTypeMap = new HashMap();
         http http = new http();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
@@ -517,9 +504,14 @@ public class ValuePro {
         String urlPattern = "";
 
         for (int i = 0; i < articles.length; i++) {
-            data = articles[i].split("\\t");
-            articleMap.put(data[0], data[1]);
-            strSet.add(data[0]);
+            try {
+                data = articles[i].split("\\t");
+                articleLinkMap.put(data[0], data[2]);
+                articleLinkTypeMap.put(data[0], data[1]);
+                strSet.add(data[0]);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         }
         for (Iterator it = strSet.iterator(); it.hasNext();) {
             urlPattern += (String) it.next() + ";";
@@ -531,7 +523,7 @@ public class ValuePro {
         while (eventType != XmlPullParser.END_DOCUMENT) {
             if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("article")) {
                 if (strSet.contains(xpp.getAttributeValue(2).trim())) {
-                    vl = new ValueLink(xpp.getAttributeValue(2).trim(), xpp.getAttributeValue(1), (String) articleMap.get(xpp.getAttributeValue(2).trim()));
+                    vl = new ValueLink(xpp.getAttributeValue(2).trim(), xpp.getAttributeValue(1), (String) articleLinkTypeMap.get(xpp.getAttributeValue(2).trim()), (String) articleLinkMap.get(xpp.getAttributeValue(2).trim()));
                     out.add(vl);
                     strSet.remove(xpp.getAttributeValue(2).trim());
                 }
@@ -539,7 +531,7 @@ public class ValuePro {
             eventType = xpp.next();
         }
         for (Iterator it = strSet.iterator(); it.hasNext();) {
-            vl = new ValueLink((String) it.next(), "Empty", "Empty");
+            vl = new ValueLink((String) it.next(), "Empty", "Empty", "Empty");
             out.add(vl);
         }
         return out;
@@ -832,5 +824,20 @@ public class ValuePro {
             out = ex.getMessage();
         }
         return out;
+    }
+
+    public String clearSession() {
+        login();
+        logout();
+        Cookies cs = new Cookies();
+        cs.setId(1);
+        cs.setCookie("");
+        cs.setTime(0L);
+        try {
+            FactoryDAO.getInstance().getCookiesDAO().addCookies(cs);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "Cleared...";
     }
 }

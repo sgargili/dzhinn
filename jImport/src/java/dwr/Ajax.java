@@ -104,4 +104,9 @@ public class Ajax {
         ValuePro vp = new ValuePro();
         return vp.addLink(links);
     }
+
+    public String clearSession() {
+        ValuePro vp = new ValuePro();
+        return vp.clearSession();
+    }
 }
