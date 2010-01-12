@@ -310,6 +310,37 @@
                     </ul>
                 </div>
             </div>
+            <div id="optSes">
+                <div dojoType="dijit.TooltipDialog" id="optSesInput">
+                    <h1 style="color:orange">Сброс сессии.</h1>
+                    <table id="ownerChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #e1e1e1 align=left>
+                            <td style="padding:7px">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = #cfcdcd align=left>
+                                                    <td>
+                                                        <center>
+                                                            <button id="optSes_button" dojoType="dijit.form.Button" onclick="clearSession()">
+                                                                &lt;&lt;&lt;Сброс&gt;&gt;&gt;
+                                                            </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                        <td>
+                                            <div id="uloptSesLog"></div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <div id ="eCsv">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
                     <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
@@ -423,7 +454,10 @@
                 <div class="details-info"><b>Смена авторов и статусов</b>. Формат - список <b>артиклей</b> или <b>айдишников артиклей</b>(но не в перемешку).</div>
             </div>
             <div id="vLink-details">
-                <div class="details-info"><b>Добавление ссылок к артиклям</b>. Формат - список <b>артиклей и ссылок</b>(разделитель между артиклем и ссылкой - <b>табуляция</b>).</div>
+                <div class="details-info"><b>Добавление ссылок к артиклям</b>. Формат - список <b>артиклей, типов ссылок и ссылок</b>(разделитель между артиклем, типом и ссылкой - <b>табуляция</b>).</div>
+            </div>
+            <div id="oSes-details">
+                <div class="details-info"><b>Сброс сессии. Применять только когда не срабатывает какая-либо процедура по работе с Value4IT</b>...</div>
             </div>
         </div>
     </body>

@@ -29,4 +29,11 @@
         id:'eCsv',
         leaf:true
     }]
+},{
+    text:'Настройки',
+    children:[{
+        text:'Сброс сессии',
+        id:'oSes',
+        leaf:true
+    }]
 }]

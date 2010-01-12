@@ -16,6 +16,7 @@ Ext.onReady(function(){
         value4export,
         value4ovnerstatus,
         value4link,
+        osession,
         //        magento,
         // from combination.js:
         //        yandex,

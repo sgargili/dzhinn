@@ -441,6 +441,16 @@ function addLink(){
     });
 }
 
+function clearSession(){
+    dojo.byId('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    Show('uloptSesLog');
+    Ajax.clearSession(function(data) {
+        dojo.byId('uloptSesLog').innerHTML = data;
+        Hide('uloptSesLog');
+    });
+   
+}
+
 function clearCache(){
     dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {
