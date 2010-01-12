@@ -815,6 +815,9 @@ public class ValuePro {
             return "Введите данные...";
         }
         String[] temp = splitString(products);
+        if (temp[0].split("\\t").length != 3) {
+            return "Введены не верные данные... Верный формат -  артикль\"символ табуляции\"тип ссылки\"символ табуляции\"ссылка";
+        }
         Pattern p = Pattern.compile("[А-Яа-я]");
         Matcher m;
         for (int i = 0; i < temp.length; i++) {
