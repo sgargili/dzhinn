@@ -28,6 +28,7 @@ import org.apache.commons.httpclient.HttpState;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.xmlpull.v1.XmlPullParser;
@@ -50,6 +51,7 @@ public class ValuePro {
             method.setParameter("PASSWORD", "Andrey1602");
             method.setParameter("btlogin", "SIGN-IN");
             try {
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 int returnCode = client.executeMethod(method);
                 setCookie();
             } catch (Exception e) {
@@ -66,6 +68,7 @@ public class ValuePro {
         String url = "http://cf.value4it.com/login/logout.jsp";
         GetMethod getMethod = new GetMethod(url);
         try {
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
             int getResult = client.executeMethod(getMethod);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -189,6 +192,7 @@ public class ValuePro {
                     }
                 }
                 getMethod.setRequestBody(req);
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 int getResult = client.executeMethod(getMethod);
                 getMethod.releaseConnection();
             } catch (IOException e) {
@@ -234,6 +238,7 @@ public class ValuePro {
                     req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 int getResult = client.executeMethod(getMethod);
                 getMethod.releaseConnection();
             } catch (IOException e) {
@@ -288,6 +293,7 @@ public class ValuePro {
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
                     getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                     int getResult = client.executeMethod(getMethod);
                     getMethod.releaseConnection();
                     try {
@@ -346,6 +352,7 @@ public class ValuePro {
                     req[4 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 int getResult = client.executeMethod(getMethod);
                 getMethod.releaseConnection();
             } catch (IOException e) {
@@ -391,6 +398,7 @@ public class ValuePro {
                     req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
                 int getResult = client.executeMethod(getMethod);
                 getMethod.releaseConnection();
             } catch (IOException e) {
@@ -407,6 +415,7 @@ public class ValuePro {
         String out = "<div>";
         GetMethod getMethod = new GetMethod("https://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
         try {
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
             int getResult = client.executeMethod(getMethod);
             out = IOUtils.toString(getMethod.getResponseBodyAsStream(), "UTF-8").trim();
         } catch (Exception e) {

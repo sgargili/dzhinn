@@ -7,6 +7,7 @@ package HttpClient;
 import java.io.File;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -22,6 +23,7 @@ public class http {
         String allString = "";
         GetMethod getMethod = new GetMethod(url);
         try {
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
             int getResult = client.executeMethod(getMethod);
             allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), "UTF-8");
             allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
@@ -38,6 +40,7 @@ public class http {
         String allString = "";
         GetMethod getMethod = new GetMethod(url);
         try {
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
             int getResult = client.executeMethod(getMethod);
             allString = IOUtils.toString(getMethod.getResponseBodyAsStream(), encoding);
             allString = allString.replaceAll("Error 500:.*", "<?xml version=\"1.0\" encoding=\"UTF-8\"?><itemCard></itemCard>");
@@ -54,6 +57,7 @@ public class http {
         File tempFile = new File("temp");
         GetMethod getMethod = new GetMethod(url);
         try {
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
             int getResult = client.executeMethod(getMethod);
             org.apache.sanselan.util.IOUtils.putInputStreamToFile(getMethod.getResponseBodyAsStream(), tempFile);
         } catch (Exception e) {
