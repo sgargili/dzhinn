@@ -431,6 +431,16 @@ function exportMarketing(){
     });
 }
 
+function addLink(){
+    dojo.byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = dojo.byId('ArticlesAddLink').value;
+    //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
+    Ajax.addLink(data, function(data) {
+        dojo.byId('uladdLinkLog').innerHTML = data;
+    //        Show("AllDialog_Suppliers_Out");
+    });
+}
+
 function clearCache(){
     dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {

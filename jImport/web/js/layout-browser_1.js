@@ -15,6 +15,7 @@ Ext.onReady(function(){
         //        nix, a2Zmall,
         value4export,
         value4ovnerstatus,
+        value4link,
         //        magento,
         // from combination.js:
         //        yandex,

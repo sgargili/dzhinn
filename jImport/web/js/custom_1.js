@@ -39,6 +39,28 @@ var value4ovnerstatus = {
     ]
 };
 
+var value4link = {
+
+    xtype: 'tabpanel',
+    id: 'vLink-panel',
+    plain: true,  //remove the header border
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+    },
+    items:[{
+        title: 'Добавление ссылок',
+        contentEl: 'addLink',
+        autoScroll: true
+    }
+//    ,{
+//        title: 'Смена статуса',
+//        contentEl: 'statusChange',
+//        autoScroll: true
+//    }
+    ]
+};
+
 var nix = {
 
     xtype: 'tabpanel',

@@ -270,6 +270,46 @@
                     </ul>
                 </div>
             </div>
+            <div id="addLink">
+                <div dojoType="dijit.TooltipDialog" id="addLinkInput">
+                    <h1 style="color:orange">Добавление ссылок. Вводить только артикли, айдишники артиклей не пройдут...</h1>
+                    <table id="addLinkTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                        <tr bgcolor = #e1e1e1 align=left>
+                            <td style="padding:7px">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <textarea id='ArticlesAddLink' style='width:700px; height:150px'></textarea>
+                                        </td>
+                                        <td>
+                                        </td>
+                                        <td>
+                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = #cfcdcd align=left>
+                                                    <td>
+                                                        <center>
+                                                            <button id="addLink_button" dojoType="dijit.form.Button" onclick="addLink()">
+                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
+                                                            </button>
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br/>
+                <div dojoType="dijit.TooltipDialog" id="addLinkLogs" style="text-align:left; overflow:visible scroll">
+                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                    <br/>
+                    <ul id="uladdLinkLog" style="min-height:350px">
+                    </ul>
+                </div>
+            </div>
             <div id ="eCsv">
                 <div dojoType="dijit.TooltipDialog" id="AllDialog_eCsv">
                     <table id="TableeCsv" bgcolor=black align ="center" cellspacing='1' cellpadding='1' border='0' width='100%'>
@@ -374,13 +414,16 @@
                 </div>
             </div>
             <div id="vExp-details">
-                <h2 class="details-info">Экспорт в системе Content Factory</h2>
+                <div class="details-info"><b>Экспорт</b>. Формат - список <b>артиклей</b> или <b>айдишников артиклей</b> (но не в перемешку).</div>
             </div>
             <div id="eCsv-details">
-                <h2 class="details-info">Преобразование форматов файлов...</h2>
+                <div class="details-info"><b>Преобразование форматов файлов</b>...</div>
             </div>
             <div id="vStat-details">
-                <h2 class="details-info">Смена авторов и статусов в системе Content Factory</h2>
+                <div class="details-info"><b>Смена авторов и статусов</b>. Формат - список <b>артиклей</b> или <b>айдишников артиклей</b>(но не в перемешку).</div>
+            </div>
+            <div id="vLink-details">
+                <div class="details-info"><b>Добавление ссылок к артиклям</b>. Формат - список <b>артиклей и ссылок</b>(разделитель между артиклем и ссылкой - <b>табуляция</b>).</div>
             </div>
         </div>
     </body>

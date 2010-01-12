@@ -1,12 +1,16 @@
 [{
-    text:'Экспорт',
+    text:'Value4IT',
     children:[{
-        text:'Экспорт Value4IT',
+        text:'Экспорт',
         id:'vExp',
         leaf:true
     },{
         text:'Авторы и статусы',
         id:'vStat',
+        leaf:true
+    },{
+        text:'Ссылки',
+        id:'vLink',
         leaf:true
     }
 ]
