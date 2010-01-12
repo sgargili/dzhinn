@@ -8,14 +8,17 @@ import DAO.FactoryDAO;
 import HttpClient.http;
 import Pojo.Cookies;
 import Pojo.ValueArticle;
+import Pojo.ValueLink;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -266,6 +269,55 @@ public class ValuePro {
 
     }
 
+    private String aLink(List articlesData) {
+        NameValuePair[] req;
+        ValueLink vl;
+        String url = "http://cf.value4it.com/cf/classcat/classcat_links.jsp";
+        String out = buildResponse4Link(articlesData, "Add Links");
+        boolean process = false;
+        List exportData = new ArrayList();
+        for (Iterator it = articlesData.iterator(); it.hasNext();) {
+            vl = (ValueLink) it.next();
+            if (!vl.getClasscatId().equals("Empty") //
+                    && !vl.getArticle().equals("Empty")//
+                    && !vl.getArticle().equals("")//
+                    && vl.getArticle() != null//
+                    && !vl.getClasscatId().equals("")//
+                    && vl.getClasscatId() != null) {
+                process = true;
+                exportData.add(vl);
+            }
+        }
+        if (process) {
+            login();
+            try {
+                PostMethod getMethod = new PostMethod(url);
+                for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    vl = (ValueLink) it.next();
+                    req = new NameValuePair[6];
+                    req[0] = new NameValuePair("LANG_CODE", "en");
+                    req[1] = new NameValuePair("TYPE_DOC", "1");
+                    req[2] = new NameValuePair("INFO_ID", "");
+                    req[3] = new NameValuePair("TEXT", "Product Information");
+                    req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
+                    req[5] = new NameValuePair("SOURCE", vl.getLink());
+                    getMethod.setRequestBody(req);
+                    int getResult = client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException ex) {
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            updateSessionTime();
+        }
+        return out;
+
+    }
+
     private String cngStat(List articlesData, String status) {
         if (status.equals("Research")) {
             status = "4";
@@ -452,6 +504,47 @@ public class ValuePro {
         return out;
     }
 
+    public List getClasscatIdByArticles(String[] articles) throws XmlPullParserException, UnsupportedEncodingException, IOException {
+        String[] data;
+        Map articleMap = new HashMap();
+        http http = new http();
+        XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
+        XmlPullParser xpp = factory.newPullParser();
+
+        List out = new ArrayList();
+        Set<String> strSet = new HashSet();
+        ValueLink vl;
+        String urlPattern = "";
+
+        for (int i = 0; i < articles.length; i++) {
+            data = articles[i].split("\\t");
+            articleMap.put(data[0], data[1]);
+            strSet.add(data[0]);
+        }
+        for (Iterator it = strSet.iterator(); it.hasNext();) {
+            urlPattern += (String) it.next() + ";";
+        }
+        File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern);
+
+        xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
+        int eventType = xpp.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("article")) {
+                if (strSet.contains(xpp.getAttributeValue(2).trim())) {
+                    vl = new ValueLink(xpp.getAttributeValue(2).trim(), xpp.getAttributeValue(1), (String) articleMap.get(xpp.getAttributeValue(2).trim()));
+                    out.add(vl);
+                    strSet.remove(xpp.getAttributeValue(2).trim());
+                }
+            }
+            eventType = xpp.next();
+        }
+        for (Iterator it = strSet.iterator(); it.hasNext();) {
+            vl = new ValueLink((String) it.next(), "Empty", "Empty");
+            out.add(vl);
+        }
+        return out;
+    }
+
     public List getArtclesByArticlesId(String[] articlesId) throws XmlPullParserException, UnsupportedEncodingException, IOException {
 
         http http = new http();
@@ -534,6 +627,57 @@ public class ValuePro {
                     + "</td>"//
                     + "<td style='padding-left:4px; text-align: center'>"//
                     + (!va.getArticleId().equals("Empty") && !va.getArticle().equals("Empty") ? "Passed" : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "</tr>";//
+        }
+        out += "</table>";
+        return out;
+    }
+
+    public String buildResponse4Link(List articlesData, String requestAction) {
+        ValueLink vl;
+        int i = 1;
+        String out = "<table bgcolor=black align=center cellspacing='1' cellpadding='1' border=0 width=98%>"//
+                + "<tr bgcolor = #2d4491 align=center>"//
+                + "<td>"//
+                + "<font color=white>#</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Article</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Exist</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>ClasscatID</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Request Action</font>"//
+                + "</td>"//
+                + "<td>"//
+                + "<font color=white>Request Status</font>"//
+                + "</td>"//
+                + "</tr>";//
+        for (Iterator it = articlesData.iterator(); it.hasNext();) {
+            vl = (ValueLink) it.next();
+            out += "<tr bgcolor = #cfcdcd>"//
+                    + " <td style='padding-left:4px; text-align: center'>"//
+                    + i++//
+                    + "</td>"//
+                    + " <td style='padding-left:4px; text-align: center'>"//
+                    + (!vl.getArticle().equals("Empty") ? vl.getArticle() : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!vl.getClasscatId().equals("Empty") && !vl.getArticle().equals("Empty") ? "Yes" : "<font color=red>No</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!vl.getClasscatId().equals("Empty") ? vl.getClasscatId() : "<font color=red>-</font>")//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + requestAction//
+                    + "</td>"//
+                    + "<td style='padding-left:4px; text-align: center'>"//
+                    + (!vl.getClasscatId().equals("Empty") && !vl.getArticle().equals("Empty") ? "Passed" : "<font color=red>-</font>")//
                     + "</td>"//
                     + "</tr>";//
         }
@@ -659,6 +803,31 @@ public class ValuePro {
                 return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
             }
             out = cngOwn(data, owner);
+        } catch (Exception ex) {
+            out = ex.getMessage();
+        }
+        return out;
+    }
+
+    public String addLink(String products) {
+        if (products == null || products.equals("")) {
+            return "Введите данные...";
+        }
+        String[] temp = splitString(products);
+        Pattern p = Pattern.compile("[А-Яа-я]");
+        Matcher m;
+        for (int i = 0; i < temp.length; i++) {
+            m = p.matcher(temp[i]);
+            if (m.find()) {
+                return "Русские символы в строке <b>" + (i + 1) + "</b> -> <b>" + temp[i] + "</b>";
+            }
+        }
+        String out = "Смори логи...";
+        ValueLink vl;
+        List data = new ArrayList();
+        try {
+            data = getClasscatIdByArticles(temp);
+            out = aLink(data);
         } catch (Exception ex) {
             out = ex.getMessage();
         }

@@ -98,4 +98,10 @@ public class Ajax {
         ValuePro vp = new ValuePro();
         return vp.changeOwner(products, owner);
     }
+
+    public String addLink(String links) {
+        links = links.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
+        ValuePro vp = new ValuePro();
+        return vp.addLink(links);
+    }
 }
