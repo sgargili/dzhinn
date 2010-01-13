@@ -8,6 +8,7 @@ import com.thoughtworks.xstream.XStream;
 import dao.FactoryDAO;
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
 import org.apache.commons.io.FileUtils;
@@ -24,21 +25,10 @@ public class xmlOutput {
         XStream xstream = new XStream();
         xstream.alias("item", Keymarketing.class);
         xstream.alias("list", List.class);
-        //xstream.registerConverter(new marketingConvertor());
-        xstream.omitField(Keymarketing.class, "id");
-        xstream.aliasField("id", Keymarketing.class, "keyarticle");
-        xstream.useAttributeFor(Keymarketing.class, "id");
-        xstream.useAttributeFor(Keymarketing.class, "keyarticle");
-        xstream.setMode(XStream.NO_REFERENCES);
-        //xstream.registerLocalConverter(Keymarketing.class, "keymarketing", new marketingConvertor());
-        
-
-        //xstream.addImplicitCollection(Keymarketing.class, "id");
-        //xstream.alias("phonenumber", PhoneNumber.class);
-        String xml = xstream.toXML(data);
-        System.out.println(xml);
-        FileUtils.writeStringToFile(new File("C://OldCategoriesnew.xml"), xml, "UTF-8");
-
-
+        xstream.registerConverter(new xmlConvertor());
+        OutputStream out = FileUtils.openOutputStream(new File("C://new.xml"));
+        xstream.toXML(data, out);
+        out.flush();
+        out.close();
     }
 }
