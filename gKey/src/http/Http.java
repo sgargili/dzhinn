@@ -7,10 +7,12 @@ package http;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 /**
@@ -135,6 +137,29 @@ public class Http {
 
             out.flush();
             out.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        return tempFile;
+    }
+
+    public File DownloadBinaryFile(String url, boolean useProxy) {
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        if (useProxy) {
+            client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+        }
+        GetMethod getMethod = new GetMethod(url);
+        FileOutputStream fos = null;
+        File tempFile = new File("/admin/home/temp.jpg");
+        try {
+            int getResult = client.executeMethod(getMethod);
+            byte[] imageData = getMethod.getResponseBody();
+            fos = new FileOutputStream(tempFile);
+            fos.write(imageData);
+            fos.close();
 
         } catch (Exception e) {
             System.err.println(e);
