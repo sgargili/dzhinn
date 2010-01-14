@@ -9,18 +9,11 @@ Ext.onReady(function(){
         activeItem: 0,
         border: false,
         items: [
-        // from basic.js:
         start,
-        // from custom.js:
-        //        nix, a2Zmall,
         value4export,
         value4ovnerstatus,
         value4link,
         osession,
-        //        magento,
-        // from combination.js:
-        //        yandex,
-        //        price_Concentrator,
         ecsv
         ]
     };

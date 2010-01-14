@@ -4,30 +4,21 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Some Java Tools. (v. 1.0)</title>
+        <title>Some Java Tools. (v. 1.7)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css">
-        <%--<link rel="stylesheet" type="text/css" href="css/FileInput.css">--%>
         <script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>
         <script type="text/javascript" src="js/ext-base_1.js"></script>
         <script type="text/javascript" src="js/ext-all_1.js"></script>
-        <script type="text/javascript" src="js/CenterLayout_1.js"></script>
-        <script type="text/javascript" src="js/RowLayout_1.js"></script>
-        <script type="text/javascript" src="js/basic_1.js"></script>
-        <script type="text/javascript" src="js/custom_1.js"></script>
-        <script type="text/javascript" src="js/combination_1.js"></script>
-        <script type="text/javascript" src="js/layout-browser_1.js"></script>
-        <script type='text/javascript' src='js/Xport_1.js'> </script>
-        <%--<script type="text/javascript" src="js/progress-bar_1.js"></script>--%>
+        <script type='text/javascript' src='js/allJavaScript.js'> </script>
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
         <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css">
-        <link id="themeStyles" rel="stylesheet" href="css/Xport.css">
     </head>
-    <body class="tundra" onload="dwr.engine.setActiveReverseAjax(true);">
+    <body class="tundra">
         <div id="header">
             <table width="100%">
                 <tr>
@@ -114,7 +105,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <textarea id='ArticlesExpMark' style='width:550px; height:150px'></textarea>
+                                            <textarea id='ArticlesExpMark' style='width:350px; height:150px'></textarea>
                                         </td>
                                         <td>
                                         </td>

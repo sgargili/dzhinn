@@ -159,7 +159,7 @@ function clearSession(){
         dojo.byId('uloptSesLog').innerHTML = data;
         Hide('uloptSesLog');
     });
-   
+
 }
 
 function clearCache(){
@@ -195,7 +195,7 @@ function changeStatus(){
     Ajax.changeStatus(data, status, function(data) {
         dojo.byId('ulstatusChangeLog').innerHTML = data;
     });
-    
+
 }
 function changeOwner(){
     dojo.byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
@@ -399,3 +399,4 @@ Ext.onReady(function(){
         renderTo: Ext.getBody()
     });
 });
+
