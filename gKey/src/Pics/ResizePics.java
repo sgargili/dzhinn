@@ -9,7 +9,6 @@ import com.mortennobel.imagescaling.AdvancedResizeOp;
 import com.mortennobel.imagescaling.ResampleOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import javax.imageio.ImageIO;
 
 /**
@@ -18,7 +17,27 @@ import javax.imageio.ImageIO;
  */
 public class ResizePics {
 
-    public static void main(String[] arg) throws IOException {
+    public static void main(String[] arg) {
+        File imageLayer400;
+        File imageLayer200;
+        File imageLayer160;
+        File imageLayer75;
+
+        BufferedImage bi400;
+        BufferedImage bi200;
+        BufferedImage bi160;
+        BufferedImage bi75;
+        BufferedImage rescaledImg;
+
+        File outImage400;
+        File outImage200;
+        File outImage160;
+        File outImage75;
+
+        int resizeCountW, resizeCountH;
+
+        ResampleOp resampleOp;
+
         for (int i = 47950; i < 49100; i++) {
             File inputImage = null;
             BufferedImage biInput;
@@ -27,27 +46,24 @@ public class ResizePics {
                 inputImage = new File("C://keyPics/" + i + ".jpg");
                 biInput = ImageIO.read(inputImage);
             } catch (Exception ex) {
-                //ex.printStackTrace();
                 continue;
             }
             try {
-                File imageLayer400 = new File("C://400.jpg");
-                File imageLayer200 = new File("C://200.jpg");
-                File imageLayer160 = new File("C://160.jpg");
-                File imageLayer75 = new File("C://75.jpg");
+                imageLayer400 = new File("C://400.jpg");
+                imageLayer200 = new File("C://200.jpg");
+                imageLayer160 = new File("C://160.jpg");
+                imageLayer75 = new File("C://75.jpg");
 
-                BufferedImage bi400 = ImageIO.read(imageLayer400);
-                BufferedImage bi200 = ImageIO.read(imageLayer200);
-                BufferedImage bi160 = ImageIO.read(imageLayer160);
-                BufferedImage bi75 = ImageIO.read(imageLayer75);
+                bi400 = ImageIO.read(imageLayer400);
+                bi200 = ImageIO.read(imageLayer200);
+                bi160 = ImageIO.read(imageLayer160);
+                bi75 = ImageIO.read(imageLayer75);
 
-                File outImage400 = new File("C://keyOut/" + i + "-400.jpg");
-                File outImage200 = new File("C://keyOut/" + i + "-200.jpg");
-                File outImage160 = new File("C://keyOut/" + i + "-160.jpg");
-                File outImage75 = new File("C://keyOut/" + i + "-75.jpg");
-                //System.out.println(i);
+                outImage400 = new File("C://keyOut/" + i + "-400.jpg");
+                outImage200 = new File("C://keyOut/" + i + "-200.jpg");
+                outImage160 = new File("C://keyOut/" + i + "-160.jpg");
+                outImage75 = new File("C://keyOut/" + i + "-75.jpg");
 
-                int resizeCountW, resizeCountH;
                 if (biInput.getHeight() >= biInput.getWidth()) {
                     System.out.println(i + " -> H > W");
                     if (biInput.getHeight() >= 300) {
@@ -68,9 +84,9 @@ public class ResizePics {
                     }
                 }
 
-                ResampleOp resampleOp = new ResampleOp(resizeCountH, resizeCountW);
+                resampleOp = new ResampleOp(resizeCountH, resizeCountW);
                 resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.None);
-                BufferedImage rescaledImg = resampleOp.filter(biInput, null);
+                rescaledImg = resampleOp.filter(biInput, null);
                 BorderFilter bf = new BorderFilter();
                 bf.setLeftBorder((400 - rescaledImg.getWidth()) / 2);
                 bf.setRightBorder((300 - rescaledImg.getHeight()) / 2);
