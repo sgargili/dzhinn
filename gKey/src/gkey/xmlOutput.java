@@ -26,7 +26,7 @@ public class xmlOutput {
         xstream.alias("item", Keymarketing.class);
         xstream.alias("list", List.class);
         xstream.registerConverter(new xmlConvertor());
-        OutputStream out = FileUtils.openOutputStream(new File("C://new.xml"));
+        OutputStream out = FileUtils.openOutputStream(new File("/home/admin/keyMarketing.xml"));
         xstream.toXML(data, out);
         out.flush();
         out.close();

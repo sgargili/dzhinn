@@ -146,15 +146,15 @@ public class Http {
         return tempFile;
     }
 
-    public File DownloadBinaryFile(String url, boolean useProxy) {
+    public void DownloadBinaryFile(String url, boolean useProxy, String fileName) {
         client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
         GetMethod getMethod = new GetMethod(url);
-        FileOutputStream fos = null;
-        File tempFile = new File("/admin/home/temp.jpg");
         try {
+            FileOutputStream fos = null;
+            File tempFile = new File("/home/admin/keyPics/" + fileName + ".jpg");
             int getResult = client.executeMethod(getMethod);
             byte[] imageData = getMethod.getResponseBody();
             fos = new FileOutputStream(tempFile);
@@ -166,7 +166,7 @@ public class Http {
         } finally {
             getMethod.releaseConnection();
         }
-        return tempFile;
+        //return tempFile;
     }
 
     public File DownloadContentAsFile(String url, boolean useProxy, String tempFileName) {

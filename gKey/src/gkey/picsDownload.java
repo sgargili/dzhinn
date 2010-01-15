@@ -4,12 +4,20 @@
  */
 package gkey;
 
+import dao.FactoryDAO;
 import http.Http;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParserException;
+import pojo.TempPojo2;
+import tor.IpChange;
 
 /**
  *
@@ -201,11 +209,40 @@ public class picsDownload {
 //                System.out.println(e);
 //            }
 //        }
-        Http ht = new Http();
-        File flTemp;
-        for (int i = 83183; i < 83190; i++) {
-            flTemp = ht.DownloadContentAsFile("http://shop.key.ru/photo/items/" + i + ".jpg", true);
-            FileUtils.copyFile(flTemp, new File(i + ".jpg"));
+        Set temp = new TreeSet();
+        TempPojo2 tp;
+        try {
+            List lst = FactoryDAO.getInstance().getTempPojoDAO2().getAllTempPojo2();
+            for (Iterator it = lst.iterator(); it.hasNext();) {
+                tp = (TempPojo2) it.next();
+                temp.add(tp.getKeyarticle());
+            }
+        } catch (Exception ex) {
         }
+        System.out.println(temp.size());
+        Http ht = new Http();
+        IpChange ip = new IpChange();
+        int k = 0;
+        int iter = 0;
+        String tempStr;
+        for (Iterator it = temp.iterator(); it.hasNext();) {
+            tempStr = (String) it.next();
+            if (k++ == 17) {
+                ip.setChange();
+                k = 0;
+                System.out.println("Ip change...");
+            }
+            System.out.println(iter++ + " - " + tempStr + " - ya kartinka skachivaetsya...");
+            ht.DownloadBinaryFile("http://shop.key.ru/photo/items/" + tempStr + ".jpg", true, tempStr);
+        }
+//        for (int i = 0; i < 100000; i++) {
+//            if (k++ == 17) {
+//                ip.setChange();
+//                k = 0;
+//                System.out.println("Ip change...");
+//            }
+//            System.out.println(i + " - ya kartinka skachivaetsya...");
+//            ht.DownloadBinaryFile("http://shop.key.ru/photo/items/" + i + ".jpg", true, i + "");
+//        }
     }
 }

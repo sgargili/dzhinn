@@ -19,8 +19,12 @@ public class xmlConvertor implements Converter {
 
     public void marshal(Object o, HierarchicalStreamWriter writer, MarshallingContext mc) {
         Keymarketing km = (Keymarketing) o;
-        writer.addAttribute("id", km.getKeyarticle());
-        writer.setValue(km.getKeymarketing());
+        try {
+            writer.addAttribute("id", km.getKeyarticle());
+            writer.setValue(km.getKeymarketing());
+        } catch (Exception ex) {
+            km.getKeyarticle();
+        }
     }
 
     public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext uc) {

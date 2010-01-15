@@ -62,7 +62,7 @@ public class KeyMarketingDAOImpl implements KeyMarketingDAO {
             session.beginTransaction();
             Query getByLogin =
                     session.createQuery(
-                    "from Keymarketing k");
+                    "from Keymarketing k order by keyarticle");
             result = getByLogin.list();
         } catch (RuntimeException e) {
         } finally {
