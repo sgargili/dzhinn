@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import pojo.NixInputData;
 import pojo.PtLink;
+import tor.IpChange;
 
 /**
  *
@@ -28,6 +29,8 @@ public class Main {
         List generalLinks = nix.getAllNixPT();
         List allLinks;
 
+        IpChange ip = new IpChange();
+
         PtLink pt;
         NixInputData nid;
 
@@ -39,6 +42,7 @@ public class Main {
             allLinks = nix.getDepartmentNixLinks(pt.getLink());
             for (Iterator it2 = allLinks.iterator(); it2.hasNext();) {
                 tempLink = (String) it2.next();
+                ip.setChange();
                 nid = new NixInputData();
                 nid.setProductType(pt.getProductType());
                 nid.setProductUrl(tempLink);
