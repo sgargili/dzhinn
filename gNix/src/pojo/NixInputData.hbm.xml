@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 18.01.2010 11:45:54 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="nixdb" name="pojo.NixInputData" table="nix_input_data">
+    <id name="id" type="long">
+      <column name="id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="productType" type="string">
+      <column name="product_type"/>
+    </property>
+    <property name="productUrl" type="string">
+      <column length="65535" name="product_url"/>
+    </property>
+    <property name="htmlData" type="string">
+      <column length="65535" name="html_data"/>
+    </property>
+  </class>
+</hibernate-mapping>
