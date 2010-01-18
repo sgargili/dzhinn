@@ -4,6 +4,7 @@
  */
 package gnix;
 
+import processing.NixProcessing;
 import dao.FactoryDAO;
 import java.util.Iterator;
 import java.util.List;
