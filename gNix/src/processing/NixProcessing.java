@@ -47,6 +47,8 @@ public class NixProcessing {
 
         Pattern pat = Pattern.compile("^(.)");
         Matcher mat;
+        Pattern pat2 = Pattern.compile("НИКС");
+        Matcher mat2;
 
         boolean ptBool = false, linkBool = false, isWrite = true;
 
@@ -91,9 +93,12 @@ public class NixProcessing {
                     ptBool = false;
                 }
                 if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("a") && linkBool && isWrite) {
-                    ptLink = new PtLink(tempPT, tempLink);
-                    out.add(ptLink);
-                    linkBool = false;
+                    mat2 = pat2.matcher(tempPT);
+                    if (!mat2.find()) {
+                        ptLink = new PtLink(tempPT, tempLink);
+                        out.add(ptLink);
+                        linkBool = false;
+                    }
                 }
                 eventType = xpp.next();
             }

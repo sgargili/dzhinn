@@ -65,8 +65,9 @@ public class Http {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
         File tempFile = new File("temp.html");
-        GetMethod getMethod = new GetMethod(url);
+        GetMethod getMethod = null;
         try {
+            getMethod = new GetMethod(url);
             int getResult = client.executeMethod(getMethod);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
             out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "WINDOWS-1251"));
@@ -77,7 +78,11 @@ public class Http {
         } catch (Exception e) {
             System.err.println(e);
         } finally {
-            getMethod.releaseConnection();
+            try {
+                getMethod.releaseConnection();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         return tempFile;
     }
