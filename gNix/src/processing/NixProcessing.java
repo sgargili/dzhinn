@@ -4,10 +4,12 @@
  */
 package processing;
 
+import dao.FactoryDAO;
 import http.Http;
 import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,7 +17,10 @@ import org.apache.commons.io.FileUtils;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import parsers.HTMLParser;
+import pojo.NixInputData;
+import pojo.NixOutputData;
 import pojo.PtLink;
+import tor.IpChange;
 
 /**
  *
@@ -24,12 +29,17 @@ import pojo.PtLink;
 public class NixProcessing {
 
     private static NixProcessing instance = null;
+    static int bayan = 0;
 
     public static NixProcessing getInstance() {
         if (instance == null) {
             instance = new NixProcessing();
         }
         return instance;
+    }
+
+    public String getName() {
+        return Thread.currentThread().getName();
     }
 
     public List getAllNixPT() {
@@ -154,5 +164,179 @@ public class NixProcessing {
         }
 
         return out;
+    }
+
+    public void loadHTMLContent(String threadNum, NixInputData nixInput) {
+
+        FactoryDAO fd = FactoryDAO.getInstance();
+
+        IpChange ip = new IpChange();
+
+        String tempStr = "";
+
+        Http ht = new Http();
+
+        try {
+            System.out.println("Поток " + threadNum + " -> Продукт -> " + nixInput.getProductUrl());
+            if (bayan++ == 17) {
+                ip.setChange();
+                bayan = 1;
+                System.out.println(" Сменился IP...");
+            }
+            tempStr = ht.DownloadContentAsString("http://www.nix.ru" + nixInput.getProductUrl(), "WINDOWS-1251", true);
+            nixInput = new NixInputData();
+            nixInput.setHtmlData(tempStr);
+            fd.getNixInputDataDAO().addNixInputData(nixInput);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void getProductDescFromHTML(String threadNum, String productType, String html) {
+        List data = new ArrayList();
+        NixOutputData nix;
+
+        Pattern pat = Pattern.compile("(.*)\\|.*");
+        Matcher mat;
+
+        Pattern pat2 = Pattern.compile("good_id=(\\d+)");
+        Matcher mat2;
+
+        Pattern pat3 = Pattern.compile("Производитель");
+        Matcher mat3;
+
+        File tempInputData = new File("C://1" + ".html");
+        try {
+            FileUtils.writeStringToFile(tempInputData, html, "UTF-8");
+        } catch (Exception ex) {
+        }
+        File tempOutputData = HTMLParser.getInstance().normalizeHTML(tempInputData, "UTF-8", "some.xhtml");
+        boolean groupBool = false, attributeBool = false, valueBool = false, nameBool = false, articleBool = false, manufacturerBool = false;
+        String tempGroup = "", tempAttribute = "", tempValue = "", tempFullName = "", tempArticle = "", tempManufacturer = "";
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(tempOutputData), "UTF-8"));
+            int eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                if (eventType == XmlPullParser.START_TAG //
+                        && xpp.getName().equals("td") //
+                        && xpp.getAttributeCount() == 3 //
+                        && xpp.getAttributeValue(2).equals("e")//
+                        && xpp.getAttributeValue(0).equals("3")) {
+                    groupBool = true;
+                }
+                if (eventType == XmlPullParser.START_TAG //
+                        && xpp.getName().equals("td") //
+                        && xpp.getAttributeCount() == 5 //
+                        && xpp.getAttributeValue(2).equals("desc_property")//
+                        ) {
+                    attributeBool = true;
+                }
+                if (eventType == XmlPullParser.START_TAG //
+                        && xpp.getName().equals("td") //
+                        && xpp.getAttributeCount() == 5 //
+                        && xpp.getAttributeValue(2).equals("desc_desc")//
+                        ) {
+                    valueBool = true;
+                }
+                if (eventType == XmlPullParser.START_TAG //
+                        && xpp.getName().equals("h1") //
+                        && xpp.getAttributeCount() == 1 //
+                        && xpp.getAttributeValue(0).equals("goods_name")//
+                        ) {
+                    nameBool = true;
+                }
+                if (eventType == XmlPullParser.START_TAG //
+                        && xpp.getName().equals("script") //
+                        && xpp.getAttributeCount() == 3 //
+                        && xpp.getAttributeValue(0).equals("javascript")//
+                        ) {
+                    mat2 = pat2.matcher(xpp.getAttributeValue(1));
+                    if (mat2.find()) {
+                        tempArticle = mat2.group(1);
+                    }
+                }
+                if (eventType == XmlPullParser.TEXT && groupBool) {
+                    tempGroup = xpp.getText();
+                }
+                if (eventType == XmlPullParser.TEXT && attributeBool) {
+                    tempAttribute = xpp.getText();
+                    mat3 = pat3.matcher(tempAttribute);
+                    if (mat3.find()) {
+                        manufacturerBool = true;
+                    }
+                }
+                if (eventType == XmlPullParser.TEXT && valueBool) {
+                    tempValue += xpp.getText();
+                    if (manufacturerBool) {
+                        tempManufacturer = xpp.getText();
+                        manufacturerBool = false;
+                    }
+                }
+                if (eventType == XmlPullParser.TEXT && nameBool) {
+                    tempFullName = xpp.getText();
+                }
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && groupBool) {
+                    groupBool = false;
+                }
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && attributeBool) {
+                    attributeBool = false;
+                }
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && valueBool) {
+                    valueBool = false;
+                    mat = pat.matcher(tempValue);
+                    if (mat.find()) {
+                        tempValue = mat.group(1);
+                    }
+                    nix = new NixOutputData();
+                    nix.setFullName(tempFullName);
+                    nix.setManufacturer("");
+                    nix.setArticle(tempArticle);
+                    nix.setProductType(productType);
+                    nix.setPicUrl("");
+                    nix.setGroupe(tempGroup);
+                    nix.setAttribute(tempAttribute);
+                    nix.setAttributeValue(tempValue);
+                    data.add(nix);
+                    //System.out.println(tempArticle + " - " + productType + " - " + tempFullName + " - " + tempGroup + " - " + tempAttribute + " - " + tempValue);
+                    tempValue = "";
+                }
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("h1") && nameBool) {
+                    nameBool = false;
+                }
+                eventType = xpp.next();
+            }
+            int i = 0;
+            for (Iterator it = data.iterator(); it.hasNext();) {
+                nix = (NixOutputData) it.next();
+                nix.setManufacturer(tempManufacturer);
+                data.set(i++, nix);
+            }
+//            for (Iterator it = data.iterator(); it.hasNext();) {
+//                nix = (NixOutputData) it.next();
+//                System.out.println(nix.getFullName() +
+//                        " - " +
+//                        nix.getManufacturer() +
+//                        " - " +
+//                        nix.getArticle() +
+//                        " - " +
+//                        nix.getProductType() +
+//                        " - " +
+//                        nix.getPicUrl() +
+//                        " - " +
+//                        nix.getGroupe() +
+//                        " - " +
+//                        nix.getAttribute() +
+//                        " - " +
+//                        nix.getAttributeValue());
+//            }
+            FactoryDAO.getInstance().getNixOutputDataDAO().addNixOutputData(data);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
     }
 }

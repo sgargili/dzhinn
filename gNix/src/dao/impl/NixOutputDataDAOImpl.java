@@ -5,6 +5,7 @@
 package dao.impl;
 
 import dao.NixOutputDataDAO;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -24,6 +25,24 @@ public class NixOutputDataDAOImpl implements NixOutputDataDAO {
             session.beginTransaction();
             session.saveOrUpdate(nixOutputData);
             session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+    }
+
+    public void addNixOutputData(List nixOutputDataList) {
+        Session session = null;
+        try {
+            for (Iterator it = nixOutputDataList.iterator(); it.hasNext();) {
+                session = HibernateUtil.getSessionFactory().openSession();
+                session.beginTransaction();
+                session.saveOrUpdate((NixOutputData) it.next());
+                session.getTransaction().commit();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -31,7 +31,23 @@ public class HTMLParser {
 
     public File normalizeHTML(File tempInputPtFile, String encoding) {
         XMLReader r = new Parser();
-        File tempOutputPtFile = new File("tempPT.html");
+        File tempOutputPtFile = new File("tempNormalizeData.html");
+        try {
+            OutputStream os = new FileOutputStream(tempOutputPtFile);
+            Writer w = new OutputStreamWriter(os, encoding);
+            ContentHandler h = new XMLWriter(w);
+            r.setContentHandler(h);
+            r.parse(tempInputPtFile.toURI().toString());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return tempOutputPtFile;
+    }
+
+    public File normalizeHTML(File tempInputPtFile, String encoding, String tempFileName) {
+        XMLReader r = new Parser();
+        File tempOutputPtFile = new File(tempFileName);
         try {
             OutputStream os = new FileOutputStream(tempOutputPtFile);
             Writer w = new OutputStreamWriter(os, encoding);

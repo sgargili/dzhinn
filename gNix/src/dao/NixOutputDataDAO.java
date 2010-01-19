@@ -15,6 +15,8 @@ public interface NixOutputDataDAO {
 
     public void addNixOutputData(NixOutputData nixOutputData);
 
+    public void addNixOutputData(List nixOutputDataList);
+
     public List getAllNixOutputData();
 
     public List getAllNixOutputData(int firstResult, int maxResult);
