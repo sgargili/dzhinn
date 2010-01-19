@@ -17,5 +17,7 @@ public interface NixInputDataDAO {
 
     public List getAllNixInputData();
 
+    public List getAllNixInputData(int firstResult, int maxResult);
+
     public List getNixInputDataByProductType(String productType);
 }

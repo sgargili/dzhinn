@@ -75,4 +75,28 @@ public class NixInputDataDAOImpl implements NixInputDataDAO {
         }
         return result;
     }
+
+    public List getAllNixInputData(int firstResult, int maxResult) {
+        Session session = null;
+        List<NixInputData> result = null;
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query AllNixOutputDataQuery =
+                    session.createQuery(
+                    "from NixInputData n");
+            AllNixOutputDataQuery.setFirstResult(firstResult);
+            AllNixOutputDataQuery.setMaxResults(maxResult);
+
+            result = AllNixOutputDataQuery.list();
+
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return result;
+    }
 }
