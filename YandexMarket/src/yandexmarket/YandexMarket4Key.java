@@ -165,7 +165,7 @@ public class YandexMarket4Key {
 
                         }
                         if (eventType == XmlPullParser.TEXT && pageBool) {
-                            p = Pattern.compile("—\\s(\\d+)");
+                            p = Pattern.compile("—\\s(\\d+)"); 
                             m = p.matcher(xpp.getText());
                             if (m.find()) {
                                 try {
