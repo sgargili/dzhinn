@@ -17,7 +17,7 @@ import java.net.UnknownHostException;
 public class IpChange {
 
     public boolean setChange() throws UnknownHostException, IOException {
-        Socket socket = new Socket("127.0.0.1", 9051);
+        Socket socket = new Socket("127.0.0.1", 7751);
         OutputStream os = socket.getOutputStream();
         InputStream is = socket.getInputStream();
         os.write("authenticate\r\n".getBytes());

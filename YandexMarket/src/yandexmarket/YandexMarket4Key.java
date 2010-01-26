@@ -113,8 +113,8 @@ public class YandexMarket4Key {
                         m2 = p2.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
 
                         if (!m.find() & !m2.find()) {
-                            //temp = new File("/root/doc/" + art.getArticle() + ".xhtml");
-                            //FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
+                            temp = new File("/root/doc/" + art.getArticle() + ".xhtml");
+                            FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
                             break;
                         }
 //                        if (!m2.find()) {
