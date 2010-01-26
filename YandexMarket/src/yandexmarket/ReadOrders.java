@@ -27,14 +27,14 @@ public class ReadOrders {
 
     public static void main(String[] args) throws XmlPullParserException, UnsupportedEncodingException, IOException, SQLException {
         long start = System.currentTimeMillis();
-        File orders = new File("orders.csv");
+        File orders = new File("C://orders.csv");
         CsvWriter writer = new CsvWriter(orders.getAbsolutePath(), ',', Charset.forName("UTF-8"));
         String[] mass = new String[2];
         Articles art;
         FactoryDAO fd = FactoryDAO.getInstance();
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-        File xml = new File("temp");
+        File xml = new File("C://orders.xml");
         int tempInt = 0;
 //        http ht = new http();
 //        File xml = ht.DownloadContentAsFile("http://213.53.57.20/CatExp/orders.exml", false);

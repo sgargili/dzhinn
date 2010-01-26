@@ -101,7 +101,6 @@ public class YandexMarket4Key {
                                 tempDesc//
                                 + "&nopreciser=1&page=" +//
                                 pageCounts;
-//Red_360x640/GSM/GPS/32G/microSD/WF/BT/Cam/
                         System.out.println(url);
                         fl = ht.DownloadContentAsFile(url, true);
                         m = p.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
@@ -220,6 +219,7 @@ public class YandexMarket4Key {
             } catch (Exception ex) {
                 System.out.println(ex);
             }
+            xml.delete();
         }
 
     }

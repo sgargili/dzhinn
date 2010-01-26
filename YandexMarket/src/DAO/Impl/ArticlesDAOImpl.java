@@ -43,9 +43,9 @@ public class ArticlesDAOImpl implements ArticlesDAO {
             session.beginTransaction();
             Query getArticles =
                     session.createQuery(
-                    "from Articles");
-            getArticles.setMaxResults(5);
-            getArticles.setFirstResult(189);
+                    "from Articles a");
+            //getArticles.setMaxResults(5);
+            //getArticles.setFirstResult(189);
             result = getArticles.list();
         } catch (RuntimeException e) {
         } finally {
