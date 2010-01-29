@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Some Java Tools. (v. 1.7)</title>
+        <title>Some Java Tools. (v. 2.0)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css">
