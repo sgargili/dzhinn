@@ -18,7 +18,7 @@
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
         <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css">
     </head>
-    <body class="tundra">
+    <body class="tundra" onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
             <table width="100%">
                 <tr>
@@ -147,6 +147,21 @@
                     <br/>
                     <ul id="ulexpMarkLog" style="min-height:350px">
                     </ul>
+                </div>
+            </div>
+            <div id="chat_id">
+                <div dojoType="dijit.TooltipDialog" id="AllDialog_chat_id">
+                    <p>
+                        Текст:
+                        <input id="text" onkeypress="dwr.util.onReturn(event, sendMessage)" style="width:450px"/>
+                        <input type="button" value="Send" onclick="sendMessage()"/>
+                        Ник:
+                        <input id="nick_id" value="Введите ник..."/>
+                    </p>
+                </div>
+                <br/>
+                <div dojoType="dijit.TooltipDialog" id="chat_id_log">
+                    <ul id="chat_id_ul" style="list-style-type:none;">Типа чат...</ul>
                 </div>
             </div>
             <div id="statusChange">
@@ -449,6 +464,9 @@
             </div>
             <div id="oSes-details">
                 <div class="details-info"><b>Сброс сессии. Применять только когда не срабатывает какая-либо процедура по работе с Value4IT</b>...</div>
+            </div>
+            <div id="eChat-details">
+                <div class="details-info"><b>Простенький Ajax чат</b>...</div>
             </div>
         </div>
     </body>

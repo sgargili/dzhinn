@@ -30,6 +30,13 @@
         leaf:true
     }]
 },{
+    text:'Если делать нечего',
+    children:[{
+        text:'Чат',
+        id:'eChat',
+        leaf:true
+    }]
+},{
     text:'Настройки',
     children:[{
         text:'Сброс сессии',

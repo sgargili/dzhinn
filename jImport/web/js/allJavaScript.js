@@ -209,6 +209,16 @@ function changeOwner(){
 function showStatistics(){
     window.open("https://cf.value4it.com/cf/export/stat.jsp","", config="");
 }
+function sendMessage() { 
+    if(dwr.util.getValue("nick_id")==""||dwr.util.getValue("nick_id")=="Введите ник..."||dwr.util.getValue("nick_id")=="60511120540229999"){
+        alert("Введите ник...");
+        return;
+    }
+    Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"));
+}
+function updateMessage() {
+    Ajax.updateMessage();
+}
 
 var start = {
     id: 'start-panel',
@@ -217,6 +227,7 @@ var start = {
     //	bodyStyle: 'padding:25px',
     contentEl: 'start-div'
 };
+
 var value4export = {
 
     xtype: 'tabpanel',
@@ -234,8 +245,22 @@ var value4export = {
         title: 'Экспорт маркетинга',
         contentEl: 'expMark',
         autoScroll: true
-    }
-    ]
+    }]
+};
+var echat = {
+
+    xtype: 'tabpanel',
+    id: 'eChat-panel',
+    plain: true,  //remove the header border
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+    },
+    items:[{
+        title: 'Типа чат...',
+        contentEl: 'chat_id',
+        autoScroll: true
+    }]
 };
 var value4ovnerstatus = {
 
@@ -311,6 +336,7 @@ var ecsv = {
 };
 
 Ext.onReady(function(){
+    updateMessage();
     Ext.QuickTips.init();
     var detailEl;
     var contentPanel = {
@@ -321,8 +347,9 @@ Ext.onReady(function(){
         activeItem: 0,
         border: false,
         items: [
-        start,
+        // start,
         value4export,
+        echat,
         value4ovnerstatus,
         value4link,
         osession,
@@ -334,9 +361,9 @@ Ext.onReady(function(){
         title: 'Меню',
         region:'north',
         split: true,
-        height: 150,
+        height: 200,
         width: 150,
-        minSize: 150,
+        minSize: 200,
         autoScroll: true,
         rootVisible: false,
         lines: false,

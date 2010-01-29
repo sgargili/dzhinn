@@ -7,6 +7,7 @@ package value4it;
 import DAO.FactoryDAO;
 import HttpClient.http;
 import Pojo.Cookies;
+import Pojo.Logs;
 import Pojo.ValueArticle;
 import Pojo.ValueLink;
 import java.io.File;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -31,6 +33,7 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.directwebremoting.WebContextFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -42,6 +45,8 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class ValuePro {
 
     private HttpClient client = new HttpClient();
+    final Calendar cal = Calendar.getInstance();
+    Logs log;
 
     public void login() {
         if (!isSessionAlive()) {
@@ -51,9 +56,19 @@ public class ValuePro {
             method.setParameter("PASSWORD", "Andrey1602");
             method.setParameter("btlogin", "SIGN-IN");
             try {
-                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int returnCode = client.executeMethod(method);
-                setCookie();
+                log = new Logs();
+                log.setLogType("Login. Create new Session.");
+                log.setLogMessage(setCookie());
+                log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                        + cal.get(Calendar.MONTH) + "/"//
+                        + cal.get(Calendar.YEAR) + " "//
+                        + cal.get(Calendar.HOUR) + ":"//
+                        + cal.get(Calendar.MINUTE) + ":"//
+                        + cal.get(Calendar.SECOND));
+                FactoryDAO.getInstance().getLogsDAO().addLogs(log);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             } finally {
@@ -68,8 +83,19 @@ public class ValuePro {
         String url = "http://cf.value4it.com/login/logout.jsp";
         GetMethod getMethod = new GetMethod(url);
         try {
-            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
             int getResult = client.executeMethod(getMethod);
+            log = new Logs();
+            log.setLogType("Logout.");
+            log.setLogMessage("Just logout...");
+            log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+            log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                    + cal.get(Calendar.MONTH) + "/"//
+                    + cal.get(Calendar.YEAR) + " "//
+                    + cal.get(Calendar.HOUR) + ":"//
+                    + cal.get(Calendar.MINUTE) + ":"//
+                    + cal.get(Calendar.SECOND));
+            FactoryDAO.getInstance().getLogsDAO().addLogs(log);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
@@ -136,6 +162,7 @@ public class ValuePro {
     }
 
     private String export(List articlesData, boolean isRuEn) {
+        String exportStr = "";
         NameValuePair[] req;
         ValueArticle va;
         String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
@@ -164,7 +191,7 @@ public class ValuePro {
                     req[0] = new NameValuePair("referer", "");
                     req[1] = new NameValuePair("FACTORY_ID", "137");
                     req[2] = new NameValuePair("ACTION", "EXPORT");
-                    req[3] = new NameValuePair("PN_RPP", "100");
+                    req[3] = new NameValuePair("PN_RPP", "0");
                     req[4] = new NameValuePair("LANGS", "");
                     req[5] = new NameValuePair("LANG", "en");
                     req[6] = new NameValuePair("LANG", "ru");
@@ -178,7 +205,7 @@ public class ValuePro {
                     req[0] = new NameValuePair("referer", "");
                     req[1] = new NameValuePair("FACTORY_ID", "137");
                     req[2] = new NameValuePair("ACTION", "EXPORT");
-                    req[3] = new NameValuePair("PN_RPP", "100");
+                    req[3] = new NameValuePair("PN_RPP", "0");
                     req[4] = new NameValuePair("LANGS", "");
                     req[5] = new NameValuePair("LANG", "bg");
                     req[6] = new NameValuePair("LANG", "hr");
@@ -192,10 +219,25 @@ public class ValuePro {
                     }
                 }
                 getMethod.setRequestBody(req);
-                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                exportStr = "Size: " + req.length + " Body: ";
+                for (int k = 0; k < req.length; k++) {
+                    exportStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                }
+                log = new Logs();
+                log.setLogType("Export by Products.");
+                log.setLogMessage(exportStr);
+                log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                        + cal.get(Calendar.MONTH) + "/"//
+                        + cal.get(Calendar.YEAR) + " "//
+                        + cal.get(Calendar.HOUR) + ":"//
+                        + cal.get(Calendar.MINUTE) + ":"//
+                        + cal.get(Calendar.SECOND));
+                FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                 getMethod.releaseConnection();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             updateSessionTime();
@@ -205,6 +247,7 @@ public class ValuePro {
     }
 
     private String exportMark(List articlesData) {
+        String exportMarkStr = "";
         NameValuePair[] req;
         ValueArticle va;
         String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
@@ -238,10 +281,25 @@ public class ValuePro {
                     req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
-                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                exportMarkStr = "Size: " + req.length + " Body: ";
+                for (int k = 0; k < req.length; k++) {
+                    exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                }
+                log = new Logs();
+                log.setLogType("Export Marketing.");
+                log.setLogMessage(exportMarkStr);
+                log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                        + cal.get(Calendar.MONTH) + "/"//
+                        + cal.get(Calendar.YEAR) + " "//
+                        + cal.get(Calendar.HOUR) + ":"//
+                        + cal.get(Calendar.MINUTE) + ":"//
+                        + cal.get(Calendar.SECOND));
+                FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                 getMethod.releaseConnection();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             updateSessionTime();
@@ -251,6 +309,7 @@ public class ValuePro {
     }
 
     private String aLink(List articlesData) {
+        String aLinkStr = "";
         NameValuePair[] req;
         ValueLink vl;
         String url = "http://cf.value4it.com/cf/classcat/classcat_links.jsp";
@@ -293,15 +352,30 @@ public class ValuePro {
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
                     getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     int getResult = client.executeMethod(getMethod);
+                    aLinkStr = "Size: " + req.length + " Body: ";
+                    for (int k = 0; k < req.length; k++) {
+                        aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                    }
+                    log = new Logs();
+                    log.setLogType("Add Link.");
+                    log.setLogMessage(aLinkStr);
+                    log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                    log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                            + cal.get(Calendar.MONTH) + "/"//
+                            + cal.get(Calendar.YEAR) + " "//
+                            + cal.get(Calendar.HOUR) + ":"//
+                            + cal.get(Calendar.MINUTE) + ":"//
+                            + cal.get(Calendar.SECOND));
+                    FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                     getMethod.releaseConnection();
                     try {
                         Thread.sleep(300);
                     } catch (InterruptedException ex) {
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             updateSessionTime();
@@ -311,6 +385,7 @@ public class ValuePro {
     }
 
     private String cngStat(List articlesData, String status) {
+        String cStatkStr = "";
         if (status.equals("Research")) {
             status = "4";
         } else if (status.equals("Control")) {
@@ -352,10 +427,21 @@ public class ValuePro {
                     req[4 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
-                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                log = new Logs();
+                log.setLogType("Change Status.");
+                log.setLogMessage(cStatkStr);
+                log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                        + cal.get(Calendar.MONTH) + "/"//
+                        + cal.get(Calendar.YEAR) + " "//
+                        + cal.get(Calendar.HOUR) + ":"//
+                        + cal.get(Calendar.MINUTE) + ":"//
+                        + cal.get(Calendar.SECOND));
+                FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                 getMethod.releaseConnection();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             updateSessionTime();
@@ -365,6 +451,7 @@ public class ValuePro {
     }
 
     private String cngOwn(List articlesData, String owner) {
+        String cOwnStr = "";
         NameValuePair[] req;
         ValueArticle va;
         String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
@@ -398,10 +485,21 @@ public class ValuePro {
                     req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                 }
                 getMethod.setRequestBody(req);
-                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+                client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                log = new Logs();
+                log.setLogType("Change Owner.");
+                log.setLogMessage(cOwnStr);
+                log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                        + cal.get(Calendar.MONTH) + "/"//
+                        + cal.get(Calendar.YEAR) + " "//
+                        + cal.get(Calendar.HOUR) + ":"//
+                        + cal.get(Calendar.MINUTE) + ":"//
+                        + cal.get(Calendar.SECOND));
+                FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                 getMethod.releaseConnection();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             updateSessionTime();
@@ -415,8 +513,19 @@ public class ValuePro {
         String out = "<div>";
         GetMethod getMethod = new GetMethod("https://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
         try {
-            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; Trident/4.0; Maxthon; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729)");
+            client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
             int getResult = client.executeMethod(getMethod);
+            log = new Logs();
+            log.setLogType("Clear Cache.");
+            log.setLogMessage("Just clear cache...");
+            log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+            log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                    + cal.get(Calendar.MONTH) + "/"//
+                    + cal.get(Calendar.YEAR) + " "//
+                    + cal.get(Calendar.HOUR) + ":"//
+                    + cal.get(Calendar.MINUTE) + ":"//
+                    + cal.get(Calendar.SECOND));
+            FactoryDAO.getInstance().getLogsDAO().addLogs(log);
             out = IOUtils.toString(getMethod.getResponseBodyAsStream(), "UTF-8").trim();
         } catch (Exception e) {
             System.err.println(e);

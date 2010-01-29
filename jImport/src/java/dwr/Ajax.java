@@ -8,10 +8,13 @@ package dwr;
  *
  * @author APopov
  */
+import DAO.FactoryDAO;
 import XML.XmlPro;
 import java.util.LinkedList;
 import org.directwebremoting.Browser;
 import org.directwebremoting.ui.dwr.Util;
+import Pojo.ChatLogs;
+import org.directwebremoting.WebContextFactory;
 import value4it.ValuePro;
 
 /**
@@ -23,26 +26,51 @@ public class Ajax {
      * @param text The new message text to add
      */
     XmlPro xmlp = new XmlPro();
+    ChatLogs chLog;
+    String[] strMas;
 
     public void addMessage(String text) {
-        // Make sure we have a list of the list 10 messages
-        if (text != null && text.trim().length() > 0) {
-            messages.addFirst(new Message(text));
-            while (messages.size() > 10) {
-                messages.removeLast();
+        String ip = WebContextFactory.get().getHttpServletRequest().getRemoteAddr();
+        if (!text.equals("Введите ник...: ")) {
+            // Make sure we have a list of the list 10 messages
+            try {
+                strMas = text.split(":\\s");
+                chLog = new ChatLogs(ip, strMas[0], strMas[1]);
+                FactoryDAO.getInstance().getChatLogsDAO().addChatLogs(chLog);
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
+
+            if (text != null && text.trim().length() > 0) {
+                messages.addLast(new Message(text));
+                while (messages.size() > 30) {
+                    messages.removeFirst();
+                }
+            }
+
+            // Clear the input box in the browser that kicked off this page only
+            Util.setValue("text", "");
+
+            // For all the browsers on the current page:
+            Browser.withCurrentPage(new Runnable() {
+
+                public void run() {
+                    // Clear the list and add in the new set of messages
+                    Util.removeAllOptions("chat_id_ul");
+                    Util.addOptions("chat_id_ul", messages, "text");
+                    // ScriptSessions.addFunctionCall("updateMessage");
+                }
+            });
         }
+    }
 
-        // Clear the input box in the browser that kicked off this page only
-        Util.setValue("text", "");
-
-        // For all the browsers on the current page:
+    public void updateMessage() {
         Browser.withCurrentPage(new Runnable() {
 
             public void run() {
                 // Clear the list and add in the new set of messages
-                Util.removeAllOptions("xxxsss");
-                Util.addOptions("xxxsss", messages, "text");
+                Util.removeAllOptions("chat_id_ul");
+                Util.addOptions("chat_id_ul", messages, "text");
             }
         });
     }

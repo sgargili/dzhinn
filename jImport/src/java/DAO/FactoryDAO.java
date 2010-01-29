@@ -4,7 +4,9 @@
  */
 package DAO;
 
+import DAO.Impl.ChatLogsDAOImpl;
 import DAO.Impl.CookiesDAOImpl;
+import DAO.Impl.LogsDAOImpl;
 
 /**
  *
@@ -13,6 +15,8 @@ import DAO.Impl.CookiesDAOImpl;
 public class FactoryDAO {
 
     private CookiesDAO cookiesDAO = null;
+    private ChatLogsDAO chatLogsDAO = null;
+    private LogsDAO logsDAO = null;
     private static FactoryDAO instance = null;
 
     public CookiesDAO getCookiesDAO() {
@@ -20,6 +24,20 @@ public class FactoryDAO {
             cookiesDAO = new CookiesDAOImpl();
         }
         return cookiesDAO;
+    }
+
+    public ChatLogsDAO getChatLogsDAO() {
+        if (chatLogsDAO == null) {
+            chatLogsDAO = new ChatLogsDAOImpl();
+        }
+        return chatLogsDAO;
+    }
+
+    public LogsDAO getLogsDAO() {
+        if (logsDAO == null) {
+            logsDAO = new LogsDAOImpl();
+        }
+        return logsDAO;
     }
 
     public static synchronized FactoryDAO getInstance() {
