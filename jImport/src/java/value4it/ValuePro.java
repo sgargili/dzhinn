@@ -163,6 +163,7 @@ public class ValuePro {
 
     private String export(List articlesData, boolean isRuEn) {
         String exportStr = "";
+        int varCount = 0;
         NameValuePair[] req;
         ValueArticle va;
         String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
@@ -195,6 +196,7 @@ public class ValuePro {
                     req[4] = new NameValuePair("LANGS", "");
                     req[5] = new NameValuePair("LANG", "en");
                     req[6] = new NameValuePair("LANG", "ru");
+                    varCount = 7;
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
                         va = (ValueArticle) it.next();
                         req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
@@ -213,6 +215,7 @@ public class ValuePro {
                     req[8] = new NameValuePair("LANG", "pl");
                     req[9] = new NameValuePair("LANG", "ru");
                     req[10] = new NameValuePair("LANG", "sl");
+                    varCount = 11;
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
                         va = (ValueArticle) it.next();
                         req[11 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
@@ -221,7 +224,7 @@ public class ValuePro {
                 getMethod.setRequestBody(req);
                 client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
-                exportStr = "Size: " + req.length + " Body: ";
+                exportStr = "Size: " + (req.length - varCount) + " Body: ";
                 for (int k = 0; k < req.length; k++) {
                     exportStr += req[k].getName() + "=" + req[k].getValue() + "/";
                 }
@@ -283,7 +286,7 @@ public class ValuePro {
                 getMethod.setRequestBody(req);
                 client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
-                exportMarkStr = "Size: " + req.length + " Body: ";
+                exportMarkStr = "Size: " + (req.length - 3) + " Body: ";
                 for (int k = 0; k < req.length; k++) {
                     exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
                 }
@@ -354,7 +357,7 @@ public class ValuePro {
                     getMethod.setRequestBody(req);
                     client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     int getResult = client.executeMethod(getMethod);
-                    aLinkStr = "Size: " + req.length + " Body: ";
+                    aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
                     }
@@ -429,6 +432,10 @@ public class ValuePro {
                 getMethod.setRequestBody(req);
                 client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                cStatkStr = "Size: " + (req.length - 4) + " Body: ";
+                for (int k = 0; k < req.length; k++) {
+                    cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                }
                 log = new Logs();
                 log.setLogType("Change Status.");
                 log.setLogMessage(cStatkStr);
@@ -487,6 +494,10 @@ public class ValuePro {
                 getMethod.setRequestBody(req);
                 client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                 int getResult = client.executeMethod(getMethod);
+                cOwnStr = "Size: " + (req.length - 3) + " Body: ";
+                for (int k = 0; k < req.length; k++) {
+                    cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                }
                 log = new Logs();
                 log.setLogType("Change Owner.");
                 log.setLogMessage(cOwnStr);
