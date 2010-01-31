@@ -7,7 +7,7 @@
 //dojo.require("dojo.data.ItemFileReadStore");
 //
 //function Show(ID){
-//    Ext.get(ID).style.height = "0px";
+//    dojo.byId(ID).style.height = "0px";
 //    var w1 = dojo.fx.wipeIn({
 //        node: ID,
 //        duration: 500
@@ -18,7 +18,7 @@
 //    });
 //    var a1 = dojo.fx.chain([w1, f1]);
 //
-//    Ext.get(ID).style.height = "0px";
+//    dojo.byId(ID).style.height = "0px";
 //    var w2 = dojo.fx.wipeIn({
 //        node: ID,
 //        duration: 500
@@ -38,7 +38,7 @@
 //};
 //
 //function Hide(id){
-//    Ext.get(id).style.height = "0px";
+//    dojo.byId(id).style.height = "0px";
 //    var w = dojo.fx.wipeIn({
 //        node: id,
 //        duration: 100
@@ -49,7 +49,7 @@
 //    });
 //    var a = dojo.fx.chain([w, f]);
 //
-//    Ext.get(id).style.height = "0px";
+//    dojo.byId(id).style.height = "0px";
 //    var w3 = dojo.fx.wipeIn({
 //        node: id,
 //        duration: 100
@@ -69,17 +69,17 @@
 //};
 
 function UploadeCsv(){
-    var fileName = Ext.get('uploadFileeCsv').value;
-    var checkSeparator = Ext.get('eCsvSeparator').checked;
-    var checkZip = Ext.get('eCsvZip').checked;
+    var fileName = dojo.byId('uploadFileeCsv').value;
+    var checkSeparator = dojo.byId('eCsvSeparator').checked;
+    var checkZip = dojo.byId('eCsvZip').checked;
     var file = dwr.util.getValue('uploadFileeCsv');
-    var encoding = Ext.get('eCsvEncoding').value;
-    var engine = Ext.get('eCsvEngine').value;
+    var encoding = dojo.byId('eCsvEncoding').value;
+    var engine = dojo.byId('eCsvEngine').value;
 
-    Ext.get('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    dojo.byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     CsvProcessing.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, engine, function(data) {
         dwr.engine.openInDownload(data);
-        Ext.get('it4profitCsvLoadingProcess').innerHTML = "";
+        dojo.byId('it4profitCsvLoadingProcess').innerHTML = "";
         if(data==null){
             alert("Не верный формат файла. Поддерживаемые форматы: csv и xls.");
         }
@@ -87,12 +87,12 @@ function UploadeCsv(){
 }
 
 function FixProfitCsv(){
-    var fileName = Ext.get('uploadit4profitCsv').value;
+    var fileName = dojo.byId('uploadit4profitCsv').value;
     var file = dwr.util.getValue('uploadit4profitCsv');
-    Ext.get('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    dojo.byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     CsvProcessing.fixItprofitFile(file, fileName, function(data) {
         dwr.engine.openInDownload(data);
-        Ext.get('it4profitCsvLoadingProcess').innerHTML = "";
+        dojo.byId('it4profitCsvLoadingProcess').innerHTML = "";
         if(data==null){
             alert("Не верный формат файла. Поддерживаемые форматы: csv и zip.");
         }
@@ -100,109 +100,109 @@ function FixProfitCsv(){
 }
 
 function UpdateManPT(){
-    Ext.get('Test').innerHTML = "Loading...";
+    dojo.byId('Test').innerHTML = "Loading...";
     UploadDownload.createUpdateManPt(function(data) {
-        Ext.get('Test').innerHTML = data;
+        dojo.byId('Test').innerHTML = data;
         alert(data);
     });
 }
 function Watch_All_PT_Nix(){
-    Ext.get('TablenixPT_Out').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    dojo.byId('TablenixPT_Out').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     Nix.getAllPT(function(data) {
-        Ext.get('TablenixPT_Out').innerHTML = data;
+        dojo.byId('TablenixPT_Out').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 function ShowYandexFile(){
-    if(Ext.get("yandexType").value =="Загрузить из файла"){
-        Ext.get('tduploadYandexFile').style.display = "inline";
+    if(dojo.byId("yandexType").value =="Загрузить из файла"){
+        dojo.byId('tduploadYandexFile').style.display = "inline";
     } else{
-        Ext.get('tduploadYandexFile').style.display = "none";
+        dojo.byId('tduploadYandexFile').style.display = "none";
 
     }
 }
 
 function exportByProduct(){
-    Ext.get('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = Ext.get('Articles').value;
+    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = dojo.byId('Articles').value;
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
-        Ext.get('ulexpProdLog').innerHTML = data;
+        dojo.byId('ulexpProdLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function exportMarketing(){
-    Ext.get('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = Ext.get('ArticlesExpMark').value;
+    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = dojo.byId('ArticlesExpMark').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.exportMarketing(data, function(data) {
-        Ext.get('ulexpMarkLog').innerHTML = data;
+        dojo.byId('ulexpMarkLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function addLink(){
-    Ext.get('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = Ext.get('ArticlesAddLink').value;
+    dojo.byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = dojo.byId('ArticlesAddLink').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.addLink(data, function(data) {
-        Ext.get('uladdLinkLog').innerHTML = data;
+        dojo.byId('uladdLinkLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function clearSession(){
-    Ext.get('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Show('uloptSesLog');
     Ajax.clearSession(function(data) {
-        Ext.get('uloptSesLog').innerHTML = data;
+        dojo.byId('uloptSesLog').innerHTML = data;
         Hide('uloptSesLog');
     });
 
 }
 
 function clearCache(){
-    Ext.get('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {
-        Ext.get('ulexpProdLog').innerHTML = data;
+        dojo.byId('ulexpProdLog').innerHTML = data;
     });
 }
 
 function clearCacheMark(){
-    Ext.get('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {
-        Ext.get('ulexpMarkLog').innerHTML = data;
+        dojo.byId('ulexpMarkLog').innerHTML = data;
     });
 }
 
 function changeStatus(){
-    Ext.get('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var status = "";
-    var data = Ext.get('ArticlesStatusChange').value;
-    var rBool = Ext.get('statusOne').checked;
-    var cBool = Ext.get('statusTwo').checked;
-    var dBool = Ext.get('statusThree').checked;
+    var data = dojo.byId('ArticlesStatusChange').value;
+    var rBool = dojo.byId('statusOne').checked;
+    var cBool = dojo.byId('statusTwo').checked;
+    var dBool = dojo.byId('statusThree').checked;
     if(rBool){
-        status = Ext.get('statusOne').value;
+        status = dojo.byId('statusOne').value;
     }
     if(cBool){
-        status = Ext.get('statusTwo').value;
+        status = dojo.byId('statusTwo').value;
     }
     if(dBool){
-        status = Ext.get('statusThree').value;
+        status = dojo.byId('statusThree').value;
     }
     Ajax.changeStatus(data, status, function(data) {
-        Ext.get('ulstatusChangeLog').innerHTML = data;
+        dojo.byId('ulstatusChangeLog').innerHTML = data;
     });
 
 }
 function changeOwner(){
-    Ext.get('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var owner = dijit.byId('owner').attr('value');
-    var data = Ext.get('ArticlesOwnerChange').value;
+    var data = dojo.byId('ArticlesOwnerChange').value;
     Ajax.changeOwner(data, owner, function(data) {
-        Ext.get('ulownerChangeLog').innerHTML = data;
+        dojo.byId('ulownerChangeLog').innerHTML = data;
     });
 }
 
@@ -215,7 +215,6 @@ function sendMessage() {
         return;
     }
     Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"));
-    //jQuery("#chat_id_log").html("ddd");
 }
 function updateMessage() {
     Ajax.updateMessage();
