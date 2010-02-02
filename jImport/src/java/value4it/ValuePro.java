@@ -253,10 +253,10 @@ public class ValuePro {
                             }
                             //}
                         }
-                        //getMethod.setRequestBody(req);
-                        // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                        //int getResult = client.executeMethod(getMethod);
-                        //getMethod.releaseConnection();
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                        int getResult = client.executeMethod(getMethod);
+                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -340,9 +340,9 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-                    //getMethod.setRequestBody(req);
-                    //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    //int getResult = client.executeMethod(getMethod);
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    int getResult = client.executeMethod(getMethod);
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -358,7 +358,7 @@ public class ValuePro {
                             + cal.get(Calendar.MINUTE) + ":"//
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                    //getMethod.releaseConnection();
+                    getMethod.releaseConnection();
                     req = null;
                     Thread.sleep(300);
                 }
@@ -524,9 +524,9 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-                    // getMethod.setRequestBody(req);
-                    //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    //int getResult = client.executeMethod(getMethod);
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    int getResult = client.executeMethod(getMethod);
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -542,7 +542,7 @@ public class ValuePro {
                             + cal.get(Calendar.MINUTE) + ":"//
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                    //getMethod.releaseConnection();
+                    getMethod.releaseConnection();
                     Thread.sleep(300);
                     req = null;
                 }
@@ -614,9 +614,9 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     //}
-                    //getMethod.setRequestBody(req);
-                    // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    // int getResult = client.executeMethod(getMethod);
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    int getResult = client.executeMethod(getMethod);
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -632,8 +632,9 @@ public class ValuePro {
                             + cal.get(Calendar.MINUTE) + ":"//
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                    //getMethod.releaseConnection();
-                    Thread.sleep(1000);
+                    getMethod.releaseConnection();
+                    Thread.sleep(300);
+                    req = null;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
