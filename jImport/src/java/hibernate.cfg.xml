@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/value4it</property>
-    <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">Pass4root</property>
-    <property name="hibernate.current_session_context_class">thread</property>
+    <session-factory>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/value4it</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">Pass4root</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
+        <property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+        <property name="connection.pool_size">20</property>
+        <property name="c3p0.min_size">2</property>
+        <property name="c3p0.max_size">20</property>
+        <property name="c3p0.timeout">320</property>
+        <property name="c3p0.max_statements">3</property>
+        <property name="c3p0.idle_test_period">300</property>
     <!--<mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
     <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
     <mapping resource="Pojo/PcProductsAvailable.hbm.xml"/>
@@ -19,7 +27,7 @@
     <mapping resource="Pojo/PcManufacturePt.hbm.xml"/>
     <mapping resource="Pojo/PcProductTypes.hbm.xml"/>
     -->
-    <mapping resource="Pojo/Cookies.hbm.xml"/>
+        <mapping resource="Pojo/Cookies.hbm.xml"/>
     <!--
     <mapping resource="Pojo/Manufacturers.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>
@@ -70,7 +78,7 @@
     <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
     <mapping resource="Pojo/ProductsImages.hbm.xml"/>
     <mapping resource="Pojo/SQLStoredProcedures.hbm.xml"/>-->
-    <mapping resource="Pojo/ChatLogs.hbm.xml"/>
+        <mapping resource="Pojo/ChatLogs.hbm.xml"/>
     <!--<mapping resource="Pojo/ManufacturersInfo.hbm.xml"/>
     <mapping resource="Pojo/PcManufacturePt.hbm.xml"/>
     <mapping resource="Pojo/Manufacturers.hbm.xml"/>
@@ -111,7 +119,7 @@
     <mapping resource="Pojo/PcProductTypes.hbm.xml"/>
     <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
     <mapping resource="Pojo/ProductImgLib.hbm.xml"/>-->
-    <mapping resource="Pojo/Logs.hbm.xml"/>
+        <mapping resource="Pojo/Logs.hbm.xml"/>
     <!--<mapping resource="Pojo/PcSyncIds.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProducts.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
@@ -172,5 +180,5 @@
     <mapping resource="Pojo/Categories.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>
     <mapping resource="Pojo/Cookies.hbm.xml"/>-->
-  </session-factory>
+    </session-factory>
 </hibernate-configuration>

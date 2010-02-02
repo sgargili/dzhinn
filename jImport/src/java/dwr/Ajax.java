@@ -12,9 +12,10 @@ import DAO.FactoryDAO;
 import XML.XmlPro;
 import java.util.LinkedList;
 import org.directwebremoting.Browser;
-import org.directwebremoting.ui.dwr.Util;
+//import org.directwebremoting.
 import Pojo.ChatLogs;
 import org.directwebremoting.WebContextFactory;
+import org.directwebremoting.ui.dwr.Util;
 import value4it.ValuePro;
 
 /**
@@ -32,7 +33,7 @@ public class Ajax {
     public void addMessage(String text) {
         String ip = WebContextFactory.get().getHttpServletRequest().getRemoteAddr();
         if (!text.equals("Введите ник...: ")) {
-            // Make sure we have a list of the list 10 messages
+            // Make sure we have a list of the list 30 messages
             try {
                 strMas = text.split(":\\s");
                 chLog = new ChatLogs(ip, strMas[0], strMas[1]);
@@ -49,7 +50,7 @@ public class Ajax {
             }
 
             // Clear the input box in the browser that kicked off this page only
-            Util.setValue("text", "");
+            //Util.setValue("text", "");
 
             // For all the browsers on the current page:
             Browser.withCurrentPage(new Runnable() {
