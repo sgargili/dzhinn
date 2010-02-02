@@ -186,7 +186,7 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                PostMethod getMethod = new PostMethod(url);
+                PostMethod getMethod;
 //                int i;
 //                System.out.println(exportData.size());
 //                int n = 0;
@@ -200,6 +200,7 @@ public class ValuePro {
                 try {
                     //for (int j = 0; j < n; j++) {
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
+                        getMethod = new PostMethod(url);
 //                        i = 0;
                         if (isRuEn) {
                             // Тупняк... Если, типа, итерация последняя, то количество зависит от остатка...
@@ -212,7 +213,7 @@ public class ValuePro {
                             req[0] = new NameValuePair("referer", "");
                             req[1] = new NameValuePair("FACTORY_ID", "137");
                             req[2] = new NameValuePair("ACTION", "EXPORT");
-                            req[3] = new NameValuePair("PN_RPP", "0");
+                            req[3] = new NameValuePair("PN_RPP", "100");
                             req[4] = new NameValuePair("LANGS", "");
                             req[5] = new NameValuePair("LANG", "en");
                             req[6] = new NameValuePair("LANG", "ru");
@@ -236,7 +237,7 @@ public class ValuePro {
                             req[0] = new NameValuePair("referer", "");
                             req[1] = new NameValuePair("FACTORY_ID", "137");
                             req[2] = new NameValuePair("ACTION", "EXPORT");
-                            req[3] = new NameValuePair("PN_RPP", "0");
+                            req[3] = new NameValuePair("PN_RPP", "100");
                             req[4] = new NameValuePair("LANGS", "");
                             req[5] = new NameValuePair("LANG", "bg");
                             req[6] = new NameValuePair("LANG", "hr");
@@ -254,8 +255,8 @@ public class ValuePro {
                             //}
                         }
                         getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                        int getResult = client.executeMethod(getMethod);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+                        client.executeMethod(getMethod);
                         getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
@@ -275,6 +276,7 @@ public class ValuePro {
                         FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                         Thread.sleep(300);
                         req = null;
+                        getMethod = null;
                     }
                 } catch (IndexOutOfBoundsException ex) {
                 }
@@ -310,7 +312,7 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                PostMethod getMethod = new PostMethod(url);
+                PostMethod getMethod;
 //                int i;
 //                int n = 0;
 //                int ost = 0;
@@ -328,6 +330,7 @@ public class ValuePro {
 //                        req = new NameValuePair[3 + 2 * ost];
 //                    }
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    getMethod = new PostMethod(url);
                     req = new NameValuePair[5];
                     req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
                     req[1] = new NameValuePair("SOURCE", "");
@@ -395,7 +398,7 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                PostMethod getMethod = new PostMethod(url);
+                PostMethod getMethod;
 //                int n = 0;
 //                if (exportData.size() % 10 == 0) {
 //                    n = exportData.size() / 10;
@@ -404,6 +407,7 @@ public class ValuePro {
 //                }
 //                for (int j = 0; j < n; j++) {
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    getMethod = new PostMethod(url);
                     // for (int l = j * 10; l < (j + 1) * 10; l++) {
                     vl = (ValueLink) it.next();
                     if (vl.getLinkType().trim().equalsIgnoreCase("Datasheet")) {
@@ -487,7 +491,7 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                PostMethod getMethod = new PostMethod(url);
+                PostMethod getMethod;
 //                int i;
 //                int n = 0;
 //                int ost = 0;
@@ -499,6 +503,7 @@ public class ValuePro {
 //                }
                 //for (int j = 0; j < n; j++) {
                 for (Iterator it = changeData.iterator(); it.hasNext();) {
+                    getMethod = new PostMethod(url);
                     // req = new NameValuePair[4 + 2 * changeData.size()];
 //                    i = 0;
 //                    if (j != n - 1) {
@@ -578,7 +583,7 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                PostMethod getMethod = new PostMethod(url);
+                PostMethod getMethod;
 //                int i = 0;
 //                int n = 0;
 //                int ost = 0;
@@ -590,6 +595,7 @@ public class ValuePro {
 //                }
                 // for (int j = 0; j < n; j++) {
                 for (Iterator it = changeData.iterator(); it.hasNext();) {
+                    getMethod = new PostMethod(url);
                     //req = new NameValuePair[3 + 2 * changeData.size()];
 //                    i = 0;
 //                    if (j != n - 1) {
