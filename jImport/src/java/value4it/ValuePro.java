@@ -187,26 +187,28 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int i;
-                System.out.println(exportData.size());
-                int n = 0;
-                int ost = 0;
-                if (exportData.size() % 10 == 0) {
-                    n = exportData.size() / 10;
-                } else {
-                    n = exportData.size() / 10 + 1;
-                    ost = exportData.size() % 10;
-                }
+//                int i;
+//                System.out.println(exportData.size());
+//                int n = 0;
+//                int ost = 0;
+//                if (exportData.size() % 10 == 0) {
+//                    n = exportData.size() / 10;
+//                } else {
+//                    n = exportData.size() / 10 + 1;
+//                    ost = exportData.size() % 10;
+//                }
                 try {
-                    for (int j = 0; j < n; j++) {
-                        i = 0;
+                    //for (int j = 0; j < n; j++) {
+                    for (Iterator it = exportData.iterator(); it.hasNext();) {
+//                        i = 0;
                         if (isRuEn) {
                             // Тупняк... Если, типа, итерация последняя, то количество зависит от остатка...
-                            if (j != n - 1) {
-                                req = new NameValuePair[17];
-                            } else {
-                                req = new NameValuePair[7 + ost];
-                            }
+//                            if (j != n - 1) {
+//                                req = new NameValuePair[17];
+//                            } else {
+//                                req = new NameValuePair[7 + ost];
+//                            }
+                            req = new NameValuePair[8];
                             req[0] = new NameValuePair("referer", "");
                             req[1] = new NameValuePair("FACTORY_ID", "137");
                             req[2] = new NameValuePair("ACTION", "EXPORT");
@@ -215,21 +217,22 @@ public class ValuePro {
                             req[5] = new NameValuePair("LANG", "en");
                             req[6] = new NameValuePair("LANG", "ru");
                             varCount = 7;
-                            for (int l = j * 10; l < (j + 1) * 10; l++) {
-                                try {
-                                    va = (ValueArticle) exportData.get(l);
-                                    req[7 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                                    // System.out.println("Прошло!!! -> " + va.getArticleId());
+                            //for (int l = j * 10; l < (j + 1) * 10; l++) {
+                            try {
+                                va = (ValueArticle) it.next();
+                                req[7] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                                // System.out.println("Прошло!!! -> " + va.getArticleId());
                                 } catch (Exception ex) {
-                                }
                             }
+                            //  }
 
                         } else {
-                            if (ost == 0) {
-                                req = new NameValuePair[21];
-                            } else {
-                                req = new NameValuePair[11 + ost];
-                            }
+//                            if (ost == 0) {
+//                                req = new NameValuePair[21];
+//                            } else {
+//                                req = new NameValuePair[11 + ost];
+//                            }
+                            req = new NameValuePair[12];
                             req[0] = new NameValuePair("referer", "");
                             req[1] = new NameValuePair("FACTORY_ID", "137");
                             req[2] = new NameValuePair("ACTION", "EXPORT");
@@ -242,13 +245,13 @@ public class ValuePro {
                             req[9] = new NameValuePair("LANG", "ru");
                             req[10] = new NameValuePair("LANG", "sl");
                             varCount = 11;
-                            for (int l = j * 10; l < (j + 1) * 10; l++) {
-                                try {
-                                    va = (ValueArticle) exportData.get(l);
-                                    req[11 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                                } catch (Exception ex) {
-                                }
+                            //for (int l = j * 10; l < (j + 1) * 10; l++) {
+                            try {
+                                va = (ValueArticle) it.next();
+                                req[11] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                            } catch (Exception ex) {
                             }
+                            //}
                         }
                         //getMethod.setRequestBody(req);
                         // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
@@ -270,7 +273,8 @@ public class ValuePro {
                                 + cal.get(Calendar.MINUTE) + ":"//
                                 + cal.get(Calendar.SECOND));
                         FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                        Thread.sleep(1000);
+                        Thread.sleep(300);
+                        req = null;
                     }
                 } catch (IndexOutOfBoundsException ex) {
                 }
@@ -281,7 +285,6 @@ public class ValuePro {
             updateSessionTime();
         }
         return out;
-
     }
 
     private String exportMark(List articlesData) {
@@ -308,33 +311,35 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int i;
-                int n = 0;
-                int ost = 0;
-                if (exportData.size() % 10 == 0) {
-                    n = exportData.size() / 10;
-                } else {
-                    n = exportData.size() / 10 + 1;
-                    ost = exportData.size() % 10;
-                }
-                for (int j = 0; j < n; j++) {
-                    i = 0;
-                    if (j != n - 1) {
-                        req = new NameValuePair[23];
-                    } else {
-                        req = new NameValuePair[3 + 2 * ost];
-                    }
+//                int i;
+//                int n = 0;
+//                int ost = 0;
+//                if (exportData.size() % 10 == 0) {
+//                    n = exportData.size() / 10;
+//                } else {
+//                    n = exportData.size() / 10 + 1;
+//                    ost = exportData.size() % 10;
+//                }
+//                for (int j = 0; j < n; j++) {
+//                    i = 0;
+//                    if (j != n - 1) {
+//                        req = new NameValuePair[23];
+//                    } else {
+//                        req = new NameValuePair[3 + 2 * ost];
+//                    }
+                for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    req = new NameValuePair[5];
                     req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_OWNER_ID", "70919085040801266");
-                    for (int l = j * 10; l < (j + 1) * 10; l++) {
-                        try {
-                            va = (ValueArticle) exportData.get(l);
-                            req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                            req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
-                        } catch (Exception ex) {
-                        }
+                    // for (int l = j * 10; l < (j + 1) * 10; l++) {
+                    try {
+                        va = (ValueArticle) it.next();
+                        req[3] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[4] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                    } catch (Exception ex) {
                     }
+                    // }
                     //getMethod.setRequestBody(req);
                     //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     //int getResult = client.executeMethod(getMethod);
@@ -354,7 +359,8 @@ public class ValuePro {
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                     //getMethod.releaseConnection();
-                    Thread.sleep(1000);
+                    req = null;
+                    Thread.sleep(300);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -390,56 +396,57 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int n = 0;
-                if (exportData.size() % 10 == 0) {
-                    n = exportData.size() / 10;
-                } else {
-                    n = exportData.size() / 10 + 1;
-                }
-                for (int j = 0; j < n; j++) {
-                    //for (Iterator it = exportData.iterator(); it.hasNext();) {
-                    for (int l = j * 10; l < (j + 1) * 10; l++) {
-                        vl = (ValueLink) exportData.get(l);
-                        if (vl.getLinkType().trim().equalsIgnoreCase("Datasheet")) {
-                            linkType = "3";
-                        } else if (vl.getLinkType().trim().equalsIgnoreCase("Data sheet")) {
-                            linkType = "3";
-                        } else if (vl.getLinkType().trim().equalsIgnoreCase("Specifications")) {
-                            linkType = "2";
-                        } else if (vl.getLinkType().trim().equalsIgnoreCase("Specification")) {
-                            linkType = "2";
-                        }
-                        req = new NameValuePair[6];
-                        req[0] = new NameValuePair("LANG_CODE", "en");
-                        req[1] = new NameValuePair("TYPE_DOC", linkType);
-                        req[2] = new NameValuePair("INFO_ID", "");
-                        req[3] = new NameValuePair("TEXT", vl.getLinkType());
-                        req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
-                        req[5] = new NameValuePair("SOURCE", vl.getLink());
-                        getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                        int getResult = client.executeMethod(getMethod);
-                        aLinkStr = "Size: " + (req.length - 5) + " Body: ";
-                        for (int k = 0; k < req.length; k++) {
-                            aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
-                        }
-                        log = new Logs();
-                        log.setLogType("Add Link.");
-                        log.setLogMessage(aLinkStr);
-                        log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
-                        log.setLogTime(cal.get(Calendar.DATE) + "/"//
-                                + cal.get(Calendar.MONTH) + "/"//
-                                + cal.get(Calendar.YEAR) + " "//
-                                + cal.get(Calendar.HOUR) + ":"//
-                                + cal.get(Calendar.MINUTE) + ":"//
-                                + cal.get(Calendar.SECOND));
-                        FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                        getMethod.releaseConnection();
-                        try {
-                            Thread.sleep(300);
-                        } catch (InterruptedException ex) {
-                        }
+//                int n = 0;
+//                if (exportData.size() % 10 == 0) {
+//                    n = exportData.size() / 10;
+//                } else {
+//                    n = exportData.size() / 10 + 1;
+//                }
+//                for (int j = 0; j < n; j++) {
+                for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    // for (int l = j * 10; l < (j + 1) * 10; l++) {
+                    vl = (ValueLink) it.next();
+                    if (vl.getLinkType().trim().equalsIgnoreCase("Datasheet")) {
+                        linkType = "3";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Data sheet")) {
+                        linkType = "3";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Specifications")) {
+                        linkType = "2";
+                    } else if (vl.getLinkType().trim().equalsIgnoreCase("Specification")) {
+                        linkType = "2";
                     }
+                    req = new NameValuePair[6];
+                    req[0] = new NameValuePair("LANG_CODE", "en");
+                    req[1] = new NameValuePair("TYPE_DOC", linkType);
+                    req[2] = new NameValuePair("INFO_ID", "");
+                    req[3] = new NameValuePair("TEXT", vl.getLinkType());
+                    req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
+                    req[5] = new NameValuePair("SOURCE", vl.getLink());
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    int getResult = client.executeMethod(getMethod);
+                    aLinkStr = "Size: " + (req.length - 5) + " Body: ";
+                    for (int k = 0; k < req.length; k++) {
+                        aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
+                    }
+                    log = new Logs();
+                    log.setLogType("Add Link.");
+                    log.setLogMessage(aLinkStr);
+                    log.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                    log.setLogTime(cal.get(Calendar.DATE) + "/"//
+                            + cal.get(Calendar.MONTH) + "/"//
+                            + cal.get(Calendar.YEAR) + " "//
+                            + cal.get(Calendar.HOUR) + ":"//
+                            + cal.get(Calendar.MINUTE) + ":"//
+                            + cal.get(Calendar.SECOND));
+                    FactoryDAO.getInstance().getLogsDAO().addLogs(log);
+                    getMethod.releaseConnection();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException ex) {
+                    }
+                    // }
+                    req = null;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -481,23 +488,25 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int i;
-                int n = 0;
-                int ost = 0;
-                if (changeData.size() % 10 == 0) {
-                    n = changeData.size() / 10;
-                } else {
-                    n = changeData.size() / 10 + 1;
-                    ost = changeData.size() % 10;
-                }
-                for (int j = 0; j < n; j++) {
+//                int i;
+//                int n = 0;
+//                int ost = 0;
+//                if (changeData.size() % 10 == 0) {
+//                    n = changeData.size() / 10;
+//                } else {
+//                    n = changeData.size() / 10 + 1;
+//                    ost = changeData.size() % 10;
+//                }
+                //for (int j = 0; j < n; j++) {
+                for (Iterator it = changeData.iterator(); it.hasNext();) {
                     // req = new NameValuePair[4 + 2 * changeData.size()];
-                    i = 0;
-                    if (j != n - 1) {
-                        req = new NameValuePair[24];
-                    } else {
-                        req = new NameValuePair[4 + 2 * ost];
-                    }
+//                    i = 0;
+//                    if (j != n - 1) {
+//                        req = new NameValuePair[24];
+//                    } else {
+//                        req = new NameValuePair[4 + 2 * ost];
+//                    }
+                    req = new NameValuePair[6];
                     req[0] = new NameValuePair("POST_ACTION", "change_status");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_STATUS", status);
@@ -507,14 +516,14 @@ public class ValuePro {
 //                        req[4 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
 //                        req[4 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
 //                    }
-                    for (int l = j * 10; l < (j + 1) * 10; l++) {
-                        try {
-                            va = (ValueArticle) changeData.get(l);
-                            req[4 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                            req[4 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
-                        } catch (Exception ex) {
-                        }
+                    // for (int l = j * 10; l < (j + 1) * 10; l++) {
+                    try {
+                        va = (ValueArticle) it.next();
+                        req[4] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[5] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                    } catch (Exception ex) {
                     }
+                    // }
                     // getMethod.setRequestBody(req);
                     //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     //int getResult = client.executeMethod(getMethod);
@@ -534,7 +543,8 @@ public class ValuePro {
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
                     //getMethod.releaseConnection();
-                    Thread.sleep(1000);
+                    Thread.sleep(300);
+                    req = null;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -569,23 +579,25 @@ public class ValuePro {
             login();
             try {
                 PostMethod getMethod = new PostMethod(url);
-                int i = 0;
-                int n = 0;
-                int ost = 0;
-                if (changeData.size() % 10 == 0) {
-                    n = changeData.size() / 10;
-                } else {
-                    n = changeData.size() / 10 + 1;
-                    ost = changeData.size() % 10;
-                }
-                for (int j = 0; j < n; j++) {
+//                int i = 0;
+//                int n = 0;
+//                int ost = 0;
+//                if (changeData.size() % 10 == 0) {
+//                    n = changeData.size() / 10;
+//                } else {
+//                    n = changeData.size() / 10 + 1;
+//                    ost = changeData.size() % 10;
+//                }
+                // for (int j = 0; j < n; j++) {
+                for (Iterator it = changeData.iterator(); it.hasNext();) {
                     //req = new NameValuePair[3 + 2 * changeData.size()];
-                    i = 0;
-                    if (j != n - 1) {
-                        req = new NameValuePair[23];
-                    } else {
-                        req = new NameValuePair[3 + 2 * ost];
-                    }
+//                    i = 0;
+//                    if (j != n - 1) {
+//                        req = new NameValuePair[23];
+//                    } else {
+//                        req = new NameValuePair[3 + 2 * ost];
+//                    }
+                    req = new NameValuePair[5];
                     req[0] = new NameValuePair("POST_ACTION", "change_owner");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_OWNER_ID", owner);
@@ -594,14 +606,14 @@ public class ValuePro {
 //                        req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
 //                        req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
 //                    }
-                    for (int l = j * 10; l < (j + 1) * 10; l++) {
-                        try {
-                            va = (ValueArticle) changeData.get(l);
-                            req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                            req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
-                        } catch (Exception ex) {
-                        }
+                    //for (int l = j * 10; l < (j + 1) * 10; l++) {
+                    try {
+                        va = (ValueArticle) it.next();
+                        req[3] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[4] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                    } catch (Exception ex) {
                     }
+                    //}
                     //getMethod.setRequestBody(req);
                     // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     // int getResult = client.executeMethod(getMethod);

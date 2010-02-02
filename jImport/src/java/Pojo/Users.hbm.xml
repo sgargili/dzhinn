@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 02.02.2010 14:18:48 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="Pojo.Users" table="users" catalog="value4it">
+        <id name="id" type="long">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="user" type="string">
+            <column name="user" length="512" />
+        </property>
+        <property name="nick" type="string">
+            <column name="nick" length="512" />
+        </property>
+        <property name="login" type="string">
+            <column name="login" length="256" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="256" />
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" length="15" />
+        </property>
+    </class>
+</hibernate-mapping>

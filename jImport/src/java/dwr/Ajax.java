@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import org.directwebremoting.Browser;
 //import org.directwebremoting.
 import Pojo.ChatLogs;
+import Pojo.Users;
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.ui.dwr.Util;
 import value4it.ValuePro;
@@ -29,6 +30,7 @@ public class Ajax {
     XmlPro xmlp = new XmlPro();
     ChatLogs chLog;
     String[] strMas;
+    Users user;
 
     public void addMessage(String text) {
         String ip = WebContextFactory.get().getHttpServletRequest().getRemoteAddr();
@@ -38,6 +40,18 @@ public class Ajax {
                 strMas = text.split(":\\s");
                 chLog = new ChatLogs(ip, strMas[0], strMas[1]);
                 FactoryDAO.getInstance().getChatLogsDAO().addChatLogs(chLog);
+                user = FactoryDAO.getInstance().getUsersDAO().getUserByIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                if (user != null) {
+                    if (!user.getNick().equals(strMas[0])) {
+                        user.setNick(strMas[0]);
+                        FactoryDAO.getInstance().getUsersDAO().addUser(user);
+                    }
+                } else {
+                    user = new Users();
+                    user.setIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+                    user.setNick(strMas[0]);
+                    FactoryDAO.getInstance().getUsersDAO().addUser(user);
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
