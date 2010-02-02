@@ -22,6 +22,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.httpclient.Cookie;
@@ -45,7 +46,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 public class ValuePro {
 
     private HttpClient client = new HttpClient();
-    final Calendar cal = Calendar.getInstance();
+    final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
     Logs log;
 
     public void login() {
@@ -249,10 +250,10 @@ public class ValuePro {
                                 }
                             }
                         }
-                        getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                        int getResult = client.executeMethod(getMethod);
-                        getMethod.releaseConnection();
+                        //getMethod.setRequestBody(req);
+                        // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                        //int getResult = client.executeMethod(getMethod);
+                        //getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -334,9 +335,9 @@ public class ValuePro {
                         } catch (Exception ex) {
                         }
                     }
-                    getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    int getResult = client.executeMethod(getMethod);
+                    //getMethod.setRequestBody(req);
+                    //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    //int getResult = client.executeMethod(getMethod);
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -352,7 +353,7 @@ public class ValuePro {
                             + cal.get(Calendar.MINUTE) + ":"//
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                    getMethod.releaseConnection();
+                    //getMethod.releaseConnection();
                     Thread.sleep(1000);
                 }
             } catch (Exception e) {
@@ -415,9 +416,9 @@ public class ValuePro {
                         req[3] = new NameValuePair("TEXT", vl.getLinkType());
                         req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                         req[5] = new NameValuePair("SOURCE", vl.getLink());
-                        //getMethod.setRequestBody(req);
-                        //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                        //int getResult = client.executeMethod(getMethod);
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                        int getResult = client.executeMethod(getMethod);
                         aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
                             aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -433,7 +434,7 @@ public class ValuePro {
                                 + cal.get(Calendar.MINUTE) + ":"//
                                 + cal.get(Calendar.SECOND));
                         FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                        //getMethod.releaseConnection();
+                        getMethod.releaseConnection();
                         try {
                             Thread.sleep(300);
                         } catch (InterruptedException ex) {
@@ -483,11 +484,11 @@ public class ValuePro {
                 int i;
                 int n = 0;
                 int ost = 0;
-                if (articlesData.size() % 10 == 0) {
-                    n = articlesData.size() / 10;
+                if (changeData.size() % 10 == 0) {
+                    n = changeData.size() / 10;
                 } else {
-                    n = articlesData.size() / 10 + 1;
-                    ost = articlesData.size() % 10;
+                    n = changeData.size() / 10 + 1;
+                    ost = changeData.size() % 10;
                 }
                 for (int j = 0; j < n; j++) {
                     // req = new NameValuePair[4 + 2 * changeData.size()];
@@ -508,13 +509,13 @@ public class ValuePro {
 //                    }
                     for (int l = j * 10; l < (j + 1) * 10; l++) {
                         try {
-                            va = (ValueArticle) articlesData.get(l);
+                            va = (ValueArticle) changeData.get(l);
                             req[4 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                             req[4 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                         } catch (Exception ex) {
                         }
                     }
-                    //getMethod.setRequestBody(req);
+                    // getMethod.setRequestBody(req);
                     //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
                     //int getResult = client.executeMethod(getMethod);
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
@@ -571,11 +572,11 @@ public class ValuePro {
                 int i = 0;
                 int n = 0;
                 int ost = 0;
-                if (articlesData.size() % 10 == 0) {
-                    n = articlesData.size() / 10;
+                if (changeData.size() % 10 == 0) {
+                    n = changeData.size() / 10;
                 } else {
-                    n = articlesData.size() / 10 + 1;
-                    ost = articlesData.size() % 10;
+                    n = changeData.size() / 10 + 1;
+                    ost = changeData.size() % 10;
                 }
                 for (int j = 0; j < n; j++) {
                     //req = new NameValuePair[3 + 2 * changeData.size()];
@@ -595,15 +596,15 @@ public class ValuePro {
 //                    }
                     for (int l = j * 10; l < (j + 1) * 10; l++) {
                         try {
-                            va = (ValueArticle) articlesData.get(l);
+                            va = (ValueArticle) changeData.get(l);
                             req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                             req[3 + i++] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                         } catch (Exception ex) {
                         }
                     }
                     //getMethod.setRequestBody(req);
-                    //client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    //int getResult = client.executeMethod(getMethod);
+                    // client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    // int getResult = client.executeMethod(getMethod);
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -619,7 +620,7 @@ public class ValuePro {
                             + cal.get(Calendar.MINUTE) + ":"//
                             + cal.get(Calendar.SECOND));
                     FactoryDAO.getInstance().getLogsDAO().addLogs(log);
-                    // getMethod.releaseConnection();
+                    //getMethod.releaseConnection();
                     Thread.sleep(1000);
                 }
             } catch (Exception e) {
@@ -669,7 +670,7 @@ public class ValuePro {
     }
 
     public boolean isArticle(String article) {
-        Pattern p = Pattern.compile("\\d{17}");
+        Pattern p = Pattern.compile("\\d{17,18}");
         Matcher m = p.matcher(article);
         if (m.matches()) {
             return false;
