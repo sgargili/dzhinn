@@ -254,10 +254,10 @@ public class ValuePro {
                             }
                             //}
                         }
-//                        getMethod.setRequestBody(req);
-//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-//                        client.executeMethod(getMethod);
-//                        getMethod.releaseConnection();
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+                        client.executeMethod(getMethod);
+                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -343,10 +343,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    int getResult = client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -427,10 +427,10 @@ public class ValuePro {
                     req[3] = new NameValuePair("TEXT", vl.getLinkType());
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    int getResult = client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -531,10 +531,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    int getResult = client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -622,10 +622,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     //}
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    int getResult = client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -659,7 +659,7 @@ public class ValuePro {
         GetMethod getMethod = new GetMethod("https://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
         try {
             client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-            int getResult = client.executeMethod(getMethod);
+            client.executeMethod(getMethod);
             log = new Logs();
             log.setLogType("Clear Cache.");
             log.setLogMessage("Just clear cache...");
@@ -733,7 +733,6 @@ public class ValuePro {
             urlPattern += (String) it.next() + ";";
         }
         File xml = http.DownloadContentAsFile("http://213.53.57.39/cfInfoWS/cfcode.exml?article=" + urlPattern);
-
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
         int eventType = xpp.getEventType();
         while (eventType != XmlPullParser.END_DOCUMENT) {
