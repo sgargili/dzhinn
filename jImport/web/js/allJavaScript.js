@@ -217,7 +217,7 @@ function sendMessage() {
     Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"), function(data) {
         dojo.byId("text").value = "";
     });
-    //dojo.byId("text").value="";
+//dojo.byId("text").value="";
 }
 function updateMessage() {
     Ajax.updateMessage();
@@ -242,12 +242,36 @@ var value4export = {
     },
     items:[{
         title: 'Экспорт по продукту',
-        contentEl: 'expByProd',
-        autoScroll: true
+        //contentEl: 'expByProd',
+        autoScroll: true,
+        items:[{
+            title: 'Экспорт',
+            contentEl: 'expByProdInput',
+            autoScroll: true
+        },{
+            bodyStyle: 'padding:0px; border: 0',
+            html: '<div id="brId" style="background-color: #e1e8ff"><br/></div>'
+        },{
+            title: 'Логи сервера',
+            contentEl: 'expProdLogs',
+            autoScroll: true
+        }]
     },{
         title: 'Экспорт маркетинга',
-        contentEl: 'expMark',
-        autoScroll: true
+        //contentEl: 'expMark',
+        autoScroll: true,
+        items:[{
+            title: 'Экспорт маркетинга',
+            contentEl: 'expMarkInput',
+            autoScroll: true
+        },{
+            bodyStyle: 'padding:0px; border: 0',
+            html: '<div id="brId" style="background-color: #e1e8ff"><br/></div>'
+        },{
+            title: 'Логи сервера',
+            contentEl: 'expMarkLogs',
+            autoScroll: true
+        }]
     }]
 };
 var echat = {
@@ -432,6 +456,14 @@ Ext.onReady(function(){
         width: 150,
         html: '<p class="details-info">Выберите нужную функцию...</p>'
     };
+
+    var panel1 = new Ext.Panel({
+        title: 'Panel 1',
+        html: 'Width = container width\' - 50 px',
+        // Width = container width' - 50 px.
+        anchor: '-50'
+    });
+
     new Ext.Viewport({
         layout: 'border',
         title: 'Ext Layout Browser',

@@ -47,9 +47,9 @@
                 <img style="position:absolute; top:20%; left:20%" src="images/vovka.jpg"/>
             </div>
             <div id="expByProd">
-                <div dojoType="dijit.TooltipDialog" id="expByProdInput">
-                    <h1 style="color:orange">Экспорт</h1>
-                    <table id="expProdTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="expByProdInput">
+                    <%--<h1 style="color:orange">Экспорт</h1>--%>
+                    <table id="expProdTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px"> 
                                 <table>
@@ -95,17 +95,17 @@
                     </table>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="expProdLogs" style="text-align:left; overflow:visible scroll">
-                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                <div id="expProdLogs" style="text-align:left; overflow:visible scroll; background-color: #e1e1e1">
+                    <%--<h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>--%>
                     <br/>
                     <ul id="ulexpProdLog" style="min-height:350px">
                     </ul>
                 </div>
             </div>
             <div id="expMark">
-                <div dojoType="dijit.TooltipDialog" id="expMarkInput">
-                    <h1 style="color:orange">Экспорт маркетинга</h1>
-                    <table id="expMarkTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="expMarkInput">
+                    <%--<h1 style="color:orange">Экспорт маркетинга</h1>--%>
+                    <table id="expMarkTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
                                 <table>
@@ -136,6 +136,9 @@
                                                             <button id="cache_Mark_button" dojoType="dijit.form.Button" onclick="clearCacheMark()">
                                                                 &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
                                                             </button>
+                                                            <%--<input type="button" id="cache_Mark_button2" />--%>
+                                                              <%--  &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
+                                                            </button>--%>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -148,8 +151,8 @@
                     </table>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="expMarkLogs" style="text-align:left; overflow:visible scroll">
-                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
+                <div id="expMarkLogs" style="text-align:left; overflow:visible scroll; background-color: #e1e1e1">
+                    <%--<h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>--%>
                     <br/>
                     <ul id="ulexpMarkLog" style="min-height:350px">
                     </ul>
@@ -163,10 +166,10 @@
                         <input id="chat_btn" type="button" value="Send" onclick="sendMessage()"/>
                         Ник:
                         <input id="nick_id" value="<% try {
-                out.print(user.getNick());
-            } catch (Exception ex) {
-                out.print("Введите ник...");
-            }%>"/>
+                                        out.print(user.getNick());
+                                    } catch (Exception ex) {
+                                        out.print("Введите ник...");
+                                    }%>"/>
                     </p>
                 </div>
                 <br/>
