@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 29.01.2010 17:00:17 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.ChatLogs" table="chat_logs" catalog="value4it">
-        <id name="id" type="java.lang.Long">
-            <column name="id" />
-            <generator class="identity" />
-        </id>
-        <property name="ip" type="string">
-            <column name="ip" length="15" />
-        </property>
-        <property name="nick" type="string">
-            <column name="nick" length="512" />
-        </property>
-        <property name="message" type="string">
-            <column name="message" length="65535" />
-        </property>
-    </class>
+  <class catalog="value4it" name="Pojo.ChatLogs" table="chat_logs">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="ip" type="string">
+      <column length="15" name="ip"/>
+    </property>
+    <property name="nick" type="string">
+      <column length="512" name="nick"/>
+    </property>
+    <property name="message" type="string">
+      <column length="65535" name="message"/>
+    </property>
+  </class>
 </hibernate-mapping>

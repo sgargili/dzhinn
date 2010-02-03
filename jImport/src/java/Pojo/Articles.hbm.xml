@@ -1,15 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 06.01.2010 13:28:43 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.Articles" table="articles" catalog="value4it">
-        <id name="articleId" type="long">
-            <column name="article_id" />
-            <generator class="assigned" />
-        </id>
-        <property name="article" type="string">
-            <column name="article" length="512" />
-        </property>
-    </class>
+  <class catalog="value4it" name="Pojo.Articles" table="articles">
+    <id name="articleId" type="long">
+      <column name="article_id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="article" type="string">
+      <column length="512" name="article"/>
+    </property>
+  </class>
 </hibernate-mapping>
