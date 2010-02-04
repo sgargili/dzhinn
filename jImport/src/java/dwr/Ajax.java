@@ -21,9 +21,7 @@ import java.util.Map;
 import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.ui.dwr.Util;
-import org.directwebremoting.ScriptSessions;
 import org.directwebremoting.ScriptSession;
-import org.directwebremoting.impl.DefaultScriptSession;
 import value4it.ValuePro;
 
 /**
@@ -45,15 +43,17 @@ public class Ajax {
 
     public void test() {
         //ipCount.setCountAll(10);
-        for (int t = 1; t <= 10; t++) {
+        ScriptSession ss;
+        ScriptBuffer script;
+        for (int t = 0; t < 10; t++) {
             //count = t;
             //ipCount.setCount(count);
             //ipMap.put(WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), ipCount);
-            ScriptSession ss = WebContextFactory.get().getScriptSession();
-            ScriptBuffer script = new ScriptBuffer();
+            ss = WebContextFactory.get().getScriptSession();
+            script = new ScriptBuffer();
             try {
                 script.appendScript("update(");
-                script.appendData(10);
+                script.appendData(9);
                 script.appendScript(",");
                 script.appendData(t);
                 script.appendScript(");");
@@ -62,7 +62,7 @@ public class Ajax {
                 ex.printStackTrace();
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(300);
             } catch (InterruptedException ex) {
             }
         }

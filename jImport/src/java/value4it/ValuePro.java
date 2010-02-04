@@ -34,6 +34,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.directwebremoting.ScriptBuffer;
+import org.directwebremoting.ScriptSession;
 import org.directwebremoting.WebContextFactory;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -49,7 +51,7 @@ public class ValuePro {
     final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
     Logs log;
     private static Map ipMap = new HashMap();
-    int count;
+    int count = 1;
 
     public void login() {
         if (!isSessionAlive()) {
@@ -169,6 +171,8 @@ public class ValuePro {
         int varCount = 0;
         NameValuePair[] req;
         ValueArticle va;
+        ScriptSession ss;
+        ScriptBuffer script;
         String url = "http://cf.value4it.com/cf/admin/export_product.jsp";
         String out = buildResponse(articlesData, "Export");
         boolean process = false;
@@ -202,8 +206,18 @@ public class ValuePro {
                 try {
                     //for (int j = 0; j < n; j++) {
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
-                        count++;
-                        ipMap.put(ip, count);
+                        ss = WebContextFactory.get().getScriptSession();
+                        script = new ScriptBuffer();
+                        try {
+                            script.appendScript("update(");
+                            script.appendData(exportData.size());
+                            script.appendScript(",");
+                            script.appendData(count++);
+                            script.appendScript(");");
+                            ss.addScript(script);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                        }
                         getMethod = new PostMethod(url);
 //                        i = 0;
                         if (isRuEn) {
@@ -227,7 +241,7 @@ public class ValuePro {
                                 va = (ValueArticle) it.next();
                                 req[7] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                                 // System.out.println("Прошло!!! -> " + va.getArticleId());
-                                } catch (Exception ex) {
+                            } catch (Exception ex) {
                             }
                             //  }
 
@@ -290,8 +304,6 @@ public class ValuePro {
             }
             updateSessionTime();
         }
-        count = 0;
-        ipMap.put(ip, count);
         return out;
     }
 
