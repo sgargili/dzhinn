@@ -123,7 +123,7 @@ function ShowYandexFile(){
 }
 
 function exportByProduct(){
-    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulexpProdLog').innerHTML = "";
     var data = dojo.byId('Articles').value;
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
@@ -361,7 +361,24 @@ var ecsv = {
     contentEl: 'eCsv' // pull existing content from the page
 
 };
-
+function update(allCount, count){
+    if(count==1){
+        pbar.show();
+    }
+    Runner.run(pbar, allCount, count);
+    if(allCount==count){
+        pbar.reset();
+        pbar.hide();
+    }
+}
+//Please do not use the following code as a best practice! :)
+var Runner = function(){
+    return {
+        run : function(pbar, allCount, count){
+            pbar.updateProgress(count/allCount, 'Export ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
 Ext.onReady(function(){
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
@@ -488,4 +505,11 @@ Ext.onReady(function(){
         ],
         renderTo: Ext.getBody()
     });
+    pbar = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbar',
+        cls:'center-align',
+        renderTo:'pbarId'
+    });
+    pbar.hide();
 });

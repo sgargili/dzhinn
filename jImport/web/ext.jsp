@@ -24,8 +24,7 @@
             <button id="btn2">Show</button><br />
             <input id="text"/>
             <button id="btn4" onclick="setCount()">set</button><br />
-            <button id="btn3" onclick="getCount()">get</button><br />
-            <button id="btn5" onclick="update()">up</button><br />
+            
         <div id="p2" style="width:50%;"></div>
     </p>
     <%--<p>

@@ -98,6 +98,9 @@
                 <div id="expProdLogs" style="text-align:left; overflow:visible scroll; background-color: #e1e1e1">
                     <%--<h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>--%>
                     <br/>
+                    <center>
+                    <div id="pbarId" style="width:50%;"></div>
+                    </center>
                     <ul id="ulexpProdLog" style="min-height:350px">
                     </ul>
                 </div>
