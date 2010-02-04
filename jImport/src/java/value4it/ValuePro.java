@@ -48,6 +48,8 @@ public class ValuePro {
     private HttpClient client = new HttpClient();
     final Calendar cal = Calendar.getInstance(TimeZone.getDefault());
     Logs log;
+    private static Map ipMap = new HashMap();
+    int count;
 
     public void login() {
         if (!isSessionAlive()) {
@@ -162,7 +164,7 @@ public class ValuePro {
         return out;
     }
 
-    private String export(List articlesData, boolean isRuEn) {
+    private String export(List articlesData, String ip, boolean isRuEn) {
         String exportStr = "";
         int varCount = 0;
         NameValuePair[] req;
@@ -200,6 +202,8 @@ public class ValuePro {
                 try {
                     //for (int j = 0; j < n; j++) {
                     for (Iterator it = exportData.iterator(); it.hasNext();) {
+                        count++;
+                        ipMap.put(ip, count);
                         getMethod = new PostMethod(url);
 //                        i = 0;
                         if (isRuEn) {
@@ -254,10 +258,10 @@ public class ValuePro {
                             }
                             //}
                         }
-                        getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-                        client.executeMethod(getMethod);
-                        getMethod.releaseConnection();
+//                        getMethod.setRequestBody(req);
+//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+//                        client.executeMethod(getMethod);
+//                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -286,7 +290,13 @@ public class ValuePro {
             }
             updateSessionTime();
         }
+        count = 0;
+        ipMap.put(ip, count);
         return out;
+    }
+
+    public int getCount() {
+        return count;
     }
 
     private String exportMark(List articlesData) {
@@ -939,7 +949,7 @@ public class ValuePro {
         return out;
     }
 
-    public String exportByProducts(String products, boolean ruEnBool) {
+    public String exportByProducts(String products, String ip, boolean ruEnBool) {
         if (products == null || products.equals("")) {
             return "Введите Articles или ArticlesId...";
         }
@@ -963,7 +973,7 @@ public class ValuePro {
             } else {
                 return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
             }
-            out = export(data, ruEnBool);
+            out = export(data, ip, ruEnBool);
         } catch (Exception ex) {
             out = ex.getMessage();
         }

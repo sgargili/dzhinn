@@ -14,9 +14,16 @@ import java.util.LinkedList;
 import org.directwebremoting.Browser;
 //import org.directwebremoting.
 import Pojo.ChatLogs;
+import Pojo.IpCount;
 import Pojo.Users;
+import java.util.HashMap;
+import java.util.Map;
+import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.ui.dwr.Util;
+import org.directwebremoting.ScriptSessions;
+import org.directwebremoting.ScriptSession;
+import org.directwebremoting.impl.DefaultScriptSession;
 import value4it.ValuePro;
 
 /**
@@ -31,6 +38,38 @@ public class Ajax {
     ChatLogs chLog;
     String[] strMas;
     Users user;
+    int j;
+    private static Map<String, IpCount> ipMap = new HashMap();
+    IpCount ipCount = new IpCount();
+    int count;
+
+    public void test() {
+        //ipCount.setCountAll(10);
+        for (int t = 1; t <= 10; t++) {
+            //count = t;
+            //ipCount.setCount(count);
+            //ipMap.put(WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), ipCount);
+            ScriptSession ss = WebContextFactory.get().getScriptSession();
+            ScriptBuffer script = new ScriptBuffer();
+            try {
+                script.appendScript("update(");
+                script.appendData(10);
+                script.appendScript(",");
+                script.appendData(t);
+                script.appendScript(");");
+                ss.addScript(script);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+            }
+        }
+        // ipCount.setCount(0);
+        //ipCount.setCountAll(0);
+        //ipMap.put(WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), ipCount);
+    }
 
     public void addMessage(String text) {
         String ip = WebContextFactory.get().getHttpServletRequest().getRemoteAddr();
@@ -89,6 +128,19 @@ public class Ajax {
             }
         });
     }
+
+    public void setCount(int l) {
+        j = l;
+    }
+
+    public int getCount() {
+        j = ipMap.get(WebContextFactory.get().getHttpServletRequest().getRemoteAddr()).getCount();
+        return j;
+    }
+
+    public int getCountAll() {
+        return ipMap.get(WebContextFactory.get().getHttpServletRequest().getRemoteAddr()).getCountAll();
+    }
     /**
      * The current set of messages
      */
@@ -116,7 +168,7 @@ public class Ajax {
     public String exportByProducts(String products, boolean ruEnBool) {
         ValuePro vp = new ValuePro();
         products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
-        return vp.exportByProducts(products, ruEnBool);
+        return vp.exportByProducts(products, WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), ruEnBool);
     }
 
     public String exportMarketing(String products) {
