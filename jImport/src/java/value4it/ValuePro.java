@@ -358,7 +358,7 @@ public class ValuePro {
                     ss = WebContextFactory.get().getScriptSession();
                     script = new ScriptBuffer();
                     try {
-                        script.appendScript("updateMar(");
+                        script.appendScript("updateMark(");
                         script.appendData(exportData.size());
                         script.appendScript(",");
                         script.appendData(count++);
