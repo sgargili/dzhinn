@@ -253,14 +253,17 @@ var value4export = {
         items:[{
             title: 'Экспорт',
             contentEl: 'expByProdInput',
-            autoScroll: true
+            autoScroll: true,
+            id:'id111'
         },{
-            bodyStyle: 'padding:0px; border: 0',
-            html: '<div id="brId" style="background-color: #e1e8ff"><br/></div>'
+            bodyStyle: 'padding:0px; border:0; border-left-width:thin',
+            html: '<div id="pbarId"></div>',
+            id:'id222'
         },{
             title: 'Логи сервера',
             contentEl: 'expProdLogs',
-            autoScroll: true
+            autoScroll: true,
+            id:'id333'
         }]
     },{
         title: 'Экспорт маркетинга',
@@ -269,14 +272,19 @@ var value4export = {
         items:[{
             title: 'Экспорт маркетинга',
             contentEl: 'expMarkInput',
-            autoScroll: true
+            autoScroll: true,
+            id:'id444'
         },{
-            bodyStyle: 'padding:0px; border: 0',
-            html: '<div id="brId" style="background-color: #e1e8ff"><br/></div>'
+            items: {
+                id: 'pbar1',
+                xtype: 'progress'
+            },
+            id:'id555'
         },{
             title: 'Логи сервера',
             contentEl: 'expMarkLogs',
-            autoScroll: true
+            autoScroll: true,
+            id:'id777'
         }]
     }]
 };
@@ -606,10 +614,10 @@ Ext.onReady(function(){
 
     pbarProd = new Ext.ProgressBar({
         text:'Ready',
-        id:'pbar',
+        id:'pbarProd',
         animate:true,
         style: {
-            width: '70%',
+            width: '100%',
             margin: '0px auto'
         },
         renderTo:'pbarId'
@@ -620,47 +628,55 @@ Ext.onReady(function(){
         text:'Ready',
         id:'pbarMar-id',
         animate:true,
+        cls:'custom',
+        boxMinHeight:20,
         style: {
-            width: '70%',
+            width: '100%',
             margin: '0px auto'
-        },
-        renderTo:'pbarMarId'
+        //height: '16px'
+        }
+    //renderTo:'pbarMarkId'
     });
+    pbarMar.setSize(200,10);
     pbarMar.setDisabled(true);
 
-    pbarStat = new Ext.ProgressBar({
-        text:'Ready',
-        id:'pbarStat-id',
-        animate:true,
-        style: {
-            width: '70%',
-            margin: '0px auto'
-        },
-        renderTo:'pbarStatId'
-    });
-    pbarStat.setDisabled(true);
-
-    pbarOwn = new Ext.ProgressBar({
-        text:'Ready',
-        id:'pbpbarOwnar-id',
-        animate:true,
-        style: {
-            width: '70%',
-            margin: '0px auto'
-        },
-        renderTo:'pbarOwnId'
-    });
-    pbarOwn.setDisabled(true);
-
-    pbarLink = new Ext.ProgressBar({
-        text:'Ready',
-        id:'pbarLink-id',
-        animate:true,
-        style: {
-            width: '70%',
-            margin: '0px auto'
-        },
-        renderTo:'pbarLinkId'
-    });
-    pbarLink.setDisabled(true);
+//    pbarStat = new Ext.ProgressBar({
+//        text:'Ready',
+//        id:'pbarStat-id',
+//        animate:true,
+//        style: {
+//            width: '70%',
+//            margin: '0px auto'
+//        },
+//        renderTo:'pbarStatId'
+//    });
+//    pbarStat.setDisabled(true);
+//
+//    pbarOwn = new Ext.ProgressBar({
+//        text:'Ready',
+//        id:'pbpbarOwnar-id',
+//        animate:true,
+//        style: {
+//            width: '70%',
+//            margin: '0px auto'
+//        },
+//        renderTo:'pbarOwnId'
+//    });
+//    pbarOwn.setDisabled(true);
+//
+//    pbarLink = new Ext.ProgressBar({
+//        text:'Ready',
+//        id:'pbarLink-id',
+//        animate:true,
+//        style: {
+//            width: '70%',
+//            margin: '0px auto'
+//        },
+//        renderTo:'pbarLinkId'
+//    });
+//    pbarLink.setDisabled(true);
 });
+
+function aaasss(){
+    Ext.getCmp('pbar1').updateProgress(Math.random());
+}

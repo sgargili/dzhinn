@@ -1,12 +1,13 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.FactoryDAO"%>
-<%@page import="Pojo.Users"%>
-<%
-            Users user;
-            user = FactoryDAO.getInstance().getUsersDAO().getUserByIp(request.getRemoteHost());
-%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : newXMLDocument.xml
+    Created on : 5 Февраль 2010 г., 16:09
+    Author     : APopov
+    Description:
+        Purpose of the document follows.
+-->
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -14,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
+        <!--<link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>-->
         <script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
@@ -22,7 +24,6 @@
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
-        <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>
     </head>
     <body class="tundra" onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
@@ -32,12 +33,12 @@
                         <h1>Fast Export and so on...</h1>
                     </td>
                     <td>
-                        <%-- <div id="pbarId">
+                       <!-- <div id="pbarId">
                          </div>
                      </td>
                      <td>
                          <div id="pbarMarkId">
-                         </div>--%>
+                         </div>-->
                     </td>
                 </tr>
             </table>
@@ -49,16 +50,13 @@
                 <div style="padding:50px; font-size:large; color:#000">
                     А-а-а, и так сойдет...
                 </div>
-                <%--<img style="position:absolute; top:20%; left:20%" src="images/vovka.jpg"/>--%>
+                <img style="position:absolute; top:20%; left:20%" src="images/vovka.jpg"/>
             </div>
-            <div id="expByProd"><div id="iiiddd">
-                    <div id="pbarMarkId"></div>
-                </div>
+            <div id="expByProd">
                 <div id="expByProdInput">
-                    <%--<h1 style="color:orange">Экспорт</h1>--%>
-                    <table id="expProdTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px"> 
+                    <table id="expProdTable" bgcolor='black' cellspacing='0' cellpadding='0' border='0' width='100%'>
+                        <tr bgcolor = '#e1e1e1' align='left'>
+                            <td style="padding:7px">
                                 <table>
                                     <tr>
                                         <td>
@@ -67,8 +65,8 @@
                                         <td>
                                         </td>
                                         <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
+                                            <table bgcolor='black' cellspacing='1' cellpadding='1' border='0' width='100%'>
+                                                <tr bgcolor = '#cfcdcd' align='left'>
                                                     <td>
                                                         <center>
                                                             <table cellspacing='7' cellpadding='0'>
@@ -104,6 +102,8 @@
                 <br/>
                 <div id="expProdLogs" style="background-color: #e1e1e1;">
                     <br/>
+
+                    <br/>
                     <div id="ulexpProdLog" style="min-height:350px">
                     </div>
                     <br/>
@@ -111,7 +111,7 @@
             </div>
             <div id="expMark">
                 <div id="expMarkInput">
-                    <%--<h1 style="color:orange">Экспорт маркетинга</h1>--%>
+           
                     <table id="expMarkTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
@@ -162,9 +162,9 @@
                     <br/>
                     <%--<div id="pbarId">
                     </div>--%>
-                    <button onclick="aaasss()"></button>
-                    <div id="pbarMarkId">
-                    </div>
+
+                    <%-- <div id="pbarMarkId">
+                     </div>--%>
                     <br/>
                     <div id="ulexpMarkLog" style="min-height:350px">
                     </div>

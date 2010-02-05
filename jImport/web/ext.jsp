@@ -10,7 +10,7 @@
         <!-- ENDLIBS -->
 
         <script type="text/javascript" src="js/ext-all.js"></script>
-        <script type="text/javascript" src="js/progress-bar.js"></script>
+        <script type="text/javascript" src="js/progress-bar_1.js"></script>
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
@@ -26,6 +26,7 @@
             <button id="btn4" onclick="setCount()">set</button><br />
             
         <div id="p2" style="width:50%;"></div>
+         <div id="p3" style="width:50%;"></div>
     </p>
     <%--<p>
         <b>Waiting Bar</b><br />

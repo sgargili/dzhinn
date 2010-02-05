@@ -1,0 +1,77 @@
+// To play in Firebug uncomment next line
+// Ext.get(document.body).update('<div id="ext-test"></div>');
+
+// reference local blank image
+Ext.BLANK_IMAGE_URL = '/extjs/lib/resources/images/default/s.gif';
+
+// create namespace
+Ext.namespace('Test');
+
+// create application
+Test.app = function() {
+  // do NOT access DOM from here; elements don't exist yet
+
+  // private variables
+
+  // private functions
+
+  // public space
+  return {
+    // public properties, e.g. strings to translate
+
+    // public methods
+    init: function() {
+
+    var tabs = new Ext.TabPanel({
+      renderTo: 'ext-tabs',
+      deferredRender: false,
+      layoutOnTabChange: true,
+      activeTab: 0,
+      defaults: { bodyStyle: 'padding: 10px;', hideMode: 'offsets' },
+      width: 300,
+      height: 200,
+      items: [
+        {
+          title: 'Tab',
+          items: {
+            id: 'pbar1',
+            xtype: 'progress'
+          }
+        }
+      ],
+      bbar: [{
+        text: 'Update progress bar',
+        handler: function(){
+          Ext.getCmp('pbar1').updateProgress(Math.random());
+        }
+      }]
+    });
+
+    var panel = new Ext.Panel({
+      renderTo: 'ext-panel',
+      defaults: { bodyStyle: 'padding: 10px;' },
+      width: 300,
+      height: 200,
+      items: [
+        {
+          title: 'Panel',
+          border: false,
+          items: {
+            id: 'pbar2',
+            xtype: 'progress'
+          }
+        }
+      ],
+      bbar: [{
+        text: 'Update progress bar',
+        handler: function(){
+          Ext.getCmp('pbar2').updateProgress(Math.random());
+        }
+      }]
+    });
+
+    } // end of init
+  };
+}(); // end of app
+
+Ext.onReady(Test.app.init, Test.app);

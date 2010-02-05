@@ -1,5 +1,6 @@
 
 var pbar2;
+var pbar3;
 var btn2;
 Ext.onReady(function(){
     pbar2 = new Ext.ProgressBar({
@@ -9,6 +10,15 @@ Ext.onReady(function(){
         renderTo:'p2'
     });
     pbar2.hide();
+
+    pbar3 = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbar3',
+        cls:'left-align',
+        renderTo:'p3'
+    });
+
+
     btn2 = Ext.get('btn2');
     btn2.on('click', function(){
         Ajax.getCountAll(function(data) {
