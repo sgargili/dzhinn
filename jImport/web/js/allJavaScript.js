@@ -399,14 +399,15 @@ var RunnerProd = function(){
 
 function updateMark(allCount, count){
     if(count==1){
-        pbarMar.setDisabled(false);
+        Ext.getCmp('pbar1').setDisabled(false);
+    // pbarMar.setDisabled(false);
     }
-    RunnerMar.run(pbarMar, allCount, count);
+    RunnerMar.run(Ext.getCmp('pbar1'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbarMar.reset();
-            pbarMar.updateText("Ready to Export Marketing");
-            pbarMar.setDisabled(true);
+            Ext.getCmp('pbar1').reset();
+            Ext.getCmp('pbar1').updateText("Ready to Export Marketing");
+            Ext.getCmp('pbar1').setDisabled(true);
         }
     }, 500);
 }
@@ -486,6 +487,8 @@ var RunnerLink = function(){
 }();
 
 Ext.onReady(function(){
+    //    Ext.getCmp('pbar1').setDisabled(true);
+    //    Ext.getCmp('pbar1').updateText("Ready");
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
         Ext.MessageBox.buttonText.no = "нах";
