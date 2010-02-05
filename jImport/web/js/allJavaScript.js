@@ -6,7 +6,11 @@ dojo.require("dijit.Dialog");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("dojo.data.ItemFileReadStore");
 
-var pbar;
+var pbarProd;
+var pbarMar;
+var pbarStat;
+var pbarOwn;
+var pbarLink;
 
 function Show(ID){
     dojo.byId(ID).style.height = "0px";
@@ -135,7 +139,7 @@ function exportByProduct(){
 }
 
 function exportMarketing(){
-    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    dojo.byId('ulexpMarkLog').innerHTML = "";
     var data = dojo.byId('ArticlesExpMark').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.exportMarketing(data, function(data) {
@@ -363,27 +367,116 @@ var ecsv = {
     contentEl: 'eCsv' // pull existing content from the page
 
 };
-function update(allCount, count){
+function updateProd(allCount, count){
     if(count==1){
-        pbar.setDisabled(false);
+        pbarProd.setDisabled(false);
     }
-    Runner.run(pbar, allCount, count);
+    RunnerProd.run(pbarProd, allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbar.reset();
-            pbar.updateText("Ready to Export");
-            pbar.setDisabled(true);
+            pbarProd.reset();
+            pbarProd.updateText("Ready to Export");
+            pbarProd.setDisabled(true);
         }
     }, 500);
 }
 //Please do not use the following code as a best practice! :)
-var Runner = function(){
+var RunnerProd = function(){
     return {
-        run : function(pbar, allCount, count){
-            pbar.updateProgress(count/allCount, 'Export ' + count + ' in '+allCount+'...');
+        run : function(pbarProd, allCount, count){
+            pbarProd.updateProgress(count/allCount, 'Export ' + count + ' in '+allCount+'...');
         }
     }
 }();
+
+function updateMark(allCount, count){
+    if(count==1){
+        pbarMar.setDisabled(false);
+    }
+    RunnerMar.run(pbarMar, allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            pbarMar.reset();
+            pbarMar.updateText("Ready to Export Marketing");
+            pbarMar.setDisabled(true);
+        }
+    }, 500);
+}
+//Please do not use the following code as a best practice! :)
+var RunnerMar = function(){
+    return {
+        run : function(pbarMar, allCount, count){
+            pbarMar.updateProgress(count/allCount, 'Export Marketing ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateStat(allCount, count){
+    if(count==1){
+        pbarStat.setDisabled(false);
+    }
+    RunnerStat.run(pbarStat, allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            pbarStat.reset();
+            pbarStat.updateText("Ready to change Status");
+            pbarStat.setDisabled(true);
+        }
+    }, 500);
+}
+//Please do not use the following code as a best practice! :)
+var RunnerStat = function(){
+    return {
+        run : function(pbarStat, allCount, count){
+            pbarStat.updateProgress(count/allCount, 'Change Status ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateOwn(allCount, count){
+    if(count==1){
+        pbarOwn.setDisabled(false);
+    }
+    RunnerOwn.run(pbarOwn, allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            pbarOwn.reset();
+            pbarOwn.updateText("Ready to change Owner");
+            pbarOwn.setDisabled(true);
+        }
+    }, 500);
+}
+//Please do not use the following code as a best practice! :)
+var RunnerOwn = function(){
+    return {
+        run : function(pbarOwn, allCount, count){
+            pbarOwn.updateProgress(count/allCount, 'Change Owner ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateLink(allCount, count){
+    if(count==1){
+        pbarLink.setDisabled(false);
+    }
+    RunnerLink.run(pbarLink, allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            pbarLink.reset();
+            pbarLink.updateText("Ready to add Link");
+            pbarLink.setDisabled(true);
+        }
+    }, 500);
+}
+//Please do not use the following code as a best practice! :)
+var RunnerLink = function(){
+    return {
+        run : function(pbarLink, allCount, count){
+            pbarLink.updateProgress(count/allCount, 'Add Link ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
 Ext.onReady(function(){
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
@@ -394,7 +487,7 @@ Ext.onReady(function(){
             buttons: Ext.Msg.YESNO,
             fn: function(btn){
                 if (btn == 'yes'){
-                    exportByProduct()();
+                    exportByProduct();
                 }
             },
             icon: Ext.MessageBox.QUESTION
@@ -510,17 +603,64 @@ Ext.onReady(function(){
         ],
         renderTo: Ext.getBody()
     });
-    pbar = new Ext.ProgressBar({
+
+    pbarProd = new Ext.ProgressBar({
         text:'Ready',
         id:'pbar',
-        cls:'center-align',
         animate:true,
         style: {
             width: '70%',
             margin: '0px auto'
-        }
-        ,
+        },
         renderTo:'pbarId'
     });
-    pbar.setDisabled(true);
+    pbarProd.setDisabled(true);
+
+    pbarMar = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbarMar-id',
+        animate:true,
+        style: {
+            width: '70%',
+            margin: '0px auto'
+        },
+        renderTo:'pbarMarId'
+    });
+    pbarMar.setDisabled(true);
+
+    pbarStat = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbarStat-id',
+        animate:true,
+        style: {
+            width: '70%',
+            margin: '0px auto'
+        },
+        renderTo:'pbarStatId'
+    });
+    pbarStat.setDisabled(true);
+
+    pbarOwn = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbpbarOwnar-id',
+        animate:true,
+        style: {
+            width: '70%',
+            margin: '0px auto'
+        },
+        renderTo:'pbarOwnId'
+    });
+    pbarOwn.setDisabled(true);
+
+    pbarLink = new Ext.ProgressBar({
+        text:'Ready',
+        id:'pbarLink-id',
+        animate:true,
+        style: {
+            width: '70%',
+            margin: '0px auto'
+        },
+        renderTo:'pbarLinkId'
+    });
+    pbarLink.setDisabled(true);
 });

@@ -156,10 +156,13 @@
                 </div>
                 <br/>
                 <div id="expMarkLogs" style="text-align:left; overflow:visible scroll; background-color: #e1e1e1">
-                    <%--<h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>--%>
                     <br/>
-                    <ul id="ulexpMarkLog" style="min-height:350px">
-                    </ul>
+                    <div id="pbarMarId">
+                    </div>
+                    <br/>
+                    <div id="ulexpMarkLog" style="min-height:350px">
+                    </div>
+                    <br/>
                 </div>
             </div>
             <div id="chat_id">
@@ -239,10 +242,13 @@
                 </div>
                 <br/>
                 <div dojoType="dijit.TooltipDialog" id="statusChangeLogs" style="text-align:left; overflow:visible scroll">
-                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
                     <br/>
-                    <ul id="ulstatusChangeLog" style="min-height:350px">
-                    </ul>
+                    <div id="pbarStatId">
+                    </div>
+                    <br/>
+                    <div id="ulstatusChangeLog" style="min-height:350px">
+                    </div>
+                    <br/>
                 </div>
             </div>
             <div id="ownerChange">
@@ -287,10 +293,13 @@
                 </div>
                 <br/>
                 <div dojoType="dijit.TooltipDialog" id="ownerChangeLogs" style="text-align:left; overflow:visible scroll">
-                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
                     <br/>
-                    <ul id="ulownerChangeLog" style="min-height:350px">
-                    </ul>
+                    <div id="pbarOwnId">
+                    </div>
+                    <br/>
+                    <div id="ulownerChangeLog" style="min-height:350px">
+                    </div>
+                    <br/>
                 </div>
             </div>
             <div id="addLink">
@@ -327,10 +336,13 @@
                 </div>
                 <br/>
                 <div dojoType="dijit.TooltipDialog" id="addLinkLogs" style="text-align:left; overflow:visible scroll">
-                    <h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>
                     <br/>
-                    <ul id="uladdLinkLog" style="min-height:350px">
-                    </ul>
+                    <div id="pbarLinkId">
+                    </div>
+                    <br/>
+                    <div id="uladdLinkLog" style="min-height:350px">
+                    </div>
+                    <br/>
                 </div>
             </div>
             <div id="optSes">
