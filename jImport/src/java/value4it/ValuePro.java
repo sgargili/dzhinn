@@ -209,7 +209,7 @@ public class ValuePro {
                         ss = WebContextFactory.get().getScriptSession();
                         script = new ScriptBuffer();
                         try {
-                            script.appendScript("update(");
+                            script.appendScript("updateProd(");
                             script.appendData(exportData.size());
                             script.appendScript(",");
                             script.appendData(count++);
@@ -272,10 +272,10 @@ public class ValuePro {
                             }
                             //}
                         }
-                        getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-                        client.executeMethod(getMethod);
-                        getMethod.releaseConnection();
+//                        getMethod.setRequestBody(req);
+//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+//                        client.executeMethod(getMethod);
+//                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -304,6 +304,7 @@ public class ValuePro {
             }
             updateSessionTime();
         }
+        count = 1;
         return out;
     }
 
@@ -315,6 +316,8 @@ public class ValuePro {
         String exportMarkStr = "";
         NameValuePair[] req;
         ValueArticle va;
+        ScriptSession ss;
+        ScriptBuffer script;
         String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
         String out = buildResponse(articlesData, "Export Marketing");
         boolean process = false;
@@ -352,6 +355,18 @@ public class ValuePro {
 //                        req = new NameValuePair[3 + 2 * ost];
 //                    }
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    ss = WebContextFactory.get().getScriptSession();
+                    script = new ScriptBuffer();
+                    try {
+                        script.appendScript("updateMar(");
+                        script.appendData(exportData.size());
+                        script.appendScript(",");
+                        script.appendData(count++);
+                        script.appendScript(");");
+                        ss.addScript(script);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     getMethod = new PostMethod(url);
                     req = new NameValuePair[5];
                     req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
@@ -365,10 +380,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-                    getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    client.executeMethod(getMethod);
-                    getMethod.releaseConnection();
+//                    getMethod.setRequestBody(req);
+//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+//                    client.executeMethod(getMethod);
+//                    getMethod.releaseConnection();
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -393,6 +408,7 @@ public class ValuePro {
             }
             updateSessionTime();
         }
+        count = 1;
         return out;
 
     }
@@ -400,6 +416,8 @@ public class ValuePro {
     private String aLink(List articlesData) {
         String aLinkStr = "";
         NameValuePair[] req;
+        ScriptSession ss;
+        ScriptBuffer script;
         ValueLink vl;
         String url = "http://cf.value4it.com/cf/classcat/classcat_links.jsp";
         String out = buildResponse4Link(articlesData, "Add Links");
@@ -421,6 +439,18 @@ public class ValuePro {
         if (process) {
             login();
             try {
+                ss = WebContextFactory.get().getScriptSession();
+                script = new ScriptBuffer();
+                try {
+                    script.appendScript("updateLink(");
+                    script.appendData(exportData.size());
+                    script.appendScript(",");
+                    script.appendData(count++);
+                    script.appendScript(");");
+                    ss.addScript(script);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 PostMethod getMethod;
 //                int n = 0;
 //                if (exportData.size() % 10 == 0) {
@@ -449,10 +479,10 @@ public class ValuePro {
                     req[3] = new NameValuePair("TEXT", vl.getLinkType());
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
-                    getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    client.executeMethod(getMethod);
-                    getMethod.releaseConnection();
+//                    getMethod.setRequestBody(req);
+//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+//                    client.executeMethod(getMethod);
+//                    getMethod.releaseConnection();
                     aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -481,6 +511,7 @@ public class ValuePro {
             }
             updateSessionTime();
         }
+        count = 1;
         return out;
 
     }
@@ -496,6 +527,8 @@ public class ValuePro {
         }
         NameValuePair[] req;
         ValueArticle va;
+        ScriptSession ss;
+        ScriptBuffer script;
         String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
         String out = buildResponse(articlesData, "Change Status");
         boolean process = false;
@@ -515,6 +548,18 @@ public class ValuePro {
         if (process) {
             login();
             try {
+                ss = WebContextFactory.get().getScriptSession();
+                script = new ScriptBuffer();
+                try {
+                    script.appendScript("updateStat(");
+                    script.appendData(changeData.size());
+                    script.appendScript(",");
+                    script.appendData(count++);
+                    script.appendScript(");");
+                    ss.addScript(script);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 PostMethod getMethod;
 //                int i;
 //                int n = 0;
@@ -553,10 +598,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-                    getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    client.executeMethod(getMethod);
-                    getMethod.releaseConnection();
+//                    getMethod.setRequestBody(req);
+//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+//                    client.executeMethod(getMethod);
+//                    getMethod.releaseConnection();
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -588,6 +633,8 @@ public class ValuePro {
         String cOwnStr = "";
         NameValuePair[] req;
         ValueArticle va;
+        ScriptSession ss;
+        ScriptBuffer script;
         String url = "http://cf.value4it.com/cf/admin/articles_admin.jsp";
         String out = buildResponse(articlesData, "Change Owner");
         boolean process = false;
@@ -607,6 +654,18 @@ public class ValuePro {
         if (process) {
             login();
             try {
+                ss = WebContextFactory.get().getScriptSession();
+                script = new ScriptBuffer();
+                try {
+                    script.appendScript("updateOwn(");
+                    script.appendData(changeData.size());
+                    script.appendScript(",");
+                    script.appendData(count++);
+                    script.appendScript(");");
+                    ss.addScript(script);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 PostMethod getMethod;
 //                int i = 0;
 //                int n = 0;
@@ -644,10 +703,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     //}
-                    getMethod.setRequestBody(req);
-                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-                    client.executeMethod(getMethod);
-                    getMethod.releaseConnection();
+//                    getMethod.setRequestBody(req);
+//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+//                    client.executeMethod(getMethod);
+//                    getMethod.releaseConnection();
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
