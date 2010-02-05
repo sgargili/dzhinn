@@ -6,6 +6,8 @@ dojo.require("dijit.Dialog");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("dojo.data.ItemFileReadStore");
 
+var pbar;
+
 function Show(ID){
     dojo.byId(ID).style.height = "0px";
     var w1 = dojo.fx.wipeIn({
@@ -363,13 +365,16 @@ var ecsv = {
 };
 function update(allCount, count){
     if(count==1){
-        pbar.show();
+        pbar.setDisabled(false);
     }
     Runner.run(pbar, allCount, count);
-    if(allCount==count){
-        pbar.reset();
-        pbar.hide();
-    }
+    setTimeout(function(){
+        if(allCount==count){
+            pbar.reset();
+            pbar.updateText("Ready to Export");
+            pbar.setDisabled(true);
+        }
+    }, 500);
 }
 //Please do not use the following code as a best practice! :)
 var Runner = function(){
@@ -509,7 +514,13 @@ Ext.onReady(function(){
         text:'Ready',
         id:'pbar',
         cls:'center-align',
+        animate:true,
+        style: {
+            width: '70%',
+            margin: '0px auto'
+        }
+        ,
         renderTo:'pbarId'
     });
-    pbar.hide();
+    pbar.setDisabled(true);
 });

@@ -98,11 +98,12 @@
                 <div id="expProdLogs" style="text-align:left; overflow:visible scroll; background-color: #e1e1e1">
                     <%--<h1 style="color:orange; text-decoration:underline">Логи сервера:</h1>--%>
                     <br/>
-                    <center>
-                    <div id="pbarId" style="width:50%;"></div>
-                    </center>
-                    <ul id="ulexpProdLog" style="min-height:350px">
-                    </ul>
+                    <div id="pbarId">
+                    </div>
+                    <br/>
+                    <div id="ulexpProdLog" style="min-height:350px">
+                    </div>
+                    <br/>
                 </div>
             </div>
             <div id="expMark">
@@ -140,8 +141,8 @@
                                                                 &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
                                                             </button>
                                                             <%--<input type="button" id="cache_Mark_button2" />--%>
-                                                              <%--  &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
-                                                            </button>--%>
+                                                            <%--  &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
+                                                          </button>--%>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -169,10 +170,10 @@
                         <input id="chat_btn" type="button" value="Send" onclick="sendMessage()"/>
                         Ник:
                         <input id="nick_id" value="<% try {
-                                        out.print(user.getNick());
-                                    } catch (Exception ex) {
-                                        out.print("Введите ник...");
-                                    }%>"/>
+                out.print(user.getNick());
+            } catch (Exception ex) {
+                out.print("Введите ник...");
+            }%>"/>
                     </p>
                 </div>
                 <br/>
