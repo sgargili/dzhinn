@@ -277,7 +277,13 @@ var value4export = {
         },{
             items: {
                 id: 'pbar1',
-                xtype: 'progress'
+                text:'Ready',
+                xtype: 'progress',
+                animate:true,
+                style: {
+                    width: '100%',
+                    margin: '0px auto'
+                }
             },
             id:'id555'
         },{
