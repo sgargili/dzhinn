@@ -737,7 +737,7 @@ public class ValuePro {
     public String clearCache() {
         login();
         String out = "<div>";
-        GetMethod getMethod = new GetMethod("https://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
+        GetMethod getMethod = new GetMethod("http://cf.value4it.com/admin/long-name-to-clear-cache.jsp");
         try {
             client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
             client.executeMethod(getMethod);
