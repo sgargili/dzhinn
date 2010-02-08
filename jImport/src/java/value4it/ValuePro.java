@@ -272,10 +272,10 @@ public class ValuePro {
                             }
                             //}
                         }
-//                        getMethod.setRequestBody(req);
-//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-//                        client.executeMethod(getMethod);
-//                        getMethod.releaseConnection();
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+                        client.executeMethod(getMethod);
+                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -380,10 +380,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -439,18 +439,6 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                ss = WebContextFactory.get().getScriptSession();
-                script = new ScriptBuffer();
-                try {
-                    script.appendScript("updateLink(");
-                    script.appendData(exportData.size());
-                    script.appendScript(",");
-                    script.appendData(count++);
-                    script.appendScript(");");
-                    ss.addScript(script);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
                 PostMethod getMethod;
 //                int n = 0;
 //                if (exportData.size() % 10 == 0) {
@@ -460,6 +448,18 @@ public class ValuePro {
 //                }
 //                for (int j = 0; j < n; j++) {
                 for (Iterator it = exportData.iterator(); it.hasNext();) {
+                    ss = WebContextFactory.get().getScriptSession();
+                    script = new ScriptBuffer();
+                    try {
+                        script.appendScript("updateLink(");
+                        script.appendData(exportData.size());
+                        script.appendScript(",");
+                        script.appendData(count++);
+                        script.appendScript(");");
+                        ss.addScript(script);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     getMethod = new PostMethod(url);
                     // for (int l = j * 10; l < (j + 1) * 10; l++) {
                     vl = (ValueLink) it.next();
@@ -479,10 +479,10 @@ public class ValuePro {
                     req[3] = new NameValuePair("TEXT", vl.getLinkType());
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -548,18 +548,6 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                ss = WebContextFactory.get().getScriptSession();
-                script = new ScriptBuffer();
-                try {
-                    script.appendScript("updateStat(");
-                    script.appendData(changeData.size());
-                    script.appendScript(",");
-                    script.appendData(count++);
-                    script.appendScript(");");
-                    ss.addScript(script);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
                 PostMethod getMethod;
 //                int i;
 //                int n = 0;
@@ -572,6 +560,18 @@ public class ValuePro {
 //                }
                 //for (int j = 0; j < n; j++) {
                 for (Iterator it = changeData.iterator(); it.hasNext();) {
+                    ss = WebContextFactory.get().getScriptSession();
+                    script = new ScriptBuffer();
+                    try {
+                        script.appendScript("updateStat(");
+                        script.appendData(changeData.size());
+                        script.appendScript(",");
+                        script.appendData(count++);
+                        script.appendScript(");");
+                        ss.addScript(script);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     getMethod = new PostMethod(url);
                     // req = new NameValuePair[4 + 2 * changeData.size()];
 //                    i = 0;
@@ -598,10 +598,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -654,18 +654,6 @@ public class ValuePro {
         if (process) {
             login();
             try {
-                ss = WebContextFactory.get().getScriptSession();
-                script = new ScriptBuffer();
-                try {
-                    script.appendScript("updateOwn(");
-                    script.appendData(changeData.size());
-                    script.appendScript(",");
-                    script.appendData(count++);
-                    script.appendScript(");");
-                    ss.addScript(script);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                }
                 PostMethod getMethod;
 //                int i = 0;
 //                int n = 0;
@@ -678,6 +666,18 @@ public class ValuePro {
 //                }
                 // for (int j = 0; j < n; j++) {
                 for (Iterator it = changeData.iterator(); it.hasNext();) {
+                    ss = WebContextFactory.get().getScriptSession();
+                    script = new ScriptBuffer();
+                    try {
+                        script.appendScript("updateOwn(");
+                        script.appendData(changeData.size());
+                        script.appendScript(",");
+                        script.appendData(count++);
+                        script.appendScript(");");
+                        ss.addScript(script);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     getMethod = new PostMethod(url);
                     //req = new NameValuePair[3 + 2 * changeData.size()];
 //                    i = 0;
@@ -703,10 +703,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     //}
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";
