@@ -187,7 +187,7 @@ var value4export = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px'
     },
     items:[{
         title: 'Экспорт по продукту',
@@ -204,6 +204,15 @@ var value4export = {
                 animate:true,
                 style: {
                     width:'100%',
+                    //                    font: { text-decoration:underline
+                    //                        name: 'Tahoma',
+                    //                        color: 0x444444,
+                    //                        size: 22
+                    //                    },
+//                                        text: {
+//                                            align:'right',
+//                                            decoration:'underline'
+//                                        },
                     margin: '0px auto',
                     border:'0px'
                 }
@@ -228,6 +237,7 @@ var value4export = {
                 animate:true,
                 style: {
                     width: '100%',
+                   // textalign:'left',
                     margin: '0px auto',
                     border:'0px'
                 }
@@ -379,18 +389,19 @@ var ecsv = {
 
 
 function updateProd(allCount, count){
-    if(count==1){
-        // butProd.dom.disabled = true;
-        //dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
-        Ext.getCmp('pbarProd').setDisabled(false);
-    }
+//    if(count==1){
+//        // butProd.dom.disabled = true;
+//        //dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
+//        Ext.getCmp('pbarProd').setDisabled(false);
+//       // Ext.getCmp('pbarProd').setStyle("text-align", "left");
+//    }
     RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
             // dijit.byId('products_importByArticle_button').setAttribute("disabled", false);
             Ext.getCmp('pbarProd').reset();
             Ext.getCmp('pbarProd').updateText("Ready to Export");
-            Ext.getCmp('pbarProd').setDisabled(true);
+            //Ext.getCmp('pbarProd').setDisabled(true);
         }
     }, 500);
 }
@@ -404,17 +415,17 @@ var RunnerProd = function(){
 }();
 
 function updateMark(allCount, count){
-    if(count==1){
-        //dijit.byId('products_importMark_button').setAttribute("disabled", true);
-        Ext.getCmp('pbarMark').setDisabled(false);
-    }
+//    if(count==1){
+//        //dijit.byId('products_importMark_button').setAttribute("disabled", true);
+//        Ext.getCmp('pbarMark').setDisabled(false);
+//    }
     RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
             //dijit.byId('products_importMark_button').setAttribute("disabled", false);
             Ext.getCmp('pbarMark').reset();
             Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
-            Ext.getCmp('pbarMark').setDisabled(true);
+            //Ext.getCmp('pbarMark').setDisabled(true);
         }
     }, 500);
 }
@@ -428,17 +439,17 @@ var RunnerMar = function(){
 }();
 
 function updateStat(allCount, count){
-    if(count==1){
-        //dijit.byId('statusChange_button').setAttribute("disabled", true);
-        Ext.getCmp('pbarStat').setDisabled(false);
-    }
+//    if(count==1){
+//        //dijit.byId('statusChange_button').setAttribute("disabled", true);
+//        Ext.getCmp('pbarStat').setDisabled(false);
+//    }
     RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
             // dijit.byId('statusChange_button').setAttribute("disabled", false);
             Ext.getCmp('pbarStat').reset();
             Ext.getCmp('pbarStat').updateText("Ready to change Status");
-            Ext.getCmp('pbarStat').setDisabled(true);
+           // Ext.getCmp('pbarStat').setDisabled(true);
         }
     }, 500);
 }
@@ -452,17 +463,17 @@ var RunnerStat = function(){
 }();
 
 function updateOwn(allCount, count){
-    if(count==1){
-        //dijit.byId('ownerChange_button').setAttribute("disabled", true);
-        Ext.getCmp('pbarOwn').setDisabled(false);
-    }
+//    if(count==1){
+//        //dijit.byId('ownerChange_button').setAttribute("disabled", true);
+//        Ext.getCmp('pbarOwn').setDisabled(false);
+//    }
     RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
             // dijit.byId('ownerChange_button').setAttribute("disabled", false);
             Ext.getCmp('pbarOwn').reset();
             Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
-            Ext.getCmp('pbarOwn').setDisabled(true);
+           // Ext.getCmp('pbarOwn').setDisabled(true);
         }
     }, 500);
 }
@@ -476,17 +487,17 @@ var RunnerOwn = function(){
 }();
 
 function updateLink(allCount, count){
-    if(count==1){
-        //        dijit.byId('addLink_button').setAttribute("disabled", true);
-        Ext.getCmp('pbarLink').setDisabled(false);
-    }
+//    if(count==1){
+//        //        dijit.byId('addLink_button').setAttribute("disabled", true);
+//        Ext.getCmp('pbarLink').setDisabled(false);
+//    }
     RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
             //dijit.byId('addLink_button').setAttribute("disabled", false);
             Ext.getCmp('pbarLink').reset();
             Ext.getCmp('pbarLink').updateText("Ready to add Link");
-            Ext.getCmp('pbarLink').setDisabled(true);
+           // Ext.getCmp('pbarLink').setDisabled(true);
         }
     }, 500);
 }

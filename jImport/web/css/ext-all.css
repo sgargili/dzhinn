@@ -5094,8 +5094,9 @@ body.ext-ie6.x-body-masked .x-window select {
     width:0;
     background: repeat-x left center;
     border-top:1px solid;
-    border-bottom:1px solid;
-    border-right:1px solid;
+    /*border-bottom:2px solid;*/
+    /*border-right:1px solid;
+    border-left:1px solid;*/
 }
 
 .x-progress-text {
@@ -5103,7 +5104,7 @@ body.ext-ie6.x-body-masked .x-window select {
     overflow:hidden;
     position:absolute;
     left:0;
-    text-align:center;
+    text-align:left;
 }
 
 .x-progress-text-back {
@@ -6915,7 +6916,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-progress-text-back {
-    color:#396095;
+    color:#12600d;
 }.x-list-header{
     background-color:#f9f9f9;
     background-image:url(../images/default/grid/grid3-hrow.gif);

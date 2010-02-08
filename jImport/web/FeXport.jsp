@@ -47,9 +47,7 @@
                 </div>
                 <%--<img style="position:absolute; top:20%; left:20%" src="images/vovka.jpg"/>--%>
             </div>
-            <div id="expByProd"><div id="iiiddd">
-                    <div id="pbarMarkId"></div>
-                </div>
+            <div id="expByProd">
                 <div id="expByProdInput">
                     <%--<h1 style="color:orange">Экспорт</h1>--%>
                     <table id="expProdTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
