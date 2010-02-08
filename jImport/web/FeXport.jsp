@@ -316,9 +316,9 @@
                 </div>
             </div>
             <div id="optSes">
-                <div dojoType="dijit.TooltipDialog" id="optSesInput">
-                    <h1 style="color:orange">Сброс сессии.</h1>
-                    <table id="ownerChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="optSesInput">
+                    <%--<h1 style="color:orange">Сброс сессии.</h1>--%>
+                    <table id="ownerChangeTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
                                 <table>

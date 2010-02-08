@@ -374,8 +374,13 @@ var osession = {
     },
     items:[{
         title: 'Сброс сессии',
-        contentEl: 'optSes',
-        autoScroll: true
+       // contentEl: 'optSes',
+        autoScroll: true,
+        items:[{
+            title: 'Сброс сессии',
+            contentEl: 'optSesInput',
+            autoScroll: true
+        }]
     }]
 };
 
