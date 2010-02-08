@@ -10,6 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=7" />
         <title>Some Java Tools. (v.2.0)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
@@ -32,12 +33,6 @@
                         <h1>Fast Export and so on...</h1>
                     </td>
                     <td>
-                        <%-- <div id="pbarId">
-                         </div>
-                     </td>
-                     <td>
-                         <div id="pbarMarkId">
-                         </div>--%>
                     </td>
                 </tr>
             </table>
@@ -90,6 +85,9 @@
                                                             <button id="statistics_button" dojoType="dijit.form.Button" onclick="showStatistics()">
                                                                 &lt;&lt;&lt;Статистика&gt;&gt;&gt;
                                                             </button>
+                                                            <button onclick="aaasss()">
+                                                                Update
+                                                            </button>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -126,16 +124,6 @@
                                             <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
                                                 <tr bgcolor = #cfcdcd align=left>
                                                     <td>
-                                                        <%--          <table cellspacing='7' cellpadding='0'>
-                                                                      <tr>
-                                                                          <td>
-                                                                              <input id='ruEnOnlyExpMark' dojoType='dijit.form.CheckBox'/>
-                                                                          </td>
-                                                                          <td>
-                                                                              <label for="ruEnOnlyExpMark">ru/en language only...</label>
-                                                                          </td>
-                                                                      </tr>
-                                                                  </table>--%>
                                                         <center>
                                                             <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportMarketing()">
                                                                 &lt;&lt;&lt;Запуск&gt;&gt;&gt;
@@ -143,9 +131,6 @@
                                                             <button id="cache_Mark_button" dojoType="dijit.form.Button" onclick="clearCacheMark()">
                                                                 &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
                                                             </button>
-                                                            <%--<input type="button" id="cache_Mark_button2" />--%>
-                                                            <%--  &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
-                                                          </button>--%>
                                                         </center>
                                                     </td>
                                                 </tr>
@@ -160,12 +145,6 @@
                 <br/>
                 <div id="expMarkLogs" style="background-color: #e1e1e1">
                     <br/>
-                    <%--<div id="pbarId">
-                    </div>--%>
-                    <%--<button onclick="aaasss()"></button>--%>
-                    <div id="pbarMarkId">
-                    </div>
-                    <br/>
                     <div id="ulexpMarkLog" style="min-height:350px">
                     </div>
                     <br/>
@@ -179,10 +158,10 @@
                         <input id="chat_btn" type="button" value="Send" onclick="sendMessage()"/>
                         Ник:
                         <input id="nick_id" value="<% try {
-                out.print(user.getNick());
-            } catch (Exception ex) {
-                out.print("Введите ник...");
-            }%>"/>
+                                        out.print(user.getNick());
+                                    } catch (Exception ex) {
+                                        out.print("Введите ник...");
+                                    }%>"/>
                     </p>
                 </div>
                 <br/>
@@ -191,9 +170,8 @@
                 </div>
             </div>
             <div id="statusChange">
-                <div dojoType="dijit.TooltipDialog" id="statusChangeInput">
-                    <h1 style="color:orange">Смена статуса</h1>
-                    <table id="statusChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="statusChangeInput">
+                    <table id="statusChangeTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
                                 <table>
@@ -247,20 +225,16 @@
                     </table>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="statusChangeLogs" style="text-align:left; overflow:visible scroll">
-                    <%-- <br/>
-                     <div id="pbarStatId">
-                     </div>
-                     <br/>--%>
+                <div id="statusChangeLogs" style="background-color: #e1e1e1">
+                    <br/>
                     <div id="ulstatusChangeLog" style="min-height:350px">
                     </div>
                     <br/>
                 </div>
             </div>
             <div id="ownerChange">
-                <div dojoType="dijit.TooltipDialog" id="ownerChangeInput">
-                    <h1 style="color:orange">Смена автора</h1>
-                    <table id="ownerChangeTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="ownerChangeInput">
+                    <table id="ownerChangeTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
                                 <table>
@@ -298,20 +272,17 @@
                     </table>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="ownerChangeLogs" style="text-align:left; overflow:visible scroll">
-                    <%-- <br/>
-                     <div id="pbarOwnId">
-                     </div>
-                     <br/>--%>
+                <div id="ownerChangeLogs" style="background-color: #e1e1e1">
+                    <br/>
                     <div id="ulownerChangeLog" style="min-height:350px">
                     </div>
                     <br/>
                 </div>
             </div>
             <div id="addLink">
-                <div dojoType="dijit.TooltipDialog" id="addLinkInput">
-                    <h1 style="color:orange">Добавление ссылок. Вводить только артикли, айдишники артиклей не пройдут...</h1>
-                    <table id="addLinkTable" bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
+                <div id="addLinkInput">
+                    <%--<h1 style="color:orange">Добавление ссылок. Вводить только артикли, айдишники артиклей не пройдут...</h1>--%>
+                    <table id="addLinkTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
                         <tr bgcolor = #e1e1e1 align=left>
                             <td style="padding:7px">
                                 <table>
@@ -341,11 +312,8 @@
                     </table>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="addLinkLogs" style="text-align:left; overflow:visible scroll">
-                    <%--<br/>
-                    <div id="pbarLinkId">
-                    </div>
-                    <br/>--%>
+                <div id="addLinkLogs" style="background-color: #e1e1e1">
+                    <br/>
                     <div id="uladdLinkLog" style="min-height:350px">
                     </div>
                     <br/>

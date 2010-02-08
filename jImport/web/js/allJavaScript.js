@@ -6,73 +6,6 @@ dojo.require("dijit.Dialog");
 dojo.require("dijit.form.FilteringSelect");
 dojo.require("dojo.data.ItemFileReadStore");
 
-var pbarProd;
-var pbarMar;
-var pbarStat;
-var pbarOwn;
-var pbarLink;
-
-function Show(ID){
-    dojo.byId(ID).style.height = "0px";
-    var w1 = dojo.fx.wipeIn({
-        node: ID,
-        duration: 500
-    });
-    var f1 = dojo.fadeOut({
-        node: ID,
-        duration: 500
-    });
-    var a1 = dojo.fx.chain([w1, f1]);
-
-    dojo.byId(ID).style.height = "0px";
-    var w2 = dojo.fx.wipeIn({
-        node: ID,
-        duration: 500
-    });
-    var f2 = dojo.fadeIn({
-        node: ID,
-        duration: 1000
-    });
-    var a2 = dojo.fx.combine([w2, f2]);
-
-    dojo.connect(a1, "onEnd", function(){
-        a2.play();
-    });
-    dojo.connect(a2, "onEnd", function(){
-        });
-    a1.play();
-};
-
-function Hide(id){
-    dojo.byId(id).style.height = "0px";
-    var w = dojo.fx.wipeIn({
-        node: id,
-        duration: 100
-    });
-    var f = dojo.fadeOut({
-        node: id,
-        duration: 1000
-    });
-    var a = dojo.fx.chain([w, f]);
-
-    dojo.byId(id).style.height = "0px";
-    var w3 = dojo.fx.wipeIn({
-        node: id,
-        duration: 100
-    });
-    var f3 = dojo.fadeIn({
-        node: id,
-        duration: 1000
-    });
-    var a3 = dojo.fx.combine([w3, f3]);
-
-    dojo.connect(a3, "onEnd", function(){
-        a.play();
-    });
-    dojo.connect(a, "onEnd", function(){
-        });
-    a3.play();
-};
 
 function UploadeCsv(){
     var fileName = dojo.byId('uploadFileeCsv').value;
@@ -129,17 +62,22 @@ function ShowYandexFile(){
 }
 
 function exportByProduct(){
-    dojo.byId('ulexpProdLog').innerHTML = "";
-    var data = dojo.byId('Articles').value;
+    //Ext.get('ulexpProdLog').insertHtml("beforeBegin","<center>Loading <img src='images/loading-balls.gif'/></center>");
+    Ext.getCmp('ulexpProdLog').body.innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+
+    var data =  Ext.get('Articles').getValue();
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
-        dojo.byId('ulexpProdLog').innerHTML = data;
+            Ext.getCmp('ulexpProdLog').body.innerHTML = data;
+
+       // Ext.get('ulexpProdLog').insertHtml("beforeBegin",data);
+    //Ext.fly('ulexpProdLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function exportMarketing(){
-    dojo.byId('ulexpMarkLog').innerHTML = "";
+    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data = dojo.byId('ArticlesExpMark').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.exportMarketing(data, function(data) {
@@ -244,53 +182,55 @@ var value4export = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
     },
     items:[{
         title: 'Экспорт по продукту',
-        //contentEl: 'expByProd',
         autoScroll: true,
         items:[{
             title: 'Экспорт',
             contentEl: 'expByProdInput',
-            autoScroll: true,
-            id:'id111'
+            autoScroll: true 
         },{
-            bodyStyle: 'padding:0px; border:0; border-left-width:thin',
-            html: '<div id="pbarId"></div>',
-            id:'id222'
+            items: {
+                id: 'pbarProd',
+                xtype: 'progress',
+                text:'Ready',
+                animate:true,
+                style: {
+                    width:'100%',
+                    margin: '0px auto',
+                    border:'0px'
+                }
+            }
         },{
             title: 'Логи сервера',
             contentEl: 'expProdLogs',
-            autoScroll: true,
-            id:'id333'
+            autoScroll: true
         }]
     },{
         title: 'Экспорт маркетинга',
-        //contentEl: 'expMark',
         autoScroll: true,
         items:[{
             title: 'Экспорт маркетинга',
             contentEl: 'expMarkInput',
-            autoScroll: true,
-            id:'id444'
+            autoScroll: true
         },{
             items: {
-                id: 'pbar1',
+                id: 'pbarMark',
                 text:'Ready',
                 xtype: 'progress',
                 animate:true,
                 style: {
                     width: '100%',
-                    margin: '0px auto'
+                    margin: '0px auto',
+                    border:'0px'
                 }
-            },
-            id:'id555'
+            }
         },{
             title: 'Логи сервера',
             contentEl: 'expMarkLogs',
-            autoScroll: true,
-            id:'id777'
+            autoScroll: true
         }]
     }]
 };
@@ -301,7 +241,7 @@ var echat = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
     },
     items:[{
         title: 'Типа чат...',
@@ -316,16 +256,58 @@ var value4ovnerstatus = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
     },
     items:[{
         title: 'Смена автора',
         contentEl: 'ownerChange',
-        autoScroll: true
+        autoScroll: true,
+        items:[{
+            title: 'Смена автора',
+            contentEl: 'ownerChangeInput',
+            autoScroll: true
+        },{
+            items: {
+                id: 'pbarOwn',
+                text:'Ready',
+                xtype: 'progress',
+                animate:true,
+                style: {
+                    width: '100%',
+                    margin: '0px auto',
+                    border:'0px'
+                }
+            }
+        },{
+            title: 'Логи сервера',
+            contentEl: 'ownerChangeLogs',
+            autoScroll: true
+        }]
     },{
         title: 'Смена статуса',
         contentEl: 'statusChange',
-        autoScroll: true
+        autoScroll: true,
+        items:[{
+            title: 'Смена статуса',
+            contentEl: 'statusChangeInput',
+            autoScroll: true
+        },{
+            items: {
+                id: 'pbarStat',
+                text:'Ready',
+                xtype: 'progress',
+                animate:true,
+                style: {
+                    width: '100%',
+                    margin: '0px auto',
+                    border:'0px'
+                }
+            }
+        },{
+            title: 'Логи сервера',
+            contentEl: 'statusChangeLogs',
+            autoScroll: true
+        }]
     }
     ]
 };
@@ -337,19 +319,34 @@ var value4link = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
     },
     items:[{
         title: 'Добавление ссылок',
         contentEl: 'addLink',
-        autoScroll: true
-    }
-    //    ,{
-    //        title: 'Смена статуса',
-    //        contentEl: 'statusChange',
-    //        autoScroll: true
-    //    }
-    ]
+        autoScroll: true,
+        items:[{
+            title: 'Добавление ссылок',
+            contentEl: 'addLinkInput',
+            autoScroll: true
+        },{
+            items: {
+                id: 'pbarLink',
+                text:'Ready',
+                xtype: 'progress',
+                animate:true,
+                style: {
+                    width: '100%',
+                    margin: '0px auto',
+                    border:'0px'
+                }
+            }
+        },{
+            title: 'Логи сервера',
+            contentEl: 'addLinkLogs',
+            autoScroll: true
+        }]
+    }]
 };
 var osession = {
 
@@ -364,33 +361,28 @@ var osession = {
         title: 'Сброс сессии',
         contentEl: 'optSes',
         autoScroll: true
-    }
-    //    ,{
-    //        title: 'Смена статуса',
-    //        contentEl: 'statusChange',
-    //        autoScroll: true
-    //    }
-    ]
+    }]
 };
+
 var ecsv = {
     id: 'eCsv-panel',
     title: 'Преобразование файла из форматов XLS и CSV(Excel) в нормальный CSV!',
     layout: 'fit',
     bodyStyle: 'padding:17px; background-color:#e1e8ff; width:100%; height:100%',
-    //	bodyStyle: 'padding:25px',
-    contentEl: 'eCsv' // pull existing content from the page
-
+    contentEl: 'eCsv'
 };
+
+
 function updateProd(allCount, count){
     if(count==1){
-        pbarProd.setDisabled(false);
+        Ext.getCmp('pbarProd').setDisabled(false);
     }
-    RunnerProd.run(pbarProd, allCount, count);
+    RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbarProd.reset();
-            pbarProd.updateText("Ready to Export");
-            pbarProd.setDisabled(true);
+            Ext.getCmp('pbarProd').reset();
+            Ext.getCmp('pbarProd').updateText("Ready to Export");
+            Ext.getCmp('pbarProd').setDisabled(true);
         }
     }, 500);
 }
@@ -405,15 +397,15 @@ var RunnerProd = function(){
 
 function updateMark(allCount, count){
     if(count==1){
-        Ext.getCmp('pbar1').setDisabled(false);
+        Ext.getCmp('pbarMark').setDisabled(false);
     // pbarMar.setDisabled(false);
     }
-    RunnerMar.run(Ext.getCmp('pbar1'), allCount, count);
+    RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            Ext.getCmp('pbar1').reset();
-            Ext.getCmp('pbar1').updateText("Ready to Export Marketing");
-            Ext.getCmp('pbar1').setDisabled(true);
+            Ext.getCmp('pbarMark').reset();
+            Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
+            Ext.getCmp('pbarMark').setDisabled(true);
         }
     }, 500);
 }
@@ -428,14 +420,14 @@ var RunnerMar = function(){
 
 function updateStat(allCount, count){
     if(count==1){
-        pbarStat.setDisabled(false);
+        Ext.getCmp('pbarStat').setDisabled(false);
     }
-    RunnerStat.run(pbarStat, allCount, count);
+    RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbarStat.reset();
-            pbarStat.updateText("Ready to change Status");
-            pbarStat.setDisabled(true);
+            Ext.getCmp('pbarStat').reset();
+            Ext.getCmp('pbarStat').updateText("Ready to change Status");
+            Ext.getCmp('pbarStat').setDisabled(true);
         }
     }, 500);
 }
@@ -450,14 +442,14 @@ var RunnerStat = function(){
 
 function updateOwn(allCount, count){
     if(count==1){
-        pbarOwn.setDisabled(false);
+        Ext.getCmp('pbarOwn').setDisabled(false);
     }
-    RunnerOwn.run(pbarOwn, allCount, count);
+    RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbarOwn.reset();
-            pbarOwn.updateText("Ready to change Owner");
-            pbarOwn.setDisabled(true);
+            Ext.getCmp('pbarOwn').reset();
+            Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
+            Ext.getCmp('pbarOwn').setDisabled(true);
         }
     }, 500);
 }
@@ -472,14 +464,14 @@ var RunnerOwn = function(){
 
 function updateLink(allCount, count){
     if(count==1){
-        pbarLink.setDisabled(false);
+        Ext.getCmp('pbarLink').setDisabled(false);
     }
-    RunnerLink.run(pbarLink, allCount, count);
+    RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            pbarLink.reset();
-            pbarLink.updateText("Ready to add Link");
-            pbarLink.setDisabled(true);
+            Ext.getCmp('pbarLink').reset();
+            Ext.getCmp('pbarLink').updateText("Ready to add Link");
+            Ext.getCmp('pbarLink').setDisabled(true);
         }
     }, 500);
 }
@@ -493,8 +485,8 @@ var RunnerLink = function(){
 }();
 
 Ext.onReady(function(){
-    //    Ext.getCmp('pbar1').setDisabled(true);
-    //    Ext.getCmp('pbar1').updateText("Ready");
+    updateMessage();
+    Ext.QuickTips.init();
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
         Ext.MessageBox.buttonText.no = "нах";
@@ -510,8 +502,6 @@ Ext.onReady(function(){
             icon: Ext.MessageBox.QUESTION
         });
     });
-    updateMessage();
-    Ext.QuickTips.init();
     var detailEl;
     var contentPanel = {
         id: 'content-panel',
@@ -520,8 +510,9 @@ Ext.onReady(function(){
         margins: '2 5 5 0',
         activeItem: 0,
         border: false,
+        width:'100%',
         items: [
-        // start,
+        //start,
         value4export,
         echat,
         value4ovnerstatus,
@@ -589,12 +580,12 @@ Ext.onReady(function(){
         html: '<p class="details-info">Выберите нужную функцию...</p>'
     };
 
-    var panel1 = new Ext.Panel({
-        title: 'Panel 1',
-        html: 'Width = container width\' - 50 px',
-        // Width = container width' - 50 px.
-        anchor: '-50'
-    });
+    //    var panel1 = new Ext.Panel({
+    //        title: 'Panel 1',
+    //        html: 'Width = container width\' - 50 px',
+    //        // Width = container width' - 50 px.
+    //        anchor: '-50'
+    //    });
 
     new Ext.Viewport({
         layout: 'border',
@@ -620,72 +611,9 @@ Ext.onReady(function(){
         ],
         renderTo: Ext.getBody()
     });
-
-    pbarProd = new Ext.ProgressBar({
-        text:'Ready',
-        id:'pbarProd',
-        animate:true,
-        style: {
-            width: '100%',
-            margin: '0px auto'
-        },
-        renderTo:'pbarId'
-    });
-    pbarProd.setDisabled(true);
-
-    pbarMar = new Ext.ProgressBar({
-        text:'Ready',
-        id:'pbarMar-id',
-        animate:true,
-        cls:'custom',
-        boxMinHeight:20,
-        style: {
-            width: '100%',
-            margin: '0px auto'
-        //height: '16px'
-        }
-    //renderTo:'pbarMarkId'
-    });
-    pbarMar.setSize(200,10);
-    pbarMar.setDisabled(true);
-
-//    pbarStat = new Ext.ProgressBar({
-//        text:'Ready',
-//        id:'pbarStat-id',
-//        animate:true,
-//        style: {
-//            width: '70%',
-//            margin: '0px auto'
-//        },
-//        renderTo:'pbarStatId'
-//    });
-//    pbarStat.setDisabled(true);
-//
-//    pbarOwn = new Ext.ProgressBar({
-//        text:'Ready',
-//        id:'pbpbarOwnar-id',
-//        animate:true,
-//        style: {
-//            width: '70%',
-//            margin: '0px auto'
-//        },
-//        renderTo:'pbarOwnId'
-//    });
-//    pbarOwn.setDisabled(true);
-//
-//    pbarLink = new Ext.ProgressBar({
-//        text:'Ready',
-//        id:'pbarLink-id',
-//        animate:true,
-//        style: {
-//            width: '70%',
-//            margin: '0px auto'
-//        },
-//        renderTo:'pbarLinkId'
-//    });
-//    pbarLink.setDisabled(true);
 });
 
 function aaasss(){
-    Ext.getCmp('pbar1').updateProgress(Math.random());
+    Ext.getCmp('pbarProd').updateProgress(Math.random());
+    alert(Ext.getCmp('pbarProd').update("Done"));
 }
