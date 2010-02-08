@@ -62,36 +62,36 @@ function ShowYandexFile(){
 }
 
 function exportByProduct(){
-    //Ext.get('ulexpProdLog').insertHtml("beforeBegin","<center>Loading <img src='images/loading-balls.gif'/></center>");
-    Ext.getCmp('ulexpProdLog').body.innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-
+    dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
+    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data =  Ext.get('Articles').getValue();
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
-            Ext.getCmp('ulexpProdLog').body.innerHTML = data;
-
-       // Ext.get('ulexpProdLog').insertHtml("beforeBegin",data);
-    //Ext.fly('ulexpProdLog').innerHTML = data;
-    //        Show("AllDialog_Suppliers_Out");
+        dijit.byId('products_importByArticle_button').setAttribute("disabled", false);
+        dojo.byId('ulexpProdLog').innerHTML = data;
     });
 }
 
 function exportMarketing(){
+    dijit.byId('products_importMark_button').setAttribute("disabled", true);
     dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data = dojo.byId('ArticlesExpMark').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.exportMarketing(data, function(data) {
+        dijit.byId('products_importMark_button').setAttribute("disabled", false);
         dojo.byId('ulexpMarkLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function addLink(){
+    dijit.byId('addLink_button').setAttribute("disabled", true);
     dojo.byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data = dojo.byId('ArticlesAddLink').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.addLink(data, function(data) {
         dojo.byId('uladdLinkLog').innerHTML = data;
+        dijit.byId('addLink_button').setAttribute("disabled", false);
     //        Show("AllDialog_Suppliers_Out");
     });
 }
@@ -121,6 +121,7 @@ function clearCacheMark(){
 }
 
 function changeStatus(){
+    dijit.byId('statusChange_button').setAttribute("disabled", true);
     dojo.byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var status = "";
     var data = dojo.byId('ArticlesStatusChange').value;
@@ -138,15 +139,19 @@ function changeStatus(){
     }
     Ajax.changeStatus(data, status, function(data) {
         dojo.byId('ulstatusChangeLog').innerHTML = data;
+        dijit.byId('statusChange_button').setAttribute("disabled", false);
+
     });
 
 }
 function changeOwner(){
+    dijit.byId('ownerChange_button').setAttribute("disabled", true);
     dojo.byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var owner = dijit.byId('owner').attr('value');
     var data = dojo.byId('ArticlesOwnerChange').value;
     Ajax.changeOwner(data, owner, function(data) {
         dojo.byId('ulownerChangeLog').innerHTML = data;
+        dijit.byId('ownerChange_button').setAttribute("disabled", false);
     });
 }
 
@@ -182,7 +187,7 @@ var value4export = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
     },
     items:[{
         title: 'Экспорт по продукту',
@@ -241,7 +246,7 @@ var echat = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
     },
     items:[{
         title: 'Типа чат...',
@@ -256,7 +261,7 @@ var value4ovnerstatus = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
     },
     items:[{
         title: 'Смена автора',
@@ -319,7 +324,7 @@ var value4link = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:600px;'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
     },
     items:[{
         title: 'Добавление ссылок',
@@ -375,11 +380,14 @@ var ecsv = {
 
 function updateProd(allCount, count){
     if(count==1){
+        // butProd.dom.disabled = true;
+        //dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
         Ext.getCmp('pbarProd').setDisabled(false);
     }
     RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
+            // dijit.byId('products_importByArticle_button').setAttribute("disabled", false);
             Ext.getCmp('pbarProd').reset();
             Ext.getCmp('pbarProd').updateText("Ready to Export");
             Ext.getCmp('pbarProd').setDisabled(true);
@@ -397,12 +405,13 @@ var RunnerProd = function(){
 
 function updateMark(allCount, count){
     if(count==1){
+        //dijit.byId('products_importMark_button').setAttribute("disabled", true);
         Ext.getCmp('pbarMark').setDisabled(false);
-    // pbarMar.setDisabled(false);
     }
     RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
+            //dijit.byId('products_importMark_button').setAttribute("disabled", false);
             Ext.getCmp('pbarMark').reset();
             Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
             Ext.getCmp('pbarMark').setDisabled(true);
@@ -420,11 +429,13 @@ var RunnerMar = function(){
 
 function updateStat(allCount, count){
     if(count==1){
+        //dijit.byId('statusChange_button').setAttribute("disabled", true);
         Ext.getCmp('pbarStat').setDisabled(false);
     }
     RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
+            // dijit.byId('statusChange_button').setAttribute("disabled", false);
             Ext.getCmp('pbarStat').reset();
             Ext.getCmp('pbarStat').updateText("Ready to change Status");
             Ext.getCmp('pbarStat').setDisabled(true);
@@ -442,11 +453,13 @@ var RunnerStat = function(){
 
 function updateOwn(allCount, count){
     if(count==1){
+        //dijit.byId('ownerChange_button').setAttribute("disabled", true);
         Ext.getCmp('pbarOwn').setDisabled(false);
     }
     RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
+            // dijit.byId('ownerChange_button').setAttribute("disabled", false);
             Ext.getCmp('pbarOwn').reset();
             Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
             Ext.getCmp('pbarOwn').setDisabled(true);
@@ -464,11 +477,13 @@ var RunnerOwn = function(){
 
 function updateLink(allCount, count){
     if(count==1){
+        //        dijit.byId('addLink_button').setAttribute("disabled", true);
         Ext.getCmp('pbarLink').setDisabled(false);
     }
     RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
+            //dijit.byId('addLink_button').setAttribute("disabled", false);
             Ext.getCmp('pbarLink').reset();
             Ext.getCmp('pbarLink').updateText("Ready to add Link");
             Ext.getCmp('pbarLink').setDisabled(true);
@@ -485,8 +500,11 @@ var RunnerLink = function(){
 }();
 
 Ext.onReady(function(){
+
     updateMessage();
+
     Ext.QuickTips.init();
+    
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
         Ext.MessageBox.buttonText.no = "нах";
@@ -502,7 +520,9 @@ Ext.onReady(function(){
             icon: Ext.MessageBox.QUESTION
         });
     });
+
     var detailEl;
+
     var contentPanel = {
         id: 'content-panel',
         region: 'center', // this is what makes this panel into a region within the containing layout
@@ -521,6 +541,7 @@ Ext.onReady(function(){
         ecsv
         ]
     };
+
     var treePanel = new Ext.tree.TreePanel({
         id: 'tree-panel',
         title: 'Меню',
@@ -577,7 +598,7 @@ Ext.onReady(function(){
         autoScroll: true,
         height: 400,
         width: 150,
-        html: '<p class="details-info">Выберите нужную функцию...</p>'
+        html: '<p class="details-info"><b style="color:red">Для правильной работы прогресс-баров в IE8 включите режим совместимости с IE7. (Значек с разорванной страничкой справа от адресной строки.)</b><br/><br/>Выберите нужную функцию...</p>'
     };
 
     //    var panel1 = new Ext.Panel({
@@ -612,8 +633,3 @@ Ext.onReady(function(){
         renderTo: Ext.getBody()
     });
 });
-
-function aaasss(){
-    Ext.getCmp('pbarProd').updateProgress(Math.random());
-    alert(Ext.getCmp('pbarProd').update("Done"));
-}

@@ -9,9 +9,9 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
+        <%--<meta http-equiv="X-UA-Compatible" content="IE=7" />--%>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=7" />
-        <title>Some Java Tools. (v.2.0)</title>
+        <title>Some Java Tools. (v.2.1)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
@@ -24,6 +24,7 @@
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
         <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>
+        <%--<script src="js/IE82.js" type="text/javascript"></script>--%>
     </head>
     <body class="tundra" onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
@@ -84,9 +85,6 @@
                                                             </button>
                                                             <button id="statistics_button" dojoType="dijit.form.Button" onclick="showStatistics()">
                                                                 &lt;&lt;&lt;Статистика&gt;&gt;&gt;
-                                                            </button>
-                                                            <button onclick="aaasss()">
-                                                                Update
                                                             </button>
                                                         </center>
                                                     </td>
@@ -158,10 +156,10 @@
                         <input id="chat_btn" type="button" value="Send" onclick="sendMessage()"/>
                         Ник:
                         <input id="nick_id" value="<% try {
-                                        out.print(user.getNick());
-                                    } catch (Exception ex) {
-                                        out.print("Введите ник...");
-                                    }%>"/>
+                out.print(user.getNick());
+            } catch (Exception ex) {
+                out.print("Введите ник...");
+            }%>"/>
                     </p>
                 </div>
                 <br/>
