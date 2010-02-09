@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
-        <script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>
+        <%--<script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>--%>
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
         <script type='text/javascript' src='js/allJavaScript.js'> </script>
@@ -23,10 +23,10 @@
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
-        <link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>
+        <%--<link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>--%>
         <%--<script src="js/IE82.js" type="text/javascript"></script>--%>
     </head>
-    <body class="tundra" onload="dwr.engine.setActiveReverseAjax(true);">
+    <body onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
             <table width="100%">
                 <tr>
@@ -85,6 +85,7 @@
                                                                 &lt;&lt;&lt;Статистика&gt;&gt;&gt;
                                                             </button>
                                                         </center>
+                                                        <div id="tableTT">222</div>
                                                     </td>
                                                 </tr>
                                             </table>

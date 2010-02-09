@@ -1,24 +1,42 @@
-dojo.require("dojo.parser");
-dojo.require("dijit.TitlePane");
-dojo.require("dijit.form.CheckBox");
-dojo.require("dijit.form.Button");
-dojo.require("dijit.Dialog");
-dojo.require("dijit.form.FilteringSelect");
-dojo.require("dojo.data.ItemFileReadStore");
+//dojo.require("dojo.parser");
+//dojo.require("dijit.TitlePane");
+//dojo.require("dijit.form.CheckBox");
+//dojo.require("dijit.form.Button");
+//dojo.require("dijit.Dialog");
+//dojo.require("dijit.form.FilteringSelect");
+//dojo.require("dojo.data.ItemFileReadStore");
 
+function byId(id){
+    return dwr.util.byId(id);
+}
+
+var butt = {
+    xtype: 'buttongroup',
+    rowspan: 3,
+    columns: 3,
+    items: [{
+        text: '<<<Запуск>>>'
+    },{
+        text: '<<<Почистить кэш>>>'
+    },{
+        text: '<<<Статистика>>>'
+    }]
+///,
+//    renderTo:'tableTT'
+};
 
 function UploadeCsv(){
-    var fileName = dojo.byId('uploadFileeCsv').value;
-    var checkSeparator = dojo.byId('eCsvSeparator').checked;
-    var checkZip = dojo.byId('eCsvZip').checked;
+    var fileName = byId('uploadFileeCsv').value;
+    var checkSeparator = byId('eCsvSeparator').checked;
+    var checkZip = byId('eCsvZip').checked;
     var file = dwr.util.getValue('uploadFileeCsv');
-    var encoding = dojo.byId('eCsvEncoding').value;
-    var engine = dojo.byId('eCsvEngine').value;
+    var encoding = byId('eCsvEncoding').value;
+    var engine = byId('eCsvEngine').value;
 
-    dojo.byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     CsvProcessing.convertXLSCSV(file, fileName, encoding, checkSeparator, checkZip, engine, function(data) {
         dwr.engine.openInDownload(data);
-        dojo.byId('it4profitCsvLoadingProcess').innerHTML = "";
+        byId('it4profitCsvLoadingProcess').innerHTML = "";
         if(data==null){
             alert("Не верный формат файла. Поддерживаемые форматы: csv и xls.");
         }
@@ -26,12 +44,12 @@ function UploadeCsv(){
 }
 
 function FixProfitCsv(){
-    var fileName = dojo.byId('uploadit4profitCsv').value;
+    var fileName = byId('uploadit4profitCsv').value;
     var file = dwr.util.getValue('uploadit4profitCsv');
-    dojo.byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    byId('it4profitCsvLoadingProcess').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     CsvProcessing.fixItprofitFile(file, fileName, function(data) {
         dwr.engine.openInDownload(data);
-        dojo.byId('it4profitCsvLoadingProcess').innerHTML = "";
+        byId('it4profitCsvLoadingProcess').innerHTML = "";
         if(data==null){
             alert("Не верный формат файла. Поддерживаемые форматы: csv и zip.");
         }
@@ -39,119 +57,122 @@ function FixProfitCsv(){
 }
 
 function UpdateManPT(){
-    dojo.byId('Test').innerHTML = "Loading...";
+    byId('Test').innerHTML = "Loading...";
     UploadDownload.createUpdateManPt(function(data) {
-        dojo.byId('Test').innerHTML = data;
+        byId('Test').innerHTML = data;
         alert(data);
     });
 }
 function Watch_All_PT_Nix(){
-    dojo.byId('TablenixPT_Out').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
+    byId('TablenixPT_Out').innerHTML = "Loading <img src='images/loading-balls.gif'/>";
     Nix.getAllPT(function(data) {
-        dojo.byId('TablenixPT_Out').innerHTML = data;
+        byId('TablenixPT_Out').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 function ShowYandexFile(){
-    if(dojo.byId("yandexType").value =="Загрузить из файла"){
-        dojo.byId('tduploadYandexFile').style.display = "inline";
+    if(byId("yandexType").value =="Загрузить из файла"){
+        byId('tduploadYandexFile').style.display = "inline";
     } else{
-        dojo.byId('tduploadYandexFile').style.display = "none";
+        byId('tduploadYandexFile').style.display = "none";
 
     }
 }
 
 function exportByProduct(){
-    dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
-    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    alert(byId('Articles').value);
+    //byId('products_importByArticle_button').disabled = true;
+    byId('products_importByArticle_button').disabled = true;
+    byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var data =  Ext.get('Articles').getValue();
     var ruEnBool = dwr.util.getValue('ruEnOnly');
     Ajax.exportByProducts(data, ruEnBool, function(data) {
-        dijit.byId('products_importByArticle_button').setAttribute("disabled", false);
-        dojo.byId('ulexpProdLog').innerHTML = data;
+        //byId('products_importByArticle_button').disabled = false;
+        byId('products_importByArticle_button').disabled = false;
+        byId('ulexpProdLog').innerHTML = data;
     });
 }
 
 function exportMarketing(){
-    dijit.byId('products_importMark_button').setAttribute("disabled", true);
-    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = dojo.byId('ArticlesExpMark').value;
+    byId('products_importMark_button').disabled = true;
+    byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = byId('ArticlesExpMark').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.exportMarketing(data, function(data) {
-        dijit.byId('products_importMark_button').setAttribute("disabled", false);
-        dojo.byId('ulexpMarkLog').innerHTML = data;
+        byId('products_importMark_button').disabled = false;
+        byId('ulexpMarkLog').innerHTML = data;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function addLink(){
-    dijit.byId('addLink_button').setAttribute("disabled", true);
-    dojo.byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = dojo.byId('ArticlesAddLink').value;
+    byId('addLink_button').disabled = true;
+    byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var data = byId('ArticlesAddLink').value;
     //var ruEnBool = dwr.util.getValue('ruEnOnlyExpMark');
     Ajax.addLink(data, function(data) {
-        dojo.byId('uladdLinkLog').innerHTML = data;
-        dijit.byId('addLink_button').setAttribute("disabled", false);
+        byId('uladdLinkLog').innerHTML = data;
+        byId('addLink_button').disabled = false;
     //        Show("AllDialog_Suppliers_Out");
     });
 }
 
 function clearSession(){
-    dojo.byId('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    byId('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Show('uloptSesLog');
     Ajax.clearSession(function(data) {
-        dojo.byId('uloptSesLog').innerHTML = data;
+        byId('uloptSesLog').innerHTML = data;
         Hide('uloptSesLog');
     });
 
 }
 
 function clearCache(){
-    dojo.byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {
-        dojo.byId('ulexpProdLog').innerHTML = data;
+        byId('ulexpProdLog').innerHTML = data;
     });
 }
 
 function clearCacheMark(){
-    dojo.byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     Ajax.clearCache(function(data) {
-        dojo.byId('ulexpMarkLog').innerHTML = data;
+        byId('ulexpMarkLog').innerHTML = data;
     });
 }
 
 function changeStatus(){
-    dijit.byId('statusChange_button').setAttribute("disabled", true);
-    dojo.byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    byId('statusChange_button').disabled = true;
+    byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
     var status = "";
-    var data = dojo.byId('ArticlesStatusChange').value;
-    var rBool = dojo.byId('statusOne').checked;
-    var cBool = dojo.byId('statusTwo').checked;
-    var dBool = dojo.byId('statusThree').checked;
+    var data = byId('ArticlesStatusChange').value;
+    var rBool = byId('statusOne').checked;
+    var cBool = byId('statusTwo').checked;
+    var dBool = byId('statusThree').checked;
     if(rBool){
-        status = dojo.byId('statusOne').value;
+        status = byId('statusOne').value;
     }
     if(cBool){
-        status = dojo.byId('statusTwo').value;
+        status = byId('statusTwo').value;
     }
     if(dBool){
-        status = dojo.byId('statusThree').value;
+        status = byId('statusThree').value;
     }
     Ajax.changeStatus(data, status, function(data) {
-        dojo.byId('ulstatusChangeLog').innerHTML = data;
-        dijit.byId('statusChange_button').setAttribute("disabled", false);
+        byId('ulstatusChangeLog').innerHTML = data;
+        byId('statusChange_button').disabled = false;
 
     });
 
 }
 function changeOwner(){
-    dijit.byId('ownerChange_button').setAttribute("disabled", true);
-    dojo.byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var owner = dijit.byId('owner').attr('value');
-    var data = dojo.byId('ArticlesOwnerChange').value;
+    byId('ownerChange_button').disabled = true;
+    byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
+    var owner = byId('owner').attr('value');
+    var data = byId('ArticlesOwnerChange').value;
     Ajax.changeOwner(data, owner, function(data) {
-        dojo.byId('ulownerChangeLog').innerHTML = data;
-        dijit.byId('ownerChange_button').setAttribute("disabled", false);
+        byId('ulownerChangeLog').innerHTML = data;
+        byId('ownerChange_button').disabled = false;
     });
 }
 
@@ -164,9 +185,9 @@ function sendMessage() {
         return;
     }
     Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"), function(data) {
-        dojo.byId("text").value = "";
+        byId("text").value = "";
     });
-//dojo.byId("text").value="";
+//byId("text").value="";
 }
 function updateMessage() {
     Ajax.updateMessage();
@@ -195,7 +216,12 @@ var value4export = {
         items:[{
             title: 'Экспорт',
             contentEl: 'expByProdInput',
-            autoScroll: true 
+            autoScroll: true,
+            items: {
+                id: 'but',
+                xtype: 'button',
+                text:'<<<Запуск>>>'
+            }
         },{
             items: {
                 id: 'pbarProd',
@@ -204,15 +230,6 @@ var value4export = {
                 animate:true,
                 style: {
                     width:'100%',
-                    //                    font: { text-decoration:underline
-                    //                        name: 'Tahoma',
-                    //                        color: 0x444444,
-                    //                        size: 22
-                    //                    },
-//                                        text: {
-//                                            align:'right',
-//                                            decoration:'underline'
-//                                        },
                     margin: '0px auto',
                     border:'0px'
                 }
@@ -221,7 +238,14 @@ var value4export = {
             title: 'Логи сервера',
             contentEl: 'expProdLogs',
             autoScroll: true
-        }]
+        //            items: {
+        //                id: 'but',
+        //                xtype: 'button',
+        //                text:'<<<Запуск>>>'
+        //            }
+        }
+        //        ,butt
+        ]
     },{
         title: 'Экспорт маркетинга',
         autoScroll: true,
@@ -237,7 +261,7 @@ var value4export = {
                 animate:true,
                 style: {
                     width: '100%',
-                   // textalign:'left',
+                    // textalign:'left',
                     margin: '0px auto',
                     border:'0px'
                 }
@@ -374,7 +398,7 @@ var osession = {
     },
     items:[{
         title: 'Сброс сессии',
-       // contentEl: 'optSes',
+        // contentEl: 'optSes',
         autoScroll: true,
         items:[{
             title: 'Сброс сессии',
@@ -383,6 +407,45 @@ var osession = {
         }]
     }]
 };
+
+//var buttonsExp = {
+//    xtype: 'buttongroup',
+//    columns: 3,
+//    title: 'Clipboard',
+//    items: [{
+//        text: 'Paste',
+//        scale: 'large',
+//        rowspan: 3,
+//        iconCls: 'add',
+//        iconAlign: 'top',
+//        cls: 'x-btn-as-arrow'
+//    },{
+//        xtype:'splitbutton',
+//        text: 'Menu Button',
+//        scale: 'large',
+//        rowspan: 3,
+//        iconCls: 'add',
+//        iconAlign: 'top',
+//        arrowAlign:'bottom',
+//        menu: [{
+//            text: 'Menu Item 1'
+//        }]
+//    },{
+//        xtype:'splitbutton',
+//        text: 'Cut',
+//        iconCls: 'add16',
+//        menu: [{
+//            text: 'Cut Menu Item'
+//        }]
+//    },{
+//        text: 'Copy',
+//        iconCls: 'add16'
+//    },{
+//        text: 'Format',
+//        iconCls: 'add16'
+//    }]
+//
+//};
 
 var ecsv = {
     id: 'eCsv-panel',
@@ -394,19 +457,19 @@ var ecsv = {
 
 
 function updateProd(allCount, count){
-//    if(count==1){
-//        // butProd.dom.disabled = true;
-//        //dijit.byId('products_importByArticle_button').setAttribute("disabled", true);
-//        Ext.getCmp('pbarProd').setDisabled(false);
-//       // Ext.getCmp('pbarProd').setStyle("text-align", "left");
-//    }
+    //    if(count==1){
+    //        // butProd.dom.disabled = true;
+    //        //byId('products_importByArticle_button').disabled = true;
+    //        Ext.getCmp('pbarProd').setDisabled(false);
+    //       // Ext.getCmp('pbarProd').setStyle("text-align", "left");
+    //    }
     RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            // dijit.byId('products_importByArticle_button').setAttribute("disabled", false);
+            // byId('products_importByArticle_button').disabled = false;
             Ext.getCmp('pbarProd').reset();
             Ext.getCmp('pbarProd').updateText("Ready to Export");
-            //Ext.getCmp('pbarProd').setDisabled(true);
+        //Ext.getCmp('pbarProd').setDisabled(true);
         }
     }, 500);
 }
@@ -420,17 +483,17 @@ var RunnerProd = function(){
 }();
 
 function updateMark(allCount, count){
-//    if(count==1){
-//        //dijit.byId('products_importMark_button').setAttribute("disabled", true);
-//        Ext.getCmp('pbarMark').setDisabled(false);
-//    }
+    //    if(count==1){
+    //        //byId('products_importMark_button').disabled = true;
+    //        Ext.getCmp('pbarMark').setDisabled(false);
+    //    }
     RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            //dijit.byId('products_importMark_button').setAttribute("disabled", false);
+            //byId('products_importMark_button').disabled = false;
             Ext.getCmp('pbarMark').reset();
             Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
-            //Ext.getCmp('pbarMark').setDisabled(true);
+        //Ext.getCmp('pbarMark').setDisabled(true);
         }
     }, 500);
 }
@@ -444,17 +507,17 @@ var RunnerMar = function(){
 }();
 
 function updateStat(allCount, count){
-//    if(count==1){
-//        //dijit.byId('statusChange_button').setAttribute("disabled", true);
-//        Ext.getCmp('pbarStat').setDisabled(false);
-//    }
+    //    if(count==1){
+    //        //byId('statusChange_button').disabled = true;
+    //        Ext.getCmp('pbarStat').setDisabled(false);
+    //    }
     RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            // dijit.byId('statusChange_button').setAttribute("disabled", false);
+            // byId('statusChange_button').disabled = false;
             Ext.getCmp('pbarStat').reset();
             Ext.getCmp('pbarStat').updateText("Ready to change Status");
-           // Ext.getCmp('pbarStat').setDisabled(true);
+        // Ext.getCmp('pbarStat').setDisabled(true);
         }
     }, 500);
 }
@@ -468,17 +531,17 @@ var RunnerStat = function(){
 }();
 
 function updateOwn(allCount, count){
-//    if(count==1){
-//        //dijit.byId('ownerChange_button').setAttribute("disabled", true);
-//        Ext.getCmp('pbarOwn').setDisabled(false);
-//    }
+    //    if(count==1){
+    //        //byId('ownerChange_button').disabled = true;
+    //        Ext.getCmp('pbarOwn').setDisabled(false);
+    //    }
     RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            // dijit.byId('ownerChange_button').setAttribute("disabled", false);
+            // byId('ownerChange_button').disabled = false;
             Ext.getCmp('pbarOwn').reset();
             Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
-           // Ext.getCmp('pbarOwn').setDisabled(true);
+        // Ext.getCmp('pbarOwn').setDisabled(true);
         }
     }, 500);
 }
@@ -492,17 +555,17 @@ var RunnerOwn = function(){
 }();
 
 function updateLink(allCount, count){
-//    if(count==1){
-//        //        dijit.byId('addLink_button').setAttribute("disabled", true);
-//        Ext.getCmp('pbarLink').setDisabled(false);
-//    }
+    //    if(count==1){
+    //        //        byId('addLink_button').disabled = true;
+    //        Ext.getCmp('pbarLink').setDisabled(false);
+    //    }
     RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
     setTimeout(function(){
         if(allCount==count){
-            //dijit.byId('addLink_button').setAttribute("disabled", false);
+            //byId('addLink_button').disabled = false;
             Ext.getCmp('pbarLink').reset();
             Ext.getCmp('pbarLink').updateText("Ready to add Link");
-           // Ext.getCmp('pbarLink').setDisabled(true);
+        // Ext.getCmp('pbarLink').setDisabled(true);
         }
     }, 500);
 }
@@ -515,12 +578,27 @@ var RunnerLink = function(){
     }
 }();
 
-Ext.onReady(function(){
 
+
+
+Ext.onReady(function(){
+    
     updateMessage();
 
     Ext.QuickTips.init();
-    
+
+    var p = new Ext.Panel({
+        renderTo: 'tableTT',
+        items:{
+            xtype: 'buttongroup',
+            rowspan: 3,
+            columns: 3,
+            items: [{
+                text: '<<<Запуск>>>'
+            }]
+        }
+    });
+
     Ext.get('products_importByArticle_button').on('click', function(){
         Ext.MessageBox.buttonText.yes = "ага";
         Ext.MessageBox.buttonText.no = "нах";
