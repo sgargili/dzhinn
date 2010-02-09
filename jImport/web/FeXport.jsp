@@ -56,7 +56,7 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <textarea id='Articles' style='width:350px; height:150px'></textarea>
+                                            <textarea id='Articles' style='width:350px; height:150px;'></textarea>
                                         </td>
                                         <td>
                                         </td>
@@ -85,7 +85,7 @@
                                                                 &lt;&lt;&lt;Статистика&gt;&gt;&gt;
                                                             </button>
                                                         </center>
-                                                        <div id="tableTT">222</div>
+                                                        <%--<div id="tableTT">222</div>--%>
                                                     </td>
                                                 </tr>
                                             </table>
