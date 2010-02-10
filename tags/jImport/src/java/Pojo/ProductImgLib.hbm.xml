@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26.10.2009 11:31:41 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="Pojo.ProductImgLib" table="product_img_lib">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="pid" type="long">
+      <column name="pid" not-null="true"/>
+    </property>
+    <property name="small" type="string">
+      <column length="200" name="small" not-null="true"/>
+    </property>
+    <property name="medium" type="string">
+      <column length="200" name="medium" not-null="true"/>
+    </property>
+    <property name="big" type="string">
+      <column length="200" name="big" not-null="true"/>
+    </property>
+    <property name="name" type="string">
+      <column length="200" name="name" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

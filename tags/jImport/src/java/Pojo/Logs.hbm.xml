@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 29.01.2010 17:00:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="value4it" name="Pojo.Logs" table="logs">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="ip" type="string">
+      <column length="15" name="ip"/>
+    </property>
+    <property name="logType" type="string">
+      <column length="256" name="log_type"/>
+    </property>
+    <property name="logMessage" type="string">
+      <column length="65535" name="log_message"/>
+    </property>
+    <property name="logTime" type="string">
+      <column length="256" name="log_time"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="jImport">
+    <display-name>jImport</display-name>
+    <description>jImport...</description>
+    <listener>
+        <listener-class>org.directwebremoting.servlet.DwrListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dwr-invoker</servlet-name>
+        <display-name>DWR Servlet</display-name>
+        <description>Direct Web Remoter Servlet</description>
+        <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>activeReverseAjaxEnabled</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>initApplicationScopeCreatorsAtStartup</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jsonRpcEnabled</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jsonpEnabled</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <init-param>
+            <param-name>preferDataUrlSchema</param-name>
+            <param-value>false</param-value>
+        </init-param>
+        <init-param>
+            <param-name>maxWaitAfterWrite</param-name>
+            <param-value>-1</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>FeXport</servlet-name>
+        <servlet-class>fe.FeXport</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dwr-invoker</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+    <welcome-file-list>
+        <welcome-file>FeXport.jsp</welcome-file>
+    </welcome-file-list>
+    </web-app>
