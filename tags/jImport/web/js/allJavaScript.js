@@ -9,6 +9,37 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+var store = new Ext.data.Store({
+    url: 'data/Owners.xml',
+    reader: new Ext.data.XmlReader({
+        record: 'Owner',
+        id: 'Id'
+    }, [
+    {
+        name: 'owner',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var combo = new Ext.form.ComboBox({
+    store: store,
+    displayField:'owner',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'local',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите автора...',
+    style: {
+        marginBottom: '10px'
+    },
+    width:200
+});
+
 function UploadeCsv(){
     var fileName = byId('uploadFileeCsv').value;
     var checkSeparator = byId('eCsvSeparator').checked;
@@ -50,13 +81,12 @@ function exportByProduct(data, ruEnBool, btn){
     });
 }
 
-function exportMarketing(){
-    byId('products_importMark_button').disabled = true;
+function exportMarketing(data, btn){
+    btn.disable();
     byId('ulexpMarkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = byId('ArticlesExpMark').value;
     Ajax.exportMarketing(data, function(data) {
-        byId('products_importMark_button').disabled = false;
         byId('ulexpMarkLog').innerHTML = data;
+        btn.enable();
     });
 }
 
@@ -159,14 +189,13 @@ var value4export = {
     plain: true,  //remove the header border
     activeItem: 0,
     defaults: {
-        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px'
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%'
     },
     items:[{
         title: 'Экспорт по продукту',
         autoScroll: true,
         items:[{
             title: 'Экспорт',
-            //contentEl: 'expByProdInput',
             autoScroll: true,
             defaults: {
                 bodyStyle: 'background-color:#e1e8ff;'
@@ -177,131 +206,6 @@ var value4export = {
                 height: '100%',
                 bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
                 buttonAlign: 'center',
-                items:[{
-                    bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
-                    items: [{
-                        xtype: 'textarea',
-                        fieldLabel: 'Message text',
-                        width: 350,
-                        height: 150,
-                        hideLabel: true,
-                        bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
-                        name: 'msg',
-                        flex: 1,
-                        id:'expArt'
-                    }]
-                },{
-                    columnWidth:.5,
-                    style: {
-                        margin: '70px auto'
-                    },
-                    bodyStyle: 'border:0px; background-color:#E1E1E1;',
-                    //layout:'column',
-                    items:[{
-                        //                        xtype: 'buttongroup',
-                        xtype: 'button',
-                        //                        rowspan: 3,
-                        //                        columns: 3,
-                        //                        bodyStyle: 'border:0px; background-color:#E1E1E1;',
-                        //                        items: [{
-                        id:'toogleBtn',
-                        text: 'ru/en language only...',
-                        style: {
-                            //marginBottom: '10px'
-                            // marginLeft: '97px',
-                            marginBottom: 10
-                        // margin: '0px auto'
-                        },
-                        enableToggle: true
-                    //                        }]
-                    },{
-                        xtype: 'buttongroup',
-                        rowspan: 3,
-                        columns: 3,
-                        bodyStyle: 'border:0px; background-color:#E1E1E1;',
-                        items: [{
-                            text: '<<<Запуск>>>',
-                            id:'expProdBtn',
-                            style: {
-                                marginRight: '10px'
-                            },
-                            listeners: {
-                                click: function() {
-                                    Ext.MessageBox.buttonText.yes = "ага";
-                                    Ext.MessageBox.buttonText.no = "нах";
-                                    Ext.Msg.show({
-                                        title:'Подтверждение!',
-                                        msg: 'Запустить ЭКСПОРТ продуктов?',
-                                        buttons: Ext.Msg.YESNO,
-                                        fn: function(btn){
-                                            if (btn == 'yes'){
-                                                if(Ext.getCmp('toogleBtn').pressed){
-                                                    exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
-                                                } else{
-                                                    exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
-                                                }
-                                            }
-                                        },
-                                        icon: Ext.MessageBox.QUESTION
-                                    });
-                                }
-                            }
-                        },{
-                            text: '<<<Почистить кэш>>>',
-                            id:'clearChBtn',
-                            style: {
-                                marginRight: '10px'
-                            },
-                            listeners: {
-                                click: function() {
-                                    clearCache();
-                                }
-                            }
-                        },{
-                            text: '<<<Статистика>>>',
-                            id:'statBtn',
-                            listeners: {
-                                click: function() {
-                                    showStatistics();
-                                }
-                            }
-                        }]
-                    }]
-                }]
-            }]
-        },{
-            items: {
-                id: 'pbarProd',
-                xtype: 'progress',
-                text:'Ready',
-                animate:true,
-                style: {
-                    width:'100%',
-                    margin: '0px auto',
-                    border:'0px'
-                }
-            }
-        },{
-            title: 'Логи сервера',
-            contentEl: 'expProdLogs',
-            autoScroll: true
-        }
-
-        ]
-    },{
-        title: 'Экспорт маркетинга',
-        autoScroll: true,
-        items:[{
-            title: 'Экспорт маркетинга',
-            //contentEl: 'expMarkInput',
-            autoScroll: true,
-            items:[{
-                layout:'column',
-                width: '100%',
-                height: '100%',
-                bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
-                buttonAlign: 'center',
-                //bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
                 items: [{
                     bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
                     items: [{
@@ -310,35 +214,25 @@ var value4export = {
                         width: 350,
                         height: 150,
                         hideLabel: true,
-                        bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                        // bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
                         name: 'msg',
                         flex: 1,
                         id:'expArt'
                     }]
                 },{
-                    //columnWidth:.5,
                     style: {
                         margin: '50px auto'
                     },
-                    //                    xtype: 'fieldset',
-                    //                    defaults: {
-                    //                        anchor: '-20' // leave room for error icon
-                    //                    },
-                    // title: 'Individual Checkboxes',
+                    
                     bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
-                    //                    autoHeight: true,
-                    //                    defaultType: 'checkbox',
-                    //                    columns: [100, 100],
-                    //                    vertical: true,
-                    //                    horizontal:true,
+                   
                     items: [{
                         xtype: 'checkbox',
-                        //fieldLabel: 'Favorite Animals',
                         style: {
                             marginLeft: '100px'
                         },
-                        boxLabel: 'ru/en language only...'
-
+                        boxLabel: 'ru/en language only...',
+                        id:'toogleBtn'
                     }, {
                         xtype: 'buttongroup',
                         rowspan: 3,
@@ -360,7 +254,7 @@ var value4export = {
                                         buttons: Ext.Msg.YESNO,
                                         fn: function(btn){
                                             if (btn == 'yes'){
-                                                if(Ext.getCmp('toogleBtn').pressed){
+                                                if(Ext.getCmp('toogleBtn').checked){
                                                     exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
                                                 } else{
                                                     exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
@@ -391,9 +285,81 @@ var value4export = {
                                 }
                             }
                         }]
-                    
+
                     }]
                 }]
+            }]
+        },{
+            items: {
+                id: 'pbarProd',
+                xtype: 'progress',
+                text:'Ready',
+                animate:true,
+                style: {
+                    width:'100%',
+                    margin: '0px auto',
+                    border:'0px'
+                }
+            }
+        },{
+            title: 'Логи сервера',
+            contentEl: 'expProdLogs',
+            autoScroll: true
+        }
+        ]
+    },{
+        title: 'Экспорт маркетинга',
+        autoScroll: true,
+        items:[{
+            title: 'Экспорт маркетинга',
+            //contentEl: 'expMarkInput',
+            autoScroll: true,
+            items:[{
+                layout:'column',
+                width: '100%',
+                height: '100%',
+                bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                buttonAlign: 'center',
+                items: [{
+                    bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                    items: [{
+                        xtype: 'textarea',
+                        fieldLabel: 'Message text',
+                        width: 350,
+                        height: 150,
+                        hideLabel: true,
+                        flex: 1,
+                        id:'expMarkArt'
+                    }]
+                },{
+                    style: {
+                        marginTop: '80px'
+                    },
+                    xtype: 'buttongroup',
+                    bodyStyle: 'padding:1px; border:0px; background-color:#E1E1E1;',
+                    items: [{
+                        text: '<<<Запуск>>>',
+                        id:'expMarkBtn',
+                        style: {
+                            marginRight: '10px'
+                        },
+                        listeners: {
+                            click: function() {
+                                exportMarketing(Ext.getCmp('expMarkArt').getValue(), Ext.getCmp('expMarkBtn'));
+                            }
+                        }
+                    },{
+                        text: '<<<Почистить кэш>>>',
+                        //                        id:'clearChBtn',
+                        listeners: {
+                            click: function() {
+                                clearCacheMark();
+                            }
+                        }
+                    }
+                    ]
+                }]
+
             }]
         },{
             items: {
@@ -503,12 +469,94 @@ var value4ovnerstatus = {
     },
     items:[{
         title: 'Смена автора',
-        contentEl: 'ownerChange',
+        //contentEl: 'ownerChange',
         autoScroll: true,
         items:[{
             title: 'Смена автора',
-            contentEl: 'ownerChangeInput',
-            autoScroll: true
+            //contentEl: 'ownerChangeInput',
+            autoScroll: true,
+            items: [{
+                layout:'column',
+                width: '100%',
+                height: '100%',
+                bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                buttonAlign: 'center',
+                items: [{
+                    bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                    items: [{
+                        xtype: 'textarea',
+                        fieldLabel: 'Message text',
+                        width: 350,
+                        height: 150,
+                        hideLabel: true,
+                        // bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                        name: 'msg',
+                        flex: 1,
+                        id:'expArt'
+                    }]
+                },{
+                    style: {
+                        margin: '50px auto'
+                    },
+
+                    bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+
+                    items: [combo, {
+                        xtype: 'buttongroup',
+                        rowspan: 3,
+                        columns: 3,
+                        bodyStyle: 'border:0px; background-color:#E1E1E1;',
+                        items: [{
+                            text: '<<<Запуск>>>',
+                            id:'expProdBtn',
+                            style: {
+                                marginRight: '10px'
+                            },
+                            listeners: {
+                                click: function() {
+                                    Ext.MessageBox.buttonText.yes = "ага";
+                                    Ext.MessageBox.buttonText.no = "нах";
+                                    Ext.Msg.show({
+                                        title:'Подтверждение!',
+                                        msg: 'Запустить ЭКСПОРТ продуктов?',
+                                        buttons: Ext.Msg.YESNO,
+                                        fn: function(btn){
+                                            if (btn == 'yes'){
+                                                if(Ext.getCmp('toogleBtn').checked){
+                                                    exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
+                                                } else{
+                                                    exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
+                                                }
+                                            }
+                                        },
+                                        icon: Ext.MessageBox.QUESTION
+                                    });
+                                }
+                            }
+                        },{
+                            text: '<<<Почистить кэш>>>',
+                            id:'clearChBtn',
+                            style: {
+                                marginRight: '10px'
+                            },
+                            listeners: {
+                                click: function() {
+                                    clearCache();
+                                }
+                            }
+                        },{
+                            text: '<<<Статистика>>>',
+                            id:'statBtn',
+                            listeners: {
+                                click: function() {
+                                    showStatistics();
+                                }
+                            }
+                        }]
+
+                    }]
+                }]
+            }]
         },{
             items: {
                 id: 'pbarOwn',
@@ -790,7 +838,8 @@ Ext.onReady(function(){
     updateMessage();
 
     Ext.QuickTips.init();
-
+    
+    store.load();
     //    var p = new Ext.Panel({
     //        renderTo: 'tableTT',
     //            items:{
@@ -972,7 +1021,7 @@ Ext.onReady(function(){
         autoScroll: true,
         height: 400,
         width: 150,
-        html: '<p class="details-info"><b style="color:red">Для правильной работы прогресс-баров и чата в IE8 включите режим совместимости с IE7. (Значек с разорванной страничкой справа от адресной строки.)</b><br/><br/>Выберите нужную функцию...</p>'
+        html: '<p class="details-info"><b style="color:red">Для правильной работы прогресс-баров и чата в IE8 включите режим совместимости с IE7. (Значок с разорванной страничкой справа от адресной строки.)</b><br/><br/>Выберите нужную функцию...</p>'
     };
 
     //    var panel1 = new Ext.Panel({
