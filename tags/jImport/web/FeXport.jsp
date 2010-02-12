@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bubble.css"/>
         <%--<script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>--%>
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
@@ -162,7 +163,7 @@
                     </p>
                 </div>
                 <br/>
-                <div dojoType="dijit.TooltipDialog" id="chat_id_log">
+                <div id="chat_id_log">
                     <ul id="chat_id_ul" style="list-style-type:none;min-height:490px">Типа чат...</ul>
                 </div>
             </div>

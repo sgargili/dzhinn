@@ -9,6 +9,19 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+Ext.ux.BubblePanel = Ext.extend(Ext.Panel, {
+    baseCls: 'x-bubble',
+    frame: true
+});
+
+var bubble = new Ext.ux.BubblePanel({
+    bodyStyle: 'padding-left: 8px;color: #1e1e1e',
+    //renderTo: 'chat_id_log',
+    html: 'Привет!',
+    //width: 200,
+    autoHeight: true
+});
+
 var store = new Ext.data.Store({
     url: 'data/Owners.xml',
     reader: new Ext.data.XmlReader({
@@ -30,12 +43,13 @@ var combo = new Ext.form.ComboBox({
     displayField:'owner',
     valueField: 'id',
     typeAhead: true,
-    mode: 'local',
+    mode: 'remote',
     forceSelection: true,
     triggerAction: 'all',
     emptyText:'Выберите автора...',
+    editable: false,
     style: {
-        marginBottom: '10px'
+        margin: '0px'
     },
     width:200
 });
@@ -122,38 +136,21 @@ function clearCacheMark(){
     });
 }
 
-function changeStatus(){
-    byId('statusChange_button').disabled = true;
+function changeStatus(data, status, btn){
+    btn.disable();
     byId('ulstatusChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var status = "";
-    var data = byId('ArticlesStatusChange').value;
-    var rBool = byId('statusOne').checked;
-    var cBool = byId('statusTwo').checked;
-    var dBool = byId('statusThree').checked;
-    if(rBool){
-        status = byId('statusOne').value;
-    }
-    if(cBool){
-        status = byId('statusTwo').value;
-    }
-    if(dBool){
-        status = byId('statusThree').value;
-    }
     Ajax.changeStatus(data, status, function(data) {
         byId('ulstatusChangeLog').innerHTML = data;
-        byId('statusChange_button').disabled = false;
-
+        btn.enable();
     });
 
 }
-function changeOwner(){
-    byId('ownerChange_button').disabled = true;
+function changeOwner(data, owner, btn){
+    btn.disable();
     byId('ulownerChangeLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var owner = byId('owner').attr('value');
-    var data = byId('ArticlesOwnerChange').value;
     Ajax.changeOwner(data, owner, function(data) {
         byId('ulownerChangeLog').innerHTML = data;
-        byId('ownerChange_button').disabled = false;
+        btn.enable();
     });
 }
 
@@ -165,10 +162,12 @@ function sendMessage() {
         alert("Введите ник...");
         return;
     }
+    if(dwr.util.getValue("text")==""){
+        return;
+    }
     Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"), function(data) {
         byId("text").value = "";
     });
-//byId("text").value="";
 }
 function updateMessage() {
     Ajax.updateMessage();
@@ -492,69 +491,28 @@ var value4ovnerstatus = {
                         // bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
                         name: 'msg',
                         flex: 1,
-                        id:'expArt'
+                        id:'changeOwnArt'
                     }]
                 },{
                     style: {
                         margin: '50px auto'
                     },
-
                     bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
 
-                    items: [combo, {
-                        xtype: 'buttongroup',
-                        rowspan: 3,
-                        columns: 3,
-                        bodyStyle: 'border:0px; background-color:#E1E1E1;',
-                        items: [{
-                            text: '<<<Запуск>>>',
-                            id:'expProdBtn',
-                            style: {
-                                marginRight: '10px'
-                            },
-                            listeners: {
-                                click: function() {
-                                    Ext.MessageBox.buttonText.yes = "ага";
-                                    Ext.MessageBox.buttonText.no = "нах";
-                                    Ext.Msg.show({
-                                        title:'Подтверждение!',
-                                        msg: 'Запустить ЭКСПОРТ продуктов?',
-                                        buttons: Ext.Msg.YESNO,
-                                        fn: function(btn){
-                                            if (btn == 'yes'){
-                                                if(Ext.getCmp('toogleBtn').checked){
-                                                    exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
-                                                } else{
-                                                    exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
-                                                }
-                                            }
-                                        },
-                                        icon: Ext.MessageBox.QUESTION
-                                    });
-                                }
+                    items: [combo,{
+                        xtype: 'button',
+                        text: '<<<Запуск>>>',
+                        id:'changeOwnBtn',
+                        style: {
+                            marginTop: '10px'
+                        },
+                        listeners: {
+                            click: function() {
+                                changeOwner(Ext.getCmp('changeOwnArt').getValue(), combo.value, Ext.getCmp('changeOwnBtn'));
                             }
-                        },{
-                            text: '<<<Почистить кэш>>>',
-                            id:'clearChBtn',
-                            style: {
-                                marginRight: '10px'
-                            },
-                            listeners: {
-                                click: function() {
-                                    clearCache();
-                                }
-                            }
-                        },{
-                            text: '<<<Статистика>>>',
-                            id:'statBtn',
-                            listeners: {
-                                click: function() {
-                                    showStatistics();
-                                }
-                            }
-                        }]
-
-                    }]
+                        }
+                    }
+                    ]
                 }]
             }]
         },{
@@ -576,12 +534,79 @@ var value4ovnerstatus = {
         }]
     },{
         title: 'Смена статуса',
-        contentEl: 'statusChange',
+        //contentEl: 'statusChange',
         autoScroll: true,
         items:[{
             title: 'Смена статуса',
-            contentEl: 'statusChangeInput',
-            autoScroll: true
+            //contentEl: 'statusChangeInput',
+            autoScroll: true,
+            items: [{
+                layout:'column',
+                width: '100%',
+                height: '100%',
+                bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                buttonAlign: 'center',
+                items: [{
+                    bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                    items: [{
+                        xtype: 'textarea',
+                        fieldLabel: 'Message text',
+                        width: 350,
+                        height: 150,
+                        hideLabel: true,
+                        // bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                        name: 'msg',
+                        flex: 1,
+                        id:'changeStatArt'
+                    }]
+                },{
+                    style: {
+                        margin: '46px auto'
+                    },
+                    bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+
+                    items: [{
+                        xtype: 'radiogroup',
+                        columns: [77, 65, 77],
+                        id:'radioData',
+
+                        items: [
+                        {
+                            boxLabel: 'Research',
+                            name:'radio1',
+                            inputValue: 'Research',
+                            checked: true
+                        },
+
+                        {
+                            boxLabel: 'Control',
+                            name:'radio1',
+                            inputValue: 'Control'
+                        },
+
+                        {
+                            boxLabel: 'Done',
+                            name:'radio1',
+                            inputValue: 'Done'
+                        }
+                        ]
+                    },{
+                        xtype: 'button',
+                        text: '<<<Запуск>>>',
+                        id:'changeStatBtn',
+                        style: {
+                            marginTop: '10px'
+                        },
+                        listeners: {
+                            click: function() {
+                                //alert(Ext.getCmp('radioData').getValue().getGroupValue());
+                                changeStatus(Ext.getCmp('changeStatArt').getValue(), Ext.getCmp('radioData').getValue().getGroupValue(), Ext.getCmp('changeStatBtn'));
+                            }
+                        }
+                    }
+                    ]
+                }]
+            }]
         },{
             items: {
                 id: 'pbarStat',
@@ -839,7 +864,7 @@ Ext.onReady(function(){
 
     Ext.QuickTips.init();
     
-    store.load();
+    //store.load();
     //    var p = new Ext.Panel({
     //        renderTo: 'tableTT',
     //            items:{
