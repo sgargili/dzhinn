@@ -37,7 +37,7 @@ public class StatusCheck {
 
         int i = 0;
 
-        CsvReader reader = new CsvReader("C://keyErrors.csv", ';', Charset.forName("Windows-1251"));
+        CsvReader reader = new CsvReader("C://Key.csv", ';', Charset.forName("Windows-1251"));
 
         KeyStatus key;
         List<KeyStatus> keyList = new ArrayList();
@@ -61,6 +61,7 @@ public class StatusCheck {
                         key.setArticleId(xpp.getAttributeValue(0));
                         key.setStatus(xpp.getAttributeValue(6));
                         key.setProductType(xpp.getAttributeValue(9));
+                        key.setFullName(xpp.getAttributeValue(4));
                         key.setCard("0");
 
                         profXml = http.DownloadContentAsString("http://213.53.57.39/shopInfoWSwar/product.exml?product=" + key.getArticleId(), "UTF-8", false);
@@ -84,14 +85,15 @@ public class StatusCheck {
         }
 
         CsvWriter writer = new CsvWriter("C://ouputAll.csv", ',', Charset.forName("UTF-8"));
-        String[] mass = new String[5];
+        String[] mass = new String[6];
         for (Iterator it = keyList.iterator(); it.hasNext();) {
             key = (KeyStatus) it.next();
             mass[0] = key.getArticle();
             mass[1] = key.getArticleId();
-            mass[2] = key.getProductType();
-            mass[3] = key.getStatus();
-            mass[4] = key.getCard();
+            mass[2] = key.getFullName();
+            mass[3] = key.getProductType();
+            mass[4] = key.getStatus();
+            mass[5] = key.getCard();
             writer.writeRecord(mass);
             writer.flush();
         }
