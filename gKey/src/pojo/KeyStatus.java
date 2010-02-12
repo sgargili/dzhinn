@@ -10,14 +10,23 @@ package pojo;
  */
 public class KeyStatus {
 
-    private String article, articleId, productType, status, card;
+    private String article, articleId, fullName, productType, status, card;
 
-    public KeyStatus(String article, String articleId, String productType, String status, String card) {
+    public KeyStatus(String article, String articleId, String fullName, String productType, String status, String card) {
         this.article = article;
         this.articleId = articleId;
+        this.fullName = fullName;
         this.productType = productType;
         this.status = status;
         this.card = card;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public KeyStatus() {
