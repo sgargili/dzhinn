@@ -223,7 +223,7 @@ var value4export = {
                         margin: '50px auto'
                     },
                     
-                    bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                    bodyStyle: 'padding:7px; border: 1px solid #B7C8D7; background-color:#E1E1E1;',
                    
                     items: [{
                         xtype: 'checkbox',
@@ -335,7 +335,7 @@ var value4export = {
                         marginTop: '80px'
                     },
                     xtype: 'buttongroup',
-                    bodyStyle: 'padding:1px; border:0px; background-color:#E1E1E1;',
+                    bodyStyle: 'padding:1px; border:0; background-color:#E1E1E1;',
                     items: [{
                         text: '<<<Запуск>>>',
                         id:'expMarkBtn',
@@ -497,7 +497,7 @@ var value4ovnerstatus = {
                     style: {
                         margin: '50px auto'
                     },
-                    bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                    bodyStyle: 'padding:7px; border: 1px solid #B7C8D7; background-color:#E1E1E1;',
 
                     items: [combo,{
                         xtype: 'button',
@@ -563,7 +563,7 @@ var value4ovnerstatus = {
                     style: {
                         margin: '46px auto'
                     },
-                    bodyStyle: 'padding:7px; border:0; background-color:#E1E1E1;',
+                    bodyStyle: 'padding:7px; border: 1px solid #B7C8D7; background-color:#E1E1E1;',
 
                     items: [{
                         xtype: 'radiogroup',
