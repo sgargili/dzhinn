@@ -452,8 +452,44 @@ var echat = {
     },
     items:[{
         title: 'Типа чат...',
-        contentEl: 'chat_id',
-        autoScroll: true
+        //contentEl: 'chat_id',
+
+        autoScroll: true,
+        items:[{
+            layout:'column',
+            bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
+            items: [{
+                xtype: 'textfield',
+                width: 650,
+                height:25,
+                id:'chatData',
+                fieldLabel: 'First Name',
+                name: 'first',
+                allowBlank:false
+
+            },{
+                xtype: 'button',
+                text: '<<<Отправить>>>',
+                id:'chatBtn',
+                style: {
+                    marginLeft: '10px'
+                    //marginTop: '10px'
+                },
+                listeners: {
+                    click: function() {
+                    //alert(Ext.getCmp('radioData').getValue().getGroupValue());
+                    //changeStatus(Ext.getCmp('changeStatArt').getValue(), Ext.getCmp('radioData').getValue().getGroupValue(), Ext.getCmp('changeStatBtn'));
+                    }
+                }
+            }
+            ]
+        },{
+            bodyStyle: 'padding:7px; border: 0; background-color:#e1e8ff;',
+            html: '<br/>'
+        },{
+            bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
+            contentEl: 'chat_id_ul'
+        }]
     }]
 };
 var value4ovnerstatus = {
