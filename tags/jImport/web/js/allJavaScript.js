@@ -104,13 +104,12 @@ function exportMarketing(data, btn){
     });
 }
 
-function addLink(){
-    byId('addLink_button').disabled = true;
+function addLink(data, btn){
+    btn.disable();
     byId('uladdLinkLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    var data = byId('ArticlesAddLink').value;
     Ajax.addLink(data, function(data) {
         byId('uladdLinkLog').innerHTML = data;
-        byId('addLink_button').disabled = false;
+        btn.enable();
     });
 }
 
@@ -639,12 +638,48 @@ var value4link = {
     },
     items:[{
         title: 'Добавление ссылок',
-        contentEl: 'addLink',
+        //contentEl: 'addLink',
         autoScroll: true,
         items:[{
             title: 'Добавление ссылок',
-            contentEl: 'addLinkInput',
-            autoScroll: true
+            //contentEl: 'addLinkInput',
+            autoScroll: true,
+            items:[{
+                layout:'column',
+                width: '100%',
+                height: '100%',
+                bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                buttonAlign: 'center',
+                items: [{
+                    bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
+                    items: [{
+                        xtype: 'textarea',
+                        fieldLabel: 'Message text',
+                        width: 700,
+                        height: 150,
+                        hideLabel: true,
+                        flex: 1,
+                        id:'LinkskArt'
+                    }]
+                },{
+                    style: {
+                        marginTop: '70px'
+                    },
+                    xtype: 'buttongroup',
+                    bodyStyle: 'padding:1px; border:0; background-color:#E1E1E1;',
+                    items: [{
+                        text: '<<<Запуск>>>',
+                        id:'LinksBtn',
+                        listeners: {
+                            click: function() {
+                                addLink(Ext.getCmp('LinkskArt').getValue(), Ext.getCmp('LinksBtn'));
+                            }
+                        }
+                    }
+                    ]
+                }]
+
+            }]
         },{
             items: {
                 id: 'pbarLink',
