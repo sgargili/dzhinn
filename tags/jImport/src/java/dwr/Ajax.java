@@ -97,7 +97,7 @@ public class Ajax {
 
             if (text != null && text.trim().length() > 0) {
                 messages.addLast(new Message(text));
-                while (messages.size() > 30) {
+                while (messages.size() > 37) {
                     messages.removeFirst();
                 }
             }
@@ -127,6 +127,20 @@ public class Ajax {
                 Util.addOptions("chat_id_ul", messages, "text");
             }
         });
+    }
+
+    public String updateNick() {
+        Users userName = null;
+        String output = "Введите ник...";
+        try {
+            userName = new Users();
+            userName = FactoryDAO.getInstance().getUsersDAO().getUserByIp(WebContextFactory.get().getHttpServletRequest().getRemoteAddr());
+            output = userName.getNick();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        userName = null;
+        return output;
     }
 
     public void setCount(int l) {
