@@ -156,20 +156,27 @@ function changeOwner(data, owner, btn){
 function showStatistics(){
     window.open("https://cf.value4it.com/cf/export/stat.jsp","", config="");
 }
-function sendMessage() { 
-    if(dwr.util.getValue("nick_id")==""||dwr.util.getValue("nick_id")=="Введите ник..."||dwr.util.getValue("nick_id")=="60511120540229999"){
+function sendMessage(message, nick) {
+    if(nick==""||nick=="Введите ник..."||nick=="60511120540229999"){
         alert("Введите ник...");
+        Ext.getCmp('chatNick').setValue("");
         return;
     }
-    if(dwr.util.getValue("text")==""){
+    if(message==""||message==" "){
         return;
     }
-    Ajax.addMessage(dwr.util.getValue("nick_id") + ": " + dwr.util.getValue("text"), function(data) {
-        byId("text").value = "";
+    Ajax.addMessage(nick + ": " + message, function(data) {
+        Ext.getCmp('chatData').setValue("");
     });
 }
 function updateMessage() {
     Ajax.updateMessage();
+}
+
+function updateNick() {
+    Ajax.updateNick(function(data) {
+        Ext.getCmp('chatNick').setValue(data);
+    });
 }
 
 var start = {
@@ -459,28 +466,64 @@ var echat = {
             layout:'column',
             bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
             items: [{
+                html:'<h1>Текст:</h1>',
+                style: {
+                    marginTop: '4px',
+                    marginRight: '7px'
+                },
+                bodyStyle: 'border: 0px'
+            },{
                 xtype: 'textfield',
                 width: 650,
                 height:25,
                 id:'chatData',
-                fieldLabel: 'First Name',
-                name: 'first',
-                allowBlank:false
+                blankText:'Введите что-нибудь...',
+                // allowBlank:false,
+                enableKeyEvents:true,
+                style: {
+                    marginTop: '0px'
+                },
+                listeners: {
+                    specialkey: function(something,e){
+                        // e.HOME, e.END, e.PAGE_UP, e.PAGE_DOWN,
+                        // e.TAB, e.ESC, arrow keys: e.LEFT, e.RIGHT, e.UP, e.DOWN
+                        if (e.getKey() == e.ENTER) {
+                            sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+                        }
+                    }
+                }
 
             },{
                 xtype: 'button',
-                text: '<<<Отправить>>>',
-                id:'chatBtn',
+                text: '<<Отправить>>>',
                 style: {
-                    marginLeft: '10px'
-                    //marginTop: '10px'
+                    marginLeft: '7px'
                 },
                 listeners: {
                     click: function() {
-                    //alert(Ext.getCmp('radioData').getValue().getGroupValue());
-                    //changeStatus(Ext.getCmp('changeStatArt').getValue(), Ext.getCmp('radioData').getValue().getGroupValue(), Ext.getCmp('changeStatBtn'));
+                        sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
                     }
                 }
+            },
+            {
+                html:'<h1>Ник:</h1>',
+                style: {
+                    marginTop: '4px',
+                    marginLeft: '7px',
+                    marginRight: '7px'
+                },
+                bodyStyle: 'border: 0px'
+            },{
+                xtype: 'textfield',
+                //                width: 650,
+                height:25,
+                id:'chatNick',
+                blankText:'Введите что-нибудь...',
+                allowBlank:false,
+                style: {
+                    marginTop: '0px'
+                }
+
             }
             ]
         },{
@@ -932,6 +975,7 @@ var RunnerLink = function(){
 Ext.onReady(function(){
     
     updateMessage();
+    updateNick();
 
     Ext.QuickTips.init();
     
