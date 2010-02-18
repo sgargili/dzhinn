@@ -179,10 +179,10 @@ public class Ajax {
         return xmlp.checkProductsStatus();
     }
 
-    public String exportByProducts(String products, boolean ruEnBool) {
+    public String exportByProducts(String products, String langs) {
         ValuePro vp = new ValuePro();
         products = products.trim().replaceAll("(\\n)+|(\\r\\n)+|(\\n\\r)+", "|||");
-        return vp.exportByProducts(products, WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), ruEnBool);
+        return vp.exportByProducts(products, WebContextFactory.get().getHttpServletRequest().getRemoteAddr(), langs);
     }
 
     public String exportMarketing(String products) {

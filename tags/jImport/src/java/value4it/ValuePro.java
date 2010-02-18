@@ -166,8 +166,9 @@ public class ValuePro {
         return out;
     }
 
-    private String export(List articlesData, String ip, boolean isRuEn) {
+    private String export(List articlesData, String ip, String langs) {
         String exportStr = "";
+        String[] languages = splitLangs(langs);
         int varCount = 0;
         NameValuePair[] req;
         ValueArticle va;
@@ -220,62 +221,63 @@ public class ValuePro {
                         }
                         getMethod = new PostMethod(url);
 //                        i = 0;
-                        if (isRuEn) {
-                            // Тупняк... Если, типа, итерация последняя, то количество зависит от остатка...
+//                        if (isRuEn) {
+                        // Тупняк... Если, типа, итерация последняя, то количество зависит от остатка...
 //                            if (j != n - 1) {
 //                                req = new NameValuePair[17];
 //                            } else {
 //                                req = new NameValuePair[7 + ost];
 //                            }
-                            req = new NameValuePair[8];
-                            req[0] = new NameValuePair("referer", "");
-                            req[1] = new NameValuePair("FACTORY_ID", "137");
-                            req[2] = new NameValuePair("ACTION", "EXPORT");
-                            req[3] = new NameValuePair("PN_RPP", "100");
-                            req[4] = new NameValuePair("LANGS", "");
-                            req[5] = new NameValuePair("LANG", "en");
-                            req[6] = new NameValuePair("LANG", "ru");
-                            varCount = 7;
-                            //for (int l = j * 10; l < (j + 1) * 10; l++) {
-                            try {
-                                va = (ValueArticle) it.next();
-                                req[7] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                                // System.out.println("Прошло!!! -> " + va.getArticleId());
+                        req = new NameValuePair[6 + languages.length];
+                        req[0] = new NameValuePair("referer", "");
+                        req[1] = new NameValuePair("FACTORY_ID", "137");
+                        req[2] = new NameValuePair("ACTION", "EXPORT");
+                        req[3] = new NameValuePair("PN_RPP", "100");
+                        req[4] = new NameValuePair("LANGS", "");
+                        varCount = 5 + languages.length;
+                        //for (int l = j * 10; l < (j + 1) * 10; l++) {
+                        try {
+                            va = (ValueArticle) it.next();
+                            req[5] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                            // System.out.println("Прошло!!! -> " + va.getArticleId());
                             } catch (Exception ex) {
-                            }
-                            //  }
-
-                        } else {
-//                            if (ost == 0) {
-//                                req = new NameValuePair[21];
-//                            } else {
-//                                req = new NameValuePair[11 + ost];
-//                            }
-                            req = new NameValuePair[12];
-                            req[0] = new NameValuePair("referer", "");
-                            req[1] = new NameValuePair("FACTORY_ID", "137");
-                            req[2] = new NameValuePair("ACTION", "EXPORT");
-                            req[3] = new NameValuePair("PN_RPP", "100");
-                            req[4] = new NameValuePair("LANGS", "");
-                            req[5] = new NameValuePair("LANG", "bg");
-                            req[6] = new NameValuePair("LANG", "hr");
-                            req[7] = new NameValuePair("LANG", "en");
-                            req[8] = new NameValuePair("LANG", "pl");
-                            req[9] = new NameValuePair("LANG", "ru");
-                            req[10] = new NameValuePair("LANG", "sl");
-                            varCount = 11;
-                            //for (int l = j * 10; l < (j + 1) * 10; l++) {
-                            try {
-                                va = (ValueArticle) it.next();
-                                req[11] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                            } catch (Exception ex) {
-                            }
-                            //}
                         }
-//                        getMethod.setRequestBody(req);
-//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-//                        client.executeMethod(getMethod);
-//                        getMethod.releaseConnection();
+                        for (int j = 0; j < languages.length; j++) {
+                            req[6 + j] = new NameValuePair("LANG", languages[j]);
+                        }
+                        //  }
+
+//                        } else {
+////                            if (ost == 0) {
+////                                req = new NameValuePair[21];
+////                            } else {
+////                                req = new NameValuePair[11 + ost];
+////                            }
+//                            req = new NameValuePair[12];
+//                            req[0] = new NameValuePair("referer", "");
+//                            req[1] = new NameValuePair("FACTORY_ID", "137");
+//                            req[2] = new NameValuePair("ACTION", "EXPORT");
+//                            req[3] = new NameValuePair("PN_RPP", "100");
+//                            req[4] = new NameValuePair("LANGS", "");
+//                            req[5] = new NameValuePair("LANG", "bg");
+//                            req[6] = new NameValuePair("LANG", "hr");
+//                            req[7] = new NameValuePair("LANG", "en");
+//                            req[8] = new NameValuePair("LANG", "pl");
+//                            req[9] = new NameValuePair("LANG", "ru");
+//                            req[10] = new NameValuePair("LANG", "sl");
+//                            varCount = 11;
+//                            //for (int l = j * 10; l < (j + 1) * 10; l++) {
+//                            try {
+//                                va = (ValueArticle) it.next();
+//                                req[11] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+//                            } catch (Exception ex) {
+//                            }
+//                            //}
+//                        }
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+                        client.executeMethod(getMethod);
+                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -771,6 +773,15 @@ public class ValuePro {
         return outputStringArray;
     }
 
+    private String[] splitLangs(String inputString) {
+        String[] outputStringArray = null;
+        String splitPattern = ",";
+        if (!inputString.equals("")) {
+            outputStringArray = inputString.split(splitPattern);
+        }
+        return outputStringArray;
+    }
+
     public boolean isArticle(String article) {
         Pattern p = Pattern.compile("\\d{17,18}");
         Matcher m = p.matcher(article);
@@ -1020,7 +1031,7 @@ public class ValuePro {
         return out;
     }
 
-    public String exportByProducts(String products, String ip, boolean ruEnBool) {
+    public String exportByProducts(String products, String ip, String langs) {
         if (products == null || products.equals("")) {
             return "Введите Articles или ArticlesId...";
         }
@@ -1044,7 +1055,7 @@ public class ValuePro {
             } else {
                 return "Введите однотипные данные, либо только Articles, либо ArticlesId...";
             }
-            out = export(data, ip, ruEnBool);
+            out = export(data, ip, langs);
         } catch (Exception ex) {
             out = ex.getMessage();
         }
