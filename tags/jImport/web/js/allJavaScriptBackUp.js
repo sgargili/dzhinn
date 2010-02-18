@@ -9,7 +9,7 @@ function byId(id){
     return Ext.getDom(id);
 }
 
-var storeOwners = new Ext.data.Store({
+var store = new Ext.data.Store({
     url: 'data/Owners.xml',
     reader: new Ext.data.XmlReader({
         record: 'Owner',
@@ -25,8 +25,8 @@ var storeOwners = new Ext.data.Store({
     ])
 });
 
-var comboOwner = new Ext.form.ComboBox({
-    store: storeOwners,
+var combo = new Ext.form.ComboBox({
+    store: store,
     displayField:'owner',
     valueField: 'id',
     typeAhead: true,
@@ -39,68 +39,6 @@ var comboOwner = new Ext.form.ComboBox({
         margin: '0px'
     },
     width:200
-});
-
-var storeLanguages = new Ext.data.Store({
-    url: 'data/Languages.xml',
-    reader: new Ext.data.XmlReader({
-        record: 'Language',
-        id: 'Value'
-    }, [
-    {
-        name: 'lang',
-        mapping: 'Name'
-    }, {
-        name:'value',
-        mapping:'Value'
-    }
-    ])
-});
-
-var comboLanguages = new Ext.ux.form.MultiSelect({
-    name: 'multiselect',
-    width: 250,
-    height: 200,
-    allowBlank:false,
-    //autoScroll: true,
-    displayField:'lang',
-    valueField: 'value',
-    blankText:'Выберите язык!',
-    style:{
-        marginBottom: '10px'
-    },
-    store: storeLanguages,
-    tbar:[{
-        text: 'Clear',
-        handler: function(){
-            comboLanguages.reset();
-        }
-    },{
-        text: 'Ru/En only',
-        handler: function(){
-            comboLanguages.setValue('ru,en');
-        }
-    },{
-        text: 'En only',
-        handler: function(){
-            comboLanguages.setValue('en');
-        }
-    },{
-        text: 'Default',
-        handler: function(){
-            comboLanguages.setValue('ru,en,bg,pl,hr,sl');
-        }
-    //    },{
-    //        text:'Посмареть',
-    //        handler: function(){
-    //            if(comboLanguages.isValid()){
-    //                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-    //                    comboLanguages.getValue());
-    //            }
-    //        }
-    }],
-    ddReorder: true
-
 });
 
 function UploadeCsv(){
@@ -135,13 +73,12 @@ function FixProfitCsv(){
 }
 
 
-function exportByProduct(data, langs, btn){
+function exportByProduct(data, ruEnBool, btn){
     btn.disable();
     byId('ulexpProdLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
-    Ajax.exportByProducts(data, langs, function(data) {
+    Ajax.exportByProducts(data, ruEnBool, function(data) {
         byId('ulexpProdLog').innerHTML = data;
         btn.enable();
-        comboLanguages.reset();
     });
 }
 
@@ -247,18 +184,17 @@ var value4export = {
     },
     items:[{
         title: 'Экспорт по продукту',
-        //autoScroll: true,
+        autoScroll: true,
         items:[{
             title: 'Экспорт',
             autoScroll: true,
-            //            defaults: {
-            //                bodyStyle: 'background-color:#e1e8ff;'
-            //            },
-            items: [
-            {
+            defaults: {
+                bodyStyle: 'background-color:#e1e8ff;'
+            },
+            items: [{
                 layout:'column',
-                //                width: '100%',
-                //                height: '100%',
+                width: '100%',
+                height: '100%',
                 bodyStyle: 'padding:10px; border:0; background-color:#E1E1E1;',
                 buttonAlign: 'center',
                 items: [{
@@ -275,21 +211,19 @@ var value4export = {
                     }]
                 },{
                     style: {
-                        margin: '7px auto'
+                        margin: '50px auto'
                     },
                     
                     bodyStyle: 'padding:7px; border: 1px solid #B7C8D7; background-color:#E1E1E1;',
                    
-                    items: [
-                    //                        {
-                    //                        xtype: 'checkbox',
-                    //                        style: {
-                    //                            marginLeft: '100px'
-                    //                        },
-                    //                        boxLabel: 'ru/en language only...',
-                    //                        id:'toogleBtn'
-                    //                    }
-                    comboLanguages,{
+                    items: [{
+                        xtype: 'checkbox',
+                        style: {
+                            marginLeft: '100px'
+                        },
+                        boxLabel: 'ru/en language only...',
+                        id:'toogleBtn'
+                    }, {
                         xtype: 'buttongroup',
                         rowspan: 3,
                         columns: 3,
@@ -310,13 +244,10 @@ var value4export = {
                                         buttons: Ext.Msg.YESNO,
                                         fn: function(btn){
                                             if (btn == 'yes'){
-                                                //                                                if(Ext.getCmp('toogleBtn').checked){
-                                                //                                                    exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
-                                                //                                                } else{
-                                                //                                                    exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
-                                                //                                                }
-                                                if(comboLanguages.isValid()){
-                                                    exportByProduct(Ext.getCmp('expArt').getValue(), comboLanguages.getValue(), Ext.getCmp('expProdBtn'));
+                                                if(Ext.getCmp('toogleBtn').checked){
+                                                    exportByProduct(Ext.getCmp('expArt').getValue(), true, Ext.getCmp('expProdBtn'));
+                                                } else{
+                                                    exportByProduct(Ext.getCmp('expArt').getValue(), false, Ext.getCmp('expProdBtn'));
                                                 }
                                             }
                                         },
@@ -559,10 +490,7 @@ var value4ovnerstatus = {
                     },
                     bodyStyle: 'padding:7px; border: 1px solid #B7C8D7; background-color:#E1E1E1;',
 
-                    items: [
-                    comboOwner,
-                    
-                    {
+                    items: [combo,{
                         xtype: 'button',
                         text: '<<<Запуск>>>',
                         id:'changeOwnBtn',
@@ -571,7 +499,7 @@ var value4ovnerstatus = {
                         },
                         listeners: {
                             click: function() {
-                                changeOwner(Ext.getCmp('changeOwnArt').getValue(), comboOwner.value, Ext.getCmp('changeOwnBtn'));
+                                changeOwner(Ext.getCmp('changeOwnArt').getValue(), combo.value, Ext.getCmp('changeOwnBtn'));
                             }
                         }
                     }
@@ -878,7 +806,7 @@ Ext.onReady(function(){
     
     updateMessage();
     updateNick();
-    storeLanguages.load();
+
     Ext.QuickTips.init();
     
     var detailEl;

@@ -15,10 +15,12 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
-        <link rel="stylesheet" type="text/css" href="css/bubble.css"/>
+        <%--<link rel="stylesheet" type="text/css" href="css/bubble.css"/>--%>
+        <link rel="stylesheet" type="text/css" href="css/MultiSelect.css"/>
         <%--<script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>--%>
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
+        <script type="text/javascript" src="js/ux-all.js"></script>
         <script type='text/javascript' src='js/allJavaScript.js'> </script>
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>
@@ -39,8 +41,6 @@
                 </tr>
             </table>
         </div>
-        <div dojoType="dojo.data.ItemFileReadStore" jsId="stateStore" url="data/owners.json">
-        </div>
         <div style="display:none;">
             <div id="start-div" style="background-color:#e1e8ff; width:100%; height:100%">
                 <div style="padding:50px; font-size:large; color:#000">
@@ -48,274 +48,36 @@
                 </div>
                 <%--<img style="position:absolute; top:20%; left:20%" src="images/vovka.jpg"/>--%>
             </div>
-            <div id="expByProd">
-                <div id="expByProdInput">
-                    <%--<h1 style="color:orange">Экспорт</h1>--%>
-                    <table id="expProdTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px"> 
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <textarea id='Articles' style='width:350px; height:150px;'></textarea>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
-                                                    <td>
-                                                        <center>
-                                                            <table cellspacing='7' cellpadding='0'>
-                                                                <tr>
-                                                                    <td>
-                                                                        <input id='ruEnOnly' dojoType='dijit.form.CheckBox'/>
-                                                                    </td>
-                                                                    <td>
-                                                                        <label for="ruEnOnly">ru/en language only...</label>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                            <button id="products_importByArticle_button" dojoType="dijit.form.Button">
-                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                                            </button>
-                                                            <button id="cache_button" dojoType="dijit.form.Button" onclick="clearCache()">
-                                                                &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
-                                                            </button>
-                                                            <button id="statistics_button" dojoType="dijit.form.Button" onclick="showStatistics()">
-                                                                &lt;&lt;&lt;Статистика&gt;&gt;&gt;
-                                                            </button>
-                                                        </center>
-                                                        <%--<div id="tableTT">222</div>--%>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+            <div id="expProdLogs" style="background-color: #e1e1e1;">
+                <br/>
+                <div id="ulexpProdLog" style="min-height:350px">
                 </div>
                 <br/>
-                <div id="expProdLogs" style="background-color: #e1e1e1;">
-                    <br/>
-                    <div id="ulexpProdLog" style="min-height:350px">
-                    </div>
-                    <br/>
-                </div>
             </div>
-            <div id="expMark">
-                <div id="expMarkInput">
-                    <%--<h1 style="color:orange">Экспорт маркетинга</h1>--%>
-                    <table id="expMarkTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <textarea id='ArticlesExpMark' style='width:350px; height:150px'></textarea>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
-                                                    <td>
-                                                        <center>
-                                                            <button id="products_importMark_button" dojoType="dijit.form.Button" onclick="exportMarketing()">
-                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                                            </button>
-                                                            <button id="cache_Mark_button" dojoType="dijit.form.Button" onclick="clearCacheMark()">
-                                                                &lt;&lt;&lt;Почистить кэш&gt;&gt;&gt;
-                                                            </button>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+            <div id="expMarkLogs" style="background-color: #e1e1e1">
+                <br/>
+                <div id="ulexpMarkLog" style="min-height:350px">
                 </div>
                 <br/>
-                <div id="expMarkLogs" style="background-color: #e1e1e1">
-                    <br/>
-                    <div id="ulexpMarkLog" style="min-height:350px">
-                    </div>
-                    <br/>
-                </div>
             </div>
-            <div id="chat_id">
-                <div dojoType="dijit.TooltipDialog" id="AllDialog_chat_id">
-                    <p>
-                        Текст:
-                        <input id="text" onkeypress="dwr.util.onReturn(event, sendMessage)" style="width:550px"/>
-                        <input id="chat_btn" type="button" value="Send" onclick="sendMessage()"/>
-                        Ник:
-                        <input id="nick_id" value="<% try {
-                out.print(user.getNick());
-            } catch (Exception ex) {
-                out.print("Введите ник...");
-            }%>"/>
-                    </p>
+            <ul id="chat_id_ul" style="list-style-type:none;min-height:490px">Типа чат...</ul>
+            <div id="statusChangeLogs" style="background-color: #e1e1e1">
+                <br/>
+                <div id="ulstatusChangeLog" style="min-height:350px">
                 </div>
                 <br/>
-                <div id="chat_id_log">
-                    <ul id="chat_id_ul" style="list-style-type:none;min-height:490px">Типа чат...</ul>
-                </div>
             </div>
-            <div id="statusChange">
-                <div id="statusChangeInput">
-                    <table id="statusChangeTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <textarea id='ArticlesStatusChange' style='width:350px; height:150px'></textarea>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
-                                                    <td>
-                                                        <table cellspacing='7' cellpadding='0'>
-                                                            <tr>
-                                                                <td>
-                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusOne" checked value="Research" />
-                                                                    <label for="statusOne">
-                                                                        Research
-                                                                    </label>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusTwo"
-                                                                           value="Control" />
-                                                                    <label for="statusTwo">
-                                                                        Control
-                                                                    </label>
-                                                                </td>
-                                                                <td>
-                                                                    <input type="radio" dojoType="dijit.form.RadioButton" name="status" id="statusThree"
-                                                                           value="Done" />
-                                                                    <label for="statusThree">
-                                                                        Done
-                                                                    </label>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <center>
-                                                            <button id="statusChange_button" dojoType="dijit.form.Button" onclick="changeStatus()">
-                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                                            </button>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+            <div id="ownerChangeLogs" style="background-color: #e1e1e1">
+                <br/>
+                <div id="ulownerChangeLog" style="min-height:350px">
                 </div>
                 <br/>
-                <div id="statusChangeLogs" style="background-color: #e1e1e1">
-                    <br/>
-                    <div id="ulstatusChangeLog" style="min-height:350px">
-                    </div>
-                    <br/>
-                </div>
             </div>
-            <div id="ownerChange">
-                <div id="ownerChangeInput">
-                    <table id="ownerChangeTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <textarea id='ArticlesOwnerChange' style='width:350px; height:150px'></textarea>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
-                                                    <td>
-                                                        <table cellspacing='7' cellpadding='0'>
-                                                            <tr>
-                                                                <td>
-                                                                    <input dojoType="dijit.form.FilteringSelect" store="stateStore" value="60511120540229999"
-                                                                           searchAttr="name" id="owner"/>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <center>
-                                                            <button id="ownerChange_button" dojoType="dijit.form.Button" onclick="changeOwner()">
-                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                                            </button>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
+            <div id="addLinkLogs" style="background-color: #e1e1e1">
+                <br/>
+                <div id="uladdLinkLog" style="min-height:350px">
                 </div>
                 <br/>
-                <div id="ownerChangeLogs" style="background-color: #e1e1e1">
-                    <br/>
-                    <div id="ulownerChangeLog" style="min-height:350px">
-                    </div>
-                    <br/>
-                </div>
-            </div>
-            <div id="addLink">
-                <div id="addLinkInput">
-                    <%--<h1 style="color:orange">Добавление ссылок. Вводить только артикли, айдишники артиклей не пройдут...</h1>--%>
-                    <table id="addLinkTable" bgcolor=black cellspacing='0' cellpadding='0' border='0' width='100%'>
-                        <tr bgcolor = #e1e1e1 align=left>
-                            <td style="padding:7px">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <textarea id='ArticlesAddLink' style='width:700px; height:150px'></textarea>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                            <table bgcolor=black cellspacing='1' cellpadding='1' border='0' width='100%'>
-                                                <tr bgcolor = #cfcdcd align=left>
-                                                    <td>
-                                                        <center>
-                                                            <button id="addLink_button" dojoType="dijit.form.Button" onclick="addLink()">
-                                                                &lt;&lt;&lt;Запуск&gt;&gt;&gt;
-                                                            </button>
-                                                        </center>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <br/>
-                <div id="addLinkLogs" style="background-color: #e1e1e1">
-                    <br/>
-                    <div id="uladdLinkLog" style="min-height:350px">
-                    </div>
-                    <br/>
-                </div>
             </div>
             <div id="optSes">
                 <div id="optSesInput">
