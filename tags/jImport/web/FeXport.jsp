@@ -1,15 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="DAO.FactoryDAO"%>
+<%--<%@page import="DAO.FactoryDAO"%>
 <%@page import="Pojo.Users"%>
 <%
             Users user;
             user = FactoryDAO.getInstance().getUsersDAO().getUserByIp(request.getRemoteHost());
-%>
+%>--%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
-        <%--<meta http-equiv="X-UA-Compatible" content="IE=7" />--%>
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Some Java Tools. (v.2.1)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
@@ -27,7 +27,7 @@
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
         <%--<link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>--%>
-        <%--<script src="js/IE82.js" type="text/javascript"></script>--%>
+        <%--<script src="js/IE8.js" type="text/javascript"></script>--%>
     </head>
     <body onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">

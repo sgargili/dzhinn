@@ -71,21 +71,6 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
     },
     store: storeLanguages,
     tbar:[{
-        text: 'Clear',
-        handler: function(){
-            comboLanguages.reset();
-        }
-    },{
-        text: 'Ru/En only',
-        handler: function(){
-            comboLanguages.setValue('ru,en');
-        }
-    },{
-        text: 'En only',
-        handler: function(){
-            comboLanguages.setValue('en');
-        }
-    },{
         text: 'Default',
         handler: function(){
             comboLanguages.setValue('ru,en,bg,pl,hr,sl');
@@ -98,6 +83,21 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
     //                    comboLanguages.getValue());
     //            }
     //        }
+    },{
+        text: 'Ru/En only',
+        handler: function(){
+            comboLanguages.setValue('ru,en');
+        }
+    },{
+        text: 'En only',
+        handler: function(){
+            comboLanguages.setValue('en');
+        }
+    },{
+        text: 'Clear',
+        handler: function(){
+            comboLanguages.reset();
+        }
     }],
     ddReorder: true
 
@@ -985,4 +985,5 @@ Ext.onReady(function(){
         ],
         renderTo: Ext.getBody()
     });
+    comboLanguages.setValue('ru,en,bg,pl,hr,sl');
 });
