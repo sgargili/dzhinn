@@ -16,12 +16,19 @@ import org.directwebremoting.Browser;
 import Pojo.ChatLogs;
 import Pojo.IpCount;
 import Pojo.Users;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.apache.commons.io.FileUtils;
 import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.ui.dwr.Util;
 import org.directwebremoting.ScriptSession;
+import org.directwebremoting.io.FileTransfer;
+import value4it.MatchingData;
 import value4it.ValuePro;
 
 /**
@@ -217,5 +224,29 @@ public class Ajax {
     public String clearSession() {
         ValuePro vp = new ValuePro();
         return vp.clearSession();
+    }
+
+    public FileTransfer matchData(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)|(\\.xlsx)|(\\.xls)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return null;
+        }
+
+        MatchingData match = new MatchingData();
+
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+        p = Pattern.compile("\\.csv");
+        m = p.matcher(fileName);
+        if (m.find()) {
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, fileName, MatchingData.CSV)));
+        } else {
+            fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xlsx", "$2");
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, fileName, MatchingData.EXCEL)));
+        }
+        
+        return new FileTransfer(fileName + ".xlsx", "application/vnd.ms-excel", buffer.toByteArray());
     }
 }

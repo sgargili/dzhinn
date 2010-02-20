@@ -274,10 +274,10 @@ public class ValuePro {
 //                            }
 //                            //}
 //                        }
-                        getMethod.setRequestBody(req);
-                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-                        client.executeMethod(getMethod);
-                        getMethod.releaseConnection();
+//                        getMethod.setRequestBody(req);
+//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+//                        client.executeMethod(getMethod);
+//                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
