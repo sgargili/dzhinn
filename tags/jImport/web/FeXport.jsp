@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
-        <%--<link rel="stylesheet" type="text/css" href="css/bubble.css"/>--%>
+        <link rel="stylesheet" type="text/css" href="css/FileUpload.css"/>
         <link rel="stylesheet" type="text/css" href="css/MultiSelect.css"/>
         <%--<script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>--%>
         <script type="text/javascript" src="js/ext-base.js"></script>
@@ -230,6 +230,9 @@
             </div>
             <div id="eChat-details">
                 <div class="details-info"><b>Простенький Ajax чат</b>...</div>
+            </div>
+            <div id="eRow-details">
+                <div class="details-info"><b>Сравнение столбцов на наличие данных из одного в другом</b>... Формат - файл: вход(<b>Excel(.xls, .xlsx)</b>, <b>текст(.csv)</b>), выход(<b>Excel(.xlsx)</b>); кодировка: текстового файла <b>Windows-1251(ANSI)</b>; данные: вход(<b>два столбца, первый ищем во втором</b>), выход(<b>три столбца, первые два как и у входного файла, третий отражение наличия первого во втором в виде 0 и 1</b>). </div>
             </div>
         </div>
     </body>

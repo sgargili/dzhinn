@@ -28,6 +28,10 @@
         text:'XLS,CSV(Excel) -> CSV',
         id:'eCsv',
         leaf:true
+    },{
+        text:'Сравнение данных',
+        id:'eRow',
+        leaf:true
     }]
 },{
     text:'Если делать нечего',

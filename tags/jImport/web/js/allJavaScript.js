@@ -121,6 +121,13 @@ function UploadeCsv(){
     });
 }
 
+//function matchData(file, filename){
+//    Ajax.matchData(file, filename, function(data) {
+//        dwr.engine.openInDownload(data);
+//    });
+//
+//}
+
 function FixProfitCsv(){
     var fileName = byId('uploadit4profitCsv').value;
     var file = dwr.util.getValue('uploadit4profitCsv');
@@ -228,6 +235,90 @@ function updateNick() {
         Ext.getCmp('chatNick').setValue(data);
     });
 }
+function updateProd(allCount, count){
+    RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            Ext.getCmp('pbarProd').reset();
+            Ext.getCmp('pbarProd').updateText("Ready to Export");
+        }
+    }, 500);
+}
+var RunnerProd = function(){
+    return {
+        run : function(pbarProd, allCount, count){
+            pbarProd.updateProgress(count/allCount, 'Export ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateMark(allCount, count){
+    RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            Ext.getCmp('pbarMark').reset();
+            Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
+        }
+    }, 500);
+}
+var RunnerMar = function(){
+    return {
+        run : function(pbarMar, allCount, count){
+            pbarMar.updateProgress(count/allCount, 'Export Marketing ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateStat(allCount, count){
+    RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            Ext.getCmp('pbarStat').reset();
+            Ext.getCmp('pbarStat').updateText("Ready to change Status");
+        }
+    }, 500);
+}
+var RunnerStat = function(){
+    return {
+        run : function(pbarStat, allCount, count){
+            pbarStat.updateProgress(count/allCount, 'Change Status ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateOwn(allCount, count){
+    RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            Ext.getCmp('pbarOwn').reset();
+            Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
+        }
+    }, 500);
+}
+var RunnerOwn = function(){
+    return {
+        run : function(pbarOwn, allCount, count){
+            pbarOwn.updateProgress(count/allCount, 'Change Owner ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
+
+function updateLink(allCount, count){
+    RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            Ext.getCmp('pbarLink').reset();
+            Ext.getCmp('pbarLink').updateText("Ready to add Link");
+        }
+    }, 500);
+}
+var RunnerLink = function(){
+    return {
+        run : function(pbarLink, allCount, count){
+            pbarLink.updateProgress(count/allCount, 'Add Link ' + count + ' in '+allCount+'...');
+        }
+    }
+}();
 
 var start = {
     id: 'start-panel',
@@ -785,93 +876,76 @@ var ecsv = {
     contentEl: 'eCsv'
 };
 
-
-function updateProd(allCount, count){
-    RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
-    setTimeout(function(){
-        if(allCount==count){
-            Ext.getCmp('pbarProd').reset();
-            Ext.getCmp('pbarProd').updateText("Ready to Export");
-        }
-    }, 500);
-}
-var RunnerProd = function(){
-    return {
-        run : function(pbarProd, allCount, count){
-            pbarProd.updateProgress(count/allCount, 'Export ' + count + ' in '+allCount+'...');
-        }
-    }
-}();
-
-function updateMark(allCount, count){
-    RunnerMar.run(Ext.getCmp('pbarMark'), allCount, count);
-    setTimeout(function(){
-        if(allCount==count){
-            Ext.getCmp('pbarMark').reset();
-            Ext.getCmp('pbarMark').updateText("Ready to Export Marketing");
-        }
-    }, 500);
-}
-var RunnerMar = function(){
-    return {
-        run : function(pbarMar, allCount, count){
-            pbarMar.updateProgress(count/allCount, 'Export Marketing ' + count + ' in '+allCount+'...');
-        }
-    }
-}();
-
-function updateStat(allCount, count){
-    RunnerStat.run(Ext.getCmp('pbarStat'), allCount, count);
-    setTimeout(function(){
-        if(allCount==count){
-            Ext.getCmp('pbarStat').reset();
-            Ext.getCmp('pbarStat').updateText("Ready to change Status");
-        }
-    }, 500);
-}
-var RunnerStat = function(){
-    return {
-        run : function(pbarStat, allCount, count){
-            pbarStat.updateProgress(count/allCount, 'Change Status ' + count + ' in '+allCount+'...');
-        }
-    }
-}();
-
-function updateOwn(allCount, count){
-    RunnerOwn.run(Ext.getCmp('pbarOwn'), allCount, count);
-    setTimeout(function(){
-        if(allCount==count){
-            Ext.getCmp('pbarOwn').reset();
-            Ext.getCmp('pbarOwn').updateText("Ready to change Owner");
-        }
-    }, 500);
-}
-var RunnerOwn = function(){
-    return {
-        run : function(pbarOwn, allCount, count){
-            pbarOwn.updateProgress(count/allCount, 'Change Owner ' + count + ' in '+allCount+'...');
-        }
-    }
-}();
-
-function updateLink(allCount, count){
-    RunnerLink.run(Ext.getCmp('pbarLink'), allCount, count);
-    setTimeout(function(){
-        if(allCount==count){
-            Ext.getCmp('pbarLink').reset();
-            Ext.getCmp('pbarLink').updateText("Ready to add Link");
-        }
-    }, 500);
-}
-var RunnerLink = function(){
-    return {
-        run : function(pbarLink, allCount, count){
-            pbarLink.updateProgress(count/allCount, 'Add Link ' + count + ' in '+allCount+'...');
-        }
-    }
-}();
-
-
+var erow = {
+    xtype: 'tabpanel',
+    id: 'eRow-panel',
+    plain: true,
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:100%; height:100%'
+    },
+    items:[{
+        title: 'Сравнение данных',
+        autoScroll: true,
+        items:[{
+            title: 'Сравнение столбцов',
+            autoScroll: true,
+            bodyStyle: 'padding:7px; background-color:#e1e8ff',
+            layout:'column',
+            items:[{
+                xtype: 'fileuploadfield',
+                width:350,
+                style:{
+                    width:'350px'
+                },
+                id: 'matchFile',
+                emptyText: 'Выберите файл',
+                fieldLabel: 'Файл',
+                // name: 'photo-path',
+                buttonText: 'Выбрать'
+            //        buttonCfg: {
+            //            iconCls: 'upload-icon'
+            //        }
+            },{
+                xtype: 'button',
+                text: '<<<Запуск>>>',
+                id:'changeStatBtn',
+                style: {
+                    marginLeft: '5px'
+                },
+                listeners: {
+                    click: function() {
+                        var file = dwr.util.getValue('matchFile-file');
+                        Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
+                            dwr.engine.openInDownload(data);
+                        });
+//                        alert(Ext.getCmp('matchFile').getValue());
+//                        matchData(Ext.getCmp('matchFile'), Ext.getCmp('matchFile').getValue());
+                    }
+                }
+            }]
+        }]
+    }]
+//    id: 'eRow-panel',
+//    title: 'Сравнение столбцов',
+//    layout: 'column',
+//    bodyStyle: 'padding:17px; background-color:#e1e8ff; width:100%; height:100%',
+//    items:[{
+//        xtype: 'fileuploadfield',
+//        width:350,
+//        style:{
+//            width:'350px'
+//        },
+//        id: 'form-file',
+//        emptyText: 'Выберите файл',
+//        fieldLabel: 'Файл',
+//        name: 'photo-path',
+//        buttonText: 'Выбрать'
+//    //        buttonCfg: {
+//    //            iconCls: 'upload-icon'
+//    //        }
+//    }]
+};
 
 
 Ext.onReady(function(){
@@ -898,7 +972,8 @@ Ext.onReady(function(){
         value4ovnerstatus,
         value4link,
         osession,
-        ecsv
+        ecsv,
+        erow
         ]
     };
 
