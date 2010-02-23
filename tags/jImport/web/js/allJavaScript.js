@@ -9,6 +9,16 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+var map = new Ext.KeyMap(Ext.getBody(), [
+ {
+    key: 13,
+    ctrl:true,
+    fn: function(){
+        alert('Control + shift + tab was pressed.');
+    }
+}
+]);
+
 var storeOwners = new Ext.data.Store({
     url: 'data/Owners.xml',
     reader: new Ext.data.XmlReader({
@@ -65,6 +75,8 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
     //autoScroll: true,
     displayField:'lang',
     valueField: 'value',
+    minSelections:1,
+    minSelectionsText:'Нужно выбрать хотя бы {1} язык!',
     blankText:'Выберите язык!',
     style:{
         marginBottom: '10px'
@@ -75,14 +87,14 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
         handler: function(){
             comboLanguages.setValue('ru,en,bg,pl,hr,sl');
         }
-    //    },{
-    //        text:'Посмареть',
-    //        handler: function(){
-    //            if(comboLanguages.isValid()){
-    //                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-    //                    comboLanguages.getValue());
-    //            }
-    //        }
+    },{
+        text:'Посмареть',
+        handler: function(){
+            if(comboLanguages.isValid()){
+                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+                    comboLanguages.getValue());
+            }
+        }
     },{
         text: 'Ru/En only',
         handler: function(){
@@ -542,51 +554,18 @@ var echat = {
         title: 'Типа чат...',
         autoScroll: true,
         items:[{
+            bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
+            contentEl: 'chat_id_ul'
+        },{
+            bodyStyle: 'padding:7px; border: 0; background-color:#e1e8ff;',
+            html: '<br/>'
+        },{
             layout:'column',
             bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
             items: [{
-                html:'<h1>Текст:</h1>',
-                style: {
-                    marginTop: '4px',
-                    marginRight: '7px'
-                },
-                bodyStyle: 'border: 0px'
-            },{
-                xtype: 'textfield',
-                width: 650,
-                height:25,
-                id:'chatData',
-                blankText:'Введите что-нибудь...',
-                // allowBlank:false,
-                enableKeyEvents:true,
-                style: {
-                    marginTop: '0px'
-                },
-                listeners: {
-                    specialkey: function(something,e){
-                        if (e.getKey() == e.ENTER) {
-                            sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
-                        }
-                    }
-                }
-
-            },{
-                xtype: 'button',
-                text: '<<Отправить>>>',
-                style: {
-                    marginLeft: '7px'
-                },
-                listeners: {
-                    click: function() {
-                        sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
-                    }
-                }
-            },
-            {
                 html:'<h1>Ник:</h1>',
                 style: {
                     marginTop: '4px',
-                    marginLeft: '7px',
                     marginRight: '7px'
                 },
                 bodyStyle: 'border: 0px'
@@ -597,17 +576,48 @@ var echat = {
                 blankText:'Введите что-нибудь...',
                 allowBlank:false,
                 style: {
-                    marginTop: '0px'
+                    marginBottom: '7px'
                 }
 
+            },{
+                xtype: 'textarea',
+                //width: 700,
+                height:170,
+                autoScroll:true,
+                allowBlank:false,
+                blankText:'Введите сообщение...',
+                id:'chatData',
+                // allowBlank:false,
+                enableKeyEvents:true,
+                style: {
+                    width:'99%',
+                    marginTop: '0px',
+                    marginBottom: '0px'
+                },
+                listeners: {
+                    specialkey: function(something,e){
+                        if (e.getKey() == e.ENTER) {
+                            sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+                        }
+                    }
+                }
+
+            },
+            {
+                xtype: 'button',
+                text: '<<Отправить>>>',
+                style: {
+                    marginTop: '7px',
+                    align: 'center'
+                },
+                bodyStyle: 'align:center',
+                listeners: {
+                    click: function() {
+                        sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+                    }
+                }
             }
             ]
-        },{
-            bodyStyle: 'padding:7px; border: 0; background-color:#e1e8ff;',
-            html: '<br/>'
-        },{
-            bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
-            contentEl: 'chat_id_ul'
         }]
     }]
 };
@@ -718,7 +728,8 @@ var value4ovnerstatus = {
 
                     items: [{
                         xtype: 'radiogroup',
-                        columns: [77, 65, 77],
+                        columns: 3,
+                        width:250,
                         id:'radioData',
 
                         items: [
@@ -895,13 +906,12 @@ var erow = {
             items:[{
                 xtype: 'fileuploadfield',
                 width:350,
-                style:{
-                    width:'350px'
-                },
                 id: 'matchFile',
-                emptyText: 'Выберите файл',
-                fieldLabel: 'Файл',
-                // name: 'photo-path',
+                emptyText: 'Выберите файл...',
+                style: {
+                    marginTop: '0px',
+                    marginBottom: '0px'
+                },
                 buttonText: 'Выбрать'
             //        buttonCfg: {
             //            iconCls: 'upload-icon'
@@ -917,10 +927,36 @@ var erow = {
                     click: function() {
                         var file = dwr.util.getValue('matchFile-file');
                         Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
-                            dwr.engine.openInDownload(data);
+                            Ext.getCmp('matchFile').reset();
+                            if(data==null){
+                                Ext.Msg.show({
+                                    title:'Неверный формат файла...',
+                                    msg: 'Верный смотри в инфо...',
+                                    buttons: Ext.Msg.OK,
+                                    width:250
+                                });
+                            } else{
+                                dwr.engine.openInDownload(data);
+                            }
                         });
-//                        alert(Ext.getCmp('matchFile').getValue());
-//                        matchData(Ext.getCmp('matchFile'), Ext.getCmp('matchFile').getValue());
+                    }
+                }
+            },{
+                xtype: 'button',
+                text: '<<<Посмареть>>>',
+                id:'changeStatBtn2',
+                style: {
+                    marginLeft: '5px'
+                },
+                listeners: {
+                    click: function() {
+                        //                        var file = dwr.util.getValue('matchFile-file');
+                        //                        Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
+                        //                            Ext.getCmp('matchFile').reset();
+                        //                            dwr.engine.openInDownload(data);
+                        //                        });
+                        alert(Ext.getCmp('matchFile').getValue());
+                    //                        matchData(Ext.getCmp('matchFile'), Ext.getCmp('matchFile').getValue());
                     }
                 }
             }]
@@ -1060,5 +1096,5 @@ Ext.onReady(function(){
         ],
         renderTo: Ext.getBody()
     });
-    comboLanguages.setValue('ru,en,bg,pl,hr,sl');
+//comboLanguages.setValue('ru');
 });
