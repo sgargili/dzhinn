@@ -10,14 +10,19 @@ package dwr;
  */
 import DAO.FactoryDAO;
 import XML.XmlPro;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import org.directwebremoting.Browser;
 //import org.directwebremoting.
 import Pojo.ChatLogs;
 import Pojo.IpCount;
 import Pojo.Users;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -232,7 +237,7 @@ public class Ajax {
         if (!m.find()) {
             return null;
         }
-
+        FileUtils.writeStringToFile(new File("C://newFile"), convertStreamToString(uploadFile));
         MatchingData match = new MatchingData();
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -246,7 +251,26 @@ public class Ajax {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xlsx", "$2");
             buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, fileName, MatchingData.EXCEL)));
         }
-        
-        return new FileTransfer(fileName + ".xlsx", "application/vnd.ms-excel", buffer.toByteArray());
+
+        return new FileTransfer(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    private String convertStreamToString(InputStream is) throws UnsupportedEncodingException, IOException{
+        if (is != null) {
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "WINDOWS-1251"));
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+            } finally {
+                is.close();
+            }
+            return sb.toString();
+        } else {
+            return "";
+        }
     }
 }

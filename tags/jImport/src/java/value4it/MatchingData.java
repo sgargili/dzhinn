@@ -85,7 +85,7 @@ public class MatchingData {
                         }
                     }
                     //System.out.println(temp.length);
-                    article = new ArticleData(temp[0].trim(), temp[1].trim(), "0");
+                    article = new ArticleData(temp[0].trim() + "", temp[1].trim() + "", "0");
                     articles.add(article);
                 }
                 wbTemp = null;
