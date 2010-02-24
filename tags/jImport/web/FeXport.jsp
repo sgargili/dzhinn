@@ -21,6 +21,7 @@
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
         <script type="text/javascript" src="js/ux-all.js"></script>
+        <script type="text/javascript" src="js/Ext.ux.UploadDialog.js"></script>
         <script type='text/javascript' src='js/allJavaScript.js'> </script>
         <script type='text/javascript' src='dwr/engine.js'></script>
         <script type='text/javascript' src='dwr/util.js'></script>

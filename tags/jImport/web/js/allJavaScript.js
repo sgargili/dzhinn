@@ -9,8 +9,25 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+var dialog = new Ext.ux.UploadDialog.Dialog({
+    proxyDrag: false,
+    resizable: false,
+    draggable: false,
+    url: 'database.php',
+    base_params: {
+        'task': 'ADDTEMPLATE'
+    },
+    permitted_extensions: ['jpg','jpe','jpeg','gif','png','htm','html','txt','zip','rar','css','xls','doc','rtf','pdf'],
+    reset_on_hide: false,
+    upload_single_file: false,
+    allow_close_on_upload: false,
+    title: 'Files for create new template',
+    upload_autostart: false,
+    post_var_name: 'template'
+});
+
 var map = new Ext.KeyMap(Ext.getBody(), [
- {
+{
     key: 13,
     ctrl:true,
     fn: function(){
@@ -87,15 +104,17 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
         handler: function(){
             comboLanguages.setValue('ru,en,bg,pl,hr,sl');
         }
-    },{
-        text:'Посмареть',
-        handler: function(){
-            if(comboLanguages.isValid()){
-                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-                    comboLanguages.getValue());
-            }
-        }
-    },{
+    }
+    //    ,{
+    //        text:'Посмареть',
+    //        handler: function(){
+    //            if(comboLanguages.isValid()){
+    //                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+    //                    comboLanguages.getValue());
+    //            }
+    //        }
+    //    }
+    ,{
         text: 'Ru/En only',
         handler: function(){
             comboLanguages.setValue('ru,en');
@@ -925,7 +944,11 @@ var erow = {
                 },
                 listeners: {
                     click: function() {
-                        var file = dwr.util.getValue('matchFile-file');
+                        var file = Ext.getDom('matchFile-file');
+                        var file2 = dwr.util.getValue('matchFile-file');
+                        alert(file.value);
+                        file.value='';
+                        alert(file.value);
                         Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
                             Ext.getCmp('matchFile').reset();
                             if(data==null){
@@ -939,27 +962,30 @@ var erow = {
                                 dwr.engine.openInDownload(data);
                             }
                         });
+                        
                     }
                 }
-            },{
-                xtype: 'button',
-                text: '<<<Посмареть>>>',
-                id:'changeStatBtn2',
-                style: {
-                    marginLeft: '5px'
-                },
-                listeners: {
-                    click: function() {
-                        //                        var file = dwr.util.getValue('matchFile-file');
-                        //                        Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
-                        //                            Ext.getCmp('matchFile').reset();
-                        //                            dwr.engine.openInDownload(data);
-                        //                        });
-                        alert(Ext.getCmp('matchFile').getValue());
-                    //                        matchData(Ext.getCmp('matchFile'), Ext.getCmp('matchFile').getValue());
-                    }
-                }
-            }]
+            }
+            //            ,{
+            //                xtype: 'button',
+            //                text: '<<<Посмареть>>>',
+            //                id:'changeStatBtn2',
+            //                style: {
+            //                    marginLeft: '5px'
+            //                },
+            //                listeners: {
+            //                    click: function() {
+            //                        //                        var file = dwr.util.getValue('matchFile-file');
+            //                        //                        Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
+            //                        //                            Ext.getCmp('matchFile').reset();
+            //                        //                            dwr.engine.openInDownload(data);
+            //                        //                        });
+            //                        alert(Ext.getCmp('matchFile').getValue());
+            //                    //                        matchData(Ext.getCmp('matchFile'), Ext.getCmp('matchFile').getValue());
+            //                    }
+            //                }
+            //            }
+            ]
         }]
     }]
 //    id: 'eRow-panel',
