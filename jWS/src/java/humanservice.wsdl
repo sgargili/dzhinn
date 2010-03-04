@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:ms="http://localhost:8070/jWS/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="humanservice"
+	targetNamespace="http://localhost:8070/jWS/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://localhost:8070/jWS/" elementFormDefault="qualified">
+            <xsd:complexType name="HumanType">
+                <xsd:sequence>
+                    <xsd:element name="name" type="xsd:string" />
+                    <xsd:element name="surname" type="xsd:string" />
+                    <xsd:element name="id" type="xsd:integer" />
+                </xsd:sequence>
+            </xsd:complexType>
+            <xsd:element name="HumanRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:integer" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:element name="HumanResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="human" type="ms:HumanType" />
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="HumanRequest">
+        <wsdl:part element="ms:humanRequest" name="parameters" />
+    </wsdl:message>
+    <wsdl:message name="HumanResponse">
+        <wsdl:part element="ms:HumanResponse" name="parameters" />
+    </wsdl:message>
+    <wsdl:portType name="humanservice">
+        <wsdl:operation name="GetHuman">
+            <wsdl:input message="ms:HumanRequest" />
+            <wsdl:output message="ms:HumanResponse" />
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="humanserviceSOAP" type="ms:humanservice">
+        <soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+        <wsdl:operation name="GetHumanDetails">
+            <soap:operation soapAction="http://localhost:8070/jWS/GetHuman" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal" />
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="humanservice">
+        <wsdl:port binding="ms:humanserviceSOAP" name="humanserviceSOAP">
+            <soap:address location="http://localhost:8070/jWS/services/HumanRequest" />
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
