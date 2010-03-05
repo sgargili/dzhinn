@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ec:EchoRequest xmlns:ec="http://www.averconsulting.com/echo/schemas" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.averconsulting.com/echo/schemas echo.xsd ">
+  <ec:Echo>
+    <ec:Name>ec:Name</ec:Name>
+  </ec:Echo>
+</ec:EchoRequest>
