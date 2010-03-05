@@ -29,7 +29,7 @@
             <bean class="org.springframework.ws.wsdl.wsdl11.builder.XsdBasedSoap11Wsdl4jDefinitionBuilder">
                 <property name="schema" value="/WEB-INF/echo.xsd"/>
                 <property name="portTypeName" value="Echo"/>
-                <property name="locationUri" value="http://localhost:8070/jWS/"/>
+                <property name="locationUri" value="http://localhost:8070/jWS/service/"/>
             </bean>
         </property>
     </bean>
