@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12.03.2010 15:04:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.RuleType" table="rule_type" catalog="mergingdb">
+        <id name="ruleTypeId" type="java.lang.Integer">
+            <column name="rule_type_id" />
+            <generator class="identity" />
+        </id>
+        <property name="ruleTypeName" type="string">
+            <column name="rule_type_name" length="256" />
+        </property>
+        <set name="attributeRules" inverse="true">
+            <key>
+                <column name="rule_type_id" />
+            </key>
+            <one-to-many class="pojo.AttributeRule" />
+        </set>
+    </class>
+</hibernate-mapping>

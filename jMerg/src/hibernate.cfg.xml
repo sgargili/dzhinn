@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mergingdb</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Pass4root</property>
+    <mapping resource="pojo/Attribute.hbm.xml"/>
+    <mapping resource="pojo/Article.hbm.xml"/>
+    <mapping resource="pojo/Rule.hbm.xml"/>
+    <mapping resource="pojo/Groupe.hbm.xml"/>
+    <mapping resource="pojo/Regexp.hbm.xml"/>
+    <mapping resource="pojo/Matching.hbm.xml"/>
+    <mapping resource="pojo/AttributeValue.hbm.xml"/>
+    <mapping resource="pojo/Model.hbm.xml"/>
+    <mapping resource="pojo/AttributeRule.hbm.xml"/>
+    <mapping resource="pojo/AttributeToGroupe.hbm.xml"/>
+    <mapping resource="pojo/Bank.hbm.xml"/>
+    <mapping resource="pojo/AttributeType.hbm.xml"/>
+    <mapping resource="pojo/Unit.hbm.xml"/>
+    <mapping resource="pojo/RuleType.hbm.xml"/>
+    <mapping resource="pojo/GroupeToModel.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

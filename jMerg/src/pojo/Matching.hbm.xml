@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12.03.2010 15:04:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Matching" table="matching" catalog="mergingdb">
+        <id name="matchingId" type="java.lang.Integer">
+            <column name="matching_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bankByBankIdTo" class="pojo.Bank" fetch="select">
+            <column name="bank_id_to" />
+        </many-to-one>
+        <many-to-one name="articleByArticleIdTo" class="pojo.Article" fetch="select">
+            <column name="article_id_to" />
+        </many-to-one>
+        <many-to-one name="articleByArticleIdFrom" class="pojo.Article" fetch="select">
+            <column name="article_id_from" />
+        </many-to-one>
+        <many-to-one name="bankByBankIdFrom" class="pojo.Bank" fetch="select">
+            <column name="bank_id_from" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

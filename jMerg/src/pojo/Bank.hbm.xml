@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12.03.2010 15:04:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Bank" table="bank" catalog="mergingdb" lazy="false">
+        <id name="bankId" type="java.lang.Integer">
+            <column name="bank_id" />
+            <generator class="identity" />
+        </id>
+        <property name="bankName" type="string">
+            <column name="bank_name" length="256" />
+        </property>
+        <set name="groupes" inverse="true" lazy="false">
+            <key>
+                <column name="bank_id" />
+            </key>
+            <one-to-many class="pojo.Groupe" />
+        </set>
+        <set name="matchingsForBankIdFrom" inverse="true">
+            <key>
+                <column name="bank_id_from" />
+            </key>
+            <one-to-many class="pojo.Matching" />
+        </set>
+        <set name="matchingsForBankIdTo" inverse="true">
+            <key>
+                <column name="bank_id_to" />
+            </key>
+            <one-to-many class="pojo.Matching" />
+        </set>
+        <set name="models" inverse="true">
+            <key>
+                <column name="bank_id" />
+            </key>
+            <one-to-many class="pojo.Model" />
+        </set>
+        <set name="attributes" inverse="true" lazy="false">
+            <key>
+                <column name="bank_id" />
+            </key>
+            <one-to-many class="pojo.Attribute" />
+        </set>
+        <set name="articles" inverse="true">
+            <key>
+                <column name="bank_id" />
+            </key>
+            <one-to-many class="pojo.Article" />
+        </set>
+    </class>
+</hibernate-mapping>

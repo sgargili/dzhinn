@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 12.03.2010 15:04:10 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Model" table="model" catalog="mergingdb">
+        <id name="modelId" type="java.lang.Integer">
+            <column name="model_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="bank" class="pojo.Bank" fetch="select">
+            <column name="bank_id" />
+        </many-to-one>
+        <property name="modelName" type="string">
+            <column name="model_name" length="256" />
+        </property>
+        <set name="rulesForModelIdFrom" inverse="true">
+            <key>
+                <column name="model_id_from" />
+            </key>
+            <one-to-many class="pojo.Rule" />
+        </set>
+        <set name="rulesForModelIdTo" inverse="true">
+            <key>
+                <column name="model_id_to" />
+            </key>
+            <one-to-many class="pojo.Rule" />
+        </set>
+        <set name="groupeToModels" inverse="true">
+            <key>
+                <column name="model_id" />
+            </key>
+            <one-to-many class="pojo.GroupeToModel" />
+        </set>
+    </class>
+</hibernate-mapping>
