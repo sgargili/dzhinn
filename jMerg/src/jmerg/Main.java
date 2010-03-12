@@ -8,6 +8,7 @@ import dao.FactoryDAO;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import pojo.Article;
 import pojo.Attribute;
 import pojo.AttributeValue;
 import pojo.Bank;
@@ -24,6 +25,8 @@ public class Main {
      */
     public static void main(String[] args) {
         Bank bank;
+        Article art;
+        Set articles;
         Groupe groupe;
         Set groupes;
         Attribute atr;
@@ -43,19 +46,19 @@ public class Main {
 //                System.out.println(groupe.getGroupeId() + " - " + groupe.getGroupeName());
 //            }
 //        }
-        bank = FactoryDAO.getInstance().getBankDAO().getBankById(1);
+        bank = FactoryDAO.getInstance().getBankDAO().getBankById(222);
 
-        attributes = bank.getAttributes();
-        Iterator itn = attributes.iterator();
+        articles = bank.getArticles();
+        Iterator itn = articles.iterator();
         while (itn.hasNext()) {
-            atr = (Attribute) itn.next();
-            attributeValues = atr.getAttributeValues();
-            //System.out.println(atr.getAttributeId() + " - " + atr.getAttributeName());
-            Iterator itn2 = attributeValues.iterator();
-            while (itn2.hasNext()) {
-                artV = (AttributeValue) itn2.next();
-                System.out.println(atr.getAttributeId() + " - " + artV.getAttributeValue());
-            }
+            art = (Article) itn.next();
+            //attributeValues = atr.getAttributeValues();
+            System.out.println(art.getArticleId() + " - " + art.getArticleName());
+//            Iterator itn2 = attributeValues.iterator();
+//            while (itn2.hasNext()) {
+//                artV = (AttributeValue) itn2.next();
+//                System.out.println(atr.getAttributeId() + " - " + artV.getAttributeValue());
+//            }
         }
 
     }

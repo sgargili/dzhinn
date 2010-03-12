@@ -7,6 +7,8 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/mergingdb</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Pass4root</property>
+    <property name="hibernate.show_sql">true</property>
+    <property name="hibernate.format_sql">true</property>
     <mapping resource="pojo/Attribute.hbm.xml"/>
     <mapping resource="pojo/Article.hbm.xml"/>
     <mapping resource="pojo/Rule.hbm.xml"/>

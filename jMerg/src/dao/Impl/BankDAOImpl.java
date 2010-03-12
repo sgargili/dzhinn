@@ -53,12 +53,14 @@ public class BankDAOImpl implements BankDAO {
     }
 
     public Bank getBankById(int id) {
+        System.out.println(id);
         List out = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             out = session.createCriteria(Bank.class, id + "").list();
+            System.out.println(out.size());
             session.getTransaction().commit();
         } catch (Exception e) {
             System.out.println(e);
@@ -68,6 +70,6 @@ public class BankDAOImpl implements BankDAO {
                 session.close();
             }
         }
-        return (Bank) out.get(0);
+        return (Bank) out.get(1);
     }
 }

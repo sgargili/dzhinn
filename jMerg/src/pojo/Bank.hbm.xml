@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 12.03.2010 15:04:10 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="pojo.Bank" table="bank" catalog="mergingdb" lazy="false">
+    <class name="pojo.Bank" table="bank" catalog="mergingdb" >
         <id name="bankId" type="java.lang.Integer">
             <column name="bank_id" />
             <generator class="identity" />
@@ -11,7 +11,7 @@
         <property name="bankName" type="string">
             <column name="bank_name" length="256" />
         </property>
-        <set name="groupes" inverse="true" lazy="false">
+        <set name="groupes" inverse="true" >
             <key>
                 <column name="bank_id" />
             </key>
@@ -35,13 +35,13 @@
             </key>
             <one-to-many class="pojo.Model" />
         </set>
-        <set name="attributes" inverse="true" lazy="false">
+        <set name="attributes" inverse="true" >
             <key>
                 <column name="bank_id" />
             </key>
             <one-to-many class="pojo.Attribute" />
         </set>
-        <set name="articles" inverse="true">
+        <set name="articles" inverse="true" lazy="false">
             <key>
                 <column name="bank_id" />
             </key>
