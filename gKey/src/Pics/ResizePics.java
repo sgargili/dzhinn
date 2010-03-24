@@ -213,6 +213,7 @@ public class ResizePics {
 //        }
 //    }
     public static void main(String[] arg) {
+        String first, second, third;
         File imageLayer400;
         File imageLayer200;
         File imageLayer160;
@@ -238,31 +239,37 @@ public class ResizePics {
 
         BorderFilter bf;
 
-        for (int i = 47950; i < 48100; i++) {
+        for (int i = 10000; i < 100000; i++) {
             File inputImage = null;
             BufferedImage biInput;
 
             try {
-                inputImage = new File("C://keyPics/" + i + ".jpg");
+                inputImage = new File("/home/admin/keyPics/" + i + ".jpg");
                 biInput = ImageIO.read(inputImage);
             } catch (Exception ex) {
                 continue;
             }
             try {
-                imageLayer400 = new File("C://400.jpg");
-                imageLayer200 = new File("C://200.jpg");
-                imageLayer160 = new File("C://160.jpg");
-                imageLayer75 = new File("C://75.jpg");
+                imageLayer400 = new File("/home/admin/layerPics/400.jpg");
+                imageLayer200 = new File("/home/admin/layerPics/200.jpg");
+                imageLayer160 = new File("/home/admin/layerPics/160.jpg");
+                imageLayer75 = new File("/home/admin/layerPics/75.jpg");
 
                 bi400 = ImageIO.read(imageLayer400);
                 // bi200 = ImageIO.read(imageLayer200);
                 bi160 = ImageIO.read(imageLayer160);
                 //bi75 = ImageIO.read(imageLayer75);
-
-                outImage400 = new File("C://keyOut/" + i + "-400.jpg");
-                outImage200 = new File("C://keyOut/" + i + "-200.jpg");
-                outImage160 = new File("C://keyOut/" + i + "-160.jpg");
-                outImage75 = new File("C://keyOut/" + i + "-75.jpg");
+                first = (i + "").substring(0, 1);
+                second = (i + "").substring(1, 2);
+                third = (i + "").substring(2);
+                new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/400x300").mkdirs();
+                outImage400 = new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/400x300/400.jpg");
+                new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/200x150").mkdirs();
+                outImage200 = new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/200x150/200.jpg");
+                new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/160x160").mkdirs();
+                outImage160 = new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/160x160/160.jpg");
+                new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/75x56").mkdirs();
+                outImage75 = new File("/smbRoot/ftpRoot/keyPics/" + first + "/" + second + "/" + third + "/" + "/75x56/75.jpg");
 
                 if (biInput.getHeight() >= biInput.getWidth()) {
                     System.out.println(i + " -> H > W");
@@ -290,7 +297,7 @@ public class ResizePics {
                 }
 
                 if (resize) {
-                    resampleOp = new ResampleOp(resizeCountH, resizeCountW);
+                    resampleOp = new ResampleOp(resizeCountW, resizeCountH);
                     resampleOp.setUnsharpenMask(AdvancedResizeOp.UnsharpenMask.None);
                     rescaledImg = resampleOp.filter(biInput, bi400);
                 } else {
