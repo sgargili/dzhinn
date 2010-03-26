@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26.03.2010 11:08:27 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.Value" table="value" catalog="softdb">
+        <id name="valueId" type="java.lang.Integer">
+            <column name="value_id" />
+            <generator class="identity" />
+        </id>
+        <property name="valueName" type="string">
+            <column name="value_name" length="65535" />
+        </property>
+        <set name="attributes" inverse="true" table="attribute_to_value">
+            <key>
+                <column name="value_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojo.Attribute">
+                <column name="attribute_id" not-null="true" />
+            </many-to-many>
+        </set>
+        <set name="productTypes" inverse="true" table="product_type_to_value">
+            <key>
+                <column name="value_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="pojo.ProductType">
+                <column name="product_type_id" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
