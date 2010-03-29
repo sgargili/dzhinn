@@ -4,8 +4,8 @@
  */
 package dao;
 
-import dao.impl.AttributeDAOImpl;
-import dao.impl.SoftDAOImpl;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -13,9 +13,8 @@ import dao.impl.SoftDAOImpl;
  */
 public class FactoryDAO {
 
-    private static SoftDAO softDAO = null;
+    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/SpringConfig.xml");
     private static FactoryDAO instance = null;
-    private static AttributeDAO attributeDAO = null;
 
     public static synchronized FactoryDAO getInstance() {
         if (instance == null) {
@@ -25,16 +24,17 @@ public class FactoryDAO {
     }
 
     public SoftDAO getSoftDAO() {
-        if (softDAO == null) {
-            softDAO = new SoftDAOImpl();
-        }
-        return softDAO;
+        return (SoftDAO) factory.getBean("SoftDAO");
     }
 
     public AttributeDAO getAttributeDAO() {
-        if (attributeDAO == null) {
-            attributeDAO = new AttributeDAOImpl();
-        }
-        return attributeDAO;
+        return (AttributeDAO) factory.getBean("AttributeDAO");
+    }
+
+    public ProductTypeDAO getProductTypeDAO() {
+        return (ProductTypeDAO) factory.getBean("ProductTypeDAO");
+    }
+    public ValueDAO getValueDAO() {
+        return (ValueDAO) factory.getBean("ValueDAO");
     }
 }

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Set;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Attribute;
 import pojo.ProductType;
 import pojo.Value;
@@ -20,6 +22,12 @@ import util.HibernateUtil;
  * @author APopov
  */
 public class AttributeDAOImpl implements AttributeDAO {
+
+    private HibernateTemplate hibernateTemplate;
+
+    public void setSessionFactory(SessionFactory sf) {
+        this.hibernateTemplate = new HibernateTemplate(sf);
+    }
 
     public void addAttribute(Attribute attribute) {
         Session session = null;
@@ -69,7 +77,7 @@ public class AttributeDAOImpl implements AttributeDAO {
             Query getByLogin = session.createQuery("from Attribute a left join fetch a.productTypes where a.attributeId = :atrId");
             getByLogin.setInteger("atrId", attribute.getAttributeId());
             outTemp = getByLogin.list();
-            attr =(Attribute) outTemp.get(0);
+            attr = (Attribute) outTemp.get(0);
             System.out.println(attr.getAttributeId());
             System.out.println(attr.getAttributeName());
             out = attr.getProductTypes();

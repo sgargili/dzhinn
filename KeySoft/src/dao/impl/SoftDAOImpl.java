@@ -8,6 +8,8 @@ import dao.SoftDAO;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Soft;
 import util.HibernateUtil;
 
@@ -16,6 +18,12 @@ import util.HibernateUtil;
  * @author APopov
  */
 public class SoftDAOImpl implements SoftDAO {
+
+    private HibernateTemplate hibernateTemplate;
+
+    public void setSessionFactory(SessionFactory sf) {
+        this.hibernateTemplate = new HibernateTemplate(sf);
+    }
 
     public void addSoft(Soft soft) {
         Session session = null;
