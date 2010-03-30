@@ -5,10 +5,11 @@
 package dao.impl;
 
 import dao.ValueDAO;
-import java.util.Iterator;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import pojo.Attribute;
+import pojo.ProductType;
 import pojo.Value;
 
 /**
@@ -28,57 +29,59 @@ public class ValueDAOImpl implements ValueDAO {
     }
 
     public void addValue(Value value) {
-        hibernateTemplate.save(value);
+        getHibernateTemplate().save(value);
     }
 
     public void updateValue(Value value) {
-        hibernateTemplate.update(value);
+        getHibernateTemplate().update(value);
     }
 
     public void addOrUpdateValue(Value value) {
-        hibernateTemplate.saveOrUpdate(value);
+        getHibernateTemplate().saveOrUpdate(value);
     }
 
     public void deleteValue(Value value) {
-        hibernateTemplate.delete(value);
-    }
-
-    public List<Value> getAllValues() {
-        SessionFactory sf = getHibernateTemplate().getSessionFactory();
-        
-        List<Value> outValues = (List<Value>) hibernateTemplate.loadAll(Value.class);
-        //System.out.println(outValues.get(5).getProductTypes());
-        Value val;
-        Iterator<Value> it = outValues.iterator();
-        while (it.hasNext()) {
-            val = it.next();
-//            val.getAttributes();
-//            val.getProductTypes();
-            System.out.println(val.getAttributes());
-            System.out.println(val.getProductTypes());
-        }
-        //String query = "from Value v left join fetch v.productTypes join fetch v.attributes";
-
-        //getHibernateTemplate().findByNamedParam(query, "name", '%' + str + '%');
-
-        //hibernateTemplate.find(query);
-
-        return outValues;
-    }
-
-    public List<Value> getValuesByProductTypes() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public List<Value> getValuesByAttributes() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public Value getValueById(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        getHibernateTemplate().delete(value);
     }
 
     public List<Value> getAllValuesOnly() {
-        return (List<Value>) hibernateTemplate.loadAll(Value.class);
+        return (List<Value>) getHibernateTemplate().loadAll(Value.class);
+    }
+
+    public List<Value> getAllValuesHavingDependence() {
+        String query = "from Value v " +
+                "join fetch v.productTypes " +
+                "join fetch v.attributes";
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<Value> getValuesByProductTypes() {
+        String query = "from Value v " +
+                "join fetch v.productTypes";
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<Value> getValuesByProductType(ProductType productType) {
+        String query = "from Value v " +
+                "join fetch v.productTypes as productType " +
+                "where productType = :productType";
+        return getHibernateTemplate().findByNamedParam(query, "productType", productType);
+    }
+
+    public List<Value> getValuesByAttributes() {
+        String query = "from Value v " +
+                "join fetch v.attributes";
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<Value> getValuesByAttribute(Attribute attribute) {
+        String query = "from Value v " +
+                "join fetch v.attributes as attribute " +
+                "where attribute = :attribute";
+        return getHibernateTemplate().findByNamedParam(query, "attribute", attribute);
+    }
+
+    public Value getValueById(int id) {
+        return (Value) getHibernateTemplate().load(Value.class, id);
     }
 }

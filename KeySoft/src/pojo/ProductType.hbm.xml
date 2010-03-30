@@ -15,7 +15,7 @@
             <key>
                 <column name="product_type_id" not-null="true" />
             </key>
-            <many-to-many entity-name="pojo.Attribute" lazy="proxy">
+            <many-to-many entity-name="pojo.Attribute">
                 <column name="attribute_id" not-null="true" />
             </many-to-many>
         </set>

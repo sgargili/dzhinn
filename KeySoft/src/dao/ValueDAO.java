@@ -5,6 +5,8 @@
 package dao;
 
 import java.util.List;
+import pojo.Attribute;
+import pojo.ProductType;
 import pojo.Value;
 
 /**
@@ -23,11 +25,15 @@ public interface ValueDAO {
 
     public List<Value> getAllValuesOnly();
 
-    public List<Value> getAllValues();
+    public List<Value> getAllValuesHavingDependence();
 
     public List<Value> getValuesByProductTypes();
 
+    public List<Value> getValuesByProductType(ProductType productType);
+
     public List<Value> getValuesByAttributes();
+
+    public List<Value> getValuesByAttribute(Attribute attribute);
 
     public Value getValueById(int id);
 }

@@ -11,7 +11,7 @@
         <property name="attributeName" type="string">
             <column name="attribute_name" length="512" />
         </property>
-        <set name="productTypes" inverse="true" table="product_type_to_attribute" lazy="true" >
+        <set name="productTypes" inverse="false" table="product_type_to_attribute">
             <key>
                 <column name="attribute_id" not-null="true" />
             </key>

@@ -5,7 +5,6 @@
 package dao;
 
 import java.util.List;
-import java.util.Set;
 import pojo.Attribute;
 import pojo.ProductType;
 import pojo.Value;
@@ -18,11 +17,25 @@ public interface AttributeDAO {
 
     public void addAttribute(Attribute attribute);
 
+    public void updateAttributeDependence(Attribute attribute);
+
+    public void updateAttribute(Attribute attribute);
+
+    public void addOrUpdateAttribute(Attribute attribute);
+
+    public void deleteAttribute(Attribute attribute);
+
+    public List<Attribute> getAllAttributesOnly();
+
+    public List<Attribute> getAllAttributesHavingDependence();
+
+    public List<Attribute> getAttributesByProductTypes();
+
+    public List<Attribute> getAttributesByProductType(ProductType productType);
+
+    public List<Attribute> getAttributesByValues();
+
+    public List<Attribute> getAttributesByValue(Value value);
+
     public Attribute getAttributeById(int id);
-
-    public List<Attribute> getAllAttributes();
-
-    public Set<ProductType> getAllProductTypesByAttribute(Attribute attribute);
-
-    public Set<Value> getAllValuesByAttribute(Attribute attribute);
 }
