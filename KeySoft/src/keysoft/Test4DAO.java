@@ -108,9 +108,62 @@ public class Test4DAO {
 //        atr.setValues(set);
 //        atr.setProductTypes(set2);
 //        FactoryDAO.getInstance().getAttributeDAO().updateAttributeDependence(atr);
-        Attribute at = new Attribute();
-        at.setAttributeId(2048);
-        at.setAttributeName("New!!!");
-        FactoryDAO.getInstance().getAttributeDAO().deleteAttribute(at);
+//        Attribute at = new Attribute();
+//        at.setAttributeId(2048);
+//        at.setAttributeName("New!!!");
+//        FactoryDAO.getInstance().getAttributeDAO().deleteAttribute(at);
+//        Value val = new Value();
+//        val.setValueName("20 дюймов");
+//        FactoryDAO.getInstance().getValueDAO().addValue(val);
+//        Attribute at = new Attribute();
+//        at.setAttributeName("Диагональ экрана");
+//        at.getValues().add(val);
+//        FactoryDAO.getInstance().getAttributeDAO().addAttribute(at);
+        FactoryDAO fd = FactoryDAO.getInstance();
+//        Value val = new Value();
+//        val.setValueName("20 дюймов");
+//        fd.getValueDAO().addValue(val);
+//        Value val2 = new Value();
+//        val2.setValueName("8mc");
+//        fd.getValueDAO().addValue(val2);
+//        Value val3 = new Value();
+//        val3.setValueName("5000:1");
+//        fd.getValueDAO().addValue(val3);
+//        Attribute at = new Attribute();
+//        at.setAttributeName("Диагональ экрана");
+//        at.getValues().add(val);
+//        fd.getAttributeDAO().addAttribute(at);
+//        Attribute at2 = new Attribute();
+//        at2.setAttributeName("Время отклика");
+//        at2.getValues().add(val2);
+//        fd.getAttributeDAO().addAttribute(at2);
+//        Attribute at3 = new Attribute();
+//        at3.setAttributeName("Контраст");
+//        at3.getValues().add(val3);
+//        fd.getAttributeDAO().addAttribute(at3);
+//        ProductType pt = new ProductType();
+//        pt.setProductTypeName("Мониторы");
+//        pt.getAttributes().add(at);
+//        pt.getAttributes().add(at2);
+//        pt.getAttributes().add(at3);
+//        pt.getValues().add(val);
+//        pt.getValues().add(val2);
+//        pt.getValues().add(val3);
+//        fd.getProductTypeDAO().addProductType(pt);
+
+        List pts = fd.getProductTypeDAO().getAllProductTypesHavingDependence();
+        ProductType pt;
+        Attribute at;
+        System.out.println(pts.size());
+        Iterator it = pts.iterator();
+        while(it.hasNext()){
+            pt = (ProductType) it.next();
+            System.out.println(pt.getProductTypeId());
+            Iterator it2 = pt.getAttributes().iterator();
+            while(it2.hasNext()){
+                at = (Attribute) it2.next();
+                System.out.println(at.getAttributeName());
+            }
+        }
     }
 }
