@@ -17,9 +17,11 @@ public interface ValueDAO {
 
     public void addValue(Value value);
 
-    public void updateValue(Value value);
+    public void updateValueDependence(Value value);
 
-    public void addOrUpdateValue(Value value);
+    public void updateValueNameOnly(Value value);
+
+    public void addOrUpdateValueNameOnly(Value value);
 
     public void deleteValue(Value value);
 

@@ -17,9 +17,11 @@ public interface ProductTypeDAO {
 
     public void addProductType(ProductType productType);
 
-    public void updatProductType(ProductType productType);
+    public void updatProductTypeDependence(ProductType productType);
 
-    public void addOrUpdateProductType(ProductType productType);
+    public void updateProductTypeNameOnly(ProductType productType);
+
+    public void addOrUpdateProductTypeNameOnly(ProductType productType);
 
     public void deleteProductType(ProductType productType);
 

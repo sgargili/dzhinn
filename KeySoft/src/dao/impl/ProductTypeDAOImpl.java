@@ -30,14 +30,47 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
 
     public void addProductType(ProductType productType) {
         getHibernateTemplate().save(productType);
+        getHibernateTemplate().flush();
+
     }
 
-    public void updatProductType(ProductType productType) {
+    public void updatProductTypeDependence(ProductType productType) {
+        ProductType newProductType;
+        try {
+            newProductType = getProductTypeById(productType.getProductTypeId());
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + productType.getProductTypeId());
+            return;
+        }
+        newProductType.getValues().addAll(productType.getValues());
+        newProductType.getAttributes().addAll(productType.getAttributes());
+        getHibernateTemplate().merge(newProductType);
+        getHibernateTemplate().flush();
         getHibernateTemplate().update(productType);
     }
 
-    public void addOrUpdateProductType(ProductType productType) {
-        getHibernateTemplate().saveOrUpdate(productType);
+    public void updateProductTypeNameOnly(ProductType productType) {
+        try {
+            ProductType newProductType;
+            newProductType = getProductTypeById(productType.getProductTypeId());
+            newProductType.setProductTypeName(productType.getProductTypeName());
+            getHibernateTemplate().update(newProductType);
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + productType.getProductTypeId());
+        }
+        getHibernateTemplate().flush();
+    }
+
+    public void addOrUpdateProductTypeNameOnly(ProductType productType) {
+        try {
+            ProductType newProductType;
+            newProductType = getProductTypeById(productType.getProductTypeId());
+            newProductType.setProductTypeName(productType.getProductTypeName());
+            getHibernateTemplate().update(newProductType);
+        } catch (Exception ex) {
+            getHibernateTemplate().save(productType);
+        }
+        getHibernateTemplate().flush();
     }
 
     public void deleteProductType(ProductType productType) {
@@ -49,35 +82,35 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     }
 
     public List<ProductType> getAllProductTypesHavingDependence() {
-        String query = "from ProductType p " +
-                "join fetch p.values " +
-                "join fetch p.attributes";
+        String query = "from ProductType p "
+                + "join fetch p.values "
+                + "join fetch p.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByAttributes() {
-        String query = "from ProductType p " +
-                "join fetch p.attributes";
+        String query = "from ProductType p "
+                + "join fetch p.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByAttribute(Attribute attribute) {
-        String query = "from ProductType p " +
-                "join fetch p.attributes as attribute " +
-                "where attribute = :attribute";
+        String query = "from ProductType p "
+                + "join fetch p.attributes as attribute "
+                + "where attribute = :attribute";
         return getHibernateTemplate().findByNamedParam(query, "attribute", attribute);
     }
 
     public List<ProductType> getProductTypesByValues() {
-        String query = "from ProductType p " +
-                "join fetch p.values";
+        String query = "from ProductType p "
+                + "join fetch p.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByValue(Value value) {
-        String query = "from ProductType p " +
-                "join fetch p.values as value " +
-                "where value = :value";
+        String query = "from ProductType p "
+                + "join fetch p.values as value "
+                + "where value = :value";
         return getHibernateTemplate().findByNamedParam(query, "value", value);
     }
 

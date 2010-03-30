@@ -19,9 +19,9 @@ public interface AttributeDAO {
 
     public void updateAttributeDependence(Attribute attribute);
 
-    public void updateAttribute(Attribute attribute);
+    public void updateAttributeNameOnly(Attribute attribute);
 
-    public void addOrUpdateAttribute(Attribute attribute);
+    public void addOrUpdateAttributeNameOnly(Attribute attribute);
 
     public void deleteAttribute(Attribute attribute);
 

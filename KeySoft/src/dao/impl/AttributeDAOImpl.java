@@ -30,24 +30,45 @@ public class AttributeDAOImpl implements AttributeDAO {
 
     public void addAttribute(Attribute attribute) {
         getHibernateTemplate().save(attribute);
-    }
-
-    public void updateAttributeDependence(Attribute attribute) {
-        Attribute attributeTemp;
-        attributeTemp = getAttributeById(attribute.getAttributeId());
-        attributeTemp.getValues().addAll(attribute.getValues());
-        attributeTemp.getProductTypes().addAll(attribute.getProductTypes());
-        getHibernateTemplate().merge(attributeTemp);
         getHibernateTemplate().flush();
     }
 
-    public void updateAttribute(Attribute attribute) {
-        //getAttributeById(attribute.getAttributeId());
-        getHibernateTemplate().update(attribute);
+    public void updateAttributeDependence(Attribute attribute) {
+        Attribute newAttribute;
+        try {
+            newAttribute = getAttributeById(attribute.getAttributeId());
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + attribute.getAttributeId());
+            return;
+        }
+        newAttribute.getValues().addAll(attribute.getValues());
+        newAttribute.getProductTypes().addAll(attribute.getProductTypes());
+        getHibernateTemplate().merge(newAttribute);
+        getHibernateTemplate().flush();
     }
 
-    public void addOrUpdateAttribute(Attribute attribute) {
-        getHibernateTemplate().saveOrUpdate(attribute);
+    public void updateAttributeNameOnly(Attribute attribute) {
+        try {
+            Attribute newAttribute;
+            newAttribute = getAttributeById(attribute.getAttributeId());
+            newAttribute.setAttributeName(attribute.getAttributeName());
+            getHibernateTemplate().update(newAttribute);
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + attribute.getAttributeId());
+        }
+        getHibernateTemplate().flush();
+    }
+
+    public void addOrUpdateAttributeNameOnly(Attribute attribute) {
+        try {
+            Attribute newAttribute;
+            newAttribute = getAttributeById(attribute.getAttributeId());
+            newAttribute.setAttributeName(attribute.getAttributeName());
+            getHibernateTemplate().update(newAttribute);
+        } catch (Exception ex) {
+            getHibernateTemplate().save(attribute);
+        }
+        getHibernateTemplate().flush();
     }
 
     public void deleteAttribute(Attribute attribute) {
@@ -59,35 +80,35 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public List<Attribute> getAllAttributesHavingDependence() {
-        String query = "from Attribute a " +
-                "join fetch a.productTypes " +
-                "join fetch a.values";
+        String query = "from Attribute a "
+                + "join fetch a.productTypes "
+                + "join fetch a.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByProductTypes() {
-        String query = "from Attribute a " +
-                "join fetch a.productTypes";
+        String query = "from Attribute a "
+                + "join fetch a.productTypes";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByProductType(ProductType productType) {
-        String query = "from Attribute a " +
-                "join fetch a.productTypes as productType " +
-                "where productType = :productType";
+        String query = "from Attribute a "
+                + "join fetch a.productTypes as productType "
+                + "where productType = :productType";
         return getHibernateTemplate().findByNamedParam(query, "productType", productType);
     }
 
     public List<Attribute> getAttributesByValues() {
-        String query = "from Attribute a " +
-                "join fetch a.values";
+        String query = "from Attribute a "
+                + "join fetch a.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByValue(Value value) {
-        String query = "from Attribute a " +
-                "join fetch a.values as value " +
-                "where value = :value";
+        String query = "from Attribute a "
+                + "join fetch a.values as value "
+                + "where value = :value";
         return getHibernateTemplate().findByNamedParam(query, "value", value);
     }
 

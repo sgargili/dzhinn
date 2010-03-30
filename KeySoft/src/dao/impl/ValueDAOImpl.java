@@ -30,14 +30,45 @@ public class ValueDAOImpl implements ValueDAO {
 
     public void addValue(Value value) {
         getHibernateTemplate().save(value);
+        getHibernateTemplate().flush();
     }
 
-    public void updateValue(Value value) {
-        getHibernateTemplate().update(value);
+    public void updateValueDependence(Value value) {
+        Value newValue;
+        try {
+            newValue = getValueById(value.getValueId());
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + value.getValueId());
+            return;
+        }
+        newValue.getAttributes().addAll(value.getAttributes());
+        newValue.getProductTypes().addAll(value.getProductTypes());
+        getHibernateTemplate().merge(newValue);
+        getHibernateTemplate().flush();
     }
 
-    public void addOrUpdateValue(Value value) {
-        getHibernateTemplate().saveOrUpdate(value);
+    public void updateValueNameOnly(Value value) {
+        try {
+            Value newValue;
+            newValue = getValueById(value.getValueId());
+            newValue.setValueName(value.getValueName());
+            getHibernateTemplate().update(newValue);
+        } catch (Exception ex) {
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + value.getValueId());
+        }
+        getHibernateTemplate().flush();
+    }
+
+    public void addOrUpdateValueNameOnly(Value value) {
+        try {
+            Value newValue;
+            newValue = getValueById(value.getValueId());
+            newValue.setValueName(value.getValueName());
+            getHibernateTemplate().update(newValue);
+        } catch (Exception ex) {
+            getHibernateTemplate().save(value);
+        }
+        getHibernateTemplate().flush();
     }
 
     public void deleteValue(Value value) {
@@ -49,35 +80,35 @@ public class ValueDAOImpl implements ValueDAO {
     }
 
     public List<Value> getAllValuesHavingDependence() {
-        String query = "from Value v " +
-                "join fetch v.productTypes " +
-                "join fetch v.attributes";
+        String query = "from Value v "
+                + "join fetch v.productTypes "
+                + "join fetch v.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<Value> getValuesByProductTypes() {
-        String query = "from Value v " +
-                "join fetch v.productTypes";
+        String query = "from Value v "
+                + "join fetch v.productTypes";
         return getHibernateTemplate().find(query);
     }
 
     public List<Value> getValuesByProductType(ProductType productType) {
-        String query = "from Value v " +
-                "join fetch v.productTypes as productType " +
-                "where productType = :productType";
+        String query = "from Value v "
+                + "join fetch v.productTypes as productType "
+                + "where productType = :productType";
         return getHibernateTemplate().findByNamedParam(query, "productType", productType);
     }
 
     public List<Value> getValuesByAttributes() {
-        String query = "from Value v " +
-                "join fetch v.attributes";
+        String query = "from Value v "
+                + "join fetch v.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<Value> getValuesByAttribute(Attribute attribute) {
-        String query = "from Value v " +
-                "join fetch v.attributes as attribute " +
-                "where attribute = :attribute";
+        String query = "from Value v "
+                + "join fetch v.attributes as attribute "
+                + "where attribute = :attribute";
         return getHibernateTemplate().findByNamedParam(query, "attribute", attribute);
     }
 

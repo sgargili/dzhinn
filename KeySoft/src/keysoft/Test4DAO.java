@@ -91,22 +91,26 @@ public class Test4DAO {
 //        }
 //        System.out.println("-------");
 
-        Value val = new Value();
-        val.setValueId(381);
-        Value val2 = new Value();
-        val2.setValueId(386);
-        Set set = new HashSet();
-        set.add(val);
-        set.add(val2);
-        ProductType pt = new ProductType();
-        pt.setProductTypeId(5);
-        Set set2 = new HashSet();
-        set2.add(pt);
-        Attribute atr = new Attribute();
-        atr.setAttributeId(1165);
-        atr.setAttributeName("Attribute 1165");
-        atr.setValues(set);
-        atr.setProductTypes(set2);
-        FactoryDAO.getInstance().getAttributeDAO().updateAttributeDependence(atr);
+//        Value val = new Value();
+//        val.setValueId(381);
+//        Value val2 = new Value();
+//        val2.setValueId(386);
+//        Set set = new HashSet();
+//        set.add(val);
+//        set.add(val2);
+//        ProductType pt = new ProductType();
+//        pt.setProductTypeId(5);
+//        Set set2 = new HashSet();
+//        set2.add(pt);
+//        Attribute atr = new Attribute();
+//        atr.setAttributeId(1165);
+//        atr.setAttributeName("Attribute 1165");
+//        atr.setValues(set);
+//        atr.setProductTypes(set2);
+//        FactoryDAO.getInstance().getAttributeDAO().updateAttributeDependence(atr);
+        Attribute at = new Attribute();
+        at.setAttributeId(2048);
+        at.setAttributeName("New!!!");
+        FactoryDAO.getInstance().getAttributeDAO().deleteAttribute(at);
     }
 }

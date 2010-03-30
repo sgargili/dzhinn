@@ -11,7 +11,7 @@
         <property name="valueName" type="string">
             <column name="value_name" length="65535" />
         </property>
-        <set name="attributes" inverse="true" table="attribute_to_value">
+        <set name="attributes" inverse="false" table="attribute_to_value">
             <key>
                 <column name="value_id" not-null="true" />
             </key>
@@ -19,7 +19,7 @@
                 <column name="attribute_id" not-null="true" />
             </many-to-many>
         </set>
-        <set name="productTypes" inverse="true" table="product_type_to_value">
+        <set name="productTypes" inverse="false" table="product_type_to_value">
             <key>
                 <column name="value_id" not-null="true" />
             </key>
