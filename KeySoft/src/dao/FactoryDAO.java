@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dao.impl.HeadphonesDAOImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -14,6 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class FactoryDAO {
 
     private ApplicationContext factory = new ClassPathXmlApplicationContext("config/SpringConfig.xml");
+    private static HeadphonesDAO headphonesDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -36,5 +38,11 @@ public class FactoryDAO {
     }
     public ValueDAO getValueDAO() {
         return (ValueDAO) factory.getBean("ValueDAO");
+    }
+    public HeadphonesDAO getHeadphonesDAO() {
+        if (headphonesDAO == null) {
+            headphonesDAO = new HeadphonesDAOImpl();
+        }
+        return headphonesDAO;
     }
 }

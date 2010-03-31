@@ -13,5 +13,6 @@
     <mapping resource="pojo/Soft.hbm.xml"/>
     <mapping resource="pojo/Value.hbm.xml"/>
     <mapping resource="pojo/ProductType.hbm.xml"/>
+    <mapping resource="pojo/Headphones.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

@@ -24,6 +24,7 @@ import org.xml.sax.ContentHandler;
 import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
+import pojo.Headphones;
 import pojo.Soft;
 
 /**
@@ -249,7 +250,7 @@ public class DownloadImpl implements Download {
                 soft.setBenefits(benefits.replaceAll("Особенности", ""));
                 soft.setAttributes(attributes);
                 soft.setKeyArticle(Integer.parseInt(article));
-                fd.getSoftDAO().addSoft(soft);
+//                fd.getSoftDAO().addSoft(soft);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -424,15 +425,17 @@ public class DownloadImpl implements Download {
                 xml = new File(dst);
                 xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
                 int eventType = xpp.getEventType();
+                //до этого стандартно
+
                 while (eventType != XmlPullParser.END_DOCUMENT) {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(GAME_PAGE))) {
                         fullNameBool = true;
                     }
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1) {
-                       sss = xpp.getAttributeValue(0);
+                        sss = xpp.getAttributeValue(0);
                         m = p.matcher(sss);
-                        if(m.find()){
-                        titleBool = true;
+                        if (m.find()) {
+                            titleBool = true;
                         }
                         //titleBool = true;
                     }
@@ -457,14 +460,14 @@ public class DownloadImpl implements Download {
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(OBJECT_BOX))) {
                         boxBool = true;
                     }
-                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(OBJECT_LANG))) {
-                        langBool = true;
-                    }
+//                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(OBJECT_LANG))) {
+//                        langBool = true;
+//                    }
                     if (eventType == XmlPullParser.TEXT && fullNameBool) {
                         fullName = xpp.getText().trim();
                     }
                     if (eventType == XmlPullParser.TEXT && titleBool) {
-                        title += xpp.getText().trim()+";";
+                        title += xpp.getText() + "\n\r";
                     }
                     if (eventType == XmlPullParser.TEXT && manufacturerBool) {
                         manufacturer += xpp.getText();
@@ -535,17 +538,17 @@ public class DownloadImpl implements Download {
                     eventType = xpp.next();
                 }
                 System.out.println(fullName);
-//                System.out.println(pic);
+                System.out.println(pic);
                 System.out.println(title);
-//                System.out.println(manufacturer);
-//                System.out.println(programmers);
-//                System.out.println(date);
-//                System.out.println(type);
-//                System.out.println(box);
-//                System.out.println(lang);
-//                System.out.println(description);
-//                System.out.println(benefits);
-//                System.out.println(systemReq);
+                System.out.println(manufacturer);
+                System.out.println(programmers);
+                System.out.println(date);
+                System.out.println(type);
+                System.out.println(box);
+                System.out.println(lang);
+                System.out.println(description);
+                System.out.println(benefits);
+                System.out.println(systemReq);
                 attributes = title + "|||" + manufacturer + "|||" + programmers + "|||" + date + "|||" + type + "|||" + lang;
                 soft = new Soft();
                 soft.setFullName(fullName);
@@ -555,7 +558,7 @@ public class DownloadImpl implements Download {
                 soft.setBenefits(benefits.replaceAll("Особенности", ""));
                 soft.setAttributes(attributes);
                 soft.setKeyArticle(Integer.parseInt(article));
-                //fd.getSoftDAO().addSoft(soft);
+//                fd.getSoftDAO().addSoft(soft);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
@@ -565,6 +568,223 @@ public class DownloadImpl implements Download {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        try {
+            os.close();
+            w.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadContentFromPleer(String article, String url) {
+        //throw new UnsupportedOperationException("Not supported yet.");
+        String IMAGE_TAG = "image";
+        String BLOCKT_TAG = "blockTitle2";
+//        String IMG_LINK = "img_link";
+//        String OBJECT_TITLE = "object_title";
+//        String OBJECT_MANUF = "object_manuf";
+//        String OBJECT_PROG = "object_prog";
+//        String OBJECT_DATE = "object_date";
+//        String OBJECT_TYPE = "object_type";
+//        String OBJECT_BOX = "object_box";
+//        String OBJECT_LANG = "object_lang";
+
+        FactoryDAO fd = FactoryDAO.getInstance();
+        Soft soft;
+        if (url.equals("") || url == null) {
+            soft = new Soft();
+            soft.setKeyArticle(Integer.parseInt(article));
+            soft.setFullName("Google нифига не нашел...");
+            fd.getSoftDAO().addSoft(soft);
+            return;
+        }
+        Http http = new Http();
+        String htmlData = http.DownloadContentAsString(url, "WINDOWS-1251", true);
+
+        String dst = "C://javaTemp/dst.xhtml";
+
+        String tempFile = "C://javaTemp/temp.html";
+        String sss;
+
+        Pattern p = Pattern.compile("buymessage");
+
+        Matcher m;
+
+        int attrFlag = 1;
+
+        String fullName = "",
+                pic = "",
+                description = "",
+                attributes = "";
+
+        boolean fullNameBool = false,
+                imageTagBool = false,
+                attrTagBool1 = false,
+                attrTagBool2 = false,
+                attrTagBool3=false,
+                bodyTagBool = false,
+                tdTagBool = false,
+                markBool1 = false,
+                markBool2 = false,
+                markTextBool=false;
+
+
+
+        OutputStream os = null;
+
+        XMLReader r;
+
+        Writer w = null;
+
+        ContentHandler h;
+
+        try {
+            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            XmlPullParser xpp = factory.newPullParser();
+            File xml = null;
+            File html = new File(tempFile);
+            FileUtils.writeStringToFile(html, htmlData, "UTF-8");
+
+            try {
+
+                os = new FileOutputStream(dst);
+                r = new Parser();
+                w = new OutputStreamWriter(os, "UTF-8");
+                h = new XMLWriter(w);
+                r.setContentHandler(h);
+                r.parse(html.toURI().toString());
+                xml = new File(dst);
+                xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
+                int eventType = xpp.getEventType();
+                //до этого стандартно
+
+                while (eventType != XmlPullParser.END_DOCUMENT) {
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && (xpp.getAttributeValue(0).equals(IMAGE_TAG))) {
+                        imageTagBool = true;
+                    }
+
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && imageTagBool) {
+                        pic = "http://pleer.ru" + xpp.getAttributeValue(1);
+//                        imageTagBool = false;
+                    }
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("img") && imageTagBool) {
+                        fullName = xpp.getAttributeValue(2);
+                        imageTagBool = false;
+                    }
+//******************************** Поиск атрибутов на странице******************************
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals(BLOCKT_TAG)) {
+                        attrTagBool1 = true;
+                    }
+
+                    if (eventType == XmlPullParser.TEXT && attrTagBool1 && xpp.getText().trim().equals("Техническое описание")) {
+                        attrTagBool1 = false;
+                        attrTagBool2 = true;
+                    }
+
+                    if (eventType == XmlPullParser.START_TAG && attrTagBool2 && xpp.getName().equals("div")&&xpp.getAttributeCount()==1&&xpp.getAttributeValue(0).equals("text")) {
+                        attrTagBool2 = false;
+                        attrTagBool3 = true;
+                    }
+
+                    if (eventType == XmlPullParser.TEXT && attrTagBool3) {
+                      if (!xpp.getText().trim().equals(" ")|!xpp.getText().trim().equals(" ")){
+                        attributes+=xpp.getText().trim()+";";
+                      }
+                    }
+                    if (eventType == XmlPullParser.END_TAG && attrTagBool3 && xpp.getName().equals("div")) {
+                        attrTagBool3 = false;
+                    }
+
+//                    if (eventType == XmlPullParser.START_TAG && attrTagBool2 && xpp.getName().equals("tbody")) {
+//                        bodyTagBool = true;
+//                        attrTagBool2 = false;
+//                    }
+//
+//
+//                    if (eventType == XmlPullParser.START_TAG && bodyTagBool && xpp.getName().equals("td")) {
+//                        tdTagBool = true;
+//                    }
+//
+//                    if (eventType == XmlPullParser.TEXT && tdTagBool && !xpp.getText().equals(" ")) {
+//                        if (attrFlag % 2 == 1) {
+//                            attributes += xpp.getText().trim();
+//                            attrFlag++;
+//                            tdTagBool = false;
+//                        } else {
+//                            attributes += " - " + xpp.getText().trim() + ";";
+//                            attrFlag++;
+//                            tdTagBool = false;
+//                        }
+//                    }
+//
+//
+//                    if (eventType == XmlPullParser.END_TAG && bodyTagBool && xpp.getName().equals("tbody")) {
+//                        bodyTagBool = false;
+//                    }
+//*************************Поиск маркетинга на странице************************************
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals(BLOCKT_TAG)) {
+                        markBool1 = true;
+                    }
+                    if (eventType == XmlPullParser.TEXT && markBool1 && xpp.getText().trim().equals("Полное описание")) {
+                        markBool1 = false;
+                        markBool2 = true;
+                    }
+                    if (eventType == XmlPullParser.START_TAG && markBool2 && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals("text")) {
+                        markBool2 = false;
+                        markTextBool=true;
+                    }
+                    if (eventType == XmlPullParser.TEXT && markTextBool ) {
+                        markTextBool = false;
+                        description=xpp.getText().trim();
+                    }
+
+                    eventType = xpp.next();
+                }
+                System.out.println("Fullname: " + fullName);
+                System.out.println("Ссылка на изображение: " + pic);
+                System.out.println("Атрибуты: " + attributes);
+//            System.out.println(title);
+//            System.out.println(manufacturer);
+//            System.out.println(programmers);
+//            System.out.println(date);
+//            System.out.println(type);
+//            System.out.println(box);
+//            System.out.println(lang);
+            System.out.println("Маркетинговое описание: "+description);
+//            System.out.println(benefits);
+//            System.out.println(systemReq);
+//            attributes = title + "|||" + manufacturer + "|||" + programmers + "|||" + date + "|||" + type + "|||" + lang;
+//            soft = new Soft();
+//            soft.setFullName(fullName);
+//            soft.setDescriptions(description.replaceAll("Описание", ""));
+//            soft.setPicUrl(pic);
+//            soft.setSystemRequirements(systemReq.replaceAll("Системные требования", ""));
+//            soft.setBenefits(benefits.replaceAll("Особенности", ""));
+//            soft.setAttributes(attributes);
+//            soft.setKeyArticle(Integer.parseInt(article));
+//                fd.getSoftDAO().addSoft(soft);
+             Headphones hp=new Headphones();
+             hp.setAttributes(attributes);
+             hp.setDescriptions(description);
+             hp.setFullName(fullName);
+             hp.setKeyArticle(Integer.parseInt(article));
+             hp.setPicUrl(pic);
+             fd.getHeadphonesDAO().addHeadphones(hp);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            xml.delete();
+            html.delete();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+
+
+
+
+
         try {
             os.close();
             w.close();

@@ -30,27 +30,28 @@ public class Main {
      */
     public static void main(String[] args) {
 
-//        Download dl = new DownloadImpl();
-//        Map map = new HashMap();
-//        String article, description;
-//        int i = 1;
-//        try {
-//            CsvReader reader = new CsvReader("C://FakeArticles.csv", ';', Charset.forName("Windows-1251"));
-//            while (reader.readRecord()) {
-//                map.put(reader.get(0).trim(), reader.get(1).trim());
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        Iterator it = map.keySet().iterator();
-//        while (it.hasNext()) {
-//            article = (String) it.next();
-//            description = (String) map.get(article);
-//            System.out.println(i++ + " - " + article + " - " + description);
-//            dl.loadContentFromCdDiski(article, dl.askGoogle(description));
-//        }
         Download dl = new DownloadImpl();
-        dl.loadContentFromCdVSeti("989898", "http://www.cdvseti.ru/id14664.html");
+        Map map = new HashMap();
+        String article, description;
+        int i = 1;
+        try {
+            CsvReader reader = new CsvReader("C://1/1.csv", ';', Charset.forName("Windows-1251"));
+            while (reader.readRecord()) {
+                map.put(reader.get(0).trim(), reader.get(3).trim());
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        Iterator it = map.keySet().iterator();
+        while (it.hasNext()) {
+            if (i++<24) continue;
+            article = (String) it.next();
+            description = (String) map.get(article);
+            System.out.println(i + " - " + article + " - " + description);
+            dl.loadContentFromPleer(article, description);
+        }
+//        Download dl = new DownloadImpl();
+//        dl.loadContentFromPleer("989898", "http://pleer.ru/_16537.html");
 //        Map fake = new HashMap();
 //        try {
 //            CsvReader reader = new CsvReader("C://FakeArticles.csv", ';', Charset.forName("Windows-1251"));

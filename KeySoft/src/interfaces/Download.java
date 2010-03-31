@@ -14,5 +14,7 @@ public interface Download {
 
     public void loadContentFromCdVSeti(String article, String url);
 
+    public void loadContentFromPleer(String article, String url);
+
     public String askGoogle(String description);
 }
