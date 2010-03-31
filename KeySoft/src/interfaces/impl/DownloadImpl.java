@@ -621,12 +621,12 @@ public class DownloadImpl implements Download {
                 imageTagBool = false,
                 attrTagBool1 = false,
                 attrTagBool2 = false,
-                attrTagBool3=false,
+                attrTagBool3 = false,
                 bodyTagBool = false,
                 tdTagBool = false,
                 markBool1 = false,
                 markBool2 = false,
-                markTextBool=false;
+                markTextBool = false;
 
 
 
@@ -681,15 +681,15 @@ public class DownloadImpl implements Download {
                         attrTagBool2 = true;
                     }
 
-                    if (eventType == XmlPullParser.START_TAG && attrTagBool2 && xpp.getName().equals("div")&&xpp.getAttributeCount()==1&&xpp.getAttributeValue(0).equals("text")) {
+                    if (eventType == XmlPullParser.START_TAG && attrTagBool2 && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals("text")) {
                         attrTagBool2 = false;
                         attrTagBool3 = true;
                     }
 
                     if (eventType == XmlPullParser.TEXT && attrTagBool3) {
-                      if (!xpp.getText().trim().equals(" ")|!xpp.getText().trim().equals(" ")){
-                        attributes+=xpp.getText().trim()+";";
-                      }
+                        if (!xpp.getText().trim().equals(" ") | !xpp.getText().trim().equals(" ")) {
+                            attributes += xpp.getText().trim() + ";";
+                        }
                     }
                     if (eventType == XmlPullParser.END_TAG && attrTagBool3 && xpp.getName().equals("div")) {
                         attrTagBool3 = false;
@@ -731,11 +731,11 @@ public class DownloadImpl implements Download {
                     }
                     if (eventType == XmlPullParser.START_TAG && markBool2 && xpp.getName().equals("div") && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals("text")) {
                         markBool2 = false;
-                        markTextBool=true;
+                        markTextBool = true;
                     }
-                    if (eventType == XmlPullParser.TEXT && markTextBool ) {
+                    if (eventType == XmlPullParser.TEXT && markTextBool) {
                         markTextBool = false;
-                        description=xpp.getText().trim();
+                        description = xpp.getText().trim();
                     }
 
                     eventType = xpp.next();
@@ -750,7 +750,7 @@ public class DownloadImpl implements Download {
 //            System.out.println(type);
 //            System.out.println(box);
 //            System.out.println(lang);
-            System.out.println("Маркетинговое описание: "+description);
+                System.out.println("Маркетинговое описание: " + description);
 //            System.out.println(benefits);
 //            System.out.println(systemReq);
 //            attributes = title + "|||" + manufacturer + "|||" + programmers + "|||" + date + "|||" + type + "|||" + lang;
@@ -763,13 +763,13 @@ public class DownloadImpl implements Download {
 //            soft.setAttributes(attributes);
 //            soft.setKeyArticle(Integer.parseInt(article));
 //                fd.getSoftDAO().addSoft(soft);
-             Headphones hp=new Headphones();
-             hp.setAttributes(attributes);
-             hp.setDescriptions(description);
-             hp.setFullName(fullName);
-             hp.setKeyArticle(Integer.parseInt(article));
-             hp.setPicUrl(pic);
-             fd.getHeadphonesDAO().addHeadphones(hp);
+                Headphones hp = new Headphones();
+                hp.setAttributes(attributes);
+                hp.setDescriptions(description);
+                hp.setFullName(fullName);
+                hp.setKeyArticle(Integer.parseInt(article));
+                hp.setPicUrl(pic);
+                fd.getHeadphonesDAO().addHeadphones(hp);
 
             } catch (Exception ex) {
                 ex.printStackTrace();
