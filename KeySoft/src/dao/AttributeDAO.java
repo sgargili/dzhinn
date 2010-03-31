@@ -38,4 +38,6 @@ public interface AttributeDAO {
     public List<Attribute> getAttributesByValue(Value value);
 
     public Attribute getAttributeById(int id);
+
+    public Attribute getAttributeByIdWithValues(int id);
 }

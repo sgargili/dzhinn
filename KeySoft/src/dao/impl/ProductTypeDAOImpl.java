@@ -4,6 +4,7 @@
  */
 package dao.impl;
 
+import dao.FactoryDAO;
 import dao.ProductTypeDAO;
 import java.util.List;
 import org.hibernate.SessionFactory;
@@ -82,39 +83,53 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     }
 
     public List<ProductType> getAllProductTypesHavingDependence() {
-        String query = "from ProductType p "
-                + "join fetch p.values "
-                + "join fetch p.attributes";
+        String query = "from ProductType p " + "join fetch p.values " + "join fetch p.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByAttributes() {
-        String query = "from ProductType p "
-                + "join fetch p.attributes";
+        String query = "from ProductType p " + "join fetch p.attributes";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByAttribute(Attribute attribute) {
-        String query = "from ProductType p "
-                + "join fetch p.attributes as attribute "
-                + "where attribute = :attribute";
+        String query = "from ProductType p " + "join fetch p.attributes as attribute " + "where attribute = :attribute";
         return getHibernateTemplate().findByNamedParam(query, "attribute", attribute);
     }
 
     public List<ProductType> getProductTypesByValues() {
-        String query = "from ProductType p "
-                + "join fetch p.values";
+        String query = "from ProductType p " + "join fetch p.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<ProductType> getProductTypesByValue(Value value) {
-        String query = "from ProductType p "
-                + "join fetch p.values as value "
-                + "where value = :value";
+        String query = "from ProductType p " + "join fetch p.values as value " + "where value = :value";
         return getHibernateTemplate().findByNamedParam(query, "value", value);
     }
 
     public ProductType getProductTypeById(int id) {
         return (ProductType) getHibernateTemplate().load(ProductType.class, id);
+    }
+
+    public ProductType getProductTypeByIdWithDependence(int id) {
+        ProductType pt;
+        pt = (ProductType) getHibernateTemplate().load(ProductType.class, id);
+        pt.getAttributes().isEmpty();
+        pt.getValues().isEmpty();
+        return pt;
+    }
+
+    public ProductType getProductTypeByIdWithAttributes(int id) {
+        ProductType pt;
+        pt = (ProductType) getHibernateTemplate().load(ProductType.class, id);
+        pt.getAttributes().isEmpty();
+        return pt;
+    }
+
+    public ProductType getProductTypeByIdWithValues(int id) {
+        ProductType pt;
+        pt = (ProductType) getHibernateTemplate().load(ProductType.class, id);
+        pt.getValues().isEmpty();
+        return pt;
     }
 }

@@ -151,19 +151,20 @@ public class Test4DAO {
 //        pt.getValues().add(val3);
 //        fd.getProductTypeDAO().addProductType(pt);
 
-        List pts = fd.getProductTypeDAO().getAllProductTypesHavingDependence();
-        ProductType pt;
+        //List pts = fd.getProductTypeDAO().getAllProductTypesHavingDependence();
+        ProductType pt = fd.getProductTypeDAO().getProductTypeByIdWithAttributes(1);
         Attribute at;
-        System.out.println(pts.size());
-        Iterator it = pts.iterator();
-        while(it.hasNext()){
-            pt = (ProductType) it.next();
+        Value val;
+        //System.out.println(pts.size());
+        //Iterator it = pts.iterator();
+       // while(it.hasNext()){
+           // pt = (ProductType) it.next();
             System.out.println(pt.getProductTypeId());
-            Iterator it2 = pt.getAttributes().iterator();
+            Iterator it2 = pt.getValues().iterator();
             while(it2.hasNext()){
-                at = (Attribute) it2.next();
-                System.out.println(at.getAttributeName());
+                val = (Value) it2.next();
+                System.out.println(val.getValueName());
             }
-        }
+       // }
     }
 }

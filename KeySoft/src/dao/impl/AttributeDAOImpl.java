@@ -80,40 +80,39 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public List<Attribute> getAllAttributesHavingDependence() {
-        String query = "from Attribute a "
-                + "join fetch a.productTypes "
-                + "join fetch a.values";
+        String query = "from Attribute a " + "join fetch a.productTypes " + "join fetch a.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByProductTypes() {
-        String query = "from Attribute a "
-                + "join fetch a.productTypes";
+        String query = "from Attribute a " + "join fetch a.productTypes";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByProductType(ProductType productType) {
-        String query = "from Attribute a "
-                + "join fetch a.productTypes as productType "
-                + "where productType = :productType";
+        String query = "from Attribute a " + "join fetch a.productTypes as productType " + "where productType = :productType";
         return getHibernateTemplate().findByNamedParam(query, "productType", productType);
     }
 
     public List<Attribute> getAttributesByValues() {
-        String query = "from Attribute a "
-                + "join fetch a.values";
+        String query = "from Attribute a " + "join fetch a.values";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAttributesByValue(Value value) {
-        String query = "from Attribute a "
-                + "join fetch a.values as value "
-                + "where value = :value";
+        String query = "from Attribute a " + "join fetch a.values as value " + "where value = :value";
         return getHibernateTemplate().findByNamedParam(query, "value", value);
     }
 
     public Attribute getAttributeById(int id) {
         return (Attribute) getHibernateTemplate().load(Attribute.class, id);
+    }
+
+    public Attribute getAttributeByIdWithValues(int id) {
+        Attribute attribute;
+        attribute = (Attribute) getHibernateTemplate().load(Attribute.class, id);
+        attribute.getValues().isEmpty();
+        return attribute;
     }
 //    public Set<ProductType> getAllProductTypesByAttribute(Attribute attribute) {
 //        List<Attribute> outTemp = null;

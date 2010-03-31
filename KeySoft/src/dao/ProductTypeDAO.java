@@ -38,4 +38,10 @@ public interface ProductTypeDAO {
     public List<ProductType> getProductTypesByValue(Value value);
 
     public ProductType getProductTypeById(int id);
+
+    public ProductType getProductTypeByIdWithDependence(int id);
+
+    public ProductType getProductTypeByIdWithAttributes(int id);
+
+    public ProductType getProductTypeByIdWithValues(int id);
 }
