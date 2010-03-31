@@ -19,6 +19,8 @@
         </property>
         <property name="attributes" type="string">
             <column name="attributes" length="65535" />
+            <property name="vendor" type="string">
+            <column name="vendor" length="65535" />
         </property>
         <property name="descriptions" type="string">
             <column name="descriptions" length="65535" />
