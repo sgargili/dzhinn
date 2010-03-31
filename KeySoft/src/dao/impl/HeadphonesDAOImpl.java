@@ -6,9 +6,9 @@ package dao.impl;
 
 import dao.HeadphonesDAO;
 import java.util.List;
-import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Headphones;
-import util.HibernateUtil;
 
 /**
  *
@@ -16,28 +16,26 @@ import util.HibernateUtil;
  */
 public class HeadphonesDAOImpl implements HeadphonesDAO {
 
-    public void addHeadphones(Headphones headphones) {
-        Session session = null;
-        try {
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.saveOrUpdate(headphones);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (session != null && session.isOpen()) {
+    private HibernateTemplate hibernateTemplate;
 
-                session.close();
-            }
-        }
+    public HibernateTemplate getHibernateTemplate() {
+        return hibernateTemplate;
+    }
+
+    public void setSessionFactory(SessionFactory sf) {
+        this.hibernateTemplate = new HibernateTemplate(sf);
+    }
+
+    public void addHeadphones(Headphones headphones) {
+        getHibernateTemplate().save(headphones);
+        getHibernateTemplate().flush();
     }
 
     public List getAllHeadphones() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (List<Headphones>) getHibernateTemplate().loadAll(Headphones.class);
     }
 
     public Headphones getHeadphonesById(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return (Headphones) getHibernateTemplate().load(Headphones.class, id);
     }
 }

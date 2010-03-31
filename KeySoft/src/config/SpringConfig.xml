@@ -17,17 +17,19 @@
                 <value>pojo/ProductType.hbm.xml</value>
                 <value>pojo/Value.hbm.xml</value>
                 <value>pojo/Soft.hbm.xml</value>
+                <value>pojo/Headphones.hbm.xml</value>
             </list>
         </property>
 
         <property name="hibernateProperties">
             <value>
             hibernate.dialect=org.hibernate.dialect.MySQLDialect
+            hibernate.connection.characterEncoding=UTF-8
+            hibernate.current_session_context_class=thread
             hibernate.show_sql=true
             hibernate.format_sql=true
             </value>
         </property>
-
     </bean>
 
     <bean id="dataSource"
@@ -37,7 +39,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 
         <property name="url">
-            <value>jdbc:mysql://localhost:3306/softdb?useUnicode=true&amp;characterEncoding=utf-8</value>
+            <value>jdbc:mysql://192.168.1.177:3306/softdb?useUnicode=true&amp;characterEncoding=utf-8</value>
         </property>
 
         <property name="username">
@@ -68,6 +70,10 @@
     </bean>
 
     <bean id="ValueDAOTemp" class="dao.impl.ValueDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="HeadphonesDAOTemp" class="dao.impl.HeadphonesDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -147,6 +153,24 @@
 
         <property name="proxyInterfaces">
             <value>dao.SoftDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="HeadphonesDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="HeadphonesDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.HeadphonesDAO</value>
         </property>
 
         <property name="interceptorNames">
