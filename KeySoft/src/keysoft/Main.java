@@ -80,17 +80,18 @@ public class Main {
         String[] atr_val = new String[2];
         CsvWriter writer = new CsvWriter("C://1/HeadphonesUpload.csv", ',', Charset.forName("WINDOWS-1251"));
         Iterator it = list.iterator();
-        String[] atr ;//массив со строками-атрибутами
+        String[] atr;//массив со строками-атрибутами
         int ar_it = 0;//пробегает по элементам atr
         Boolean wrt = false;
-        int ctr=0;
+        int ctr = 0;
         while (it.hasNext()) {
             hd = (Headphones) it.next();
             ctr++;
-            System.out.print(ctr+" ");
+            System.out.println("*********************************************");
+            System.out.print(ctr + ") ");
             atr = hd.getAttributes().split(";");//в atr хранятся полученные строки путем разделения строки со списком атрибутов разделителем ;
             System.out.println("получается, что всего " + atr.length + " атрибутов у данного продукта");
-         
+
             while (ar_it < atr.length) {
 
                 mass[0] = hd.getFullName() + "";
@@ -99,27 +100,34 @@ public class Main {
                 mass[3] = "Headphones";
                 mass[4] = hd.getPicUrl() + "";
                 mass[5] = "Main";
+
+                atr_val[0] = "";
+                atr_val[1] = "";
                 //******пытаемся разделить атрибут и его значение
-                if (!atr[ar_it].equals("")){
-                if (atr[ar_it].contains(":")) {
-                    atr_val = atr[ar_it].split(":");
-                    System.out.println("Разделилось:");
-                    wrt = true;
-                } else {
-                    if (atr[ar_it].contains("-")) {
-                        atr_val = atr[ar_it].split("-");
-                        System.out.println("Разделилось-");
-                        wrt = true;
+                if (!atr[ar_it].equals("")) {
+                    System.out.println("Строка " + atr[ar_it]);
+                    if (atr[ar_it].contains(": ")) {
+                        atr_val = atr[ar_it].split(":");
+                        System.out.println("разделилась\":\"");
+//                    wrt = true;
+                    } else {
+                        if (atr[ar_it].contains("-")) {
+                            atr_val = atr[ar_it].split("-");
+                            System.out.println("разделилась\"-\"");
+//                        wrt = true;
+                        }
                     }
-                }
                 }
 //                if (atr[ar_it].matches(" ")){
 //                atr_val=atr[ar_it].split(" ");
 //                }
-                System.out.println("Атрибут: "+atr_val[0]);
-                System.out.println("значение: "+atr_val[1]);
-                mass[6] = atr_val[0];
-                mass[7] = atr_val[1];
+                if (!atr_val[0].equals(null) && !atr_val[1].equals(null)&&!atr_val[0].equals(" ")) {
+                    System.out.println("Атрибут: " + atr_val[0]);
+                    System.out.println("значение: " + atr_val[1]);
+                    mass[6] = atr_val[0];
+                    mass[7] = atr_val[1];
+                    wrt = true;
+                }
 //                mass[6]="Атрибут";
 //                mass[7]=atr[ar_it];
                 ar_it++;
@@ -131,17 +139,18 @@ public class Main {
 //            mass[5] = soft.getBenefits().replaceAll("\n", "").replaceAll("\t", "");
 //            mass[6] = soft.getSystemRequirements().replaceAll("\n", "".replaceAll("\t", ""));
                 try {
+                    if (wrt == true) {
+                        writer.writeRecord(mass);
+                        System.out.println("Записано для продукта номер " + ctr);
+                    }
 
-                    writer.writeRecord(mass);
-                    System.out.println("Записано для продукта номер "+ctr);
-                    
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 writer.flush();
             }
-            ar_it=0;
+            ar_it = 0;
         }
         writer.close();
     }
