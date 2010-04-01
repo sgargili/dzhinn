@@ -31,35 +31,36 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        Download dl = new DownloadImpl();
-        Map map = new HashMap();
-//        String[] map;
-//        map=new String[3];
-        Headphones map1=new Headphones();
-        String article, description,vend;
-        int i = 1;
-        try {
-            CsvReader reader = new CsvReader("C://1/1.csv", ';', Charset.forName("Windows-1251"));
-            while (reader.readRecord()) {
-                map1.setVendor(reader.get(1).trim());
-                map1.setPicUrl(reader.get(3).trim());
-                map.put(reader.get(0).trim(), map1);
-//                map[0]=reader.get(0).trim();
-//                map[1]=reader.get(1).trim();
-//                map[2]=reader.get(2).trim();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        Iterator it1 = map.keySet().iterator();
-        while (it1.hasNext()) {
-            article = (String) it1.next();
-            map1=(Headphones) map.get(article);
-            description = map1.getPicUrl();
-            vend=map1.getVendor();
-            System.out.println(i++ + " - " + article + " - " + vend+" "+description);
-            dl.loadContentFromPleer(article, description, vend);
-        }
+//        Download dl = new DownloadImpl();
+//        Map map = new HashMap();
+//
+//        Headphones map1;
+//
+//        String article, description, vend;
+//        int i = 1;
+//        try {
+//            CsvReader reader = new CsvReader("C://1/1.csv", ';', Charset.forName("Windows-1251"));
+//            while (reader.readRecord()) {
+//                map1 = new Headphones();
+//                map1.setVendor(reader.get(1).trim());
+//                map1.setPicUrl(reader.get(3).trim());
+//                map.put(reader.get(0).trim(), map1);
+//
+//            }
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//
+//        Iterator it1 = map.keySet().iterator();
+//        while (it1.hasNext()) {
+//            article = (String) it1.next();
+//            map1 = (Headphones) map.get(article);
+//            description = map1.getPicUrl();
+//            vend = map1.getVendor();
+//            System.out.println(i++ + " - " + article + " - " + vend + " " + description);
+//            dl.loadContentFromPleer(article, description, vend);
+//        }
+        //**************************************до этого идет код по считыванию контента со страниц
 //        Download dl = new DownloadImpl();
 //        dl.loadContentFromPleer("989898", "http://pleer.ru/_16537.html");
 //        Map fake = new HashMap();
@@ -75,17 +76,53 @@ public class Main {
 
         List list = FactoryDAO.getInstance().getHeadphonesDAO().getAllHeadphones();
         Headphones hd;
-        String[] mass = new String[7];
-        CsvWriter writer = new CsvWriter("C://SoftAll.csv", ',', Charset.forName("WINDOWS-1251"));
+        String[] mass = new String[8];
+        String[] atr_val = new String[2];
+        CsvWriter writer = new CsvWriter("C://1/HeadphonesUpload.csv", ',', Charset.forName("WINDOWS-1251"));
         Iterator it = list.iterator();
-        String[] atr;//массив со строками-атрибутами
+        String[] atr ;//массив со строками-атрибутами
         int ar_it = 0;//пробегает по элементам atr
+        Boolean wrt = false;
+        int ctr=0;
         while (it.hasNext()) {
             hd = (Headphones) it.next();
-            atr = hd.getAttributes().split(";");
+            ctr++;
+            System.out.print(ctr+" ");
+            atr = hd.getAttributes().split(";");//в atr хранятся полученные строки путем разделения строки со списком атрибутов разделителем ;
+            System.out.println("получается, что всего " + atr.length + " атрибутов у данного продукта");
+         
             while (ar_it < atr.length) {
+
                 mass[0] = hd.getFullName() + "";
-                mass[1]= hd.getPicUrl()+"";
+                mass[1] = hd.getVendor() + "";
+                mass[2] = hd.getKeyArticle() + "";
+                mass[3] = "Headphones";
+                mass[4] = hd.getPicUrl() + "";
+                mass[5] = "Main";
+                //******пытаемся разделить атрибут и его значение
+                if (!atr[ar_it].equals("")){
+                if (atr[ar_it].contains(":")) {
+                    atr_val = atr[ar_it].split(":");
+                    System.out.println("Разделилось:");
+                    wrt = true;
+                } else {
+                    if (atr[ar_it].contains("-")) {
+                        atr_val = atr[ar_it].split("-");
+                        System.out.println("Разделилось-");
+                        wrt = true;
+                    }
+                }
+                }
+//                if (atr[ar_it].matches(" ")){
+//                atr_val=atr[ar_it].split(" ");
+//                }
+                System.out.println("Атрибут: "+atr_val[0]);
+                System.out.println("значение: "+atr_val[1]);
+                mass[6] = atr_val[0];
+                mass[7] = atr_val[1];
+//                mass[6]="Атрибут";
+//                mass[7]=atr[ar_it];
+                ar_it++;
 
 //            mass[1] = (String) fake.get(soft.getKeyArticle() + "");
 //            mass[2] = soft.getFullName().replaceAll("\n", "").replaceAll("\t", "");
@@ -94,12 +131,17 @@ public class Main {
 //            mass[5] = soft.getBenefits().replaceAll("\n", "").replaceAll("\t", "");
 //            mass[6] = soft.getSystemRequirements().replaceAll("\n", "".replaceAll("\t", ""));
                 try {
+
                     writer.writeRecord(mass);
+                    System.out.println("Записано для продукта номер "+ctr);
+                    
+
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
                 writer.flush();
             }
+            ar_it=0;
         }
         writer.close();
     }
