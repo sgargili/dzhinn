@@ -34,6 +34,13 @@
         leaf:true
     }]
 },{
+    text:'Grabli',
+    children:[{
+        text:'Грабли контента',
+        id:'eGrabli',
+        leaf:true
+    }]
+},{
     text:'Если делать нечего',
     children:[{
         text:'Чат',

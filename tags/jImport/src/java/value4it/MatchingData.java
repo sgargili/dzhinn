@@ -21,6 +21,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import Pojo.ArticleData;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -38,14 +39,15 @@ public class MatchingData {
         }
 
         File outputFile = new File(fileName + ".xlsx");
-
+        //File temp = new File("C:/temp");
+        //FileUtils.
         ArticleData article;
         List articles = new ArrayList();
         Set articles2 = new TreeSet();
 
         if (type == CSV) {
             try {
-                CsvReader reader = new CsvReader(uploadFile, ',', Charset.forName("WINDOWS-1251"));
+                CsvReader reader = new CsvReader("C://newFile", ',', Charset.forName("WINDOWS-1251"));
                 while (reader.readRecord()) {
                     article = new ArticleData(reader.get(0).trim(), reader.get(1).trim(), "0");
                     articles.add(article);

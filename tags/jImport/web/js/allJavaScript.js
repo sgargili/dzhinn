@@ -9,6 +9,109 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+var ds = new Ext.data.ArrayStore({
+    data: [[123,'One Hundred Twenty Three'],
+    ['1', 'One'], ['2', 'Two'], ['3', 'Three'], ['4', 'Four'], ['5', 'Five'],
+    ['6', 'Six'], ['7', 'Seven'], ['8', 'Eight'], ['9', 'Nine']],
+    fields: ['value','text'],
+    sortInfo: {
+        field: 'value',
+        direction: 'ASC'
+    }
+});
+
+/*
+ * Ext.ux.form.ItemSelector Example Code
+ */
+
+
+var chatForm = new Ext.form.FormPanel({
+    style: {
+        width:'100%',
+        marginTop: '0px',
+        marginBottom: '0px'
+    },
+    buttonAlign: 'right',
+    layout:'column',
+    items:[
+    {
+        html:'<h1>Ник:</h1>',
+        style: {
+            marginTop: '5px',
+            marginRight: '7px'
+        },
+        bodyStyle: 'border: 0px'
+    },
+    {
+        xtype: 'textfield',
+        //html:'<h1>Ник:</h1>',
+        //        fieldLabel: 'Ник',
+        //        labelStyle: 'width:125px; font-weight:bold;',
+        //        labelSeparator: '...',
+        hideLabel: true,
+        height:25,
+        id:'chatNick',
+        blankText:'Введите что-нибудь...',
+        allowBlank:false,
+        style: {
+            marginTop: '3px'
+        }
+
+    },{
+        xtype: 'textarea',
+        //width: 700,
+        height:170,
+        autoScroll:true,
+        //allowBlank:false,
+        hideLabel: true,
+        //blankText:'Введите сообщение...',
+        id:'chatData',
+        // allowBlank:false,
+        enableKeyEvents:true,
+        style: {
+            width:'98.7%',
+            marginTop: '3px',
+            marginLeft: '3px',
+            marginRight: '0px',
+            marginBottom: '3px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+                }
+            }
+        }
+
+    }
+    //    ,{
+    //        xtype: 'button',
+    //        text: '<<Отправить>>>',
+    //        style: {
+    //            marginTop: '7px',
+    //            align: 'center'
+    //        },
+    //        bodyStyle: 'align:center',
+    //        listeners: {
+    //            click: function() {
+    //                sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+    //            }
+    //        }
+    //    }
+
+    ],
+
+    buttons: [{
+        text: 'Отправить',
+        handler: function(){
+            if(chatForm.getForm().isValid()){
+                sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+            }
+        }
+    }]
+});
+
+
 var dialog = new Ext.ux.UploadDialog.Dialog({
     proxyDrag: false,
     resizable: false,
@@ -26,15 +129,15 @@ var dialog = new Ext.ux.UploadDialog.Dialog({
     post_var_name: 'template'
 });
 
-var map = new Ext.KeyMap(Ext.getBody(), [
-{
-    key: 13,
-    ctrl:true,
-    fn: function(){
-        alert('Control + shift + tab was pressed.');
-    }
-}
-]);
+//var map = new Ext.KeyMap(Ext.getBody(), [
+//{
+//    key: 13,
+//    ctrl:true,
+//    fn: function(){
+//        alert('Control + shift + tab was pressed.');
+//    }
+//}
+//]);
 
 var storeOwners = new Ext.data.Store({
     url: 'data/Owners.xml',
@@ -54,6 +157,22 @@ var storeOwners = new Ext.data.Store({
 
 var comboOwner = new Ext.form.ComboBox({
     store: storeOwners,
+    displayField:'owner',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите автора...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200
+});
+var comboOwner2 = new Ext.form.ComboBox({
+    store: storeOwners,
+    hideLabel: true,
     displayField:'owner',
     valueField: 'id',
     typeAhead: true,
@@ -132,6 +251,70 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
     }],
     ddReorder: true
 
+});
+var isForm = new Ext.form.FormPanel({
+    title: 'Обучалка системы',
+    width:800,
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+     bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    layout:'column',
+    items: [{
+        html:'<h1>Product Type:</h1>',
+        style: {
+            marginTop: '5px',
+            marginRight: '7px'
+        },
+        bodyStyle: 'border: 0px'
+    },
+    comboOwner2,
+    {
+        xtype: 'itemselector',
+        name: 'itemselector',
+        //fieldLabel: 'ItemSelector',
+        labelWidth:'0',
+        hideLabel: true,
+        bodyStyle: 'padding:0px;',
+        imagePath: 'images/ux',
+        multiselects: [{
+            width: 300,
+            height: 250,
+            store: ds,
+            displayField: 'text',
+            valueField: 'value',
+            tbar:[{
+                text: 'clear',
+                handler:function(){
+                    isForm.getForm().findField('itemselector').reset();
+                }
+            }]
+        },{
+            width: 300,
+            height: 250,
+            store: [['10','Ten']],
+            tbar:[{
+                text: 'clear',
+                handler:function(){
+                    isForm.getForm().findField('itemselector').reset();
+                }
+            }]
+        }]
+    // }]
+    }],
+
+    buttons: [{
+        text: 'Save',
+        handler: function(){
+            if(isForm.getForm().isValid()){
+                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+                    isForm.getForm().getValues(true));
+            }
+        }
+    }]
 });
 
 function UploadeCsv(){
@@ -581,61 +764,63 @@ var echat = {
         },{
             layout:'column',
             bodyStyle: 'padding:7px; border: 1px solid #7EABCD; background-color:#fff;',
-            items: [{
-                html:'<h1>Ник:</h1>',
-                style: {
-                    marginTop: '4px',
-                    marginRight: '7px'
-                },
-                bodyStyle: 'border: 0px'
-            },{
-                xtype: 'textfield',
-                height:25,
-                id:'chatNick',
-                blankText:'Введите что-нибудь...',
-                allowBlank:false,
-                style: {
-                    marginBottom: '7px'
-                }
-
-            },{
-                xtype: 'textarea',
-                //width: 700,
-                height:170,
-                autoScroll:true,
-                allowBlank:false,
-                blankText:'Введите сообщение...',
-                id:'chatData',
-                // allowBlank:false,
-                enableKeyEvents:true,
-                style: {
-                    width:'99%',
-                    marginTop: '0px',
-                    marginBottom: '0px'
-                },
-                listeners: {
-                    specialkey: function(something,e){
-                        if (e.getKey() == e.ENTER) {
-                            sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
-                        }
-                    }
-                }
-
-            },
-            {
-                xtype: 'button',
-                text: '<<Отправить>>>',
-                style: {
-                    marginTop: '7px',
-                    align: 'center'
-                },
-                bodyStyle: 'align:center',
-                listeners: {
-                    click: function() {
-                        sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
-                    }
-                }
-            }
+            items: [
+            //                {
+            //                html:'<h1>Ник:</h1>',
+            //                style: {
+            //                    marginTop: '4px',
+            //                    marginRight: '7px'
+            //                },
+            //                bodyStyle: 'border: 0px'
+            //            },{
+            //                xtype: 'textfield',
+            //                height:25,
+            //                id:'chatNick',
+            //                blankText:'Введите что-нибудь...',
+            //                allowBlank:false,
+            //                style: {
+            //                    marginBottom: '7px'
+            //                }
+            //
+            //            },{
+            //                xtype: 'textarea',
+            //                //width: 700,
+            //                height:170,
+            //                autoScroll:true,
+            //                allowBlank:false,
+            //                blankText:'Введите сообщение...',
+            //                id:'chatData',
+            //                // allowBlank:false,
+            //                enableKeyEvents:true,
+            //                style: {
+            //                    width:'99%',
+            //                    marginTop: '0px',
+            //                    marginBottom: '0px'
+            //                },
+            //                listeners: {
+            //                    specialkey: function(something,e){
+            //                        if (e.getKey() == e.ENTER) {
+            //                            sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+            //                        }
+            //                    }
+            //                }
+            //
+            //            },
+            //            {
+            //                xtype: 'button',
+            //                text: '<<Отправить>>>',
+            //                style: {
+            //                    marginTop: '7px',
+            //                    align: 'center'
+            //                },
+            //                bodyStyle: 'align:center',
+            //                listeners: {
+            //                    click: function() {
+            //                        sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+            //                    }
+            //                }
+            //            }
+            chatForm
             ]
         }]
     }]
@@ -898,6 +1083,21 @@ var osession = {
     }]
 };
 
+var egrabli = {
+    xtype: 'tabpanel',
+    id: 'eGrabli-panel',
+    plain: true,  //remove the header border
+    activeItem: 0,
+    defaults: {
+        bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
+    },
+    items:[{
+        title: 'Сборка контента',
+        autoScroll: true,
+        items:[isForm]
+    }]
+};
+
 var ecsv = {
     id: 'eCsv-panel',
     title: 'Преобразование файла из форматов XLS и CSV(Excel) в нормальный CSV!',
@@ -946,9 +1146,9 @@ var erow = {
                     click: function() {
                         var file = Ext.getDom('matchFile-file');
                         var file2 = dwr.util.getValue('matchFile-file');
-                        alert(file.value);
-                        file.value='';
-                        alert(file.value);
+                        //                        alert(file.value);
+                        //                        file.value='';
+                        //                        alert(file.value);
                         Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
                             Ext.getCmp('matchFile').reset();
                             if(data==null){
@@ -1009,14 +1209,13 @@ var erow = {
 //    }]
 };
 
-
 Ext.onReady(function(){
     
     updateMessage();
     updateNick();
     storeLanguages.load();
     Ext.QuickTips.init();
-    
+
     var detailEl;
 
     var contentPanel = {
@@ -1033,6 +1232,7 @@ Ext.onReady(function(){
         echat,
         value4ovnerstatus,
         value4link,
+        egrabli,
         osession,
         ecsv,
         erow
