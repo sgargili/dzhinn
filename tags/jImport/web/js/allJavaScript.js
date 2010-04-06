@@ -184,6 +184,7 @@ var comboOwner2 = new Ext.form.ComboBox({
     style: {
         margin: '0px'
     },
+
     width:200
 });
 
@@ -254,10 +255,10 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
 });
 var isForm = new Ext.form.FormPanel({
     title: 'Обучалка системы',
-    width:800,
+    width: '100%',
     //height:400,
     //bodyStyle: 'padding:10px;',
-     bodyStyle: 'padding:7px;',
+    bodyStyle: 'padding:7px;',
     //    items:[{
     //        style: {
     //            padding: '10px auto'
@@ -266,7 +267,7 @@ var isForm = new Ext.form.FormPanel({
     items: [{
         html:'<h1>Product Type:</h1>',
         style: {
-            marginTop: '5px',
+            marginTop: '100px',
             marginRight: '7px'
         },
         bodyStyle: 'border: 0px'
