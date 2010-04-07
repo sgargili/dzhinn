@@ -8,6 +8,7 @@ import DAO.Impl.ChatLogsDAOImpl;
 import DAO.Impl.CookiesDAOImpl;
 import DAO.Impl.LogsDAOImpl;
 import DAO.Impl.UsersDAOImpl;
+import DAO.Impl.ValueUserDAOImpl;
 
 /**
  *
@@ -19,6 +20,7 @@ public class FactoryDAO {
     private ChatLogsDAO chatLogsDAO = null;
     private LogsDAO logsDAO = null;
     private UsersDAO usersDAO = null;
+    private ValueUserDAO valueUserDAO = null;
     private static FactoryDAO instance = null;
 
     public CookiesDAO getCookiesDAO() {
@@ -26,6 +28,13 @@ public class FactoryDAO {
             cookiesDAO = new CookiesDAOImpl();
         }
         return cookiesDAO;
+    }
+
+    public ValueUserDAO getValueUserDAO() {
+        if (valueUserDAO == null) {
+            valueUserDAO = new ValueUserDAOImpl();
+        }
+        return valueUserDAO;
     }
 
     public ChatLogsDAO getChatLogsDAO() {

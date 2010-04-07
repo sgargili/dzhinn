@@ -9,6 +9,7 @@ package dwr;
  * @author APopov
  */
 import DAO.FactoryDAO;
+import DAO.FactoryDAO4Grabli;
 import XML.XmlPro;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -226,6 +227,14 @@ public class Ajax {
         return vp.addLink(links);
     }
 
+    public String addProductType(String productTypeName) {
+        if (FactoryDAO4Grabli.getInstance().getProductTypeDAO().isProductTypePresent(productTypeName)) {
+            return "Already Exist";
+        }
+        ValuePro vp = new ValuePro();
+        return vp.addProductType(productTypeName);
+    }
+
     public String clearSession() {
         ValuePro vp = new ValuePro();
         return vp.clearSession();
@@ -255,7 +264,7 @@ public class Ajax {
         return new FileTransfer(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
-    private String convertStreamToString(InputStream is) throws UnsupportedEncodingException, IOException{
+    private String convertStreamToString(InputStream is) throws UnsupportedEncodingException, IOException {
         if (is != null) {
             StringBuilder sb = new StringBuilder();
             String line;

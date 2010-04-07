@@ -5,9 +5,11 @@
 package value4it;
 
 import DAO.FactoryDAO;
+import DAO.FactoryDAO4Grabli;
 import HttpClient.http;
 import Pojo.Cookies;
 import Pojo.Logs;
+import Pojo.ProductType;
 import Pojo.ValueArticle;
 import Pojo.ValueLink;
 import java.io.File;
@@ -1196,5 +1198,12 @@ public class ValuePro {
             ex.printStackTrace();
         }
         return "Cleared...";
+    }
+
+    public String addProductType(String ProductTypeName) {
+        ProductType pt = new ProductType();
+        pt.setProductTypeName(ProductTypeName);
+        FactoryDAO4Grabli.getInstance().getProductTypeDAO().addOrUpdateProductTypeNameOnly(pt);
+        return "Done";
     }
 }

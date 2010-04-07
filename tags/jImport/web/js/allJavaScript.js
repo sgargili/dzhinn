@@ -84,20 +84,20 @@ var chatForm = new Ext.form.FormPanel({
         }
 
     }
-    //    ,{
-    //        xtype: 'button',
-    //        text: '<<Отправить>>>',
-    //        style: {
-    //            marginTop: '7px',
-    //            align: 'center'
-    //        },
-    //        bodyStyle: 'align:center',
-    //        listeners: {
-    //            click: function() {
-    //                sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
-    //            }
-    //        }
-    //    }
+//        ,{
+//            xtype: 'button',
+//            text: '<<Отправить>>>',
+//            style: {
+//                marginTop: '7px',
+//                align: 'center'
+//            },
+//            bodyStyle: 'align:center',
+//            listeners: {
+//                click: function() {
+//                    sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+//                }
+//            }
+//        }
 
     ],
 
@@ -140,7 +140,8 @@ var dialog = new Ext.ux.UploadDialog.Dialog({
 //]);
 
 var storeOwners = new Ext.data.Store({
-    url: 'data/Owners.xml',
+    //url: 'data/Owners.xml',
+    url: 'ValueUsers.exml',
     reader: new Ext.data.XmlReader({
         record: 'Owner',
         id: 'Id'
@@ -154,6 +155,50 @@ var storeOwners = new Ext.data.Store({
     }
     ])
 });
+
+var storePts = new Ext.data.Store({
+    //url: 'data/Owners.xml',
+    url: 'ProductType.exml',
+    reader: new Ext.data.XmlReader({
+        record: 'ProductType',
+        id: 'Id'
+    }, [
+    {
+        name: 'pt',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeAtrsProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+
+var storeAtrs = new Ext.data.Store({
+    proxy: storeAtrsProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Attribute',
+        id: 'Id'
+    }, [
+    {
+        name: 'atr',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+function storeAtrsUpdate(id){
+    storeAtrsProxy.setUrl("Attribute.exml?ptId="+id);
+    storeAtrs.load();
+}
 
 var comboOwner = new Ext.form.ComboBox({
     store: storeOwners,
@@ -170,22 +215,29 @@ var comboOwner = new Ext.form.ComboBox({
     },
     width:200
 });
+
 var comboOwner2 = new Ext.form.ComboBox({
-    store: storeOwners,
+    store: storePts,
     hideLabel: true,
-    displayField:'owner',
+    displayField:'pt',
     valueField: 'id',
     typeAhead: true,
     mode: 'remote',
     forceSelection: true,
     triggerAction: 'all',
-    emptyText:'Выберите автора...',
+    emptyText:'Выберите PT...',
     editable: false,
     style: {
         margin: '0px'
     },
-
-    width:200
+    width:200,
+    listeners: {
+        'select': function(){
+            storeAtrsProxy.setUrl("Attribute.exml?ptId=" + comboOwner2.getValue());
+            storeAtrs.clearData();
+            storeAtrs.load();
+        }
+    }
 });
 
 var storeLanguages = new Ext.data.Store({
@@ -253,6 +305,7 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
     ddReorder: true
 
 });
+
 var isForm = new Ext.form.FormPanel({
     title: 'Обучалка системы',
     width: '100%',
@@ -263,48 +316,90 @@ var isForm = new Ext.form.FormPanel({
     //        style: {
     //            padding: '10px auto'
     //        },
-    layout:'column',
+    //layout:'column',
     items: [{
-        html:'<h1>Product Type:</h1>',
-        style: {
-            marginTop: '100px',
-            marginRight: '7px'
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [{
+            html:'<h1>Product Type:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px'
+            },
+            bodyStyle: 'border: 0px'
         },
-        bodyStyle: 'border: 0px'
-    },
-    comboOwner2,
-    {
-        xtype: 'itemselector',
-        name: 'itemselector',
-        //fieldLabel: 'ItemSelector',
-        labelWidth:'0',
-        hideLabel: true,
-        bodyStyle: 'padding:0px;',
-        imagePath: 'images/ux',
-        multiselects: [{
-            width: 300,
-            height: 250,
-            store: ds,
-            displayField: 'text',
-            valueField: 'value',
-            tbar:[{
-                text: 'clear',
-                handler:function(){
-                    isForm.getForm().findField('itemselector').reset();
-                }
-            }]
+        comboOwner2,{
+            html:'<h1>Новый Product Type:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
         },{
-            width: 300,
-            height: 250,
-            store: [['10','Ten']],
-            tbar:[{
-                text: 'clear',
-                handler:function(){
-                    isForm.getForm().findField('itemselector').reset();
+            xtype: 'textfield',
+            hideLabel: true,
+            height:22,
+            id:'newPT',
+            blankText:'Введите что-нибудь...',
+            allowBlank:true,
+                    style: {
+                        marginTop: '1px'
+                    }
+        },{
+            xtype: 'button',
+            text: '<<<Добавить>>>',
+            style: {
+//                marginTop: '1px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'align:center',
+            listeners: {
+                click: function() {
+                    alert("Привет!");
                 }
-            }]
+            }
         }]
-    // }]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    },{
+        bodyStyle: 'padding:7px;',
+        items: [{
+            xtype: 'itemselector',
+            name: 'itemselector',
+            //fieldLabel: 'ItemSelector',
+            labelWidth:'0',
+            hideLabel: true,
+            bodyStyle: 'padding:0px;',
+            imagePath: 'images/ux',
+            multiselects: [{
+                width: 300,
+                height: 250,
+                store: storeAtrs,
+                displayField: 'atr',
+                valueField: 'id',
+                tbar:[{
+                    text: 'clear',
+                    handler:function(){
+                        isForm.getForm().findField('itemselector').reset();
+                    }
+                }]
+            },{
+                width: 300,
+                height: 250,
+                store: storePts,
+                displayField: 'pt',
+                valueField: 'id',
+                tbar:[{
+                    text: 'clear',
+                    handler:function(){
+                        isForm.getForm().findField('itemselector').reset();
+                    }
+                }]
+            }]
+        // }]
+        }]
     }],
 
     buttons: [{
@@ -384,6 +479,13 @@ function addLink(data, btn){
         btn.enable();
     });
 }
+
+function addProductType(data){
+    Ajax.addProductType(data, function(data) {
+
+    });
+}
+
 
 function clearSession(){
     byId('uloptSesLog').innerHTML = "<center>Loading <img src='images/loading-balls.gif'/></center>";
@@ -1093,9 +1195,21 @@ var egrabli = {
         bodyStyle: 'padding:7px; background-color:#e1e8ff; width:1000px;'
     },
     items:[{
-        title: 'Сборка контента',
+        title: 'Продукт типы',
+        autoScroll: true
+    //items:[isForm]
+    },{
+        title: 'Атрибуты',
         autoScroll: true,
         items:[isForm]
+    },{
+        title: 'Значения атрибутов',
+        autoScroll: true
+    //items:[isForm]
+    },{
+        title: 'Сборка контента',
+        autoScroll: true
+    //items:[isForm]
     }]
 };
 
@@ -1324,4 +1438,5 @@ Ext.onReady(function(){
         renderTo: Ext.getBody()
     });
 //comboLanguages.setValue('ru');
+//storeAtrs.load();
 });

@@ -45,9 +45,33 @@
         <servlet-name>FeXport</servlet-name>
         <servlet-class>fe.FeXport</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProductType</servlet-name>
+        <servlet-class>servlets.ProductType</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValueUsers</servlet-name>
+        <servlet-class>servlets.ValueUsers</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Attribute</servlet-name>
+        <servlet-class>servlets.Attribute</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductType</servlet-name>
+        <url-pattern>/ProductType.exml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValueUsers</servlet-name>
+        <url-pattern>/ValueUsers.exml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Attribute</servlet-name>
+        <url-pattern>/Attribute.exml</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>FeXport.jsp</welcome-file>
