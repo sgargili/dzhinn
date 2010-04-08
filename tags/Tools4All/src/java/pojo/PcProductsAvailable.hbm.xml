@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09.10.2009 15:37:20 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="pojo.PcProductsAvailable" table="prod_avail_view">
+    <id name="Model" type="string">
+      <column name="model"/>
+      <!--<generator class="identity"/>-->
+    </id>
+    <!--<property name="ptName" type="string">
+            <column name="pt_name"/>
+        </property>
+        <property name="status" type="boolean">
+            <column name="status" not-null="true"/>
+        </property>-->
+  </class>
+</hibernate-mapping>

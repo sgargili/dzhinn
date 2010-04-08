@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26.10.2009 10:07:37 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="pojo.ProductsImages" table="products_images">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="increment"/>
+    </id>
+    <property name="productId" type="int">
+      <column name="product_id" not-null="true"/>
+    </property>
+    <property name="imgXs" type="string">
+      <column name="img_xs" not-null="true"/>
+    </property>
+    <property name="imgS" type="string">
+      <column name="img_s" not-null="true"/>
+    </property>
+    <property name="imgM" type="string">
+      <column name="img_m" not-null="true"/>
+    </property>
+    <property name="imgB" type="string">
+      <column name="img_b" not-null="true"/>
+    </property>
+    <property name="ordered" type="int">
+      <column name="ordered" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

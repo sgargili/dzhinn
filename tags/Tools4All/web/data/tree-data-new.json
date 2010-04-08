@@ -1,0 +1,57 @@
+[{
+    text:'Value4IT',
+    children:[{
+        text:'Экспорт',
+        id:'vExp',
+        leaf:true
+    },{
+        text:'Авторы и статусы',
+        id:'vStat',
+        leaf:true
+    },{
+        text:'Ссылки',
+        id:'vLink',
+        leaf:true
+    }
+]
+//},{
+//    text:'Работа с ценами',
+//    children:[{
+//        text:'Яндекс маркет',
+//        id:'Yandex',
+//        leaf:true
+//    }
+//]
+},{
+    text:'Полезные функции',
+    children:[{
+        text:'XLS,CSV(Excel) -> CSV',
+        id:'eCsv',
+        leaf:true
+    },{
+        text:'Сравнение данных',
+        id:'eRow',
+        leaf:true
+    }]
+},{
+    text:'Grabli',
+    children:[{
+        text:'Грабли контента',
+        id:'eGrabli',
+        leaf:true
+    }]
+},{
+    text:'Если делать нечего',
+    children:[{
+        text:'Чат',
+        id:'eChat',
+        leaf:true
+    }]
+},{
+    text:'Настройки',
+    children:[{
+        text:'Сброс сессии',
+        id:'oSes',
+        leaf:true
+    }]
+}]

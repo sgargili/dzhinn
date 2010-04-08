@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>XML Grid Example</title>
+        <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
+
+        <!-- LIBS -->
+        <script type="text/javascript" src="js/ext-base.js"></script>
+        <!-- ENDLIBS -->
+
+        <script type="text/javascript" src="js/ext-all.js"></script>
+
+        <script type="">
+            Ext.onReady(function(){
+                new Ext.FormPanel({
+                    height: 100,
+                    renderTo: Ext.getBody(),
+                    layoutConfig: {
+                        labelSeparator: '~'   // layout config has lowest priority (defaults to ':')
+                    },
+                    labelSeparator: '>>',     // config at container level
+                    items: [{
+                            xtype: 'textfield',
+                            fieldLabel: 'Field 1',
+                            labelSeparator: '...' // field/component level config supersedes others
+                        },{
+                            xtype: 'textfield',
+                            fieldLabel: 'Field 2' // labelSeparator will be '='
+                        }]
+                });
+            }
+        )
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

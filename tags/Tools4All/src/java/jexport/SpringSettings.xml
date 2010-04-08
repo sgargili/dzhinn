@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="sayHello" class="jexport.MessageImpl" singleton="true">
+        <property name="name" value="123">
+            <!--<value>Andreyqwqw</value>-->
+        </property>
+    </bean>
+</beans>

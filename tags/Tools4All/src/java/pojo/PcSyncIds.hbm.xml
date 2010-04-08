@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10.11.2009 16:32:17 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="pojo.PcSyncIds" table="pc_sync_ids">
+    <id name="shoppid" type="long">
+      <column name="shoppid"/>
+      <generator class="increment"/>
+    </id>
+    <property name="it4pid" type="long">
+      <column name="it4pid" not-null="true"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14.10.2009 15:47:45 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="u196802" name="pojo.Manufacturers" table="manufacturers">
+    <id name="manufacturersId" type="java.lang.Integer">
+      <column name="manufacturers_id"/>
+      <generator class="assigned"/>
+    </id>
+    <property name="manufacturersImage" type="string">
+      <column length="64" name="manufacturers_image"/>
+    </property>
+    <property name="dateAdded" type="timestamp">
+      <column length="19" name="date_added"/>
+    </property>
+    <property name="lastModified" type="timestamp">
+      <column length="19" name="last_modified"/>
+    </property>
+  </class>
+</hibernate-mapping>
