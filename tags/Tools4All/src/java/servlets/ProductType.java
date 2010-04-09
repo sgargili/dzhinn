@@ -6,7 +6,6 @@ package servlets;
 
 import dao.FactoryDAO4Grabli;
 import com.thoughtworks.xstream.XStream;
-import convertors.XmlConvertor4PT;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,7 +13,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.hibernate.collection.PersistentBag;
 
 /**
  *
@@ -39,12 +37,30 @@ public class ProductType extends HttpServlet {
         xstream.alias("ProductType", pojo.ProductType.class);
         //xstream.addImplicitCollection(pojo.ProductType.class, "attributes");
         //xstream.omitField(PersistentBag.class, "initialized");
-        xstream.registerConverter(new XmlConvertor4PT());
+//        xstream.registerConverter(new XmlConvertor4PT());
+        xstream.omitField(pojo.ProductType.class, "attributes");
+        xstream.aliasField("Id", pojo.ProductType.class, "productTypeId");
+        xstream.aliasField("Name", pojo.ProductType.class, "productTypeName");
+        xstream.aliasField("AltName", pojo.ProductType.class, "productTypeAlternative");
         List ptList;
         String xml;
+        int all;
         try {
+            if (request.getParameter("all") == null) {
+                all = 0;
+            } else {
+                all = Integer.parseInt(request.getParameter("all"));
+            }
             ptList = fd.getProductTypeDAO().getAllProductTypesOnly();
             xml = xstream.toXML(ptList);
+            if (all == 1) {
+                xml = xml.replace("<ProductTypes>", "<ProductTypes>\n"
+                        + "  <ProductType>\n"
+                        + "    <Id>7777</Id>\n"
+                        + "    <Name>All Product Types</Name>\n"
+                        + "    <AltName></AltName>\n"
+                        + "  </ProductType>");
+            }
             out.println(xml);
         } catch (Exception ex) {
         } finally {

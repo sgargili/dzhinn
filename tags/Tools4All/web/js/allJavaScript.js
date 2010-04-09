@@ -31,6 +31,22 @@ var storePts = new Ext.data.Store({
     ])
 });
 
+var storePtsAll = new Ext.data.Store({
+    url: 'ProductType.exml?all=1',
+    reader: new Ext.data.XmlReader({
+        record: 'ProductType',
+        id: 'Id'
+    }, [
+    {
+        name: 'pt',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
 // Все переводы
 var storePtsAlt = new Ext.data.Store({
     //url: 'data/Owners.xml',
@@ -490,9 +506,9 @@ var isForm = new Ext.form.FormPanel({
 
 var ptMulti = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
-    width: 250,
+    width: 350,
     height: 200,
-    allowBlank:false,
+    allowBlank:true,
     //autoScroll: true,
     displayField:'pt',
     valueField: 'id',
@@ -528,7 +544,28 @@ var ptMulti = new Ext.ux.form.MultiSelect({
     },{
         text: 'Сохранить ПТ',
         handler: function(){
-            updatePtAltName(ptMulti.getValue(), ptField.getValue());
+            Ajax.updateProductTypeAltName(ptMulti.getValue(), ptField.getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    //ptField.setValue("");
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.INFO
+                    });
+                } else {
+                    //                    ptField.setValue("");
+                    Ext.Msg.show({
+                        title: 'Выполненно!',
+                        msg: 'Варианты ПТ добавлены.',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.INFO
+                    });
+                }
+            });
+            storePts.load();
         }
     },
     {
@@ -542,10 +579,39 @@ var ptMulti = new Ext.ux.form.MultiSelect({
                 buttons: Ext.Msg.YESNO,
                 fn: function(btn){
                     if (btn == 'yes'){
-                        alert("Удален нах...");
+                        Ajax.deleteProductType(ptMulti.getValue(), function(data) {
+                            if(data=="MultiSelectInRequest"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!!!',
+                                    msg: 'Выбирайте только одно значение!',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                ptField.setValue("");
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'ПТ удален.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                                storePts.load();
+                            }
+
+                        });
+                    //alert("Удален нах...");
                     }
                 },
                 icon: Ext.MessageBox.QUESTION
+            });
+        }
+    },{
+        text: 'Загрузить файл с ПТ',
+        handler: function(){
+            Ajax.downloadPTData(function(data) {
+                dwr.engine.openInDownload(data);
             });
         }
     }],
@@ -602,7 +668,7 @@ var ptForm = new Ext.form.FormPanel({
         bodyStyle: 'padding:7px;',
         items: [
         {
-            html:'<h1>Новый Product Type:</h1>',
+            html:'<h1>Новый ПТ:</h1>',
             style: {
                 marginTop: '3px',
                 marginRight: '7px',
@@ -675,30 +741,31 @@ var ptForm = new Ext.form.FormPanel({
                 click: function() {
                     //var file = Ext.getDom('ptFile-file');
                     var file = dwr.util.getValue('ptFile-file');
-//                    alert(Ext.get('ptFile-file').getValue());
-//                    Ext.getCmp('ptFile').reset();
-//                    alert(Ext.get('ptFile-file').getValue());
-                                    Ajax.updatePtByFile(file, Ext.getCmp('ptFile').getValue(), function(data) {
-                                        Ext.getCmp('ptFile').reset();
-                                        if(data=="!csv"){
-                                                Ext.Msg.show({
-                                                    title:'Неверный формат файла...',
-                                                    msg: 'Верный смотри в инфо...',
-                                                    buttons: Ext.Msg.OK,
-                                                    width:250,
-                                                    icon: Ext.MessageBox.ERROR
-                                                });
-                                            } else{
-                                                Ext.Msg.show({
-                                                    title:'Все гуд',
-                                                    msg: 'Все гуд',
-                                                    buttons: Ext.Msg.OK,
-                                                    width:250,
-                                                    icon: Ext.MessageBox.INFO
-                                                });
-                                            }
-                                        });
-                   // alert("Ушло");
+                    //                    alert(Ext.get('ptFile-file').getValue());
+                    //                    Ext.getCmp('ptFile').reset();
+                    //                    alert(Ext.get('ptFile-file').getValue());
+                    Ajax.updatePtByFile(file, Ext.getCmp('ptFile').getValue(), function(data) {
+                        Ext.getCmp('ptFile').reset();
+                        if(data=="!csv"){
+                            Ext.Msg.show({
+                                title:'Неверный формат файла...',
+                                msg: 'Верный смотри в инфо...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else{
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Файл залит.',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+                            storePts.load();
+                        }
+                    });
+                // alert("Ушло");
 
                 }
             }
@@ -723,6 +790,335 @@ var ptForm = new Ext.form.FormPanel({
     }]
 });
 
+var comboPT = new Ext.form.ComboBox({
+    store: storePtsAll,
+    hideLabel: true,
+    displayField:'pt',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите PT...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200
+//    listeners: {
+//        'select': function(){
+//            storeAtrsProxy.setUrl("Attribute.exml?ptId=" + comboOwner2.getValue());
+//            storeAtrs.clearData();
+//            storeAtrs.load();
+//        }
+//    }
+});
+
+var storeAtr = new Ext.data.Store({
+    url: 'Attribute.exml',
+    reader: new Ext.data.XmlReader({
+        record: 'Attribute',
+        id: 'Id'
+    }, [
+    {
+        name: 'atr',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+
+var atrMulti = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 350,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'atr',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'Нужно выбрать хотя бы {1} язык!',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginBottom: '9px'
+    },
+    store: storeAtr,
+    listeners: {
+        click: function() {
+            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    atrField.setValue("");
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                } else {
+                    atrField.setValue(data);
+                }
+            });
+        }
+    },
+    tbar:[{
+        text: 'Показать Атрибуты',
+        handler: function(){
+            storeAtr.load();
+        }
+    },{
+        text: 'Сохранить Атрибуты',
+        handler: function(){
+            Ajax.updateProductTypeAltName(ptMulti.getValue(), ptField.getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    //ptField.setValue("");
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.INFO
+                    });
+                } else {
+                    //                    ptField.setValue("");
+                    Ext.Msg.show({
+                        title: 'Выполненно!',
+                        msg: 'Варианты ПТ добавлены.',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.INFO
+                    });
+                }
+            });
+            storePts.load();
+        }
+    },
+    {
+        text: 'Удалить Атрибуты',
+        handler: function(){
+            Ext.MessageBox.buttonText.yes = "ага";
+            Ext.MessageBox.buttonText.no = "нах";
+            Ext.Msg.show({
+                title:'Подтверждение!',
+                msg: 'Удалить ПТ?',
+                buttons: Ext.Msg.YESNO,
+                fn: function(btn){
+                    if (btn == 'yes'){
+                        Ajax.deleteProductType(ptMulti.getValue(), function(data) {
+                            if(data=="MultiSelectInRequest"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!!!',
+                                    msg: 'Выбирайте только одно значение!',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                ptField.setValue("");
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'ПТ удален.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                                storePts.load();
+                            }
+
+                        });
+                    //alert("Удален нах...");
+                    }
+                },
+                icon: Ext.MessageBox.QUESTION
+            });
+        }
+    }],
+    ddReorder: true
+
+});
+
+
+var atrField = new Ext.form.TextArea({
+    //xtype: 'textarea',
+    //width: 700,
+    height:200,
+    autoScroll:true,
+    //allowBlank:false,
+    hideLabel: true,
+    //blankText:'Введите сообщение...',
+    id:'artData',
+    // allowBlank:false,
+    enableKeyEvents:true,
+    style: {
+        width:'50%',
+        marginTop: '1px',
+        marginLeft: '3px',
+        marginRight: '0px',
+        marginBottom: '9px'
+    },
+    listeners: {
+        specialkey: function(something,e){
+            if (e.getKey() == e.ENTER) {
+        //sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+        }
+        }
+    }
+
+});
+
+var atrForm = new Ext.form.FormPanel({
+    title: 'Атрибуты',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [
+        {
+            html:'<h1>Новый Атрибут:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'textfield',
+            hideLabel: true,
+            height:22,
+            id:'newAtr',
+            blankText:'Введите что-нибудь...',
+            allowBlank:false,
+            style: {
+                marginTop: '1px'
+            }
+        },{
+            xtype: 'button',
+            text: '<<<Добавить>>>',
+            style: {
+                //                marginTop: '1px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'align:center',
+            listeners: {
+                click: function() {
+                    //alert(isForm.getForm().findField('newPT').getValue());
+                    if(ptForm.getForm().isValid()){
+                        addProductType(ptForm.getForm().findField('newPT').getValue());
+                    } else{
+                        Ext.Msg.show({
+                            title: 'Предупреждение!',
+                            msg: 'Укажите название ПТ!',
+                            buttons: Ext.MessageBox.OK,
+                            width: 300,
+                            icon: Ext.MessageBox.ERROR
+                        });
+                    }
+                }
+            }
+        },{
+            html:'<h1>Залить Атрибуты файлом:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'fileuploadfield',
+            width:350,
+            id: 'AtrFile',
+            emptyText: 'Выберите файл...',
+            style: {
+                marginTop: '0px',
+                marginBottom: '0px'
+            },
+            buttonText: 'Выбрать'
+        //        buttonCfg: {
+        //            iconCls: 'upload-icon'
+        //        }
+        },{
+            xtype: 'button',
+            text: '<<<Запуск>>>',
+            id:'AtrUploadBtn',
+            style: {
+                marginLeft: '5px',
+                marginRight: '5px'
+            },
+            listeners: {
+                click: function() {
+                    //var file = Ext.getDom('ptFile-file');
+                    var file = dwr.util.getValue('ptFile-file');
+                    //                    alert(Ext.get('ptFile-file').getValue());
+                    //                    Ext.getCmp('ptFile').reset();
+                    //                    alert(Ext.get('ptFile-file').getValue());
+                    Ajax.updatePtByFile(file, Ext.getCmp('ptFile').getValue(), function(data) {
+                        Ext.getCmp('ptFile').reset();
+                        if(data=="!csv"){
+                            Ext.Msg.show({
+                                title:'Неверный формат файла...',
+                                msg: 'Верный смотри в инфо...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else{
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Файл залит.',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+                            storePts.load();
+                        }
+                    });
+                // alert("Ушло");
+
+                }
+            }
+        },comboPT]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    },{
+        bodyStyle: 'padding:7px;',
+        layout:'column',
+        items: [atrMulti, atrField]
+    }]
+    ,
+
+    buttons: [{
+        text: 'Save',
+        handler: function(){
+            if(ptForm.getForm().isValid()){
+                updatePtAltName(ptMulti.getValue(), ptField.getValue());
+            }
+        }
+    }]
+});
+
+
+
+
+
+
+
+
+
+
+
 function getPtAltName(id){
     Ajax.getProductTypeAltName(id, function(data) {
         if(data=="MultiSelectInRequest"){
@@ -736,30 +1132,6 @@ function getPtAltName(id){
             });
         } else {
             ptField.setValue(data);
-        }
-    });
-}
-
-function updatePtAltName(id, name){
-    Ajax.updateProductTypeAltName(id, name, function(data) {
-        if(data=="MultiSelectInRequest"){
-            ptField.setValue("");
-            Ext.Msg.show({
-                title: 'Предупреждение!!!',
-                msg: 'Выбирайте только одно значение!',
-                buttons: Ext.MessageBox.OK,
-                width: 300,
-                icon: Ext.MessageBox.INFO
-            });
-        } else {
-            ptField.setValue("");
-            Ext.Msg.show({
-                title: 'Выполненно!',
-                msg: 'Варианты ПТ добавлены.',
-                buttons: Ext.MessageBox.OK,
-                width: 300,
-                icon: Ext.MessageBox.INFO
-            });
         }
     });
 }
@@ -1582,9 +1954,8 @@ var egrabli = {
     //items:[isForm]
     },{
         title: 'Атрибуты',
-        autoScroll: true
-        ,
-        items:[isForm]
+        autoScroll: true,
+        items:[atrForm]
     },{
         title: 'Значения атрибутов',
         autoScroll: true

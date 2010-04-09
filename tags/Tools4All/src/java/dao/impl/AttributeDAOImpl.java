@@ -63,4 +63,14 @@ public class AttributeDAOImpl implements AttributeDAO {
                 "order by a.attributeName";
         return getHibernateTemplate().findByNamedParam(query, "productType", productType);
     }
+
+    public Attribute getAttributeById(int id) {
+        Attribute atr = (Attribute) getHibernateTemplate().load(Attribute.class, id);
+        try {
+            atr.getAttributeAlternative().equals("");
+        } catch (NullPointerException ex) {
+            atr.setAttributeAlternative("");
+        }
+        return atr;
+    }
 }

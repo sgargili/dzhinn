@@ -36,7 +36,7 @@ public class XmlConvertor4PT implements Converter {
                 writer.setValue(pt.getProductTypeName());
             }
             writer.endNode();
-            writer.startNode("altName");
+            writer.startNode("AltName");
             if (pt.getProductTypeAlternative() == null) {
                 writer.setValue("");
             } else {

@@ -314,7 +314,94 @@ public class Ajax {
         return "Done";
     }
 
+    public FileTransfer downloadPTData() throws Exception {
+        File file = new File("C://tempXlsx.xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
+        file.delete();
+        return new FileTransfer("PT.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    public String deleteProductType(String productTypeId) {
+        ProductType pt = new ProductType();
+        try {
+            pt.setProductTypeId(Integer.parseInt(productTypeId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            pt = null;
+            return "MultiSelectInRequest";
+        }
+        GrabliPro gp = new GrabliPro();
+        gp.deleteProductType(pt);
+        return "Done";
+    }
+
     public String updatePtByFile(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return "!csv";
+        }
+        File file = new File("C://tempFile");
+        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
+        GrabliPro gp = new GrabliPro();
+        gp.updateProductTypeByFile(file);
+        return "Done";
+    }
+
+
+
+     public String getAttributeAltName(String attributeId) {
+        String altName = "";
+        GrabliPro gp = new GrabliPro();
+        try {
+            altName = gp.getAttributeAltName(Integer.parseInt(attributeId));
+        } catch (NumberFormatException ex) {
+            return "MultiSelectInRequest";
+        }
+        return altName;
+    }
+
+    public String updateAttributeAltName(String productTypeId, String newAltName) {
+        ProductType pt = new ProductType();
+        try {
+            pt.setProductTypeId(Integer.parseInt(productTypeId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            pt = null;
+            return "MultiSelectInRequest";
+        }
+        pt.setProductTypeAlternative(newAltName);
+        GrabliPro gp = new GrabliPro();
+        gp.updateProductTypeAltName(pt);
+        return "Done";
+    }
+
+    public FileTransfer downloadAtrData() throws Exception {
+        File file = new File("C://tempXlsx.xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
+        file.delete();
+        return new FileTransfer("PT.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    public String deleteAttribute(String productTypeId) {
+        ProductType pt = new ProductType();
+        try {
+            pt.setProductTypeId(Integer.parseInt(productTypeId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            pt = null;
+            return "MultiSelectInRequest";
+        }
+        GrabliPro gp = new GrabliPro();
+        gp.deleteProductType(pt);
+        return "Done";
+    }
+
+    public String updateAtrByFile(InputStream uploadFile, String fileName) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)");
         Matcher m = p.matcher(fileName);
         if (!m.find()) {

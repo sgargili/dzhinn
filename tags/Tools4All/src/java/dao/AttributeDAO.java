@@ -20,6 +20,8 @@ public interface AttributeDAO {
 
     public List<Attribute> getAttributesOnlyByProductTypeId(ProductType productType);
 
+    public Attribute getAttributeById(int id);
+
     public Attribute getAttributeByName(String name);
 
     public boolean isAttributePresent(Attribute attribute);
