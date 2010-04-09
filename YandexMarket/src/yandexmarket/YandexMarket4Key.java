@@ -1,5 +1,6 @@
 package yandexmarket;
 
+import CSV.CsvWriter;
 import DAO.FactoryDAO;
 import HttpClient.http;
 import Pojo.Articles;
@@ -16,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -85,14 +87,17 @@ public class YandexMarket4Key {
         String code;
         String url;
         File temp;
+        boolean finded = false,
+                hrefBool = false;
+        String[] testArt = new String[4];
 
-
+        CsvWriter wrtr = new CsvWriter("C://1/KeyProds3.csv", ',', Charset.forName("WINDOWS-1251"));
 
         // Цикл по всем артиклям выгруженным из базы
         for (Iterator iter = articles.iterator(); iter.hasNext();) {
             Articles art = (Articles) iter.next();
             tempDesc = "";
-
+            finded = false;
             // Тупая реализация устранения избыточности описания кея. :)
             // Берем не все описание, а только не больше (n/2)+2 слова из описания.
             // И слово должно быть не больше 16 символов.
@@ -109,7 +114,7 @@ public class YandexMarket4Key {
 
             // Определяем нужное описание.
             if (wordsCount > 3) {
-                for (int wr = 0; wr < (wordsCount / 2) + 2; wr++) {
+                for (int wr = 0; wr < (wordsCount / 2) + 1; wr++) {//Тут изменил +2 на +1!!!*******************
                     if (stringContent[wr].length() <= 16) {
                         tempDesc += " " + stringContent[wr];
                     }
@@ -176,55 +181,42 @@ public class YandexMarket4Key {
                     r = new Parser();
                     w = new OutputStreamWriter(os, theOutputEncoding);
                     h = new XMLWriter(w);
+
+
+                    String artURL = "",
+                            yaDesc = "";
                     r.setContentHandler(h);
                     r.parse(fl.toURI().toString());
                     xml = new File(dst);
                     xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "WINDOWS-1251"));
                     boolean bool = false, pageBool = false;
+
                     int eventType = xpp.getEventType();
-                    p = Pattern.compile("Код.*теля:(.*)");
+                    //p = Pattern.compile("Код.*теля:(.*)");
                     while (eventType != XmlPullParser.END_DOCUMENT) {
-                        if (eventType == XmlPullParser.START_TAG &&
-                                xpp.getName().equals("p") &&
-                                xpp.getAttributeCount() == 1 &&
-                                (xpp.getAttributeValue(0).equals("b-offers__spec"))) {
-                            bool = true;
+                        if (eventType == XmlPullParser.START_TAG && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals("b-model-actioins__cnt")) {
+                            finded = true;
+                            System.out.println("нашлось (список)");
                         }
-                        if (pageCount == 1 && eventType == XmlPullParser.START_TAG &&
-                                xpp.getName().equals("p") &&
-                                xpp.getAttributeCount() == 1 &&
-                                (xpp.getAttributeValue(0).equals("search-stat"))) {
-                            pageBool = true;
+
+                        if (eventType == XmlPullParser.TEXT && xpp.getText().trim().equals("все характеристики")) {
+                            finded = true;
+                            System.out.println("нашлось (страница с описанием)");
                         }
-                        if (eventType == XmlPullParser.TEXT && bool) {
-                            m = p.matcher(xpp.getText());
-                            if (m.find()) {
-                                code = m.group(1).trim().replaceAll("═", "");
-                                codes.add(code);
-                                System.out.println(xpp.getText());
-                            }
+
+                        testArt[0] = art.getArticle();
+                        testArt[1] = art.getDescription();
+                        testArt[2] = "";
+                        if (finded) {
+                            testArt[2] = "true";
+                        } else {
+                            testArt[2] = "false";
                         }
-                        if (eventType == XmlPullParser.TEXT && pageBool) {
-                            p = Pattern.compile("—\\s(\\d+)");
-                            m = p.matcher(xpp.getText());
-                            if (m.find()) {
-                                try {
-                                    pageCount = (int) Math.round(Integer.parseInt(m.group(1)) / 10.0);
-                                    System.out.println(pageCount);
-                                } catch (Exception ex) {
-                                    System.out.println(ex);
-                                }
-                            }
-                        }
-                        if (eventType == XmlPullParser.END_TAG && (bool)) {
-                            bool = false;
-                        }
-                        if (eventType == XmlPullParser.END_TAG && (pageBool)) {
-                            pageBool = false;
-                        }
+                        testArt[3] = url;
 
                         eventType = xpp.next();
                     }
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -236,21 +228,19 @@ public class YandexMarket4Key {
                 }
             }
 
-            // Запись полученных дынных в базу.
-            try {
-                yandexData = "";
-                mtch = new Matching();
-                mtch.setKeyarticle(art.getArticle());
-                mtch.setKeydesc(art.getDescription());
-                for (Iterator iter3 = codes.iterator(); iter3.hasNext();) {
-                    yandexData += "|||" + (String) iter3.next();
-                }
-                mtch.setYadata(URLDecoder.decode(yandexData, "UTF-8"));
-                fd.getMatchingDAO().addMatching(mtch);
-            } catch (Exception ex) {
-                System.out.println(ex);
-            }
             xml.delete();
+            System.out.println("Продукт нашелся в маркете? - " + testArt[2]);
+            try {
+
+                wrtr.writeRecord(testArt);
+                wrtr.flush();
+                System.out.println("Записано в файл...");
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                System.out.println("Записать не удалось");
+            }
         }
+        wrtr.close();
     }
 }

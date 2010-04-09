@@ -9,6 +9,7 @@ import DAO.Impl.It4articlesDAOImpl;
 import DAO.Impl.MatchingDAOImpl;
 import DAO.Impl.RivalsDAOImpl;
 import DAO.Impl.RivalsdataDAOImpl;
+import DAO.Impl.newArticlesDAOImpl;
 
 /**
  *
@@ -17,6 +18,7 @@ import DAO.Impl.RivalsdataDAOImpl;
 public class FactoryDAO {
 
     private ArticlesDAO articlesDAO = null;
+    private newArticlesDAO newarticlesDAO = null;
     private RivalsDAO rivalsDAO = null;
     private RivalsdataDAO rivalsDataDAO = null;
     private It4articlesDAO it4articlesDAO = null;
@@ -35,6 +37,12 @@ public class FactoryDAO {
             articlesDAO = new ArticlesDAOImpl();
         }
         return articlesDAO;
+    }
+    public newArticlesDAO getnewArticlesDAO() {
+        if (newarticlesDAO == null) {
+            newarticlesDAO = new newArticlesDAOImpl();
+        }
+        return newarticlesDAO;
     }
 
     public RivalsdataDAO getRivalsDataDAO() {
