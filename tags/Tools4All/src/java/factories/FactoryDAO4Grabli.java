@@ -1,5 +1,8 @@
-package dao;
+package factories;
 
+import dao.AttributeDAO;
+import dao.ProductTypeDAO;
+import dao.ValueDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class FactoryDAO4Grabli {
 
-    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/SpringConfig.xml");
+    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/DaoSpringConfig.xml");
     private static FactoryDAO4Grabli instance = null;
 
     public static synchronized FactoryDAO4Grabli getInstance() {

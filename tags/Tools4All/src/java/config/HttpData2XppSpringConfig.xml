@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!--Декларация бинов для получения экземпляра парсера Xpp3 для HTML страниц-->
+
+    <bean id="HttpData2Xpp" class="xml.impl.HttpData2XppImpl"/>
+
+    <!--Декларация бинов для получения экземпляра парсера Xpp3 для HTML страниц - конец-->
+
+</beans>

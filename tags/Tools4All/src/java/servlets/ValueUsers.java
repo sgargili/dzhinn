@@ -4,7 +4,7 @@
  */
 package servlets;
 
-import dao.FactoryDAO;
+import factories.FactoryDAO;
 import pojo.ValueUser;
 import com.thoughtworks.xstream.XStream;
 import java.io.IOException;

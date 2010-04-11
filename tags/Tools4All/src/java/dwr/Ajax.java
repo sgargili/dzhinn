@@ -8,8 +8,8 @@ package dwr;
  *
  * @author APopov
  */
-import dao.FactoryDAO;
-import dao.FactoryDAO4Grabli;
+import factories.FactoryDAO;
+import factories.FactoryDAO4Grabli;
 import grabli.GrabliPro;
 import xml.XmlPro;
 import java.io.IOException;

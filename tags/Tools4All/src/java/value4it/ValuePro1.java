@@ -4,7 +4,7 @@
  */
 package value4it;
 
-import dao.FactoryDAO;
+import factories.FactoryDAO;
 import httpclient.http;
 import pojo.Cookies;
 import pojo.Logs;

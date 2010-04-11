@@ -9,7 +9,7 @@
     <property name="hibernate.connection.password">Pass4root</property>
     <property name="hibernate.current_session_context_class">thread</property>
     <property name="hibernate.connection.characterEncoding">UTF-8</property>
-        <!--<property name="hibernate.show_sql">true</property>-->
+    <!--<property name="hibernate.show_sql">true</property>-->
     <mapping resource="Pojo/PcProcessStatus.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsToCategories.hbm.xml"/>
     <mapping resource="Pojo/PcSyncProductsDescription.hbm.xml"/>

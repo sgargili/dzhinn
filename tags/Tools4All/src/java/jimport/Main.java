@@ -4,9 +4,9 @@
  */
 package jimport;
 
+import factories.FactoryHTTPData2Xpp;
 import java.io.IOException;
-import java.sql.SQLException;
-import javax.xml.transform.TransformerException;
+import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
@@ -18,19 +18,25 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    @SuppressWarnings("static-access")
-    public static void main(String[] args) throws SQLException, XmlPullParserException, IOException, TransformerException {
-        //xmlElab xml = new xmlElab();
-        // xml.xmlPcSyncProducts();
-        //System.out.println("First Done...");
-//        //xml.xmlPcSyncProductsDescription();
-//        List lst = FactoryDAO4Imports.getInstance().getPcProductsAvailableDAO().getPcProductsAvailable();
-//        int i = 1;
-//        for (Iterator it = lst.iterator(); it.hasNext();) {
-//            PcProductsAvailable str = (PcProductsAvailable) it.next();
-//            System.out.println(i++ + " -> " + str.getModel());
-//        }
-        // FactoryDAO4Imports.getInstance().getPcSyncProductsDescriptionDAO().truncatePcSyncProductsDescription();
-       // System.out.println(FactoryDAO4Imports.getInstance().getTestHPDAO().getTestHP(8833));
+    public static void main(String[] args) throws XmlPullParserException, IOException {
+        XmlPullParser xpp = FactoryHTTPData2Xpp.getInstance().getHttpData2Xpp().getXpp("http://www.ya.ru");
+        boolean bool = false;
+        int eventType = xpp.getEventType();
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG
+                    && xpp.getName().equals("title")) {
+                bool = true;
+            }
+
+            if (eventType == XmlPullParser.TEXT && bool) {
+                System.out.println(xpp.getText());
+            }
+            if (eventType == XmlPullParser.END_TAG && bool) {
+                bool = false;
+            }
+
+            eventType = xpp.next();
+        }
+
     }
 }

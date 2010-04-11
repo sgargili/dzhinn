@@ -4,10 +4,10 @@
  */
 package servlets;
 
-import dao.FactoryDAO4Grabli;
+import factories.FactoryDAO4Grabli;
 import com.thoughtworks.xstream.XStream;
 import convertors.XmlConvertor4PT;
-import dao.FactoryDAO;
+import factories.FactoryDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

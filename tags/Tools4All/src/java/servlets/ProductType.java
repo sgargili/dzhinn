@@ -4,7 +4,7 @@
  */
 package servlets;
 
-import dao.FactoryDAO4Grabli;
+import factories.FactoryDAO4Grabli;
 import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.PrintWriter;

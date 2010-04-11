@@ -2,8 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package factories;
 
+import dao.ChatLogsDAO;
+import dao.CookiesDAO;
+import dao.LogsDAO;
+import dao.UsersDAO;
+import dao.ValueLanguageDAO;
+import dao.ValueUserDAO;
 import dao.impl.ChatLogsDAOImpl;
 import dao.impl.CookiesDAOImpl;
 import dao.impl.LogsDAOImpl;
