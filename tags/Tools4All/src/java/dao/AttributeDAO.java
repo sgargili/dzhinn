@@ -18,7 +18,9 @@ public interface AttributeDAO {
 
     public List<Attribute> getAllAttributesOnly();
 
-    public List<Attribute> getAttributesOnlyByProductTypeId(ProductType productType);
+    public List<Attribute> getAttributesOnlyByProductType(ProductType productType);
+
+    public List<Attribute> getAttributesOnlyByProductTypeId(int id);
 
     public Attribute getAttributeById(int id);
 

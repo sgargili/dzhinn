@@ -1,6 +1,7 @@
 package factories;
 
 import dao.AttributeDAO;
+import dao.ParentRelateElementDAO;
 import dao.ProductTypeDAO;
 import dao.ValueDAO;
 import org.springframework.context.ApplicationContext;
@@ -32,5 +33,9 @@ public class FactoryDAO4Grabli {
 
     public ValueDAO getValueDAO() {
         return (ValueDAO) factory.getBean("ValueDAO");
+    }
+
+    public ParentRelateElementDAO getParentRelateElementDAO() {
+        return (ParentRelateElementDAO) factory.getBean("ParentRelateElementDAO");
     }
 }

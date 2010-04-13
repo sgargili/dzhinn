@@ -56,7 +56,7 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     @Override
-    public List<Attribute> getAttributesOnlyByProductTypeId(ProductType productType) {
+    public List<Attribute> getAttributesOnlyByProductType(ProductType productType) {
         String query = "from Attribute a " +//
                 "join fetch a.productTypes as productType " + //
                 "where productType = :productType " + //
@@ -72,5 +72,9 @@ public class AttributeDAOImpl implements AttributeDAO {
             atr.setAttributeAlternative("");
         }
         return atr;
+    }
+
+    public List<Attribute> getAttributesOnlyByProductTypeId(int id) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

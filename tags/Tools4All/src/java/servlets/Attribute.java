@@ -56,7 +56,7 @@ public class Attribute extends HttpServlet {
             if (id!=0) {
                 pt = new ProductType();
                 pt.setProductTypeId(id);
-                atrList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(pt);
+                atrList = fd.getAttributeDAO().getAttributesOnlyByProductType(pt);
             } else {
                 atrList = fd.getAttributeDAO().getAllAttributesOnly();
             }
