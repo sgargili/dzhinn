@@ -20,7 +20,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import pojo.ArticleData;
 import pojo.Attribute;
 
 /**
@@ -30,6 +29,13 @@ import pojo.Attribute;
 public class GrabliPro {
 
     FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
+
+    public String addProductType(String ProductTypeName) {
+        ProductType pt = new ProductType();
+        pt.setProductTypeName(ProductTypeName);
+        FactoryDAO4Grabli.getInstance().getProductTypeDAO().addOrUpdateProductTypeNameOnly(pt);
+        return "Done";
+    }
 
     public String getProductTypeAltName(int productTypeId) {
         String out;
@@ -113,6 +119,13 @@ public class GrabliPro {
         return file;
     }
 
+    public String addAttribute(String attributeName) {
+        Attribute at = new Attribute();
+        at.setAttributeName(attributeName);
+        fd.getAttributeDAO().addOrUpdateAttributeNameOnly(at);
+        return "Done";
+    }
+
     public String getAttributeAltName(int attributeId) {
         String out;
         Attribute atr;
@@ -125,17 +138,17 @@ public class GrabliPro {
         return out;
     }
 
-    public void updateAttributeAltName(ProductType pt) {
-        fd.getProductTypeDAO().updateProductTypeAltNameOnly(pt);
+    public void updateAttributeAltName(Attribute at) {
+        fd.getAttributeDAO().updateAttributeAltNameOnly(at);
     }
 
-    public void deleteAttribute(ProductType pt) {
-        fd.getProductTypeDAO().deleteProductType(pt);
+    public void deleteAttribute(Attribute at) {
+        fd.getAttributeDAO().deleteAttribute(at);
     }
 
     public void updateAttributeByFile(File file) {
         CsvReader reader = null;
-        ProductType pt;
+        Attribute at;
         try {
             reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
         } catch (Exception ex) {
@@ -144,10 +157,10 @@ public class GrabliPro {
         try {
             while (reader.readRecord()) {
 //                FactoryDAO4Imports.getInstance().getPcProductTypesDAO().addPcProductsToPt(new PcProductTypes(reader.get(0), true));
-                pt = new ProductType();
-                pt.setProductTypeName(reader.get(0));
-                pt.setProductTypeAlternative(reader.get(1));
-                fd.getProductTypeDAO().addOrUpdateProductTypeNameOnly(pt);
+                at = new Attribute();
+                at.setAttributeName(reader.get(0));
+                at.setAttributeAlternative(reader.get(1));
+                fd.getAttributeDAO().addOrUpdateAttributeNameOnly(at);
             }
             reader.close();
         } catch (IOException ex) {
@@ -156,26 +169,35 @@ public class GrabliPro {
     }
 
     public File downloadAttributeData(File file) {
-        List<ProductType> pts = fd.getProductTypeDAO().getAllProductTypesOnly();
-        ProductType pt;
+        List<Attribute> atrs = fd.getAttributeDAO().getAllAttributesOnly();
+        Attribute atr;
+        CellStyle style;
+
 
         try {
             FileOutputStream out = new FileOutputStream(file);
             Workbook wb = new XSSFWorkbook();
             Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
             Row r = null;
             Cell c = null;
             wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
             int i = 0;
-            for (Iterator it = pts.iterator(); it.hasNext();) {
-                pt = (ProductType) it.next();
+            for (Iterator it = atrs.iterator(); it.hasNext();) {
+                atr = (Attribute) it.next();
                 r = s.createRow(i++);
                 c = r.createCell(0);
                 c.setCellType(c.CELL_TYPE_STRING);
-                c.setCellValue(pt.getProductTypeName());
+                c.setCellValue(atr.getAttributeName());
+                c.setCellStyle(style);
                 c = r.createCell(1);
                 c.setCellType(c.CELL_TYPE_STRING);
-                c.setCellValue(pt.getProductTypeAlternative());
+                c.setCellValue(atr.getAttributeAlternative());
+                c.setCellStyle(style);
             }
             wb.write(out);
             out.close();

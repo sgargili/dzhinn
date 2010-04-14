@@ -385,123 +385,6 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
 
 });
 
-var isForm = new Ext.form.FormPanel({
-    title: 'Обучалка системы',
-    width: '100%',
-    //height:400,
-    //bodyStyle: 'padding:10px;',
-    bodyStyle: 'padding:7px;',
-    //    items:[{
-    //        style: {
-    //            padding: '10px auto'
-    //        },
-    //layout:'column',
-    items: [{
-        layout:'column',
-        bodyStyle: 'padding:7px;',
-        items: [{
-            html:'<h1>Product Type:</h1>',
-            style: {
-                marginTop: '3px',
-                marginRight: '7px'
-            },
-            bodyStyle: 'border: 0px'
-        },
-        comboOwner2,{
-            html:'<h1>Новый Product Type:</h1>',
-            style: {
-                marginTop: '3px',
-                marginRight: '7px',
-                marginLeft: '7px'
-            },
-            bodyStyle: 'border: 0px'
-        },{
-            xtype: 'textfield',
-            hideLabel: true,
-            height:22,
-            id:'newPT1',
-            blankText:'Введите что-нибудь...',
-            allowBlank:false,
-            style: {
-                marginTop: '1px'
-            }
-        },{
-            xtype: 'button',
-            text: '<<<Добавить>>>',
-            style: {
-                //                marginTop: '1px',
-                marginLeft: '7px'
-            },
-            bodyStyle: 'align:center',
-            listeners: {
-                click: function() {
-                    //alert(isForm.getForm().findField('newPT').getValue());
-                    if(isForm.getForm().isValid()){
-                        addProductType(isForm.getForm().findField('newPT').getValue());
-                    } else{
-                        Ext.Msg.show({
-                            title: 'Предупреждение!',
-                            msg: 'Укажите название ПТ!',
-                            buttons: Ext.MessageBox.OK,
-                            width: 300,
-                            icon: Ext.MessageBox.QUESTION
-                        });
-                    }
-                }
-            }
-        }]
-    },{
-        html:'&nbsp;',
-        bodyStyle: 'border: 0px'
-    },{
-        bodyStyle: 'padding:7px;',
-        items: [{
-            xtype: 'itemselector',
-            name: 'itemselector',
-            //fieldLabel: 'ItemSelector',
-            labelWidth:'0',
-            hideLabel: true,
-            bodyStyle: 'padding:0px;',
-            imagePath: 'images/ux',
-            multiselects: [{
-                width: 300,
-                height: 250,
-                store: storePtsAlt,
-                displayField: 'atr',
-                valueField: 'id',
-                tbar:[{
-                    text: 'clear',
-                    handler:function(){
-                        isForm.getForm().findField('itemselector').reset();
-                    }
-                }]
-            },{
-                width: 300,
-                height: 250,
-                store: storePtsNeed,
-                displayField: 'pt',
-                valueField: 'id',
-                tbar:[{
-                    text: 'clear',
-                    handler:function(){
-                        isForm.getForm().findField('itemselector').reset();
-                    }
-                }]
-            }]
-        // }]
-        }]
-    }],
-
-    buttons: [{
-        text: 'Save',
-        handler: function(){
-            if(isForm.getForm().isValid()){
-                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-                    isForm.getForm().getValues(true));
-            }
-        }
-    }]
-});
 
 
 var ptMulti = new Ext.ux.form.MultiSelect({
@@ -814,8 +697,13 @@ var comboPT = new Ext.form.ComboBox({
 //    }
 });
 
+var storeAtrProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
 var storeAtr = new Ext.data.Store({
-    url: 'Attribute.exml',
+    proxy: storeAtrProxy,
     reader: new Ext.data.XmlReader({
         record: 'Attribute',
         id: 'Id'
@@ -868,12 +756,25 @@ var atrMulti = new Ext.ux.form.MultiSelect({
     tbar:[{
         text: 'Показать Атрибуты',
         handler: function(){
+            if(comboPT.getValue()==""){
+                Ext.Msg.show({
+                    title: 'Предупреждение!!!',
+                    msg: 'Выбирайте ПТ!',
+                    buttons: Ext.MessageBox.OK,
+                    width: 300,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
+            storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
+            storeAtr.clearData();
             storeAtr.load();
+            atrField.setValue("");
         }
     },{
-        text: 'Сохранить Атрибуты',
+        text: 'Сохранить Атрибут',
         handler: function(){
-            Ajax.updateProductTypeAltName(ptMulti.getValue(), ptField.getValue(), function(data) {
+            Ajax.updateAttributeAltName(atrMulti.getValue(), atrField.getValue(), function(data) {
                 if(data=="MultiSelectInRequest"){
                     //ptField.setValue("");
                     Ext.Msg.show({
@@ -887,28 +788,30 @@ var atrMulti = new Ext.ux.form.MultiSelect({
                     //                    ptField.setValue("");
                     Ext.Msg.show({
                         title: 'Выполненно!',
-                        msg: 'Варианты ПТ добавлены.',
+                        msg: 'Варианты атрибута добавлены.',
                         buttons: Ext.MessageBox.OK,
                         width: 300,
                         icon: Ext.MessageBox.INFO
                     });
                 }
             });
-            storePts.load();
+            storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
+            storeAtr.clearData();
+            storeAtr.load();
+            atrField.setValue("");
         }
-    },
-    {
-        text: 'Удалить Атрибуты',
+    },{
+        text: 'Удалить Атрибут',
         handler: function(){
             Ext.MessageBox.buttonText.yes = "ага";
             Ext.MessageBox.buttonText.no = "нах";
             Ext.Msg.show({
                 title:'Подтверждение!',
-                msg: 'Удалить ПТ?',
+                msg: 'Удалить Атрибут? Он будет удален из всех ПТ...',
                 buttons: Ext.Msg.YESNO,
                 fn: function(btn){
                     if (btn == 'yes'){
-                        Ajax.deleteProductType(ptMulti.getValue(), function(data) {
+                        Ajax.deleteAttribute(atrMulti.getValue(), function(data) {
                             if(data=="MultiSelectInRequest"){
                                 Ext.Msg.show({
                                     title: 'Предупреждение!!!',
@@ -918,25 +821,35 @@ var atrMulti = new Ext.ux.form.MultiSelect({
                                     icon: Ext.MessageBox.ERROR
                                 });
                             } else {
-                                ptField.setValue("");
+                                atrField.setValue("");
                                 Ext.Msg.show({
                                     title: 'Выполненно!',
-                                    msg: 'ПТ удален.',
+                                    msg: 'Атрибут удален.',
                                     buttons: Ext.MessageBox.OK,
                                     width: 300,
                                     icon: Ext.MessageBox.INFO
                                 });
-                                storePts.load();
+                                storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
+                                storeAtr.clearData();
+                                storeAtr.load();
+                                atrField.setValue("");
                             }
 
                         });
-                    //alert("Удален нах...");
                     }
                 },
                 icon: Ext.MessageBox.QUESTION
             });
         }
-    }],
+    },{
+        text: 'Загрузить файл с Атрибутами',
+        handler: function(){
+            Ajax.downloadAtrData(function(data) {
+                dwr.engine.openInDownload(data);
+            });
+        }
+    }
+    ],
     ddReorder: true
 
 });
@@ -1014,12 +927,39 @@ var atrForm = new Ext.form.FormPanel({
             listeners: {
                 click: function() {
                     //alert(isForm.getForm().findField('newPT').getValue());
-                    if(ptForm.getForm().isValid()){
-                        addProductType(ptForm.getForm().findField('newPT').getValue());
+                    if(atrForm.getForm().isValid()){
+                        //addProductType(ptForm.getForm().findField('newPT').getValue());
+                        Ajax.addAttribute(atrForm.getForm().findField('newAtr').getValue(), function(data) {
+                            if(data=="Already Exist"){
+                                Ext.Msg.show({
+                                    title: 'Дубль!!!',
+                                    msg: 'Такой Атрибут уже есть...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else if(data=="Empty"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!',
+                                    msg: 'Одини пробелы и/или цифры в названии Атрибута...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'Атрибут добавлен.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                            }
+                        });
                     } else{
                         Ext.Msg.show({
                             title: 'Предупреждение!',
-                            msg: 'Укажите название ПТ!',
+                            msg: 'Укажите название Атрибута!',
                             buttons: Ext.MessageBox.OK,
                             width: 300,
                             icon: Ext.MessageBox.ERROR
@@ -1058,13 +998,9 @@ var atrForm = new Ext.form.FormPanel({
             },
             listeners: {
                 click: function() {
-                    //var file = Ext.getDom('ptFile-file');
-                    var file = dwr.util.getValue('ptFile-file');
-                    //                    alert(Ext.get('ptFile-file').getValue());
-                    //                    Ext.getCmp('ptFile').reset();
-                    //                    alert(Ext.get('ptFile-file').getValue());
-                    Ajax.updatePtByFile(file, Ext.getCmp('ptFile').getValue(), function(data) {
-                        Ext.getCmp('ptFile').reset();
+                    var file = dwr.util.getValue('AtrFile-file');
+                    Ajax.updateAtrByFile(file, Ext.getCmp('AtrFile').getValue(), function(data) {
+                        Ext.getCmp('AtrFile').reset();
                         if(data=="!csv"){
                             Ext.Msg.show({
                                 title:'Неверный формат файла...',
@@ -1081,35 +1017,204 @@ var atrForm = new Ext.form.FormPanel({
                                 width:250,
                                 icon: Ext.MessageBox.INFO
                             });
-                            storePts.load();
+                        //storePts.load();
                         }
                     });
                 // alert("Ушло");
 
                 }
             }
-        },comboPT]
+        }]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    }
+    //    ,{
+    //        bodyStyle: 'padding:7px; border:0px',
+    //        layout:'column',
+    //        items: [comboPT]
+    //    }
+    ,{
+        bodyStyle: 'padding:7px;',
+        //layout:'column',
+        //      columns: [100, 1000],
+        //        horisontal: true,
+        items: [
+        comboPT,{
+            bodyStyle: 'border:0px;',
+            layout:'column',
+            items: [
+            atrMulti,
+            atrField
+
+            ]
+        }
+        ]
+    }]
+});
+
+
+
+var storeAtr2ProdTypeProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeAtr2ProdType = new Ext.data.Store({
+    proxy: storeAtr2ProdTypeProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Attribute',
+        id: 'Id'
+    }, [
+    {
+        name: 'atr',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeAtrAllProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeAtrAll = new Ext.data.Store({
+    proxy: storeAtrAllProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Attribute',
+        id: 'Id'
+    }, [
+    {
+        name: 'atr',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var comboPts = new Ext.form.ComboBox({
+    store: storePts,
+    hideLabel: true,
+    displayField:'pt',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите PT...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
+            storeAtr2ProdType.clearData();
+            storeAtr2ProdType.load();
+        }
+    }
+});
+
+
+var Atr2PTForm = new Ext.form.FormPanel({
+    title: 'Привязка ПТ к атрибутам',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [{
+            html:'<h1>Product Type:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },
+        comboPts]
     },{
         html:'&nbsp;',
         bodyStyle: 'border: 0px'
     },{
         bodyStyle: 'padding:7px;',
-        layout:'column',
-        items: [atrMulti, atrField]
+        items: [{
+            xtype: 'itemselector',
+            name: 'itemselector',
+            //fieldLabel: 'ItemSelector',
+            labelWidth:'0',
+            hideLabel: true,
+            bodyStyle: 'padding:0px;',
+            imagePath: 'images/ux',
+            multiselects: [{
+                width: 300,
+                height: 250,
+                store: storeAtrAll,
+                displayField: 'atr',
+                valueField: 'id',
+                tbar:[{
+                    text: 'Загрузить Атрибуты',
+                    handler:function(){
+                        storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.get('atrTemplate').getValue());
+                        storeAtrAll.clearData();
+                        storeAtrAll.load();
+                    }
+                },{
+                    xtype: 'textfield',
+                    hideLabel: true,
+                    height:22,
+                    id:'atrTemplate',
+                    blankText:'Введите что-нибудь...',
+                    allowBlank:true,
+                    style: {
+                        marginTop: '1px'
+                    }
+                },{
+                    text: 'clear',
+                    handler:function(){
+                        Atr2PTForm.getForm().findField('itemselector').reset();
+                    }
+                }]
+            },{
+                width: 300,
+                height: 250,
+                store: storeAtr2ProdType,
+                displayField: 'atr',
+                valueField: 'id',
+                tbar:[{
+                    text: 'clear',
+                    handler:function(){
+                        Atr2PTForm.getForm().findField('itemselector').reset();
+                    }
+                }]
+            }]
+        // }]
+        }]
     }]
-    ,
-
-    buttons: [{
-        text: 'Save',
-        handler: function(){
-            if(ptForm.getForm().isValid()){
-                updatePtAltName(ptMulti.getValue(), ptField.getValue());
-            }
-        }
-    }]
+//    ,
+//
+//    buttons: [{
+//        text: 'Save',
+//        handler: function(){
+//            if(Atr2PTForm.getForm().isValid()){
+//                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+//                    Atr2PTForm.getForm().getValues(true));
+//            }
+//        }
+//    }]
 });
-
-
 
 
 
@@ -1956,14 +2061,16 @@ var egrabli = {
         title: 'Атрибуты',
         autoScroll: true,
         items:[atrForm]
-    },{
-        title: 'Значения атрибутов',
-        autoScroll: true
-    //items:[ptForm]
-    },{
+    },
+    //    {
+    //        title: 'Значения атрибутов',
+    //        autoScroll: true
+    //    //items:[ptForm]
+    //    },
+    {
         title: 'Сборка контента',
-        autoScroll: true
-    //items:[isForm]
+        autoScroll: true,
+        items:[Atr2PTForm]
     }]
 };
 
@@ -2195,4 +2302,5 @@ Ext.onReady(function(){
     //comboLanguages.setValue('ru');
     //storeAtrs.load();
     storeLngs.load();
+//storeAtrAll.load();
 });

@@ -44,6 +44,7 @@ public class Attribute extends HttpServlet {
         xstream.omitField(pojo.Attribute.class, "productTypes");
         //xstream.registerConverter(new XmlConvertor4Attributes());
         List atrList;
+        String template = "";
         String xml;
         int id;
         ProductType pt;
@@ -52,13 +53,23 @@ public class Attribute extends HttpServlet {
                 id = 0;
             } else {
                 id = Integer.parseInt(request.getParameter("ptId"));
+                if (id == 7777) {
+                    id = 0;
+                }
             }
-            if (id!=0) {
-                pt = new ProductType();
-                pt.setProductTypeId(id);
-                atrList = fd.getAttributeDAO().getAttributesOnlyByProductType(pt);
+            if (request.getParameter("template") != null) {
+                template = request.getParameter("template");
+            }
+            if (!template.equals("")) {
+                atrList = fd.getAttributeDAO().getAttributesOnlyByTemplate(template);
             } else {
-                atrList = fd.getAttributeDAO().getAllAttributesOnly();
+                if (id != 0) {
+                    pt = new ProductType();
+                    pt.setProductTypeId(id);
+                    atrList = fd.getAttributeDAO().getAttributesOnlyByProductType(pt);
+                } else {
+                    atrList = fd.getAttributeDAO().getAllAttributesOnly();
+                }
             }
             xml = xstream.toXML(atrList);
             out.println(xml);

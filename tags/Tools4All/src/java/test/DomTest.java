@@ -65,7 +65,7 @@ public class DomTest {
 
         visit(doc, 0);
         System.out.println(nodes.size());
-        NodeList nodess = nodes.get(0).getParentNode().getParentNode().getChildNodes();
+        NodeList nodess = nodes.get(2).getParentNode().getParentNode().getChildNodes();
         for (int k = 0; k < nodes.size(); k++) {
             System.out.println(nodess.item(k).getTextContent());
         }

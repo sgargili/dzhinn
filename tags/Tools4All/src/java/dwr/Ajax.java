@@ -35,6 +35,7 @@ import org.directwebremoting.WebContextFactory;
 import org.directwebremoting.ui.dwr.Util;
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.io.FileTransfer;
+import pojo.Attribute;
 import pojo.ProductType;
 import value4it.MatchingData;
 import value4it.ValuePro;
@@ -229,17 +230,6 @@ public class Ajax {
         return vp.addLink(links);
     }
 
-    public String addProductType(String productTypeName) {
-        if (productTypeName.replaceAll("\\s+|\\d+", "").equals("")) {
-            return "Empty";
-        }
-        if (FactoryDAO4Grabli.getInstance().getProductTypeDAO().isProductTypePresent(productTypeName.trim())) {
-            return "Already Exist";
-        }
-        ValuePro vp = new ValuePro();
-        return vp.addProductType(productTypeName);
-    }
-
     public String clearSession() {
         ValuePro vp = new ValuePro();
         return vp.clearSession();
@@ -288,6 +278,17 @@ public class Ajax {
         }
     }
 
+    public String addProductType(String productTypeName) {
+        if (productTypeName.replaceAll("\\s+|\\d+", "").equals("")) {
+            return "Empty";
+        }
+        if (FactoryDAO4Grabli.getInstance().getProductTypeDAO().isProductTypePresent(productTypeName.trim())) {
+            return "Already Exist";
+        }
+        GrabliPro gp = new GrabliPro();
+        return gp.addProductType(productTypeName);
+    }
+
     public String getProductTypeAltName(String productTypeId) {
         String altName = "";
         GrabliPro gp = new GrabliPro();
@@ -315,7 +316,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadPTData() throws Exception {
-        File file = new File("C://tempXlsx.xlsx");
+        File file = new File(System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
@@ -350,9 +351,7 @@ public class Ajax {
         return "Done";
     }
 
-
-
-     public String getAttributeAltName(String attributeId) {
+    public String getAttributeAltName(String attributeId) {
         String altName = "";
         GrabliPro gp = new GrabliPro();
         try {
@@ -363,41 +362,41 @@ public class Ajax {
         return altName;
     }
 
-    public String updateAttributeAltName(String productTypeId, String newAltName) {
-        ProductType pt = new ProductType();
+    public String updateAttributeAltName(String attributeId, String newAltName) {
+        Attribute at = new Attribute();
         try {
-            pt.setProductTypeId(Integer.parseInt(productTypeId));
+            at.setAttributeId(Integer.parseInt(attributeId));
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
-            pt = null;
+            at = null;
             return "MultiSelectInRequest";
         }
-        pt.setProductTypeAlternative(newAltName);
+        at.setAttributeAlternative(newAltName);
         GrabliPro gp = new GrabliPro();
-        gp.updateProductTypeAltName(pt);
+        gp.updateAttributeAltName(at);
         return "Done";
     }
 
     public FileTransfer downloadAtrData() throws Exception {
-        File file = new File("C://tempXlsx.xlsx");
+        File file = new File(System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadAttributeData(file)));
         file.delete();
-        return new FileTransfer("PT.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+        return new FileTransfer("Atr.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
-    public String deleteAttribute(String productTypeId) {
-        ProductType pt = new ProductType();
+    public String deleteAttribute(String attributeId) {
+        Attribute at = new Attribute();
         try {
-            pt.setProductTypeId(Integer.parseInt(productTypeId));
+            at.setAttributeId(Integer.parseInt(attributeId));
         } catch (NumberFormatException ex) {
             ex.printStackTrace();
-            pt = null;
+            at = null;
             return "MultiSelectInRequest";
         }
         GrabliPro gp = new GrabliPro();
-        gp.deleteProductType(pt);
+        gp.deleteAttribute(at);
         return "Done";
     }
 
@@ -410,7 +409,18 @@ public class Ajax {
         File file = new File("C://tempFile");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
-        gp.updateProductTypeByFile(file);
+        gp.updateAttributeByFile(file);
         return "Done";
+    }
+
+    public String addAttribute(String attributeName) {
+        if (attributeName.replaceAll("\\s+|\\d+", "").equals("")) {
+            return "Empty";
+        }
+        if (FactoryDAO4Grabli.getInstance().getAttributeDAO().isAttributePresent(attributeName.trim())) {
+            return "Already Exist";
+        }
+        GrabliPro gp = new GrabliPro();
+        return gp.addAttribute(attributeName);
     }
 }

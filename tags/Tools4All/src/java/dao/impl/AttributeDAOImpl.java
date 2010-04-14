@@ -77,4 +77,52 @@ public class AttributeDAOImpl implements AttributeDAO {
     public List<Attribute> getAttributesOnlyByProductTypeId(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public void updateAttributeAltNameOnly(Attribute attribute) {
+        try {
+            Attribute newAttribute;
+            newAttribute = getAttributeById(attribute.getAttributeId());
+            newAttribute.setAttributeAlternative(attribute.getAttributeAlternative());
+            getHibernateTemplate().update(newAttribute);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Нечего обновлять... Нету такого аттрибута с Id: " + attribute.getAttributeId());
+        }
+    }
+
+    public void deleteAttribute(Attribute attribute) {
+        getHibernateTemplate().delete(attribute);
+    }
+
+    public boolean isAttributePresent(String attributeName) {
+        String query = "from Attribute a where attributeName = :value";
+        try {
+            return !getHibernateTemplate().findByNamedParam(query, "value", attributeName).isEmpty();
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
+    public void addOrUpdateAttributeNameOnly(Attribute attribute) {
+        try {
+            Attribute newAttribute;
+            newAttribute = getAttributeByName(attribute.getAttributeName());
+            newAttribute.setAttributeAlternative(attribute.getAttributeAlternative());
+            getHibernateTemplate().update(newAttribute);
+        } catch (Exception ex) {
+            // ex.printStackTrace();
+            getHibernateTemplate().save(attribute);
+        }
+    }
+
+    public List<Attribute> getAttributesOnlyByTemplate(String template) {
+        template = "%" + template + "%";
+        String query = "from Attribute a where attributeName like :value";
+        System.out.println(template);
+        try {
+            return getHibernateTemplate().findByNamedParam(query, "value", template);
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }
