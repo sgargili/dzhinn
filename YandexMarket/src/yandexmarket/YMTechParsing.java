@@ -48,7 +48,7 @@ public class YMTechParsing {
 
     public static void main(String[] args) throws XmlPullParserException, SQLException, UnsupportedEncodingException, IOException {
         // Инициализация...
-        String dst = "C://javaTemp/new.xhtml";
+        String dst = "/home/ilyahoo/NetBeansProjects/Temp/new.xhtml";
         OutputStream os = null;
         XMLReader r;
         Writer w = null;
@@ -96,7 +96,7 @@ public class YMTechParsing {
                 URLBool = false;
         String[] testArt = new String[4];
 
-        CsvWriter wrtr = new CsvWriter("C://1/KeyProdsNew.csv", ',', Charset.forName("WINDOWS-1251"));
+        CsvWriter wrtr = new CsvWriter("/home/ilyahoo/NetBeansProjects/1/KeyProdsNew.csv", ',', Charset.forName("WINDOWS-1251"));
 
         // Цикл по всем артиклям выгруженным из базы
         for (Iterator iter = articles.iterator(); iter.hasNext();) {
@@ -107,7 +107,7 @@ public class YMTechParsing {
             tempDesc = art.getSearchdesc();
             System.out.println("*******************************************");
             System.out.print(art.getId() + ") " + tempDesc);
-            System.out.println(" <"+art.getKeyart()+">");
+            System.out.println(" <" + art.getKeyart() + ">");
 
             // Если описание русское, то его переводим в формат юникода,
             // чтобы URL была хорошая.
@@ -138,7 +138,7 @@ public class YMTechParsing {
                     m2 = p2.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
                     m3 = p3.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
                     if (!m.find() & !m2.find() & !m3.find()) {
-                        temp = new File("C://javaTemp/" + art.getKeyart() + ".xhtml");
+                        temp = new File("/home/ilyahoo/NetBeansProjects/Temp/" + art.getKeyart() + ".xhtml");
                         FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
                         break;
                     }
@@ -176,32 +176,33 @@ public class YMTechParsing {
 //                        URLBool = true;
 //                    }
 
-                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && xpp.getAttributeCount() == 2) {
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && xpp.getAttributeCount() == 2 && xpp.getAttributeValue(1).indexOf("model.xml?hid") != -1) {
                         URLBool = false;
-                        tempURL = xpp.getAttributeValue(0);
-                        System.out.print(tempURL);
-                        System.out.println(" | " + tempURL.indexOf("show-uid"));
-                        //System.out.println("вроде нашли ссылку: " + tempURL);
+                        tempURL = xpp.getAttributeValue(1);
+//                        System.out.println("вроде нашли ссылку: " + tempURL + " | " + tempURL.indexOf("model.xml?hid"));
                         //&& xpp.getAttributeValue(1).indexOf("model.xml?hid")>-1
                         //&& xpp.getAttributeValue(0).indexOf("model.xml?hid") != -1
                     }
 
-                    if (eventType == XmlPullParser.TEXT) {
+                    if (eventType == XmlPullParser.TEXT && xpp.getText().trim().equals("все характеристики")) {
                         finded = true;
                         System.out.println("нашлось (страница с описанием)");
-                        System.out.println("текст: "+xpp.getText().trim());
+                        System.out.println("текст: " + xpp.getText().trim());
                         // && xpp.getText().trim().equals("все характеристики")
                     }
 
                     if (eventType == XmlPullParser.START_TAG && !finded && xpp.getAttributeCount() == 1 && xpp.getAttributeValue(0).equals("b-model-actioins__cnt")) {
                         finded = true;
-                        System.out.println("нашлось (список)");
+                        System.out.println("Нашлась ссылка на описание продyкта (в списке)...");
                         lstBool = true;
                         DldURL = "http://market.yandex.ru" + tempURL;
+                        art.setPurl(DldURL);
                         System.out.println("Ссылка на описание товара: " + DldURL);
+                        getAtrs(art.getId(), DldURL);
+
                     }
 
-                    
+
                     testArt[0] = art.getKeyart();
                     testArt[1] = art.getSearchdesc();
                     testArt[2] = "";
@@ -239,5 +240,216 @@ public class YMTechParsing {
             }
         }
         wrtr.close();
+    }
+
+    static void getAtrs(long id, String dURL) throws XmlPullParserException {
+        String dst1 = "/home/ilyahoo/NetBeansProjects/Temp/parsing.xhtml";
+        FactoryDAO fd = FactoryDAO.getInstance();
+        OutputStream os = null;
+        XMLReader r;
+        ContentHandler h;
+        http ht1 = new http();
+        File fl, temp;
+        IpChange ip = new IpChange();
+        Writer w1 = null;
+
+        // Шаблоны регекспов для определения кидалово со стороны яндекса.
+        Pattern ptr = Pattern.compile("captcha.yandex.net");
+        Matcher mt;
+        Pattern ptr2 = Pattern.compile(".title.404");
+        Matcher mt2;
+        Pattern ptr3 = Pattern.compile("Connect to market.yandex.ru:80 failed");
+        Matcher mt3;
+
+        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+        XmlPullParser xpp = factory.newPullParser();
+        File xml = new File(dst1);
+
+        Matching mtch;
+
+        int pageCount = 1;
+        String[] stringContent;
+        //FactoryDAO fd2 = FactoryDAO.getInstance();
+
+
+        String prodType = "", atrs = "", tempAt = "", tempGr = "", pictURL = "";
+        boolean PTBool = false,
+                techBool = false,
+                techBool2 = false,
+                groupBool = false,
+                atrBool = false,
+                valBool = false,
+                picBool = false;
+        String[] tempArr;
+        int ctr;
+
+
+
+        // Бесконечный цикл созднынный для того, чтобы бегать тором
+        // по яндексу пока он нас не пустит, как только пустит, то выход
+        // из цикла брейком.
+        while (true) {
+            try {
+                int pageCounts = 1;
+                // Говорим яндексу, что мы из москвы
+                ht1.setCookie("http://tune.yandex.ru/region/save2.xml?fretpath=http://market.yandex.ru&domain=yandex.ru&retpath=http://market.yandex.ru&region_id=213", true);
+
+                // Строка запрос яндексу
+
+                //System.out.println(dURL);
+                fl = ht1.DownloadContentAsFile(dURL, true);
+
+                // Пара регекспов для определния того, что яндекс
+                // нас отбросил. Если они оба не находятся на странице,
+                // то значит что яндекс нас пустил, запоминаем
+                // содержимое странички и выходим из цикла брейком.
+                mt = ptr.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
+                mt2 = ptr2.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
+                mt3 = ptr3.matcher(FileUtils.readFileToString(fl, theOutputEncoding));
+                if (!mt.find() & !mt2.find() & !mt3.find()) {
+                    temp = new File("/home/ilyahoo/NetBeansProjects/Temp/" + id + "_tech.xhtml");
+                    FileUtils.writeStringToFile(temp, FileUtils.readFileToString(fl, theOutputEncoding), "UTF-8");
+                    break;
+                }
+
+                // Если регекспы сработали, то значит надо поменять IP
+                // и начать по-новой...
+                ip.setChange();
+                System.out.println("Сменился Ip...");
+
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+        }
+
+        // Разбор полученой странички.
+        try {
+            os = new FileOutputStream(dst1);
+            r = new Parser();
+            w1 = new OutputStreamWriter(os, theOutputEncoding);
+            h = new XMLWriter(w1);
+
+
+            String artURL = "",
+                    yaDesc = "";
+            r.setContentHandler(h);
+            r.parse(fl.toURI().toString());
+            xml = new File(dst1);
+            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
+
+            int eventType = xpp.getEventType();
+            Newarticles artWrt;
+
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("title")) {
+                    PTBool = true;
+                }
+                if (eventType == XmlPullParser.TEXT && PTBool) {
+                    PTBool = false;
+                    prodType = xpp.getText().trim();
+                    tempArr = prodType.split(" – ");
+                    prodType = tempArr[tempArr.length - 2];
+                    prodType = prodType.trim();
+                    System.out.println("Product Type: " + prodType);
+                }
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("table") && xpp.getAttributeCount() == 5 && xpp.getAttributeValue(0).equals("modelProperties")) {
+                    techBool2 = true;
+                }
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("b") && techBool2) {
+                    groupBool = true;
+                    techBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && groupBool && techBool) {
+                    atrs += "||" + xpp.getText() + "|";
+                    groupBool = false;
+                    tempGr = xpp.getText();
+                }
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("span") && techBool) {
+                    atrBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && techBool && atrBool) {
+                    atrs += xpp.getText() + " -- ";
+                    tempAt = xpp.getText();
+//                    System.out.println("atrib: "+xpp.getText());
+                    atrBool = false;
+                }
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && xpp.getAttributeCount() == 3 && xpp.getAttributeValue(2).equals("bigpic")) {
+                    picBool = true;
+                }
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("img") && picBool) {
+                    picBool = false;
+                    pictURL = xpp.getAttributeValue(0);
+                    System.out.println("Ссылка на картинкy: " + pictURL);
+                }
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("a") && picBool) {
+                    picBool = false;
+                    pictURL = xpp.getAttributeValue(2);
+                    System.out.println("Ссылка на картинкy: " + pictURL);
+                }
+
+
+                if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("td") && techBool) {
+                    valBool = true;
+//                    System.out.println("__________");
+//                    for (ctr=0;ctr<xpp.getAttributeCount();ctr++){
+//                        System.out.println(xpp.getAttributeName(ctr) + " = " + xpp.getAttributeValue(ctr));
+//                    }
+                }
+
+                if (eventType == XmlPullParser.TEXT && techBool && valBool && !xpp.getText().equals(" ") && !xpp.getText().equals(tempAt) && !xpp.getText().equals(tempGr)) {
+//                    System.out.println("znachen: "+xpp.getText());
+                    atrs += xpp.getText() + ";";
+                    valBool = false;
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("table") && techBool) {
+                    groupBool = false;
+                    techBool = false;
+                    atrBool = false;
+                    valBool = false;
+                    techBool2 = false;
+                }
+
+//                System.out.println("razbiraem: " + dURL);
+
+                eventType = xpp.next();
+            }
+            System.out.println("Атрибyты: " + atrs);
+            artWrt = new Newarticles();
+            artWrt.setAttr(atrs);
+            artWrt.setId(id);
+            artWrt.setPicurl(pictURL);
+            artWrt.setPt(prodType);
+            artWrt.setPurl(dURL);
+
+            try {
+                fd.getnewArticlesDAO().addnArticles(artWrt);
+                System.out.println("Записано в базy...");
+            } catch (Exception ex) {
+                System.out.println("Ошибка при записи данных в базy!");
+                ex.printStackTrace();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            os.close();
+            w1.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        xml.delete();
+
     }
 }

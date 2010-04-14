@@ -52,7 +52,7 @@ public class http {
     public void setCookie(String url, boolean useProxy) {
         client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
         if (useProxy) {
-            client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+            client.getHostConfiguration().setProxy("127.0.0.1", 9050);
         }
         GetMethod getMethod = new GetMethod(url);
         try {
@@ -108,11 +108,11 @@ public class http {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
         //String url = "http://213.53.57.20/ShopIX/exportFullXML.jsp?shopId=74";
-        File tempFile = new File("C://javaTemp/temp.html");
+        File tempFile = new File("/home/ilyahoo/NetBeansProjects/Temp/temp.html");
         GetMethod getMethod = new GetMethod(url);
         try {
             int getResult = client.executeMethod(getMethod);
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "Windows-1251"));
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
             out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "UTF-8"));
 
             out.flush();
