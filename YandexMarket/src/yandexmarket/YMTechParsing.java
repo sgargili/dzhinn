@@ -198,7 +198,7 @@ public class YMTechParsing {
                         DldURL = "http://market.yandex.ru" + tempURL;
                         art.setPurl(DldURL);
                         System.out.println("Ссылка на описание товара: " + DldURL);
-                        getAtrs(art.getId(), DldURL);
+                        getAtrs(art.getId(), DldURL,art.getKeyart(),art.getVendor(),art.getSearchdesc());
 
                     }
 
@@ -242,7 +242,7 @@ public class YMTechParsing {
         wrtr.close();
     }
 
-    static void getAtrs(long id, String dURL) throws XmlPullParserException {
+    static void getAtrs(long id, String dURL, String kart, String vnd, String sd) throws XmlPullParserException {
         String dst1 = "/home/ilyahoo/NetBeansProjects/Temp/parsing.xhtml";
         FactoryDAO fd = FactoryDAO.getInstance();
         OutputStream os = null;
@@ -429,7 +429,9 @@ public class YMTechParsing {
             artWrt.setPicurl(pictURL);
             artWrt.setPt(prodType);
             artWrt.setPurl(dURL);
-
+            artWrt.setKeyart(kart);
+            artWrt.setSearchdesc(sd);
+            artWrt.setVendor(vnd);
             try {
                 fd.getnewArticlesDAO().addnArticles(artWrt);
                 System.out.println("Записано в базy...");
