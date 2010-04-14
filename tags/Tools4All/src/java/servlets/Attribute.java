@@ -31,6 +31,14 @@ public class Attribute extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/xml;charset=UTF-8");
+        String requestEnc = request.getCharacterEncoding();
+        if (requestEnc == null) {
+            requestEnc = "ISO-8859-1";
+        }
+        String clientEnc = request.getParameter("charset");
+        if (clientEnc == null) {
+            clientEnc = "utf-8";
+        }
         PrintWriter out = response.getWriter();
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
         XStream xstream = new XStream();
@@ -58,7 +66,8 @@ public class Attribute extends HttpServlet {
                 }
             }
             if (request.getParameter("template") != null) {
-                template = request.getParameter("template");
+                template = new String(request.getParameter("template").getBytes(requestEnc), clientEnc);
+                System.out.println(template);
             }
             if (!template.equals("")) {
                 atrList = fd.getAttributeDAO().getAttributesOnlyByTemplate(template);

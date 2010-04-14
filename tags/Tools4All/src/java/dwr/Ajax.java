@@ -25,7 +25,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -422,5 +424,17 @@ public class Ajax {
         }
         GrabliPro gp = new GrabliPro();
         return gp.addAttribute(attributeName);
+    }
+
+    public String addAtr2Pt(String ptId, String atrIds) {
+        String[] attributesIds = atrIds.split(",");
+        List<Integer> atrList = new ArrayList();
+        for (int i = 0; i < attributesIds.length; i++) {
+            atrList.add(Integer.parseInt(attributesIds[i]));
+        }
+        int ptIdd = Integer.parseInt(ptId);
+        GrabliPro gp = new GrabliPro();
+        gp.addAtr2Pt(ptIdd, atrList);
+        return "Done";
     }
 }

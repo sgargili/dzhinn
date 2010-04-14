@@ -1167,7 +1167,7 @@ var Atr2PTForm = new Ext.form.FormPanel({
                 tbar:[{
                     text: 'Загрузить Атрибуты',
                     handler:function(){
-                        storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.get('atrTemplate').getValue());
+                        storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
                         storeAtrAll.clearData();
                         storeAtrAll.load();
                     }
@@ -1180,13 +1180,18 @@ var Atr2PTForm = new Ext.form.FormPanel({
                     allowBlank:true,
                     style: {
                         marginTop: '1px'
+                    },
+                    listeners: {
+                        specialkey: function(something,e){
+                            if (e.getKey() == e.ENTER) {
+                                storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
+                                storeAtrAll.clearData();
+                                storeAtrAll.load();
+                            }
+                        }
                     }
-                },{
-                    text: 'clear',
-                    handler:function(){
-                        Atr2PTForm.getForm().findField('itemselector').reset();
-                    }
-                }]
+                }
+                ]
             },{
                 width: 300,
                 height: 250,
@@ -1194,9 +1199,18 @@ var Atr2PTForm = new Ext.form.FormPanel({
                 displayField: 'atr',
                 valueField: 'id',
                 tbar:[{
-                    text: 'clear',
+                    text: 'Сохранить связи Атрибуты - ПТ',
                     handler:function(){
-                        Atr2PTForm.getForm().findField('itemselector').reset();
+                        Ajax.addAtr2Pt(comboPts.getValue(), Atr2PTForm.getForm().findField('itemselector').getValue(), function(data) {
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Связки сохранены.',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+
+                    });
                     }
                 }]
             }]

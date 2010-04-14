@@ -220,4 +220,26 @@ public class GrabliPro {
         style.setTopBorderColor(IndexedColors.BLACK.getIndex());
         return style;
     }
+
+    public void addAtr2Pt(int ptId, List atrIds) {
+        ProductType pt = fd.getProductTypeDAO().getProductTypeByIdWithAttributes(ptId);
+        Attribute atr;
+        int i;
+        Iterator it = pt.getAttributes().iterator();
+//        while (it.hasNext()) {
+//            atr = (Attribute) it.next();
+//            if (atrIds.contains(atr.getAttributeId())) {
+//                atrIds.remove(atr.getAttributeId());
+//            }
+//        }
+        pt.getAttributes().clear();
+        it = atrIds.iterator();
+        while (it.hasNext()) {
+            i = (Integer) it.next();
+            atr = fd.getAttributeDAO().getAttributeById(i);
+            pt.getAttributes().add(atr);
+        }
+        fd.getProductTypeDAO().addProductType(pt);
+
+    }
 }

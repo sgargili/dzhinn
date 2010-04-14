@@ -28,7 +28,7 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     }
 
     public void addProductType(ProductType productType) {
-        getHibernateTemplate().persist(productType);
+        getHibernateTemplate().saveOrUpdate(productType);
     }
 
     public void updateProductTypeNameOnly(ProductType productType) {
