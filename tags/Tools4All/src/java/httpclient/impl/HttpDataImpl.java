@@ -105,7 +105,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File(System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -160,7 +160,7 @@ public class HttpDataImpl implements HttpData {
     }
 
     public File downloadContentAsFile(String url, String outputFileEncoding) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File(System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -198,7 +198,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File(System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -236,7 +236,7 @@ public class HttpDataImpl implements HttpData {
     }
 
     public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File(System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -274,7 +274,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File(System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);

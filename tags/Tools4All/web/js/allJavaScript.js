@@ -389,7 +389,7 @@ var comboLanguages = new Ext.ux.form.MultiSelect({
 
 var ptMulti = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
-    width: 350,
+    width: 400,
     height: 200,
     allowBlank:true,
     //autoScroll: true,
@@ -721,7 +721,7 @@ var storeAtr = new Ext.data.Store({
 
 var atrMulti = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
-    width: 350,
+    width: 400,
     height: 200,
     allowBlank:true,
     //autoScroll: true,
@@ -1154,13 +1154,15 @@ var Atr2PTForm = new Ext.form.FormPanel({
             xtype: 'itemselector',
             name: 'itemselector',
             //fieldLabel: 'ItemSelector',
-            labelWidth:'0',
+            //labelWidth:'0',
             hideLabel: true,
             bodyStyle: 'padding:0px;',
             imagePath: 'images/ux',
+            //            fromLegend:'Возможно',
+            //            toLegend:'Привязано',
             multiselects: [{
-                width: 300,
-                height: 250,
+                width: 400,
+                height: 500,
                 store: storeAtrAll,
                 displayField: 'atr',
                 valueField: 'id',
@@ -1190,27 +1192,70 @@ var Atr2PTForm = new Ext.form.FormPanel({
                             }
                         }
                     }
+                },{
+                    text: 'Загрузить файл со связками',
+                    handler:function(){
+                        Ajax.downloadAtr2PtData(function(data) {
+                            dwr.engine.openInDownload(data);
+                        });
+                    }
                 }
                 ]
             },{
-                width: 300,
-                height: 250,
+                width: 400,
+                height: 500,
                 store: storeAtr2ProdType,
                 displayField: 'atr',
                 valueField: 'id',
                 tbar:[{
                     text: 'Сохранить связи Атрибуты - ПТ',
                     handler:function(){
-                        Ajax.addAtr2Pt(comboPts.getValue(), Atr2PTForm.getForm().findField('itemselector').getValue(), function(data) {
+                        if(comboPts.getValue()==null||comboPts.getValue()==""){
                             Ext.Msg.show({
-                                title:'Выполненно!',
-                                msg: 'Связки сохранены.',
+                                title:'Внимание!',
+                                msg: 'Выберите ПТ',
                                 buttons: Ext.Msg.OK,
                                 width:250,
-                                icon: Ext.MessageBox.INFO
+                                icon: Ext.MessageBox.ERROR
                             });
+                            return;
+                        }
+                        if(Atr2PTForm.getForm().findField('itemselector').getValue()==null||
+                            Atr2PTForm.getForm().findField('itemselector').getValue()==""){
+                            Ext.MessageBox.buttonText.yes = "ага";
+                            Ext.MessageBox.buttonText.no = "нах";
+                            Ext.Msg.show({
+                                title:'Подтверждение!',
+                                msg: 'Точно сохранить? А то поле атрибутов пустое...',
+                                buttons: Ext.Msg.YESNO,
+                                fn: function(btn){
+                                    if (btn == 'yes'){
+                                        Ajax.addAtr2Pt(comboPts.getValue(), Atr2PTForm.getForm().findField('itemselector').getValue(), function(data) {
+                                            Ext.Msg.show({
+                                                title:'Выполненно!',
+                                                msg: 'Связки сохранены.',
+                                                buttons: Ext.Msg.OK,
+                                                width:250,
+                                                icon: Ext.MessageBox.INFO
+                                            });
 
-                    });
+                                        });
+                                    }
+                                },
+                                icon: Ext.MessageBox.QUESTION
+                            });
+                        } else{
+                            Ajax.addAtr2Pt(comboPts.getValue(), Atr2PTForm.getForm().findField('itemselector').getValue(), function(data) {
+                                Ext.Msg.show({
+                                    title:'Выполненно!',
+                                    msg: 'Связки сохранены.',
+                                    buttons: Ext.Msg.OK,
+                                    width:250,
+                                    icon: Ext.MessageBox.INFO
+                                });
+
+                            });
+                        }
                     }
                 }]
             }]
@@ -2096,6 +2141,19 @@ var ecsv = {
     contentEl: 'eCsv'
 };
 
+var fibasic = new Ext.ux.form.FileUploadField({
+    width:350,
+    id: 'matchFile',
+    emptyText: 'Выберите файл...',
+    style: {
+        marginTop: '0px',
+        marginBottom: '0px'
+    },
+    buttonText: 'Выбрать'
+});
+
+var p = new Ext.ux.form.FileUploadField();
+
 var erow = {
     xtype: 'tabpanel',
     id: 'eRow-panel',
@@ -2112,20 +2170,8 @@ var erow = {
             autoScroll: true,
             bodyStyle: 'padding:7px; background-color:#e1e8ff',
             layout:'column',
-            items:[{
-                xtype: 'fileuploadfield',
-                width:350,
-                id: 'matchFile',
-                emptyText: 'Выберите файл...',
-                style: {
-                    marginTop: '0px',
-                    marginBottom: '0px'
-                },
-                buttonText: 'Выбрать'
-            //        buttonCfg: {
-            //            iconCls: 'upload-icon'
-            //        }
-            },{
+            items:[fibasic,p,
+            {
                 xtype: 'button',
                 text: '<<<Запуск>>>',
                 id:'changeStatBtn',
@@ -2136,11 +2182,16 @@ var erow = {
                     click: function() {
                         var file = Ext.getDom('matchFile-file');
                         var file2 = dwr.util.getValue('matchFile-file');
-                        //                        alert(file.value);
-                        //                        file.value='';
-                        //                        alert(file.value);
-                        Ajax.matchData(file, Ext.getCmp('matchFile').getValue(), function(data) {
+
+                        Ajax.matchData(file2, byId("matchFile-file").value, function(data) {
+                            //Ext.getCmp('matchFile').remove();
                             Ext.getCmp('matchFile').reset();
+                            
+                            
+                            //Ext.getCmp('matchFile').createFileInput();
+                            //.setRawValue(null)
+                            //Ext.getCmp('matchFile').setRawValue(null);
+                            //dwr.util.setValue('matchFile','');
                             if(data==null){
                                 Ext.Msg.show({
                                     title:'Неверный формат файла...',
@@ -2151,6 +2202,18 @@ var erow = {
                                 });
                             } else{
                                 dwr.engine.openInDownload(data);
+                                //fibasic.destroy();
+                                 fibasic = new Ext.ux.form.FileUploadField({
+                                    width:350,
+                                    id: 'matchFile',
+                                    emptyText: 'Выберите файл...',
+                                    style: {
+                                        marginTop: '0px',
+                                        marginBottom: '0px'
+                                    },
+                                    buttonText: 'Выбрать'
+                                });
+                                Ext.QuickTips.init();
                             }
                         });
 

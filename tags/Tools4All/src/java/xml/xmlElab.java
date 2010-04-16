@@ -50,7 +50,7 @@ public class xmlElab {
         oldCat oc;
         XmlPullParserFactory factory = factory = XmlPullParserFactory.newInstance();
         XmlPullParser xpp = factory.newPullParser();
-        File oldXml = new File("C://OldCategories.xml");
+        File oldXml = new File("OldCategories.xml");
         xpp.setInput(new InputStreamReader(FileUtils.openInputStream(oldXml), "UTF-8"));
         int eventType = xpp.getEventType();
         while (eventType != XmlPullParser.END_DOCUMENT) {

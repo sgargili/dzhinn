@@ -243,7 +243,8 @@ public class Ajax {
         if (!m.find()) {
             return null;
         }
-        FileUtils.writeStringToFile(new File("C://newFile"), convertStreamToString(uploadFile));
+        File file = new File("C://"+System.nanoTime()+".temp");
+        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         MatchingData match = new MatchingData();
 
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -252,10 +253,10 @@ public class Ajax {
         m = p.matcher(fileName);
         if (m.find()) {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
-            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, fileName, MatchingData.CSV)));
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, MatchingData.CSV)));
         } else {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xlsx", "$2");
-            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, fileName, MatchingData.EXCEL)));
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, MatchingData.EXCEL)));
         }
 
         return new FileTransfer(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
@@ -346,7 +347,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("C://tempFile");
+        File file = new File(System.nanoTime()+".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateProductTypeByFile(file);
@@ -408,7 +409,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("C://tempFile");
+        File file = new File(System.nanoTime()+".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateAttributeByFile(file);
@@ -429,12 +430,24 @@ public class Ajax {
     public String addAtr2Pt(String ptId, String atrIds) {
         String[] attributesIds = atrIds.split(",");
         List<Integer> atrList = new ArrayList();
-        for (int i = 0; i < attributesIds.length; i++) {
-            atrList.add(Integer.parseInt(attributesIds[i]));
+        try {
+            for (int i = 0; i < attributesIds.length; i++) {
+                atrList.add(Integer.parseInt(attributesIds[i]));
+            }
+        } catch (NumberFormatException ex) {
         }
         int ptIdd = Integer.parseInt(ptId);
         GrabliPro gp = new GrabliPro();
         gp.addAtr2Pt(ptIdd, atrList);
         return "Done";
+    }
+
+    public FileTransfer downloadAtr2PtData() throws Exception {
+        File file = new File(System.nanoTime() + ".xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadAtr2PtData(file)));
+        file.delete();
+        return new FileTransfer("Atr2Pt.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 }

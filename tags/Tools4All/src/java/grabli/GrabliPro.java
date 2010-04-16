@@ -11,6 +11,7 @@ import csv.CsvReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
@@ -208,6 +209,57 @@ public class GrabliPro {
         return file;
     }
 
+    public File downloadAtr2PtData(File file) {
+        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
+        List<ProductType> pts = new ArrayList();
+        ProductType pt;
+        Iterator iter = ptsTemp.iterator();
+        while (iter.hasNext()) {
+            pt = (ProductType) iter.next();
+            pt = fd.getProductTypeDAO().getProductTypeByIdWithAttributes(pt.getProductTypeId());
+            pts.add(pt);
+        }
+        Attribute atr;
+        CellStyle style;
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            Workbook wb = new XSSFWorkbook();
+            Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
+            Row r = null;
+            Cell c = null;
+            wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
+            int i = 0;
+            for (Iterator it = pts.iterator(); it.hasNext();) {
+                pt = (ProductType) it.next();
+                iter = pt.getAttributes().iterator();
+                while (iter.hasNext()) {
+                    atr = (Attribute) iter.next();
+                    r = s.createRow(i++);
+                    c = r.createCell(0);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(pt.getProductTypeName());
+                    c.setCellStyle(style);
+                    c = r.createCell(1);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(atr.getAttributeName());
+                    c.setCellStyle(style);
+                }
+            }
+            wb.write(out);
+            out.close();
+            wb = null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return file;
+    }
+
     private static CellStyle createBorderedStyle(Workbook wb) {
         CellStyle style = wb.createCellStyle();
         style.setBorderRight(CellStyle.BORDER_THIN);
@@ -236,7 +288,9 @@ public class GrabliPro {
         it = atrIds.iterator();
         while (it.hasNext()) {
             i = (Integer) it.next();
-            atr = fd.getAttributeDAO().getAttributeById(i);
+            //atr = fd.getAttributeDAO().getAttributeById(i);
+            atr = new Attribute();
+            atr.setAttributeId(i);
             pt.getAttributes().add(atr);
         }
         fd.getProductTypeDAO().addProductType(pt);
