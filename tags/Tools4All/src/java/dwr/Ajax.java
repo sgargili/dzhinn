@@ -38,6 +38,7 @@ import org.directwebremoting.ui.dwr.Util;
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.io.FileTransfer;
 import pojo.Attribute;
+import pojo.AttributeAlternativeName;
 import pojo.ProductType;
 import value4it.MatchingData;
 import value4it.ValuePro;
@@ -243,7 +244,7 @@ public class Ajax {
         if (!m.find()) {
             return null;
         }
-        File file = new File("C://"+System.nanoTime()+".temp");
+        File file = new File("C://" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         MatchingData match = new MatchingData();
 
@@ -347,7 +348,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File(System.nanoTime()+".temp");
+        File file = new File(System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateProductTypeByFile(file);
@@ -409,7 +410,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File(System.nanoTime()+".temp");
+        File file = new File(System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateAttributeByFile(file);
@@ -449,5 +450,24 @@ public class Ajax {
         buffer.write(FileUtils.readFileToByteArray(gp.downloadAtr2PtData(file)));
         file.delete();
         return new FileTransfer("Atr2Pt.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    public String addAttributeAltName(String attributeId, String newAltName) {
+        AttributeAlternativeName atrAlt = new AttributeAlternativeName();
+        Attribute atr = new Attribute();
+        atr.setAttributeId(Integer.parseInt(attributeId));
+        try {
+            atr.setAttributeId(Integer.parseInt(attributeId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            atrAlt = null;
+            return "MultiSelectInRequest";
+        }
+        atrAlt.setAttributeAlernativeNameValue(newAltName);
+        atrAlt.setAttribute(atr);
+        GrabliPro gp = new GrabliPro();
+        gp.addAttributeAltName(atrAlt);
+        return "Done";
+
     }
 }

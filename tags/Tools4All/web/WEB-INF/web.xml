@@ -61,6 +61,10 @@
         <servlet-name>Language</servlet-name>
         <servlet-class>servlets.Language</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AttributeAltName</servlet-name>
+        <servlet-class>servlets.AttributeAltName</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -80,6 +84,10 @@
     <servlet-mapping>
         <servlet-name>Language</servlet-name>
         <url-pattern>/Language.exml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttributeAltName</servlet-name>
+        <url-pattern>/AttributeAltName</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>tools4value.jsp</welcome-file>

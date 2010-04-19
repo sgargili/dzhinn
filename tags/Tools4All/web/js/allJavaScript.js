@@ -718,6 +718,27 @@ var storeAtr = new Ext.data.Store({
     ])
 });
 
+var storeAtrProxyAlt = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeAtrAlt = new Ext.data.Store({
+    proxy: storeAtrProxyAlt,
+    reader: new Ext.data.XmlReader({
+        record: 'AltName',
+        id: 'Id'
+    }, [
+    {
+        name: 'name',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
 
 var atrMulti = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
@@ -728,7 +749,7 @@ var atrMulti = new Ext.ux.form.MultiSelect({
     displayField:'atr',
     valueField: 'id',
     minSelections:1,
-    minSelectionsText:'Нужно выбрать хотя бы {1} язык!',
+    minSelectionsText:'',
     blankText:'Выберите язык!',
     style:{
         marginTop: '1px',
@@ -737,20 +758,25 @@ var atrMulti = new Ext.ux.form.MultiSelect({
     store: storeAtr,
     listeners: {
         click: function() {
-            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
-                if(data=="MultiSelectInRequest"){
-                    atrField.setValue("");
-                    Ext.Msg.show({
-                        title: 'Предупреждение!!!',
-                        msg: 'Выбирайте только одно значение!',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.ERROR
-                    });
-                } else {
-                    atrField.setValue(data);
-                }
-            });
+            //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+            //                if(data=="MultiSelectInRequest"){
+            //                    atrField.setValue("");
+            //                    Ext.Msg.show({
+            //                        title: 'Предупреждение!!!',
+            //                        msg: 'Выбирайте только одно значение!',
+            //                        buttons: Ext.MessageBox.OK,
+            //                        width: 300,
+            //                        icon: Ext.MessageBox.ERROR
+            //                    });
+            //                } else {
+            //                    atrField.setValue(data);
+            //                }
+            //            });
+            //            alert(atrMulti.getValue());
+            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+            storeAtrAlt.clearData();
+            storeAtrAlt.load();
+        //atrField.setValue("");
         }
     },
     tbar:[{
@@ -847,6 +873,97 @@ var atrMulti = new Ext.ux.form.MultiSelect({
             Ajax.downloadAtrData(function(data) {
                 dwr.engine.openInDownload(data);
             });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+var atrMultiAlt = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 400,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'name',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginBottom: '9px'
+    },
+    store: storeAtrAlt,
+    //    listeners: {
+    //        click: function() {
+    //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+    //                if(data=="MultiSelectInRequest"){
+    //                    atrField.setValue("");
+    //                    Ext.Msg.show({
+    //                        title: 'Предупреждение!!!',
+    //                        msg: 'Выбирайте только одно значение!',
+    //                        buttons: Ext.MessageBox.OK,
+    //                        width: 300,
+    //                        icon: Ext.MessageBox.ERROR
+    //                    });
+    //                } else {
+    //                    atrField.setValue(data);
+    //                }
+    //            });
+    //        } atrForm.getForm().findField('newAtr').getValue()
+    //    },
+    tbar:[{
+        text: 'Добавить значение',
+        handler: function(){
+            Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                } else {
+                    storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                    storeAtrAlt.clearData();
+                    storeAtrAlt.load();
+                }
+            });
+        }
+    },{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'atrAltName',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                        if(data=="MultiSelectInRequest"){
+                            Ext.Msg.show({
+                                title: 'Предупреждение!!!',
+                                msg: 'Выбирайте только одно значение!',
+                                buttons: Ext.MessageBox.OK,
+                                width: 300,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else {
+                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                            storeAtrAlt.clearData();
+                            storeAtrAlt.load();
+                        }
+                    });
+
+                }
+            }
         }
     }
     ],
@@ -1045,7 +1162,7 @@ var atrForm = new Ext.form.FormPanel({
             layout:'column',
             items: [
             atrMulti,
-            atrField
+            atrMultiAlt
 
             ]
         }
@@ -2203,7 +2320,7 @@ var erow = {
                             } else{
                                 dwr.engine.openInDownload(data);
                                 //fibasic.destroy();
-                                 fibasic = new Ext.ux.form.FileUploadField({
+                                fibasic = new Ext.ux.form.FileUploadField({
                                     width:350,
                                     id: 'matchFile',
                                     emptyText: 'Выберите файл...',

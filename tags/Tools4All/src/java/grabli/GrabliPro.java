@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pojo.Attribute;
+import pojo.AttributeAlternativeName;
 
 /**
  *
@@ -295,5 +296,12 @@ public class GrabliPro {
         }
         fd.getProductTypeDAO().addProductType(pt);
 
+    }
+
+    public void addAttributeAltName(AttributeAlternativeName atrAlt) {
+        if (fd.getAttributeAlternativeNameDAO().isAttributeAlternativeNamePresent(atrAlt.getAttributeAlernativeNameValue())) {
+        } else {
+            fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
+        }
     }
 }

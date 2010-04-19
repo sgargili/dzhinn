@@ -5,21 +5,24 @@
 package servlets;
 
 import factories.FactoryDAO4Grabli;
-import pojo.ProductType;
+import pojo.Attribute;
 import com.thoughtworks.xstream.XStream;
+import convertors.XmlConvertor4AtrAlt;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import pojo.AttributeAlternativeName;
 
 /**
  *
  * @author APopov
  */
-public class Attribute extends HttpServlet {
+public class AttributeAltName extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -42,51 +45,31 @@ public class Attribute extends HttpServlet {
         PrintWriter out = response.getWriter();
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
         XStream xstream = new XStream();
-        xstream.alias("Attributes", List.class);
-        xstream.alias("Attribute", pojo.Attribute.class);
-        xstream.aliasField("Id", pojo.Attribute.class, "attributeId");
-        xstream.aliasField("Name", pojo.Attribute.class, "attributeName");
-        xstream.aliasField("AltName", pojo.Attribute.class, "attributeAlternative");
-        //xstream.addImplicitCollection(pojo.ProductType.class, "attributes");
-        xstream.omitField(pojo.Attribute.class, "values");
-        xstream.omitField(pojo.Attribute.class, "attributeAlternativeNames");
-        xstream.omitField(pojo.Attribute.class, "productTypes");
-        //xstream.registerConverter(new XmlConvertor4Attributes());
-        List atrList;
-        String template = "";
+        xstream.alias("Attribute", Attribute.class);
+        // xstream.alias("Name", String.class);
+        //xstream.addImplicitCollection(AttributeAlternativeName.class, "attributeAltName");
+        //xstream.aliasField("Id", AttributeAlternativeName.class, "attributeId");
+        xstream.registerConverter(new XmlConvertor4AtrAlt());
+
+        Attribute atr;
         String xml;
+        //AttributeAlternativeName atrAlt;
         int id;
-        ProductType pt;
         try {
-            if (request.getParameter("ptId") == null) {
-                id = 0;
+            if (request.getParameter("attribute") == null) {
+                out.println("<AltNames>");
+                out.println("</AltNames>");
             } else {
-                id = Integer.parseInt(request.getParameter("ptId"));
-                if (id == 7777) {
-                    id = 0;
-                }
+                id = Integer.parseInt(request.getParameter("attribute"));
+                atr = fd.getAttributeDAO().getAttributeById(id);
+                xml = xstream.toXML(atr);
+                out.println(xml);
             }
-            if (request.getParameter("template") != null) {
-                template = new String(request.getParameter("template").getBytes(requestEnc), clientEnc);
-                System.out.println(template);
-            }
-            if (!template.equals("")) {
-                atrList = fd.getAttributeDAO().getAttributesOnlyByTemplate(template);
-            } else {
-                if (id != 0) {
-                    pt = new ProductType();
-                    pt.setProductTypeId(id);
-                    atrList = fd.getAttributeDAO().getAttributesOnlyByProductType(pt);
-                } else {
-                    atrList = fd.getAttributeDAO().getAllAttributesOnly();
-                }
-            }
-            xml = xstream.toXML(atrList);
-            out.println(xml);
         } catch (Exception ex) {
-            out.println("<Attributes>");
+            System.out.println(ex);
+            out.println("<AltNames>");
             out.println(ex);
-            out.println("</Attributes>");
+            out.println("</AltNames>");
         } finally {
             out.close();
         }

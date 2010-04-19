@@ -65,13 +65,24 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public Attribute getAttributeById(int id) {
-        Attribute atr = (Attribute) getHibernateTemplate().load(Attribute.class, id);
+//        Attribute atr = (Attribute) getHibernateTemplate().load(Attribute.class, id);
+//        try {
+//            atr.getAttributeAlternative().equals("");
+//            atr.getAttributeAlternativeNames().isEmpty();
+//        } catch (NullPointerException ex) {
+//            atr.setAttributeAlternative("");
+//             atr.setAttributeAlternativeNames(null);
+//        }
+//        return atr;
+        Attribute atr;
+        String query = "from Attribute a where attributeId = :value";
         try {
-            atr.getAttributeAlternative().equals("");
-        } catch (NullPointerException ex) {
-            atr.setAttributeAlternative("");
+            atr = (Attribute) getHibernateTemplate().findByNamedParam(query, "value", id).get(0);
+            atr.getAttributeAlternativeNames().isEmpty();
+            return atr;
+        } catch (Exception ex) {
+            return null;
         }
-        return atr;
     }
 
     public List<Attribute> getAttributesOnlyByProductTypeId(int id) {
