@@ -30,7 +30,7 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
     }
 
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName) {
-         try {
+        try {
             attributeAlternativeName = (AttributeAlternativeName) getHibernateTemplate().load(AttributeAlternativeName.class, attributeAlternativeName.getAttributeAlernativeNameId());
             return true;
         } catch (Exception ex) {
@@ -39,11 +39,15 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
     }
 
     public boolean isAttributeAlternativeNamePresent(String attributeAlternativeNameValue) {
-       String query = "from AttributeAlternativeName a where attributeAlernativeNameValue = :value";
+        String query = "from AttributeAlternativeName a where attributeAlernativeNameValue = :value";
         try {
             return !getHibernateTemplate().findByNamedParam(query, "value", attributeAlternativeNameValue).isEmpty();
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public void deleteAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName) {
+        getHibernateTemplate().delete(attributeAlternativeName);
     }
 }

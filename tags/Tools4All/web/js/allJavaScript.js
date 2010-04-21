@@ -893,6 +893,7 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
     blankText:'Выберите язык!',
     style:{
         marginTop: '1px',
+        marginLeft: '3px',
         marginBottom: '9px'
     },
     store: storeAtrAlt,
@@ -927,6 +928,7 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
                         icon: Ext.MessageBox.ERROR
                     });
                 } else {
+                    Ext.getCmp('atrAltName').setValue("");
                     storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
                     storeAtrAlt.clearData();
                     storeAtrAlt.load();
@@ -956,6 +958,7 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
                                 icon: Ext.MessageBox.ERROR
                             });
                         } else {
+                            Ext.getCmp('atrAltName').setValue("");
                             storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
                             storeAtrAlt.clearData();
                             storeAtrAlt.load();
@@ -964,6 +967,15 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
 
                 }
             }
+        }
+    },{
+        text: 'Удалить значения',
+        handler: function(){
+            Ajax.deleteAttributeAltName(atrMulti.getValue(), atrMultiAlt.getValue(), function(data) {
+                storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                storeAtrAlt.clearData();
+                storeAtrAlt.load();
+            });
         }
     }
     ],
@@ -1393,8 +1405,283 @@ var Atr2PTForm = new Ext.form.FormPanel({
 });
 
 
+var fileGrabliInput = new Ext.ux.form.FileUploadField({
+    width:350,
+    id: 'fileGrabliFile',
+    emptyText: 'Выберите файл...',
+    style: {
+        marginTop: '0px',
+        marginBottom: '0px'
+    },
+    buttonText: 'Выбрать'
+});
+
+var storeCsvDataProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeCsvData = new Ext.data.Store({
+    //url: 'GrabliData?fileId=123456789',
+    proxy:storeCsvDataProxy,
+    reader: new Ext.data.XmlReader({
+        // records will have an "Item" tag
+        record: 'Csv',
+        id: 'article'
+    }, [{
+        name: 'article',
+        mapping: 'article'
+    }, {
+        name:'description',
+        mapping:'description'
+    }, {
+        name:'pt',
+        mapping:'pt'
+    }, {
+        name:'url',
+        mapping:'url'
+    }])
+});
+
+var storeCsvColumnData = new Ext.data.Store({
+    url: 'GrabliCsvColumnData',
+    reader: new Ext.data.XmlReader({
+        // records will have an "Item" tag
+        record: 'entry',
+        id: 'int'
+    }, [{
+        name: 'int',
+        mapping: 'int'
+    }, {
+        name:'string',
+        mapping:'string'
+    }])
+});
+
+var comboCsvColumnData1 = new Ext.form.ComboBox({
+    store: storeCsvColumnData,
+    hideLabel: true,
+    displayField:'string',
+    valueField: 'int',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите тип...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+        //            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
+        //            storeAtr2ProdType.clearData();
+        //            storeAtr2ProdType.load();
+        }
+    }
+});
+var comboCsvColumnData2 = new Ext.form.ComboBox({
+    store: storeCsvColumnData,
+    hideLabel: true,
+    displayField:'string',
+    valueField: 'int',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите тип...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:300,
+    listeners: {
+        'select': function(){
+        //            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
+        //            storeAtr2ProdType.clearData();
+        //            storeAtr2ProdType.load();
+        }
+    }
+});
+var comboCsvColumnData3 = new Ext.form.ComboBox({
+    store: storeCsvColumnData,
+    hideLabel: true,
+    displayField:'string',
+    valueField: 'int',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите тип...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+        //            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
+        //            storeAtr2ProdType.clearData();
+        //            storeAtr2ProdType.load();
+        }
+    }
+});
+
+var comboCsvColumnData4 = new Ext.form.ComboBox({
+    store: storeCsvColumnData,
+    hideLabel: true,
+    displayField:'string',
+    valueField: 'int',
+    typeAhead: true,
+    mode: 'local',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите тип...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+        //            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
+        //            storeAtr2ProdType.clearData();
+        //            storeAtr2ProdType.load();
+        }
+    }
+});
+
+var grid = new Ext.grid.GridPanel({
+    store: storeCsvData,
+    tbar : [comboCsvColumnData1,
+    comboCsvColumnData2,
+    comboCsvColumnData3,
+    comboCsvColumnData4],
+    columns: [
+    {
+        header: "",
+        width: 200,
+        dataIndex: 'article',
+        sortable: true
+    },
+
+    {
+        header: "",
+        width: 300,
+        dataIndex: 'description',
+        sortable: true
+    },
+
+    {
+        header: "",
+        width: 200,
+        dataIndex: 'pt',
+        sortable: true
+    },
+
+    {
+        header: "",
+        width: 200,
+        dataIndex: 'url',
+        sortable: true
+    }
+    ],
+    headerAsText: true,
+    hidden: true,
+    hideHeaders:true,
+    //renderTo:'example-grid',
+    width:'100%',
+    height:200,
+    style: {
+//        marginTop: '3px'
+}
+});
 
 
+var GrabliFile = new Ext.form.FormPanel({
+    title: 'Файл для заливки данных',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [fileGrabliInput,
+        {
+            xtype: 'button',
+            text: '<<<Запуск>>>',
+            id:'fileGrabliInputBtn',
+            style: {
+                marginLeft: '5px'
+            },
+            listeners: {
+                click: function() {
+                    var file2 = dwr.util.getValue('fileGrabliFile-file');
+                    Ajax.uploadGrabliFile(file2, Ext.getCmp('fileGrabliFile').getValue(), function(data) {
+                        Ext.getCmp('fileGrabliFile').reset();
+                        if(data==null){
+                            Ext.Msg.show({
+                                title:'Неверный формат файла...',
+                                msg: 'Верный смотри в инфо...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else{
+                            storeCsvDataProxy.setUrl("GrabliData?fileId=" + data);
+                            storeCsvData.clearData();
+                            storeCsvData.load();
+                            comboCsvColumnData1.setValue("Article");
+                            comboCsvColumnData2.setValue("Description");
+                            comboCsvColumnData3.setValue("Product Type");
+                            comboCsvColumnData4.setValue("Url");
+                            // alert(data);
+                            //                            GrabliGrid.setDisabled(false);
+                            grabliGrid.slideIn();
+                            //grabliGrid.highlight();
+                            grid.setVisible(true);
+                        }
+                    });
+                }
+            }
+        }]
+    }]
+});
+
+var grabliGrid = new Ext.form.FormPanel({
+    title: 'Разбор данных входного файла',
+    width: '100%',
+    disabled: false,
+    animCollapse:true,
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    style: {
+        marginTop: '3px'
+    },
+    items: [grid],
+    buttons: [{
+        text: 'Save',
+        handler: function(){
+            if(Atr2PTForm.getForm().isValid()){
+                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+                    Atr2PTForm.getForm().getValues(true));
+            }
+        }
+    }]
+});
 
 
 
@@ -2244,9 +2531,14 @@ var egrabli = {
     //    //items:[ptForm]
     //    },
     {
-        title: 'Сборка контента',
+        title: 'Связка ПТ -> Атрибут',
         autoScroll: true,
         items:[Atr2PTForm]
+    },
+    {
+        title: 'Грабли',
+        autoScroll: true,
+        items:[GrabliFile, grabliGrid]
     }]
 };
 
@@ -2285,9 +2577,29 @@ var erow = {
         items:[{
             title: 'Сравнение столбцов',
             autoScroll: true,
-            bodyStyle: 'padding:7px; background-color:#e1e8ff',
+            bodyStyle: 'padding:7px; background-color:#ffffff',
             layout:'column',
-            items:[fibasic,p,
+            items:[fibasic,p,{
+                html:'<h1>Разделитель:</h1>',
+                style: {
+                    marginTop: '4px',
+                    marginLeft: '7px',
+                    marginRight: '7px'
+                },
+                bodyStyle: 'border: 0px'
+            },{
+                xtype: 'textfield',
+                hideLabel: true,
+                //fieldLabel:'Разделитель:',
+                //height:25,
+                //width:25,
+                regex:/[,]|[;]/,
+                regexText:'Введите точку с запятой или точку!',
+                //                maskRe:'[,;]',
+                id:'matchSep',
+                blankText:'Введите точку с запятой или точку...',
+                allowBlank:false
+            },
             {
                 xtype: 'button',
                 text: '<<<Запуск>>>',
@@ -2299,40 +2611,43 @@ var erow = {
                     click: function() {
                         var file = Ext.getDom('matchFile-file');
                         var file2 = dwr.util.getValue('matchFile-file');
-
-                        Ajax.matchData(file2, byId("matchFile-file").value, function(data) {
-                            //Ext.getCmp('matchFile').remove();
-                            Ext.getCmp('matchFile').reset();
+                        if(Ext.getCmp('matchSep').isValid){
+                            Ajax.matchData(file2, byId("matchFile-file").value, Ext.getCmp('matchSep').getValue(), function(data) {
+                                //Ext.getCmp('matchFile').remove();
+                                Ext.getCmp('matchFile').reset();
                             
                             
-                            //Ext.getCmp('matchFile').createFileInput();
-                            //.setRawValue(null)
-                            //Ext.getCmp('matchFile').setRawValue(null);
-                            //dwr.util.setValue('matchFile','');
-                            if(data==null){
-                                Ext.Msg.show({
-                                    title:'Неверный формат файла...',
-                                    msg: 'Верный смотри в инфо...',
-                                    buttons: Ext.Msg.OK,
-                                    width:250,
-                                    icon: Ext.MessageBox.ERROR
-                                });
-                            } else{
-                                dwr.engine.openInDownload(data);
-                                //fibasic.destroy();
-                                fibasic = new Ext.ux.form.FileUploadField({
-                                    width:350,
-                                    id: 'matchFile',
-                                    emptyText: 'Выберите файл...',
-                                    style: {
-                                        marginTop: '0px',
-                                        marginBottom: '0px'
-                                    },
-                                    buttonText: 'Выбрать'
-                                });
-                                Ext.QuickTips.init();
-                            }
-                        });
+                                //Ext.getCmp('matchFile').createFileInput();
+                                //.setRawValue(null)
+                                //Ext.getCmp('matchFile').setRawValue(null);
+                                //dwr.util.setValue('matchFile','');
+                                if(data==null){
+                                    Ext.Msg.show({
+                                        title:'Неверный формат файла...',
+                                        msg: 'Верный смотри в инфо...',
+                                        buttons: Ext.Msg.OK,
+                                        width:250,
+                                        icon: Ext.MessageBox.ERROR
+                                    });
+                                } else{
+                                    dwr.engine.openInDownload(data);
+                                    //fibasic.destroy();
+                                    fibasic = new Ext.ux.form.FileUploadField({
+                                        width:350,
+                                        id: 'matchFile',
+                                        emptyText: 'Выберите файл...',
+                                        style: {
+                                            marginTop: '0px',
+                                            marginBottom: '0px'
+                                        },
+                                        buttonText: 'Выбрать'
+                                    });
+                                    Ext.QuickTips.init();
+                                }
+                            });
+                        } else{
+                            Ext.getCmp('matchSep').setValue("");
+                        }
 
                     }
                 }
@@ -2496,5 +2811,8 @@ Ext.onReady(function(){
     //comboLanguages.setValue('ru');
     //storeAtrs.load();
     storeLngs.load();
+    storeCsvData.load();
+    storeCsvColumnData.load();
+    //grabliGrid.hide();
 //storeAtrAll.load();
 });

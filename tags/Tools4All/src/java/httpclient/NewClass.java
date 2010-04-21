@@ -15,7 +15,7 @@ import java.io.File;
 public class NewClass {
     public static void main(String[] args) {
         HttpData http = FactoryHTTP.getInstance().getHttpData();
-        http.downloadContentAsFile("http://www.ya.ru", "UTF-8", "WINDOWS-1251", new File("C://new.html"), false);
+        http.downloadContentAsFile("http://213.53.57.20/CatExp/orders.exml", "UTF-8", "WINDOWS-1251", new File("C://orders.xml"), false);
     }
 
 }

@@ -150,7 +150,9 @@ public class GrabliPro {
 
     public void updateAttributeByFile(File file) {
         CsvReader reader = null;
-        Attribute at;
+        Attribute atr;
+        AttributeAlternativeName atrAlt;
+        String[] mass;
         try {
             reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
         } catch (Exception ex) {
@@ -158,11 +160,16 @@ public class GrabliPro {
         }
         try {
             while (reader.readRecord()) {
-//                FactoryDAO4Imports.getInstance().getPcProductTypesDAO().addPcProductsToPt(new PcProductTypes(reader.get(0), true));
-                at = new Attribute();
-                at.setAttributeName(reader.get(0));
-                at.setAttributeAlternative(reader.get(1));
-                fd.getAttributeDAO().addOrUpdateAttributeNameOnly(at);
+                atr = new Attribute();
+                atr.setAttributeName(reader.get(0));
+                fd.getAttributeDAO().addOrUpdateAttributeNameOnly(atr);
+                mass = reader.get(1).split(",");
+                for (int i = 0; i < mass.length; i++) {
+                    atrAlt = new AttributeAlternativeName();
+                    atrAlt.setAttribute(atr);
+                    atrAlt.setAttributeAlernativeNameValue(mass[i]);
+                    fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
+                }
             }
             reader.close();
         } catch (IOException ex) {
@@ -303,5 +310,9 @@ public class GrabliPro {
         } else {
             fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
         }
+    }
+
+    public void deleteAttributeAltName(AttributeAlternativeName atrAlt) {
+        fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeName(atrAlt);
     }
 }

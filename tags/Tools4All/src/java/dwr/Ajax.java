@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.LinkedList;
 import org.directwebremoting.Browser;
-//import org.directwebremoting.
 import pojo.ChatLogs;
 import pojo.IpCount;
 import pojo.Users;
@@ -238,7 +237,7 @@ public class Ajax {
         return vp.clearSession();
     }
 
-    public FileTransfer matchData(InputStream uploadFile, String fileName) throws Exception {
+    public FileTransfer matchData(InputStream uploadFile, String fileName, String separator) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)|(\\.xlsx)|(\\.xls)");
         Matcher m = p.matcher(fileName);
         if (!m.find()) {
@@ -254,10 +253,10 @@ public class Ajax {
         m = p.matcher(fileName);
         if (m.find()) {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.csv", "$2");
-            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, MatchingData.CSV)));
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, separator, MatchingData.CSV)));
         } else {
             fileName = fileName.replaceAll("(.*\\\\)?(.+)\\.xlsx", "$2");
-            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, MatchingData.EXCEL)));
+            buffer.write(FileUtils.readFileToByteArray(match.matchData(uploadFile, file, fileName, separator, MatchingData.EXCEL)));
         }
 
         return new FileTransfer(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
@@ -455,7 +454,6 @@ public class Ajax {
     public String addAttributeAltName(String attributeId, String newAltName) {
         AttributeAlternativeName atrAlt = new AttributeAlternativeName();
         Attribute atr = new Attribute();
-        atr.setAttributeId(Integer.parseInt(attributeId));
         try {
             atr.setAttributeId(Integer.parseInt(attributeId));
         } catch (NumberFormatException ex) {
@@ -469,5 +467,43 @@ public class Ajax {
         gp.addAttributeAltName(atrAlt);
         return "Done";
 
+    }
+
+    public String deleteAttributeAltName(String attributeId, String altNameId) {
+        AttributeAlternativeName atrAlt = new AttributeAlternativeName();
+        Attribute atr = new Attribute();
+        try {
+            atr.setAttributeId(Integer.parseInt(attributeId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            atrAlt = null;
+            return "MultiSelectInRequest";
+        }
+        String[] mass = altNameId.split(",");
+        for (int i = 0; i < mass.length; i++) {
+            try {
+                atrAlt.setAttributeAlernativeNameId(Integer.parseInt(mass[i]));
+                atrAlt.setAttribute(atr);
+            } catch (NumberFormatException ex) {
+                ex.printStackTrace();
+                atrAlt = null;
+            }
+            GrabliPro gp = new GrabliPro();
+            gp.deleteAttributeAltName(atrAlt);
+        }
+        return "Done";
+
+    }
+
+    public String uploadGrabliFile(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return "!csv";
+        }
+        String outId = System.nanoTime() + "";
+        File file = new File("C://" + outId + ".csv");
+        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
+        return outId;
     }
 }

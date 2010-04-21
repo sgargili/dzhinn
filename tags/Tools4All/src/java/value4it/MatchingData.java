@@ -31,7 +31,7 @@ public class MatchingData {
     public static final int EXCEL = 0;
     public static final int CSV = 1;
 
-    public File matchData(InputStream uploadFile, File file, String fileName, int type) {
+    public File matchData(InputStream uploadFile, File file, String fileName, String separator, int type) {
 
         if (type != CSV && type != EXCEL) {
             return null;
@@ -43,10 +43,13 @@ public class MatchingData {
         ArticleData article;
         List articles = new ArrayList();
         Set articles2 = new TreeSet();
+        if (separator.equals("") || separator == null) {
+            separator = ",";
+        }
 
         if (type == CSV) {
             try {
-                CsvReader reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
+                CsvReader reader = new CsvReader(file.getAbsolutePath(), separator.charAt(0), Charset.forName("WINDOWS-1251"));
                 while (reader.readRecord()) {
                     article = new ArticleData(reader.get(0).trim(), reader.get(1).trim(), "0");
                     articles.add(article);

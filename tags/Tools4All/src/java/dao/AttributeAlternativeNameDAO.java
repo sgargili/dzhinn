@@ -14,6 +14,8 @@ public interface AttributeAlternativeNameDAO {
 
     public void addAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName);
 
+    public void deleteAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName);
+
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName);
 
     public boolean isAttributeAlternativeNamePresent(String attributeAlternativeNameValue);

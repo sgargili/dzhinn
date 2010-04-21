@@ -65,6 +65,14 @@
         <servlet-name>AttributeAltName</servlet-name>
         <servlet-class>servlets.AttributeAltName</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GrabliData</servlet-name>
+        <servlet-class>servlets.GrabliData</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GrabliCsvColumnData</servlet-name>
+        <servlet-class>servlets.GrabliCsvColumnData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -88,6 +96,14 @@
     <servlet-mapping>
         <servlet-name>AttributeAltName</servlet-name>
         <url-pattern>/AttributeAltName</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrabliData</servlet-name>
+        <url-pattern>/GrabliData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GrabliCsvColumnData</servlet-name>
+        <url-pattern>/GrabliCsvColumnData</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>tools4value.jsp</welcome-file>
