@@ -384,10 +384,10 @@ public class ValuePro {
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     exportMarkStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         exportMarkStr += req[k].getName() + "=" + req[k].getValue() + "/";

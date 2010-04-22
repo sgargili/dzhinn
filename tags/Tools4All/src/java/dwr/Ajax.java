@@ -502,8 +502,31 @@ public class Ajax {
             return "!csv";
         }
         String outId = System.nanoTime() + "";
-        File file = new File("C://" + outId + ".csv");
+        File file = new File("/root/" + outId + ".csv");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         return outId;
+    }
+
+    public String processGrabli() {
+        ScriptSession ss;
+        ScriptBuffer script;
+        ss = WebContextFactory.get().getScriptSession();
+        for (int count = 1; count <= 20; count++) {
+            try {
+                script = new ScriptBuffer();
+                script.appendScript("updateGrabli(");
+                script.appendData(20);
+                script.appendScript(",");
+                script.appendData(count);
+                script.appendScript(");");
+                ss.addScript(script);
+                script = null;
+                Thread.sleep(300);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
+        }
+        return "Done";
     }
 }

@@ -1588,7 +1588,7 @@ var grid = new Ext.grid.GridPanel({
     }
     ],
     headerAsText: true,
-    hidden: true,
+    //hidden: true,
     hideHeaders:true,
     //renderTo:'example-grid',
     width:'100%',
@@ -1599,7 +1599,7 @@ var grid = new Ext.grid.GridPanel({
 });
 
 
-var GrabliFile = new Ext.form.FormPanel({
+var grabliFile = new Ext.form.FormPanel({
     title: 'Файл для заливки данных',
     width: '100%',
     //height:400,
@@ -1616,7 +1616,7 @@ var GrabliFile = new Ext.form.FormPanel({
         items: [fileGrabliInput,
         {
             xtype: 'button',
-            text: '<<<Запуск>>>',
+            text: '<<<Запуск обработки файла>>>',
             id:'fileGrabliInputBtn',
             style: {
                 marginLeft: '5px'
@@ -1638,15 +1638,14 @@ var GrabliFile = new Ext.form.FormPanel({
                             storeCsvDataProxy.setUrl("GrabliData?fileId=" + data);
                             storeCsvData.clearData();
                             storeCsvData.load();
-                            comboCsvColumnData1.setValue("Article");
-                            comboCsvColumnData2.setValue("Description");
-                            comboCsvColumnData3.setValue("Product Type");
-                            comboCsvColumnData4.setValue("Url");
-                            // alert(data);
-                            //                            GrabliGrid.setDisabled(false);
-                            grabliGrid.slideIn();
-                            //grabliGrid.highlight();
-                            grid.setVisible(true);
+                            comboCsvColumnData1.setValue("1");
+                            comboCsvColumnData2.setValue("2");
+                            comboCsvColumnData3.setValue("3");
+                            comboCsvColumnData4.setValue("4");
+                            grabliGrid.getEl().fadeIn({
+                                duration: 2
+                            });
+                            grabliGrid.show();
                         }
                     });
                 }
@@ -1658,7 +1657,9 @@ var GrabliFile = new Ext.form.FormPanel({
 var grabliGrid = new Ext.form.FormPanel({
     title: 'Разбор данных входного файла',
     width: '100%',
-    disabled: false,
+    id:'grabliGrid',
+    //disabled: true,
+    // hidden: true,
     animCollapse:true,
     //height:400,
     //bodyStyle: 'padding:10px;',
@@ -1673,17 +1674,46 @@ var grabliGrid = new Ext.form.FormPanel({
     },
     items: [grid],
     buttons: [{
-        text: 'Save',
+        text: 'Сохранить и запустить',
         handler: function(){
-            if(Atr2PTForm.getForm().isValid()){
-                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
-                    Atr2PTForm.getForm().getValues(true));
-            }
+            //            alert(comboCsvColumnData1.getValue() + " "
+            //                +comboCsvColumnData2.getValue() + " "
+            //                +comboCsvColumnData3.getValue() + " "
+            //                +comboCsvColumnData4.getValue());
+            grabliPBar.getEl().fadeIn({
+                duration: 1.5
+            });
+            Ajax.processGrabli(function(data) {
+                //dwr.engine.openInDownload(data);
+                });
+            grabliPBar.show();
+        //            if(Atr2PTForm.getForm().isValid()){
+        //                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+        //                    Atr2PTForm.getForm().getValues(true));
+        //            }
         }
     }]
 });
 
+var grabliPBarOutside = new Ext.ProgressBar({
+    text:'Ready',
+    xtype: 'progress',
+    animate:true,
+    style: {
+        width: '100%',
+        margin: '0px auto',
+        border:'0px'
+    }
+});
 
+var grabliPBar = new Ext.form.FormPanel({
+    title: 'Обработка...',
+    width: '100%',
+    style: {
+        marginTop: '3px'
+    },
+    items: [grabliPBarOutside]
+});
 
 
 
@@ -1873,6 +1903,30 @@ function updateNick() {
         Ext.getCmp('chatNick').setValue(data);
     });
 }
+
+var RunnerGrabli = function(){
+    return {
+        run : function(grabliPBarOutside, allCount, count){
+            grabliPBarOutside.updateProgress(count/allCount, 'Обрабатывается ' + count + ' из '+allCount+'...');
+        }
+    }
+}();
+
+
+function updateGrabli(allCount, count){
+    RunnerGrabli.run(grabliPBarOutside, allCount, count);
+    setTimeout(function(){
+        if(allCount==count){
+            grabliPBarOutside.reset();
+            grabliPBarOutside.updateText("Готово");
+            grabliPBar.getEl().fadeOut({
+                duration: 1
+            });
+        }
+    }, 500);
+}
+
+
 function updateProd(allCount, count){
     RunnerProd.run(Ext.getCmp('pbarProd'), allCount, count);
     setTimeout(function(){
@@ -2507,8 +2561,7 @@ var osession = {
     }]
 };
 
-var egrabli = {
-    xtype: 'tabpanel',
+var egrabli = new Ext.TabPanel({
     id: 'eGrabli-panel',
     plain: true,  //remove the header border
     activeItem: 0,
@@ -2538,10 +2591,10 @@ var egrabli = {
     {
         title: 'Грабли',
         autoScroll: true,
-        items:[GrabliFile, grabliGrid]
+        items:[grabliFile, grabliGrid, grabliPBar]
     }]
-};
-
+});
+    
 var ecsv = {
     id: 'eCsv-panel',
     title: 'Преобразование файла из форматов XLS и CSV(Excel) в нормальный CSV!',
@@ -2694,14 +2747,14 @@ var erow = {
 //    //        }
 //    }]
 };
-
+// 
 Ext.onReady(function(){
 
     updateMessage();
     updateNick();
     storeLanguages.load();
     Ext.QuickTips.init();
-
+ 
     var detailEl;
 
     var contentPanel = {
@@ -2813,6 +2866,9 @@ Ext.onReady(function(){
     storeLngs.load();
     storeCsvData.load();
     storeCsvColumnData.load();
-    //grabliGrid.hide();
+    //Ext.grabliGrid.getEl().hide();
+    grabliGrid.hide();
+    grabliPBar.hide();
+//grabliGrid.hide();
 //storeAtrAll.load();
 });

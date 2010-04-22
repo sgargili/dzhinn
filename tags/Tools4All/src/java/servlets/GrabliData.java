@@ -69,7 +69,7 @@ public class GrabliData extends HttpServlet {
                     id = 0;
                 }
             }
-            file = new File("C://" + id + ".csv");
+            file = new File("/root/" + id + ".csv");
             try {
                 reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
             } catch (Exception ex) {
@@ -80,18 +80,19 @@ public class GrabliData extends HttpServlet {
                 if (i++ == 8) {
                     break;
                 }
+                //String newString = new String(oldString.getBytes("UTF-8"), "Cp1251");
                 csv = new GrabliCsvData();
-                csv.setArticle(reader.get(0));
-                csv.setDescription(reader.get(1));
-                csv.setPt(reader.get(2));
-                csv.setUrl(reader.get(3));
+                csv.setArticle(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"));
+                csv.setDescription(new String(reader.get(1).getBytes("Cp1251"), "UTF-8"));
+                csv.setPt(new String(reader.get(2).getBytes("Cp1251"), "UTF-8"));
+                csv.setUrl(new String(reader.get(3).getBytes("Cp1251"), "UTF-8"));
                 csvs.add(csv);
             }
             reader.close();
 
             xml = xstream.toXML(csvs);
             out.println(xml);
-            file.delete();
+           // file.delete();
         } catch (Exception ex) {
             out.println("<CsvData>");
             out.println(ex);
