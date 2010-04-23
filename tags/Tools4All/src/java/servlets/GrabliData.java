@@ -4,7 +4,6 @@
  */
 package servlets;
 
-import factories.FactoryDAO4Grabli;
 import pojo.ProductType;
 import com.thoughtworks.xstream.XStream;
 import csv.CsvReader;
@@ -69,7 +68,7 @@ public class GrabliData extends HttpServlet {
                     id = 0;
                 }
             }
-            file = new File("/root/" + id + ".csv");
+            file = new File("/root/tempFolder/" + id + ".csv");
             try {
                 reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
             } catch (Exception ex) {

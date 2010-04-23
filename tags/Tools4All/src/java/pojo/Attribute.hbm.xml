@@ -21,7 +21,7 @@
             <key column="attribute_id"/>
             <many-to-many class="pojo.Value" column="value_id"/>
         </bag>
-        <bag lazy="true" name="attributeAlternativeNames" table="attribute_alternative_name">
+        <bag lazy="true" name="attributeAlternativeNames" table="attribute_alternative_name" cascade="delete-orphan">
             <key>
                 <column name="attribute_id" not-null="true" />
             </key>

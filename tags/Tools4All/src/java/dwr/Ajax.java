@@ -319,7 +319,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadPTData() throws Exception {
-        File file = new File(System.nanoTime() + ".xlsx");
+        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
@@ -347,7 +347,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File(System.nanoTime() + ".temp");
+        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateProductTypeByFile(file);
@@ -381,7 +381,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadAtrData() throws Exception {
-        File file = new File(System.nanoTime() + ".xlsx");
+        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadAttributeData(file)));
@@ -409,7 +409,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File(System.nanoTime() + ".temp");
+        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateAttributeByFile(file);
@@ -443,7 +443,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadAtr2PtData() throws Exception {
-        File file = new File(System.nanoTime() + ".xlsx");
+        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadAtr2PtData(file)));
@@ -502,7 +502,7 @@ public class Ajax {
             return "!csv";
         }
         String outId = System.nanoTime() + "";
-        File file = new File("/root/" + outId + ".csv");
+        File file = new File("/root/tempFolder/" + outId + ".csv");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         return outId;
     }

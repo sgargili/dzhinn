@@ -71,8 +71,8 @@ public class GrabliPro {
             while (reader.readRecord()) {
 //                FactoryDAO4Imports.getInstance().getPcProductTypesDAO().addPcProductsToPt(new PcProductTypes(reader.get(0), true));
                 pt = new ProductType();
-                pt.setProductTypeName(reader.get(0));
-                pt.setProductTypeAlternative(reader.get(1));
+                pt.setProductTypeName(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"));
+                pt.setProductTypeAlternative(new String(reader.get(1).getBytes("Cp1251"), "UTF-8"));
                 fd.getProductTypeDAO().addOrUpdateProductTypeNameOnly(pt);
             }
             reader.close();
@@ -145,6 +145,7 @@ public class GrabliPro {
     }
 
     public void deleteAttribute(Attribute at) {
+        fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeNameByAttribute(at);
         fd.getAttributeDAO().deleteAttribute(at);
     }
 
@@ -161,9 +162,10 @@ public class GrabliPro {
         try {
             while (reader.readRecord()) {
                 atr = new Attribute();
-                atr.setAttributeName(reader.get(0));
+                atr.setAttributeName(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"));
                 fd.getAttributeDAO().addOrUpdateAttributeNameOnly(atr);
-                mass = reader.get(1).split(",");
+                atr = fd.getAttributeDAO().getAttributeByName(atr.getAttributeName());
+                mass = new String(reader.get(1).getBytes("Cp1251"), "UTF-8").split(",");
                 for (int i = 0; i < mass.length; i++) {
                     atrAlt = new AttributeAlternativeName();
                     atrAlt.setAttribute(atr);
@@ -178,9 +180,11 @@ public class GrabliPro {
     }
 
     public File downloadAttributeData(File file) {
-        List<Attribute> atrs = fd.getAttributeDAO().getAllAttributesOnly();
+        List<Attribute> atrs = fd.getAttributeDAO().getAllAttributesWithAltNames();
         Attribute atr;
+        AttributeAlternativeName atrAlt;
         CellStyle style;
+        String tempAtributeName = "";
 
 
         try {
@@ -196,17 +200,27 @@ public class GrabliPro {
             style = createBorderedStyle(wb);
             style.setAlignment(CellStyle.ALIGN_LEFT);
             int i = 0;
-            for (Iterator it = atrs.iterator(); it.hasNext();) {
+            Iterator it = atrs.iterator();
+            Iterator itAlt;
+            while (it.hasNext()) {
                 atr = (Attribute) it.next();
-                r = s.createRow(i++);
-                c = r.createCell(0);
-                c.setCellType(c.CELL_TYPE_STRING);
-                c.setCellValue(atr.getAttributeName());
-                c.setCellStyle(style);
-                c = r.createCell(1);
-                c.setCellType(c.CELL_TYPE_STRING);
-                c.setCellValue(atr.getAttributeAlternative());
-                c.setCellStyle(style);
+                if (tempAtributeName.equals(atr.getAttributeName())) {
+                    continue;
+                }
+                itAlt = atr.getAttributeAlternativeNames().iterator();
+                while (itAlt.hasNext()) {
+                    atrAlt = (AttributeAlternativeName) itAlt.next();
+                    r = s.createRow(i++);
+                    c = r.createCell(0);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(atr.getAttributeName());
+                    c.setCellStyle(style);
+                    c = r.createCell(1);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(atrAlt.getAttributeAlernativeNameValue());
+                    c.setCellStyle(style);
+                }
+                tempAtributeName = atr.getAttributeName();
             }
             wb.write(out);
             out.close();

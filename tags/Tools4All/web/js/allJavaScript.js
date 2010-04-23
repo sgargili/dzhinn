@@ -1716,7 +1716,6 @@ var grabliPBar = new Ext.form.FormPanel({
 });
 
 
-
 function getPtAltName(id){
     Ajax.getProductTypeAltName(id, function(data) {
         if(data=="MultiSelectInRequest"){
@@ -2651,7 +2650,10 @@ var erow = {
                 //                maskRe:'[,;]',
                 id:'matchSep',
                 blankText:'Введите точку с запятой или точку...',
-                allowBlank:false
+                allowBlank:false,
+                style: {
+                    marginTop: '1px'
+                }
             },
             {
                 xtype: 'button',
@@ -2726,28 +2728,10 @@ var erow = {
             //            }
             ]
         }]
-    }]
-//    id: 'eRow-panel',
-//    title: 'Сравнение столбцов',
-//    layout: 'column',
-//    bodyStyle: 'padding:17px; background-color:#e1e8ff; width:100%; height:100%',
-//    items:[{
-//        xtype: 'fileuploadfield',
-//        width:350,
-//        style:{
-//            width:'350px'
-//        },
-//        id: 'form-file',
-//        emptyText: 'Выберите файл',
-//        fieldLabel: 'Файл',
-//        name: 'photo-path',
-//        buttonText: 'Выбрать'
-//    //        buttonCfg: {
-//    //            iconCls: 'upload-icon'
-//    //        }
-//    }]
+    }
+    ]
 };
-// 
+
 Ext.onReady(function(){
 
     updateMessage();

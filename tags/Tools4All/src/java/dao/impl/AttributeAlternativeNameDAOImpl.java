@@ -5,8 +5,13 @@
 package dao.impl;
 
 import dao.AttributeAlternativeNameDAO;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 
 /**
@@ -26,7 +31,9 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
     }
 
     public void addAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName) {
-        getHibernateTemplate().saveOrUpdate(attributeAlternativeName);
+        if (!isAttributeAlternativeNamePresent(attributeAlternativeName.getAttributeAlernativeNameValue())) {
+            getHibernateTemplate().save(attributeAlternativeName);
+        }
     }
 
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName) {
@@ -50,4 +57,20 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
     public void deleteAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName) {
         getHibernateTemplate().delete(attributeAlternativeName);
     }
+
+    public void deleteAttributeAlternativeNameByAttribute(final Attribute attribute) {
+//        String query = "delete from AttributeAlternativeName alt where alt.attribute = :attribute";
+//        getHibernateTemplate().bulkUpdate(query, "attribute", attribute);
+        final String request = "delete from AttributeAlternativeName alt where alt.attribute = :attribute";
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setParameter("attribute", attribute);
+                return query.executeUpdate();
+            }
+        });
+    }
 }
+//            return getHibernateTemplate().findByNamedParam(query, "value", template);
+

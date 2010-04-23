@@ -102,6 +102,7 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public void deleteAttribute(Attribute attribute) {
+        //attribute.s
         getHibernateTemplate().delete(attribute);
     }
 
@@ -135,5 +136,11 @@ public class AttributeDAOImpl implements AttributeDAO {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public List<Attribute> getAllAttributesWithAltNames() {
+        String query = "from Attribute as a " +
+                "join fetch a.attributeAlternativeNames";
+        return getHibernateTemplate().find(query);
     }
 }

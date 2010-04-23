@@ -4,6 +4,7 @@
  */
 package dao;
 
+import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 
 /**
@@ -15,6 +16,8 @@ public interface AttributeAlternativeNameDAO {
     public void addAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName);
 
     public void deleteAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName);
+
+    public void deleteAttributeAlternativeNameByAttribute(Attribute attribute);
 
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName);
 
