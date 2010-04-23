@@ -1,33 +1,35 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 07.04.2010 16:06:38 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.Newarticles" table="Newarticles" catalog="yandexdb">
-        <id name="id" type="java.lang.Long">
-            <column name="id" />
-            <generator class="identity" />
-        </id>
-        <property name="keyart" type="string">
-            <column name="keyart" />
-        </property>
-        <property name="vendor" type="string">
-            <column name="vendor" length="65535" />
-        </property>
-        <property name="pt" type="string">
-            <column name="pt" length="65535" />
-        </property>
-        <property name="searchdesc" type="string">
-            <column name="searchdesc" length="65535" />
-        </property>
-        <property name="purl" type="string">
-            <column name="purl" length="65535" />
-        </property>
-        <property name="picurl" type="string">
-            <column name="picurl" length="65535"/>
-        </property>
-        <property name="attr" type="string">
-            <column name="attr" length="65535" />
-        </property>
-    </class>
+  <class catalog="yandexdb" name="Pojo.Newarticles" table="Newarticles">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="keyart" type="string">
+      <column name="keyart"/>
+    </property>
+    <property name="vendor" type="string">
+      <column length="65535" name="vendor"/>
+    </property>
+    <property name="pt" type="string">
+      <column length="65535" name="pt"/>
+    </property>
+    <property name="searchdesc" type="string">
+      <column length="65535" name="searchdesc"/>
+    </property>
+    <property name="purl" type="string">
+      <column length="65535" name="purl"/>
+    </property>
+    <property name="picurl" type="string">
+      <column length="65535" name="picurl"/>
+    </property>
+    <property name="attr" type="string">
+      <column length="65535" name="attr"/>
+    </property>
+    <property name="longdescr" type="string">
+      <column length="65535" name="longdescr"/>
+    </property>
+  </class>
 </hibernate-mapping>

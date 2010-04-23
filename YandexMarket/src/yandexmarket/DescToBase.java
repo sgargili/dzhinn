@@ -23,7 +23,7 @@ public class DescToBase {
         String kart, vend, desc, sdesc = "";
         FactoryDAO fd = FactoryDAO.getInstance();
         Newarticles searchArt;
-        CsvReader rdr = new CsvReader("C://1/InputArt.csv", ',', Charset.forName("Windows-1251"));
+        CsvReader rdr = new CsvReader("/home/ilyahoo/NetBeansProjects/1/InputArt.csv", ',', Charset.forName("Windows-1251"));
 
         while (rdr.readRecord()) {
             kart = rdr.get(0).trim();
@@ -36,6 +36,7 @@ public class DescToBase {
             searchArt.setKeyart(kart);
             searchArt.setSearchdesc(sdesc);
             searchArt.setVendor(vend);
+            searchArt.setLongdescr(desc);
             fd.getnewArticlesDAO().addnArticles(searchArt);
         }
         rdr.close();

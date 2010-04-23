@@ -1,24 +1,23 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 18.12.2009 12:53:18 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="Pojo.Matching" table="matching" catalog="yandexdb">
-        <id name="id" type="java.lang.Long">
-            <column name="id" />
-            <generator class="identity" />
-        </id>
-        <property name="keyarticle" type="string">
-            <column name="keyarticle" />
-        </property>
-        <property name="keydesc" type="string">
-            <column name="keydesc" length="1024" />
-        </property>
-        <property name="apparticle" type="string">
-            <column name="apparticle" length="1024" />
-        </property>
-        <property name="yadata" type="string">
-            <column name="yadata" length="1024" />
-        </property>
-    </class>
+  <class catalog="yandexdb" name="Pojo.Matching" table="matching">
+    <id name="id" type="java.lang.Long">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="keyarticle" type="string">
+      <column name="keyarticle"/>
+    </property>
+    <property name="keydesc" type="string">
+      <column length="1024" name="keydesc"/>
+    </property>
+    <property name="apparticle" type="string">
+      <column length="1024" name="apparticle"/>
+    </property>
+    <property name="yadata" type="string">
+      <column length="1024" name="yadata"/>
+    </property>
+  </class>
 </hibernate-mapping>

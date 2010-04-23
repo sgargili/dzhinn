@@ -198,7 +198,7 @@ public class YMTechParsing {
                         DldURL = "http://market.yandex.ru" + tempURL;
                         art.setPurl(DldURL);
                         System.out.println("Ссылка на описание товара: " + DldURL);
-                        getAtrs(art.getId(), DldURL,art.getKeyart(),art.getVendor(),art.getSearchdesc());
+                        getAtrs(art.getId(), DldURL,art.getKeyart(),art.getVendor(),art.getSearchdesc(), art.getLongdescr());
 
                     }
 
@@ -242,7 +242,7 @@ public class YMTechParsing {
         wrtr.close();
     }
 
-    static void getAtrs(long id, String dURL, String kart, String vnd, String sd) throws XmlPullParserException {
+    static void getAtrs(long id, String dURL, String kart, String vnd, String sd, String ldesc) throws XmlPullParserException {
         String dst1 = "/home/ilyahoo/NetBeansProjects/Temp/parsing.xhtml";
         FactoryDAO fd = FactoryDAO.getInstance();
         OutputStream os = null;
@@ -406,7 +406,7 @@ public class YMTechParsing {
 
                 if (eventType == XmlPullParser.TEXT && techBool && valBool && !xpp.getText().equals(" ") && !xpp.getText().equals(tempAt) && !xpp.getText().equals(tempGr)) {
 //                    System.out.println("znachen: "+xpp.getText());
-                    atrs += xpp.getText() + ";";
+                    atrs += xpp.getText() + ";;";
                     valBool = false;
                 }
 
@@ -432,6 +432,7 @@ public class YMTechParsing {
             artWrt.setKeyart(kart);
             artWrt.setSearchdesc(sd);
             artWrt.setVendor(vnd);
+            artWrt.setLongdescr(ldesc);
             try {
                 fd.getnewArticlesDAO().addnArticles(artWrt);
                 System.out.println("Записано в базy...");

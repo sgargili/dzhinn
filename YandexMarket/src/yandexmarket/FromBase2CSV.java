@@ -31,32 +31,36 @@ public class FromBase2CSV {
         for (Iterator iter = articles.iterator(); iter.hasNext();) {
             Newarticles art = (Newarticles) iter.next();
             ms = new String[8];
-            if (art.getAttr()!=null) {
+            if (art.getAttr() != null) {
                 System.out.println("*****************************************");
-                System.out.println(art.getId()+") <"+art.getKeyart()+">");
+                System.out.println(art.getId() + ") <" + art.getKeyart() + ">");
                 grps = art.getAttr().split("\\|\\|");
                 System.out.println("Y продyкта " + (grps.length - 1) + " грyпп");
                 for (int i1 = 1; i1 < grps.length; i1++) {
                     atrbs = grps[i1].split("\\|");
-                    ms[0] = art.getSearchdesc();
-                    ms[1] = art.getVendor();
-                    ms[2] = art.getKeyart();
-                    ms[3] = art.getPt();
-                    ms[4] = art.getPicurl();
-                    ms[5] = atrbs[0];
-                    System.out.println("Грyппа: " + ms[5]);
-                    atrbs2 = atrbs[1].split(";");
-                    System.out.println("Y продyкта в этой грyппе " + atrbs2.length + " атрибyтов");
-                    for (int i2 = 0; i2 < atrbs2.length; i2++) {
-                        at_val = atrbs2[i2].split(" -- ");
-                        ms[6] = at_val[0];
-                        ms[7] = at_val[1];
-                        try {
-                            wrtr.writeRecord(ms);
-                            wrtr.flush();
+                    if (atrbs.length > 1) {
+                        ms[0] = art.getLongdescr();
+                        ms[1] = art.getVendor();
+                        ms[2] = art.getKeyart();
+                        ms[3] = art.getPt();
+                        ms[4] = art.getPicurl();
+                        ms[5] = atrbs[0];
+                        System.out.println("Грyппа: " + ms[5]);
+                        atrbs2 = atrbs[1].split(";;");
+                        System.out.println("Y продyкта в этой грyппе " + atrbs2.length + " атрибyтов");
+                        for (int i2 = 0; i2 < atrbs2.length; i2++) {
+                            at_val = atrbs2[i2].split(" -- ");
+                            if (at_val.length > 1) {
+                                ms[6] = at_val[0];
+                                ms[7] = at_val[1];
+                                try {
+                                    wrtr.writeRecord(ms);
+                                    wrtr.flush();
 //                            System.out.println("Атрибyты записаны в выходной файл...");
-                        } catch (Exception e) {
-                            System.out.println(e);
+                                } catch (Exception e) {
+                                    System.out.println(e);
+                                }
+                            }
                         }
                     }
                 }
