@@ -4,8 +4,10 @@
  */
 package DAO;
 
+import DAO.Impl.KeyFromXmlDAOImpl;
 import DAO.Impl.ArticlesDAOImpl;
 import DAO.Impl.It4articlesDAOImpl;
+import DAO.Impl.MarkFromXmlDAOImpl;
 import DAO.Impl.MatchingDAOImpl;
 import DAO.Impl.RivalsDAOImpl;
 import DAO.Impl.RivalsdataDAOImpl;
@@ -23,6 +25,8 @@ public class FactoryDAO {
     private RivalsdataDAO rivalsDataDAO = null;
     private It4articlesDAO it4articlesDAO = null;
     private MatchingDAO matchingDAO = null;
+    private KeyFromXmlDAO keysDAO = null;
+    private MarkFromXmlDAO kmarkDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -38,11 +42,26 @@ public class FactoryDAO {
         }
         return articlesDAO;
     }
+
     public newArticlesDAO getnewArticlesDAO() {
         if (newarticlesDAO == null) {
             newarticlesDAO = new newArticlesDAOImpl();
         }
         return newarticlesDAO;
+    }
+
+    public KeyFromXmlDAO getKeysDAO() {
+        if (keysDAO == null) {
+            keysDAO = new KeyFromXmlDAOImpl();
+        }
+        return keysDAO;
+    }
+
+    public MarkFromXmlDAO getMKeysDAO() {
+        if (kmarkDAO == null) {
+            kmarkDAO = new MarkFromXmlDAOImpl();
+        }
+        return kmarkDAO;
     }
 
     public RivalsdataDAO getRivalsDataDAO() {
