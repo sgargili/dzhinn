@@ -11,6 +11,7 @@ import DAO.Impl.MarkFromXmlDAOImpl;
 import DAO.Impl.MatchingDAOImpl;
 import DAO.Impl.RivalsDAOImpl;
 import DAO.Impl.RivalsdataDAOImpl;
+import DAO.Impl.keyUploadInfoDAOImpl;
 import DAO.Impl.newArticlesDAOImpl;
 
 /**
@@ -27,6 +28,7 @@ public class FactoryDAO {
     private MatchingDAO matchingDAO = null;
     private KeyFromXmlDAO keysDAO = null;
     private MarkFromXmlDAO kmarkDAO = null;
+    private keyUploadInfoDAO kupdDAO = null;
     private static FactoryDAO instance = null;
 
     public static synchronized FactoryDAO getInstance() {
@@ -62,6 +64,13 @@ public class FactoryDAO {
             kmarkDAO = new MarkFromXmlDAOImpl();
         }
         return kmarkDAO;
+    }
+
+    public keyUploadInfoDAO getUIKeysDAO() {
+        if (kupdDAO == null) {
+            kupdDAO = new keyUploadInfoDAOImpl();
+        }
+        return kupdDAO;
     }
 
     public RivalsdataDAO getRivalsDataDAO() {

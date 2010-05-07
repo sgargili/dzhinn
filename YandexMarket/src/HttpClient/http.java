@@ -116,7 +116,7 @@ public class http {
         try {
             int getResult = client.executeMethod(getMethod);
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(tempFile), "UTF-8"));
-            out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "UTF-8"));
+            out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), "WINDOWS-1251"));
 
             out.flush();
             out.close();

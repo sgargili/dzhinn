@@ -24,7 +24,7 @@ public class LoadKeysFromCSV {
         FactoryDAO fd = FactoryDAO.getInstance();
         KeyFromXml keys;
 
-        CsvReader rdr = new CsvReader("/home/ilyahoo/NetBeansProjects/KeyUpload/Keys2DB.csv", ',', Charset.forName("Windows-1251"));
+        CsvReader rdr = new CsvReader("/home/ilyahoo/NetBeansProjects/KeyUpload/Key2DB_2.csv", ',', Charset.forName("Windows-1251"));
 
         while (rdr.readRecord()) {
             keyart = rdr.get(0).trim();

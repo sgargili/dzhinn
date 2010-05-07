@@ -244,7 +244,7 @@ public class ResizePics {
             BufferedImage biInput;
 
             try {
-                inputImage = new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/KEY_" + i + ".jpg");
+                inputImage = new File("/home/ilyahoo/NetBeansProjects/KeyPic/Pics/KEY_" + i + ".jpg");
                 biInput = ImageIO.read(inputImage);
             } catch (Exception ex) {
                 continue;
@@ -263,14 +263,14 @@ public class ResizePics {
                 second = (i + "").substring(1, 2);
                 third = (i + "").substring(2);
                 System.out.println("Sozdanie faila");
-                new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/400x300").mkdirs();
-                outImage400 = new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/400x300/400.jpg");
-                new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/200x150").mkdirs();
-                outImage200 = new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/200x150/200.jpg");
-                new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/160x160").mkdirs();
-                outImage160 = new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/160x160/160.jpg");
-                new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/75x56").mkdirs();
-                outImage75 = new File("/home/ilyahoo/NetBeansProjects/Temp/Pic/OutputPics/" + first + "/" + second + "/" + third + "/" + "/75x56/75.jpg");
+                new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/400x300").mkdirs();
+                outImage400 = new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/400x300/400.jpg");
+                new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/200x150").mkdirs();
+                outImage200 = new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/200x150/200.jpg");
+                new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/160x160").mkdirs();
+                outImage160 = new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/160x160/160.jpg");
+                new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/75x56").mkdirs();
+                outImage75 = new File("/home/ilyahoo/NetBeansProjects/KeyPic/Output/" + first + "/" + second + "/" + third + "/" + "/75x56/75.jpg");
                 System.out.println("Fail sozdan");
 
                 if (biInput.getHeight() >= biInput.getWidth()) {

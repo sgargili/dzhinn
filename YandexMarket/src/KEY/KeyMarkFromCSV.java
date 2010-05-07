@@ -101,6 +101,8 @@ public class KeyMarkFromCSV {
                 km.setMarketing(mark);
 
                 fd.getMKeysDAO().addKeys(km);
+                os.close();
+                w.close();
 
             } catch (Exception ex) {
                 ex.printStackTrace();

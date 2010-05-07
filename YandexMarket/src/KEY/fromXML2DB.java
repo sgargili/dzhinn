@@ -74,6 +74,7 @@ public class fromXML2DB {
                 r.setContentHandler(h);
                 r.parse(fl.toURI().toString());
                 xml = new File(dst);
+
                 xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml), "UTF-8"));
 
                 int eventType = xpp.getEventType();
@@ -101,7 +102,7 @@ public class fromXML2DB {
                         //System.out.println(">"+fulln);
                     }
 
-                    
+
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("section") && cardBool) {
                         atrs += "||" + xpp.getAttributeValue(0) + "|";
                         //System.out.println(xpp.getAttributeValue(0));
@@ -109,13 +110,20 @@ public class fromXML2DB {
 
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("section") && xpp.getAttributeCount() == 2 && xpp.getAttributeValue(0).equals("Спецификация")) {
                         cardBool = true;
-                        atrs="";
+                        atrs = "";
                     }
+
                     if (eventType == XmlPullParser.TEXT && difCardBool && xpp.getText().equals("Особенности")) {
                         difCardBool = false;
                         difCardBool2 = true;
                         atrs += "||Main|";
                     }
+                    if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("section") && xpp.getAttributeCount() == 2 && xpp.getAttributeValue(0).equals("Доп. информация") && !cardBool && !difCardBool2) {
+                        cardBool = true;
+                        atrs = "";
+                    }
+
+
                     if (eventType == XmlPullParser.START_TAG && xpp.getName().equals("param_name") && cardBool && !atrBool) {
                         atrBool = true;
                     }
@@ -159,7 +167,7 @@ public class fromXML2DB {
                 kdata.setAttr(atrs);
                 atrs = "";
                 fd.getKeysDAO().addKeys(kdata);
-
+                os.close();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

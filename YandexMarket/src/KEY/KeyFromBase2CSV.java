@@ -28,10 +28,19 @@ public class KeyFromBase2CSV {
         String[] grps, atrbs, atrbs2;
         String[] at_val;
         String tempDes;
+        int files, lines;
+        files = 1;
+        lines = 0;
 
         for (Iterator iter = keys.iterator(); iter.hasNext();) {
             KeyFromXml ks = (KeyFromXml) iter.next();
             ms = new String[8];
+            if (lines > 5250) {
+                lines = 0;
+                files++;
+                wrtr.close();
+                wrtr = new CsvWriter("/home/ilyahoo/NetBeansProjects/1/KeyProdsUpload" + files + ".csv", ',', Charset.forName("UTF-8"));
+            }
             if (ks.getAttr() != null) {
                 System.out.println("*****************************************");
                 System.out.println(ks.getId() + ") <" + ks.getKeyart() + ">");
@@ -62,35 +71,10 @@ public class KeyFromBase2CSV {
                                 try {
                                     wrtr.writeRecord(ms);
                                     wrtr.flush();
-//                            System.out.println("Атрибyты записаны в выходной файл...");
-                                } catch (Exception e) {
-                                    System.out.println(e);
-                                }
-                            }
-                        }
-                    } else {
-                        if (atrbs[0].length() > 2) {
-                            ms[0] = ks.getFullname();
-                            ms[1] = ks.getVendor();
-                            ms[2] = "KEY_" + ks.getKeyart();
-                            ms[3] = ks.getPt();
-                            ms[4] = null;
-                            ms[5] = "Main";
-                            System.out.println("Грyппа: " + ms[5]);
-                            atrbs2 = atrbs[0].split(";;");
-                            System.out.println("Y продyкта в этой грyппе " + atrbs2.length + " атрибyтов");
-                            for (int i2 = 0; i2 < atrbs2.length; i2++) {
-                                at_val = atrbs2[i2].split(" -- ");
-                                if (at_val.length > 1) {
-                                    ms[6] = at_val[0];
-                                    ms[7] = at_val[1];
-                                    try {
-                                        wrtr.writeRecord(ms);
-                                        wrtr.flush();
+                                    lines++;
 //                            System.out.println("Атрибyты записаны в выходной файл...");
                                     } catch (Exception e) {
-                                        System.out.println(e);
-                                    }
+                                    System.out.println(e);
                                 }
                             }
                         }
