@@ -16,4 +16,6 @@ public interface ValueUserDAO {
     public List getAllValueUsers();
 
     public ValueUser getValueUserById(long id);
+
+    public List getValueUserByName(String name);
 }

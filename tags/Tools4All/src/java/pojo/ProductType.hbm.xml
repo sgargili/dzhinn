@@ -2,20 +2,20 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 05.04.2010 14:56:34 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class catalog="grabli" name="pojo.ProductType" table="product_type">
-        <id name="productTypeId" type="java.lang.Integer">
-            <column name="product_type_id"/>
-            <generator class="identity"/>
-        </id>
-        <property name="productTypeName" type="string" >
-            <column default="ddd" length="512" name="product_type_name"/>
-        </property>
-        <property name="productTypeAlternative" type="string">
-            <column length="65535" name="product_type_alternative"/>
-        </property>
-        <bag inverse="false" lazy="true" name="attributes" table="pt2atr">
-            <key column="product_type_id"/>
-            <many-to-many class="pojo.Attribute" column="attribute_id"/>
-        </bag>
-    </class>
+  <class catalog="grabli" name="pojo.ProductType" table="product_type">
+    <id name="productTypeId" type="java.lang.Integer">
+      <column name="product_type_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="productTypeName" type="string">
+      <column default="ddd" length="512" name="product_type_name"/>
+    </property>
+    <property name="productTypeAlternative" type="string">
+      <column length="65535" name="product_type_alternative"/>
+    </property>
+    <bag inverse="false" lazy="true" name="attributes" table="pt2atr">
+      <key column="product_type_id"/>
+      <many-to-many class="pojo.Attribute" column="attribute_id"/>
+    </bag>
+  </class>
 </hibernate-mapping>

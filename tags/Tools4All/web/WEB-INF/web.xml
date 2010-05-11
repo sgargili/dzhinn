@@ -73,6 +73,10 @@
         <servlet-name>GrabliCsvColumnData</servlet-name>
         <servlet-class>servlets.GrabliCsvColumnData</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Service</servlet-name>
+        <servlet-class>servlets.Service</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
@@ -104,6 +108,14 @@
     <servlet-mapping>
         <servlet-name>GrabliCsvColumnData</servlet-name>
         <url-pattern>/GrabliCsvColumnData</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Service</servlet-name>
+        <url-pattern>/Service.exml</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Service</servlet-name>
+        <url-pattern>/service.exml</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>tools4value.jsp</welcome-file>

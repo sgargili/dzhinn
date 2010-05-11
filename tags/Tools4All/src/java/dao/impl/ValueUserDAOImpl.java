@@ -61,4 +61,25 @@ public class ValueUserDAOImpl implements ValueUserDAO {
         }
         return out;
     }
+
+    public List getValueUserByName(String name) {
+        Session session = null;
+        List<ValueUser> result = new ArrayList();
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            Query getByLogin =
+                    session.createQuery(
+                    "from ValueUser v where v.name like :name")//
+                    .setString("name", "%" + name + "%");
+            result = getByLogin.list();
+        } catch (RuntimeException e) {
+        } catch (Exception ex) {
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return result;
+    }
 }

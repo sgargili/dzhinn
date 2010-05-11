@@ -2,30 +2,30 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 05.04.2010 14:56:34 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class catalog="grabli" name="pojo.Attribute" table="attribute">
-        <id name="attributeId" type="java.lang.Integer">
-            <column name="attribute_id"/>
-            <generator class="identity"/>
-        </id>
-        <property name="attributeName" type="string">
-            <column length="512" name="attribute_name"/>
-        </property>
-        <property name="attributeAlternative" type="string">
-            <column length="65535" name="attribute_alternative"/>
-        </property>
-        <bag lazy="true" name="productTypes" table="pt2atr">
-            <key column="attribute_id"/>
-            <many-to-many class="pojo.ProductType" column="product_type_id"/>
-        </bag>
-        <bag lazy="true" name="values" table="atr2val">
-            <key column="attribute_id"/>
-            <many-to-many class="pojo.Value" column="value_id"/>
-        </bag>
-        <bag lazy="true" name="attributeAlternativeNames" table="attribute_alternative_name" cascade="delete-orphan">
-            <key>
-                <column name="attribute_id" not-null="true" />
-            </key>
-            <one-to-many class="pojo.AttributeAlternativeName" />
-        </bag>
-    </class>
+  <class catalog="grabli" name="pojo.Attribute" table="attribute">
+    <id name="attributeId" type="java.lang.Integer">
+      <column name="attribute_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="attributeName" type="string">
+      <column length="512" name="attribute_name"/>
+    </property>
+    <property name="attributeAlternative" type="string">
+      <column length="65535" name="attribute_alternative"/>
+    </property>
+    <bag lazy="true" name="productTypes" table="pt2atr">
+      <key column="attribute_id"/>
+      <many-to-many class="pojo.ProductType" column="product_type_id"/>
+    </bag>
+    <bag lazy="true" name="values" table="atr2val">
+      <key column="attribute_id"/>
+      <many-to-many class="pojo.Value" column="value_id"/>
+    </bag>
+    <bag cascade="delete-orphan" lazy="true" name="attributeAlternativeNames" table="attribute_alternative_name">
+      <key>
+        <column name="attribute_id" not-null="true"/>
+      </key>
+      <one-to-many class="pojo.AttributeAlternativeName"/>
+    </bag>
+  </class>
 </hibernate-mapping>
