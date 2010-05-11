@@ -43281,6 +43281,17 @@ new Ext.TabPanel({
 
     // private
     initTab : function(item, index){
+	    if(!this.itemTpl){
+            var tt = new Ext.Template(
+                 '<li class="{cls}" id="{id}"><a class="x-tab-strip-close"></a>',
+                 '<a class="x-tab-right" href="#"><em class="x-tab-left">',
+                 '<span class="x-tab-strip-inner"><span class="x-tab-strip-text {iconCls}">{text}</span></span>',
+                 '</em></a></li>'
+            );
+            tt.disableFormats = true;
+            tt.compile();
+            Ext.TabPanel.prototype.itemTpl = tt;
+        }
         var before = this.strip.dom.childNodes[index],
             p = this.getTemplateArgs(item),
             el = before ?
