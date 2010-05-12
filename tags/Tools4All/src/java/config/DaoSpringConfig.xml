@@ -26,8 +26,8 @@
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
                 hibernate.connection.characterEncoding=UTF-8
                 hibernate.current_session_context_class=thread
-                <!--hibernate.show_sql=true
-                hibernate.format_sql=true-->
+                hibernate.show_sql=true
+                hibernate.format_sql=true
             </value>
         </property>
     </bean>

@@ -1,0 +1,403 @@
+
+<Articles>
+    <Article>
+        <Id>1</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Кол-во процессоров</Attribute>
+        <Value>1600</Value>
+    </Article>
+    <Article>
+        <Id>2</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Вес брутто (измерено в НИКСе)</Attribute>
+        <Value>1.795 кг</Value>
+    </Article>
+    <Article>
+        <Id>3</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Частота памяти</Attribute>
+        <Value>1200 МГц (измерено в НИКСе)</Value>
+    </Article>
+    <Article>
+        <Id>4</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Видеопамять</Attribute>
+        <Value>2 Гб</Value>
+    </Article>
+    <Article>
+        <Id>5</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Разрядность шины памяти</Attribute>
+        <Value>256 бит</Value>
+    </Article>
+    <Article>
+        <Id>6</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Максимальное разрешение 2D/3D</Attribute>
+        <Value>2560 x 1600 при подключении DVI или DisplayPort монитора, 2048 x 1536 (при подключении аналогового монитора), 1920x1200 при подключении по HDMI.</Value>
+    </Article>
+    <Article>
+        <Id>7</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Размеры упаковки (измерено в НИКСе)</Attribute>
+        <Value>37.5 x 24.5 x 10 см</Value>
+    </Article>
+    <Article>
+        <Id>8</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Техпроцесс</Attribute>
+        <Value>40 нм</Value>
+    </Article>
+    <Article>
+        <Id>9</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>RAMDAC</Attribute>
+        <Value>400 МГц - 2 шт., 10 бит на канал.</Value>
+    </Article>
+    <Article>
+        <Id>10</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Порты</Attribute>
+        <Value>6 выходов mini-DisplayPort, 2 переходника mini-DisplayPort-&gt;DVI-D в комплекте, 2 переходника mini-DisplayPort-&gt;DisplayPort в комплекте, переходник mini-DisplayPort-&gt;HDMI в комплекте</Value>
+    </Article>
+    <Article>
+        <Id>11</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Разъем питания</Attribute>
+        <Value>8+6 pin</Value>
+    </Article>
+    <Article>
+        <Id>12</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Кол-во пиксельных конвейеров</Attribute>
+        <Value>80, 32 блоков выборки текстур</Value>
+    </Article>
+    <Article>
+        <Id>13</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Частота чипа</Attribute>
+        <Value>850 МГц (измерено в НИКСе)</Value>
+    </Article>
+    <Article>
+        <Id>14</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка вычислений общего назначения</Attribute>
+        <Value>ATI Stream, OpenCL 1.0, DirectCompute 11</Value>
+    </Article>
+    <Article>
+        <Id>15</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка API</Attribute>
+        <Value>DirectX 11 и OpenGL 3.2</Value>
+    </Article>
+    <Article>
+        <Id>16</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Тип памяти</Attribute>
+        <Value>GDDR5</Value>
+    </Article>
+    <Article>
+        <Id>17</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Модель</Attribute>
+        <Value>HD5870 2GB GDDR5 PCIE (Eyefinity 6 Edition)</Value>
+    </Article>
+    <Article>
+        <Id>18</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Интерфейс</Attribute>
+        <Value>PCI Express 2.1 16x (совместим с PCI Express 1.х) с возможностью объединения карт при помощи CrossfireX</Value>
+    </Article>
+    <Article>
+        <Id>19</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Чип</Attribute>
+        <Value>Radeon HD 5870    |    характеристики GPU</Value>
+    </Article>
+    <Article>
+        <Id>20</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Производитель</Attribute>
+        <Value>Sapphire</Value>
+    </Article>
+    <Article>
+        <Id>21</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка ОС</Attribute>
+        <Value>Windows XP x64, Windows XP, Windows MCE 2005, Windows Vista, Windows 7</Value>
+    </Article>
+    <Article>
+        <Id>22</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Ссылка на сайт производителя</Attribute>
+        <Value>www.sapphiretech.com</Value>
+    </Article>
+    <Article>
+        <Id>23</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Управление скоростью вращения</Attribute>
+        <Value>Автоматическое (проверено в НИКСе)</Value>
+    </Article>
+    <Article>
+        <Id>24</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Охлаждение</Attribute>
+        <Value>Активное (радиатор с вентилятором на лицевой стороне платы)</Value>
+    </Article>
+    <Article>
+        <Id>25</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Требования к системе</Attribute>
+        <Value>Блок питания мощностью 500 Вт или 600 Вт для двух видеокарт в режиме CrossFire
+        </Value>
+    </Article>
+    <Article>
+        <Id>26</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка HDCP</Attribute>
+        <Value>Есть (1080p)</Value>
+    </Article>
+    <Article>
+        <Id>27</Id>
+        <Name>Article1</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Конструкция системы охлаждения</Attribute>
+        <Value>Система охлаждения блокирует соседний с видеокартой слот для плат расширения.</Value>
+    </Article>
+    <Article>
+        <Id>28</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Вес брутто (измерено в НИКСе)</Attribute>
+        <Value>1.946 кг</Value>
+    </Article>
+    <Article>
+        <Id>29</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Частота памяти</Attribute>
+        <Value>1000 МГц (4 ГГц QDR)</Value>
+    </Article>
+    <Article>
+        <Id>30</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Кол-во процессоров</Attribute>
+        <Value>1600 x2</Value>
+    </Article>
+    <Article>
+        <Id>31</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Видеопамять</Attribute>
+        <Value>2 Гб всего (1024 Мб x2)</Value>
+    </Article>
+    <Article>
+        <Id>32</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Разрядность шины памяти</Attribute>
+        <Value>256 бит x2</Value>
+    </Article>
+    <Article>
+        <Id>33</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Максимальное разрешение 2D/3D</Attribute>
+        <Value>2560 x 1600 при подключении DVI или DisplayPort монитора, 2048 x 1536 (при подключении аналогового монитора), 1920x1200 при подключении по HDMI.</Value>
+    </Article>
+    <Article>
+        <Id>34</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Длина</Attribute>
+        <Value>310 мм</Value>
+    </Article>
+    <Article>
+        <Id>35</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Размеры упаковки (измерено в НИКСе)</Attribute>
+        <Value>36 x 26 x 11 см</Value>
+    </Article>
+    <Article>
+        <Id>36</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Техпроцесс</Attribute>
+        <Value>40 нм</Value>
+    </Article>
+    <Article>
+        <Id>37</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>RAMDAC</Attribute>
+        <Value>400 МГц - 2 шт., 10 бит на канал.</Value>
+    </Article>
+    <Article>
+        <Id>38</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Потребление энергии</Attribute>
+        <Value>51 ~ 294 Вт</Value>
+    </Article>
+    <Article>
+        <Id>39</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Частота чипа</Attribute>
+        <Value>725 МГц</Value>
+    </Article>
+    <Article>
+        <Id>40</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Разъем питания</Attribute>
+        <Value>8+6 pin</Value>
+    </Article>
+    <Article>
+        <Id>41</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Кол-во пиксельных конвейеров</Attribute>
+        <Value>80, 32 блоков выборки текстур x2</Value>
+    </Article>
+    <Article>
+        <Id>42</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка вычислений общего назначения</Attribute>
+        <Value>ATI Stream, OpenCL 1.0, DirectCompute 11</Value>
+    </Article>
+    <Article>
+        <Id>43</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка API</Attribute>
+        <Value>DirectX 11 и OpenGL 3.2</Value>
+    </Article>
+    <Article>
+        <Id>44</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Тип памяти</Attribute>
+        <Value>GDDR5</Value>
+    </Article>
+    <Article>
+        <Id>45</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Порты</Attribute>
+        <Value>Mini-DisplayPort, 2 выхода DVI-I, HDMI переходник в комплекте, Переходник на D-Sub в комплекте, переходник Mini-DisplayPort-&gt;DisplayPort в комплекте</Value>
+    </Article>
+    <Article>
+        <Id>46</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Интерфейс</Attribute>
+        <Value>PCI Express 2.1 16x (совместим с PCI Express 1.х) с возможностью объединения карт при помощи CrossfireX</Value>
+    </Article>
+    <Article>
+        <Id>47</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Чип</Attribute>
+        <Value>Radeon HD 5970    |    характеристики GPU</Value>
+    </Article>
+    <Article>
+        <Id>48</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Модель</Attribute>
+        <Value>Radeon HD 5970 2 GB DDR5 DisplayPort Black Edition</Value>
+    </Article>
+    <Article>
+        <Id>49</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка ОС</Attribute>
+        <Value>Windows XP x64, Windows XP, Windows MCE 2005, Windows Vista, Windows 7</Value>
+    </Article>
+    <Article>
+        <Id>50</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Ссылка на сайт производителя</Attribute>
+        <Value>www.xfxforce.com</Value>
+    </Article>
+    <Article>
+        <Id>51</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Производитель</Attribute>
+        <Value>XFX</Value>
+    </Article>
+    <Article>
+        <Id>52</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>ПО в комплекте</Attribute>
+        <Value>XFX Overvolt Tool</Value>
+    </Article>
+    <Article>
+        <Id>53</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Управление скоростью вращения</Attribute>
+        <Value>Автоматическое (проверено в НИКСе)</Value>
+    </Article>
+    <Article>
+        <Id>54</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Охлаждение</Attribute>
+        <Value>Активное (радиатор с вентилятором на лицевой стороне платы)</Value>
+    </Article>
+    <Article>
+        <Id>55</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Требования к системе</Attribute>
+        <Value>Блок питания мощностью 650 Вт или 850 Вт для двух видеокарт в режиме CrossFire</Value>
+    </Article>
+    <Article>
+        <Id>56</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Поддержка HDCP</Attribute>
+        <Value>Есть (1080p)</Value>
+    </Article>
+    <Article>
+        <Id>57</Id>
+        <Name>Article2</Name>
+        <PT>Видеокарты</PT>
+        <Attribute>Конструкция системы охлаждения</Attribute>
+        <Value>Система охлаждения блокирует соседний с видеокартой слот для плат расширения.</Value>
+    </Article>
+</Articles>

@@ -91,6 +91,6 @@ Ext.onReady(function() {
 
                 }
             }
-        }]
+        },panel]
     });
 });
