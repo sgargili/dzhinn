@@ -8,6 +8,7 @@ import factories.FactoryDAO4Grabli;
 import java.io.IOException;
 import pojo.ProductType;
 import csv.CsvReader;
+import csv.CsvWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.charset.Charset;
@@ -23,6 +24,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
+import pojo.OutputData;
 
 /**
  *
@@ -328,5 +330,58 @@ public class GrabliPro {
 
     public void deleteAttributeAltName(AttributeAlternativeName atrAlt) {
         fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeName(atrAlt);
+    }
+
+    private void parseInputData(String inputData) {
+        String[] rows = null;
+        String[] cells = null;
+        OutputData od;
+        byte bt = 0;
+        rows = inputData.split("\\|\\|\\|");
+        for (int i = 0; i < rows.length; i++) {
+            cells = rows[i].split("[$][$][$]");
+            od = new OutputData();
+            od.setOutputDataId(Integer.parseInt(cells[0]));
+            od.setArticle(cells[1]);
+            od.setProductType(cells[2]);
+            od.setAttribute(cells[3]);
+            od.setValue(cells[4]);
+            od.setUnit(cells[5]);
+            if (cells[6].equals("true")) {
+                bt = 1;
+                od.setAvailable(bt);
+            } else {
+                bt = 0;
+                od.setAvailable(bt);
+            }
+            fd.getOutputDataDAO().addOutputData(od);
+        }
+    }
+
+    public File updateParseData(File file, String inputData) {
+        parseInputData(inputData);
+        List<OutputData> ods = fd.getOutputDataDAO().getAllOutputData();
+        OutputData od;
+        CsvWriter writer = new CsvWriter(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
+        String[] mass = new String[7];
+        Iterator it = ods.iterator();
+        try {
+            while (it.hasNext()) {
+                od = (OutputData) it.next();
+                mass[0] = od.getArticle();
+                mass[1] = od.getGroupe();
+                mass[2] = od.getAttribute();
+                mass[3] = od.getValue();
+                mass[4] = od.getUnit();
+                mass[5] = "";
+                mass[6] = "";
+                if (od.getAvailable() == 1) {
+                    writer.writeRecord(mass);
+                }
+            }
+            writer.close();
+        } catch (Exception ex) {
+        }
+        return file;
     }
 }

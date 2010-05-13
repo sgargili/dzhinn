@@ -4,13 +4,15 @@
  */
 package servlets;
 
-import service.ValueUsers;
+import service.ValueUsersXML;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import service.AttributesXML;
+import service.OutputDataXML;
 
 /**
  *
@@ -58,7 +60,7 @@ public class Service extends HttpServlet {
                         //namePattern = reqParams[i].replaceFirst("name=", "");
                     }
                 }
-                ValueUsers vUsers = new ValueUsers();
+                ValueUsersXML vUsers = new ValueUsersXML();
                 if (id != null) {
                     out.println(vUsers.getValueUserById(Long.parseLong(id)));
                 } else if (namePattern != null) {
@@ -66,10 +68,56 @@ public class Service extends HttpServlet {
                 } else {
                     out.println(vUsers.getValueUsers());
                 }
+            } else if (request.getParameter("request").contains("outputData")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("outputData/", "");
+                reqParams = reqParam.split("/");
+                String id = null;
+                String article = null;
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("sessionId")) {
+                        id = reqParams[i].replaceFirst("sessionId=", "");
+                    }
+                    if (reqParams[i].contains("article")) {
+                        article = new String(reqParams[i].replaceFirst("article=", "").getBytes(requestEnc), clientEnc);
+                    }
+                }
+                OutputDataXML odXML = new OutputDataXML();
+                if (id != null) {
+                    out.println(odXML.getOutputDataBySessionId(Long.parseLong(id)));
+                } else if (article != null) {
+                    out.println(odXML.getOutputDataByArticle(article));
+                } else {
+
+                    out.println(odXML.getAllOutputData());
+                }
+            } else if (request.getParameter("request").contains("attributes")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("attributes/", "");
+                reqParams = reqParam.split("/");
+                String id = null;
+                String pt = null;
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("ptId")) {
+                        id = reqParams[i].replaceFirst("ptId=", "");
+                    }
+                    if (reqParams[i].contains("productType")) {
+                        pt = new String(reqParams[i].replaceFirst("productType=", "").getBytes(requestEnc), clientEnc);
+                    }
+
+                }
+                AttributesXML attXML = new AttributesXML();
+                if (id != null) {
+                    out.println(attXML.getAttributesByPtId(Integer.parseInt(id)));
+                }else if (pt != null) {
+                    out.println(attXML.getAttributesByPtName(pt));
+                } else {
+                    out.println(attXML.getAllAttributes());
+                }
             }
             //out.println(xml);
         } catch (Exception ex) {
-//            out.println("<Owners>");
+            out.println(ex);
 //            out.println(ex);
 //            out.println("</Owners>");
         } finally {

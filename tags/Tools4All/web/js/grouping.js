@@ -10,7 +10,8 @@ Ext.onReady(function(){
 
     var xg = Ext.grid;
     var fm = Ext.form;
-
+    var article='Just4Article';
+    var pt;
     var storeAtrsProxy = new Ext.data.HttpProxy({
         url:    'some url',
         method: 'GET'
@@ -32,19 +33,24 @@ Ext.onReady(function(){
         }
         ])
     });
+    var checkColumn = new Ext.grid.CheckColumn({
+        header: 'Active',
+        dataIndex: 'available',
+        width: 5
+    });
 
     function storeAtrsUpdate(id){
         //alert("Need");
         storeAtrsProxy.setUrl("Attribute.exml?ptId="+id);
-        //storeAtrs.load();
+    //storeAtrs.load();
     }
 
     var comboOwner = new Ext.form.ComboBox({
         store: storeAtrs,
         displayField:'atr',
-        valueField: 'id',
+        valueField: 'atr',
         typeAhead: true,
-        mode: 'remote',
+        mode: 'local',
         forceSelection: true,
         triggerAction: 'all',
         //emptyText:'Выберите автора...',
@@ -54,14 +60,18 @@ Ext.onReady(function(){
         },
         width:200,
         listeners: {
-            beforequery : function(){
-                //storeAtrs.clearData();
-                alert(grid.getSelectionModel().getColumnCount());
-                //storeAtrsUpdate(Ext.get("ids").getValue());
+            beforequery : function test(){
+                if(article!=grid.getSelectionModel().selection.record.data.article){
+                    pt = grid.getSelectionModel().selection.record.data.pt;
+                    storeAtrsProxy.setUrl("Service.exml?request=attributes/productType="+pt);
+                    article=grid.getSelectionModel().selection.record.data.article;
+                    storeAtrs.clearData();
+                    storeAtrs.load();
+                }
             }
         }
     });
-//beforequery
+    //beforequery
     var storePtsAlt = new Ext.data.GroupingStore({
         //url: 'data/Owners.xml',
         sortInfo:{
@@ -69,7 +79,7 @@ Ext.onReady(function(){
             direction: "ASC"
         },
         groupField:'article',
-        url: 'test.xml',
+        url: 'Service.exml?request=outputData',
         reader: new Ext.data.XmlReader({
             record: 'Article',
             id: 'Id',
@@ -90,10 +100,20 @@ Ext.onReady(function(){
             }, {
                 name:'value',
                 mapping:'Value'
+            }, {
+                name:'unit',
+                mapping:'Unit'
+            }, {
+                name:'available',
+                mapping:'Available',
+                type: 'bool'
             }
             ]
         })
     });
+
+    
+
 
     var cm = new Ext.grid.ColumnModel({
         // specify any defaults for each column
@@ -106,27 +126,15 @@ Ext.onReady(function(){
             header: "Article",
             width: 10,
             sortable: true,
-            dataIndex: 'article',
-            editor: new fm.TextField({
-                allowBlank: false
-            })
-        },{
-            id:'ids',
-            header: "Id",
-            width: 3,
-            sortable: true,
-            dataIndex: 'id'
+            dataIndex: 'article'
+            
         },
-
         {
             header: "Product Type",
             width: 15,
             sortable: true,
             editable: true,
-            dataIndex: 'pt',
-            editor: new fm.TextField({
-                allowBlank: false
-            })
+            dataIndex: 'pt'
         },
 
         {
@@ -145,13 +153,25 @@ Ext.onReady(function(){
             editor: new fm.TextField({
                 allowBlank: false
             })
-        }
+        },
+
+        {
+            header: "Unit",
+            width: 10,
+            sortable: true,
+            dataIndex: 'unit',
+            editor: new fm.TextField({
+                allowBlank: false
+            })
+        },checkColumn
         ]
     });
 
     var grid = new xg.EditorGridPanel({
         store: storePtsAlt,
+        id:'iii',
         cm:cm,
+        plugins: checkColumn,
         clicksToEdit: 2,
         view: new Ext.grid.GroupingView({
             forceFit:true,
@@ -161,10 +181,67 @@ Ext.onReady(function(){
         //        width: 1000,
         height: 800,
         collapsible: true,
+        // collapsed: true,
         animCollapse: true,
+        columnLines:true,
         title: 'Grouping Example',
-        renderTo: document.body
+        renderTo: document.body,
+        tbar: [{
+            text: 'Add Plant',
+            handler : function(){
+                // access the Record constructor through the grid's store
+                //                var Plant = grid.getStore().getAt(0).get("attribute");
+                //                alert(Plant);
+                //
+                var data="";
+                //                Ext.each(grid.getStore().getModifiedRecords(), function(record){
+                //                    data.push(record.data);
+                //                });
+                grid.getStore().each(
+                    function(record){
+                        data+=record.data.id+
+                        "$$$"+
+                        record.data.article+
+                        "$$$"+
+                        record.data.pt+
+                        "$$$"+
+                        record.data.attribute+
+                        "$$$"+
+                        record.data.value+
+                        "$$$"+
+                        record.data.unit+
+                        "$$$"+
+                        record.data.available+
+                        "|||";
+                    }
+                    )
+
+                Ajax.updateDownloadData(data, function(data) {
+                    dwr.engine.openInDownload(data);
+                });
+            //                Ext.Msg.show({
+            //
+            //                    msg: data,
+            //                    buttons: Ext.MessageBox.OK,
+            //                    width: 600,
+            //                    icon: Ext.MessageBox.INFO
+            //                });
+            //                var p = new Plant({
+            //                    common: 'New Plant 1',
+            //                    light: 'Mostly Shade',
+            //                    price: 0,
+            //                    availDate: (new Date()).clearTime(),
+            //                    indoor: false
+            //                });
+            //                grid.stopEditing();
+            //                store.insert(0, p);
+            //                grid.startEditing(0, 0);
+            }
+        }]
+
     });
     storePtsAlt.load();
-    //storeAtrsUpdate(12);
+//storeAtrsUpdate(12);
+    
 });
+

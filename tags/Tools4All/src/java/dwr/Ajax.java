@@ -529,4 +529,13 @@ public class Ajax {
         }
         return "Done";
     }
+
+    public FileTransfer updateDownloadData(String inputData) throws Exception {
+        File file = new File("C://" + System.nanoTime() + ".csv");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, inputData)));
+        file.delete();
+        return new FileTransfer("uploadData.csv", "text/csv", buffer.toByteArray());
+    }
 }

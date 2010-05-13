@@ -14,7 +14,7 @@ import com.thoughtworks.xstream.XStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ValueUsers {
+public class ValueUsersXML {
 
     FactoryDAO fd = FactoryDAO.getInstance();
     XStream xstream = new XStream();

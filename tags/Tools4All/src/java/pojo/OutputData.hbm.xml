@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.05.2010 10:09:46 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="grabli" name="pojo.OutputData" table="output_data">
+    <id name="outputDataId" type="java.lang.Integer">
+      <column name="output_data_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="sessionId" type="java.lang.Long">
+      <column name="session_id"/>
+    </property>
+    <property name="article" type="string">
+      <column length="512" name="article"/>
+    </property>
+    <property name="productType" type="string">
+      <column length="512" name="product_type"/>
+    </property>
+    <property name="groupe" type="string">
+      <column length="512" name="groupe"/>
+    </property>
+    <property name="attribute" type="string">
+      <column length="512" name="attribute"/>
+    </property>
+    <property name="value" type="string">
+      <column length="65535" name="value"/>
+    </property>
+    <property name="unit" type="string">
+      <column length="128" name="unit"/>
+    </property>
+    <property name="available" type="java.lang.Byte">
+      <column name="available"/>
+    </property>
+  </class>
+</hibernate-mapping>

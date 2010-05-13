@@ -86,7 +86,15 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public List<Attribute> getAttributesOnlyByProductTypeId(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ProductType productType = new ProductType();
+        productType.setProductTypeId(id);
+        String query = "from Attribute a " +//
+                "join fetch a.productTypes as productType " + //
+                "where productType = :productType " + //
+                "order by a.attributeName";
+        List<Attribute> outList = getHibernateTemplate().findByNamedParam(query, "productType", productType);
+        productType = null;
+        return outList;
     }
 
     public void updateAttributeAltNameOnly(Attribute attribute) {

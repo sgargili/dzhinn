@@ -18,6 +18,7 @@
                 <value>pojo/Value.hbm.xml</value>
                 <value>pojo/ParentRelateElement.hbm.xml</value>
                 <value>pojo/AttributeAlternativeName.hbm.xml</value>
+                <value>pojo/OutputData.hbm.xml</value>
             </list>
         </property>
 
@@ -74,6 +75,10 @@
     </bean>
 
     <bean id="AttributeAlternativeNameDAOTemp" class="dao.impl.AttributeAlternativeNameDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="OutputDataDAOTemp" class="dao.impl.OutputDataDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -170,6 +175,24 @@
 
         <property name="proxyInterfaces">
             <value>dao.AttributeAlternativeNameDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+     <bean id="OutputDataDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="OutputDataDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.OutputDataDAO</value>
         </property>
 
         <property name="interceptorNames">
