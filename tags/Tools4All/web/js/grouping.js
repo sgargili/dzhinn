@@ -12,14 +12,15 @@ Ext.onReady(function(){
     var fm = Ext.form;
     var article='Just4Article';
     var pt;
-    var storeAtrsProxy = new Ext.data.HttpProxy({
+
+    var storeAtrsProxyToOut = new Ext.data.HttpProxy({
         url:    'some url',
         method: 'GET'
     })
 
 
-    var storeAtrs = new Ext.data.Store({
-        proxy: storeAtrsProxy,
+    var storeAtrsToOut = new Ext.data.Store({
+        proxy: storeAtrsProxyToOut,
         reader: new Ext.data.XmlReader({
             record: 'Attribute',
             id: 'Id'
@@ -39,14 +40,8 @@ Ext.onReady(function(){
         width: 5
     });
 
-    function storeAtrsUpdate(id){
-        //alert("Need");
-        storeAtrsProxy.setUrl("Attribute.exml?ptId="+id);
-    //storeAtrs.load();
-    }
-
-    var comboOwner = new Ext.form.ComboBox({
-        store: storeAtrs,
+    var comboAtrsToOut = new Ext.form.ComboBox({
+        store: storeAtrsToOut,
         displayField:'atr',
         valueField: 'atr',
         typeAhead: true,
@@ -61,18 +56,18 @@ Ext.onReady(function(){
         width:200,
         listeners: {
             beforequery : function test(){
-                if(article!=grid.getSelectionModel().selection.record.data.article){
-                    pt = grid.getSelectionModel().selection.record.data.pt;
-                    storeAtrsProxy.setUrl("Service.exml?request=attributes/productType="+pt);
-                    article=grid.getSelectionModel().selection.record.data.article;
-                    storeAtrs.clearData();
-                    storeAtrs.load();
+                if(article!=gridToOut.getSelectionModel().selection.record.data.article){
+                    pt = gridToOut.getSelectionModel().selection.record.data.pt;
+                    storeAtrsProxyToOut.setUrl("Service.exml?request=attributes/productType="+pt);
+                    article=gridToOut.getSelectionModel().selection.record.data.article;
+                    storeAtrsToOut.clearData();
+                    storeAtrsToOut.load();
                 }
             }
         }
     });
     //beforequery
-    var storePtsAlt = new Ext.data.GroupingStore({
+    var outputDataStore = new Ext.data.GroupingStore({
         //url: 'data/Owners.xml',
         sortInfo:{
             field: 'article',
@@ -142,7 +137,7 @@ Ext.onReady(function(){
             width: 20,
             sortable: true,
             dataIndex: 'attribute',
-            editor: comboOwner
+            editor: comboAtrsToOut
         },
 
         {
@@ -167,8 +162,8 @@ Ext.onReady(function(){
         ]
     });
 
-    var grid = new xg.EditorGridPanel({
-        store: storePtsAlt,
+    var gridToOut = new xg.EditorGridPanel({
+        store: outputDataStore,
         id:'iii',
         cm:cm,
         plugins: checkColumn,
@@ -189,15 +184,10 @@ Ext.onReady(function(){
         tbar: [{
             text: 'Add Plant',
             handler : function(){
-                // access the Record constructor through the grid's store
-                //                var Plant = grid.getStore().getAt(0).get("attribute");
-                //                alert(Plant);
-                //
+                
                 var data="";
-                //                Ext.each(grid.getStore().getModifiedRecords(), function(record){
-                //                    data.push(record.data);
-                //                });
-                grid.getStore().each(
+               
+                gridToOut.getStore().each(
                     function(record){
                         data+=record.data.id+
                         "$$$"+
@@ -219,29 +209,12 @@ Ext.onReady(function(){
                 Ajax.updateDownloadData(data, function(data) {
                     dwr.engine.openInDownload(data);
                 });
-            //                Ext.Msg.show({
-            //
-            //                    msg: data,
-            //                    buttons: Ext.MessageBox.OK,
-            //                    width: 600,
-            //                    icon: Ext.MessageBox.INFO
-            //                });
-            //                var p = new Plant({
-            //                    common: 'New Plant 1',
-            //                    light: 'Mostly Shade',
-            //                    price: 0,
-            //                    availDate: (new Date()).clearTime(),
-            //                    indoor: false
-            //                });
-            //                grid.stopEditing();
-            //                store.insert(0, p);
-            //                grid.startEditing(0, 0);
+                gridToOut.startEditing(0, 0);
             }
         }]
 
     });
-    storePtsAlt.load();
-//storeAtrsUpdate(12);
+    outputDataStore.load();
     
 });
 
