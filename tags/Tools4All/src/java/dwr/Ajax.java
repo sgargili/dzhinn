@@ -538,4 +538,8 @@ public class Ajax {
         file.delete();
         return new FileTransfer("uploadData.csv", "text/csv", buffer.toByteArray());
     }
+
+    public String getSessionId() {
+        return System.nanoTime() + "";
+    }
 }

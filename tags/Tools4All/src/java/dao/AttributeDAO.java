@@ -28,6 +28,8 @@ public interface AttributeDAO {
 
     public List<Attribute> getAttributesOnlyByProductType(ProductType productType);
 
+    public List<Attribute> getAttributesWithAltNamesByProductType(ProductType productType);
+
     public List<Attribute> getAttributesOnlyByProductTypeId(int id);
 
     public List<Attribute> getAttributesOnlyByTemplate(String template);

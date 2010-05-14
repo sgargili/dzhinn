@@ -13,6 +13,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import pojo.Attribute;
+import pojo.AttributeAlternativeName;
 import pojo.ParentRelateElement;
 import pojo.ProductType;
 import xml.HttpData2Dom;
@@ -42,17 +43,27 @@ public class DomTest {
         ProductType pt = new ProductType();
         Attribute atr;
         pt.setProductTypeId(8);
-        atrs = fd.getAttributeDAO().getAttributesOnlyByProductType(pt);
+        AttributeAlternativeName atrAlt;
+        atrs = fd.getAttributeDAO().getAttributesWithAltNamesByProductType(pt);
         Iterator it = atrs.iterator();
-        String[] mass;
+        Iterator iter;
+        //String[] mass;
         while (it.hasNext()) {
             atr = (Attribute) it.next();
-            mass = atr.getAttributeAlternative().split(",");
-            for (int i = 0; i < mass.length; i++) {
-                if (!mass[i].trim().equals("") && mass[i].trim() != null) {
-                    attributes.add(mass[i].trim());
+            iter = atr.getAttributeAlternativeNames().iterator();
+            while (iter.hasNext()) {
+                atrAlt = (AttributeAlternativeName) iter.next();
+                if (!atrAlt.getAttributeAlernativeNameValue().equals("")) {
+                    attributes.add(atrAlt.getAttributeAlernativeNameValue());
                 }
             }
+            // mass = atr.getAttributeAlternative().split(",");
+//            for (int i = 0; i < mass.length; i++) {
+//                if (!mass[i].trim().equals("") && mass[i].trim() != null) {
+//                    attributes.add(mass[i].trim());
+//                }
+//            }
+            // attributes.add(atr.getAttributeAlternative());
 
         }
 //        Iterator iter = attributes.iterator();
@@ -65,11 +76,15 @@ public class DomTest {
 
         visit(doc, 0);
         System.out.println(nodes.size());
-        NodeList nodess = nodes.get(2).getParentNode().getParentNode().getChildNodes();
-        for (int k = 0; k < nodes.size(); k++) {
-            System.out.println(nodess.item(k).getTextContent());
+        for (int j = 0; j < nodes.size(); j++) {
+            NodeList nodess = nodes.get(j).getParentNode().getParentNode().getChildNodes();
+            for (int k = 0; k < nodes.size(); k++) {
+                if (nodess.item(k) != null) {
+                    System.out.print(nodess.item(k).getTextContent() + " - ");
+                }
+            }
+            System.out.println("");
         }
-
     }
 
     public static void visit(Node node, int level) {

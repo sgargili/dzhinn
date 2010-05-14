@@ -5,6 +5,7 @@
 package dao.impl;
 
 import dao.AttributeDAO;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -150,5 +151,20 @@ public class AttributeDAOImpl implements AttributeDAO {
         String query = "from Attribute as a " +
                 "join fetch a.attributeAlternativeNames";
         return getHibernateTemplate().find(query);
+    }
+
+    public List<Attribute> getAttributesWithAltNamesByProductType(ProductType productType) {
+        String query = "from Attribute a " +//
+                "join fetch a.productTypes as productType " + //
+                "where productType = :productType " + //
+                "order by a.attributeName";
+        List<Attribute> atrList = getHibernateTemplate().findByNamedParam(query, "productType", productType);
+        Iterator it = atrList.iterator();
+        Attribute atr;
+        while (it.hasNext()) {
+            atr = (Attribute) it.next();
+            atr.getAttributeAlternativeNames().isEmpty();
+        }
+        return atrList;
     }
 }
