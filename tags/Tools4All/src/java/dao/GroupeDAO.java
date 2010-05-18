@@ -25,6 +25,8 @@ public interface GroupeDAO {
 
     public List<Groupe> getGroupesOnlyByProductType(ProductType productType);
 
+    public List<Groupe> getGroupesByProductType(ProductType productType);
+
     public List<Groupe> getGroupesOnlyByProductTypeId(int id);
 
     public List<Groupe> getGroupesOnlyByAttribute(Attribute attribute);

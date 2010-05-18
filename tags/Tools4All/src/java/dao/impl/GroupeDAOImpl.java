@@ -5,6 +5,7 @@
 package dao.impl;
 
 import dao.GroupeDAO;
+import java.util.Iterator;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -56,6 +57,22 @@ public class GroupeDAOImpl implements GroupeDAO {
                 "where productType = :productType " + //
                 "order by g.groupeName";
         return getHibernateTemplate().findByNamedParam(query, "productType", productType);
+    }
+
+    public List<Groupe> getGroupesByProductType(ProductType productType) {
+        List<Groupe> gps;
+        Groupe gp;
+        String query = "from Groupe g " +//
+                "join fetch g.productTypes as productType " + //
+                "where productType = :productType " + //
+                "order by g.groupeName";
+        gps = getHibernateTemplate().findByNamedParam(query, "productType", productType);
+        Iterator it = gps.iterator();
+        while (it.hasNext()) {
+            gp = (Groupe) it.next();
+            gp.getAttributes().isEmpty();
+        }
+        return gps;
     }
 
     public List<Groupe> getGroupesOnlyByProductTypeId(int id) {
