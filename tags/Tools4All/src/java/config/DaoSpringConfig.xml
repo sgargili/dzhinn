@@ -19,6 +19,7 @@
                 <value>pojo/ParentRelateElement.hbm.xml</value>
                 <value>pojo/AttributeAlternativeName.hbm.xml</value>
                 <value>pojo/OutputData.hbm.xml</value>
+                <value>pojo/Groupe.hbm.xml</value>
             </list>
         </property>
 
@@ -27,8 +28,8 @@
                 hibernate.dialect=org.hibernate.dialect.MySQLDialect
                 hibernate.connection.characterEncoding=UTF-8
                 hibernate.current_session_context_class=thread
-                hibernate.show_sql=true
-                hibernate.format_sql=true
+                <!--hibernate.show_sql=true
+                hibernate.format_sql=true-->
             </value>
         </property>
     </bean>
@@ -79,6 +80,10 @@
     </bean>
 
     <bean id="OutputDataDAOTemp" class="dao.impl.OutputDataDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="GroupeDAOTemp" class="dao.impl.GroupeDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -193,6 +198,24 @@
 
         <property name="proxyInterfaces">
             <value>dao.OutputDataDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="GroupeDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="GroupeDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.GroupeDAO</value>
         </property>
 
         <property name="interceptorNames">

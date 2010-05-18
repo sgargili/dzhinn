@@ -2,6 +2,7 @@ package factories;
 
 import dao.AttributeAlternativeNameDAO;
 import dao.AttributeDAO;
+import dao.GroupeDAO;
 import dao.OutputDataDAO;
 import dao.ParentRelateElementDAO;
 import dao.ProductTypeDAO;
@@ -47,5 +48,9 @@ public class FactoryDAO4Grabli {
 
     public OutputDataDAO getOutputDataDAO() {
         return (OutputDataDAO) factory.getBean("OutputDataDAO");
+    }
+
+    public GroupeDAO getGroupeDAO() {
+        return (GroupeDAO) factory.getBean("GroupeDAO");
     }
 }

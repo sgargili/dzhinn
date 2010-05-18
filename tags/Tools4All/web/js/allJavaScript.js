@@ -1967,7 +1967,7 @@ var gridToOut = new xg.EditorGridPanel({
         //arrowAlign:'bottom',
         handler: function(){
             var data="";
-    
+
             gridToOut.getStore().each(
                 function(record){
                     data+=record.data.id+
@@ -1986,7 +1986,7 @@ var gridToOut = new xg.EditorGridPanel({
                     "|||";
                 }
                 )
-    
+
             Ajax.updateDownloadData(data, function(data) {
                 dwr.engine.openInDownload(data);
             });
@@ -2869,7 +2869,7 @@ var egrabli = new Ext.TabPanel({
         items:[grabliFile, grabliGrid, grabliPBar, gridToOut]
     }]
 });
-    
+
 var ecsv = {
     id: 'eCsv-panel',
     title: 'Преобразование файла из форматов XLS и CSV(Excel) в нормальный CSV!',
@@ -2946,8 +2946,8 @@ var erow = {
                             Ajax.matchData(file2, byId("matchFile-file").value, Ext.getCmp('matchSep').getValue(), function(data) {
                                 //Ext.getCmp('matchFile').remove();
                                 Ext.getCmp('matchFile').reset();
-                            
-                            
+
+
                                 //Ext.getCmp('matchFile').createFileInput();
                                 //.setRawValue(null)
                                 //Ext.getCmp('matchFile').setRawValue(null);
@@ -3014,7 +3014,7 @@ Ext.onReady(function(){
     updateNick();
     storeLanguages.load();
     Ext.QuickTips.init();
- 
+
     var detailEl;
 
     var contentPanel = {
