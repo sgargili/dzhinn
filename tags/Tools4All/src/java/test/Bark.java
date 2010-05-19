@@ -65,6 +65,24 @@ public class Bark {
 //                ex.printStackTrace();
 //            }
 //        }
+//        Groupe gp;
+//        ProductType pt;
+//        CsvReader reader = new CsvReader("c://pt2gp.csv", ';', Charset.forName("WINDOWS-1251"));
+//        int i = 1;
+//        while (reader.readRecord()) {
+//            i++;
+//            pt = fd.getProductTypeDAO().getProductTypeByName(reader.get(0));
+//            gp = fd.getGroupeDAO().getGroupeByName(reader.get(1));
+//            //System.out.println(reader.get(0));
+//            try {
+//                gp.getProductTypes().add(pt);
+//                fd.getGroupeDAO().addGroupe(gp);
+//                System.out.println(i + " - " + gp.getGroupeName());
+//            } catch (Exception ex) {
+//                System.out.print(i + " ");
+//                ex.printStackTrace();
+//            }
+//        }
 
 //        Attribute atr1 = fd.getAttributeDAO().getAttributeById(266);
 //        Attribute atr2 = fd.getAttributeDAO().getAttributeById(267);

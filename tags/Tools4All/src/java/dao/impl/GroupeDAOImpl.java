@@ -62,15 +62,22 @@ public class GroupeDAOImpl implements GroupeDAO {
     public List<Groupe> getGroupesByProductType(ProductType productType) {
         List<Groupe> gps;
         Groupe gp;
+        Attribute atr;
         String query = "from Groupe g " +//
                 "join fetch g.productTypes as productType " + //
                 "where productType = :productType " + //
                 "order by g.groupeName";
         gps = getHibernateTemplate().findByNamedParam(query, "productType", productType);
         Iterator it = gps.iterator();
+        Iterator iter;
         while (it.hasNext()) {
             gp = (Groupe) it.next();
-            gp.getAttributes().isEmpty();
+            //gp.getAttributes().isEmpty();
+            iter = gp.getAttributes().iterator();
+            while (iter.hasNext()) {
+                atr = (Attribute) iter.next();
+                atr.getAttributeAlternativeNames().isEmpty();
+            }
         }
         return gps;
     }

@@ -24,6 +24,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
+import pojo.Groupe;
 import pojo.OutputData;
 
 /**
@@ -335,16 +336,55 @@ public class GrabliPro {
     private void parseInputData(String inputData) {
         String[] rows = null;
         String[] cells = null;
+        String ptS, attributeS, grp = "", tempArt = "someArticle4Test";
+        ProductType pt;
+        Groupe gp;
+        Attribute atr;
+        AttributeAlternativeName atrAlt;
+        List<Groupe> gps = new ArrayList();
+        Iterator it;
+        Iterator iter;
+        Iterator iterat;
         OutputData od;
         byte bt = 0;
         rows = inputData.split("\\|\\|\\|");
         for (int i = 0; i < rows.length; i++) {
             cells = rows[i].split("[$][$][$]");
+
+            ptS = cells[2];
+            attributeS = cells[3];
+            if (!tempArt.equals(cells[1])) {
+                pt = fd.getProductTypeDAO().getProductTypeByName(ptS);
+                gps = fd.getGroupeDAO().getGroupesByProductType(pt);
+            }
+            it = gps.iterator();
+            while (it.hasNext()) {
+                gp = (Groupe) it.next();
+                iter = gp.getAttributes().iterator();
+                while (iter.hasNext()) {
+                    atr = (Attribute) iter.next();
+                    if (atr.getAttributeName().equals(attributeS)) {
+                        attributeS = atr.getAttributeName();
+                        grp = gp.getGroupeName();
+                    }
+                    iterat = atr.getAttributeAlternativeNames().iterator();
+                    while (iterat.hasNext()) {
+                        atrAlt = (AttributeAlternativeName) iterat.next();
+                        if (atrAlt.getAttributeAlernativeNameValue().equals(attributeS)) {
+                            attributeS = atr.getAttributeName();
+                            grp = gp.getGroupeName();
+                        }
+                    }
+                }
+            }
+
+
             od = new OutputData();
             od.setOutputDataId(Integer.parseInt(cells[0]));
             od.setArticle(cells[1]);
             od.setProductType(cells[2]);
-            od.setAttribute(cells[3]);
+            od.setGroupe(grp);
+            od.setAttribute(attributeS);
             od.setValue(cells[4]);
             od.setUnit(cells[5]);
             if (cells[6].equals("true")) {
@@ -355,6 +395,9 @@ public class GrabliPro {
                 od.setAvailable(bt);
             }
             fd.getOutputDataDAO().addOutputData(od);
+            tempArt = cells[1];
+            attributeS = "";
+            grp = "";
         }
     }
 
