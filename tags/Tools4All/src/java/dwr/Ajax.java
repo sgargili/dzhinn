@@ -501,10 +501,10 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        String outId = System.nanoTime() + "";
-        File file = new File("/root/tempFolder/" + outId + ".csv");
-        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
-        return outId;
+        long outId = System.nanoTime();
+        GrabliPro gp = new GrabliPro();
+        gp.fillInputData(uploadFile, outId);
+        return outId + "";
     }
 
     public String processGrabli() {

@@ -1634,23 +1634,32 @@ var grabliFile = new Ext.form.FormPanel({
                                 width:250,
                                 icon: Ext.MessageBox.ERROR
                             });
-                        } else{
-                            storeCsvDataProxy.setUrl("GrabliData?fileId=" + data);
-                            storeCsvData.clearData();
-                            storeCsvData.load();
-                            comboCsvColumnData1.setValue("1");
-                            comboCsvColumnData2.setValue("2");
-                            comboCsvColumnData3.setValue("3");
-                            comboCsvColumnData4.setValue("4");
-                            grabliGrid.getEl().fadeIn({
-                                duration: 2
+                        } else {
+                            //                            storeCsvDataProxy.setUrl("GrabliData?fileId=" + data);
+                            //                            storeCsvData.clearData();
+                            //                            storeCsvData.load();
+                            //                            comboCsvColumnData1.setValue("1");
+                            //                            comboCsvColumnData2.setValue("2");
+                            //                            comboCsvColumnData3.setValue("3");
+                            //                            comboCsvColumnData4.setValue("4");
+                            //                            grabliGrid.getEl().fadeIn({
+                            //                                duration: 2
+                            //                            });
+                            //                            grabliGrid.show();
+                            Ext.getCmp('SessionId').setValue(data);
+                            Ext.getCmp('SessionIdUp').setValue(data);
+                            grabliPBar.getEl().fadeIn({
+                                duration: 1.5
                             });
-                            grabliGrid.show();
+                            Ajax.processGrabli(function(data) {
+                                //dwr.engine.openInDownload(data);
+                                });
+                            grabliPBar.show();
                         }
                     });
-                    Ajax.getSessionId(function(data) {
-                        Ext.getCmp('SessionId').setValue(data);
-                    });
+                //                    Ajax.getSessionId(function(data) {
+                //                        Ext.getCmp('SessionId').setValue(data);
+                //                    });
                 }
             }
         },{
@@ -1845,14 +1854,21 @@ var comboAtrsToOut = new Ext.form.ComboBox({
     }
 });
 //beforequery
+
+var outputDataStoreProxy = new Ext.data.HttpProxy({
+    url:    'some url',
+    method: 'GET'
+})
+
 var outputDataStore = new Ext.data.GroupingStore({
     //url: 'data/Owners.xml',
+    proxy : outputDataStoreProxy,
     sortInfo:{
         field: 'article',
         direction: "ASC"
     },
     groupField:'article',
-    url: 'Service.exml?request=outputData',
+    //url: 'Service.exml?request=outputData',
     reader: new Ext.data.XmlReader({
         record: 'Article',
         id: 'Id',
@@ -1997,16 +2013,17 @@ var gridToOut = new xg.EditorGridPanel({
     tbar:[{
         text: 'Загрузить данные Сессии',
         handler:function(){
+            outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
             outputDataStore.load();
-//            storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
-//            storeAtrAll.clearData();
-//            storeAtrAll.load();
+        //            storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
+        //            storeAtrAll.clearData();
+        //            storeAtrAll.load();
         }
     },{
         xtype: 'textfield',
         hideLabel: true,
         height:22,
-        id:'sessionIdUp',
+        id:'SessionIdUp',
         blankText:'Введите что-нибудь...',
         allowBlank:false,
         style: {
@@ -2016,9 +2033,9 @@ var gridToOut = new xg.EditorGridPanel({
             specialkey: function(something,e){
                 if (e.getKey() == e.ENTER) {
                     outputDataStore.load();
-//                    storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
-//                    storeAtrAll.clearData();
-//                    storeAtrAll.load();
+                //                    storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
+                //                    storeAtrAll.clearData();
+                //                    storeAtrAll.load();
                 }
             }
         }

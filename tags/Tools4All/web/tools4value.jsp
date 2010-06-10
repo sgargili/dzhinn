@@ -26,68 +26,6 @@
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
-        <%--<script type='text/javascript'>
-            Ext.override(Ext.form.FileUploadField, {
-                onRender : function(ct, position){
-                    Ext.form.FileUploadField.superclass.onRender.call(this, ct, position);
-                    this.wrap = this.el.wrap({cls:'x-form-field-wrap x-form-file-wrap'});
-                    this.el.addClass('x-form-file-text');
-                    this.el.dom.removeAttribute('name');
-                    this.createFileInput();
-                    var btnCfg = Ext.applyIf(this.buttonCfg || {}, {
-                        text: this.buttonText
-                    });
-                    this.button = new Ext.Button(Ext.apply(btnCfg, {
-                        renderTo: this.wrap,
-                        cls: 'x-form-file-btn' + (btnCfg.iconCls ? ' x-btn-icon' : '')
-                    }));
-                    if(this.buttonOnly){
-                        this.el.hide();
-                        this.wrap.setWidth(this.button.getEl().getWidth());
-                    }
-                    this.addFileListener();
-                },
-                createFileInput : function() {
-                    this.fileInput = this.wrap.createChild({
-                        id: this.getFileInputId(),
-                        name: this.name||this.getId(),
-                        cls: 'x-form-file',
-                        tag: 'input',
-                        type: 'file',
-                        size: 1
-                    });
-                },
-                addFileListener : function() {
-                    this.fileInput.on({
-                        change: function(){
-                            var v = this.fileInput.dom.value;
-                            this.setValue(v);
-                            this.fireEvent('fileselected', this, v);
-                        },
-                        mouseover: function() {
-                            this.button.addClass(['x-btn-over','x-btn-focus'])
-                        },
-                        mouseout: function(){
-                            this.button.removeClass(['x-btn-over','x-btn-focus','x-btn-click'])
-                        },
-                        mousedown: function(){
-                            this.button.addClass('x-btn-click')
-                        },
-                        mouseup: function(){
-                            this.button.removeClass(['x-btn-over','x-btn-focus','x-btn-click'])
-                        },
-                        scope : this
-                    });
-                },
-                reset : function(){
-                    this.fileInput.removeAllListeners();
-                    this.fileInput.remove();
-                    this.createFileInput();
-                    this.addFileListener();
-                    Ext.form.FileUploadField.superclass.reset.call(this);
-                }
-            });
-        </script>--%>
     </head>
     <body onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
@@ -295,7 +233,7 @@
                 <div class="details-info"><b>Сравнение столбцов на наличие данных из одного в другом</b>... Формат - файл: вход(<b>Excel(.xls, .xlsx)</b>, <b>текст(.csv)</b>), выход(<b>Excel(.xlsx)</b>); кодировка: текстового файла <b>Windows-1251(ANSI)</b>; данные: вход(<b>два столбца, первый ищем во втором</b>), выход(<b>три столбца, первые два как и у входного файла, третий отражение наличия первого во втором в виде 0 и 1</b>). </div>
             </div>
             <div id="eGrabli-details">
-                <div class="details-info"><b>Работа с системой анализа сайтов</b>... Создание связок <b>ПТ - атрибуты - значения</b> и <b>вариации их значений</b>.</div>
+                <div class="details-info"><b>Работа с системой анализа сайтов</b>... Создание связок <b>ПТ - атрибуты - значения</b> и <b>вариации их значений</b>.<br/><b>Все файлы для заливки должны быть в формате "CSV", разделитель "запятая",  кодировка "UTF-8".</b></div>
             </div>
         </div>
     </body>

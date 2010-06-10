@@ -3,6 +3,7 @@ package factories;
 import dao.AttributeAlternativeNameDAO;
 import dao.AttributeDAO;
 import dao.GroupeDAO;
+import dao.InputDataDAO;
 import dao.OutputDataDAO;
 import dao.ParentRelateElementDAO;
 import dao.ProductTypeDAO;
@@ -52,5 +53,9 @@ public class FactoryDAO4Grabli {
 
     public GroupeDAO getGroupeDAO() {
         return (GroupeDAO) factory.getBean("GroupeDAO");
+    }
+
+    public InputDataDAO getInputDataDAO() {
+        return (InputDataDAO) factory.getBean("InputDataDAO");
     }
 }

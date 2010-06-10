@@ -11,6 +11,7 @@ import csv.CsvReader;
 import csv.CsvWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 import pojo.Groupe;
+import pojo.InputData;
 import pojo.OutputData;
 
 /**
@@ -426,5 +428,29 @@ public class GrabliPro {
         } catch (Exception ex) {
         }
         return file;
+    }
+
+    public void fillInputData(InputStream is, long sessionId){
+        CsvReader reader = null;
+        InputData inpData;
+        try {
+            reader = new CsvReader(is, ',', Charset.forName("UTF-8"));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            while (reader.readRecord()) {
+                inpData = new InputData();
+                inpData.setSessionId(sessionId);
+                inpData.setArticle(reader.get(0));
+                inpData.setDescription(reader.get(1));
+                inpData.setProductType(reader.get(2));
+                inpData.setUrl(reader.get(3));
+                fd.getInputDataDAO().addInputData(inpData);
+            }
+            reader.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

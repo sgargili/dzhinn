@@ -20,6 +20,7 @@
                 <value>pojo/AttributeAlternativeName.hbm.xml</value>
                 <value>pojo/OutputData.hbm.xml</value>
                 <value>pojo/Groupe.hbm.xml</value>
+                <value>pojo/InputData.hbm.xml</value>
             </list>
         </property>
 
@@ -84,6 +85,10 @@
     </bean>
 
     <bean id="GroupeDAOTemp" class="dao.impl.GroupeDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="InputDataDAOTemp" class="dao.impl.InputDataDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -190,7 +195,7 @@
 
     </bean>
 
-     <bean id="OutputDataDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <bean id="OutputDataDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
 
         <property name="target">
             <ref bean="OutputDataDAOTemp" />
@@ -216,6 +221,24 @@
 
         <property name="proxyInterfaces">
             <value>dao.GroupeDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="InputDataDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="InputDataDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.InputDataDAO</value>
         </property>
 
         <property name="interceptorNames">

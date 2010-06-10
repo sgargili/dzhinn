@@ -230,22 +230,23 @@ public class ValuePro {
 //                            } else {
 //                                req = new NameValuePair[7 + ost];
 //                            }
-                        req = new NameValuePair[6 + languages.length];
+                        req = new NameValuePair[7 + languages.length];
                         req[0] = new NameValuePair("referer", "");
                         req[1] = new NameValuePair("FACTORY_ID", "137");
                         req[2] = new NameValuePair("ACTION", "EXPORT");
                         req[3] = new NameValuePair("PN_RPP", "100");
                         req[4] = new NameValuePair("LANGS", "");
-                        varCount = 5 + languages.length;
+                        req[5] = new NameValuePair("RETURN_NO_RESPONSE", "YES");
+                        varCount = 6 + languages.length;
                         //for (int l = j * 10; l < (j + 1) * 10; l++) {
                         try {
                             va = (ValueArticle) it.next();
-                            req[5] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                            req[6] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
                             // System.out.println("Прошло!!! -> " + va.getArticleId());
                             } catch (Exception ex) {
                         }
                         for (int j = 0; j < languages.length; j++) {
-                            req[6 + j] = new NameValuePair("LANG", languages[j]);
+                            req[7 + j] = new NameValuePair("LANG", languages[j]);
                         }
                         //  }
 
@@ -276,10 +277,10 @@ public class ValuePro {
 //                            }
 //                            //}
 //                        }
-//                        getMethod.setRequestBody(req);
-//                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
-//                        client.executeMethod(getMethod);
-//                        getMethod.releaseConnection();
+                        getMethod.setRequestBody(req);
+                        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Bla-bla-bla...");
+                        client.executeMethod(getMethod);
+                        getMethod.releaseConnection();
                         //System.out.println("Длинна запроса -> " + req.length);
                         exportStr = "Size: " + (req.length - varCount) + " Body: ";
                         for (int k = 0; k < req.length; k++) {
@@ -372,15 +373,16 @@ public class ValuePro {
                         ex.printStackTrace();
                     }
                     getMethod = new PostMethod(url);
-                    req = new NameValuePair[5];
+                    req = new NameValuePair[6];
                     req[0] = new NameValuePair("POST_ACTION", "updateMarketing");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_OWNER_ID", "70919085040801266");
+                    req[3] = new NameValuePair("RETURN_NO_RESPONSE", "YES");
                     // for (int l = j * 10; l < (j + 1) * 10; l++) {
                     try {
                         va = (ValueArticle) it.next();
-                        req[3] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                        req[4] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                        req[4] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[5] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                     } catch (Exception ex) {
                     }
                     // }
@@ -483,10 +485,10 @@ public class ValuePro {
                     req[3] = new NameValuePair("TEXT", vl.getLinkType());
                     req[4] = new NameValuePair("CLASSCAT_ID", vl.getClasscatId());
                     req[5] = new NameValuePair("SOURCE", vl.getLink());
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     aLinkStr = "Size: " + (req.length - 5) + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         aLinkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -584,11 +586,12 @@ public class ValuePro {
 //                    } else {
 //                        req = new NameValuePair[4 + 2 * ost];
 //                    }
-                    req = new NameValuePair[6];
+                    req = new NameValuePair[7];
                     req[0] = new NameValuePair("POST_ACTION", "change_status");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_STATUS", status);
                     req[3] = new NameValuePair("NEW_OWNER_ID", "70919085040801266");
+                    req[4] = new NameValuePair("RETURN_NO_RESPONSE", "YES");
 //                    for (Iterator it = changeData.iterator(); it.hasNext();) {
 //                        va = (ValueArticle) it.next();
 //                        req[4 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
@@ -597,15 +600,15 @@ public class ValuePro {
                     // for (int l = j * 10; l < (j + 1) * 10; l++) {
                     try {
                         va = (ValueArticle) it.next();
-                        req[4] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                        req[5] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                        req[5] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[6] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                     } catch (Exception ex) {
                     }
                     // }
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cStatkStr = "Size: " + (req.length - 4) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cStatkStr += req[k].getName() + "=" + req[k].getValue() + "/";
@@ -690,10 +693,11 @@ public class ValuePro {
 //                    } else {
 //                        req = new NameValuePair[3 + 2 * ost];
 //                    }
-                    req = new NameValuePair[5];
+                    req = new NameValuePair[6];
                     req[0] = new NameValuePair("POST_ACTION", "change_owner");
                     req[1] = new NameValuePair("SOURCE", "");
                     req[2] = new NameValuePair("NEW_OWNER_ID", owner);
+                    req[3] = new NameValuePair("RETURN_NO_RESPONSE", "YES");
 //                    for (Iterator it = changeData.iterator(); it.hasNext();) {
 //                        va = (ValueArticle) it.next();
 //                        req[3 + i++] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
@@ -702,15 +706,15 @@ public class ValuePro {
                     //for (int l = j * 10; l < (j + 1) * 10; l++) {
                     try {
                         va = (ValueArticle) it.next();
-                        req[3] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
-                        req[4] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
+                        req[4] = new NameValuePair("ID_" + va.getArticleId(), va.getArticleId());
+                        req[5] = new NameValuePair("TARGET_" + va.getArticleId(), va.getArticleId());
                     } catch (Exception ex) {
                     }
                     //}
-//                    getMethod.setRequestBody(req);
-//                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
-//                    client.executeMethod(getMethod);
-//                    getMethod.releaseConnection();
+                    getMethod.setRequestBody(req);
+                    client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Http Java Client");
+                    client.executeMethod(getMethod);
+                    getMethod.releaseConnection();
                     cOwnStr = "Size: " + (req.length - 3) / 2 + " Body: ";
                     for (int k = 0; k < req.length; k++) {
                         cOwnStr += req[k].getName() + "=" + req[k].getValue() + "/";

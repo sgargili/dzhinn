@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 09.06.2010 15:56:25 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.InputData" table="input_data" catalog="grabli">
+        <id name="inputDataId" type="java.lang.Integer">
+            <column name="input_data_id" />
+            <generator class="identity" />
+        </id>
+        <property name="sessionId" type="java.lang.Long">
+            <column name="session_id" />
+        </property>
+        <property name="article" type="string">
+            <column name="article" length="512" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="2048" />
+        </property>
+        <property name="productType" type="string">
+            <column name="product_type" length="512" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>
