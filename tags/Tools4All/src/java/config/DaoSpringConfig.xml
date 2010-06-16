@@ -21,6 +21,8 @@
                 <value>pojo/OutputData.hbm.xml</value>
                 <value>pojo/Groupe.hbm.xml</value>
                 <value>pojo/InputData.hbm.xml</value>
+                <value>pojo/Unit.hbm.xml</value>
+                <value>pojo/UnitAlternativeName.hbm.xml</value>
             </list>
         </property>
 
@@ -89,6 +91,14 @@
     </bean>
 
     <bean id="InputDataDAOTemp" class="dao.impl.InputDataDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="UnitDAOTemp" class="dao.impl.UnitDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="UnitAlternativeNameDAOTemp" class="dao.impl.UnitAlternativeNameDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
@@ -239,6 +249,42 @@
 
         <property name="proxyInterfaces">
             <value>dao.InputDataDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="UnitDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="UnitDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.UnitDAO</value>
+        </property>
+
+        <property name="interceptorNames">
+            <list>
+                <value>hibernateInterceptor</value>
+            </list>
+        </property>
+
+    </bean>
+
+    <bean id="UnitAlternativeNameDAO" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+        <property name="target">
+            <ref bean="UnitAlternativeNameDAOTemp" />
+        </property>
+
+        <property name="proxyInterfaces">
+            <value>dao.UnitAlternativeNameDAO</value>
         </property>
 
         <property name="interceptorNames">

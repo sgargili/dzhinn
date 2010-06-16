@@ -7,6 +7,8 @@ import dao.InputDataDAO;
 import dao.OutputDataDAO;
 import dao.ParentRelateElementDAO;
 import dao.ProductTypeDAO;
+import dao.UnitAlternativeNameDAO;
+import dao.UnitDAO;
 import dao.ValueDAO;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -57,5 +59,13 @@ public class FactoryDAO4Grabli {
 
     public InputDataDAO getInputDataDAO() {
         return (InputDataDAO) factory.getBean("InputDataDAO");
+    }
+
+    public UnitDAO getUnitDAO() {
+        return (UnitDAO) factory.getBean("UnitDAO");
+    }
+
+    public UnitAlternativeNameDAO getUnitAlternativeNameDAO() {
+        return (UnitAlternativeNameDAO) factory.getBean("UnitAlternativeNameDAO");
     }
 }
