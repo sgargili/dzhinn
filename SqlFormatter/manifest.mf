@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module: apopov.sqlformatter
+OpenIDE-Module-Layer: apopov/sqlformatter/layer.xml
+OpenIDE-Module-Localizing-Bundle: apopov/sqlformatter/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
