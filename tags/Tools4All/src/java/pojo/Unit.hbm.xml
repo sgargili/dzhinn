@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16.06.2010 23:40:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="pojo.Unit" table="unit" catalog="grabli">
-        <id name="unitId" type="java.lang.Integer">
-            <column name="unit_id" />
-            <generator class="identity" />
-        </id>
-        <property name="unitName" type="string">
-            <column name="unit_name" length="512" />
-        </property>
-        <bag cascade="delete-orphan" lazy="true" name="unitAlternativeNames" table="unit_alternative_name">
-            <key>
-                <column name="unit_id" not-null="true"/>
-            </key>
-            <one-to-many class="pojo.UnitAlternativeName"/>
-        </bag>
-    </class>
+  <class catalog="grabli" name="pojo.Unit" table="unit">
+    <id name="unitId" type="java.lang.Integer">
+      <column name="unit_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="unitName" type="string">
+      <column length="512" name="unit_name"/>
+    </property>
+    <bag cascade="delete-orphan" lazy="true" name="unitAlternativeNames" table="unit_alternative_name">
+      <key>
+        <column name="unit_id" not-null="true"/>
+      </key>
+      <one-to-many class="pojo.UnitAlternativeName"/>
+    </bag>
+  </class>
 </hibernate-mapping>

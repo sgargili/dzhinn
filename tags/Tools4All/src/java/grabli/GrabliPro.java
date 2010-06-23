@@ -28,6 +28,8 @@ import pojo.AttributeAlternativeName;
 import pojo.Groupe;
 import pojo.InputData;
 import pojo.OutputData;
+import pojo.Unit;
+import pojo.UnitAlternativeName;
 
 /**
  *
@@ -154,6 +156,11 @@ public class GrabliPro {
         fd.getAttributeDAO().deleteAttribute(at);
     }
 
+    public void deleteUnit(Unit unit) {
+        fd.getUnitAlternativeNameDAO().deleteUnitAlternativeNameByUnit(unit);
+        fd.getUnitDAO().deleteUnit(unit);
+    }
+
     public void updateAttributeByFile(File file) {
         CsvReader reader = null;
         Attribute atr;
@@ -226,6 +233,58 @@ public class GrabliPro {
                     c.setCellStyle(style);
                 }
                 tempAtributeName = atr.getAttributeName();
+            }
+            wb.write(out);
+            out.close();
+            wb = null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return file;
+    }
+
+    public File downloadUnitsData(File file) {
+        List<Unit> units = fd.getUnitDAO().getAllUnitsWithAltNames();
+        Unit unit;
+        UnitAlternativeName unitAlt;
+        CellStyle style;
+        String tempUnitName = "";
+
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            Workbook wb = new XSSFWorkbook();
+            Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
+            Row r = null;
+            Cell c = null;
+            wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
+            int i = 0;
+            Iterator it = units.iterator();
+            Iterator itAlt;
+            while (it.hasNext()) {
+                unit = (Unit) it.next();
+                if (tempUnitName.equals(unit.getUnitName())) {
+                    continue;
+                }
+                itAlt = unit.getUnitAlternativeNames().iterator();
+                while (itAlt.hasNext()) {
+                    unitAlt = (UnitAlternativeName) itAlt.next();
+                    r = s.createRow(i++);
+                    c = r.createCell(0);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(unit.getUnitName());
+                    c.setCellStyle(style);
+                    c = r.createCell(1);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(unitAlt.getUnitAlternativeNameValue());
+                    c.setCellStyle(style);
+                }
+                tempUnitName = unit.getUnitName();
             }
             wb.write(out);
             out.close();
@@ -331,8 +390,19 @@ public class GrabliPro {
         }
     }
 
+    public void addUnitAltName(UnitAlternativeName unitAlt) {
+        if (fd.getUnitAlternativeNameDAO().isUnitAlternativeNamePresent(unitAlt.getUnitAlternativeNameValue())) {
+        } else {
+            fd.getUnitAlternativeNameDAO().addUnitAlternativeName(unitAlt);
+        }
+    }
+
     public void deleteAttributeAltName(AttributeAlternativeName atrAlt) {
         fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeName(atrAlt);
+    }
+
+     public void deleteUnitAltName(UnitAlternativeName unitAlt) {
+        fd.getUnitAlternativeNameDAO().deleteUnitAlternativeName(unitAlt);
     }
 
     private void parseInputData(String inputData) {
@@ -430,7 +500,7 @@ public class GrabliPro {
         return file;
     }
 
-    public void fillInputData(InputStream is, long sessionId){
+    public void fillInputData(InputStream is, long sessionId) {
         CsvReader reader = null;
         InputData inpData;
         try {

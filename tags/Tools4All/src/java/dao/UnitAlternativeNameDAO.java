@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.util.List;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
 
@@ -22,4 +23,8 @@ public interface UnitAlternativeNameDAO {
     public boolean isUnitAlternativeNamePresent(UnitAlternativeName unitAlternativeName);
 
     public boolean isUnitAlternativeNamePresent(String unitAlternativeNameValue);
+
+    public List<UnitAlternativeName> getAllUnitAlternativeNamesOnly();
+
+    public List<UnitAlternativeName> getAllUnitAlternativeNamesByUnitId(int unitId);
 }

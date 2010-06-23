@@ -1,18 +1,17 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 16.06.2010 23:40:40 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class name="pojo.UnitAlternativeName" table="unit_alternative_name" catalog="grabli">
-        <id name="unitAlernativeNameId" type="java.lang.Integer">
-            <column name="unit_alernative_name_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="unit" class="pojo.Unit" fetch="select">
-            <column name="unit_id" not-null="true" />
-        </many-to-one>
-        <property name="unitAlernativeNameValue" type="string">
-            <column name="unit_alernative_name_value" length="512" />
-        </property>
-    </class>
+  <class catalog="grabli" name="pojo.UnitAlternativeName" table="unit_alternative_name">
+    <id name="unitAlternativeNameId" type="java.lang.Integer">
+      <column name="unit_alternative_name_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Unit" fetch="select" name="unit">
+      <column name="unit_id" not-null="true"/>
+    </many-to-one>
+    <property name="unitAlternativeNameValue" type="string">
+      <column length="512" name="unit_alternative_name_value"/>
+    </property>
+  </class>
 </hibernate-mapping>

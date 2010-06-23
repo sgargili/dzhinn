@@ -2,16 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 19.04.2010 15:05:16 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-    <class catalog="grabli" name="pojo.AttributeAlternativeName" table="attribute_alternative_name">
-        <id name="attributeAlernativeNameId" type="java.lang.Integer">
-            <column name="attribute_alernative_name_id"/>
-            <generator class="identity"/>
-        </id>
-        <many-to-one class="pojo.Attribute" fetch="select" name="attribute">
-            <column name="attribute_id" not-null="true"/>
-        </many-to-one>
-        <property name="attributeAlernativeNameValue" type="string">
-            <column length="512" name="attribute_alernative_name_value"/>
-        </property>
-    </class>
+  <class catalog="grabli" name="pojo.AttributeAlternativeName" table="attribute_alternative_name">
+    <id name="attributeAlernativeNameId" type="java.lang.Integer">
+      <column name="attribute_alernative_name_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="pojo.Attribute" fetch="select" name="attribute">
+      <column name="attribute_id" not-null="true"/>
+    </many-to-one>
+    <property name="attributeAlernativeNameValue" type="string">
+      <column length="512" name="attribute_alernative_name_value"/>
+    </property>
+  </class>
 </hibernate-mapping>

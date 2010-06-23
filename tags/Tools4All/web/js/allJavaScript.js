@@ -1182,6 +1182,436 @@ var atrForm = new Ext.form.FormPanel({
     }]
 });
 
+var storeUnitsProxyAlt = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeUnitsAlt = new Ext.data.Store({
+    proxy: storeUnitsProxyAlt,
+    reader: new Ext.data.XmlReader({
+        record: 'UnitAltName',
+        id: 'Id'
+    }, [
+    {
+        name: 'name',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeUnitsProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeUnits = new Ext.data.Store({
+    proxy: storeUnitsProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Unit',
+        id: 'Id'
+    }, [
+    {
+        name: 'unit',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var unitsMulti = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 400,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'unit',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginBottom: '9px'
+    },
+    store: storeUnits,
+    listeners: {
+        click: function() {
+            //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+            //                if(data=="MultiSelectInRequest"){
+            //                    atrField.setValue("");
+            //                    Ext.Msg.show({
+            //                        title: 'Предупреждение!!!',
+            //                        msg: 'Выбирайте только одно значение!',
+            //                        buttons: Ext.MessageBox.OK,
+            //                        width: 300,
+            //                        icon: Ext.MessageBox.ERROR
+            //                    });
+            //                } else {
+            //                    atrField.setValue(data);
+            //                }
+            //            });
+            //            alert(atrMulti.getValue());
+            storeUnitsProxyAlt.setUrl("Service.exml?request=unitAlt/unitId=" + unitsMulti.getValue());
+            storeUnitsAlt.clearData();
+            storeUnitsAlt.load();
+        //atrField.setValue("");
+        }
+    },
+    tbar:[{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'unitName',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    if(Ext.getCmp('unitName').getValue()==""){
+                        storeUnitsProxy.setUrl("Service.exml?request=units");
+                        storeUnits.clearData();
+                        storeUnits.load();
+                        Ext.getCmp('unitName').setValue("");
+                    } else {
+                        storeUnitsProxy.setUrl("Service.exml?request=units/unitName=" + Ext.getCmp('unitName').getValue());
+                        storeUnits.clearData();
+                        storeUnits.load();
+                        Ext.getCmp('unitName').setValue("");
+                    }
+                }
+            }
+        }
+    },{
+        text: 'Показать',
+        handler: function(){
+            if(Ext.getCmp('unitName').getValue()==""){
+                storeUnitsProxy.setUrl("Service.exml?request=units");
+                storeUnits.clearData();
+                storeUnits.load();
+                Ext.getCmp('unitName').setValue("");
+            } else {
+                storeUnitsProxy.setUrl("Service.exml?request=units/unitName=" + Ext.getCmp('unitName').getValue());
+                storeUnits.clearData();
+                storeUnits.load();
+                Ext.getCmp('unitName').setValue("");
+            }
+        }
+    },{
+        text: 'Удалить',
+        handler: function(){
+            Ext.MessageBox.buttonText.yes = "ага";
+            Ext.MessageBox.buttonText.no = "нах";
+            Ext.Msg.show({
+                title:'Подтверждение!',
+                msg: 'Удалить Единицу измерения?',
+                buttons: Ext.Msg.YESNO,
+                fn: function(btn){
+                    if (btn == 'yes'){
+                        Ajax.deleteUnit(unitsMulti.getValue(), function(data) {
+                            if(data=="MultiSelectInRequest"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!!!',
+                                    msg: 'Выбирайте только одно значение!',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'Единица измерения удалена.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                                if(Ext.getCmp('unitName').getValue()==""){
+                                    storeUnitsProxy.setUrl("Service.exml?request=units");
+                                    storeUnits.clearData();
+                                    storeUnits.load();
+                                    Ext.getCmp('unitName').setValue("");
+                                } else {
+                                    storeUnitsProxy.setUrl("Service.exml?request=units/unitName=" + Ext.getCmp('unitName').getValue());
+                                    storeUnits.clearData();
+                                    storeUnits.load();
+                                    Ext.getCmp('unitName').setValue("");
+                                }
+                            }
+
+                        });
+                    }
+                },
+                icon: Ext.MessageBox.QUESTION
+            });
+        }
+    },{
+        text: 'Загрузить файл с Единицами измерения',
+        handler: function(){
+            Ajax.downloadUnitsData(function(data) {
+                dwr.engine.openInDownload(data);
+            });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+var unitsMultiAlt = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 400,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'name',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginLeft: '3px',
+        marginBottom: '9px'
+    },
+    store: storeUnitsAlt,
+    tbar:[{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'unitsAltName',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    Ajax.addUnitAltName(unitsMulti.getValue(), Ext.getCmp('unitsAltName').getValue(), function(data) {
+                        if(data=="MultiSelectInRequest"){
+                            Ext.Msg.show({
+                                title: 'Предупреждение!!!',
+                                msg: 'Выбирайте только одно значение!',
+                                buttons: Ext.MessageBox.OK,
+                                width: 300,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else {
+                            Ext.getCmp('unitsAltName').setValue("");
+                            storeUnitsProxyAlt.setUrl("Service.exml?request=unitAlt/unitId=" + unitsMulti.getValue());
+                            storeUnitsAlt.clearData();
+                            storeUnitsAlt.load();
+                        }
+                    });
+
+                }
+            }
+        }
+    },{
+        text: 'Добавить значение',
+        handler: function(){
+            Ajax.addUnitAltName(unitsMulti.getValue(), Ext.getCmp('unitsAltName').getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                } else {
+                    Ext.getCmp('unitsAltName').setValue("");
+                    storeUnitsProxyAlt.setUrl("Service.exml?request=unitAlt/unitId=" + unitsMulti.getValue());
+                    storeUnitsAlt.clearData();
+                    storeUnitsAlt.load();
+                }
+            });
+        }
+    },{
+        text: 'Удалить значения',
+        handler: function(){
+            Ajax.deleteUnitAltName(unitsMulti.getValue(), unitsMultiAlt.getValue(), function(data) {
+                storeUnitsProxyAlt.setUrl("Service.exml?request=unitAlt/unitId=" + unitsMulti.getValue());
+                storeUnitsAlt.clearData();
+                storeUnitsAlt.load();
+            });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+var unitsForm = new Ext.form.FormPanel({
+    title: 'Единицы измерения',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [
+        {
+            html:'<h1>Новая единица измерения:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'textfield',
+            hideLabel: true,
+            height:22,
+            id:'newUnit',
+            blankText:'Введите что-нибудь...',
+            allowBlank:false,
+            style: {
+                marginTop: '1px'
+            }
+        },{
+            xtype: 'button',
+            text: '<<<Добавить>>>',
+            style: {
+                //                marginTop: '1px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'align:center',
+            listeners: {
+                click: function() {
+                    //alert(isForm.getForm().findField('newPT').getValue());
+                    if(unitsForm.getForm().isValid()){
+                        //addProductType(ptForm.getForm().findField('newPT').getValue());
+                        Ajax.addUnit(unitsForm.getForm().findField('newUnit').getValue(), function(data) {
+                            if(data=="Already Exist"){
+                                Ext.Msg.show({
+                                    title: 'Дубль!!!',
+                                    msg: 'Такой Атрибут уже есть...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else if(data=="Empty"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!',
+                                    msg: 'Одини пробелы и/или цифры в названии Единицы измерения...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'Единица измерения добавлена.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                            }
+                        });
+                    } else{
+                        Ext.Msg.show({
+                            title: 'Предупреждение!',
+                            msg: 'Укажите название Единицы измерения!',
+                            buttons: Ext.MessageBox.OK,
+                            width: 300,
+                            icon: Ext.MessageBox.ERROR
+                        });
+                    }
+                }
+            }
+        },{
+            html:'<h1>Залить Единицы измерения файлом:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'fileuploadfield',
+            width:350,
+            id: 'UnitsFile',
+            emptyText: 'Выберите файл...',
+            style: {
+                marginTop: '0px',
+                marginBottom: '0px'
+            },
+            buttonText: 'Выбрать'
+        //        buttonCfg: {
+        //            iconCls: 'upload-icon'
+        //        }
+        },{
+            xtype: 'button',
+            text: '<<<Запуск>>>',
+            id:'UnitsUploadBtn',
+            style: {
+                marginLeft: '5px',
+                marginRight: '5px'
+            },
+            listeners: {
+                click: function() {
+                    var file = dwr.util.getValue('UnitsFile-file');
+                    Ajax.updateUnitsByFile(file, Ext.getCmp('UnitsFile').getValue(), function(data) {
+                        Ext.getCmp('UnitsFile').reset();
+                        if(data=="!csv"){
+                            Ext.Msg.show({
+                                title:'Неверный формат файла...',
+                                msg: 'Верный смотри в инфо...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else{
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Файл залит.',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+                        //storePts.load();
+                        }
+                    });
+                // alert("Ушло");
+
+                }
+            }
+        }]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    },{
+        bodyStyle: 'padding:7px;',
+        //layout:'column',
+        //      columns: [100, 1000],
+        //        horisontal: true,
+        items: [
+        {
+            bodyStyle: 'border:0px;',
+            layout:'column',
+            items: [
+            unitsMulti,
+            unitsMultiAlt
+            ]
+        }
+        ]
+    }]
+});
 
 
 var storeAtr2ProdTypeProxy = new Ext.data.HttpProxy({
@@ -2869,18 +3299,15 @@ var egrabli = new Ext.TabPanel({
         title: 'Атрибуты',
         autoScroll: true,
         items:[atrForm]
-    },
-    //    {
-    //        title: 'Значения атрибутов',
-    //        autoScroll: true
-    //    //items:[ptForm]
-    //    },
-    {
+    },{
         title: 'Связка ПТ -> Атрибут',
         autoScroll: true,
         items:[Atr2PTForm]
-    },
-    {
+    },{
+        title: 'Единицы измерения',
+        autoScroll: true,
+        items:[unitsForm]
+    },{
         title: 'Грабли',
         autoScroll: true,
         items:[grabliFile, grabliGrid, grabliPBar, gridToOut]

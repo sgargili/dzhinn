@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import service.AttributesXML;
 import service.OutputDataXML;
+import service.UnitsAltXML;
+import service.UnitsXML;
 
 /**
  *
@@ -109,10 +111,52 @@ public class Service extends HttpServlet {
                 AttributesXML attXML = new AttributesXML();
                 if (id != null) {
                     out.println(attXML.getAttributesByPtId(Integer.parseInt(id)));
-                }else if (pt != null) {
+                } else if (pt != null) {
                     out.println(attXML.getAttributesByPtName(pt));
                 } else {
                     out.println(attXML.getAllAttributes());
+                }
+            } else if (request.getParameter("request").contains("units")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("units/", "");
+                reqParams = reqParam.split("/");
+                //String id = null;
+                String unitName = null;
+                for (int i = 0; i < reqParams.length; i++) {
+//                    if (reqParams[i].contains("unitId")) {
+//                        id = reqParams[i].replaceFirst("unitId=", "");
+//                    }
+                    if (reqParams[i].contains("unitName")) {
+                        unitName = new String(reqParams[i].replaceFirst("unitName=", "").getBytes(requestEnc), clientEnc);
+                    }
+
+                }
+                UnitsXML unitXML = new UnitsXML();
+                if (unitName != null && !unitName.equals("")) {
+                    out.println(unitXML.getUnitsPtName(unitName));
+                } else {
+                    out.println(unitXML.getAllUnits());
+                }
+            } else if (request.getParameter("request").contains("unitAlt")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("unitsAlt/", "");
+                reqParams = reqParam.split("/");
+                //String id = null;
+                String unitId = null;
+                for (int i = 0; i < reqParams.length; i++) {
+//                    if (reqParams[i].contains("unitId")) {
+//                        id = reqParams[i].replaceFirst("unitId=", "");
+//                    }
+                    if (reqParams[i].contains("unitId")) {
+                        unitId = new String(reqParams[i].replaceFirst("unitId=", "").getBytes(requestEnc), clientEnc);
+                    }
+
+                }
+                UnitsAltXML unitAltXML = new UnitsAltXML();
+                if (unitId != null && !unitId.equals("")) {
+                    out.println(unitAltXML.getUnitAlternativeNamesByUnitId(Integer.parseInt(unitId)));
+                } else {
+                    out.println(unitAltXML.getAllUnitAlternativeNames());
                 }
             }
             //out.println(xml);

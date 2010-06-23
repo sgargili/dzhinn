@@ -39,6 +39,8 @@ import org.directwebremoting.io.FileTransfer;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 import pojo.ProductType;
+import pojo.Unit;
+import pojo.UnitAlternativeName;
 import value4it.MatchingData;
 import value4it.ValuePro;
 
@@ -389,6 +391,15 @@ public class Ajax {
         return new FileTransfer("Atr.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
+    public FileTransfer downloadUnitsData() throws Exception {
+        File file = new File("C://" + System.nanoTime() + ".xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadUnitsData(file)));
+        file.delete();
+        return new FileTransfer("Units.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
     public String deleteAttribute(String attributeId) {
         Attribute at = new Attribute();
         try {
@@ -400,6 +411,19 @@ public class Ajax {
         }
         GrabliPro gp = new GrabliPro();
         gp.deleteAttribute(at);
+        return "Done";
+    }
+
+    public String deleteUnit(String unitId) {
+        Unit unit = new Unit();
+        try {
+            unit.setUnitId(Integer.parseInt(unitId));
+        } catch (NumberFormatException ex) {
+            unit = null;
+            return "MultiSelectInRequest";
+        }
+        GrabliPro gp = new GrabliPro();
+        gp.deleteUnit(unit);
         return "Done";
     }
 
@@ -469,13 +493,29 @@ public class Ajax {
 
     }
 
+    public String addUnitAltName(String unitId, String newAltName) {
+        UnitAlternativeName unitAlt = new UnitAlternativeName();
+        Unit unit = new Unit();
+        try {
+            unit.setUnitId(Integer.parseInt(unitId));
+        } catch (NumberFormatException ex) {
+            unitAlt = null;
+            return "MultiSelectInRequest";
+        }
+        unitAlt.setUnitAlternativeNameValue(newAltName);
+        unitAlt.setUnit(unit);
+        GrabliPro gp = new GrabliPro();
+        gp.addUnitAltName(unitAlt);
+        return "Done";
+
+    }
+
     public String deleteAttributeAltName(String attributeId, String altNameId) {
         AttributeAlternativeName atrAlt = new AttributeAlternativeName();
         Attribute atr = new Attribute();
         try {
             atr.setAttributeId(Integer.parseInt(attributeId));
         } catch (NumberFormatException ex) {
-            ex.printStackTrace();
             atrAlt = null;
             return "MultiSelectInRequest";
         }
@@ -485,11 +525,34 @@ public class Ajax {
                 atrAlt.setAttributeAlernativeNameId(Integer.parseInt(mass[i]));
                 atrAlt.setAttribute(atr);
             } catch (NumberFormatException ex) {
-                ex.printStackTrace();
                 atrAlt = null;
             }
             GrabliPro gp = new GrabliPro();
             gp.deleteAttributeAltName(atrAlt);
+        }
+        return "Done";
+
+    }
+
+    public String deleteUnitAltName(String unitId, String altNameId) {
+        UnitAlternativeName unitAlt = new UnitAlternativeName();
+        Unit unit = new Unit();
+        try {
+            unit.setUnitId(Integer.parseInt(unitId));
+        } catch (NumberFormatException ex) {
+            unitAlt = null;
+            return "MultiSelectInRequest";
+        }
+        String[] mass = altNameId.split(",");
+        for (int i = 0; i < mass.length; i++) {
+            try {
+                unitAlt.setUnitAlternativeNameId(Integer.parseInt(mass[i]));
+                unitAlt.setUnit(unit);
+            } catch (NumberFormatException ex) {
+                unitAlt = null;
+            }
+            GrabliPro gp = new GrabliPro();
+            gp.deleteUnitAltName(unitAlt);
         }
         return "Done";
 

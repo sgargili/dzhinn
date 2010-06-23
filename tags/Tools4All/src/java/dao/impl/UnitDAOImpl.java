@@ -47,11 +47,20 @@ public class UnitDAOImpl implements UnitDAO {
     }
 
     public List<Unit> getAllUnitsWithAltNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String query = "from Unit as u " +
+                "join fetch u.unitAlternativeNames order by u.unitName";
+        return getHibernateTemplate().find(query);
     }
 
     public List<Unit> getUnitsOnlyByTemplate(String template) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       template = "%" + template + "%";
+        String query = "from Unit u where unitName like :value";
+        //System.out.println(template);
+        try {
+            return getHibernateTemplate().findByNamedParam(query, "value", template);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public Unit getUnitById(int id) {

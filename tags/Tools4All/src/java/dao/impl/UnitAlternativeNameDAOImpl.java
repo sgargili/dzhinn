@@ -5,6 +5,7 @@
 package dao.impl;
 
 import dao.UnitAlternativeNameDAO;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -31,7 +32,7 @@ public class UnitAlternativeNameDAOImpl implements UnitAlternativeNameDAO {
     }
 
     public void addUnitAlternativeName(UnitAlternativeName unitAlternativeName) {
-        if (!isUnitAlternativeNamePresent(unitAlternativeName.getUnitAlernativeNameValue())) {
+        if (!isUnitAlternativeNamePresent(unitAlternativeName.getUnitAlternativeNameValue())) {
             getHibernateTemplate().save(unitAlternativeName);
         }
     }
@@ -54,7 +55,7 @@ public class UnitAlternativeNameDAOImpl implements UnitAlternativeNameDAO {
 
     public boolean isUnitAlternativeNamePresent(UnitAlternativeName unitAlternativeName) {
         try {
-            unitAlternativeName = (UnitAlternativeName) getHibernateTemplate().load(UnitAlternativeName.class, unitAlternativeName.getUnitAlernativeNameId());
+            unitAlternativeName = (UnitAlternativeName) getHibernateTemplate().load(UnitAlternativeName.class, unitAlternativeName.getUnitAlternativeNameId());
             return true;
         } catch (Exception ex) {
             return false;
@@ -67,6 +68,21 @@ public class UnitAlternativeNameDAOImpl implements UnitAlternativeNameDAO {
             return !getHibernateTemplate().findByNamedParam(query, "value", unitAlternativeNameValue).isEmpty();
         } catch (Exception ex) {
             return false;
+        }
+    }
+
+    public List<UnitAlternativeName> getAllUnitAlternativeNamesOnly() {
+        return (List<UnitAlternativeName>) getHibernateTemplate().loadAll(UnitAlternativeName.class);
+    }
+
+    public List<UnitAlternativeName> getAllUnitAlternativeNamesByUnitId(int unitId) {
+        Unit unit = new Unit();
+        unit.setUnitId(unitId);
+        String query = "from UnitAlternativeName u where unit = :value";
+        try {
+            return getHibernateTemplate().findByNamedParam(query, "value", unit);
+        } catch (Exception ex) {
+            return null;
         }
     }
 }

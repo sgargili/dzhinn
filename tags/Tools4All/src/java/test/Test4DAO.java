@@ -20,7 +20,7 @@ public class Test4DAO {
     unit.setUnitName("килограммы");
     UnitAlternativeName unitAlt = new UnitAlternativeName();
     unitAlt.setUnit(unit);
-    unitAlt.setUnitAlernativeNameValue("кг");
+    unitAlt.setUnitAlternativeNameValue("кг");
     fd.getUnitDAO().addAUnit(unit);
     fd.getUnitAlternativeNameDAO().addUnitAlternativeName(unitAlt);
     }
