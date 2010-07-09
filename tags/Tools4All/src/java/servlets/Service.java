@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import service.AttributesXML;
+import service.GroupesXML;
 import service.OutputDataXML;
 import service.UnitsAltXML;
 import service.UnitsXML;
@@ -157,6 +158,69 @@ public class Service extends HttpServlet {
                     out.println(unitAltXML.getUnitAlternativeNamesByUnitId(Integer.parseInt(unitId)));
                 } else {
                     out.println(unitAltXML.getAllUnitAlternativeNames());
+                }
+            } else if (request.getParameter("request").contains("groupes")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("groupes/", "");
+                //System.out.println(reqParam);
+                reqParams = reqParam.split("/");
+                String id = "";
+                String pt = "";
+                String template = "";
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("ptId")) {
+                        id = reqParams[i].replaceFirst("ptId=", "");
+                        if (id.equals("7777")) {
+                            id = "0";
+                        }
+//                        System.out.println(id);
+                    }
+                    if (reqParams[i].contains("productType")) {
+                        pt = new String(reqParams[i].replaceFirst("productType=", "").getBytes(requestEnc), clientEnc);
+                    }
+                    if (reqParams[i].contains("template")) {
+//                        template = new String(reqParams[i].replaceFirst("template=", "").getBytes(requestEnc), clientEnc);
+                        template =reqParams[i].replaceFirst("template=", "");
+                    }
+
+                }
+                GroupesXML gpXML = new GroupesXML();
+//                System.out.println(id+" ---------------->>>>>> ID");
+                if (!template.equals("")) {
+//                    System.out.println(template + "--->>> Template");
+                    out.println(gpXML.getGroupesByTemplate(template));
+                } else if (id != null && !id.equals("0")) {
+//                    System.out.println(id + "--->>> ID");
+                    out.println(gpXML.getGroupesByPtId(Integer.parseInt(id)));
+                } else if (pt != null) {
+//                    System.out.println("PTNAME--->>> ID");
+                    out.println(gpXML.getGroupesByPtName(pt));
+                } else {
+//                    System.out.println("All--->>> ID");
+                    out.println(gpXML.getAllGroupes());
+                }
+            } else if (request.getParameter("request").contains("attrs")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("attrs/", "");
+                reqParams = reqParam.split("/");
+                String id = null;
+                String grp = null;
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("grpId")) {
+                        id = reqParams[i].replaceFirst("grpId=", "");
+                    }
+                    if (reqParams[i].contains("groupe")) {
+                        grp = new String(reqParams[i].replaceFirst("groupe=", "").getBytes(requestEnc), clientEnc);
+                    }
+
+                }
+                AttributesXML attXML = new AttributesXML();
+                if (id != null) {
+                    out.println(attXML.getAttributesByGroupeId(Integer.parseInt(id)));
+                } else if (grp != null) {
+                    out.println(attXML.getAttributesByGroupeName(grp));
+                } else {
+                    out.println(attXML.getAllAttributes());
                 }
             }
             //out.println(xml);

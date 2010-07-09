@@ -10,7 +10,7 @@
     <property name="unitName" type="string">
       <column length="512" name="unit_name"/>
     </property>
-    <bag cascade="delete-orphan" lazy="true" name="unitAlternativeNames" table="unit_alternative_name">
+    <bag lazy="true" name="unitAlternativeNames" table="unit_alternative_name">
       <key>
         <column name="unit_id" not-null="true"/>
       </key>

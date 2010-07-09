@@ -9,6 +9,7 @@ import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
 import pojo.Attribute;
+import pojo.Groupe;
 import pojo.ProductType;
 
 /**
@@ -32,6 +33,7 @@ public class AttributesXML {
         xstream.omitField(Attribute.class, "values");
         xstream.omitField(Attribute.class, "attributeAlternativeNames");
         xstream.omitField(Attribute.class, "productTypes");
+         xstream.omitField(Attribute.class, "groupes");
 
     }
 
@@ -42,8 +44,8 @@ public class AttributesXML {
         return xml;
     }
 
-    public String getAttributesByPtId(int id) {
-        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(id);
+    public String getAttributesByPtId(int ptId) {
+        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(ptId);
         initXstream();
         xml = xstream.toXML(attributeList);
         return xml;
@@ -52,6 +54,21 @@ public class AttributesXML {
     public String getAttributesByPtName(String ptName) {
         ProductType pt = fd.getProductTypeDAO().getProductTypeByName(ptName);
         attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(pt.getProductTypeId());
+        initXstream();
+        xml = xstream.toXML(attributeList);
+        return xml;
+    }
+
+    public String getAttributesByGroupeId(int groupeId) {
+        attributeList = fd.getAttributeDAO().getAttributesOnlyByGroupeId(groupeId);
+        initXstream();
+        xml = xstream.toXML(attributeList);
+        return xml;
+    }
+
+    public String getAttributesByGroupeName(String groupeName) {
+        Groupe groupe = fd.getGroupeDAO().getGroupeByName(groupeName);
+        attributeList = fd.getAttributeDAO().getAttributesOnlyByGroupeId(groupe.getGroupeId());
         initXstream();
         xml = xstream.toXML(attributeList);
         return xml;

@@ -30,6 +30,14 @@ public class ProductType extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/xml;charset=UTF-8");
+        String requestEnc = request.getCharacterEncoding();
+        if (requestEnc == null) {
+            requestEnc = "ISO-8859-1";
+        }
+        String clientEnc = request.getParameter("charset");
+        if (clientEnc == null) {
+            clientEnc = "utf-8";
+        }
         PrintWriter out = response.getWriter();
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
         XStream xstream = new XStream();
@@ -43,23 +51,33 @@ public class ProductType extends HttpServlet {
         xstream.aliasField("Name", pojo.ProductType.class, "productTypeName");
         xstream.aliasField("AltName", pojo.ProductType.class, "productTypeAlternative");
         List ptList;
-        String xml;
+        String xml = "";
         int all;
+        String template = "";
         try {
-            if (request.getParameter("all") == null) {
-                all = 0;
-            } else {
-                all = Integer.parseInt(request.getParameter("all"));
+            if (request.getParameter("template") != null) {
+                template = new String(request.getParameter("template").getBytes(requestEnc), clientEnc);
+                //System.out.println(template);
             }
-            ptList = fd.getProductTypeDAO().getAllProductTypesOnly();
-            xml = xstream.toXML(ptList);
-            if (all == 1) {
-                xml = xml.replace("<ProductTypes>", "<ProductTypes>\n"
-                        + "  <ProductType>\n"
-                        + "    <Id>7777</Id>\n"
-                        + "    <Name>All Product Types</Name>\n"
-                        + "    <AltName></AltName>\n"
-                        + "  </ProductType>");
+            if (!template.equals("")) {
+                ptList = fd.getProductTypeDAO().getProductTypeOnlyByTemplate(template);
+                xml = xstream.toXML(ptList);
+            } else {
+                if (request.getParameter("all") == null) {
+                    all = 0;
+                } else {
+                    all = Integer.parseInt(request.getParameter("all"));
+                }
+                ptList = fd.getProductTypeDAO().getAllProductTypesOnly();
+                xml = xstream.toXML(ptList);
+                if (all == 1) {
+                    xml = xml.replace("<ProductTypes>", "<ProductTypes>\n"
+                            + "  <ProductType>\n"
+                            + "    <Id>7777</Id>\n"
+                            + "    <Name>All Product Types</Name>\n"
+                            + "    <AltName></AltName>\n"
+                            + "  </ProductType>");
+                }
             }
             out.println(xml);
         } catch (Exception ex) {

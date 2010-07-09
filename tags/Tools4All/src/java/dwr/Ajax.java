@@ -38,6 +38,7 @@ import org.directwebremoting.ScriptSession;
 import org.directwebremoting.io.FileTransfer;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
+import pojo.Groupe;
 import pojo.ProductType;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
@@ -400,6 +401,15 @@ public class Ajax {
         return new FileTransfer("Units.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
+    public FileTransfer downloadGroupesData() throws Exception {
+        File file = new File("C://1/" + System.nanoTime() + ".xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadGroupesData(file)));
+        file.delete();
+        return new FileTransfer("Groupes.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
     public String deleteAttribute(String attributeId) {
         Attribute at = new Attribute();
         try {
@@ -427,6 +437,19 @@ public class Ajax {
         return "Done";
     }
 
+    public String deleteGroupe(String groupeId) {
+        Groupe grp = new Groupe();
+        try {
+            grp.setGroupeId(Integer.parseInt(groupeId));
+        } catch (NumberFormatException ex) {
+            grp = null;
+            return "MultiSelectInRequest";
+        }
+        GrabliPro gp = new GrabliPro();
+        gp.deleteGroupe(grp);
+        return "Done";
+    }
+
     public String updateAtrByFile(InputStream uploadFile, String fileName) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)");
         Matcher m = p.matcher(fileName);
@@ -437,6 +460,32 @@ public class Ajax {
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateAttributeByFile(file);
+        return "Done";
+    }
+
+    public String updateUnitsByFile(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return "!csv";
+        }
+        File file = new File("C://" + System.nanoTime() + ".temp");
+        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
+        GrabliPro gp = new GrabliPro();
+        gp.updateUnitByFile(file);
+        return "Done";
+    }
+
+    public String updateGroupesByFile(InputStream uploadFile, String fileName) throws Exception {
+        Pattern p = Pattern.compile("(\\.csv)");
+        Matcher m = p.matcher(fileName);
+        if (!m.find()) {
+            return "!csv";
+        }
+        File file = new File("C://1/" + System.nanoTime() + ".temp");
+        FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
+        GrabliPro gp = new GrabliPro();
+        gp.updateGroupeByFile(file);
         return "Done";
     }
 
@@ -451,7 +500,29 @@ public class Ajax {
         return gp.addAttribute(attributeName);
     }
 
-    public String addAtr2Pt(String ptId, String atrIds) {
+    public String addUnit(String unitName) {
+        if (unitName.replaceAll("\\s+|\\d+", "").equals("")) {
+            return "Empty";
+        }
+        if (FactoryDAO4Grabli.getInstance().getUnitDAO().isUnitPresent(unitName.trim())) {
+            return "Already Exist";
+        }
+        GrabliPro gp = new GrabliPro();
+        return gp.addUnit(unitName);
+    }
+
+    public String addGroupe(String groupeName) {
+        if (groupeName.replaceAll("\\s+|\\d+", "").equals("")) {
+            return "Empty";
+        }
+        if (FactoryDAO4Grabli.getInstance().getGroupeDAO().isGroupePresent(groupeName.trim())) {
+            return "Already Exist";
+        }
+        GrabliPro gp = new GrabliPro();
+        return gp.addGroupe(groupeName);
+    }
+
+    public String addGroupe2Attr(String groupeId, String atrIds) {
         String[] attributesIds = atrIds.split(",");
         List<Integer> atrList = new ArrayList();
         try {
@@ -460,19 +531,43 @@ public class Ajax {
             }
         } catch (NumberFormatException ex) {
         }
-        int ptIdd = Integer.parseInt(ptId);
+        int groupeIdd = Integer.parseInt(groupeId);
         GrabliPro gp = new GrabliPro();
-        gp.addAtr2Pt(ptIdd, atrList);
+        gp.addGroupe2Attr(groupeIdd, atrList);
         return "Done";
     }
 
-    public FileTransfer downloadAtr2PtData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+    public String addPt2Groupe(String ptId, String grpIds) {
+        String[] groupeIds = grpIds.split(",");
+        List<Integer> grpList = new ArrayList();
+        try {
+            for (int i = 0; i < groupeIds.length; i++) {
+                grpList.add(Integer.parseInt(groupeIds[i]));
+            }
+        } catch (NumberFormatException ex) {
+        }
+        int ptIdd = Integer.parseInt(ptId);
+        GrabliPro gp = new GrabliPro();
+        gp.addPt2Groupe(ptIdd, grpList);
+        return "Done";
+    }
+
+    public FileTransfer downloadGroupe2AttrData() throws Exception {
+        File file = new File("C://1/" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        buffer.write(FileUtils.readFileToByteArray(gp.downloadAtr2PtData(file)));
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadGroupe2AttrData(file)));
         file.delete();
         return new FileTransfer("Atr2Pt.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    public FileTransfer downloadPt2GroupeData() throws Exception {
+        File file = new File("C://1/" + System.nanoTime() + ".xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadPt2GroupeData(file)));
+        file.delete();
+        return new FileTransfer("Pt2Groupe.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
     public String addAttributeAltName(String attributeId, String newAltName) {

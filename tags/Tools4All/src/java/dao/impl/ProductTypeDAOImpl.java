@@ -94,6 +94,13 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
         return pt;
     }
 
+    public ProductType getProductTypeByIdWithGroupes(int id) {
+        ProductType pt;
+        pt = (ProductType) getHibernateTemplate().load(ProductType.class, id);
+        pt.getGroupes().isEmpty();
+        return pt;
+    }
+
     public void updatProductTypeWithAttributes(ProductType productType) {
         ProductType newProductType;
         try {
@@ -136,6 +143,17 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
             return (ProductType) getHibernateTemplate().findByNamedParam(query, "value", productTypeName).get(0);
         } catch (Exception ex) {
             ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<ProductType> getProductTypeOnlyByTemplate(String template) {
+        template = "%" + template + "%";
+        String query = "from ProductType p where productTypeName like :value";
+        System.out.println(template);
+        try {
+            return getHibernateTemplate().findByNamedParam(query, "value", template);
+        } catch (Exception ex) {
             return null;
         }
     }

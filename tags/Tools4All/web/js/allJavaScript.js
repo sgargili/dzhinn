@@ -15,8 +15,15 @@ function byId(id){
 
 // Хранилища ПТ.
 // Все ПТ.
+
+var storePtsProxy = new Ext.data.HttpProxy({
+    url:    'ProductType.exml',
+    method: 'GET'
+})
+
 var storePts = new Ext.data.Store({
-    url: 'ProductType.exml',
+    proxy: storePtsProxy,
+    //url: 'ProductType.exml',
     reader: new Ext.data.XmlReader({
         record: 'ProductType',
         id: 'Id'
@@ -420,34 +427,47 @@ var ptMulti = new Ext.ux.form.MultiSelect({
         }
     },
     tbar:[{
-        text: 'Показать ПТ',
-        handler: function(){
-            storePts.load();
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'ptTemplate',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                    //                        if(data=="MultiSelectInRequest"){
+                    //                            Ext.Msg.show({
+                    //                                title: 'Предупреждение!!!',
+                    //                                msg: 'Выбирайте только одно значение!',
+                    //                                buttons: Ext.MessageBox.OK,
+                    //                                width: 300,
+                    //                                icon: Ext.MessageBox.ERROR
+                    //                            });
+                    //                        } else {
+                    //                            Ext.getCmp('atrAltName').setValue("");
+                    //                            storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                    //                            storeGrpAlt.clearData();
+                    //                            storeGrpAlt.load();
+                    //                        }
+                    //                    });
+                    storePtsProxy.setUrl("ProductType.exml?template=" + Ext.getCmp('ptTemplate').getValue());
+                    storePts.clearData();
+                    storePts.load();
+
+
+                }
+            }
         }
     },{
-        text: 'Сохранить ПТ',
+        text: 'Показать ПТ',
         handler: function(){
-            Ajax.updateProductTypeAltName(ptMulti.getValue(), ptField.getValue(), function(data) {
-                if(data=="MultiSelectInRequest"){
-                    //ptField.setValue("");
-                    Ext.Msg.show({
-                        title: 'Предупреждение!!!',
-                        msg: 'Выбирайте только одно значение!',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.INFO
-                    });
-                } else {
-                    //                    ptField.setValue("");
-                    Ext.Msg.show({
-                        title: 'Выполненно!',
-                        msg: 'Варианты ПТ добавлены.',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.INFO
-                    });
-                }
-            });
+            storePtsProxy.setUrl("ProductType.exml?template=" + Ext.getCmp('ptTemplate').getValue());
+            storePts.clearData();
             storePts.load();
         }
     },
@@ -480,6 +500,8 @@ var ptMulti = new Ext.ux.form.MultiSelect({
                                     width: 300,
                                     icon: Ext.MessageBox.INFO
                                 });
+                                storePtsProxy.setUrl("ProductType.exml?template=" + Ext.getCmp('ptTemplate').getValue());
+                                storePts.clearData();
                                 storePts.load();
                             }
 
@@ -661,16 +683,16 @@ var ptForm = new Ext.form.FormPanel({
         layout:'column',
         items: [ptMulti, ptField]
     }]
-    ,
-
-    buttons: [{
-        text: 'Save',
-        handler: function(){
-            if(ptForm.getForm().isValid()){
-                updatePtAltName(ptMulti.getValue(), ptField.getValue());
-            }
-        }
-    }]
+//    ,
+//
+//    buttons: [{
+//        text: 'Save',
+//        handler: function(){
+//            if(ptForm.getForm().isValid()){
+//                updatePtAltName(ptMulti.getValue(), ptField.getValue());
+//            }
+//        }
+//    }]
 });
 
 var comboPT = new Ext.form.ComboBox({
@@ -780,48 +802,59 @@ var atrMulti = new Ext.ux.form.MultiSelect({
         }
     },
     tbar:[{
-        text: 'Показать Атрибуты',
-        handler: function(){
-            if(comboPT.getValue()==""){
-                Ext.Msg.show({
-                    title: 'Предупреждение!!!',
-                    msg: 'Выбирайте ПТ!',
-                    buttons: Ext.MessageBox.OK,
-                    width: 300,
-                    icon: Ext.MessageBox.ERROR
-                });
-                return;
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'attributeTemplate',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                    //                        if(data=="MultiSelectInRequest"){
+                    //                            Ext.Msg.show({
+                    //                                title: 'Предупреждение!!!',
+                    //                                msg: 'Выбирайте только одно значение!',
+                    //                                buttons: Ext.MessageBox.OK,
+                    //                                width: 300,
+                    //                                icon: Ext.MessageBox.ERROR
+                    //                            });
+                    //                        } else {
+                    //                            Ext.getCmp('atrAltName').setValue("");
+                    //                            storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                    //                            storeGrpAlt.clearData();
+                    //                            storeGrpAlt.load();
+                    //                        }
+                    //                    });
+                    storeAtrProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('attributeTemplate').getValue());
+                    storeAtr.clearData();
+                    storeAtr.load();
+                    
+
+                }
             }
-            storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
-            storeAtr.clearData();
-            storeAtr.load();
-            atrField.setValue("");
         }
     },{
-        text: 'Сохранить Атрибут',
+        text: 'Показать Атрибуты',
         handler: function(){
-            Ajax.updateAttributeAltName(atrMulti.getValue(), atrField.getValue(), function(data) {
-                if(data=="MultiSelectInRequest"){
-                    //ptField.setValue("");
-                    Ext.Msg.show({
-                        title: 'Предупреждение!!!',
-                        msg: 'Выбирайте только одно значение!',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.INFO
-                    });
-                } else {
-                    //                    ptField.setValue("");
-                    Ext.Msg.show({
-                        title: 'Выполненно!',
-                        msg: 'Варианты атрибута добавлены.',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.INFO
-                    });
-                }
-            });
-            storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
+            //            if(comboPT.getValue()==""){
+            //                Ext.Msg.show({
+            //                    title: 'Предупреждение!!!',
+            //                    msg: 'Выбирайте ПТ!',
+            //                    buttons: Ext.MessageBox.OK,
+            //                    width: 300,
+            //                    icon: Ext.MessageBox.ERROR
+            //                });
+            //                return;
+            //            }
+            //            storeAtrProxy.setUrl("Attribute.exml?ptId="+ comboPT.getValue());
+            //            storeAtr.clearData();
+            //            storeAtr.load();
+            storeAtrProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('attributeTemplate').getValue());
             storeAtr.clearData();
             storeAtr.load();
             atrField.setValue("");
@@ -1169,7 +1202,7 @@ var atrForm = new Ext.form.FormPanel({
         //      columns: [100, 1000],
         //        horisontal: true,
         items: [
-        comboPT,{
+        {
             bodyStyle: 'border:0px;',
             layout:'column',
             items: [
@@ -1181,6 +1214,526 @@ var atrForm = new Ext.form.FormPanel({
         ]
     }]
 });
+
+
+
+//var comboPT = new Ext.form.ComboBox({
+//    store: storePtsAll,
+//    hideLabel: true,
+//    displayField:'pt',
+//    valueField: 'id',
+//    typeAhead: true,
+//    mode: 'remote',
+//    forceSelection: true,
+//    triggerAction: 'all',
+//    emptyText:'Выберите PT...',
+//    editable: false,
+//    style: {
+//        margin: '0px'
+//    },
+//    width:200
+////    listeners: {
+////        'select': function(){
+////            storeAtrsProxy.setUrl("Attribute.exml?ptId=" + comboOwner2.getValue());
+////            storeAtrs.clearData();
+////            storeAtrs.load();
+////        }
+////    }
+//});
+
+var storeGrpProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeGrp = new Ext.data.Store({
+    proxy: storeGrpProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Groupe',
+        id: 'Id'
+    }, [
+    {
+        name: 'groupe',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeGrpProxyAlt = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeGrpAlt = new Ext.data.Store({
+    proxy: storeGrpProxyAlt,
+    reader: new Ext.data.XmlReader({
+        record: 'AltName',
+        id: 'Id'
+    }, [
+    {
+        name: 'name',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+
+var grpMulti = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 400,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'groupe',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginBottom: '9px'
+    },
+    store: storeGrp,
+    listeners: {
+        click: function() {
+        //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+        //                if(data=="MultiSelectInRequest"){
+        //                    atrField.setValue("");
+        //                    Ext.Msg.show({
+        //                        title: 'Предупреждение!!!',
+        //                        msg: 'Выбирайте только одно значение!',
+        //                        buttons: Ext.MessageBox.OK,
+        //                        width: 300,
+        //                        icon: Ext.MessageBox.ERROR
+        //                    });
+        //                } else {
+        //                    atrField.setValue(data);
+        //                }
+        //            });
+        //            alert(atrMulti.getValue());
+        //            storeGrpProxyAlt.setUrl("Service.exml?request=unitAlt/unitId="+ atrMulti.getValue());
+        //            storeGrpAlt.clearData();
+        //            storeGrpAlt.load();
+        //atrField.setValue("");
+        }
+    },
+    tbar:[{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'grpTemplate',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                    //                        if(data=="MultiSelectInRequest"){
+                    //                            Ext.Msg.show({
+                    //                                title: 'Предупреждение!!!',
+                    //                                msg: 'Выбирайте только одно значение!',
+                    //                                buttons: Ext.MessageBox.OK,
+                    //                                width: 300,
+                    //                                icon: Ext.MessageBox.ERROR
+                    //                            });
+                    //                        } else {
+                    //                            Ext.getCmp('atrAltName').setValue("");
+                    //                            storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                    //                            storeGrpAlt.clearData();
+                    //                            storeGrpAlt.load();
+                    //                        }
+                    //                    });
+                    storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue());
+                    storeGrp.clearData();
+                    storeGrp.load();
+
+                }
+            }
+        }
+    },{
+        text: 'Показать Группы',
+        handler: function(){
+            //            if(comboPT.getValue()==""){
+            //                Ext.Msg.show({
+            //                    title: 'Предупреждение!!!',
+            //                    msg: 'Выбирайте ПТ!',
+            //                    buttons: Ext.MessageBox.OK,
+            //                    width: 300,
+            //                    icon: Ext.MessageBox.ERROR
+            //                });
+            //                return;
+            //            }
+            //            storeGrpProxy.setUrl("Service.exml?request=groupes/ptId="+ comboPT.getValue());
+            //            storeGrp.clearData();
+            //            storeGrp.load();
+            //            grpField.setValue("");
+            storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue());
+            storeGrp.clearData();
+            storeGrp.load();
+        }
+    },{
+        text: 'Удалить Группу',
+        handler: function(){
+            Ext.MessageBox.buttonText.yes = "ага";
+            Ext.MessageBox.buttonText.no = "нах";
+            Ext.Msg.show({
+                title:'Подтверждение!',
+                msg: 'Удалить Группу? Она будет удален из всех ПТ...',
+                buttons: Ext.Msg.YESNO,
+                fn: function(btn){
+                    if (btn == 'yes'){
+                        Ajax.deleteGroupe(grpMulti.getValue(), function(data) {
+                            if(data=="MultiSelectInRequest"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!!!',
+                                    msg: 'Выбирайте только одно значение!',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                //                                grpField.setValue("");
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'Группа удален.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                                storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue());
+                                storeGrp.clearData();
+                                storeGrp.load();
+                            }
+
+                        });
+                    }
+                },
+                icon: Ext.MessageBox.QUESTION
+            });
+        }
+    },{
+        text: 'Загрузить файл с Группами',
+        handler: function(){
+            Ajax.downloadGroupesData(function(data) {
+                dwr.engine.openInDownload(data);
+            });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+var grpMultiAlt = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 400,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'name',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginLeft: '3px',
+        marginBottom: '9px'
+    },
+    store: storeGrpAlt,
+    //    listeners: {
+    //        click: function() {
+    //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
+    //                if(data=="MultiSelectInRequest"){
+    //                    atrField.setValue("");
+    //                    Ext.Msg.show({
+    //                        title: 'Предупреждение!!!',
+    //                        msg: 'Выбирайте только одно значение!',
+    //                        buttons: Ext.MessageBox.OK,
+    //                        width: 300,
+    //                        icon: Ext.MessageBox.ERROR
+    //                    });
+    //                } else {
+    //                    atrField.setValue(data);
+    //                }
+    //            });
+    //        } atrForm.getForm().findField('newAtr').getValue()
+    //    },
+    tbar:[{
+        text: 'Добавить значение',
+        handler: function(){
+            Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                if(data=="MultiSelectInRequest"){
+                    Ext.Msg.show({
+                        title: 'Предупреждение!!!',
+                        msg: 'Выбирайте только одно значение!',
+                        buttons: Ext.MessageBox.OK,
+                        width: 300,
+                        icon: Ext.MessageBox.ERROR
+                    });
+                } else {
+                    Ext.getCmp('atrAltName').setValue("");
+                    storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                    storeGrpAlt.clearData();
+                    storeGrpAlt.load();
+                }
+            });
+        }
+    },{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'atrAltName',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+                        if(data=="MultiSelectInRequest"){
+                            Ext.Msg.show({
+                                title: 'Предупреждение!!!',
+                                msg: 'Выбирайте только одно значение!',
+                                buttons: Ext.MessageBox.OK,
+                                width: 300,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else {
+                            Ext.getCmp('atrAltName').setValue("");
+                            storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                            storeGrpAlt.clearData();
+                            storeGrpAlt.load();
+                        }
+                    });
+
+                }
+            }
+        }
+    },{
+        text: 'Удалить значения',
+        handler: function(){
+            Ajax.deleteAttributeAltName(atrMulti.getValue(), atrMultiAlt.getValue(), function(data) {
+                storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+                storeGrpAlt.clearData();
+                storeGrpAlt.load();
+            });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+
+var grpField = new Ext.form.TextArea({
+    //xtype: 'textarea',
+    //width: 700,
+    height:200,
+    autoScroll:true,
+    //allowBlank:false,
+    hideLabel: true,
+    //blankText:'Введите сообщение...',
+    id:'grpData',
+    // allowBlank:false,
+    enableKeyEvents:true,
+    style: {
+        width:'50%',
+        marginTop: '1px',
+        marginLeft: '3px',
+        marginRight: '0px',
+        marginBottom: '9px'
+    },
+    listeners: {
+        specialkey: function(something,e){
+            if (e.getKey() == e.ENTER) {
+        //sendMessage(Ext.getCmp('chatData').getValue(), Ext.getCmp('chatNick').getValue());
+        }
+        }
+    }
+
+});
+
+var grpForm = new Ext.form.FormPanel({
+    title: 'Группы',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [
+        {
+            html:'<h1>Новая Группа:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'textfield',
+            hideLabel: true,
+            height:22,
+            id:'newGroupe',
+            blankText:'Введите что-нибудь...',
+            allowBlank:false,
+            style: {
+                marginTop: '1px'
+            }
+        },{
+            xtype: 'button',
+            text: '<<<Добавить>>>',
+            style: {
+                //                marginTop: '1px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'align:center',
+            listeners: {
+                click: function() {
+                    //alert(isForm.getForm().findField('newPT').getValue());
+                    if(grpForm.getForm().isValid()){
+                        //addProductType(ptForm.getForm().findField('newPT').getValue());
+                        Ajax.addGroupe(Ext.getCmp('newGroupe').getValue(), function(data) {
+                            if(data=="Already Exist"){
+                                Ext.Msg.show({
+                                    title: 'Дубль!!!',
+                                    msg: 'Такая группа уже есть...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else if(data=="Empty"){
+                                Ext.Msg.show({
+                                    title: 'Предупреждение!',
+                                    msg: 'Одини пробелы и/или цифры в названии Группы...',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.ERROR
+                                });
+                            } else {
+                                Ext.Msg.show({
+                                    title: 'Выполненно!',
+                                    msg: 'Группа добавлена.',
+                                    buttons: Ext.MessageBox.OK,
+                                    width: 300,
+                                    icon: Ext.MessageBox.INFO
+                                });
+                            }
+                        });
+                    } else{
+                        Ext.Msg.show({
+                            title: 'Предупреждение!',
+                            msg: 'Укажите название Группы!',
+                            buttons: Ext.MessageBox.OK,
+                            width: 300,
+                            icon: Ext.MessageBox.ERROR
+                        });
+                    }
+                }
+            }
+        },{
+            html:'<h1>Залить Группы файлом:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'fileuploadfield',
+            width:350,
+            id: 'GrpFile',
+            emptyText: 'Выберите файл...',
+            style: {
+                marginTop: '0px',
+                marginBottom: '0px'
+            },
+            buttonText: 'Выбрать'
+        //        buttonCfg: {
+        //            iconCls: 'upload-icon'
+        //        }
+        },{
+            xtype: 'button',
+            text: '<<<Запуск>>>',
+            id:'GrpUploadBtn',
+            style: {
+                marginLeft: '5px',
+                marginRight: '5px'
+            },
+            listeners: {
+                click: function() {
+                    var file = dwr.util.getValue('GrpFile-file');
+                    Ajax.updateGroupesByFile(file, Ext.getCmp('GrpFile').getValue(), function(data) {
+                        Ext.getCmp('GrpFile').reset();
+                        if(data=="!csv"){
+                            Ext.Msg.show({
+                                title:'Неверный формат файла...',
+                                msg: 'Верный смотри в инфо...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else{
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Файл залит.',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+                        //storePts.load();
+                        }
+                    });
+                // alert("Ушло");
+
+                }
+            }
+        }]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    }
+    //    ,{
+    //        bodyStyle: 'padding:7px; border:0px',
+    //        layout:'column',
+    //        items: [comboPT]
+    //    }
+    ,{
+        bodyStyle: 'padding:7px;',
+        //layout:'column',
+        //      columns: [100, 1000],
+        //        horisontal: true,
+        items: [
+        {
+            bodyStyle: 'border:0px;',
+            layout:'column',
+            items: [
+            grpMulti
+            ]
+        }
+        ]
+    }]
+});
+
+
 
 var storeUnitsProxyAlt = new Ext.data.HttpProxy({
     url:    'someURL',
@@ -1500,7 +2053,7 @@ var unitsForm = new Ext.form.FormPanel({
                             if(data=="Already Exist"){
                                 Ext.Msg.show({
                                     title: 'Дубль!!!',
-                                    msg: 'Такой Атрибут уже есть...',
+                                    msg: 'Такая уже есть...',
                                     buttons: Ext.MessageBox.OK,
                                     width: 300,
                                     icon: Ext.MessageBox.ERROR
@@ -1673,9 +2226,9 @@ var comboPts = new Ext.form.ComboBox({
     width:200,
     listeners: {
         'select': function(){
-            storeAtr2ProdTypeProxy.setUrl("Attribute.exml?ptId="+ comboPts.getValue());
-            storeAtr2ProdType.clearData();
-            storeAtr2ProdType.load();
+            storePT2GroupeProxy.setUrl("Service.exml?request=groupes/ptId=" + comboPts.getValue());
+            storePT2Groupe.clearData();
+            storePT2Groupe.load();
         }
     }
 });
@@ -1696,7 +2249,7 @@ var Atr2PTForm = new Ext.form.FormPanel({
         layout:'column',
         bodyStyle: 'padding:7px;',
         items: [{
-            html:'<h1>Product Type:</h1>',
+            html:'<h1>Продукт тип:</h1>',
             style: {
                 marginTop: '3px',
                 marginRight: '7px'
@@ -1833,6 +2386,497 @@ var Atr2PTForm = new Ext.form.FormPanel({
 //        }
 //    }]
 });
+
+
+var storePT2GroupeProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storePT2Groupe = new Ext.data.Store({
+    proxy: storePT2GroupeProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Groupe',
+        id: 'Id'
+    }, [
+    {
+        name: 'groupe',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeGroupeAllProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeGroupeAll = new Ext.data.Store({
+    proxy: storeGroupeAllProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Groupe',
+        id: 'Id'
+    }, [
+    {
+        name: 'groupe',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+
+
+
+var PT2GroupeForm = new Ext.form.FormPanel({
+    title: 'Привязка Групп к Продукт типам',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+        bodyStyle: 'padding:7px;',
+        items: [{
+            html:'<h1>Product Type:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },
+        comboPts]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    },{
+        bodyStyle: 'padding:7px;',
+        items: [{
+            xtype: 'itemselector',
+            name: 'itemselector',
+            //fieldLabel: 'ItemSelector',
+            //labelWidth:'0',
+            hideLabel: true,
+            bodyStyle: 'padding:0px;',
+            imagePath: 'images/ux',
+            //            fromLegend:'Возможно',
+            //            toLegend:'Привязано',
+            multiselects: [{
+                width: 400,
+                height: 500,
+                store: storeGroupeAll,
+                displayField: 'groupe',
+                valueField: 'id',
+                tbar:[{
+                    xtype: 'textfield',
+                    hideLabel: true,
+                    height:22,
+                    id:'groupeTemplate',
+                    blankText:'Введите что-нибудь...',
+                    allowBlank:true,
+                    style: {
+                        marginTop: '1px'
+                    },
+                    listeners: {
+                        specialkey: function(something,e){
+                            if (e.getKey() == e.ENTER) {
+                                storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue());
+                                storeGroupeAll.clearData();
+                                storeGroupeAll.load();
+                            }
+                        }
+                    }
+                },{
+                    text: 'Загрузить Группы',
+                    handler:function(){
+                        storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue());
+                        storeGroupeAll.clearData();
+                        storeGroupeAll.load();
+                    }
+                },{
+                    text: 'Загрузить файл со связками',
+                    handler:function(){
+                        Ajax.downloadPt2GroupeData(function(data) {
+                            dwr.engine.openInDownload(data);
+                        });
+                    }
+                }
+                ]
+            },{
+                width: 400,
+                height: 500,
+                store: storePT2Groupe,
+                displayField: 'groupe',
+                valueField: 'id',
+                tbar:[{
+                    text: 'Сохранить связи ПТ - Группы',
+                    handler:function(){
+                        if(comboPts.getValue()==null||comboPts.getValue()==""){
+                            Ext.Msg.show({
+                                title:'Внимание!',
+                                msg: 'Выберите ПТ',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                            return;
+                        }
+                        if(PT2GroupeForm.getForm().findField('itemselector').getValue()==null||
+                            PT2GroupeForm.getForm().findField('itemselector').getValue()==""){
+                            Ext.MessageBox.buttonText.yes = "ага";
+                            Ext.MessageBox.buttonText.no = "нах";
+                            Ext.Msg.show({
+                                title:'Подтверждение!',
+                                msg: 'Точно сохранить? А то поле Групп пустое...',
+                                buttons: Ext.Msg.YESNO,
+                                fn: function(btn){
+                                    if (btn == 'yes'){
+                                        Ajax.addPt2Groupe(comboPts.getValue(), PT2GroupeForm.getForm().findField('itemselector').getValue(), function(data) {
+                                            Ext.Msg.show({
+                                                title:'Выполненно!',
+                                                msg: 'Связки сохранены.',
+                                                buttons: Ext.Msg.OK,
+                                                width:250,
+                                                icon: Ext.MessageBox.INFO
+                                            });
+
+                                        });
+                                    }
+                                },
+                                icon: Ext.MessageBox.QUESTION
+                            });
+                        } else {
+                            Ajax.addPt2Groupe(comboPts.getValue(), PT2GroupeForm.getForm().findField('itemselector').getValue(), function(data) {
+                                Ext.Msg.show({
+                                    title:'Выполненно!',
+                                    msg: 'Связки сохранены.',
+                                    buttons: Ext.Msg.OK,
+                                    width:250,
+                                    icon: Ext.MessageBox.INFO
+                                });
+
+                            });
+                        }
+                    }
+                }]
+            }]
+        // }]
+        }]
+    }]
+//    ,
+//
+//    buttons: [{
+//        text: 'Save',
+//        handler: function(){
+//            if(Atr2PTForm.getForm().isValid()){
+//                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+//                    Atr2PTForm.getForm().getValues(true));
+//            }
+//        }
+//    }]
+});
+
+
+
+var storeGroupe2AtrProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeGroupe2Atr = new Ext.data.Store({
+    proxy: storeGroupe2AtrProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Attribute',
+        id: 'Id'
+    }, [
+    {
+        name: 'atr',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+//var storeAtrAllProxy = new Ext.data.HttpProxy({
+//    url:    'someURL',
+//    method: 'GET'
+//})
+//
+//var storeAtrAll = new Ext.data.Store({
+//    proxy: storeAtrAllProxy,
+//    reader: new Ext.data.XmlReader({
+//        record: 'Attribute',
+//        id: 'Id'
+//    }, [
+//    {
+//        name: 'atr',
+//        mapping: 'Name'
+//    }, {
+//        name:'id',
+//        mapping:'Id'
+//    }
+//    ])
+//});
+
+var storeGroupesProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+var storeGroupes = new Ext.data.Store({
+    proxy: storeGroupesProxy,
+    //    url: 'Service.exml?request=groupes',
+    reader: new Ext.data.XmlReader({
+        record: 'Groupe',
+        id: 'Id'
+    }, [
+    {
+        name: 'groupe',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+
+var comboGroupes = new Ext.form.ComboBox({
+    store: storeGroupes,
+    hideLabel: true,
+    displayField:'groupe',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите группу...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+            storeGroupe2AtrProxy.setUrl("Service.exml?request=attrs/grpId="+ comboGroupes.getValue());
+            storeGroupe2Atr.clearData();
+            storeGroupe2Atr.load();
+        }
+    }
+});
+
+var comboPtsNew = new Ext.form.ComboBox({
+    store: storePts,
+    hideLabel: true,
+    displayField:'pt',
+    valueField: 'id',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Выберите PT...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:200,
+    listeners: {
+        'select': function(){
+            storeGroupesProxy.setUrl("Service.exml?request=groupes/ptId="+ comboPtsNew.getValue());
+            //storeGroupes.clearData();
+            if(storeGroupes.getCount()!=0){
+                storeGroupes.clearData();
+                storeGroupes.reload();
+            }
+        //storeGroupes.reload();
+        }
+    }
+});
+
+
+var Grp2AtrForm = new Ext.form.FormPanel({
+    title: 'Привязка Групп к атрибутам',
+    width: '100%',
+    //height:400,
+    //bodyStyle: 'padding:10px;',
+    bodyStyle: 'padding:7px;',
+    //    items:[{
+    //        style: {
+    //            padding: '10px auto'
+    //        },
+    //layout:'column',
+    items: [{
+        layout:'column',
+//        bodyStyle: 'padding:7px;',
+        items: [{
+            layout:'column',
+            bodyStyle: 'padding:7px;border:0;',
+            items: [{
+                html:'<h1>Продукт тип:</h1>',
+                style: {
+                    marginTop: '3px',
+                    marginRight: '7px'
+                },
+                bodyStyle: 'border: 0px'
+            },
+            comboPtsNew]
+        },{
+            layout:'column',
+            bodyStyle: 'padding:7px;border:0;',
+            items: [{
+                html:'<h1>Группа:</h1>',
+                style: {
+                    marginTop: '3px',
+                    marginRight: '7px'
+                },
+                bodyStyle: 'border: 0px'
+            },
+            comboGroupes]
+        }]
+    },{
+        html:'&nbsp;',
+        bodyStyle: 'border: 0px'
+    },{
+        bodyStyle: 'padding:7px;',
+        items: [{
+            xtype: 'itemselector',
+            name: 'itemselector',
+            //fieldLabel: 'ItemSelector',
+            //labelWidth:'0',
+            hideLabel: true,
+            bodyStyle: 'padding:0px;',
+            imagePath: 'images/ux',
+            //            fromLegend:'Возможно',
+            //            toLegend:'Привязано',
+            multiselects: [{
+                width: 400,
+                height: 500,
+                store: storeAtrAll,
+                displayField: 'atr',
+                valueField: 'id',
+                tbar:[{
+                    text: 'Загрузить Атрибуты',
+                    handler:function(){
+                        storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
+                        storeAtrAll.clearData();
+                        storeAtrAll.load();
+                    }
+                },{
+                    xtype: 'textfield',
+                    hideLabel: true,
+                    height:22,
+                    id:'atrTemplate',
+                    blankText:'Введите что-нибудь...',
+                    allowBlank:true,
+                    style: {
+                        marginTop: '1px'
+                    },
+                    listeners: {
+                        specialkey: function(something,e){
+                            if (e.getKey() == e.ENTER) {
+                                storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
+                                storeAtrAll.clearData();
+                                storeAtrAll.load();
+                            }
+                        }
+                    }
+                },{
+                    text: 'Загрузить файл со связками',
+                    handler:function(){
+                        Ajax.downloadGroupe2AttrData(function(data) {
+                            dwr.engine.openInDownload(data);
+                        });
+                    }
+                }
+                ]
+            },{
+                width: 400,
+                height: 500,
+                store: storeGroupe2Atr,
+                displayField: 'atr',
+                valueField: 'id',
+                tbar:[{
+                    text: 'Сохранить связи Группы - Атрибуты',
+                    handler:function(){
+                        if(comboGroupes.getValue()==null||comboGroupes.getValue()==""){
+                            Ext.Msg.show({
+                                title:'Внимание!',
+                                msg: 'Выберите ПТ',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                            return;
+                        }
+                        if(Grp2AtrForm.getForm().findField('itemselector').getValue()==null||
+                            Grp2AtrForm.getForm().findField('itemselector').getValue()==""){
+                            Ext.MessageBox.buttonText.yes = "ага";
+                            Ext.MessageBox.buttonText.no = "нах";
+                            Ext.Msg.show({
+                                title:'Подтверждение!',
+                                msg: 'Точно сохранить? А то поле атрибутов пустое...',
+                                buttons: Ext.Msg.YESNO,
+                                fn: function(btn){
+                                    if (btn == 'yes'){
+                                        Ajax.addGroupe2Attr(comboGroupes.getValue(), Grp2AtrForm.getForm().findField('itemselector').getValue(), function(data) {
+                                            Ext.Msg.show({
+                                                title:'Выполненно!',
+                                                msg: 'Связки сохранены.',
+                                                buttons: Ext.Msg.OK,
+                                                width:250,
+                                                icon: Ext.MessageBox.INFO
+                                            });
+
+                                        });
+                                    }
+                                },
+                                icon: Ext.MessageBox.QUESTION
+                            });
+                        } else{
+                            Ajax.addGroupe2Attr(comboGroupes.getValue(), Grp2AtrForm.getForm().findField('itemselector').getValue(), function(data) {
+                                Ext.Msg.show({
+                                    title:'Выполненно!',
+                                    msg: 'Связки сохранены.',
+                                    buttons: Ext.Msg.OK,
+                                    width:250,
+                                    icon: Ext.MessageBox.INFO
+                                });
+
+                            });
+                        }
+                    }
+                }]
+            }]
+        // }]
+        }]
+    }]
+//    ,
+//
+//    buttons: [{
+//        text: 'Save',
+//        handler: function(){
+//            if(Atr2PTForm.getForm().isValid()){
+//                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
+//                    Atr2PTForm.getForm().getValues(true));
+//            }
+//        }
+//    }]
+});
+
+
+
+
 
 
 var fileGrabliInput = new Ext.ux.form.FileUploadField({
@@ -3296,18 +4340,32 @@ var egrabli = new Ext.TabPanel({
         items:[ptForm]
     //items:[isForm]
     },{
+        title: 'Группы',
+        autoScroll: true,
+        items:[grpForm]
+    },{
         title: 'Атрибуты',
         autoScroll: true,
         items:[atrForm]
-    },{
-        title: 'Связка ПТ -> Атрибут',
-        autoScroll: true,
-        items:[Atr2PTForm]
-    },{
+    },//    },
+    {
         title: 'Единицы измерения',
         autoScroll: true,
         items:[unitsForm]
     },{
+        title: 'Связка ПТ -> Группа',
+        autoScroll: true,
+        items:[PT2GroupeForm]
+    },{
+        title: 'Связка Группа -> Атрибут',
+        autoScroll: true,
+        items:[Grp2AtrForm]
+    },
+    //    {
+    //        title: 'Связка ПТ -> Атрибут',
+    //        autoScroll: true,
+    //        items:[Atr2PTForm]
+    {
         title: 'Грабли',
         autoScroll: true,
         items:[grabliFile, grabliGrid, grabliPBar, gridToOut]

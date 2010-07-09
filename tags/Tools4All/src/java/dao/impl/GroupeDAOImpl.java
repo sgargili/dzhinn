@@ -156,4 +156,11 @@ public class GroupeDAOImpl implements GroupeDAO {
             return false;
         }
     }
+
+    public Groupe getGroupeByIdWithAttributes(int id) {
+        Groupe groupe;
+        groupe = (Groupe) getHibernateTemplate().load(Groupe.class, id);
+        groupe.getAttributes().isEmpty();
+        return groupe;
+    }
 }

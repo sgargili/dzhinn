@@ -34,9 +34,13 @@ public interface ProductTypeDAO {
 
     public List<ProductType> getProductTypesByAttribute(Attribute attribute);
 
+    public List<ProductType> getProductTypeOnlyByTemplate(String template);
+
     public ProductType getProductTypeById(int id);
 
     public ProductType getProductTypeByName(String productTypeName);
 
     public ProductType getProductTypeByIdWithAttributes(int id);
+
+    public ProductType getProductTypeByIdWithGroupes(int id);
 }

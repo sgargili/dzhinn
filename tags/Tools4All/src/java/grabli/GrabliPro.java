@@ -135,6 +135,26 @@ public class GrabliPro {
         return "Done";
     }
 
+    public String addUnit(String unitName) {
+//        Attribute at = new Attribute();
+//        at.setAttributeName(unitName);
+//        fd.getAttributeDAO().addOrUpdateAttributeNameOnly(at);
+        Unit u = new Unit();
+        u.setUnitName(unitName);
+        fd.getUnitDAO().addOrUpdateUnitNameOnly(u);
+        return "Done";
+    }
+
+    public String addGroupe(String groupeName) {
+//        Attribute at = new Attribute();
+//        at.setAttributeName(unitName);
+//        fd.getAttributeDAO().addOrUpdateAttributeNameOnly(at);
+        Groupe grp = new Groupe();
+        grp.setGroupeName(groupeName);
+        fd.getGroupeDAO().addOrUpdateGroupeNameOnly(grp);
+        return "Done";
+    }
+
     public String getAttributeAltName(int attributeId) {
         String out;
         Attribute atr;
@@ -159,6 +179,10 @@ public class GrabliPro {
     public void deleteUnit(Unit unit) {
         fd.getUnitAlternativeNameDAO().deleteUnitAlternativeNameByUnit(unit);
         fd.getUnitDAO().deleteUnit(unit);
+    }
+
+    public void deleteGroupe(Groupe groupe) {
+        fd.getGroupeDAO().deleteGroupe(groupe);
     }
 
     public void updateAttributeByFile(File file) {
@@ -188,6 +212,90 @@ public class GrabliPro {
             reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void updateUnitByFile(File file) {
+        CsvReader reader = null;
+//        Attribute atr;
+//        AttributeAlternativeName atrAlt;
+        Unit unit = null;
+        UnitAlternativeName unitAlt;
+        String[] mass;
+        String tempUnit = "&&&???!!!ddsdsdwwww";
+        try {
+            reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
+        } catch (Exception ex) {
+        }
+        try {
+            while (reader.readRecord()) {
+//                if (!tempUnit.equals(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"))) {
+                if (!tempUnit.equals(reader.get(0))) {
+                    unit = new Unit();
+                    // unit.setUnitName(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"));
+                    unit.setUnitName(reader.get(0));
+                    fd.getUnitDAO().addOrUpdateUnitNameOnly(unit);
+                    unit = fd.getUnitDAO().getUnitByName(unit.getUnitName());
+                    tempUnit = unit.getUnitName();
+                }
+                unitAlt = new UnitAlternativeName();
+                unitAlt.setUnit(unit);
+//                unitAlt.setUnitAlternativeNameValue(new String(reader.get(1).getBytes("Cp1251"), "UTF-8"));
+                unitAlt.setUnitAlternativeNameValue(reader.get(1));
+                fd.getUnitAlternativeNameDAO().addUnitAlternativeName(unitAlt);
+//                mass = new String(reader.get(1).getBytes("Cp1251"), "UTF-8").split(",");
+//                for (int i = 0; i < mass.length; i++) {
+//                    atrAlt = new AttributeAlternativeName();
+//                    atrAlt.setAttribute(atr);
+//                    atrAlt.setAttributeAlernativeNameValue(mass[i]);
+//                    fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
+//                }
+
+            }
+            reader.close();
+        } catch (IOException ex) {
+        }
+    }
+
+    public void updateGroupeByFile(File file) {
+        CsvReader reader = null;
+//        Attribute atr;
+//        AttributeAlternativeName atrAlt;
+        Groupe groupe = null;
+        UnitAlternativeName unitAlt;
+        String[] mass;
+        String tempGroupe = "&&&???!!!ddsdsdwwww";
+        try {
+            reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
+        } catch (Exception ex) {
+        }
+        try {
+            while (reader.readRecord()) {
+//                if (!tempUnit.equals(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"))) {
+//                if (!tempGroupe.equals(reader.get(0))) {
+                groupe = new Groupe();
+                // unit.setUnitName(new String(reader.get(0).getBytes("Cp1251"), "UTF-8"));
+                groupe.setGroupeName(reader.get(0));
+                fd.getGroupeDAO().addOrUpdateGroupeNameOnly(groupe);
+//                    groupe = fd.getUnitDAO().getUnitByName(groupe.getUnitName());
+//                    tempGroupe = groupe.getUnitName();
+//                }
+//                unitAlt = new UnitAlternativeName();
+//                unitAlt.setUnit(groupe);
+////                unitAlt.setUnitAlternativeNameValue(new String(reader.get(1).getBytes("Cp1251"), "UTF-8"));
+//                unitAlt.setUnitAlternativeNameValue(reader.get(1));
+//                fd.getUnitAlternativeNameDAO().addUnitAlternativeName(unitAlt);
+//                mass = new String(reader.get(1).getBytes("Cp1251"), "UTF-8").split(",");
+//                for (int i = 0; i < mass.length; i++) {
+//                    atrAlt = new AttributeAlternativeName();
+//                    atrAlt.setAttribute(atr);
+//                    atrAlt.setAttributeAlernativeNameValue(mass[i]);
+//                    fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
+//                }
+
+            }
+            reader.close();
+        } catch (IOException ex) {
         }
     }
 
@@ -295,15 +403,67 @@ public class GrabliPro {
         return file;
     }
 
-    public File downloadAtr2PtData(File file) {
-        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
-        List<ProductType> pts = new ArrayList();
-        ProductType pt;
-        Iterator iter = ptsTemp.iterator();
+    public File downloadGroupesData(File file) {
+        List<Groupe> groupes = fd.getGroupeDAO().getAllGroupesOnly();
+        Groupe groupe;
+        UnitAlternativeName unitAlt;
+        CellStyle style;
+        String tempUnitName = "";
+
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            Workbook wb = new XSSFWorkbook();
+            Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
+            Row r = null;
+            Cell c = null;
+            wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
+            int i = 0;
+            Iterator it = groupes.iterator();
+            Iterator itAlt;
+            while (it.hasNext()) {
+                groupe = (Groupe) it.next();
+                if (tempUnitName.equals(groupe.getGroupeName())) {
+                    continue;
+                }
+//                itAlt = unit.getUnitAlternativeNames().iterator();
+//                while (itAlt.hasNext()) {
+//                    unitAlt = (UnitAlternativeName) itAlt.next();
+                r = s.createRow(i++);
+                c = r.createCell(0);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(groupe.getGroupeName());
+                c.setCellStyle(style);
+//                    c = r.createCell(1);
+//                    c.setCellType(c.CELL_TYPE_STRING);
+//                    c.setCellValue(unitAlt.getUnitAlternativeNameValue());
+//                    c.setCellStyle(style);
+//                }
+                tempUnitName = groupe.getGroupeName();
+            }
+            wb.write(out);
+            out.close();
+            wb = null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return file;
+    }
+
+    public File downloadGroupe2AttrData(File file) {
+        List<Groupe> grpTemp = fd.getGroupeDAO().getAllGroupesOnly();
+        List<Groupe> groupes = new ArrayList();
+        Groupe groupe;
+        Iterator iter = grpTemp.iterator();
         while (iter.hasNext()) {
-            pt = (ProductType) iter.next();
-            pt = fd.getProductTypeDAO().getProductTypeByIdWithAttributes(pt.getProductTypeId());
-            pts.add(pt);
+            groupe = (Groupe) iter.next();
+            groupe = fd.getGroupeDAO().getGroupeByIdWithAttributes(groupe.getGroupeId());
+            groupes.add(groupe);
         }
         Attribute atr;
         CellStyle style;
@@ -321,11 +481,63 @@ public class GrabliPro {
             style = createBorderedStyle(wb);
             style.setAlignment(CellStyle.ALIGN_LEFT);
             int i = 0;
-            for (Iterator it = pts.iterator(); it.hasNext();) {
-                pt = (ProductType) it.next();
-                iter = pt.getAttributes().iterator();
+            for (Iterator it = groupes.iterator(); it.hasNext();) {
+                groupe = (Groupe) it.next();
+                iter = groupe.getAttributes().iterator();
                 while (iter.hasNext()) {
                     atr = (Attribute) iter.next();
+                    r = s.createRow(i++);
+                    c = r.createCell(0);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(groupe.getGroupeName());
+                    c.setCellStyle(style);
+                    c = r.createCell(1);
+                    c.setCellType(c.CELL_TYPE_STRING);
+                    c.setCellValue(atr.getAttributeName());
+                    c.setCellStyle(style);
+                }
+            }
+            wb.write(out);
+            out.close();
+            wb = null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return file;
+    }
+
+    public File downloadPt2GroupeData(File file) {
+        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
+        List<ProductType> pts = new ArrayList();
+        ProductType pt;
+        Iterator iter = ptsTemp.iterator();
+        while (iter.hasNext()) {
+            pt = (ProductType) iter.next();
+            pt = fd.getProductTypeDAO().getProductTypeByIdWithGroupes(pt.getProductTypeId());
+            pts.add(pt);
+        }
+        Attribute atr;
+        Groupe groupe;
+        CellStyle style;
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            Workbook wb = new XSSFWorkbook();
+            Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
+            Row r = null;
+            Cell c = null;
+            wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
+            int i = 0;
+            for (Iterator it = pts.iterator(); it.hasNext();) {
+                pt = (ProductType) it.next();
+                iter = pt.getGroupes().iterator();
+                while (iter.hasNext()) {
+                    groupe = (Groupe) iter.next();
                     r = s.createRow(i++);
                     c = r.createCell(0);
                     c.setCellType(c.CELL_TYPE_STRING);
@@ -333,7 +545,7 @@ public class GrabliPro {
                     c.setCellStyle(style);
                     c = r.createCell(1);
                     c.setCellType(c.CELL_TYPE_STRING);
-                    c.setCellValue(atr.getAttributeName());
+                    c.setCellValue(groupe.getGroupeName());
                     c.setCellStyle(style);
                 }
             }
@@ -359,25 +571,50 @@ public class GrabliPro {
         return style;
     }
 
-    public void addAtr2Pt(int ptId, List atrIds) {
-        ProductType pt = fd.getProductTypeDAO().getProductTypeByIdWithAttributes(ptId);
+    public void addGroupe2Attr(int groupeId, List atrIds) {
+        Groupe groupe = fd.getGroupeDAO().getGroupeByIdWithAttributes(groupeId);
         Attribute atr;
         int i;
-        Iterator it = pt.getAttributes().iterator();
+        Iterator it = groupe.getAttributes().iterator();
 //        while (it.hasNext()) {
 //            atr = (Attribute) it.next();
 //            if (atrIds.contains(atr.getAttributeId())) {
 //                atrIds.remove(atr.getAttributeId());
 //            }
 //        }
-        pt.getAttributes().clear();
+        groupe.getAttributes().clear();
         it = atrIds.iterator();
         while (it.hasNext()) {
             i = (Integer) it.next();
             //atr = fd.getAttributeDAO().getAttributeById(i);
             atr = new Attribute();
             atr.setAttributeId(i);
-            pt.getAttributes().add(atr);
+            groupe.getAttributes().add(atr);
+        }
+        fd.getGroupeDAO().addGroupe(groupe);
+
+    }
+
+    public void addPt2Groupe(int ptId, List grpIds) {
+        ProductType pt = fd.getProductTypeDAO().getProductTypeByIdWithGroupes(ptId);
+//        Attribute atr;
+        Groupe groupe;
+        int i;
+        Iterator it = pt.getGroupes().iterator();
+//        while (it.hasNext()) {
+//            atr = (Attribute) it.next();
+//            if (atrIds.contains(atr.getAttributeId())) {
+//                atrIds.remove(atr.getAttributeId());
+//            }
+//        }
+        pt.getGroupes().clear();
+        it = grpIds.iterator();
+        while (it.hasNext()) {
+            i = (Integer) it.next();
+            //atr = fd.getAttributeDAO().getAttributeById(i);
+            groupe = new Groupe();
+            groupe.setGroupeId(i);
+            pt.getGroupes().add(groupe);
         }
         fd.getProductTypeDAO().addProductType(pt);
 
@@ -401,7 +638,7 @@ public class GrabliPro {
         fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeName(atrAlt);
     }
 
-     public void deleteUnitAltName(UnitAlternativeName unitAlt) {
+    public void deleteUnitAltName(UnitAlternativeName unitAlt) {
         fd.getUnitAlternativeNameDAO().deleteUnitAlternativeName(unitAlt);
     }
 

@@ -10,6 +10,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Attribute;
+import pojo.Groupe;
 import pojo.ProductType;
 
 /**
@@ -166,5 +167,25 @@ public class AttributeDAOImpl implements AttributeDAO {
             atr.getAttributeAlternativeNames().isEmpty();
         }
         return atrList;
+    }
+
+    public List<Attribute> getAttributesOnlyByGroupe(Groupe groupe) {
+        String query = "from Attribute a " +//
+                "join fetch a.groupes as groupe " + //
+                "where groupe = :groupe " + //
+                "order by a.attributeName";
+        return getHibernateTemplate().findByNamedParam(query, "groupe", groupe);
+    }
+
+    public List<Attribute> getAttributesOnlyByGroupeId(int id) {
+        Groupe groupe = new Groupe();
+        groupe.setGroupeId(id);
+        String query = "from Attribute a " +//
+                "join fetch a.groupes as groupe " + //
+                "where groupe = :groupe " + //
+                "order by a.attributeName";
+        List<Attribute> outList = getHibernateTemplate().findByNamedParam(query, "groupe", groupe);
+        groupe = null;
+        return outList;
     }
 }

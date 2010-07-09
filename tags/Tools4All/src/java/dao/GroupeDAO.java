@@ -37,6 +37,8 @@ public interface GroupeDAO {
 
     public Groupe getGroupeByName(String name);
 
+    public Groupe getGroupeByIdWithAttributes(int id);
+
     public boolean isGroupePresent(Groupe groupe);
 
     public boolean isGroupePresent(String groupeName);

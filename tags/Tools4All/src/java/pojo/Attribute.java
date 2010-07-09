@@ -14,6 +14,7 @@ public class Attribute implements java.io.Serializable {
     private String attributeAlternative;
     private List<Value> values = new ArrayList(0);
     private List<ProductType> productTypes = new ArrayList(0);
+    private List<Groupe> groupes = new ArrayList(0);
     private List<AttributeAlternativeName> attributeAlternativeNames = new ArrayList(0);
 
     public Attribute() {
@@ -74,6 +75,14 @@ public class Attribute implements java.io.Serializable {
         this.productTypes = productTypes;
     }
 
+    public List<Groupe> getGroupes() {
+        return groupes;
+    }
+
+    public void setGroupes(List<Groupe> groupes) {
+        this.groupes = groupes;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -96,7 +105,3 @@ public class Attribute implements java.io.Serializable {
         return hash;
     }
 }
-
-
-
-

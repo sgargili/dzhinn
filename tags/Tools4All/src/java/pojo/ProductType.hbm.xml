@@ -17,5 +17,9 @@
       <key column="product_type_id"/>
       <many-to-many class="pojo.Attribute" column="attribute_id"/>
     </bag>
+    <bag inverse="false" lazy="true" name="groupes" table="pt2groupe">
+      <key column="product_type_id"/>
+      <many-to-many class="pojo.Groupe" column="groupe_id"/>
+    </bag>
   </class>
 </hibernate-mapping>

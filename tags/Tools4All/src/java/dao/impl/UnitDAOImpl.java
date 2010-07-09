@@ -31,7 +31,15 @@ public class UnitDAOImpl implements UnitDAO {
     }
 
     public void addOrUpdateUnitNameOnly(Unit unit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            Unit newUnit;
+            newUnit = getUnitByName(unit.getUnitName());
+            newUnit.setUnitAlternativeNames(unit.getUnitAlternativeNames());
+            getHibernateTemplate().update(newUnit);
+        } catch (Exception ex) {
+            // ex.printStackTrace();
+            getHibernateTemplate().save(unit);
+        }
     }
 
     public void updateUnitAltNameOnly(Unit unit) {
@@ -47,13 +55,13 @@ public class UnitDAOImpl implements UnitDAO {
     }
 
     public List<Unit> getAllUnitsWithAltNames() {
-        String query = "from Unit as u " +
-                "join fetch u.unitAlternativeNames order by u.unitName";
+        String query = "from Unit as u "
+                + "join fetch u.unitAlternativeNames order by u.unitName";
         return getHibernateTemplate().find(query);
     }
 
     public List<Unit> getUnitsOnlyByTemplate(String template) {
-       template = "%" + template + "%";
+        template = "%" + template + "%";
         String query = "from Unit u where unitName like :value";
         //System.out.println(template);
         try {
@@ -76,14 +84,29 @@ public class UnitDAOImpl implements UnitDAO {
     }
 
     public Unit getUnitByName(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String query = "from Unit u where unitName = :value";
+        try {
+            return (Unit) getHibernateTemplate().findByNamedParam(query, "value", name).get(0);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 
     public boolean isUnitPresent(Unit unit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try {
+            unit = (Unit) getHibernateTemplate().load(Unit.class, unit.getUnitId());
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     public boolean isUnitPresent(String unitName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String query = "from Unit u where unitName = :value";
+        try {
+            return !getHibernateTemplate().findByNamedParam(query, "value", unitName).isEmpty();
+        } catch (Exception ex) {
+            return false;
+        }
     }
 }

@@ -7,6 +7,7 @@ package dao;
 import pojo.Attribute;
 import pojo.ProductType;
 import java.util.List;
+import pojo.Groupe;
 
 /**
  *
@@ -28,9 +29,13 @@ public interface AttributeDAO {
 
     public List<Attribute> getAttributesOnlyByProductType(ProductType productType);
 
+    public List<Attribute> getAttributesOnlyByGroupe(Groupe groupe);
+
     public List<Attribute> getAttributesWithAltNamesByProductType(ProductType productType);
 
     public List<Attribute> getAttributesOnlyByProductTypeId(int id);
+
+    public List<Attribute> getAttributesOnlyByGroupeId(int id);
 
     public List<Attribute> getAttributesOnlyByTemplate(String template);
 
