@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import service.AttributesXML;
 import service.GroupesXML;
 import service.OutputDataXML;
+import service.RegExpXML;
 import service.UnitsAltXML;
 import service.UnitsXML;
 
@@ -77,6 +78,9 @@ public class Service extends HttpServlet {
                 reqParams = reqParam.split("/");
                 String id = null;
                 String article = null;
+                String attributeValue = null;
+                String attributeId = null;
+                String regexpPreview = null;
                 for (int i = 0; i < reqParams.length; i++) {
                     if (reqParams[i].contains("sessionId")) {
                         id = reqParams[i].replaceFirst("sessionId=", "");
@@ -84,14 +88,32 @@ public class Service extends HttpServlet {
                     if (reqParams[i].contains("article")) {
                         article = new String(reqParams[i].replaceFirst("article=", "").getBytes(requestEnc), clientEnc);
                     }
+                    if (reqParams[i].contains("attributeId")) {
+                        attributeId = new String(reqParams[i].replaceFirst("attributeId=", "").getBytes(requestEnc), clientEnc);
+                    }
+                    if (reqParams[i].contains("attributeValue")) {
+                        attributeValue = new String(reqParams[i].replaceFirst("attributeValue=", "").getBytes(requestEnc), clientEnc);
+                    }
+
+                    if (reqParams[i].contains("regexpPreview")) {
+                        regexpPreview = new String(reqParams[i].replaceFirst("regexpPreview=", "").getBytes(requestEnc), clientEnc);
+                    }
                 }
+                //System.out.println("Before: --->>> " + attributeId + " ||| " + attributeValue);
                 OutputDataXML odXML = new OutputDataXML();
                 if (id != null) {
                     out.println(odXML.getOutputDataBySessionId(Long.parseLong(id)));
                 } else if (article != null) {
                     out.println(odXML.getOutputDataByArticle(article));
+                } else if (regexpPreview.equals("before")) {
+                    if (attributeValue != null) {
+                        out.println(odXML.getOutputDataByAttributeBefore(attributeValue));
+                    }
+                } else if (regexpPreview.equals("after")) {
+                    if (attributeValue != null) {
+                        out.println(odXML.getOutputDataByAttributeAfter(attributeId, attributeValue));
+                    }
                 } else {
-
                     out.println(odXML.getAllOutputData());
                 }
             } else if (request.getParameter("request").contains("attributes")) {
@@ -180,7 +202,7 @@ public class Service extends HttpServlet {
                     }
                     if (reqParams[i].contains("template")) {
 //                        template = new String(reqParams[i].replaceFirst("template=", "").getBytes(requestEnc), clientEnc);
-                        template =reqParams[i].replaceFirst("template=", "");
+                        template = reqParams[i].replaceFirst("template=", "");
                     }
 
                 }
@@ -221,6 +243,47 @@ public class Service extends HttpServlet {
                     out.println(attXML.getAttributesByGroupeName(grp));
                 } else {
                     out.println(attXML.getAllAttributes());
+                }
+            } else if (request.getParameter("request").contains("regexp")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("regexp/", "");
+                reqParams = reqParam.split("/");
+//                String regexpPattern = null;
+//                String regexpType = null;
+//                String regexpValue = "";
+//                String prefix = "";
+//                String suffix = "";
+//                String replacement = "";
+                String attributeId = "";
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("attributeId")) {
+                        attributeId = reqParams[i].replaceFirst("attributeId=", "");
+                    }
+//                    if (reqParams[i].contains("regexpType")) {
+//                        regexpType = new String(reqParams[i].replaceFirst("regexpType=", "").getBytes(requestEnc), clientEnc);
+//                    }
+//                    if (reqParams[i].contains("regexpValue")) {
+//                        regexpValue = new String(reqParams[i].replaceFirst("regexpValue=", "").getBytes(requestEnc), clientEnc);
+//                    }
+////                    if (reqParams[i].contains("prefix")) {
+////                        prefix = new String(reqParams[i].replaceFirst("prefix=", "").getBytes(requestEnc), clientEnc);
+////                    }
+////                    if (reqParams[i].contains("suffix")) {
+////                        suffix = new String(reqParams[i].replaceFirst("suffix=", "").getBytes(requestEnc), clientEnc);
+////                    }
+//                    if (reqParams[i].contains("replacement")) {
+//                        replacement = new String(reqParams[i].replaceFirst("replacement=", "").getBytes(requestEnc), clientEnc);
+//                    }
+
+                }
+                RegExpXML regXML = new RegExpXML();
+//                response.setContentType("text/html;charset=UTF-8");
+                if (attributeId != null && !attributeId.equals("")) {
+
+                    out.println(regXML.getRegexpsByAttributeId(Integer.parseInt(attributeId)));
+
+                } else {
+                    out.println("Sucks... Request is so lame... Where regexpType parametr?");
                 }
             }
             //out.println(xml);

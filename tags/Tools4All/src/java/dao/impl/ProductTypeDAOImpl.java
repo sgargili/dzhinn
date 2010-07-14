@@ -6,7 +6,11 @@ package dao.impl;
 
 import dao.ProductTypeDAO;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Attribute;
 import pojo.ProductType;
@@ -43,14 +47,14 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     }
 
     public void addOrUpdateProductTypeNameOnly(ProductType productType) {
-       // getHibernateTemplate().saveOrUpdate(productType);
+        // getHibernateTemplate().saveOrUpdate(productType);
         try {
             ProductType newProductType;
             newProductType = getProductTypeByName(productType.getProductTypeName());
             newProductType.setProductTypeAlternative(productType.getProductTypeAlternative());
             getHibernateTemplate().update(newProductType);
         } catch (Exception ex) {
-           // ex.printStackTrace();
+            // ex.printStackTrace();
             getHibernateTemplate().save(productType);
         }
 //        getHibernateTemplate().flush();
@@ -78,9 +82,9 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     public ProductType getProductTypeById(int id) {
         ProductType pt;
         pt = (ProductType) getHibernateTemplate().load(ProductType.class, id);
-        try{
-        pt.getProductTypeAlternative().equals("");
-        } catch(NullPointerException ex){
+        try {
+            pt.getProductTypeAlternative().equals("");
+        } catch (NullPointerException ex) {
             pt.setProductTypeAlternative("");
         }
         //pt.getAttributes().isEmpty();
@@ -138,7 +142,7 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
     }
 
     public ProductType getProductTypeByName(String productTypeName) {
-       String query = "from ProductType p where productTypeName = :value";
+        String query = "from ProductType p where productTypeName = :value";
         try {
             return (ProductType) getHibernateTemplate().findByNamedParam(query, "value", productTypeName).get(0);
         } catch (Exception ex) {
@@ -156,5 +160,72 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public List getProductTypeWithGroupesByNativeSQL() {
+        List result = null;
+        final String request =
+                "select "
+                + "    pt.product_type_name, "
+                + "    groupe.groupe_name "
+                + "from  "
+                + "    product_type as pt "
+                + "inner join "
+                + "    groupe as groupe "
+                + "inner join "
+                + "    pt2groupe as p2g "
+                + "on "
+                + "    pt.product_type_id = p2g.product_type_id "
+                + "    and "
+                + "    groupe.groupe_id = p2g.groupe_id "
+                + "order by "
+                + "    pt.product_type_name";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    public List getProductTypeWithGroupesWithAttributesByNativeSQL() {
+        List result = null;
+        final String request =
+                "select "
+                + "    pt.product_type_name, "
+                + "    groupe.groupe_name, "
+                + "    attribute.attribute_name "
+                + "from  "
+                + "    product_type as pt "
+                + "inner join "
+                + "    groupe as groupe "
+                + "inner join "
+                + "    attribute as attribute "
+                + "inner join "
+                + "    pt2groupe as p2g "
+                + "on "
+                + "    pt.product_type_id = p2g.product_type_id "
+                + "    and "
+                + "    groupe.groupe_id = p2g.groupe_id "
+                + "inner join "
+                + "    groupe2atr as g2a "
+                + "on "
+                + "    groupe.groupe_id = g2a.groupe_id "
+                + "    and "
+                + "    attribute.attribute_id = g2a.attribute_id "
+                + "order by "
+                + "    pt.product_type_name";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                return query.list();
+            }
+        });
+        return result;
     }
 }

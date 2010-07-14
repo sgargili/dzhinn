@@ -7,7 +7,11 @@ package dao.impl;
 import dao.GroupeDAO;
 import java.util.Iterator;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Attribute;
 import pojo.Groupe;
@@ -162,5 +166,34 @@ public class GroupeDAOImpl implements GroupeDAO {
         groupe = (Groupe) getHibernateTemplate().load(Groupe.class, id);
         groupe.getAttributes().isEmpty();
         return groupe;
+    }
+
+    public List getGroupesWithAttributesByNativeSQL() {
+        List result = null;
+        final String request =
+                "select "
+                + "    groupe.groupe_name, "
+                + "    atr.attribute_name "
+                + "from "
+                + "    groupe as groupe "
+                + "inner join "
+                + "    attribute as atr "
+                + "inner join "
+                + "    groupe2atr as g2a "
+                + "on "
+                + "    groupe.groupe_id = g2a.groupe_id "
+                + "    and "
+                + "    atr.attribute_id = g2a.attribute_id "
+                + "order by "
+                + "    groupe.groupe_name";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                return query.list();
+            }
+        });
+        return result;
     }
 }

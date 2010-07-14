@@ -33,7 +33,7 @@ public class AttributesXML {
         xstream.omitField(Attribute.class, "values");
         xstream.omitField(Attribute.class, "attributeAlternativeNames");
         xstream.omitField(Attribute.class, "productTypes");
-         xstream.omitField(Attribute.class, "groupes");
+        xstream.omitField(Attribute.class, "groupes");
 
     }
 

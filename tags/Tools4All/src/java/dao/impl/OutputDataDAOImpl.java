@@ -79,4 +79,15 @@ public class OutputDataDAOImpl implements OutputDataDAO {
             return null;
         }
     }
+
+    public List<OutputData> getOutputDataByAttribute(String attributeValue) {
+        List<OutputData> outputDataList;
+        String query = "from OutputData od where od.attribute = :value";
+        try {
+            outputDataList = getHibernateTemplate().findByNamedParam(query, "value", attributeValue);
+            return outputDataList;
+        } catch (Exception ex) {
+            return null;
+        }
+    }
 }

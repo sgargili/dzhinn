@@ -5,9 +5,11 @@
 package service;
 
 import com.thoughtworks.xstream.XStream;
+import convertors.XmlConvertor4RegexpAfter;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
+import pojo.Attribute;
 import pojo.OutputData;
 
 /**
@@ -51,10 +53,31 @@ public class OutputDataXML {
         return xml;
     }
 //
-public String getOutputDataByArticle(String article) {
+
+    public String getOutputDataByArticle(String article) {
         List<OutputData> odList = fd.getOutputDataDAO().getOutputDataByArticle(article);
         initXstream();
         xml = xstream.toXML(odList);
+        return xml;
+    }
+
+    public String getOutputDataByAttributeBefore(String attribute) {
+        List<OutputData> odList = fd.getOutputDataDAO().getOutputDataByAttribute(attribute);
+        initXstream();
+        xml = xstream.toXML(odList);
+        return xml;
+    }
+
+    public String getOutputDataByAttributeAfter(String attributeId, String attribute) {
+        //System.out.println(attributeId + " ||| " + attribute);
+        List<OutputData> odList = fd.getOutputDataDAO().getOutputDataByAttribute(attribute);
+        Attribute atr = fd.getAttributeDAO().getAttributeById(Integer.parseInt(attributeId));
+        Object[] objs = new Object[2];
+        objs[0] = odList;
+        objs[1] = atr;
+//        initXstream();
+        xstream.registerConverter(new XmlConvertor4RegexpAfter());
+        xml = xstream.toXML(objs);
         return xml;
     }
 }

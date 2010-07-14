@@ -33,6 +33,8 @@ public interface GroupeDAO {
 
     public List<Groupe> getGroupesOnlyByTemplate(String template);
 
+    public List getGroupesWithAttributesByNativeSQL();
+
     public Groupe getGroupeById(int id);
 
     public Groupe getGroupeByName(String name);

@@ -16,6 +16,7 @@ public class Attribute implements java.io.Serializable {
     private List<ProductType> productTypes = new ArrayList(0);
     private List<Groupe> groupes = new ArrayList(0);
     private List<AttributeAlternativeName> attributeAlternativeNames = new ArrayList(0);
+    private List<Regexp> regexps = new ArrayList(0);
 
     public Attribute() {
     }
@@ -81,6 +82,14 @@ public class Attribute implements java.io.Serializable {
 
     public void setGroupes(List<Groupe> groupes) {
         this.groupes = groupes;
+    }
+
+    public List<Regexp> getRegexps() {
+        return regexps;
+    }
+
+    public void setRegexps(List<Regexp> regexps) {
+        this.regexps = regexps;
     }
 
     @Override

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RegexpTypes>
+    <RegexpType>
+        <Id>1</Id>
+        <Name>Match</Name>
+    </RegexpType>
+    <RegexpType>
+        <Id>2</Id>
+        <Name>Split</Name>
+    </RegexpType>
+</RegexpTypes>

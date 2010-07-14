@@ -27,6 +27,8 @@ public interface AttributeDAO {
 
     public List<Attribute> getAllAttributesWithAltNames();
 
+    public List<Attribute> getAllAttributesWithRegexps();
+
     public List<Attribute> getAttributesOnlyByProductType(ProductType productType);
 
     public List<Attribute> getAttributesOnlyByGroupe(Groupe groupe);

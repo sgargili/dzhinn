@@ -7,6 +7,7 @@ import dao.InputDataDAO;
 import dao.OutputDataDAO;
 import dao.ParentRelateElementDAO;
 import dao.ProductTypeDAO;
+import dao.RegexpDAO;
 import dao.UnitAlternativeNameDAO;
 import dao.UnitDAO;
 import dao.ValueDAO;
@@ -67,5 +68,9 @@ public class FactoryDAO4Grabli {
 
     public UnitAlternativeNameDAO getUnitAlternativeNameDAO() {
         return (UnitAlternativeNameDAO) factory.getBean("UnitAlternativeNameDAO");
+    }
+
+    public RegexpDAO getRegexpDAO() {
+        return (RegexpDAO) factory.getBean("RegexpDAO");
     }
 }

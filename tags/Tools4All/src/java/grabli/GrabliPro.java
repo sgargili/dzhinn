@@ -28,6 +28,7 @@ import pojo.AttributeAlternativeName;
 import pojo.Groupe;
 import pojo.InputData;
 import pojo.OutputData;
+import pojo.Regexp;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
 
@@ -155,6 +156,31 @@ public class GrabliPro {
         return "Done";
     }
 
+    public String addRegexp(int attributeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+        if (novelty.equals("new")) {
+            Attribute at = new Attribute();
+            at.setAttributeId(attributeId);
+            Regexp reg = new Regexp();
+            reg.setAttribute(at);
+            reg.setRegexpPattern(regexpPattern);
+            reg.setRegexpType(regexpType);
+            reg.setRegexpReplacement(regexpReplacement);
+            fd.getRegexpDAO().addRegexp(reg);
+            return "Done";
+        } else {
+            Attribute at = new Attribute();
+            at.setAttributeId(attributeId);
+            Regexp reg = new Regexp();
+            reg.setAttribute(at);
+            reg.setRegexpId(Integer.parseInt(novelty));
+            reg.setRegexpPattern(regexpPattern);
+            reg.setRegexpType(regexpType);
+            reg.setRegexpReplacement(regexpReplacement);
+            fd.getRegexpDAO().addRegexp(reg);
+            return "Done";
+        }
+    }
+
     public String getAttributeAltName(int attributeId) {
         String out;
         Attribute atr;
@@ -171,9 +197,17 @@ public class GrabliPro {
         fd.getAttributeDAO().updateAttributeAltNameOnly(at);
     }
 
+    public Regexp updateRegexp(int regexpId) {
+        return fd.getRegexpDAO().getRegexpById(regexpId);
+    }
+
     public void deleteAttribute(Attribute at) {
         fd.getAttributeAlternativeNameDAO().deleteAttributeAlternativeNameByAttribute(at);
         fd.getAttributeDAO().deleteAttribute(at);
+    }
+
+    public void deleteRegexp(Regexp reg) {
+        fd.getRegexpDAO().deleteRegexp(reg);
     }
 
     public void deleteUnit(Unit unit) {
@@ -456,16 +490,18 @@ public class GrabliPro {
     }
 
     public File downloadGroupe2AttrData(File file) {
-        List<Groupe> grpTemp = fd.getGroupeDAO().getAllGroupesOnly();
-        List<Groupe> groupes = new ArrayList();
-        Groupe groupe;
-        Iterator iter = grpTemp.iterator();
-        while (iter.hasNext()) {
-            groupe = (Groupe) iter.next();
-            groupe = fd.getGroupeDAO().getGroupeByIdWithAttributes(groupe.getGroupeId());
-            groupes.add(groupe);
-        }
-        Attribute atr;
+//        List<Groupe> grpTemp = fd.getGroupeDAO().getAllGroupesOnly();
+//        List<Groupe> groupes = new ArrayList();
+//        Groupe groupe;
+//        Iterator iter = grpTemp.iterator();
+//        while (iter.hasNext()) {
+//            groupe = (Groupe) iter.next();
+//            groupe = fd.getGroupeDAO().getGroupeByIdWithAttributes(groupe.getGroupeId());
+//            groupes.add(groupe);
+//        }
+//        Attribute atr;
+        List groupes = fd.getGroupeDAO().getGroupesWithAttributesByNativeSQL();
+        Object[] objects;
         CellStyle style;
 
         try {
@@ -482,20 +518,20 @@ public class GrabliPro {
             style.setAlignment(CellStyle.ALIGN_LEFT);
             int i = 0;
             for (Iterator it = groupes.iterator(); it.hasNext();) {
-                groupe = (Groupe) it.next();
-                iter = groupe.getAttributes().iterator();
-                while (iter.hasNext()) {
-                    atr = (Attribute) iter.next();
-                    r = s.createRow(i++);
-                    c = r.createCell(0);
-                    c.setCellType(c.CELL_TYPE_STRING);
-                    c.setCellValue(groupe.getGroupeName());
-                    c.setCellStyle(style);
-                    c = r.createCell(1);
-                    c.setCellType(c.CELL_TYPE_STRING);
-                    c.setCellValue(atr.getAttributeName());
-                    c.setCellStyle(style);
-                }
+                objects = (Object[]) it.next();
+//                iter = groupe.getAttributes().iterator();
+//                while (iter.hasNext()) {
+//                atr = (Attribute) iter.next();
+                r = s.createRow(i++);
+                c = r.createCell(0);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[0].toString());
+                c.setCellStyle(style);
+                c = r.createCell(1);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[1].toString());
+                c.setCellStyle(style);
+//                }
             }
             wb.write(out);
             out.close();
@@ -507,17 +543,19 @@ public class GrabliPro {
     }
 
     public File downloadPt2GroupeData(File file) {
-        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
-        List<ProductType> pts = new ArrayList();
-        ProductType pt;
-        Iterator iter = ptsTemp.iterator();
-        while (iter.hasNext()) {
-            pt = (ProductType) iter.next();
-            pt = fd.getProductTypeDAO().getProductTypeByIdWithGroupes(pt.getProductTypeId());
-            pts.add(pt);
-        }
-        Attribute atr;
-        Groupe groupe;
+//        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
+//        List<ProductType> pts = new ArrayList();
+//        ProductType pt;
+//        Iterator iter = ptsTemp.iterator();
+//        while (iter.hasNext()) {
+//            pt = (ProductType) iter.next();
+//            pt = fd.getProductTypeDAO().getProductTypeByIdWithGroupes(pt.getProductTypeId());
+//            pts.add(pt);
+//        }
+        List pts = fd.getProductTypeDAO().getProductTypeWithGroupesByNativeSQL();
+//        Attribute atr;
+//        Groupe groupe;
+        Object[] objects;
         CellStyle style;
 
         try {
@@ -534,20 +572,80 @@ public class GrabliPro {
             style.setAlignment(CellStyle.ALIGN_LEFT);
             int i = 0;
             for (Iterator it = pts.iterator(); it.hasNext();) {
-                pt = (ProductType) it.next();
-                iter = pt.getGroupes().iterator();
-                while (iter.hasNext()) {
-                    groupe = (Groupe) iter.next();
-                    r = s.createRow(i++);
-                    c = r.createCell(0);
-                    c.setCellType(c.CELL_TYPE_STRING);
-                    c.setCellValue(pt.getProductTypeName());
-                    c.setCellStyle(style);
-                    c = r.createCell(1);
-                    c.setCellType(c.CELL_TYPE_STRING);
-                    c.setCellValue(groupe.getGroupeName());
-                    c.setCellStyle(style);
-                }
+                objects = (Object[]) it.next();
+//                iter = pt.getGroupes().iterator();
+//                while (iter.hasNext()) {
+//                groupe = (Groupe) iter.next();
+                r = s.createRow(i++);
+                c = r.createCell(0);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[0].toString());
+                c.setCellStyle(style);
+                c = r.createCell(1);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[1].toString());
+                c.setCellStyle(style);
+//                }
+            }
+            wb.write(out);
+            out.close();
+            wb = null;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return file;
+    }
+
+    public File downloadPt2Groupe2AttributeData(File file) {
+//        List<ProductType> ptsTemp = fd.getProductTypeDAO().getAllProductTypesOnly();
+//        List<ProductType> pts = new ArrayList();
+//        ProductType pt;
+//        Iterator iter = ptsTemp.iterator();
+//        while (iter.hasNext()) {
+//            pt = (ProductType) iter.next();
+//            pt = fd.getProductTypeDAO().getProductTypeByIdWithGroupes(pt.getProductTypeId());
+//            pts.add(pt);
+//        }
+        List pts = fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesByNativeSQL();
+//        Attribute atr;
+//        Groupe groupe;
+        Object[] objects;
+        CellStyle style;
+
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            Workbook wb = new XSSFWorkbook();
+            Sheet s = wb.createSheet();
+            s.setColumnWidth(0, 256 * 60);
+            s.setColumnWidth(1, 256 * 100);
+            s.setColumnWidth(2, 256 * 100);
+            s.setZoom(75, 100);
+            Row r = null;
+            Cell c = null;
+            wb.setSheetName(0, "Выходные данные");
+
+            style = createBorderedStyle(wb);
+            style.setAlignment(CellStyle.ALIGN_LEFT);
+            int i = 0;
+            for (Iterator it = pts.iterator(); it.hasNext();) {
+                objects = (Object[]) it.next();
+//                iter = pt.getGroupes().iterator();
+//                while (iter.hasNext()) {
+//                groupe = (Groupe) iter.next();
+                r = s.createRow(i++);
+                c = r.createCell(0);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[0].toString());
+                c.setCellStyle(style);
+                c = r.createCell(1);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[1].toString());
+                c.setCellStyle(style);
+                c = r.createCell(2);
+                c.setCellType(c.CELL_TYPE_STRING);
+                c.setCellValue(objects[2].toString());
+                c.setCellStyle(style);
+//                }
             }
             wb.write(out);
             out.close();

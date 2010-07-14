@@ -798,6 +798,9 @@ var atrMulti = new Ext.ux.form.MultiSelect({
             storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
             storeAtrAlt.clearData();
             storeAtrAlt.load();
+            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+            storeRegexp.clearData();
+            storeRegexp.load();
         //atrField.setValue("");
         }
     },
@@ -879,7 +882,8 @@ var atrMulti = new Ext.ux.form.MultiSelect({
                                     width: 300,
                                     icon: Ext.MessageBox.ERROR
                                 });
-                            } else {
+                            }
+                            else {
                                 atrField.setValue("");
                                 Ext.Msg.show({
                                     title: 'Выполненно!',
@@ -1009,6 +1013,380 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
                 storeAtrAlt.clearData();
                 storeAtrAlt.load();
             });
+        }
+    }
+    ],
+    ddReorder: true
+
+});
+
+var storeRegexpPreviewProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeRegexpPreview = new Ext.data.Store({
+    // load using HTTP
+    proxy: storeRegexpPreviewProxy,
+
+    // the return will be XML, so lets set up a reader
+    reader: new Ext.data.XmlReader({
+        record: 'Article',
+        id: 'Id'
+    }, [
+    {
+        name: 'value',
+        mapping: 'Value'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+// create the grid
+var gridRegexpPreview = new Ext.grid.GridPanel({
+    store: storeRegexpPreview,
+    columns: [
+    {
+        header: "Attribute Value",
+        width: 580,
+        dataIndex: 'value',
+        sortable: true
+    }
+    ]
+});
+
+
+
+
+var regexpTestWin = new Ext.Window({
+    //applyTo:'hello-win',
+    layout:'fit',
+    width:600,
+    height:300,
+    closeAction:'hide',
+    plain: true,
+
+    items: gridRegexpPreview,
+
+    buttons: [{
+        text:'Submit',
+        disabled:true
+    },{
+        text: 'Close',
+        handler: function(){
+            regexpTestWin.hide();
+        }
+    }]
+});
+
+var storeRegexpPreviewAfterProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeRegexpPreviewAfter = new Ext.data.Store({
+    // load using HTTP
+    proxy: storeRegexpPreviewAfterProxy,
+
+    // the return will be XML, so lets set up a reader
+    reader: new Ext.data.XmlReader({
+        record: 'Article',
+        id: 'Id'
+    }, [
+    {
+        name: 'valueBefore',
+        mapping: 'ValueBefore'
+    },{
+        name: 'valueAfter',
+        mapping: 'ValueAfter'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+// create the grid
+var gridRegexpPreviewAfter = new Ext.grid.GridPanel({
+    store: storeRegexpPreviewAfter,
+    columns: [
+    {
+        header: "Attribute Value Before",
+        width: 260,
+        dataIndex: 'valueBefore',
+        sortable: true
+    },
+    {
+        header: "Attribute Value After",
+        width: 260,
+        dataIndex: 'valueAfter',
+        sortable: true
+    }
+    ]
+});
+
+
+
+
+var regexpTestWinAfter = new Ext.Window({
+    //applyTo:'hello-win',
+    layout:'fit',
+    width:600,
+    height:300,
+    closeAction:'hide',
+    plain: true,
+
+    items: gridRegexpPreviewAfter,
+
+    buttons: [{
+        text: 'Close',
+        handler: function(){
+            regexpTestWinAfter.hide();
+        }
+    }]
+});
+
+
+var storeRegexpProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeRegexp = new Ext.data.Store({
+    proxy: storeRegexpProxy,
+    reader: new Ext.data.XmlReader({
+        record: 'Regexp',
+        id: 'Id'
+    }, [
+    {
+        name: 'name',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+var storeRegexpTypes = new Ext.data.Store({
+    url: "data/RegexpTypes.xml",
+    reader: new Ext.data.XmlReader({
+        record: 'RegexpType',
+        id: 'Id'
+    }, [
+    {
+        name: 'regexpType',
+        mapping: 'Name'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+
+
+var atrRegexp = new Ext.ux.form.MultiSelect({
+    name: 'multiselect',
+    width: 803,
+    height: 200,
+    allowBlank:true,
+    //autoScroll: true,
+    displayField:'name',
+    valueField: 'id',
+    minSelections:1,
+    minSelectionsText:'',
+    blankText:'Выберите язык!',
+    style:{
+        marginTop: '1px',
+        marginLeft: '0px',
+        marginBottom: '9px'
+    },
+    store: storeRegexp,
+    listeners: {
+        click: function() {
+            Ajax.updateRegexp(atrRegexp.getValue(), function(data) {
+                Ext.getCmp('regexpType').setValue(data[0]);
+                Ext.getCmp('regexpPattern').setValue(data[1]);
+                Ext.getCmp('regexpReplacement').setValue(data[2]);
+            });
+            
+        }
+    },
+    tbar:[{
+        text:'Type:'
+    },
+    {
+        xtype: 'combo',
+        store: storeRegexpTypes,
+        id:'regexpType',
+        displayField:'regexpType',
+        valueField: 'regexpType',
+        typeAhead: true,
+        mode: 'remote',
+        forceSelection: true,
+        triggerAction: 'all',
+        //emptyText:'Выберите автора...',
+        editable: false,
+        style: {
+            margin: '0px'
+        },
+        width:100
+    },
+    {
+        text:'Pattern:'
+    },{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'regexpPattern',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+            //alert(storeRegexp.getAt(0).get("id"));
+            //                if (e.getKey() == e.ENTER) {
+            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+            //                        if(data=="MultiSelectInRequest"){
+            //                            Ext.Msg.show({
+            //                                title: 'Предупреждение!!!',
+            //                                msg: 'Выбирайте только одно значение!',
+            //                                buttons: Ext.MessageBox.OK,
+            //                                width: 300,
+            //                                icon: Ext.MessageBox.ERROR
+            //                            });
+            //                        } else {
+            //                            Ext.getCmp('atrAltName').setValue("");
+            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+            //                            storeAtrAlt.clearData();
+            //                            storeAtrAlt.load();
+            //                        }
+            //                    });
+            //
+            //                }
+            }
+        }
+    },{
+        text:'Replace:'
+    },{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'regexpReplacement',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                
+            //                if (e.getKey() == e.ENTER) {
+            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+            //                        if(data=="MultiSelectInRequest"){
+            //                            Ext.Msg.show({
+            //                                title: 'Предупреждение!!!',
+            //                                msg: 'Выбирайте только одно значение!',
+            //                                buttons: Ext.MessageBox.OK,
+            //                                width: 300,
+            //                                icon: Ext.MessageBox.ERROR
+            //                            });
+            //                        } else {
+            //                            Ext.getCmp('atrAltName').setValue("");
+            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+            //                            storeAtrAlt.clearData();
+            //                            storeAtrAlt.load();
+            //                        }
+            //                    });
+            //
+            //                }
+            }
+        }
+    },{
+        text: 'Добавить/Обновить значение',
+        handler: function(){
+            if(storeRegexp.getCount()==0){
+                Ajax.addRegexp(atrMulti.getValue(),
+                    Ext.getCmp('regexpType').getValue(),
+                    Ext.getCmp('regexpPattern').getValue(),
+                    Ext.getCmp('regexpReplacement').getValue(),
+                    "new",
+                    function(data) {
+                        if(data=="MultiSelectInRequest"){
+                            Ext.Msg.show({
+                                title: 'Предупреждение!!!',
+                                msg: 'Выбирайте только одно значение!',
+                                buttons: Ext.MessageBox.OK,
+                                width: 300,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else {
+                            Ext.getCmp('regexpType').setValue("");
+                            Ext.getCmp('regexpPattern').setValue("");
+                            Ext.getCmp('regexpReplacement').setValue("");
+                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                            storeRegexp.clearData();
+                            storeRegexp.load();
+                        }
+                    });
+            } else {
+                Ajax.addRegexp(atrMulti.getValue(),
+                    Ext.getCmp('regexpType').getValue(),
+                    Ext.getCmp('regexpPattern').getValue(),
+                    Ext.getCmp('regexpReplacement').getValue(),
+                    storeRegexp.getAt(0).get("id"),
+                    function(data) {
+                        if(data=="MultiSelectInRequest"){
+                            Ext.Msg.show({
+                                title: 'Предупреждение!!!',
+                                msg: 'Выбирайте только одно значение!',
+                                buttons: Ext.MessageBox.OK,
+                                width: 300,
+                                icon: Ext.MessageBox.ERROR
+                            });
+                        } else {
+                            Ext.getCmp('regexpType').setValue("");
+                            Ext.getCmp('regexpPattern').setValue("");
+                            Ext.getCmp('regexpReplacement').setValue("");
+                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                            storeRegexp.clearData();
+                            storeRegexp.load();
+                        }
+                    });
+
+            }
+        }
+    },{
+        text: 'Удалить значения',
+        handler: function(){
+            Ajax.deleteRegexp(atrMulti.getValue(), 
+                atrRegexp.getValue(),
+                function(data) {
+                    storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                    storeRegexp.clearData();
+                    storeRegexp.load();
+                });
+        }
+    },{
+        text: 'Показать примеры',
+        handler: function(){
+            storeRegexpPreviewProxy.setUrl("Service.exml?request=outputData/regexpPreview=before/attributeValue=" + atrMulti.getValue('atr'));
+            storeRegexpPreview.clearData();
+            storeRegexpPreview.load();
+            regexpTestWin.show(this);
+        }
+    },{
+        text: 'Показать примеры работы',
+        handler: function(){
+            storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="+ atrMulti.getValue('atr')+"/attributeId="+atrMulti.getValue()+"/regexpPreview=after");
+            storeRegexpPreviewAfter.clearData();
+            storeRegexpPreviewAfter.load();
+            regexpTestWinAfter.show(this);
         }
     }
     ],
@@ -1208,9 +1586,9 @@ var atrForm = new Ext.form.FormPanel({
             items: [
             atrMulti,
             atrMultiAlt
-
             ]
-        }
+        },
+        atrRegexp
         ]
     }]
 });
@@ -2504,9 +2882,16 @@ var PT2GroupeForm = new Ext.form.FormPanel({
                         storeGroupeAll.load();
                     }
                 },{
-                    text: 'Загрузить файл со связками',
+                    text: 'Загрузить файл со связками ПТ->Группа',
                     handler:function(){
                         Ajax.downloadPt2GroupeData(function(data) {
+                            dwr.engine.openInDownload(data);
+                        });
+                    }
+                },{
+                    text: 'Загрузить файл со связками ПТ->Группа->Атрибут',
+                    handler:function(){
+                        Ajax.downloadPt2Groupe2AttributeData(function(data) {
                             dwr.engine.openInDownload(data);
                         });
                     }
@@ -2718,7 +3103,7 @@ var Grp2AtrForm = new Ext.form.FormPanel({
     //layout:'column',
     items: [{
         layout:'column',
-//        bodyStyle: 'padding:7px;',
+        //        bodyStyle: 'padding:7px;',
         items: [{
             layout:'column',
             bodyStyle: 'padding:7px;border:0;',
@@ -2792,7 +3177,7 @@ var Grp2AtrForm = new Ext.form.FormPanel({
                         }
                     }
                 },{
-                    text: 'Загрузить файл со связками',
+                    text: 'Загрузить файл со связками Группа->Атрибут',
                     handler:function(){
                         Ajax.downloadGroupe2AttrData(function(data) {
                             dwr.engine.openInDownload(data);
@@ -3329,6 +3714,35 @@ var comboAtrsToOut = new Ext.form.ComboBox({
 });
 //beforequery
 
+
+
+var comboRegexpTypes = new Ext.form.ComboBox({
+    store: storeRegexpTypes,
+    displayField:'regexpType',
+    valueField: 'regexpType',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    //emptyText:'Выберите автора...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:20
+//    listeners: {
+//        beforequery : function test(){
+//            if(article!=gridToOut.getSelectionModel().selection.record.data.article){
+//                pt = gridToOut.getSelectionModel().selection.record.data.pt;
+//                storeAtrsProxyToOut.setUrl("Service.exml?request=attributes/productType="+pt);
+//                article=gridToOut.getSelectionModel().selection.record.data.article;
+//                storeAtrsToOut.clearData();
+//                storeAtrsToOut.load();
+//            }
+//        }
+//    }
+});
+
 var outputDataStoreProxy = new Ext.data.HttpProxy({
     url:    'some url',
     method: 'GET'
@@ -3410,13 +3824,15 @@ var cm = new Ext.grid.ColumnModel({
 
     {
         header: "Value",
-        width: 60,
+        width: 30,
         sortable: true,
         dataIndex: 'value',
         editor: new fm.TextField({
             allowBlank: false
         })
     },
+
+
 
     {
         header: "Unit",
@@ -3426,7 +3842,15 @@ var cm = new Ext.grid.ColumnModel({
         editor: new fm.TextField({
             allowBlank: false
         })
-    },checkColumn
+    },
+    checkColumn,
+    {
+        header: "Regexp Type",
+        width: 15,
+        sortable: true,
+        dataIndex: 'attribute111111',
+        editor: comboRegexpTypes
+    }
     ]
 });
 
@@ -3681,13 +4105,13 @@ function updateGrabli(allCount, count){
         if(allCount==count){
             grabliPBarOutside.reset();
             grabliPBarOutside.updateText("Готово");
-            grabliPBar.getEl().fadeOut({
-                duration: 1
-            });
-            gridToOut.getEl().fadeIn({
-                duration: 2
-            });
-            gridToOut.show();
+        //            grabliPBar.getEl().fadeOut({
+        //                duration: 1
+        //            });
+        //            gridToOut.getEl().fadeIn({
+        //                duration: 2
+        //            });
+        //            gridToOut.show();
         }
     }, 500);
 }
@@ -4630,8 +5054,8 @@ Ext.onReady(function(){
     storeCsvColumnData.load();
     //Ext.grabliGrid.getEl().hide();
     grabliGrid.hide();
-    grabliPBar.hide();
-    gridToOut.hide();
+//    grabliPBar.hide();
+//gridToOut.hide();
 //grabliGrid.hide();
 //storeAtrAll.load();
 });

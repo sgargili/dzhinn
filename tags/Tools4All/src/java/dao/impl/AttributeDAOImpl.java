@@ -81,6 +81,7 @@ public class AttributeDAOImpl implements AttributeDAO {
         try {
             atr = (Attribute) getHibernateTemplate().findByNamedParam(query, "value", id).get(0);
             atr.getAttributeAlternativeNames().isEmpty();
+            atr.getRegexps().isEmpty();
             return atr;
         } catch (Exception ex) {
             return null;
@@ -151,6 +152,12 @@ public class AttributeDAOImpl implements AttributeDAO {
     public List<Attribute> getAllAttributesWithAltNames() {
         String query = "from Attribute as a " +
                 "join fetch a.attributeAlternativeNames";
+        return getHibernateTemplate().find(query);
+    }
+
+    public List<Attribute> getAllAttributesWithRegexps() {
+        String query = "from Attribute as a " +
+                "join fetch a.regexps";
         return getHibernateTemplate().find(query);
     }
 

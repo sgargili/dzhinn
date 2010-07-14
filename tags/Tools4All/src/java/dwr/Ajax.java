@@ -40,6 +40,7 @@ import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 import pojo.Groupe;
 import pojo.ProductType;
+import pojo.Regexp;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
 import value4it.MatchingData;
@@ -450,6 +451,23 @@ public class Ajax {
         return "Done";
     }
 
+    public String deleteRegexp(String attributeId, String regexpId) {
+        Regexp reg = new Regexp();
+        Attribute atr = new Attribute();
+        atr.setAttributeId(Integer.parseInt(attributeId));
+        reg.setAttribute(atr);
+        try {
+            reg.setRegexpId(Integer.parseInt(regexpId));
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+            reg = null;
+            return "MultiSelectInRequest";
+        }
+        GrabliPro gp = new GrabliPro();
+        gp.deleteRegexp(reg);
+        return "Done";
+    }
+
     public String updateAtrByFile(InputStream uploadFile, String fileName) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)");
         Matcher m = p.matcher(fileName);
@@ -522,6 +540,19 @@ public class Ajax {
         return gp.addGroupe(groupeName);
     }
 
+    public String addRegexp(int attributeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+        if (regexpPattern.replaceAll("\\s+|\\d+", "").equals("")
+                || regexpType.replaceAll("\\s+|\\d+", "").equals("")
+                || regexpReplacement.replaceAll("\\s+|\\d+", "").equals("")) {
+            return "Empty";
+        }
+//        if (FactoryDAO4Grabli.getInstance().getRegexpDAO().isRegexpPresent(regexpPattern.trim())) {
+//            return "Already Exist";
+//        }
+        GrabliPro gp = new GrabliPro();
+        return gp.addRegexp(attributeId, regexpType, regexpPattern, regexpReplacement, novelty);
+    }
+
     public String addGroupe2Attr(String groupeId, String atrIds) {
         String[] attributesIds = atrIds.split(",");
         List<Integer> atrList = new ArrayList();
@@ -568,6 +599,15 @@ public class Ajax {
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPt2GroupeData(file)));
         file.delete();
         return new FileTransfer("Pt2Groupe.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
+    }
+
+    public FileTransfer downloadPt2Groupe2AttributeData() throws Exception {
+        File file = new File("C://1/" + System.nanoTime() + ".xlsx");
+        GrabliPro gp = new GrabliPro();
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        buffer.write(FileUtils.readFileToByteArray(gp.downloadPt2Groupe2AttributeData(file)));
+        file.delete();
+        return new FileTransfer("Pt2Groupe2Attribute.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", buffer.toByteArray());
     }
 
     public String addAttributeAltName(String attributeId, String newAltName) {
@@ -699,5 +739,15 @@ public class Ajax {
 
     public String getSessionId() {
         return System.nanoTime() + "";
+    }
+
+    public String[] updateRegexp(String regexpId) {
+        String[] mass = new String[3];
+        GrabliPro gp = new GrabliPro();
+        Regexp reg = gp.updateRegexp(Integer.parseInt(regexpId));
+        mass[0] = reg.getRegexpType();
+        mass[1] = reg.getRegexpPattern();
+        mass[2] = reg.getRegexpReplacement();
+        return mass;
     }
 }

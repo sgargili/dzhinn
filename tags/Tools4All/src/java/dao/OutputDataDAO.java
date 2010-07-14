@@ -25,5 +25,7 @@ public interface OutputDataDAO {
 
     public List<OutputData> getOutputDataByArticle(String article);
 
+    public List<OutputData> getOutputDataByAttribute(String attributeValue);
+
     public boolean isOutputDataPresent(OutputData outputData);
 }
