@@ -17,6 +17,8 @@ public interface OutputDataDAO {
 
     public void deleteOutputData(OutputData outputData);
 
+    public void deleteOutputDataBySessionId(long sessionId);
+
     public List<OutputData> getAllOutputData();
 
     public OutputData getOutputDataById(int id);

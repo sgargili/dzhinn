@@ -255,9 +255,13 @@ public class Service extends HttpServlet {
 //                String suffix = "";
 //                String replacement = "";
                 String attributeId = "";
+                String groupeId = "";
                 for (int i = 0; i < reqParams.length; i++) {
                     if (reqParams[i].contains("attributeId")) {
                         attributeId = reqParams[i].replaceFirst("attributeId=", "");
+                    }
+                    if (reqParams[i].contains("groupeId")) {
+                        groupeId = reqParams[i].replaceFirst("groupeId=", "");
                     }
 //                    if (reqParams[i].contains("regexpType")) {
 //                        regexpType = new String(reqParams[i].replaceFirst("regexpType=", "").getBytes(requestEnc), clientEnc);
@@ -278,9 +282,12 @@ public class Service extends HttpServlet {
                 }
                 RegExpXML regXML = new RegExpXML();
 //                response.setContentType("text/html;charset=UTF-8");
-                if (attributeId != null && !attributeId.equals("")) {
+                if (attributeId != null
+                        && !attributeId.equals("")
+                        && groupeId != null
+                        && !groupeId.equals("")) {
 
-                    out.println(regXML.getRegexpsByAttributeId(Integer.parseInt(attributeId)));
+                    out.println(regXML.getRegexpsByAttributeIdByGroupeId(Integer.parseInt(attributeId), Integer.parseInt(groupeId)));
 
                 } else {
                     out.println("Sucks... Request is so lame... Where regexpType parametr?");

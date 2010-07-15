@@ -39,10 +39,12 @@ import org.directwebremoting.io.FileTransfer;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 import pojo.Groupe;
+import pojo.OutputData;
 import pojo.ProductType;
 import pojo.Regexp;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
+import processing.MergingProcessing;
 import value4it.MatchingData;
 import value4it.ValuePro;
 
@@ -451,11 +453,8 @@ public class Ajax {
         return "Done";
     }
 
-    public String deleteRegexp(String attributeId, String regexpId) {
+    public String deleteRegexp(String regexpId) {
         Regexp reg = new Regexp();
-        Attribute atr = new Attribute();
-        atr.setAttributeId(Integer.parseInt(attributeId));
-        reg.setAttribute(atr);
         try {
             reg.setRegexpId(Integer.parseInt(regexpId));
         } catch (NumberFormatException ex) {
@@ -540,17 +539,17 @@ public class Ajax {
         return gp.addGroupe(groupeName);
     }
 
-    public String addRegexp(int attributeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
-        if (regexpPattern.replaceAll("\\s+|\\d+", "").equals("")
-                || regexpType.replaceAll("\\s+|\\d+", "").equals("")
-                || regexpReplacement.replaceAll("\\s+|\\d+", "").equals("")) {
-            return "Empty";
-        }
+    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+//        if (regexpPattern.replaceAll("\\s+", "").equals("")
+//                || regexpType.replaceAll("\\s++", "").equals("")
+//                || regexpReplacement.replaceAll("\\s+", "").equals("")) {
+//            return "Empty";
+//        }
 //        if (FactoryDAO4Grabli.getInstance().getRegexpDAO().isRegexpPresent(regexpPattern.trim())) {
 //            return "Already Exist";
 //        }
         GrabliPro gp = new GrabliPro();
-        return gp.addRegexp(attributeId, regexpType, regexpPattern, regexpReplacement, novelty);
+        return gp.addRegexp(attributeId, groupeId, regexpType, regexpPattern, regexpReplacement, novelty);
     }
 
     public String addGroupe2Attr(String groupeId, String atrIds) {
@@ -626,6 +625,38 @@ public class Ajax {
         gp.addAttributeAltName(atrAlt);
         return "Done";
 
+    }
+
+    public String addAttributeAltNameByName(String attributeName, String newAltName) {
+        AttributeAlternativeName atrAlt = new AttributeAlternativeName();
+        Attribute atr = FactoryDAO4Grabli.getInstance().getAttributeDAO().getAttributeByName(attributeName);
+        atrAlt.setAttributeAlernativeNameValue(newAltName);
+        atrAlt.setAttribute(atr);
+        GrabliPro gp = new GrabliPro();
+        gp.addAttributeAltName(atrAlt);
+        return "Done";
+
+    }
+
+    public String updateOutputData(String outputDataRecord) {
+        String[] data = outputDataRecord.split("\\|\\|\\|");
+        OutputData od = new OutputData();
+        od.setOutputDataId(Integer.parseInt(data[0]));
+        od.setSessionId(Long.parseLong(data[1]));
+        od.setArticle(data[2]);
+        od.setProductType(data[3]);
+        od.setGroupe(data[4]);
+        od.setAttribute(data[5]);
+        od.setValue(data[6]);
+        od.setUnit(data[7]);
+//        od.setAvailable(Byte.parseByte(data[8]));
+        if (data[8].equals("true")) {
+            od.setAvailable((byte) 1);
+        } else {
+            od.setAvailable((byte) 0);
+        }
+        FactoryDAO4Grabli.getInstance().getOutputDataDAO().addOutputData(od);
+        return "Done";
     }
 
     public String addUnitAltName(String unitId, String newAltName) {
@@ -705,34 +736,22 @@ public class Ajax {
         return outId + "";
     }
 
-    public String processGrabli() {
-        ScriptSession ss;
-        ScriptBuffer script;
-        ss = WebContextFactory.get().getScriptSession();
-        for (int count = 1; count <= 20; count++) {
-            try {
-                script = new ScriptBuffer();
-                script.appendScript("updateGrabli(");
-                script.appendData(20);
-                script.appendScript(",");
-                script.appendData(count);
-                script.appendScript(");");
-                ss.addScript(script);
-                script = null;
-                Thread.sleep(300);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-
+    public String processGrabli(long sessionId) {
+        FactoryDAO4Grabli.getInstance().getOutputDataDAO().deleteOutputDataBySessionId(sessionId);
+        try {
+            MergingProcessing mp = MergingProcessing.getInstance();
+            mp.merge(sessionId);
+            return "Done";
+        } catch (Exception ex) {
+            return ex.getMessage();
         }
-        return "Done";
     }
 
-    public FileTransfer updateDownloadData(String inputData) throws Exception {
+    public FileTransfer updateDownloadData(long sessionId, String inputData) throws Exception {
         File file = new File("C://" + System.nanoTime() + ".csv");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, inputData)));
+        buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, sessionId, inputData)));
         file.delete();
         return new FileTransfer("uploadData.csv", "text/csv", buffer.toByteArray());
     }

@@ -8,8 +8,10 @@ import com.thoughtworks.xstream.XStream;
 import convertors.XmlConvertor4Regexp;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import pojo.Attribute;
+import pojo.Regexp;
 
 /**
  *
@@ -24,7 +26,13 @@ public class RegExpXML {
     String xml;
 
     private void initXstream() {
-        xstream.alias("Regexps", Attribute.class);
+        xstream.alias("Regexps", List.class);
+        xstream.alias("Regexp", Regexp.class);
+        xstream.aliasField("Id", Regexp.class, "regexpId");
+        xstream.aliasField("Name", Regexp.class, "regexpPattern");
+        xstream.omitField(Regexp.class, "attribute");
+        xstream.omitField(Regexp.class, "regexpType");
+        xstream.omitField(Regexp.class, "groupeId");
 
     }
 
@@ -35,12 +43,42 @@ public class RegExpXML {
         return xml;
     }
 
-    public String getRegexpsByAttributeId(int atrId) {
-        Attribute atr = fd.getAttributeDAO().getAttributeById(atrId);
+//    public String getRegexpsByAttributeId(int atrId) {
+//        Attribute atr = fd.getAttributeDAO().getAttributeById(atrId);
+//        //regexpList = fd.getRegexpDAO().getRegexpsByAttribute(atr);
+//        initXstream();
+//        xstream.registerConverter(new XmlConvertor4Regexp());
+//        xml = xstream.toXML(atr);
+//        return xml;
+//    }
+    public String getRegexpsByAttributeIdByGroupeId(int atrId, int groupeId) {
+//        Attribute atr = fd.getAttributeDAO().getAttributeById(atrId);
         //regexpList = fd.getRegexpDAO().getRegexpsByAttribute(atr);
+
         initXstream();
-        xstream.registerConverter(new XmlConvertor4Regexp());
-        xml = xstream.toXML(atr);
+        List out = fd.getRegexpDAO().getRegexpsByAttributeByGroupeByNativeSQL(atrId, groupeId);
+        List<Regexp> regexps = new ArrayList();
+        Iterator it = out.iterator();
+        Regexp reg;
+        Object[] objs;
+        while (it.hasNext()) {
+            objs = (Object[]) it.next();
+            reg = new Regexp();
+            reg.setRegexpId((Integer) objs[0]);
+//            reg.setRegexpType((String) objs[1]);
+            reg.setRegexpPattern("Type: <b>"
+                    + (String) objs[1]
+                    + "</b> Pattern: <b>"
+                    + (String) objs[2]
+                    + "</b> Replacement: <b>"
+                    + (String) objs[3]
+                    + "</b>");
+//            reg.setRegexpReplacement((String) objs[3]);
+            regexps.add(reg);
+
+        }
+//        xstream.registerConverter(new XmlConvertor4Regexp());
+        xml = xstream.toXML(regexps);
         return xml;
     }
 

@@ -8,16 +8,19 @@
       <generator class="identity"/>
     </id>
     <many-to-one class="pojo.Attribute" fetch="select" name="attribute">
-      <column name="attribute_id" not-null="true"/>
+      <column name="attribute_id"/>
     </many-to-one>
     <property name="regexpType" type="string">
-      <column length="10" name="regexp_type"/>
+      <column length="10" name="regexp_type" default="Match"/>
     </property>
     <property name="regexpPattern" type="string">
-      <column length="512" name="regexp_pattern"/>
+      <column length="512" name="regexp_pattern" default="(.*)"/>
     </property>
     <property name="regexpReplacement" type="string">
-      <column length="1024" name="regexp_replacement"/>
+      <column length="1024" name="regexp_replacement" default="$1"/>
+    </property>
+    <property name="groupeId" type="java.lang.Integer">
+      <column name="groupe_id"/>
     </property>
   </class>
 </hibernate-mapping>

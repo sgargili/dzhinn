@@ -162,12 +162,13 @@ public class GrabliPro {
         return "Done";
     }
 
-    public String addRegexp(int attributeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
         if (novelty.equals("new")) {
             Attribute at = new Attribute();
             at.setAttributeId(attributeId);
             Regexp reg = new Regexp();
             reg.setAttribute(at);
+            reg.setGroupeId(groupeId);
             reg.setRegexpPattern(regexpPattern);
             reg.setRegexpType(regexpType);
             reg.setRegexpReplacement(regexpReplacement);
@@ -178,6 +179,7 @@ public class GrabliPro {
             at.setAttributeId(attributeId);
             Regexp reg = new Regexp();
             reg.setAttribute(at);
+            reg.setGroupeId(groupeId);
             reg.setRegexpId(Integer.parseInt(novelty));
             reg.setRegexpPattern(regexpPattern);
             reg.setRegexpType(regexpType);
@@ -746,61 +748,109 @@ public class GrabliPro {
         fd.getUnitAlternativeNameDAO().deleteUnitAlternativeName(unitAlt);
     }
 
-    private void parseInputData(String inputData) {
+//    private void parseInputData(String inputData) {
+//        String[] rows = null;
+//        String[] cells = null;
+//        String ptS, attributeS, grp = "", tempArt = "someArticle4Test";
+//        ProductType pt;
+//        Groupe gp;
+//        Attribute atr;
+//        AttributeAlternativeName atrAlt;
+//        List<Groupe> gps = new ArrayList();
+//        Iterator it;
+//        Iterator iter;
+//        Iterator iterat;
+//        OutputData od;
+//        byte bt = 0;
+//        rows = inputData.split("\\|\\|\\|");
+//        for (int i = 0; i < rows.length; i++) {
+//            cells = rows[i].split("[$][$][$]");
+//
+//            ptS = cells[2];
+//            attributeS = cells[3];
+//            if (!tempArt.equals(cells[1])) {
+//                pt = fd.getProductTypeDAO().getProductTypeByName(ptS);
+//                gps = fd.getGroupeDAO().getGroupesByProductType(pt);
+//            }
+//            it = gps.iterator();
+//            while (it.hasNext()) {
+//                gp = (Groupe) it.next();
+//                iter = gp.getAttributes().iterator();
+//                while (iter.hasNext()) {
+//                    atr = (Attribute) iter.next();
+//                    if (atr.getAttributeName().equals(attributeS)) {
+//                        attributeS = atr.getAttributeName();
+//                        grp = gp.getGroupeName();
+//                    }
+//                    iterat = atr.getAttributeAlternativeNames().iterator();
+//                    while (iterat.hasNext()) {
+//                        atrAlt = (AttributeAlternativeName) iterat.next();
+//                        if (atrAlt.getAttributeAlernativeNameValue().equals(attributeS)) {
+//                            attributeS = atr.getAttributeName();
+//                            grp = gp.getGroupeName();
+//                        }
+//                    }
+//                }
+//            }
+//
+//
+//            od = new OutputData();
+//            od.setOutputDataId(Integer.parseInt(cells[0]));
+//            od.setArticle(cells[1]);
+//            od.setProductType(cells[2]);
+//            od.setGroupe(grp);
+//            od.setAttribute(attributeS);
+//            od.setValue(cells[4]);
+//            od.setUnit(cells[5]);
+//            if (cells[6].equals("true")) {
+//                bt = 1;
+//                od.setAvailable(bt);
+//            } else {
+//                bt = 0;
+//                od.setAvailable(bt);
+//            }
+//            fd.getOutputDataDAO().addOutputData(od);
+//            tempArt = cells[1];
+//            attributeS = "";
+//            grp = "";
+//        }
+//    }
+    private void parseInputData(long sessionId, String inputData) {
         String[] rows = null;
         String[] cells = null;
-        String ptS, attributeS, grp = "", tempArt = "someArticle4Test";
-        ProductType pt;
-        Groupe gp;
-        Attribute atr;
-        AttributeAlternativeName atrAlt;
-        List<Groupe> gps = new ArrayList();
-        Iterator it;
-        Iterator iter;
-        Iterator iterat;
+        int id;
+        String article, productType, groupe, attribute, value, unit;
+//        String ptS, attributeS, grp = "", tempArt = "someArticle4Test";
+//        ProductType pt;
+//        Groupe gp;
+//        Attribute atr;
+//        AttributeAlternativeName atrAlt;
+//        List<Groupe> gps = new ArrayList();
+//        Iterator it;
+//        Iterator iter;
+//        Iterator iterat;
         OutputData od;
         byte bt = 0;
         rows = inputData.split("\\|\\|\\|");
         for (int i = 0; i < rows.length; i++) {
             cells = rows[i].split("[$][$][$]");
-
-            ptS = cells[2];
-            attributeS = cells[3];
-            if (!tempArt.equals(cells[1])) {
-                pt = fd.getProductTypeDAO().getProductTypeByName(ptS);
-                gps = fd.getGroupeDAO().getGroupesByProductType(pt);
-            }
-            it = gps.iterator();
-            while (it.hasNext()) {
-                gp = (Groupe) it.next();
-                iter = gp.getAttributes().iterator();
-                while (iter.hasNext()) {
-                    atr = (Attribute) iter.next();
-                    if (atr.getAttributeName().equals(attributeS)) {
-                        attributeS = atr.getAttributeName();
-                        grp = gp.getGroupeName();
-                    }
-                    iterat = atr.getAttributeAlternativeNames().iterator();
-                    while (iterat.hasNext()) {
-                        atrAlt = (AttributeAlternativeName) iterat.next();
-                        if (atrAlt.getAttributeAlernativeNameValue().equals(attributeS)) {
-                            attributeS = atr.getAttributeName();
-                            grp = gp.getGroupeName();
-                        }
-                    }
-                }
-            }
-
-
+            id = Integer.parseInt(cells[0]);
+            article = cells[1];
+            productType = cells[2];
+            groupe = cells[3];
+            attribute = cells[4];
+            value = cells[5];
+            unit = cells[6];
             od = new OutputData();
-            od.setOutputDataId(Integer.parseInt(cells[0]));
-            od.setArticle(cells[1]);
-            od.setProductType(cells[2]);
-            od.setGroupe(grp);
-            od.setAttribute(attributeS);
-            od.setValue(cells[4]);
-            od.setUnit(cells[5]);
-            if (cells[6].equals("true")) {
+            od.setSessionId(sessionId);
+           // od.setOutputDataId(id);
+            od.setArticle(article);
+            od.setProductType(productType);
+            od.setGroupe(groupe);
+            od.setAttribute(attribute);
+            od.setValue(value);
+            od.setUnit(unit);
+            if (cells[7].equals("true")) {
                 bt = 1;
                 od.setAvailable(bt);
             } else {
@@ -808,15 +858,14 @@ public class GrabliPro {
                 od.setAvailable(bt);
             }
             fd.getOutputDataDAO().addOutputData(od);
-            tempArt = cells[1];
-            attributeS = "";
-            grp = "";
+
         }
     }
 
-    public File updateParseData(File file, String inputData) {
-        parseInputData(inputData);
-        List<OutputData> ods = fd.getOutputDataDAO().getAllOutputData();
+    public File updateParseData(File file, long sessionId, String inputData) {
+//        fd.getOutputDataDAO().deleteOutputDataBySessionId(sessionId);
+//        parseInputData(sessionId, inputData);
+        List<OutputData> ods = fd.getOutputDataDAO().getOutputDataBySessionId(sessionId);
         OutputData od;
         CsvWriter writer = new CsvWriter(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
         String[] mass = new String[7];

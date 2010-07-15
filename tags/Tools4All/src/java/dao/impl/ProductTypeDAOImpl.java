@@ -265,6 +265,7 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
                 + "inner join "
                 + "   `regexp` as reg "
                 + "on  reg.attribute_id = attribute.attribute_id "
+                + "and reg.groupe_id = groupe.groupe_id "
                 + "where "
                 + "    pt.product_type_id = :value "
                 + "order by "

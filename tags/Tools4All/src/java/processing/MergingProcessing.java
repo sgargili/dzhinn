@@ -2,10 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tempfile;
+package processing;
 
 import factories.FactoryDAO4Grabli;
-import factories.FactoryHTTP;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -14,33 +13,37 @@ import pojo.OutputData;
 import pojo.ProductType;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
-import processing.NixProcessing;
 
 /**
  *
  * @author APOPOV
  */
-public class TestNix {
+public class MergingProcessing {
 
-    public static void main(String[] args) {
-//        NixProcessing nix = NixProcessing.getInstance();
-//        nix.getProductDescFromHTML(123L, "Article1", "VideoCard", "http://www.nix.ru/autocatalog/asus/asustek_video/2Gb_PCIE_DDR5_ASUS_EAH5970_2DIS_2GD5_DualDVI_MiniDP_ATI_HD5970_92057.html");
-//   FactoryHTTP fack = FactoryHTTP.getInstance();
-//        System.out.println(fack.getHttpData().downloadContentAsString("http://2ip.ru/", "Windows-1251", true));
+    private static MergingProcessing instance = null;
+
+    public static MergingProcessing getInstance() {
+        if (instance == null) {
+            instance = new MergingProcessing();
+        }
+        return instance;
+    }
+
+    public void merge(long sessionId) {
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
-        List inputData = fd.getInputDataDAO().getInputDataBySessionId(71278742760062L);
+        List inputData = fd.getInputDataDAO().getInputDataBySessionId(sessionId);
 //        System.out.println(inputData.size());
         List outputData = new ArrayList();
         ProductType pt;
 //        System.out.println(outputData.size());
         List units = fd.getUnitDAO().getAllUnitsWithAltNames();
-        System.out.println(units.size());
+//        System.out.println(units.size());
         String tempPT = "@@@###!!!";
         List out = new ArrayList();
         byte available = new Byte("1");
         Boolean bool = false;
         OutputData od;
-        OutputData odNew;
+//        OutputData odNew;
         InputData id;
         Unit unit;
         UnitAlternativeName unitAlt;
@@ -91,7 +94,8 @@ public class TestNix {
                         od.setSessionId(id.getSessionId());
                         od.setAvailable(available);
 
-                        out.add(od);
+//                        out.add(od);
+                        fd.getOutputDataDAO().addOutputData(od);
                     } else {
                         regexpMass = id.getAttributeValue().split(((String) objs[5]).trim());
                         for (int i = 0; i < regexpMass.length; i++) {
@@ -117,7 +121,8 @@ public class TestNix {
                             od.setSessionId(id.getSessionId());
                             od.setAvailable(available);
 
-                            out.add(od);
+//                            out.add(od);
+                            fd.getOutputDataDAO().addOutputData(od);
                         }
                     }
 
@@ -132,24 +137,24 @@ public class TestNix {
                 od.setValue(id.getAttributeValue().trim());
                 od.setSessionId(id.getSessionId());
                 od.setAvailable(available);
-                out.add(od);
+//                out.add(od);
+                fd.getOutputDataDAO().addOutputData(od);
             }
             bool = false;
             tempPT = id.getProductType();
         }
 //        System.out.println(out.size());
-        Iterator iter = out.iterator();
-        while (iter.hasNext()) {
-            od = (OutputData) iter.next();
-            System.out.print(od.getArticle() + " ||| ");
-            System.out.print(od.getProductType() + " ||| ");
-            System.out.print(od.getGroupe() + " ||| ");
-            System.out.print(od.getAttribute() + " ||| ");
-            System.out.print(od.getValue() + " ||| ");
-            System.out.print(od.getUnit() + " ||| ");
-            System.out.println(od.getAvailable());
-
-        }
-//        System.out.println(fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesByIdByNativeSQL(253).size());
+//        Iterator iter = out.iterator();
+//        while (iter.hasNext()) {
+//            od = (OutputData) iter.next();
+//            System.out.print(od.getArticle() + " ||| ");
+//            System.out.print(od.getProductType() + " ||| ");
+//            System.out.print(od.getGroupe() + " ||| ");
+//            System.out.print(od.getAttribute() + " ||| ");
+//            System.out.print(od.getValue() + " ||| ");
+//            System.out.print(od.getUnit() + " ||| ");
+//            System.out.println(od.getAvailable());
+//
+//        }
     }
 }

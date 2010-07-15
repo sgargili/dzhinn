@@ -24,6 +24,8 @@ public interface RegexpDAO {
 
     public List<Regexp> getRegexpsByAttribute(Attribute attribute);
 
+    public List getRegexpsByAttributeByGroupeByNativeSQL(int attributeId, int groupeId);
+
     public boolean isRegexpPresent(Regexp regexp);
 
     public boolean isRegexpPresent(String regexpValue);

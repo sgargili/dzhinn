@@ -10,6 +10,8 @@ function byId(id){
     return Ext.getDom(id);
 }
 
+var tempValue="";
+
 
 // Блок хранилищ...
 
@@ -798,9 +800,9 @@ var atrMulti = new Ext.ux.form.MultiSelect({
             storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
             storeAtrAlt.clearData();
             storeAtrAlt.load();
-            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
-            storeRegexp.clearData();
-            storeRegexp.load();
+        //            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+        //            storeRegexp.clearData();
+        //            storeRegexp.load();
         //atrField.setValue("");
         }
     },
@@ -1190,7 +1192,7 @@ var storeRegexpTypes = new Ext.data.Store({
 
 var atrRegexp = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
-    width: 803,
+    width: 820,
     height: 200,
     allowBlank:true,
     //autoScroll: true,
@@ -1311,7 +1313,8 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
         text: 'Добавить/Обновить значение',
         handler: function(){
             if(storeRegexp.getCount()==0){
-                Ajax.addRegexp(atrMulti.getValue(),
+                Ajax.addRegexp(Ext.getCmp('multiG2ASel').getValue(),
+                    comboGroupes.getValue(),
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
@@ -1329,13 +1332,17 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
-                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
+                                + Ext.getCmp('multiG2ASel').getValue()
+                                +"/groupeId="
+                                +comboGroupes.getValue());
                             storeRegexp.clearData();
                             storeRegexp.load();
                         }
                     });
             } else {
-                Ajax.addRegexp(atrMulti.getValue(),
+                Ajax.addRegexp(Ext.getCmp('multiG2ASel').getValue(),
+                    comboGroupes.getValue(),
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
@@ -1353,7 +1360,10 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
-                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                            storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
+                                + Ext.getCmp('multiG2ASel').getValue()
+                                +"/groupeId="
+                                +comboGroupes.getValue());
                             storeRegexp.clearData();
                             storeRegexp.load();
                         }
@@ -1364,10 +1374,12 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
     },{
         text: 'Удалить значения',
         handler: function(){
-            Ajax.deleteRegexp(atrMulti.getValue(), 
-                atrRegexp.getValue(),
+            Ajax.deleteRegexp(atrRegexp.getValue(),
                 function(data) {
-                    storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId=" + atrMulti.getValue());
+                    storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
+                        + Ext.getCmp('multiG2ASel').getValue()
+                        +"/groupeId="
+                        +comboGroupes.getValue());
                     storeRegexp.clearData();
                     storeRegexp.load();
                 });
@@ -1587,8 +1599,8 @@ var atrForm = new Ext.form.FormPanel({
             atrMulti,
             atrMultiAlt
             ]
-        },
-        atrRegexp
+        }
+        
         ]
     }]
 });
@@ -2454,7 +2466,8 @@ var unitsForm = new Ext.form.FormPanel({
                                 });
                             }
                         });
-                    } else{
+                    }
+                    else{
                         Ext.Msg.show({
                             title: 'Предупреждение!',
                             msg: 'Укажите название Единицы измерения!',
@@ -3146,7 +3159,8 @@ var Grp2AtrForm = new Ext.form.FormPanel({
             //            toLegend:'Привязано',
             multiselects: [{
                 width: 400,
-                height: 500,
+                height: 400,
+                id: 'multiG2AAvail',
                 store: storeAtrAll,
                 displayField: 'atr',
                 valueField: 'id',
@@ -3187,10 +3201,21 @@ var Grp2AtrForm = new Ext.form.FormPanel({
                 ]
             },{
                 width: 400,
-                height: 500,
+                height: 400,
                 store: storeGroupe2Atr,
+                id: 'multiG2ASel',
                 displayField: 'atr',
                 valueField: 'id',
+                listeners: {
+                    click: function(){
+                        storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
+                            + Ext.getCmp('multiG2ASel').getValue()
+                            +"/groupeId="
+                            +comboGroupes.getValue());
+                        storeRegexp.clearData();
+                        storeRegexp.load();
+                    }
+                },
                 tbar:[{
                     text: 'Сохранить связи Группы - Атрибуты',
                     handler:function(){
@@ -3244,8 +3269,11 @@ var Grp2AtrForm = new Ext.form.FormPanel({
                 }]
             }]
         // }]
-        }]
-    }]
+        },
+        atrRegexp]
+    }
+    ]
+
 //    ,
 //
 //    buttons: [{
@@ -3510,10 +3538,10 @@ var grabliFile = new Ext.form.FormPanel({
                             grabliPBar.getEl().fadeIn({
                                 duration: 1.5
                             });
-//                            Ajax.processGrabli(function(data) {
-//                                //dwr.engine.openInDownload(data);
-//                                });
-//                            grabliPBar.show();
+                        //                            Ajax.processGrabli(function(data) {
+                        //                                //dwr.engine.openInDownload(data);
+                        //                                });
+                        //                            grabliPBar.show();
                         }
                     });
                 //                    Ajax.getSessionId(function(data) {
@@ -3573,9 +3601,9 @@ var grabliGrid = new Ext.form.FormPanel({
             grabliPBar.getEl().fadeIn({
                 duration: 1.5
             });
-            Ajax.processGrabli(function(data) {
-                //dwr.engine.openInDownload(data);
-                });
+            //            Ajax.processGrabli(function(data) {
+            //                //dwr.engine.openInDownload(data);
+            //                });
             grabliPBar.show();
         //            if(Atr2PTForm.getForm().isValid()){
         //                Ext.Msg.alert('Submitted Values', 'The following will be sent to the server: <br />'+
@@ -3755,6 +3783,9 @@ var outputDataStore = new Ext.data.GroupingStore({
         field: 'article',
         direction: "ASC"
     },
+    //    listners:{
+    //
+    //    },
     groupField:'article',
     //url: 'Service.exml?request=outputData',
     reader: new Ext.data.XmlReader({
@@ -3765,12 +3796,18 @@ var outputDataStore = new Ext.data.GroupingStore({
             name: 'id',
             mapping: 'Id'
         },{
+            name: 'sessionId',
+            mapping: 'Sid'
+        },{
             name: 'article',
             mapping: 'Name'
         }, {
             name:'pt',
             mapping:'PT',
             type: 'string'
+        }, {
+            name:'groupe',
+            mapping:'Groupe'
         }, {
             name:'attribute',
             mapping:'Attribute'
@@ -3801,19 +3838,25 @@ var cm = new Ext.grid.ColumnModel({
     {
         //id:'article',
         header: "Article",
-        width: 10,
+        width: 7,
         sortable: true,
         dataIndex: 'article'
 
     },
     {
         header: "Product Type",
-        width: 15,
+        width: 10,
         sortable: true,
         editable: true,
         dataIndex: 'pt'
     },
-
+    {
+        header: "Groupe",
+        width: 20,
+        sortable: true,
+        dataIndex: 'groupe',
+        editor: comboAtrsToOut
+    },
     {
         header: "Attribute",
         width: 20,
@@ -3831,9 +3874,6 @@ var cm = new Ext.grid.ColumnModel({
             allowBlank: false
         })
     },
-
-
-
     {
         header: "Unit",
         width: 10,
@@ -3843,14 +3883,7 @@ var cm = new Ext.grid.ColumnModel({
             allowBlank: false
         })
     },
-    checkColumn,
-    {
-        header: "Regexp Type",
-        width: 15,
-        sortable: true,
-        dataIndex: 'attribute111111',
-        editor: comboRegexpTypes
-    }
+    checkColumn
     ]
 });
 
@@ -3863,7 +3896,42 @@ var gridToOut = new xg.EditorGridPanel({
     view: new Ext.grid.GroupingView({
         forceFit:true,
         startCollapsed:true,
-        groupTextTpl: '{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})'
+        groupTextTpl: '<p style="color:{[values.rs.length > 1 ? "blue" : "green"]}">{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})</p>',
+        listeners:{
+            rowupdated: function(view, firstRow, record){
+                //                alert(tempValue + " ||| "+ record.getChanges().attribute);
+                if(record.getChanges().attribute != 'undefined'
+                    && record.getChanges().attribute != null){
+                    Ajax.addAttributeAltNameByName(record.getChanges().attribute, tempValue, function(data) {
+                        });
+                }
+                tempValue = record.get('id')
+                + "|||"
+                + record.get('sessionId')
+                + "|||"
+                + record.get('article')
+                + "|||"
+                + record.get('pt')
+                + "|||"
+                + record.get('groupe')
+                + "|||"
+                + record.get('attribute')
+                + "|||"
+                + record.get('value')
+                + "|||"
+                + record.get('unit')
+                + "|||"
+                + record.get('available');
+
+                Ajax.updateOutputData(tempValue, function(data) {
+                    });
+                tempValue = "";
+            }
+        },
+        getRowClass : function (row, index)
+        {
+            return 'new-supper-class-green';
+        }
     }),
     frame:true,
     height: 500,
@@ -3875,6 +3943,13 @@ var gridToOut = new xg.EditorGridPanel({
     //renderTo: document.body,
     style: {
         marginTop: '3px'
+    },
+    listeners: {
+        celldblclick:function(grid, rowIndex, columnIndex, e) {
+            var record = grid.getStore().getAt(rowIndex);  // Get the Record
+            var fieldName = grid.getColumnModel().getDataIndex(columnIndex); // Get field name
+            tempValue = record.get(fieldName);
+        }
     },
     buttons: [{
         text: 'Сохранить и получить файл',
@@ -3890,6 +3965,8 @@ var gridToOut = new xg.EditorGridPanel({
                     "$$$"+
                     record.data.pt+
                     "$$$"+
+                    record.data.groupe+
+                    "$$$"+
                     record.data.attribute+
                     "$$$"+
                     record.data.value+
@@ -3900,8 +3977,8 @@ var gridToOut = new xg.EditorGridPanel({
                     "|||";
                 }
                 )
-
-            Ajax.updateDownloadData(data, function(data) {
+            //                        alert(Ext.getCmp('SessionIdUp').getValue()+data);
+            Ajax.updateDownloadData(Ext.getCmp('SessionIdUp').getValue(), data, function(data) {
                 dwr.engine.openInDownload(data);
             });
         }
@@ -3909,15 +3986,6 @@ var gridToOut = new xg.EditorGridPanel({
 
 
     tbar:[{
-        text: 'Загрузить данные Сессии',
-        handler:function(){
-            outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
-            outputDataStore.load();
-        //            storeAtrAllProxy.setUrl("Attribute.exml?template=" + Ext.getCmp('atrTemplate').getValue());
-        //            storeAtrAll.clearData();
-        //            storeAtrAll.load();
-        }
-    },{
         xtype: 'textfield',
         hideLabel: true,
         height:22,
@@ -3936,6 +4004,27 @@ var gridToOut = new xg.EditorGridPanel({
                 //                    storeAtrAll.load();
                 }
             }
+        }
+    },
+    {
+        text: 'Загрузить данные Сессии',
+        handler:function(){
+            outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
+            outputDataStore.clearData();
+            outputDataStore.load();
+        }
+    },
+    {
+        text: 'Обновить/Загрузить данные Сессии',
+        handler:function(){
+            Ajax.processGrabli(Ext.getCmp('SessionIdUp').getValue(),function(data) {
+                if(data=='Done'){
+                    outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
+                    outputDataStore.clearData();
+                    outputDataStore.load();
+                }
+            });
+
         }
     }
     ]

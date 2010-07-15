@@ -8,6 +8,7 @@ import dao.RegexpDAO;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -79,5 +80,31 @@ public class RegexpDAOImpl implements RegexpDAO {
 
     public Regexp getRegexpById(int regexpId) {
         return (Regexp) getHibernateTemplate().get(Regexp.class, regexpId);
+    }
+
+    public List getRegexpsByAttributeByGroupeByNativeSQL(final int attributeId, final int groupeId) {
+        List result = null;
+        final String request =
+                "select "
+                + "    reg.regexp_id, "
+                + "    reg.regexp_type, "
+                + "    reg.regexp_pattern, "
+                + "    reg.regexp_replacement "
+                + "from  "
+                + "    `regexp` as reg "
+                + "where "
+                + "    reg.attribute_id = :attributeId "
+                + "    and reg.groupe_id = :groupeId";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setInteger("attributeId", attributeId);
+                query.setInteger("groupeId", groupeId);
+                return query.list();
+            }
+        });
+        return result;
     }
 }

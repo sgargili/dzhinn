@@ -6,7 +6,11 @@ package dao.impl;
 
 import dao.OutputDataDAO;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.OutputData;
 
@@ -89,5 +93,17 @@ public class OutputDataDAOImpl implements OutputDataDAO {
         } catch (Exception ex) {
             return null;
         }
+    }
+
+    public void deleteOutputDataBySessionId(final long sessionId) {
+        final String request = "delete from OutputData od where od.sessionId = :sessionId";
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setParameter("sessionId", sessionId);
+                return query.executeUpdate();
+            }
+        });
     }
 }
