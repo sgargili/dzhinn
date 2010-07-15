@@ -3510,10 +3510,10 @@ var grabliFile = new Ext.form.FormPanel({
                             grabliPBar.getEl().fadeIn({
                                 duration: 1.5
                             });
-                            Ajax.processGrabli(function(data) {
-                                //dwr.engine.openInDownload(data);
-                                });
-                            grabliPBar.show();
+//                            Ajax.processGrabli(function(data) {
+//                                //dwr.engine.openInDownload(data);
+//                                });
+//                            grabliPBar.show();
                         }
                     });
                 //                    Ajax.getSessionId(function(data) {

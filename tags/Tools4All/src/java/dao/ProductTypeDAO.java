@@ -40,6 +40,8 @@ public interface ProductTypeDAO {
 
     public List getProductTypeWithGroupesWithAttributesByNativeSQL();
 
+    public List getProductTypeWithGroupesWithAttributesByIdByNativeSQL(final int productTypeId);
+
     public ProductType getProductTypeById(int id);
 
     public ProductType getProductTypeByName(String productTypeName);

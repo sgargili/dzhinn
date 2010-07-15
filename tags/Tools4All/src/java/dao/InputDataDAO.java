@@ -19,6 +19,8 @@ public interface InputDataDAO {
 
     public List<InputData> getAllInputData();
 
+    public List<InputData> getInputData(int firstResult, int maxResult);
+
     public InputData getInputDataById(int id);
 
     public List<InputData> getInputDataBySessionId(long sessionId);

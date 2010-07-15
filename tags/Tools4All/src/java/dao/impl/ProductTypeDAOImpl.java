@@ -228,4 +228,56 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
         });
         return result;
     }
+
+    public List getProductTypeWithGroupesWithAttributesByIdByNativeSQL(final int productTypeId) {
+        List result = null;
+        final String request =
+                "select "
+                + "    pt.product_type_name, "
+                + "    groupe.groupe_name, "
+                + "    attribute.attribute_name, "
+                + "    aan.attribute_alernative_name_value, "
+                + "    reg.regexp_type, "
+                + "    reg.regexp_pattern, "
+                + "    reg.regexp_replacement "
+                + "from  "
+                + "    product_type as pt "
+                + "inner join "
+                + "    groupe as groupe "
+                + "inner join "
+                + "    attribute as attribute "
+                + "inner join "
+                + "    pt2groupe as p2g "
+                + "on "
+                + "    pt.product_type_id = p2g.product_type_id "
+                + "    and "
+                + "    groupe.groupe_id = p2g.groupe_id "
+                + "inner join "
+                + "    groupe2atr as g2a "
+                + "on "
+                + "    groupe.groupe_id = g2a.groupe_id "
+                + "    and "
+                + "    attribute.attribute_id = g2a.attribute_id "
+                + "inner join "
+                + "    attribute_alternative_name as aan "
+                + "on "
+                + "    attribute.attribute_id = aan.attribute_id "
+                + "inner join "
+                + "   `regexp` as reg "
+                + "on  reg.attribute_id = attribute.attribute_id "
+                + "where "
+                + "    pt.product_type_id = :value "
+                + "order by "
+                + "    pt.product_type_name ";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setInteger("value", productTypeId);
+                return query.list();
+            }
+        });
+        return result;
+    }
 }

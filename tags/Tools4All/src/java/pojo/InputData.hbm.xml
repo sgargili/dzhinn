@@ -1,26 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 09.06.2010 15:56:25 by Hibernate Tools 3.2.1.GA -->
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14.07.2010 22:31:47 by Hibernate Tools 3.2.1.GA -->
 <hibernate-mapping>
-  <class catalog="grabli" name="pojo.InputData" table="input_data">
-    <id name="inputDataId" type="java.lang.Integer">
-      <column name="input_data_id"/>
-      <generator class="identity"/>
-    </id>
-    <property name="sessionId" type="java.lang.Long">
-      <column name="session_id"/>
-    </property>
-    <property name="article" type="string">
-      <column length="512" name="article"/>
-    </property>
-    <property name="description" type="string">
-      <column length="2048" name="description"/>
-    </property>
-    <property name="productType" type="string">
-      <column length="512" name="product_type"/>
-    </property>
-    <property name="url" type="string">
-      <column length="65535" name="url"/>
-    </property>
-  </class>
+    <class name="pojo.InputData" table="input_data" catalog="grabli">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="sessionId" type="long">
+            <column name="session_id" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="full_name" length="65535" />
+        </property>
+        <property name="manufacturer" type="string">
+            <column name="manufacturer" />
+        </property>
+        <property name="article" type="string">
+            <column name="article" />
+        </property>
+        <property name="productType" type="string">
+            <column name="product_type" />
+        </property>
+        <property name="picUrl" type="string">
+            <column name="pic_url" length="65535" />
+        </property>
+        <property name="groupe" type="string">
+            <column name="groupe" />
+        </property>
+        <property name="attribute" type="string">
+            <column name="attribute" />
+        </property>
+        <property name="attributeValue" type="string">
+            <column name="attribute_value" length="65535" />
+        </property>
+    </class>
 </hibernate-mapping>

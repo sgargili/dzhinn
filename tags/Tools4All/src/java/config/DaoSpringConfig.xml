@@ -20,10 +20,10 @@
                 <value>pojo/AttributeAlternativeName.hbm.xml</value>
                 <value>pojo/OutputData.hbm.xml</value>
                 <value>pojo/Groupe.hbm.xml</value>
-                <value>pojo/InputData.hbm.xml</value>
                 <value>pojo/Unit.hbm.xml</value>
                 <value>pojo/UnitAlternativeName.hbm.xml</value>
                 <value>pojo/Regexp.hbm.xml</value>
+                <value>pojo/InputData.hbm.xml</value>
             </list>
         </property>
 
@@ -318,7 +318,7 @@
 
     </bean>
 
-
+   
     <!--Интерцепторы sessionFactory. Решение проблем с LazyLoading... Конец.-->
 
 </beans>

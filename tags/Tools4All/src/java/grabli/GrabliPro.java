@@ -9,6 +9,7 @@ import java.io.IOException;
 import pojo.ProductType;
 import csv.CsvReader;
 import csv.CsvWriter;
+import factories.FactoryHTTPData2XmlParser;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -23,14 +24,19 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.directwebremoting.ScriptBuffer;
+import org.directwebremoting.ScriptSession;
+import org.directwebremoting.WebContextFactory;
 import pojo.Attribute;
 import pojo.AttributeAlternativeName;
 import pojo.Groupe;
 import pojo.InputData;
+import pojo.InputData_1;
 import pojo.OutputData;
 import pojo.Regexp;
 import pojo.Unit;
 import pojo.UnitAlternativeName;
+import processing.NixProcessing;
 
 /**
  *
@@ -836,24 +842,59 @@ public class GrabliPro {
     }
 
     public void fillInputData(InputStream is, long sessionId) {
+        ScriptSession ss;
+        ScriptBuffer script;
+        ss = WebContextFactory.get().getScriptSession();
+
         CsvReader reader = null;
-        InputData inpData;
+
+        Object[] objs = new Object[4];
+        List<Object[]> objList = new ArrayList();
+        Iterator it;
+        NixProcessing nix = NixProcessing.getInstance();
+
+
+
+
         try {
+            int count = 1;
+            int allCount = 0;
             reader = new CsvReader(is, ',', Charset.forName("UTF-8"));
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        try {
             while (reader.readRecord()) {
-                inpData = new InputData();
-                inpData.setSessionId(sessionId);
-                inpData.setArticle(reader.get(0));
-                inpData.setDescription(reader.get(1));
-                inpData.setProductType(reader.get(2));
-                inpData.setUrl(reader.get(3));
-                fd.getInputDataDAO().addInputData(inpData);
+                allCount++;
+                objs = new Object[4];
+                objs[0] = reader.get(0);
+                objs[1] = reader.get(1);
+                objs[2] = reader.get(2);
+                objs[3] = reader.get(3);
+                objList.add(objs);
             }
             reader.close();
+
+            it = objList.iterator();
+            while (it.hasNext()) {
+                objs = (Object[]) it.next();
+                nix.getProductDescFromHTML(sessionId, (String) objs[0], (String) objs[1], (String) objs[3]);
+                try {
+                    script = new ScriptBuffer();
+                    script.appendScript("updateGrabli(");
+                    script.appendData(allCount);
+                    script.appendScript(",");
+                    script.appendData(count++);
+                    script.appendScript(");");
+                    ss.addScript(script);
+                    script = null;
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+//                inpData = new InputData();
+//                inpData.setSessionId(sessionId);
+//                inpData.setArticle(reader.get(0));
+//                inpData.setDescription(reader.get(1));
+//                inpData.setProductType(reader.get(2));
+//                inpData.setUrl(reader.get(3));
+//                fd.getInputDataDAO().addInputData(inpData);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

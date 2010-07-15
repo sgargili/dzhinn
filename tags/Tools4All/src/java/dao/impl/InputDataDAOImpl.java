@@ -6,7 +6,11 @@ package dao.impl;
 
 import dao.InputDataDAO;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.InputData;
 
@@ -38,15 +42,21 @@ public class InputDataDAOImpl implements InputDataDAO {
         return (List<InputData>) getHibernateTemplate().loadAll(InputData.class);
     }
 
+    public List<InputData> getInputData(final int firstResult, final int maxResult) {
+        final String request = "from InputData id";
+        return (List<InputData>) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setFirstResult(firstResult);
+                query.setMaxResults(maxResult);
+                return query.list();
+            }
+        });
+    }
+
     public InputData getInputDataById(int id) {
-        InputData inputData;
-        String query = "from InputData id where inputDataId = :value";
-        try {
-            inputData = (InputData) getHibernateTemplate().findByNamedParam(query, "value", id).get(0);
-            return inputData;
-        } catch (Exception ex) {
-            return null;
-        }
+        return (InputData) getHibernateTemplate().load(InputData.class, id);
     }
 
     public List<InputData> getInputDataBySessionId(long sessionId) {
@@ -70,7 +80,7 @@ public class InputDataDAOImpl implements InputDataDAO {
     public boolean isInputDataPresent(InputData inputData) {
         String query = "from InputData id where inputDataId = :value";
         try {
-            return !getHibernateTemplate().findByNamedParam(query, "value", inputData.getInputDataId()).isEmpty();
+            return !getHibernateTemplate().findByNamedParam(query, "value", inputData.getId()).isEmpty();
         } catch (Exception ex) {
             return false;
         }

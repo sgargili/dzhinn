@@ -73,4 +73,7 @@ public class FactoryDAO4Grabli {
     public RegexpDAO getRegexpDAO() {
         return (RegexpDAO) factory.getBean("RegexpDAO");
     }
+//     public InputDataDAO getInputDataDAO() {
+//        return (InputDataDAO) factory.getBean("InputDataDAO");
+//    }
 }
