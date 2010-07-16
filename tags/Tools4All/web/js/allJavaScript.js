@@ -1387,15 +1387,15 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
     },{
         text: 'Показать примеры',
         handler: function(){
-            storeRegexpPreviewProxy.setUrl("Service.exml?request=outputData/regexpPreview=before/attributeValue=" + atrMulti.getValue('atr'));
+            storeRegexpPreviewProxy.setUrl("Service.exml?request=outputData/regexpPreview=before/attributeValue=" + Ext.getCmp('multiG2ASel').getValue('atr'));
             storeRegexpPreview.clearData();
             storeRegexpPreview.load();
-            regexpTestWin.show(this);
+        regexpTestWin.show(this);
         }
     },{
         text: 'Показать примеры работы',
         handler: function(){
-            storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="+ atrMulti.getValue('atr')+"/attributeId="+atrMulti.getValue()+"/regexpPreview=after");
+            storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="+ Ext.getCmp('multiG2ASel').getValue('atr')+"/attributeId="+Ext.getCmp('multiG2ASel').getValue()+"/regexpPreview=after");
             storeRegexpPreviewAfter.clearData();
             storeRegexpPreviewAfter.load();
             regexpTestWinAfter.show(this);
@@ -3887,6 +3887,24 @@ var cm = new Ext.grid.ColumnModel({
     ]
 });
 
+function colorByPercentAvailable(row){
+    var allCount = row.length;
+    var count = 0;
+    for(i=0; i < allCount; i++){
+        if(row[i].data.available == true){
+            count++;
+        }
+    }
+    var percent = count * 100 / allCount;
+    if(percent == 100){
+        return '#00cc00'; //green
+    } else if(percent>=60){
+        return '#ff6600'; //orange
+    } else{
+        return '#ff0000'; //red
+    }
+}
+
 var gridToOut = new xg.EditorGridPanel({
     store: outputDataStore,
     id:'gridToOut',
@@ -3896,7 +3914,7 @@ var gridToOut = new xg.EditorGridPanel({
     view: new Ext.grid.GroupingView({
         forceFit:true,
         startCollapsed:true,
-        groupTextTpl: '<p style="color:{[values.rs.length > 1 ? "blue" : "green"]}">{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})</p>',
+        groupTextTpl: '<p style="color:{[colorByPercentAvailable(values.rs)]}">{text} ({[values.rs.length]} {[values.rs.length > 1 ? "Items" : "Item"]})</p>',
         listeners:{
             rowupdated: function(view, firstRow, record){
                 //                alert(tempValue + " ||| "+ record.getChanges().attribute);
@@ -3930,7 +3948,10 @@ var gridToOut = new xg.EditorGridPanel({
         },
         getRowClass : function (row, index)
         {
-            return 'new-supper-class-green';
+            if (row.data.available == true) {
+                return 'outputData-green';
+            }
+            return 'outputData-red';
         }
     }),
     frame:true,
@@ -4098,7 +4119,8 @@ function addProductType(data){
                 width: 300,
                 icon: Ext.MessageBox.ERROR
             });
-        } else {
+        }
+        else {
             storePts.clearData();
             storePts.load();
             Ext.Msg.show({

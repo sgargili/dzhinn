@@ -17,8 +17,12 @@ html,body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,p,bloc
     zoom: 1;
 }
 
-.new-supper-class-green{
-    background-color: green;
+.outputData-green{
+    background-color: #a4e0a4;
+}
+
+.outputData-red{
+    background-color: #c64e4e;
 }
 
 .ext-el-mask-msg {

@@ -39,7 +39,6 @@ public class MergingProcessing {
         List units = fd.getUnitDAO().getAllUnitsWithAltNames();
 //        System.out.println(units.size());
         String tempPT = "@@@###!!!";
-        List out = new ArrayList();
         byte available = new Byte("1");
         Boolean bool = false;
         OutputData od;
@@ -136,7 +135,7 @@ public class MergingProcessing {
                 od.setProductType(id.getProductType().trim());
                 od.setValue(id.getAttributeValue().trim());
                 od.setSessionId(id.getSessionId());
-                od.setAvailable(available);
+                od.setAvailable((byte) 0);
 //                out.add(od);
                 fd.getOutputDataDAO().addOutputData(od);
             }
