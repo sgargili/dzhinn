@@ -56,7 +56,7 @@ public class RegExpXML {
         //regexpList = fd.getRegexpDAO().getRegexpsByAttribute(atr);
 
         initXstream();
-        List out = fd.getRegexpDAO().getRegexpsByAttributeByGroupeByNativeSQL(atrId, groupeId);
+        List out = fd.getRegexpDAO().getRegexpsByAttributeByGroupeByNativeSQL(groupeId, atrId);
         List<Regexp> regexps = new ArrayList();
         Iterator it = out.iterator();
         Regexp reg;
@@ -72,6 +72,8 @@ public class RegExpXML {
                     + (String) objs[2]
                     + "</b> Replacement: <b>"
                     + (String) objs[3]
+                    + "</b> Сoefficient: <b>"
+                    + (Integer) objs[4]
                     + "</b>");
 //            reg.setRegexpReplacement((String) objs[3]);
             regexps.add(reg);

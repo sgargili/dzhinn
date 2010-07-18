@@ -162,16 +162,33 @@ public class GrabliPro {
         return "Done";
     }
 
-    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String regexpCoef, String novelty) {
         if (novelty.equals("new")) {
             Attribute at = new Attribute();
             at.setAttributeId(attributeId);
             Regexp reg = new Regexp();
             reg.setAttribute(at);
             reg.setGroupeId(groupeId);
-            reg.setRegexpPattern(regexpPattern);
-            reg.setRegexpType(regexpType);
-            reg.setRegexpReplacement(regexpReplacement);
+            if (!regexpPattern.equals("") && regexpPattern != null) {
+                reg.setRegexpPattern(regexpPattern);
+            } else {
+                reg.setRegexpPattern("(.*)");
+            }
+            if (!regexpType.equals("") && regexpType != null) {
+                reg.setRegexpType(regexpType);
+            } else {
+                reg.setRegexpType("ReplaceFirst");
+            }
+            if (!regexpReplacement.equals("") && regexpReplacement != null) {
+                reg.setRegexpReplacement(regexpReplacement);
+            } else {
+                reg.setRegexpReplacement("$1");
+            }
+            try {
+                reg.setCoefficient(Integer.parseInt(regexpCoef));
+            } catch (NumberFormatException ex) {
+                reg.setCoefficient(1);
+            }
             fd.getRegexpDAO().addRegexp(reg);
             return "Done";
         } else {
@@ -181,9 +198,26 @@ public class GrabliPro {
             reg.setAttribute(at);
             reg.setGroupeId(groupeId);
             reg.setRegexpId(Integer.parseInt(novelty));
-            reg.setRegexpPattern(regexpPattern);
-            reg.setRegexpType(regexpType);
-            reg.setRegexpReplacement(regexpReplacement);
+            if (!regexpPattern.equals("") && regexpPattern != null) {
+                reg.setRegexpPattern(regexpPattern);
+            } else {
+                reg.setRegexpPattern("(.*)");
+            }
+            if (!regexpType.equals("") && regexpType != null) {
+                reg.setRegexpType(regexpType);
+            } else {
+                reg.setRegexpType("ReplaceFirst");
+            }
+            if (!regexpReplacement.equals("") && regexpReplacement != null) {
+                reg.setRegexpReplacement(regexpReplacement);
+            } else {
+                reg.setRegexpReplacement("$1");
+            }
+            try {
+                reg.setCoefficient(Integer.parseInt(regexpCoef));
+            } catch (NumberFormatException ex) {
+                reg.setCoefficient(1);
+            }
             fd.getRegexpDAO().addRegexp(reg);
             return "Done";
         }
@@ -843,7 +877,7 @@ public class GrabliPro {
             unit = cells[6];
             od = new OutputData();
             od.setSessionId(sessionId);
-           // od.setOutputDataId(id);
+            // od.setOutputDataId(id);
             od.setArticle(article);
             od.setProductType(productType);
             od.setGroupe(groupe);

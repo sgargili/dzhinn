@@ -27,6 +27,9 @@ public class AttributesXML {
     private void initXstream() {
         xstream.alias("Attributes", List.class);
         xstream.alias("Attribute", Attribute.class);
+        xstream.alias("Attribute", Object[].class);
+        xstream.alias("Id", int.class);
+        xstream.alias("Name", String.class);
         xstream.aliasField("Id", Attribute.class, "attributeId");
         xstream.aliasField("Name", Attribute.class, "attributeName");
         xstream.aliasField("AltName", Attribute.class, "attributeAlternative");
@@ -34,6 +37,7 @@ public class AttributesXML {
         xstream.omitField(Attribute.class, "attributeAlternativeNames");
         xstream.omitField(Attribute.class, "productTypes");
         xstream.omitField(Attribute.class, "groupes");
+        xstream.omitField(Attribute.class, "regexps");
 
     }
 
@@ -45,7 +49,7 @@ public class AttributesXML {
     }
 
     public String getAttributesByPtId(int ptId) {
-        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(ptId);
+        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeIdByNativeSQL(ptId);
         initXstream();
         xml = xstream.toXML(attributeList);
         return xml;
@@ -53,7 +57,7 @@ public class AttributesXML {
 
     public String getAttributesByPtName(String ptName) {
         ProductType pt = fd.getProductTypeDAO().getProductTypeByName(ptName);
-        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeId(pt.getProductTypeId());
+        attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeIdByNativeSQL(pt.getProductTypeId());
         initXstream();
         xml = xstream.toXML(attributeList);
         return xml;

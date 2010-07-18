@@ -25,12 +25,24 @@ public class XmlConvertor4RegexpAfter implements Converter {
 
     public void marshal(Object o, HierarchicalStreamWriter writer, MarshallingContext mc) {
         Object[] input = (Object[]) o;
-        List<OutputData> outDatas = (List<OutputData>) input[0];
+        List outDatas = (List) input[0];
+        List regexps = (List) input[1];
+        Object[] objects = (Object[]) regexps.get(0);
+        Regexp reg = new Regexp();
+        String tempValue;
+        int tempInt;
+        if (!regexps.isEmpty()) {
+            reg.setRegexpType((String) objects[1]);
+            reg.setRegexpPattern((String) objects[2]);
+            reg.setRegexpReplacement((String) objects[3]);
+            reg.setCoefficient((Integer) objects[4]);
+        }
+        int i = 0;
         OutputData outData;
-        Attribute atr = (Attribute) input[1];
-        Regexp reg;
-        Pattern pat;
-        Matcher match;
+//        Attribute atr = (Attribute) input[1];
+//        Regexp reg;
+//        Pattern pat;
+//        Matcher match;
         Iterator it = outDatas.iterator();
         while (it.hasNext()) {
             outData = (OutputData) it.next();
@@ -38,7 +50,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
             try {
 
                 writer.startNode("Id");
-                writer.setValue(outData.getOutputDataId().toString());
+                writer.setValue(i++ + "");
                 writer.endNode();
 
                 writer.startNode("ValueBefore");
@@ -46,12 +58,44 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 writer.endNode();
 
                 writer.startNode("ValueAfter");
-//                pat = Pattern.compile(atr.getRegexps().get(0).getRegexpPattern());
-//                match = pat.matcher(outData.getValue());
-//                while (match.find()) {
-//                    writer.setValue(match.replaceFirst(atr.getRegexps().get(0).getRegexpReplacement()));
-//                }
-                writer.setValue(outData.getValue().replaceFirst(atr.getRegexps().get(0).getRegexpPattern(), atr.getRegexps().get(0).getRegexpReplacement()));
+                if (reg.getRegexpType().equals("ReplaceFirst")) {
+                    try {
+                        if (reg.getCoefficient() > 1) {
+                            tempValue = outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
+                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
+                            writer.setValue(tempInt+"");
+                        } else {
+                            writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                        }
+                    } catch (Exception ex) {
+//                        writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                        writer.setValue("Regexp Error: -> " + ex.getMessage());
+                    }
+                    
+                } else if (reg.getRegexpType().equals("ReplaceAll")) {
+                    try {
+                        if (reg.getCoefficient() > 1) {
+                            tempValue = outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement());
+                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
+                            writer.setValue(tempInt+"");
+                        } else {
+                            writer.setValue(outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                        }
+                    } catch (Exception ex) {
+                        writer.setValue(outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                    }
+                } else {
+                    String[] mass = outData.getValue().split(reg.getRegexpPattern());
+                    StringBuffer tmp = new StringBuffer();
+                    for (int j = 0; j < mass.length; j++) {
+                        if (j != mass.length - 1) {
+                            tmp.append(mass[j] + "<br/>");
+                        } else {
+                            tmp.append(mass[j]);
+                        }
+                    }
+                    writer.setValue(tmp.toString());
+                }
                 writer.endNode();
 
             } catch (Exception ex) {

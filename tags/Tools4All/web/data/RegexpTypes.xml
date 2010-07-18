@@ -3,10 +3,14 @@
 <RegexpTypes>
     <RegexpType>
         <Id>1</Id>
-        <Name>Match</Name>
+        <Name>ReplaceFirst</Name>
     </RegexpType>
     <RegexpType>
         <Id>2</Id>
+        <Name>ReplaceAll</Name>
+    </RegexpType>
+    <RegexpType>
+        <Id>3</Id>
         <Name>Split</Name>
     </RegexpType>
 </RegexpTypes>

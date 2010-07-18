@@ -82,14 +82,15 @@ public class RegexpDAOImpl implements RegexpDAO {
         return (Regexp) getHibernateTemplate().get(Regexp.class, regexpId);
     }
 
-    public List getRegexpsByAttributeByGroupeByNativeSQL(final int attributeId, final int groupeId) {
+    public List getRegexpsByAttributeByGroupeByNativeSQL(final int groupeId, final int attributeId) {
         List result = null;
         final String request =
                 "select "
                 + "    reg.regexp_id, "
                 + "    reg.regexp_type, "
                 + "    reg.regexp_pattern, "
-                + "    reg.regexp_replacement "
+                + "    reg.regexp_replacement, "
+                + "    reg.coefficient "
                 + "from  "
                 + "    `regexp` as reg "
                 + "where "
@@ -107,4 +108,5 @@ public class RegexpDAOImpl implements RegexpDAO {
         });
         return result;
     }
+
 }

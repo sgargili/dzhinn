@@ -15,6 +15,7 @@ import service.AttributesXML;
 import service.GroupesXML;
 import service.OutputDataXML;
 import service.RegExpXML;
+import service.SessionsXML;
 import service.UnitsAltXML;
 import service.UnitsXML;
 
@@ -80,7 +81,10 @@ public class Service extends HttpServlet {
                 String article = null;
                 String attributeValue = null;
                 String attributeId = null;
+                String groupeId = null;
+                String groupeValue = null;
                 String regexpPreview = null;
+                String regexpLimit = null;
                 for (int i = 0; i < reqParams.length; i++) {
                     if (reqParams[i].contains("sessionId")) {
                         id = reqParams[i].replaceFirst("sessionId=", "");
@@ -98,6 +102,15 @@ public class Service extends HttpServlet {
                     if (reqParams[i].contains("regexpPreview")) {
                         regexpPreview = new String(reqParams[i].replaceFirst("regexpPreview=", "").getBytes(requestEnc), clientEnc);
                     }
+                    if (reqParams[i].contains("groupeId")) {
+                        groupeId = new String(reqParams[i].replaceFirst("groupeId=", "").getBytes(requestEnc), clientEnc);
+                    }
+                    if (reqParams[i].contains("groupeValue")) {
+                        groupeValue = new String(reqParams[i].replaceFirst("groupeValue=", "").getBytes(requestEnc), clientEnc);
+                    }
+                    if (reqParams[i].contains("regexpLimit")) {
+                        regexpLimit = new String(reqParams[i].replaceFirst("regexpLimit=", "").getBytes(requestEnc), clientEnc);
+                    }
                 }
                 //System.out.println("Before: --->>> " + attributeId + " ||| " + attributeValue);
                 OutputDataXML odXML = new OutputDataXML();
@@ -111,7 +124,7 @@ public class Service extends HttpServlet {
                     }
                 } else if (regexpPreview.equals("after")) {
                     if (attributeValue != null) {
-                        out.println(odXML.getOutputDataByAttributeAfter(attributeId, attributeValue));
+                        out.println(odXML.getOutputDataByAttributeAfter(groupeId, groupeValue, attributeId, attributeValue, regexpLimit));
                     }
                 } else {
                     out.println(odXML.getAllOutputData());
@@ -292,6 +305,24 @@ public class Service extends HttpServlet {
                 } else {
                     out.println("Sucks... Request is so lame... Where regexpType parametr?");
                 }
+            } else if (request.getParameter("request").contains("sessions")) {
+                reqParam = request.getParameter("request");
+                reqParam = reqParam.replaceFirst("sessions/", "");
+                reqParams = reqParam.split("/");
+                String article = "";
+//                String regexpType = null;
+//                String regexpValue = "";
+//                String prefix = "";
+//                String suffix = "";
+//                String replacement = "";
+                for (int i = 0; i < reqParams.length; i++) {
+                    if (reqParams[i].contains("article")) {
+                        article = reqParams[i].replaceFirst("article=", "");
+                    }
+                }
+                SessionsXML sesXML = new SessionsXML();
+//                response.setContentType("text/html;charset=UTF-8");
+                out.println(sesXML.getSessionsXML(article));
             }
             //out.println(xml);
         } catch (Exception ex) {

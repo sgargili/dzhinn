@@ -11,7 +11,7 @@
       <column name="attribute_id"/>
     </many-to-one>
     <property name="regexpType" type="string">
-      <column length="10" name="regexp_type" default="Match"/>
+      <column length="12" name="regexp_type" default="ReplaceFirst"/>
     </property>
     <property name="regexpPattern" type="string">
       <column length="512" name="regexp_pattern" default="(.*)"/>
@@ -21,6 +21,9 @@
     </property>
     <property name="groupeId" type="java.lang.Integer">
       <column name="groupe_id"/>
+    </property>
+    <property name="coefficient" type="java.lang.Integer">
+      <column name="coefficient"/>
     </property>
   </class>
 </hibernate-mapping>

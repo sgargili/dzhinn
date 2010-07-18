@@ -37,6 +37,8 @@ public interface AttributeDAO {
 
     public List<Attribute> getAttributesOnlyByProductTypeId(int id);
 
+    public List<Attribute> getAttributesOnlyByProductTypeIdByNativeSQL(int id);
+
     public List<Attribute> getAttributesOnlyByGroupeId(int id);
 
     public List<Attribute> getAttributesOnlyByTemplate(String template);

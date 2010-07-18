@@ -11,12 +11,13 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Some Java Tools. (v.0.3)</title>
+        <title>Some Java Tools. (v.2.1)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>
         <link rel="stylesheet" type="text/css" href="css/FileUpload.css"/>
         <link rel="stylesheet" type="text/css" href="css/MultiSelect.css"/>
+        <%--<script type="text/javascript" src="dojo/dojo/dojo.js" djConfig="parseOnLoad: true, isDebug: false"></script>--%>
         <script type="text/javascript" src="js/ext-base.js"></script>
         <script type="text/javascript" src="js/ext-all.js"></script>
         <script type="text/javascript" src="js/ux-all.js"></script>
@@ -26,13 +27,15 @@
         <script type='text/javascript' src='dwr/util.js'></script>
         <script type='text/javascript' src='dwr/interface/Ajax.js'></script>
         <script type='text/javascript' src='dwr/interface/CsvProcessing.js'></script>
+        <%--<link id="themeStyles" rel="stylesheet" href="dojo/dijit/themes/tundra/tundra.css"/>--%>
+        <%--<script src="js/IE8.js" type="text/javascript"></script>--%>
     </head>
     <body onload="dwr.engine.setActiveReverseAjax(true);">
         <div id="header">
             <table width="100%">
                 <tr>
                     <td width="30%">
-                        <h1>Fast Export and other stuff for Value4IT...</h1>
+                        <h1>Fast Export and so on...</h1>
                     </td>
                     <td>
                     </td>
@@ -233,7 +236,7 @@
                 <div class="details-info"><b>Сравнение столбцов на наличие данных из одного в другом</b>... Формат - файл: вход(<b>Excel(.xls, .xlsx)</b>, <b>текст(.csv)</b>), выход(<b>Excel(.xlsx)</b>); кодировка: текстового файла <b>Windows-1251(ANSI)</b>; данные: вход(<b>два столбца, первый ищем во втором</b>), выход(<b>три столбца, первые два как и у входного файла, третий отражение наличия первого во втором в виде 0 и 1</b>). </div>
             </div>
             <div id="eGrabli-details">
-                <div class="details-info"><b>Работа с системой анализа и обработки контента</b>... <br/><b>Все файлы для заливки должны быть в формате "CSV", разделитель "запятая",  кодировка "UTF-8".</b></div>
+                <div class="details-info"><b>Сравнение столбцов на наличие данных из одного в другом</b>... Формат - файл: вход(<b>Excel(.xls, .xlsx)</b>, <b>текст(.csv)</b>), выход(<b>Excel(.xlsx)</b>); кодировка: текстового файла <b>Windows-1251(ANSI)</b>; данные: вход(<b>два столбца, первый ищем во втором</b>), выход(<b>три столбца, первые два как и у входного файла, третий отражение наличия первого во втором в виде 0 и 1</b>). </div>
             </div>
         </div>
     </body>

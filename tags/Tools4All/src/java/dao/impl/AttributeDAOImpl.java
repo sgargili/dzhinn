@@ -7,7 +7,11 @@ package dao.impl;
 import dao.AttributeDAO;
 import java.util.Iterator;
 import java.util.List;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import pojo.Attribute;
 import pojo.Groupe;
@@ -150,14 +154,14 @@ public class AttributeDAOImpl implements AttributeDAO {
     }
 
     public List<Attribute> getAllAttributesWithAltNames() {
-        String query = "from Attribute as a " +
-                "join fetch a.attributeAlternativeNames";
+        String query = "from Attribute as a "
+                + "join fetch a.attributeAlternativeNames";
         return getHibernateTemplate().find(query);
     }
 
     public List<Attribute> getAllAttributesWithRegexps() {
-        String query = "from Attribute as a " +
-                "join fetch a.regexps";
+        String query = "from Attribute as a "
+                + "join fetch a.regexps";
         return getHibernateTemplate().find(query);
     }
 
@@ -194,5 +198,40 @@ public class AttributeDAOImpl implements AttributeDAO {
         List<Attribute> outList = getHibernateTemplate().findByNamedParam(query, "groupe", groupe);
         groupe = null;
         return outList;
+    }
+
+    public List getAttributesOnlyByProductTypeIdByNativeSQL(final int id) {
+        List result = null;
+        final String request =
+                "select distinct "
+                + "    atr.attribute_id, "
+                + "    atr.attribute_name "
+                + "from  "
+                + "    attribute as atr "
+                + "inner join "
+                + "    groupe2atr as g2a "
+                + "on "
+                + "    atr.attribute_id = g2a.attribute_id "
+                + "inner join "
+                + "    pt2groupe as p2g "
+                + "on "
+                + "    g2a.groupe_id = p2g.groupe_id "
+                + "inner join "
+                + "    product_type as pt "
+                + "on "
+                + "    pt.product_type_id = p2g.product_type_id "
+                + "where "
+                + "    pt.product_type_id = :value "
+                + "order by "
+                + "    atr.attribute_name";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setInteger("value", id);
+                return query.list();
+            }
+        });
+        return result;
     }
 }

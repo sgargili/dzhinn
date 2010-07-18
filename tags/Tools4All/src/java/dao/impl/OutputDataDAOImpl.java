@@ -8,6 +8,7 @@ import dao.OutputDataDAO;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -105,5 +106,83 @@ public class OutputDataDAOImpl implements OutputDataDAO {
                 return query.executeUpdate();
             }
         });
+    }
+
+    public List getOutputDataByGroupeByAttributeByNativeSQL(final String groupeName, final String attributeName) {
+        List result = null;
+        final String request =
+                "select * "
+                //                + "    `odwww`.`output_data_id`, "
+                //                + "    `odwww`.`value` "
+                + "from "
+                + "    output_data";
+//                + "where "
+//                + "    od.groupe = :groupe "
+//                + "and "
+//                + "    od.attribute = :attribute";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+//                query.setParameter("groupe", groupeName);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    public List<OutputData> getOutputDataByGroupeByAttribute(final String groupeValue, final String attributeValue, final int limit) {
+        List<OutputData> result;
+//        String[] paramNames = new String[3];
+//        paramNames[0] = "groupeValue";
+//        paramNames[1] = "attributeValue";
+//        paramNames[2] = "limit";
+//        String[] values = new String[3];
+//        values[0] = groupeValue;
+//        values[1] = attributeValue;
+//        values[2] = limit + "";
+//        System.out.println(groupeValue + "|||" + attributeValue);
+//        String query = "from OutputData od where od.groupe = :groupeValue and od.attribute = :attributeValue limit :limit";
+//        try {
+//            outputDataList = getHibernateTemplate().findByNamedParam(query, paramNames, values);
+//            return outputDataList;
+//        } catch (Exception ex) {
+//            return null;
+//        }
+        final String request = "from OutputData od where od.groupe = :groupeValue and od.attribute = :attributeValue";
+        result = (List<OutputData>) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setParameter("groupeValue", groupeValue);
+                query.setParameter("attributeValue", attributeValue);
+                query.setMaxResults(limit);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    public List getSessiosnIdByArticleByNativeSQL(final String article) {
+        List result = null;
+        final String request =
+                "select distinct "
+                + "    od.session_id, "
+                + "    od.article "
+                + "from "
+                + "    output_data as od "
+                + "where "+
+                "      od.article like :article";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setParameter("article", article);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        return result;
     }
 }

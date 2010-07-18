@@ -9,7 +9,6 @@ import convertors.XmlConvertor4RegexpAfter;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
-import pojo.Attribute;
 import pojo.OutputData;
 
 /**
@@ -26,6 +25,7 @@ public class OutputDataXML {
 
     private void initXstream() {
         xstream.alias("Articles", List.class);
+        xstream.alias("Articles", Object[].class);
         xstream.alias("Article", OutputData.class);
         xstream.aliasField("Id", OutputData.class, "outputDataId");
         xstream.aliasField("Sid", OutputData.class, "sessionId");
@@ -68,14 +68,21 @@ public class OutputDataXML {
         return xml;
     }
 
-    public String getOutputDataByAttributeAfter(String attributeId, String attribute) {
+    public String getOutputDataByAttributeAfter(String groupeId, String groupeName, String attributeId, String attributeName, String regexpLimit) {
         //System.out.println(attributeId + " ||| " + attribute);
-        List<OutputData> odList = fd.getOutputDataDAO().getOutputDataByAttribute(attribute);
-        Attribute atr = fd.getAttributeDAO().getAttributeById(Integer.parseInt(attributeId));
+//        System.out.println(groupeId + "|||" + groupeName + "|||" + attributeId + "|||" + attributeName);
+        int limit;
+        try {
+            limit = Integer.parseInt(regexpLimit);
+        } catch (NumberFormatException ex) {
+            limit = 20;
+        }
+        List odList = fd.getOutputDataDAO().getOutputDataByGroupeByAttribute(groupeName, attributeName, limit);
+        List regList = fd.getRegexpDAO().getRegexpsByAttributeByGroupeByNativeSQL(Integer.parseInt(groupeId), Integer.parseInt(attributeId));
         Object[] objs = new Object[2];
         objs[0] = odList;
-        objs[1] = atr;
-//        initXstream();
+        objs[1] = regList;
+        initXstream();
         xstream.registerConverter(new XmlConvertor4RegexpAfter());
         xml = xstream.toXML(objs);
         return xml;

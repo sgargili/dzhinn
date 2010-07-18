@@ -539,7 +539,7 @@ public class Ajax {
         return gp.addGroupe(groupeName);
     }
 
-    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
+    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String regexpCoef, String novelty) {
 //        if (regexpPattern.replaceAll("\\s+", "").equals("")
 //                || regexpType.replaceAll("\\s++", "").equals("")
 //                || regexpReplacement.replaceAll("\\s+", "").equals("")) {
@@ -549,7 +549,7 @@ public class Ajax {
 //            return "Already Exist";
 //        }
         GrabliPro gp = new GrabliPro();
-        return gp.addRegexp(attributeId, groupeId, regexpType, regexpPattern, regexpReplacement, novelty);
+        return gp.addRegexp(attributeId, groupeId, regexpType, regexpPattern, regexpReplacement, regexpCoef, novelty);
     }
 
     public String addGroupe2Attr(String groupeId, String atrIds) {
@@ -748,7 +748,8 @@ public class Ajax {
     }
 
     public FileTransfer updateDownloadData(long sessionId, String inputData) throws Exception {
-        File file = new File("C://" + System.nanoTime() + ".csv");
+        File file = new File("./" + System.nanoTime() + "BLA.csv");
+        System.out.println(file.getAbsolutePath());
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, sessionId, inputData)));
@@ -761,12 +762,13 @@ public class Ajax {
     }
 
     public String[] updateRegexp(String regexpId) {
-        String[] mass = new String[3];
+        String[] mass = new String[4];
         GrabliPro gp = new GrabliPro();
         Regexp reg = gp.updateRegexp(Integer.parseInt(regexpId));
         mass[0] = reg.getRegexpType();
         mass[1] = reg.getRegexpPattern();
         mass[2] = reg.getRegexpReplacement();
+        mass[3] = reg.getCoefficient().toString();
         return mass;
     }
 }

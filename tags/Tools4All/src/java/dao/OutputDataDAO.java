@@ -29,5 +29,11 @@ public interface OutputDataDAO {
 
     public List<OutputData> getOutputDataByAttribute(String attributeValue);
 
+    public List<OutputData> getOutputDataByGroupeByAttribute(String groupeValue, String attributeValue, int limit);
+
+    public List getOutputDataByGroupeByAttributeByNativeSQL(String groupeName, String attributeName);
+
+    public List getSessiosnIdByArticleByNativeSQL(String article);
+
     public boolean isOutputDataPresent(OutputData outputData);
 }

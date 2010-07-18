@@ -52,6 +52,8 @@ public class MergingProcessing {
         Iterator itUnit;
         Iterator itUnitAlt;
         String[] regexpMass;
+        String tempValue;
+        int tempInt;
         while (itIn.hasNext()) {
             id = (InputData) itIn.next();
 //            System.out.println(id.getAttribute().trim());
@@ -67,11 +69,48 @@ public class MergingProcessing {
 //                    System.out.println(id.getAttribute().trim() + " --- " + ((String) objs[3]).trim());
                     bool = true;
                     od = new OutputData();
-                    if (((String) objs[4]).trim().equals("Match")) {
-                        if (((String) objs[5]).trim().contains("^^^^")) {
-                            od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim().replaceFirst("^^^^", ""), ((String) objs[6]).trim()));
-                        } else {
-                            od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                    if (((String) objs[4]).trim().contains("Replace")) {
+                        try {
+                            if (((String) objs[4]).trim().equals("ReplaceFirst")) {
+//                                od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                try {
+                                    if (((Integer) objs[7]) > 1) {
+                                        tempValue = id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim());
+                                        tempInt = Integer.parseInt(tempValue) * ((Integer) objs[7]);
+                                        od.setValue(tempInt + "");
+                                        od.setAvailable(available);
+                                    } else {
+                                        od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                        od.setAvailable(available);
+                                    }
+                                } catch (Exception ex) {
+                                    od.setAvailable(available);
+                                    od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                }
+                            } else {
+                                try {
+                                    if (((Integer) objs[7]) > 1) {
+                                        tempValue = id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim());
+                                        tempInt = Integer.parseInt(tempValue) * ((Integer) objs[7]);
+                                        od.setValue(tempInt + "");
+                                        od.setAvailable(available);
+                                    } else {
+                                        od.setValue(id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                        od.setAvailable(available);
+                                    }
+                                } catch (Exception ex) {
+                                    od.setAvailable(available);
+                                    od.setValue(id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                }
+                            }
+                        } catch (Exception ex) {
+//                            if (((String) objs[4]).trim().equals("ReplaceFirst")) {
+//                                od.setValue(id.getAttributeValue().replaceFirst("(.*)", ((String) objs[6]).trim()));
+//                            } else {
+//                                od.setValue(id.getAttributeValue().replaceAll("(.*)", ((String) objs[6]).trim()));
+//                            }
+                            od.setValue("Regexp Error: -> " + ex.getMessage());
+                            od.setAvailable((byte) 0);
                         }
                         od.setArticle(id.getArticle().trim());
                         od.setAttribute(((String) objs[2]).trim());
@@ -91,7 +130,7 @@ public class MergingProcessing {
                             }
                         }
                         od.setSessionId(id.getSessionId());
-                        od.setAvailable(available);
+
 
 //                        out.add(od);
                         fd.getOutputDataDAO().addOutputData(od);

@@ -12,6 +12,7 @@ public class Regexp implements java.io.Serializable {
     private String regexpPattern;
     private String regexpReplacement;
     private Integer groupeId;
+    private Integer coefficient;
 
     public Regexp() {
     }
@@ -73,5 +74,13 @@ public class Regexp implements java.io.Serializable {
 
     public void setGroupeId(Integer groupeId) {
         this.groupeId = groupeId;
+    }
+
+    public Integer getCoefficient() {
+        return coefficient;
+    }
+
+    public void setCoefficient(Integer coefficient) {
+        this.coefficient = coefficient;
     }
 }
