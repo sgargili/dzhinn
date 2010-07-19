@@ -103,4 +103,18 @@ public class HttpData2XppImpl implements HttpData2Xpp {
         }
         return xpp;
     }
+
+    public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding, boolean useProxy, String ip) {
+        XmlPullParserFactory factory = null;
+        XmlPullParser xpp = null;
+        HttpData http = FactoryHTTP.getInstance().getHttpData();
+        Html2Xml xml = FactoryHTML2XML.getInstance().getHtml2Xml();
+        try {
+            factory = XmlPullParserFactory.newInstance();
+            xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml.convertHtml2Xml(http.downloadContentAsFile(url, inputEncoding, outputEncoding, useProxy, ip))), outputEncoding));
+        } catch (Exception ex) {
+        }
+        return xpp;
+    }
 }

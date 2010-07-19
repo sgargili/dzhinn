@@ -1289,6 +1289,30 @@ var sessionWin = new Ext.Window({
             storeSession.clearData();
             storeSession.load();
         }
+    },{
+        text: 'Удалить все сессии!!!',
+        handler: function(){
+            Ext.Msg.show({
+                title:'Подтверждение!',
+                msg: 'Точно удалить все сессии? Все сессии проподут, но зато следующие выборки будут работать быстрее...',
+                buttons: Ext.Msg.YESNO,
+                fn: function(btn){
+                    if (btn == 'yes'){
+                        Ajax.deleteAllSessionId(function(data) {
+                            Ext.Msg.show({
+                                title:'Выполненно!',
+                                msg: 'Все сессии удалены...',
+                                buttons: Ext.Msg.OK,
+                                width:250,
+                                icon: Ext.MessageBox.INFO
+                            });
+
+                        });
+                    }
+                },
+                icon: Ext.MessageBox.QUESTION
+            });
+        }
     }],
 
     buttons: [{
@@ -3759,7 +3783,7 @@ var grabliFile = new Ext.form.FormPanel({
             listeners: {
                 click: function() {
                     var file2 = dwr.util.getValue('fileGrabliFile-file');
-                    Ajax.uploadGrabliFile(file2, Ext.getCmp('fileGrabliFile').getValue(), function(data) {
+                    Ajax.uploadGrabliFile(file2, Ext.getCmp('fileGrabliFile').getValue(), Ext.getCmp('proxyBool').getValue(), Ext.getCmp('proxyIP').getValue(), function(data) {
                         Ext.getCmp('fileGrabliFile').reset();
                         if(data==null){
                             Ext.Msg.show({
@@ -3816,6 +3840,46 @@ var grabliFile = new Ext.form.FormPanel({
             style: {
         // marginTop: '1px'
         }
+        },{
+            html:'<h1>Использовать Proxy:</h1>',
+            style: {
+                marginTop: '3px',
+                marginRight: '7px',
+                marginLeft: '7px'
+            },
+            bodyStyle: 'border: 0px'
+        },{
+            xtype: 'checkbox',
+            //        height:25,
+            checked: true,
+            id:'proxyBool',
+            //        blankText:'Введите что-нибудь...',
+            //        allowBlank:false,
+            style: {
+                marginTop: '3px'
+                
+            },
+            handler:function(){
+                if(Ext.getCmp('proxyBool').getValue()){
+                    Ext.getCmp('proxyIP').setDisabled(false);
+                } else{
+                    Ext.getCmp('proxyIP').setDisabled(true);
+                    Ext.getCmp('proxyIP').setValue('');
+                }
+            }
+
+
+        }, {
+            xtype: 'textfield',
+            height:22,
+            width:190,
+            id:'proxyIP',
+            blankText:'Введите что-нибудь...',
+            allowBlank:true,
+            style: {
+                marginLeft: '7px'
+            }
+
         }]
     }]
 });
@@ -4234,26 +4298,26 @@ var gridToOut = new xg.EditorGridPanel({
             }
             var data="";
 
-//            gridToOut.getStore().each(
-//                function(record){
-//                    data+=record.data.id+
-//                    "$$$"+
-//                    record.data.article+
-//                    "$$$"+
-//                    record.data.pt+
-//                    "$$$"+
-//                    record.data.groupe+
-//                    "$$$"+
-//                    record.data.attribute+
-//                    "$$$"+
-//                    record.data.value+
-//                    "$$$"+
-//                    record.data.unit+
-//                    "$$$"+
-//                    record.data.available+
-//                    "|||";
-//                }
-//                )
+            //            gridToOut.getStore().each(
+            //                function(record){
+            //                    data+=record.data.id+
+            //                    "$$$"+
+            //                    record.data.article+
+            //                    "$$$"+
+            //                    record.data.pt+
+            //                    "$$$"+
+            //                    record.data.groupe+
+            //                    "$$$"+
+            //                    record.data.attribute+
+            //                    "$$$"+
+            //                    record.data.value+
+            //                    "$$$"+
+            //                    record.data.unit+
+            //                    "$$$"+
+            //                    record.data.available+
+            //                    "|||";
+            //                }
+            //                )
             //                        alert(Ext.getCmp('SessionIdUp').getValue()+data);
             Ajax.updateDownloadData(Ext.getCmp('SessionIdUp').getValue(), data, function(data) {
                 dwr.engine.openInDownload(data);
@@ -4309,6 +4373,7 @@ var gridToOut = new xg.EditorGridPanel({
             sessionWin.show();
         }
     }
+
     ]
 
 });
@@ -5426,6 +5491,7 @@ Ext.onReady(function(){
     storeCsvColumnData.load();
     //Ext.grabliGrid.getEl().hide();
     grabliGrid.hide();
+    Ext.getCmp("proxyIP").setValue("localhost");
 //    grabliPBar.hide();
 //gridToOut.hide();
 //grabliGrid.hide();

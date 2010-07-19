@@ -33,6 +33,8 @@ public interface OutputDataDAO {
 
     public List getOutputDataByGroupeByAttributeByNativeSQL(String groupeName, String attributeName);
 
+    public void deleteAllOutputDataAndInputDataByNativeSQL();
+
     public List getSessiosnIdByArticleByNativeSQL(String article);
 
     public boolean isOutputDataPresent(OutputData outputData);

@@ -31,9 +31,9 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
     }
 
     public void addAttributeAlternativeName(AttributeAlternativeName attributeAlternativeName) {
-        if (!isAttributeAlternativeNamePresent(attributeAlternativeName.getAttributeAlernativeNameValue())) {
-            getHibernateTemplate().save(attributeAlternativeName);
-        }
+//        if (!isAttributeAlternativeNamePresent(attributeAlternativeName.getAttributeAlernativeNameValue())) {
+        getHibernateTemplate().save(attributeAlternativeName);
+//        }
     }
 
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName) {
@@ -70,6 +70,22 @@ public class AttributeAlternativeNameDAOImpl implements AttributeAlternativeName
                 return query.executeUpdate();
             }
         });
+    }
+
+    public boolean isAttributeAlternativeNamePresentByAttributeId(AttributeAlternativeName attributeAlternativeName) {
+        String query = "from AttributeAlternativeName a where attributeAlernativeNameValue = :value and attribute = :value2";
+        String[] paramNames = new String[2];
+        paramNames[0] = "value";
+        paramNames[1] = "value2";
+        Object[] objs = new Object[2];
+        objs[0] = attributeAlternativeName.getAttributeAlernativeNameValue();
+        objs[1] = attributeAlternativeName.getAttribute();
+        try {
+            return !getHibernateTemplate().findByNamedParam(query, paramNames, objs).isEmpty();
+        } catch (Exception ex) {
+            System.out.println("|||||||||||" + ex.getMessage());
+            return false;
+        }
     }
 }
 //            return getHibernateTemplate().findByNamedParam(query, "value", template);

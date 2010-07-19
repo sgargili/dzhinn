@@ -21,5 +21,7 @@ public interface AttributeAlternativeNameDAO {
 
     public boolean isAttributeAlternativeNamePresent(AttributeAlternativeName attributeAlternativeName);
 
+    public boolean isAttributeAlternativeNamePresentByAttributeId(AttributeAlternativeName attributeAlternativeName);
+
     public boolean isAttributeAlternativeNamePresent(String attributeAlternativeNameValue);
 }

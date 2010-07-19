@@ -188,8 +188,9 @@ public class NixProcessing {
 //            System.out.println(ex);
 //        }
 //    }
-    public void getProductDescFromHTML(long sessionId, String article, String productType, String url) {
+    public void getProductDescFromHTML(long sessionId, String article, String productType, String url, String proxyBool, String proxyIP) {
 //        List data = new ArrayList();
+        proxyIP = proxyIP.equalsIgnoreCase("localhost") ? "127.0.0.1" : proxyIP;
         InputData nix;
 
         FactoryHTTPData2XmlParser http = FactoryHTTPData2XmlParser.getInstance();
@@ -213,7 +214,12 @@ public class NixProcessing {
         String tempGroup = "", tempAttribute = "", tempValue = "", tempFullName = "", tempArticle = "", tempManufacturer = "";
         try {
 //            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            XmlPullParser xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true);
+            XmlPullParser xpp;
+            if (proxyBool.equals("true")) {
+                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true, proxyIP);
+            } else {
+                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", false);
+            }
 //            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(tempOutputData), "UTF-8"));
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {

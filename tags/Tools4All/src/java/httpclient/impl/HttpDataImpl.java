@@ -84,7 +84,7 @@ public class HttpDataImpl implements HttpData {
     }
 
     public File downloadContentAsFile(String url) {
-        File outFile = new File("src/java/tempfile/" + System.currentTimeMillis());
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis());
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -105,7 +105,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File(System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -160,7 +160,7 @@ public class HttpDataImpl implements HttpData {
     }
 
     public File downloadContentAsFile(String url, String outputFileEncoding) {
-        File outFile = new File(System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -198,7 +198,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File(System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -236,7 +236,7 @@ public class HttpDataImpl implements HttpData {
     }
 
     public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding) {
-        File outFile = new File(System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -274,7 +274,7 @@ public class HttpDataImpl implements HttpData {
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
         }
-        File outFile = new File(System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
         GetMethod getMethod = new GetMethod(url);
         try {
             client.executeMethod(getMethod);
@@ -309,5 +309,26 @@ public class HttpDataImpl implements HttpData {
             getMethod.releaseConnection();
         }
         return toFile;
+    }
+
+    public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding, boolean useProxy, String ip) {
+        if (useProxy) {
+            client.getHostConfiguration().setProxy(ip, 8118);
+        }
+        File outFile = new File("/root/tempFolder/" + System.currentTimeMillis() + ".xhtml");
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            client.executeMethod(getMethod);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), outputFileEncoding));
+            out.write(IOUtils.toCharArray(getMethod.getResponseBodyAsStream(), inputEncoding));
+            out.flush();
+            out.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+        return outFile;
     }
 }

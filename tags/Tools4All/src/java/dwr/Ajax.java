@@ -612,6 +612,7 @@ public class Ajax {
     public String addAttributeAltName(String attributeId, String newAltName) {
         AttributeAlternativeName atrAlt = new AttributeAlternativeName();
         Attribute atr = new Attribute();
+//        System.out.println(attributeId + "|||" + newAltName);
         try {
             atr.setAttributeId(Integer.parseInt(attributeId));
         } catch (NumberFormatException ex) {
@@ -621,6 +622,7 @@ public class Ajax {
         }
         atrAlt.setAttributeAlernativeNameValue(newAltName);
         atrAlt.setAttribute(atr);
+//        System.out.println(atrAlt.getAttribute().getAttributeId()+"|||"+atrAlt.getAttributeAlernativeNameValue());
         GrabliPro gp = new GrabliPro();
         gp.addAttributeAltName(atrAlt);
         return "Done";
@@ -724,7 +726,7 @@ public class Ajax {
 
     }
 
-    public String uploadGrabliFile(InputStream uploadFile, String fileName) throws Exception {
+    public String uploadGrabliFile(InputStream uploadFile, String fileName, String proxyBool, String proxyIP) throws Exception {
         Pattern p = Pattern.compile("(\\.csv)");
         Matcher m = p.matcher(fileName);
         if (!m.find()) {
@@ -732,7 +734,7 @@ public class Ajax {
         }
         long outId = System.nanoTime();
         GrabliPro gp = new GrabliPro();
-        gp.fillInputData(uploadFile, outId);
+        gp.fillInputData(uploadFile, outId, proxyBool, proxyIP);
         return outId + "";
     }
 
@@ -759,6 +761,11 @@ public class Ajax {
 
     public String getSessionId() {
         return System.nanoTime() + "";
+    }
+
+    public String deleteAllSessionId() {
+        FactoryDAO4Grabli.getInstance().getOutputDataDAO().deleteAllOutputDataAndInputDataByNativeSQL();
+        return "Done";
     }
 
     public String[] updateRegexp(String regexpId) {

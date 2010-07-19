@@ -23,4 +23,6 @@ public interface HttpData2Xpp {
     public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding);
 
     public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding, boolean useProxy);
+
+    public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding, boolean useProxy, String ip);
 }

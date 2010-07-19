@@ -42,5 +42,7 @@ public interface HttpData {
 
     public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding, boolean useProxy);
 
+    public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding, boolean useProxy, String ip);
+
     public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding, File toFile, boolean useProxy);
 }

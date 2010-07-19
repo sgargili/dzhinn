@@ -172,8 +172,8 @@ public class OutputDataDAOImpl implements OutputDataDAO {
                 + "    od.article "
                 + "from "
                 + "    output_data as od "
-                + "where "+
-                "      od.article like :article";
+                + "where "
+                + "      od.article like :article";
         result = (List) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(Session session) throws HibernateException {
@@ -185,4 +185,26 @@ public class OutputDataDAOImpl implements OutputDataDAO {
         });
         return result;
     }
+
+    public void deleteAllOutputDataAndInputDataByNativeSQL() {
+        final String request =
+                "delete from output_data";
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                return query.executeUpdate();
+            }
+        });
+        final String request2 =
+                "delete from input_data";
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request2);
+                return query.executeUpdate();
+            }
+        });
+    }
+
 }

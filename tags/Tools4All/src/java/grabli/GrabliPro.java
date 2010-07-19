@@ -761,7 +761,7 @@ public class GrabliPro {
     }
 
     public void addAttributeAltName(AttributeAlternativeName atrAlt) {
-        if (fd.getAttributeAlternativeNameDAO().isAttributeAlternativeNamePresent(atrAlt.getAttributeAlernativeNameValue())) {
+        if (fd.getAttributeAlternativeNameDAO().isAttributeAlternativeNamePresentByAttributeId(atrAlt)) {
         } else {
             fd.getAttributeAlternativeNameDAO().addAttributeAlternativeName(atrAlt);
         }
@@ -924,7 +924,7 @@ public class GrabliPro {
         return file;
     }
 
-    public void fillInputData(InputStream is, long sessionId) {
+    public void fillInputData(InputStream is, long sessionId, String proxyBool, String proxyIP) {
         ScriptSession ss;
         ScriptBuffer script;
         ss = WebContextFactory.get().getScriptSession();
@@ -957,7 +957,7 @@ public class GrabliPro {
             it = objList.iterator();
             while (it.hasNext()) {
                 objs = (Object[]) it.next();
-                nix.getProductDescFromHTML(sessionId, (String) objs[0], (String) objs[1], (String) objs[3]);
+                nix.getProductDescFromHTML(sessionId, (String) objs[0], (String) objs[1], (String) objs[3], proxyBool, proxyIP);
                 try {
                     script = new ScriptBuffer();
                     script.appendScript("updateGrabli(");
