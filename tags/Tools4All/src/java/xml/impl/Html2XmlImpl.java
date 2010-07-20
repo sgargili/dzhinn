@@ -23,7 +23,7 @@ import xml.Html2Xml;
 public class Html2XmlImpl implements Html2Xml {
 
     public File convertHtml2Xml(File inputHtmlFile) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             OutputStream os = new FileOutputStream(outFile);
             XMLReader r = new Parser();
@@ -40,7 +40,7 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(File inputHtmlFile, boolean deleteInputFile) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             OutputStream os = new FileOutputStream(outFile);
             XMLReader r = new Parser();
@@ -60,7 +60,7 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(File inputHtmlFile, String encodingXmlFile) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             OutputStream os = new FileOutputStream(outFile);
             XMLReader r = new Parser();
@@ -77,7 +77,7 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(File inputHtmlFile, String encodingXmlFile, boolean deleteInputFile) {
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             OutputStream os = new FileOutputStream(outFile);
             XMLReader r = new Parser();
@@ -167,8 +167,8 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(String inputHtmlString) {
-        File inputHtmlFile = new File("C://" + System.currentTimeMillis() + ".html");
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File inputHtmlFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".html");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             FileUtils.writeStringToFile(inputHtmlFile, inputHtmlString);
             OutputStream os = new FileOutputStream(outFile);
@@ -187,8 +187,8 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(String inputHtmlString, String encodingXmlFile) {
-        File inputHtmlFile = new File("C://" + System.currentTimeMillis() + ".html");
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File inputHtmlFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".html");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             FileUtils.writeStringToFile(inputHtmlFile, inputHtmlString);
             OutputStream os = new FileOutputStream(outFile);
@@ -207,8 +207,8 @@ public class Html2XmlImpl implements Html2Xml {
     }
 
     public File convertHtml2Xml(String inputHtmlString, String encodingInputString, String encodingXmlFile) {
-        File inputHtmlFile = new File("C://" + System.currentTimeMillis() + ".html");
-        File outFile = new File("C://" + System.currentTimeMillis() + ".xhtml");
+        File inputHtmlFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".html");
+        File outFile = new File("/root/TempFolder" + System.currentTimeMillis() + ".xhtml");
         try {
             FileUtils.writeStringToFile(inputHtmlFile, inputHtmlString, encodingInputString);
             OutputStream os = new FileOutputStream(outFile);

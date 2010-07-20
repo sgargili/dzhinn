@@ -13,8 +13,8 @@ import java.nio.charset.Charset;
 public class ProfitFix {
 
     public static void main(String[] arg) throws FileNotFoundException, IOException {
-        CsvWriter writer = new CsvWriter("C://awd.csv", ',', Charset.forName("UTF-8"));
-        CsvReader reader = new CsvReader("c://articles.csv", ',', Charset.forName("UTF-8"));
+        CsvWriter writer = new CsvWriter("/root/TempFolderawd.csv", ',', Charset.forName("UTF-8"));
+        CsvReader reader = new CsvReader("/root/TempFolderarticles.csv", ',', Charset.forName("UTF-8"));
         String[] mass = new String[9];
         reader.readHeaders();
         int i = 1;

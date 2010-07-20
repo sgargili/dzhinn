@@ -15,6 +15,7 @@ public class OutputData implements java.io.Serializable {
     private String value;
     private String unit;
     private Byte available;
+    private String oldValue;
 
     public OutputData() {
     }
@@ -101,6 +102,12 @@ public class OutputData implements java.io.Serializable {
     public void setProductType(String productType) {
         this.productType = productType;
     }
+
+    public String getOldValue() {
+        return oldValue;
+    }
+
+    public void setOldValue(String oldValue) {
+        this.oldValue = oldValue;
+    }
 }
-
-

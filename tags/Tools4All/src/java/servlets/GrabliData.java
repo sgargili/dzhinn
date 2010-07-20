@@ -68,7 +68,7 @@ public class GrabliData extends HttpServlet {
                     id = 0;
                 }
             }
-            file = new File("/root/tempFolder/" + id + ".csv");
+            file = new File("/root/TempFolder/" + id + ".csv");
             try {
                 reader = new CsvReader(file.getAbsolutePath(), ',', Charset.forName("WINDOWS-1251"));
             } catch (Exception ex) {

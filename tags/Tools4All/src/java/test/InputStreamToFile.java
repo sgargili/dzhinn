@@ -29,7 +29,7 @@ public class InputStreamToFile {
             System.err.println(e);
         } finally {
             try {
-                File f = new File("C://outFile.xml");
+                File f = new File("/root/TempFolderoutFile.xml");
                 IOUtils.putInputStreamToFile(result, f);
                 System.out.println("\nFile is created...................................");
             } catch (IOException e) {

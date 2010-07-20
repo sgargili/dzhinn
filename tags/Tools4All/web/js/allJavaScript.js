@@ -3342,6 +3342,16 @@ var comboGroupes = new Ext.form.ComboBox({
                 storeGroupes.reload();
             }
         }
+//        ,
+//        'collapse': function() {
+//            storeGroupes.clearData();
+//            storeGroupesProxy.setUrl("Service.exml?request=groupes/ptId="+ comboPtsNew.getValue());
+//           storeGroupes.clearData();
+//            if(storeGroupes.getCount()!=0){
+//                storeGroupes.clearData();
+//                storeGroupes.reload();
+//            }
+//        }
     }
 });
 

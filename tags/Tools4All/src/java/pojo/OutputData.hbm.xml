@@ -31,5 +31,8 @@
     <property name="available" type="java.lang.Byte">
       <column name="available"/>
     </property>
+    <property name="oldValue" type="string">
+      <column length="65535" name="old_value"/>
+    </property>
   </class>
 </hibernate-mapping>

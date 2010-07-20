@@ -54,7 +54,11 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 writer.endNode();
 
                 writer.startNode("ValueBefore");
-                writer.setValue(outData.getValue());
+                try {
+                    writer.setValue(outData.getOldValue());
+                } catch (Exception ex) {
+                    writer.setValue("");
+                }
                 writer.endNode();
 
                 writer.startNode("ValueAfter");
@@ -63,7 +67,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
                         if (reg.getCoefficient() > 1) {
                             tempValue = outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
                             tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempInt+"");
+                            writer.setValue(tempInt + "");
                         } else {
                             writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }
@@ -71,13 +75,13 @@ public class XmlConvertor4RegexpAfter implements Converter {
 //                        writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         writer.setValue("Regexp Error: -> " + ex.getMessage());
                     }
-                    
+
                 } else if (reg.getRegexpType().equals("ReplaceAll")) {
                     try {
                         if (reg.getCoefficient() > 1) {
                             tempValue = outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement());
                             tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempInt+"");
+                            writer.setValue(tempInt + "");
                         } else {
                             writer.setValue(outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }

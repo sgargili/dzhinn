@@ -249,7 +249,7 @@ public class Ajax {
         if (!m.find()) {
             return null;
         }
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         MatchingData match = new MatchingData();
 
@@ -325,7 +325,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadPTData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPTData(file)));
@@ -353,7 +353,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateProductTypeByFile(file);
@@ -387,7 +387,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadAtrData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadAttributeData(file)));
@@ -396,7 +396,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadUnitsData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadUnitsData(file)));
@@ -405,7 +405,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadGroupesData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadGroupesData(file)));
@@ -473,7 +473,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateAttributeByFile(file);
@@ -486,7 +486,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateUnitByFile(file);
@@ -499,7 +499,7 @@ public class Ajax {
         if (!m.find()) {
             return "!csv";
         }
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".temp");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".temp");
         FileUtils.writeStringToFile(file, convertStreamToString(uploadFile));
         GrabliPro gp = new GrabliPro();
         gp.updateGroupeByFile(file);
@@ -583,7 +583,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadGroupe2AttrData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadGroupe2AttrData(file)));
@@ -592,7 +592,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadPt2GroupeData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPt2GroupeData(file)));
@@ -601,7 +601,7 @@ public class Ajax {
     }
 
     public FileTransfer downloadPt2Groupe2AttributeData() throws Exception {
-        File file = new File("/root/tempFolder/" + System.nanoTime() + ".xlsx");
+        File file = new File("/root/TempFolder" + System.nanoTime() + ".xlsx");
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         buffer.write(FileUtils.readFileToByteArray(gp.downloadPt2Groupe2AttributeData(file)));
