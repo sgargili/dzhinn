@@ -109,4 +109,34 @@ public class RegexpDAOImpl implements RegexpDAO {
         return result;
     }
 
+    public boolean isRegexpPresent(final int groupeId, final int attributeId) {
+        List result = null;
+        final String request =
+                "select "
+                + "    reg.regexp_id, "
+                + "    reg.regexp_type, "
+                + "    reg.regexp_pattern, "
+                + "    reg.regexp_replacement, "
+                + "    reg.coefficient "
+                + "from  "
+                + "    `regexp` as reg "
+                + "where "
+                + "    reg.attribute_id = :attributeId "
+                + "    and reg.groupe_id = :groupeId";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setInteger("attributeId", attributeId);
+                query.setInteger("groupeId", groupeId);
+                return query.list();
+            }
+        });
+        if (result.isEmpty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
