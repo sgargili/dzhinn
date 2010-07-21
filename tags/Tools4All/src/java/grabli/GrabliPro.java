@@ -730,6 +730,16 @@ public class GrabliPro {
             atr = new Attribute();
             atr.setAttributeId(i);
             groupe.getAttributes().add(atr);
+            if (!fd.getRegexpDAO().isRegexpPresent(groupeId, i)) {
+                Regexp reg = new Regexp();
+                reg.setAttribute(atr);
+                reg.setCoefficient(1);
+                reg.setGroupeId(groupeId);
+                reg.setRegexpPattern("(.*)");
+                reg.setRegexpReplacement("$1");
+                reg.setRegexpType("ReplaceFirst");
+                fd.getRegexpDAO().addRegexp(reg);
+            }
         }
         fd.getGroupeDAO().addGroupe(groupe);
 
