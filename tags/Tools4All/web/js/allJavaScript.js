@@ -1642,13 +1642,13 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 return;
             }
             storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="
-                + Ext.getCmp('multiG2ASel').getValue('atr')
+                + escape(Ext.getCmp('multiG2ASel').getValue('atr'))
                 + "/attributeId="
                 + Ext.getCmp('multiG2ASel').getValue()
                 + "/groupeId="
                 + comboGroupes.getValue()
                 + "/groupeValue="
-                + comboGroupes.getStore().getById(comboGroupes.getValue()).get('groupe')
+                + escape(comboGroupes.getStore().getById(comboGroupes.getValue()).get('groupe'))
                 + "/regexpLimit=20"
                 + "/regexpPreview=after");
             storeRegexpPreviewAfter.clearData();
@@ -2049,7 +2049,7 @@ var grpMulti = new Ext.ux.form.MultiSelect({
                                 //                                grpField.setValue("");
                                 Ext.Msg.show({
                                     title: 'Выполненно!',
-                                    msg: 'Группа удален.',
+                                    msg: 'Группа удалена.',
                                     buttons: Ext.MessageBox.OK,
                                     width: 300,
                                     icon: Ext.MessageBox.INFO
@@ -3342,16 +3342,16 @@ var comboGroupes = new Ext.form.ComboBox({
                 storeGroupes.reload();
             }
         }
-//        ,
-//        'collapse': function() {
-//            storeGroupes.clearData();
-//            storeGroupesProxy.setUrl("Service.exml?request=groupes/ptId="+ comboPtsNew.getValue());
-//           storeGroupes.clearData();
-//            if(storeGroupes.getCount()!=0){
-//                storeGroupes.clearData();
-//                storeGroupes.reload();
-//            }
-//        }
+    //        ,
+    //        'collapse': function() {
+    //            storeGroupes.clearData();
+    //            storeGroupesProxy.setUrl("Service.exml?request=groupes/ptId="+ comboPtsNew.getValue());
+    //           storeGroupes.clearData();
+    //            if(storeGroupes.getCount()!=0){
+    //                storeGroupes.clearData();
+    //                storeGroupes.reload();
+    //            }
+    //        }
     }
 });
 
