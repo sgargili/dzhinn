@@ -69,7 +69,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
                             tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
                             writer.setValue(tempInt + "");
                         } else {
-                            writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                            writer.setValue(outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }
                     } catch (Exception ex) {
 //                        writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
