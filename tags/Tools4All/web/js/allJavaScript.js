@@ -4023,6 +4023,9 @@ var storeAtrsToOut = new Ext.data.Store({
     {
         name: 'atr',
         mapping: 'Name'
+    },{
+        name: 'groupe',
+        mapping: 'Groupe'
     }, {
         name:'id',
         mapping:'Id'
@@ -4059,7 +4062,16 @@ var comboAtrsToOut = new Ext.form.ComboBox({
                 storeAtrsToOut.load();
             }
         }
-    }
+    },
+    tpl: new Ext.XTemplate(
+        '<tpl for=".">',
+        '<tpl if="this.groupe != values.groupe">',
+        '<tpl exec="this.groupe = values.groupe"></tpl>',
+        '<h1>{groupe}</h1>',
+        '</tpl>',
+        '<div class="x-combo-list-item">{atr}</div>',
+        '</tpl>'
+        )
 });
 //beforequery
 
