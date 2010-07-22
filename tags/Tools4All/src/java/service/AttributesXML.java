@@ -5,6 +5,7 @@
 package service;
 
 import com.thoughtworks.xstream.XStream;
+import convertors.XmlConvertor4AtrAndGrp;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class AttributesXML {
         xstream.alias("Attribute", Attribute.class);
         xstream.alias("Attribute", Object[].class);
         xstream.alias("Id", int.class);
+        xstream.aliasType("Groupe", String.class);
         xstream.alias("Name", String.class);
         xstream.aliasField("Id", Attribute.class, "attributeId");
         xstream.aliasField("Name", Attribute.class, "attributeName");
@@ -59,6 +61,7 @@ public class AttributesXML {
         ProductType pt = fd.getProductTypeDAO().getProductTypeByName(ptName);
         attributeList = fd.getAttributeDAO().getAttributesOnlyByProductTypeIdByNativeSQL(pt.getProductTypeId());
         initXstream();
+        xstream.registerConverter(new XmlConvertor4AtrAndGrp());
         xml = xstream.toXML(attributeList);
         return xml;
     }
