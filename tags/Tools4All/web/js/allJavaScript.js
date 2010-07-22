@@ -1386,7 +1386,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 Ext.getCmp('regexpType').setValue(data[0]);
                 Ext.getCmp('regexpPattern').setValue(data[1]);
                 Ext.getCmp('regexpReplacement').setValue(data[2]);
-                Ext.getCmp('regexpCoef').setValue(data[3]);
+//                Ext.getCmp('regexpCoef').setValue(data[3]);
             });
             
         }
@@ -1483,44 +1483,47 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             //                }
             }
         }
-    },{
-        text:'Coefficient:'
-    },{
-        xtype: 'textfield',
-        hideLabel: true,
-        height:22,
-        id:'regexpCoef',
-        blankText:'Введите что-нибудь...',
-        allowBlank:true,
-        style: {
-            marginTop: '1px'
-        },
-        width:20,
-        listeners: {
-            specialkey: function(something,e){
-
-            //                if (e.getKey() == e.ENTER) {
-            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
-            //                        if(data=="MultiSelectInRequest"){
-            //                            Ext.Msg.show({
-            //                                title: 'Предупреждение!!!',
-            //                                msg: 'Выбирайте только одно значение!',
-            //                                buttons: Ext.MessageBox.OK,
-            //                                width: 300,
-            //                                icon: Ext.MessageBox.ERROR
-            //                            });
-            //                        } else {
-            //                            Ext.getCmp('atrAltName').setValue("");
-            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
-            //                            storeAtrAlt.clearData();
-            //                            storeAtrAlt.load();
-            //                        }
-            //                    });
-            //
-            //                }
-            }
-        }
-    },{
+    },
+//    {
+//        text:'Coefficient:'
+//    },
+//    {
+//        xtype: 'textfield',
+//        hideLabel: true,
+//        height:22,
+//        id:'regexpCoef',
+//        blankText:'Введите что-нибудь...',
+//        allowBlank:true,
+//        style: {
+//            marginTop: '1px'
+//        },
+//        width:20,
+//        listeners: {
+//            specialkey: function(something,e){
+//
+//            //                if (e.getKey() == e.ENTER) {
+//            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+//            //                        if(data=="MultiSelectInRequest"){
+//            //                            Ext.Msg.show({
+//            //                                title: 'Предупреждение!!!',
+//            //                                msg: 'Выбирайте только одно значение!',
+//            //                                buttons: Ext.MessageBox.OK,
+//            //                                width: 300,
+//            //                                icon: Ext.MessageBox.ERROR
+//            //                            });
+//            //                        } else {
+//            //                            Ext.getCmp('atrAltName').setValue("");
+//            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+//            //                            storeAtrAlt.clearData();
+//            //                            storeAtrAlt.load();
+//            //                        }
+//            //                    });
+//            //
+//            //                }
+//            }
+//        }
+//    },
+    {
         text: 'Добавить/Обновить',
         handler: function(){
             if(comboGroupes.getValue()==null||comboGroupes.getValue()==""||Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""){
@@ -1539,7 +1542,8 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
-                    Ext.getCmp('regexpCoef').getValue(),
+//                    ,
+//                    Ext.getCmp('regexpCoef').getValue(),
                     "new",
                     function(data) {
                         if(data=="MultiSelectInRequest"){
@@ -1568,7 +1572,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
-                    Ext.getCmp('regexpCoef').getValue(),
+//                    Ext.getCmp('regexpCoef').getValue(),
                     storeRegexp.getAt(0).get("id"),
                     function(data) {
                         if(data=="MultiSelectInRequest"){
@@ -1583,7 +1587,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
-                            Ext.getCmp('regexpCoef').setValue("");
+//                            Ext.getCmp('regexpCoef').setValue("");
                             storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
                                 + Ext.getCmp('multiG2ASel').getValue()
                                 +"/groupeId="
