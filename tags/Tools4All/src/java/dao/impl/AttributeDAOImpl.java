@@ -205,7 +205,8 @@ public class AttributeDAOImpl implements AttributeDAO {
         final String request =
                 "select distinct "
                 + "    atr.attribute_id, "
-                + "    atr.attribute_name "
+                + "    atr.attribute_name, "
+                + "     gp.groupe_name "
                 + "from  "
                 + "    attribute as atr "
                 + "inner join "
@@ -217,13 +218,17 @@ public class AttributeDAOImpl implements AttributeDAO {
                 + "on "
                 + "    g2a.groupe_id = p2g.groupe_id "
                 + "inner join "
+                + "    groupe as gp "
+                + "on  "
+                + "    gp.groupe_id = p2g.groupe_id "
+                + "inner join "
                 + "    product_type as pt "
                 + "on "
                 + "    pt.product_type_id = p2g.product_type_id "
                 + "where "
                 + "    pt.product_type_id = :value "
                 + "order by "
-                + "    atr.attribute_name";
+                + "    gp.groupe_name";
         result = (List) getHibernateTemplate().execute(new HibernateCallback() {
 
             public Object doInHibernate(Session session) throws HibernateException {
