@@ -30,7 +30,8 @@ public class XmlConvertor4RegexpAfter implements Converter {
         Object[] objects = (Object[]) regexps.get(0);
         Regexp reg = new Regexp();
         String tempValue;
-        int tempInt;
+//        int tempInt;
+        double tempDigit;
         if (!regexps.isEmpty()) {
             reg.setRegexpType((String) objects[1]);
             reg.setRegexpPattern((String) objects[2]);
@@ -65,32 +66,34 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 if (reg.getRegexpType().equals("ReplaceFirst")) {
                     try {
                         if (reg.getCoefficient() > 1) {
-                            tempValue = outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
-                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempInt + "");
+                            tempValue = outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
+//                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
+                            tempDigit = Double.parseDouble(tempValue) * (reg.getCoefficient());
+                            writer.setValue(tempDigit + "");
                         } else {
                             writer.setValue(outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }
                     } catch (Exception ex) {
 //                        writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-                        writer.setValue("Regexp Error: -> " + ex.getMessage());
+                        writer.setValue("Установите коэффициент в 1 или поправьте Regexp. Regexp Error: -> " + ex.getMessage());
                     }
 
                 } else if (reg.getRegexpType().equals("ReplaceAll")) {
                     try {
                         if (reg.getCoefficient() > 1) {
-                            tempValue = outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement());
-                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempInt + "");
+                            tempValue = outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement());
+//                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
+                            tempDigit = Double.parseDouble(tempValue) * (reg.getCoefficient());
+                            writer.setValue(tempDigit + "");
                         } else {
-                            writer.setValue(outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                            writer.setValue(outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }
                     } catch (Exception ex) {
-                        writer.setValue(outData.getValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                        writer.setValue(outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                     }
                 } else {
-                    String[] mass = outData.getValue().split(reg.getRegexpPattern());
-                    StringBuffer tmp = new StringBuffer();
+                    String[] mass = outData.getOldValue().split(reg.getRegexpPattern());
+                    StringBuilder tmp = new StringBuilder();
                     for (int j = 0; j < mass.length; j++) {
                         if (j != mass.length - 1) {
                             tmp.append(mass[j] + "<br/>");
