@@ -13,7 +13,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import pojo.Attribute;
 import pojo.OutputData;
 import pojo.Regexp;
 
@@ -30,13 +29,14 @@ public class XmlConvertor4RegexpAfter implements Converter {
         Object[] objects = (Object[]) regexps.get(0);
         Regexp reg = new Regexp();
         String tempValue;
+        String tempDigitString;
+        String[] mass4Regexp;
 //        int tempInt;
-        double tempDigit;
+        double tempDigit = 1d;
         if (!regexps.isEmpty()) {
             reg.setRegexpType((String) objects[1]);
             reg.setRegexpPattern((String) objects[2]);
             reg.setRegexpReplacement((String) objects[3]);
-            reg.setCoefficient((Integer) objects[4]);
         }
         int i = 0;
         OutputData outData;
@@ -65,31 +65,28 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 writer.startNode("ValueAfter");
                 if (reg.getRegexpType().equals("ReplaceFirst")) {
                     try {
-                        if (reg.getCoefficient() > 1) {
+                        if (reg.getRegexpReplacement().contains("^^^^")) {
+                            reg.setRegexpReplacement(reg.getRegexpReplacement().replaceFirst("^^^^", ""));
                             tempValue = outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
-//                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            tempDigit = Double.parseDouble(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempDigit + "");
+                            tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
+                            mass4Regexp = tempDigitString.split("[*]");
+                            for (int j = 0; j < mass4Regexp.length; j++) {
+                                tempDigit *= Double.parseDouble(mass4Regexp[j]);
+                            }
+                            writer.setValue(tempValue.replaceFirst(".*?[}](.*)", tempDigit + "$1"));
                         } else {
                             writer.setValue(outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
                         }
                     } catch (Exception ex) {
 //                        writer.setValue(outData.getValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-                        writer.setValue("Установите коэффициент в 1 или поправьте Regexp. Regexp Error: -> " + ex.getMessage());
+                        writer.setValue("Regexp Error: -> " + ex.getMessage());
                     }
 
                 } else if (reg.getRegexpType().equals("ReplaceAll")) {
                     try {
-                        if (reg.getCoefficient() > 1) {
-                            tempValue = outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement());
-//                            tempInt = Integer.parseInt(tempValue) * (reg.getCoefficient());
-                            tempDigit = Double.parseDouble(tempValue) * (reg.getCoefficient());
-                            writer.setValue(tempDigit + "");
-                        } else {
-                            writer.setValue(outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-                        }
-                    } catch (Exception ex) {
                         writer.setValue(outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
+                    } catch (Exception ex) {
+                        writer.setValue("Regexp Error: -> " + ex.getMessage());
                     }
                 } else {
                     String[] mass = outData.getOldValue().split(reg.getRegexpPattern());
@@ -108,6 +105,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
             } catch (Exception ex) {
             }
             writer.endNode();
+            tempDigit = 1d;
         }
     }
 

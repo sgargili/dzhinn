@@ -32,17 +32,13 @@ public class MergingProcessing {
     public void merge(long sessionId) {
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
         List inputData = fd.getInputDataDAO().getInputDataBySessionId(sessionId);
-//        System.out.println(inputData.size());
         List outputData = new ArrayList();
         ProductType pt;
-//        System.out.println(outputData.size());
         List units = fd.getUnitDAO().getAllUnitsWithAltNames();
-//        System.out.println(units.size());
         String tempPT = "@@@###!!!";
         byte available = new Byte("1");
         Boolean bool = false;
         OutputData od;
-//        OutputData odNew;
         InputData id;
         Unit unit;
         UnitAlternativeName unitAlt;
@@ -53,11 +49,12 @@ public class MergingProcessing {
         Iterator itUnitAlt;
         String[] regexpMass;
         String tempValue;
-        int tempInt;
+        String[] mass4Regexp;
+        String tempDigitString;
+        double tempDigit = 1d;
         while (itIn.hasNext()) {
             try {
                 id = (InputData) itIn.next();
-//            System.out.println(id.getAttribute().trim());
                 if (!tempPT.equals(id.getProductType())) {
                     pt = fd.getProductTypeDAO().getProductTypeByName(id.getProductType());
                     outputData = fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesByIdByNativeSQL(pt.getProductTypeId());
@@ -65,20 +62,22 @@ public class MergingProcessing {
                 itOut = outputData.iterator();
                 while (itOut.hasNext()) {
                     objs = (Object[]) itOut.next();
-//                System.out.println(id.getAttribute().trim() + " --- " + ((String) objs[3]).trim());
                     if (id.getAttribute().trim().equalsIgnoreCase(((String) objs[3]).trim())) {
-//                    System.out.println(id.getAttribute().trim() + " --- " + ((String) objs[3]).trim());
                         bool = true;
                         od = new OutputData();
                         if (((String) objs[4]).trim().contains("Replace")) {
                             try {
                                 if (((String) objs[4]).trim().equals("ReplaceFirst")) {
-//                                od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
                                     try {
-                                        if (((Integer) objs[7]) > 1) {
+                                        if (((String) objs[6]).trim().contains("^^^^")) {
+                                            objs[6] = (((String) objs[6]).trim().replaceFirst("^^^^", ""));
                                             tempValue = id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim());
-                                            tempInt = Integer.parseInt(tempValue) * ((Integer) objs[7]);
-                                            od.setValue(tempInt + "");
+                                            tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
+                                            mass4Regexp = tempDigitString.split("[*]");
+                                            for (int j = 0; j < mass4Regexp.length; j++) {
+                                                tempDigit *= Double.parseDouble(mass4Regexp[j]);
+                                            }
+                                            od.setValue((tempValue.replaceFirst(".*?[}](.*)", tempDigit + "$1")));
                                             od.setAvailable(available);
                                         } else {
                                             od.setValue(id.getAttributeValue().replaceFirst(((String) objs[5]).trim(), ((String) objs[6]).trim()));
@@ -90,26 +89,14 @@ public class MergingProcessing {
                                     }
                                 } else {
                                     try {
-                                        if (((Integer) objs[7]) > 1) {
-                                            tempValue = id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim());
-                                            tempInt = Integer.parseInt(tempValue) * ((Integer) objs[7]);
-                                            od.setValue(tempInt + "");
-                                            od.setAvailable(available);
-                                        } else {
-                                            od.setValue(id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim()));
-                                            od.setAvailable(available);
-                                        }
+                                        od.setValue(id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim()));
+                                        od.setAvailable(available);
                                     } catch (Exception ex) {
                                         od.setAvailable(available);
                                         od.setValue(id.getAttributeValue().replaceAll(((String) objs[5]).trim(), ((String) objs[6]).trim()));
                                     }
                                 }
                             } catch (Exception ex) {
-//                            if (((String) objs[4]).trim().equals("ReplaceFirst")) {
-//                                od.setValue(id.getAttributeValue().replaceFirst("(.*)", ((String) objs[6]).trim()));
-//                            } else {
-//                                od.setValue(id.getAttributeValue().replaceAll("(.*)", ((String) objs[6]).trim()));
-//                            }
                                 od.setValue("Regexp Error: -> " + ex.getMessage());
                                 od.setAvailable((byte) 0);
                             }
@@ -132,9 +119,6 @@ public class MergingProcessing {
                             }
                             od.setSessionId(id.getSessionId());
                             od.setOldValue(id.getAttributeValue());
-
-
-//                        out.add(od);
                             fd.getOutputDataDAO().addOutputData(od);
                         } else {
                             regexpMass = id.getAttributeValue().split(((String) objs[5]).trim());
@@ -161,13 +145,12 @@ public class MergingProcessing {
                                 od.setSessionId(id.getSessionId());
                                 od.setAvailable(available);
                                 od.setOldValue(id.getAttributeValue());
-
-//                            out.add(od);
                                 fd.getOutputDataDAO().addOutputData(od);
                             }
                         }
 
                     }
+                    tempDigit = 1d;
                 }
                 if (!bool) {
                     od = new OutputData();
@@ -178,7 +161,6 @@ public class MergingProcessing {
                     od.setValue(id.getAttributeValue().trim());
                     od.setSessionId(id.getSessionId());
                     od.setAvailable((byte) 0);
-//                out.add(od);
                     od.setOldValue(id.getAttributeValue());
                     fd.getOutputDataDAO().addOutputData(od);
                 }
@@ -187,18 +169,5 @@ public class MergingProcessing {
             } catch (Exception ex) {
             }
         }
-//        System.out.println(out.size());
-//        Iterator iter = out.iterator();
-//        while (iter.hasNext()) {
-//            od = (OutputData) iter.next();
-//            System.out.print(od.getArticle() + " ||| ");
-//            System.out.print(od.getProductType() + " ||| ");
-//            System.out.print(od.getGroupe() + " ||| ");
-//            System.out.print(od.getAttribute() + " ||| ");
-//            System.out.print(od.getValue() + " ||| ");
-//            System.out.print(od.getUnit() + " ||| ");
-//            System.out.println(od.getAvailable());
-//
-//        }
     }
 }

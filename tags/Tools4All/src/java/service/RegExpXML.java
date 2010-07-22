@@ -72,8 +72,6 @@ public class RegExpXML {
                     + (String) objs[2]
                     + "</b> Replacement: <b>"
                     + (String) objs[3]
-                    + "</b> Сoefficient: <b>"
-                    + (Integer) objs[4]
                     + "</b>");
 //            reg.setRegexpReplacement((String) objs[3]);
             regexps.add(reg);

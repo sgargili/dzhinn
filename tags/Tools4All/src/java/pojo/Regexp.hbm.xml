@@ -22,8 +22,5 @@
     <property name="groupeId" type="java.lang.Integer">
       <column name="groupe_id"/>
     </property>
-    <property name="coefficient" type="java.lang.Integer">
-      <column name="coefficient"/>
-    </property>
   </class>
 </hibernate-mapping>

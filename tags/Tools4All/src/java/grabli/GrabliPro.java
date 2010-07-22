@@ -162,7 +162,7 @@ public class GrabliPro {
         return "Done";
     }
 
-    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String regexpCoef, String novelty) {
+    public String addRegexp(int attributeId, int groupeId, String regexpType, String regexpPattern, String regexpReplacement, String novelty) {
         if (novelty.equals("new")) {
             Attribute at = new Attribute();
             at.setAttributeId(attributeId);
@@ -183,11 +183,6 @@ public class GrabliPro {
                 reg.setRegexpReplacement(regexpReplacement);
             } else {
                 reg.setRegexpReplacement("$1");
-            }
-            try {
-                reg.setCoefficient(Integer.parseInt(regexpCoef));
-            } catch (NumberFormatException ex) {
-                reg.setCoefficient(1);
             }
             fd.getRegexpDAO().addRegexp(reg);
             return "Done";
@@ -212,11 +207,6 @@ public class GrabliPro {
                 reg.setRegexpReplacement(regexpReplacement);
             } else {
                 reg.setRegexpReplacement("$1");
-            }
-            try {
-                reg.setCoefficient(Integer.parseInt(regexpCoef));
-            } catch (NumberFormatException ex) {
-                reg.setCoefficient(1);
             }
             fd.getRegexpDAO().addRegexp(reg);
             return "Done";
@@ -733,7 +723,6 @@ public class GrabliPro {
             if (!fd.getRegexpDAO().isRegexpPresent(groupeId, i)) {
                 Regexp reg = new Regexp();
                 reg.setAttribute(atr);
-                reg.setCoefficient(1);
                 reg.setGroupeId(groupeId);
                 reg.setRegexpPattern("(.*)");
                 reg.setRegexpReplacement("$1");
