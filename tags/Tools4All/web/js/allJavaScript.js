@@ -1144,7 +1144,12 @@ var regexpTestWinAfter = new Ext.Window({
 
     items: gridRegexpPreviewAfter,
     tbar:[{
-        text:'Лимит строк:'
+        html:'<h1>Лимит строк:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
     },{
         xtype: 'textfield',
         hideLabel: true,
@@ -1260,7 +1265,12 @@ var sessionWin = new Ext.Window({
 
     items: gridSession,
     tbar:[{
-        text:'Article:'
+        html:'<h1>Article:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
     },{
         xtype: 'textfield',
         hideLabel: true,
@@ -1386,13 +1396,18 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 Ext.getCmp('regexpType').setValue(data[0]);
                 Ext.getCmp('regexpPattern').setValue(data[1]);
                 Ext.getCmp('regexpReplacement').setValue(data[2]);
-//                Ext.getCmp('regexpCoef').setValue(data[3]);
+            //                Ext.getCmp('regexpCoef').setValue(data[3]);
             });
             
         }
     },
     tbar:[{
-        text:'Type:'
+        html:'<h1>Type:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
     },
     {
         xtype: 'combo',
@@ -1412,7 +1427,12 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
         }
     },
     {
-        text:'Pattern:'
+        html:'<h1>Pattern:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
     },{
         xtype: 'textfield',
         hideLabel: true,
@@ -1448,7 +1468,12 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             }
         }
     },{
-        text:'Replace:'
+        html:'<h1>Replace:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
     },{
         xtype: 'textfield',
         hideLabel: true,
@@ -1484,45 +1509,45 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             }
         }
     },
-//    {
-//        text:'Coefficient:'
-//    },
-//    {
-//        xtype: 'textfield',
-//        hideLabel: true,
-//        height:22,
-//        id:'regexpCoef',
-//        blankText:'Введите что-нибудь...',
-//        allowBlank:true,
-//        style: {
-//            marginTop: '1px'
-//        },
-//        width:20,
-//        listeners: {
-//            specialkey: function(something,e){
-//
-//            //                if (e.getKey() == e.ENTER) {
-//            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
-//            //                        if(data=="MultiSelectInRequest"){
-//            //                            Ext.Msg.show({
-//            //                                title: 'Предупреждение!!!',
-//            //                                msg: 'Выбирайте только одно значение!',
-//            //                                buttons: Ext.MessageBox.OK,
-//            //                                width: 300,
-//            //                                icon: Ext.MessageBox.ERROR
-//            //                            });
-//            //                        } else {
-//            //                            Ext.getCmp('atrAltName').setValue("");
-//            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
-//            //                            storeAtrAlt.clearData();
-//            //                            storeAtrAlt.load();
-//            //                        }
-//            //                    });
-//            //
-//            //                }
-//            }
-//        }
-//    },
+    //    {
+    //        text:'Coefficient:'
+    //    },
+    //    {
+    //        xtype: 'textfield',
+    //        hideLabel: true,
+    //        height:22,
+    //        id:'regexpCoef',
+    //        blankText:'Введите что-нибудь...',
+    //        allowBlank:true,
+    //        style: {
+    //            marginTop: '1px'
+    //        },
+    //        width:20,
+    //        listeners: {
+    //            specialkey: function(something,e){
+    //
+    //            //                if (e.getKey() == e.ENTER) {
+    //            //                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
+    //            //                        if(data=="MultiSelectInRequest"){
+    //            //                            Ext.Msg.show({
+    //            //                                title: 'Предупреждение!!!',
+    //            //                                msg: 'Выбирайте только одно значение!',
+    //            //                                buttons: Ext.MessageBox.OK,
+    //            //                                width: 300,
+    //            //                                icon: Ext.MessageBox.ERROR
+    //            //                            });
+    //            //                        } else {
+    //            //                            Ext.getCmp('atrAltName').setValue("");
+    //            //                            storeAtrProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+    //            //                            storeAtrAlt.clearData();
+    //            //                            storeAtrAlt.load();
+    //            //                        }
+    //            //                    });
+    //            //
+    //            //                }
+    //            }
+    //        }
+    //    },
     {
         text: 'Добавить/Обновить',
         handler: function(){
@@ -1542,8 +1567,8 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
-//                    ,
-//                    Ext.getCmp('regexpCoef').getValue(),
+                    //                    ,
+                    //                    Ext.getCmp('regexpCoef').getValue(),
                     "new",
                     function(data) {
                         if(data=="MultiSelectInRequest"){
@@ -1572,7 +1597,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
-//                    Ext.getCmp('regexpCoef').getValue(),
+                    //                    Ext.getCmp('regexpCoef').getValue(),
                     storeRegexp.getAt(0).get("id"),
                     function(data) {
                         if(data=="MultiSelectInRequest"){
@@ -1587,7 +1612,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
-//                            Ext.getCmp('regexpCoef').setValue("");
+                            //                            Ext.getCmp('regexpCoef').setValue("");
                             storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
                                 + Ext.getCmp('multiG2ASel').getValue()
                                 +"/groupeId="
@@ -4241,6 +4266,41 @@ function colorByPercentAvailable(row){
     }
 }
 
+
+
+var statusStore = new Ext.data.GroupingStore({
+    url: 'data/Statuses.xml',
+    reader: new Ext.data.XmlReader({
+        record: 'Status',
+        id: 'Id',
+        fields:[
+        {
+            name: 'id',
+            mapping: 'Id'
+        },{
+            name: 'status',
+            mapping: 'Name'
+        }]
+    })
+});
+
+var comboStatus = new Ext.form.ComboBox({
+    store: statusStore,
+    disabled: true,
+    displayField:'status',
+    valueField: 'status',
+    typeAhead: true,
+    mode: 'remote',
+    forceSelection: true,
+    triggerAction: 'all',
+    emptyText:'Status...',
+    editable: false,
+    style: {
+        margin: '0px'
+    },
+    width:90
+});
+
 var gridToOut = new xg.EditorGridPanel({
     store: outputDataStore,
     id:'gridToOut',
@@ -4309,7 +4369,7 @@ var gridToOut = new xg.EditorGridPanel({
         }
     },
     buttons: [{
-        text: 'Сохранить и получить файл',
+        text: 'Получить файл',
         //arrowAlign:'bottom',
         handler: function(){
             if(Ext.getCmp('SessionIdUp').getValue()==null||Ext.getCmp('SessionIdUp').getValue()==""){
@@ -4323,31 +4383,15 @@ var gridToOut = new xg.EditorGridPanel({
                 return;
             }
             var data="";
-
-            //            gridToOut.getStore().each(
-            //                function(record){
-            //                    data+=record.data.id+
-            //                    "$$$"+
-            //                    record.data.article+
-            //                    "$$$"+
-            //                    record.data.pt+
-            //                    "$$$"+
-            //                    record.data.groupe+
-            //                    "$$$"+
-            //                    record.data.attribute+
-            //                    "$$$"+
-            //                    record.data.value+
-            //                    "$$$"+
-            //                    record.data.unit+
-            //                    "$$$"+
-            //                    record.data.available+
-            //                    "|||";
-            //                }
-            //                )
-            //                        alert(Ext.getCmp('SessionIdUp').getValue()+data);
-            Ajax.updateDownloadData(Ext.getCmp('SessionIdUp').getValue(), data, function(data) {
-                dwr.engine.openInDownload(data);
-            });
+            if(Ext.getCmp('statusBool').getValue()){
+                Ajax.updateDownloadData(Ext.getCmp('SessionIdUp').getValue(), data, comboStatus.getValue(), function(data) {
+                    dwr.engine.openInDownload(data);
+                });
+            } else{
+                Ajax.updateDownloadData(Ext.getCmp('SessionIdUp').getValue(), data, "NoStatus", function(data) {
+                    dwr.engine.openInDownload(data);
+                });
+            }
         }
     }],
 
@@ -4376,6 +4420,16 @@ var gridToOut = new xg.EditorGridPanel({
     {
         text: 'Загрузить данные Сессии',
         handler:function(){
+            if(Ext.getCmp('SessionIdUp').getValue()==null||Ext.getCmp('SessionIdUp').getValue()==""){
+                Ext.Msg.show({
+                    title:'Внимание!',
+                    msg: 'Укажите сессию...',
+                    buttons: Ext.Msg.OK,
+                    width:250,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
             outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
             outputDataStore.clearData();
             outputDataStore.load();
@@ -4384,6 +4438,16 @@ var gridToOut = new xg.EditorGridPanel({
     {
         text: 'Обновить/Загрузить данные Сессии',
         handler:function(){
+            if(Ext.getCmp('SessionIdUp').getValue()==null||Ext.getCmp('SessionIdUp').getValue()==""){
+                Ext.Msg.show({
+                    title:'Внимание!',
+                    msg: 'Укажите сессию...',
+                    buttons: Ext.Msg.OK,
+                    width:250,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
             Ajax.processGrabli(Ext.getCmp('SessionIdUp').getValue(),function(data) {
                 if(data=='Done'){
                     outputDataStoreProxy.setUrl("Service.exml?request=outputData/sessionId=" + Ext.getCmp('SessionIdUp').getValue());
@@ -4400,8 +4464,38 @@ var gridToOut = new xg.EditorGridPanel({
         }
     }
 
-    ]
+    ],
+    bbar:[{
+        xtype: 'tbfill'
+    },{
+        html:'<h1>Сменить статус:</h1>',
+        style: {
+            marginTop: '3px',
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
+    },{
+        xtype: 'checkbox',
+        id:'statusBool',
+        style: {
+            marginTop: '6px',
+            marginRight: '6px'
 
+        },
+        handler:function(){
+            if(Ext.getCmp('statusBool').getValue()){
+                comboStatus.setDisabled(false);
+                comboStatus.setValue("Done");
+            } else{
+                comboStatus.setDisabled(true);
+            }
+        }
+
+
+    },
+    comboStatus
+    ]
 });
 
 
