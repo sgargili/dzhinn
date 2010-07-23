@@ -749,12 +749,12 @@ public class Ajax {
         }
     }
 
-    public FileTransfer updateDownloadData(long sessionId, String inputData) throws Exception {
-        File file = new File("/root/TempFolder/" + System.nanoTime() + ".csv");
+    public FileTransfer updateDownloadData(long sessionId, String inputData, String status) throws Exception {
+        File file = new File("C://" + System.nanoTime() + ".csv");
         System.out.println(file.getAbsolutePath());
         GrabliPro gp = new GrabliPro();
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, sessionId, inputData)));
+        buffer.write(FileUtils.readFileToByteArray(gp.updateParseData(file, sessionId, inputData, status)));
         file.delete();
         return new FileTransfer("uploadData.csv", "text/csv", buffer.toByteArray());
     }
