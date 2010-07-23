@@ -895,7 +895,7 @@ public class GrabliPro {
         }
     }
 
-    public File updateParseData(File file, long sessionId, String inputData) {
+    public File updateParseData(File file, long sessionId, String inputData, String status) {
 //        fd.getOutputDataDAO().deleteOutputDataBySessionId(sessionId);
 //        parseInputData(sessionId, inputData);
         List<OutputData> ods = fd.getOutputDataDAO().getOutputDataBySessionId(sessionId);
@@ -912,7 +912,11 @@ public class GrabliPro {
                 mass[3] = od.getValue();
                 mass[4] = od.getUnit();
                 mass[5] = "";
-                mass[6] = "";
+                if (status.equals("NoStatus")) {
+                    mass[6] = "";
+                } else {
+                    mass[6] = status;
+                }
                 if (od.getAvailable() == 1) {
                     writer.writeRecord(mass);
                 }
