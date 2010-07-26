@@ -1144,7 +1144,7 @@ var regexpTestWinAfter = new Ext.Window({
 
     items: gridRegexpPreviewAfter,
     tbar:[{
-        html:'<h1>Лимит строк:</h1>',
+        text:'<h1>Лимит строк:</h1>',
         style: {
             marginRight: '7px',
             marginLeft: '7px'
@@ -1164,7 +1164,7 @@ var regexpTestWinAfter = new Ext.Window({
             specialkey: function(something,e){
                 if (e.getKey() == e.ENTER) {
                     storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="
-                        + Ext.getCmp('multiG2ASel').getValue('atr')
+                        + Ext.getCmp('multiG2ASel').getValue('atr').replace("/","|||")
                         + "/attributeId="
                         + Ext.getCmp('multiG2ASel').getValue()
                         + "/groupeId="
@@ -1183,7 +1183,7 @@ var regexpTestWinAfter = new Ext.Window({
         text: 'Обновить',
         handler: function(){
             storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="
-                + Ext.getCmp('multiG2ASel').getValue('atr')
+                + Ext.getCmp('multiG2ASel').getValue('atr').replace("/","|||")
                 + "/attributeId="
                 + Ext.getCmp('multiG2ASel').getValue()
                 + "/groupeId="
@@ -1202,6 +1202,130 @@ var regexpTestWinAfter = new Ext.Window({
         text: 'Close',
         handler: function(){
             regexpTestWinAfter.hide();
+        }
+    }]
+});
+
+
+
+
+var storeAtrPreviewProxy = new Ext.data.HttpProxy({
+    url:    'someURL',
+    method: 'GET'
+})
+
+var storeAtrPreview = new Ext.data.Store({
+    // load using HTTP
+    proxy: storeAtrPreviewProxy,
+
+    // the return will be XML, so lets set up a reader
+    reader: new Ext.data.XmlReader({
+        record: 'Article',
+        id: 'Id'
+    }, [
+    {
+        name: 'valueBefore',
+        mapping: 'ValueBefore'
+    },{
+        name: 'valueAfter',
+        mapping: 'ValueAfter'
+    }, {
+        name:'id',
+        mapping:'Id'
+    }
+    ])
+});
+
+// create the grid
+var gridStoreAtrPreview = new Ext.grid.GridPanel({
+    store: storeAtrPreview,
+    columns: [
+    {
+        header: "Attribute Value Before",
+        width: 270,
+        dataIndex: 'valueBefore',
+        sortable: true
+    },
+    {
+        header: "Attribute Value After",
+        width: 270,
+        dataIndex: 'valueAfter',
+        sortable: true
+    }
+    ]
+});
+
+
+
+
+var atrPreviewWinAfter = new Ext.Window({
+    //applyTo:'hello-win',
+    layout:'fit',
+    width:600,
+    height:300,
+    closeAction:'hide',
+    plain: true,
+
+    items: gridStoreAtrPreview,
+    tbar:[{
+        text:'<h1>Лимит строк:</h1>',
+        style: {
+            marginRight: '7px',
+            marginLeft: '7px'
+        },
+        bodyStyle: 'border: 0px'
+    },{
+        xtype: 'textfield',
+        hideLabel: true,
+        height:22,
+        id:'regexpLimit2',
+        blankText:'Введите что-нибудь...',
+        allowBlank:true,
+        style: {
+            marginTop: '1px'
+        },
+        listeners: {
+            specialkey: function(something,e){
+                if (e.getKey() == e.ENTER) {
+                    groupe = gridToOut.getSelectionModel().selection.record.data.groupe;
+                    attribute = gridToOut.getSelectionModel().selection.record.data.attribute;
+                    storeAtrPreviewProxy.setUrl("Service.exml?request=outputData/attributeValue="
+                        +attribute.replace("/","|||")
+                        +"/groupeValue="
+                        +groupe+
+                        "/regexpLimit="
+                        + Ext.getCmp('regexpLimit2').getValue()
+                        +"/session="
+                        + Ext.getCmp('SessionIdUp').getValue()
+                        +"/regexpPreview=before");
+                    storeAtrPreview.clearData();
+                    storeAtrPreview.load();
+                }
+            }
+        }
+    },{
+        text: 'Обновить',
+        handler: function(){
+            groupe = gridToOut.getSelectionModel().selection.record.data.groupe;
+            attribute = gridToOut.getSelectionModel().selection.record.data.attribute;
+            storeAtrPreviewProxy.setUrl("Service.exml?request=outputData/attributeValue="
+                +attribute.replace("/","|||")
+                +"/groupeValue="
+                +groupe+
+                "/regexpLimit="
+                + Ext.getCmp('regexpLimit2').getValue()
+                +"/session="
+                + Ext.getCmp('SessionIdUp').getValue()
+                +"/regexpPreview=before");
+            storeAtrPreview.clearData();
+            storeAtrPreview.load();
+        }
+    }],
+
+    buttons: [{
+        text: 'Close',
+        handler: function(){
+            atrPreviewWinAfter.hide();
         }
     }]
 });
@@ -1265,7 +1389,7 @@ var sessionWin = new Ext.Window({
 
     items: gridSession,
     tbar:[{
-        html:'<h1>Article:</h1>',
+        text:'<h1>Article:</h1>',
         style: {
             marginRight: '7px',
             marginLeft: '7px'
@@ -1396,16 +1520,21 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 Ext.getCmp('regexpType').setValue(data[0]);
                 Ext.getCmp('regexpPattern').setValue(data[1]);
                 Ext.getCmp('regexpReplacement').setValue(data[2]);
-            //                Ext.getCmp('regexpCoef').setValue(data[3]);
+                if(data[3]=="0"){
+                    Ext.getCmp('useAttribute').setValue(false);
+                }else{
+                    Ext.getCmp('useAttribute').setValue(true);
+                }
             });
             
         }
     },
     tbar:[{
-        html:'<h1>Type:</h1>',
+        text:'<h1>Type:</h1>',
         style: {
-            marginRight: '7px',
-            marginLeft: '7px'
+            marginBottom: '3px',
+            marginRight: '5px',
+            marginLeft: '5px'
         },
         bodyStyle: 'border: 0px'
     },
@@ -1423,14 +1552,16 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
         editable: false,
         width:100,
         style: {
+            marginBottom: '3px',
             margin: '0px'
         }
     },
     {
-        html:'<h1>Pattern:</h1>',
+        text:'<h1>Pattern:</h1>',
         style: {
-            marginRight: '7px',
-            marginLeft: '7px'
+            marginBottom: '3px',
+            marginRight: '5px',
+            marginLeft: '5px'
         },
         bodyStyle: 'border: 0px'
     },{
@@ -1468,10 +1599,11 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             }
         }
     },{
-        html:'<h1>Replace:</h1>',
+        text:'<h1>Replace:</h1>',
         style: {
-            marginRight: '7px',
-            marginLeft: '7px'
+            marginBottom: '3px',
+            marginRight: '5px',
+            marginLeft: '5px'
         },
         bodyStyle: 'border: 0px'
     },{
@@ -1508,6 +1640,32 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             //                }
             }
         }
+    },{
+        text:'<h1>Use attribute:</h1>',
+        style: {
+            marginBottom: '3px',
+            marginRight: '3px',
+            marginLeft: '5px'
+        },
+        bodyStyle: 'border: 0px'
+    },{
+        xtype: 'checkbox',
+        id:'useAttribute',
+        style: {
+            marginBottom: '5px',
+            marginRight: '6px'
+
+        },
+        handler:function(){
+            if(Ext.getCmp('statusBool').getValue()){
+                comboStatus.setDisabled(false);
+                comboStatus.setValue("Done");
+            } else{
+                comboStatus.setDisabled(true);
+            }
+        }
+
+
     },
     //    {
     //        text:'Coefficient:'
@@ -1551,6 +1709,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
     {
         text: 'Добавить/Обновить',
         handler: function(){
+
             if(comboGroupes.getValue()==null||comboGroupes.getValue()==""||Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""){
                 Ext.Msg.show({
                     title:'Внимание!',
@@ -1567,6 +1726,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
+                    Ext.getCmp('useAttribute').getValue(),
                     //                    ,
                     //                    Ext.getCmp('regexpCoef').getValue(),
                     "new",
@@ -1583,6 +1743,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
+                            Ext.getCmp('useAttribute').setValue(false);
                             storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
                                 + Ext.getCmp('multiG2ASel').getValue()
                                 +"/groupeId="
@@ -1597,6 +1758,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                     Ext.getCmp('regexpType').getValue(),
                     Ext.getCmp('regexpPattern').getValue(),
                     Ext.getCmp('regexpReplacement').getValue(),
+                    Ext.getCmp('useAttribute').getValue(),
                     //                    Ext.getCmp('regexpCoef').getValue(),
                     storeRegexp.getAt(0).get("id"),
                     function(data) {
@@ -1612,6 +1774,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                             Ext.getCmp('regexpType').setValue("");
                             Ext.getCmp('regexpPattern').setValue("");
                             Ext.getCmp('regexpReplacement').setValue("");
+                            Ext.getCmp('useAttribute').setValue(false);
                             //                            Ext.getCmp('regexpCoef').setValue("");
                             storeRegexpProxy.setUrl("Service.exml?request=regexp/attributeId="
                                 + Ext.getCmp('multiG2ASel').getValue()
@@ -1671,7 +1834,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 return;
             }
             storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/attributeValue="
-                + escape(Ext.getCmp('multiG2ASel').getValue('atr'))
+                + escape(Ext.getCmp('multiG2ASel').getValue('atr').replace("/","|||"))
                 + "/attributeId="
                 + Ext.getCmp('multiG2ASel').getValue()
                 + "/groupeId="
@@ -3231,7 +3394,7 @@ var PT2GroupeForm = new Ext.form.FormPanel({
                                                 width:250,
                                                 icon: Ext.MessageBox.INFO
                                             });
-
+                                            updateAtrsToOutExternal();
                                         });
                                     }
                                 },
@@ -3246,7 +3409,7 @@ var PT2GroupeForm = new Ext.form.FormPanel({
                                     width:250,
                                     icon: Ext.MessageBox.INFO
                                 });
-
+                                updateAtrsToOutExternal();
                             });
                         }
                     }
@@ -3560,6 +3723,7 @@ var Grp2AtrForm = new Ext.form.FormPanel({
                                             });
 
                                         });
+                                        updateAtrsToOutExternal();
                                     }
                                 },
                                 icon: Ext.MessageBox.QUESTION
@@ -3573,7 +3737,7 @@ var Grp2AtrForm = new Ext.form.FormPanel({
                                     width:250,
                                     icon: Ext.MessageBox.INFO
                                 });
-
+                                updateAtrsToOutExternal();
                             });
                         }
                     }
@@ -4036,6 +4200,8 @@ function UploadeCsv(){
 
 var article='Just4Article';
 var pt;
+var groupe;
+var attribut;
 
 var storeAtrsProxyToOut = new Ext.data.HttpProxy({
     url:    'some url',
@@ -4082,7 +4248,7 @@ var comboAtrsToOut = new Ext.form.ComboBox({
     },
     width:200,
     listeners: {
-        beforequery : function test(){
+        beforequery : function updateAtrsToOut(){
             if(article!=gridToOut.getSelectionModel().selection.record.data.article){
                 pt = gridToOut.getSelectionModel().selection.record.data.pt;
                 storeAtrsProxyToOut.setUrl("Service.exml?request=attributes/productType="+pt);
@@ -4102,9 +4268,11 @@ var comboAtrsToOut = new Ext.form.ComboBox({
         '</tpl>'
         )
 });
-//beforequery
 
-
+function updateAtrsToOutExternal(){
+    article='|||!!!|||!!!|||';
+    updateAtrsToOut();
+}
 
 var comboRegexpTypes = new Ext.form.ComboBox({
     store: storeRegexpTypes,
@@ -4462,24 +4630,43 @@ var gridToOut = new xg.EditorGridPanel({
         handler:function(){
             sessionWin.show();
         }
+    },{
+        xtype: 'tbfill'
+    },{
+        text: 'Посмотреть значения',
+        handler:function(){
+            groupe = gridToOut.getSelectionModel().selection.record.data.groupe;
+            attribute = gridToOut.getSelectionModel().selection.record.data.attribute;
+            storeAtrPreviewProxy.setUrl("Service.exml?request=outputData/attributeValue="
+                +attribute.replace("/","|||")
+                +"/groupeValue="
+                +groupe+
+                "/regexpLimit="
+                + Ext.getCmp('regexpLimit2').getValue()
+                +"/session="
+                + Ext.getCmp('SessionIdUp').getValue()
+                +"/regexpPreview=before");
+            storeAtrPreview.clearData();
+            storeAtrPreview.load();
+            atrPreviewWinAfter.show();
+        }
     }
 
     ],
     bbar:[{
         xtype: 'tbfill'
     },{
-        html:'<h1>Сменить статус:</h1>',
+        text:'<h1>Сменить статус:</h1>',
         style: {
-            marginTop: '3px',
-            marginRight: '7px',
-            marginLeft: '7px'
+            marginBottom: '3px',
+            marginRight: '5px'
         },
         bodyStyle: 'border: 0px'
     },{
         xtype: 'checkbox',
         id:'statusBool',
         style: {
-            marginTop: '6px',
+            marginBottom: '3px',
             marginRight: '6px'
 
         },
