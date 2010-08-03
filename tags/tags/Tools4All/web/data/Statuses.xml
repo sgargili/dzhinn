@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Statuses>
+    <Status>
+        <Id>1</Id>
+        <Name>Classcat</Name>
+    </Status>
+    <Status>
+        <Id>2</Id>
+        <Name>Research</Name>
+    </Status>
+    <Status>
+        <Id>3</Id>
+        <Name>Control</Name>
+    </Status>
+    <Status>
+        <Id>4</Id>
+        <Name>Done</Name>
+    </Status>
+</Statuses>

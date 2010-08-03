@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+    <!--Декларация бинов для CSV-->
+
+    <bean id="CsvReader" class="csv.CsvReader">
+        <property name="delimiter">
+            <value>,</value>
+        </property>
+        <property name="charset">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
+    <bean id="CsvWriter" class="csv.CsvWriter">
+        <property name="delimiter">
+            <value>,</value>
+        </property>
+        <property name="charset">
+            <value>UTF-8</value>
+        </property>
+    </bean>
+
+    <!--Декларация бинов для CSV  - конец-->
+
+</beans>
