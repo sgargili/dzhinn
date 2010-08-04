@@ -69,6 +69,7 @@ public class MergingProcessing {
         boolean firstStep = true;
         Boolean regexpLast = false;
         int compInt = 1;
+        int weight;
 
         while (itIn.hasNext()) {
 
@@ -86,6 +87,7 @@ public class MergingProcessing {
 //                        compInt = 1;
 //                    }
                     useAttribute = ((Byte) objs[9]);
+                     weight = ((Integer) objs[11]);
                     if (id.getAttribute().trim().equalsIgnoreCase(((String) objs[4]).trim())) {
                         bool = true;
                         od = new OutputData();
@@ -104,7 +106,7 @@ public class MergingProcessing {
                                             try {
                                                 if (((String) objs[8]).trim().contains("^^^^")) {
                                                     objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
-                                                    pat = Pattern.compile(((String) objs[8]).trim());
+                                                    pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
                                                         match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
                                                     } else if (useAttribute == 1) {
@@ -214,6 +216,7 @@ public class MergingProcessing {
                                     }
 //                                    od.setComposite(compInt++);
 //                                    out.add(od);
+                                    od.setWeight(weight);
                                     fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
@@ -243,6 +246,7 @@ public class MergingProcessing {
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(compInt++);
 //                                        out.add(od);
+                                        od.setWeight(weight);
                                         fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
@@ -362,6 +366,7 @@ public class MergingProcessing {
 //                                    od.setComposite(compInt++);
 //                                    od.setAvailable(available);
 //                                    out.add(od);
+                                    od.setWeight(weight);
                                     fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
 //                                startStep = false;
@@ -379,7 +384,7 @@ public class MergingProcessing {
                                             try {
                                                 if (((String) objs[8]).trim().contains("^^^^")) {
                                                     objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
-                                                    pat = Pattern.compile(((String) objs[8]).trim());
+                                                    pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
                                                         match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
                                                     } else if (useAttribute == 1) {
@@ -486,6 +491,7 @@ public class MergingProcessing {
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
 //                                    out.add(od);
+                                    od.setWeight(weight);
                                     fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
@@ -515,6 +521,7 @@ public class MergingProcessing {
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(0);
 //                                        out.add(od);
+                                        od.setWeight(weight);
                                         fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
@@ -631,6 +638,7 @@ public class MergingProcessing {
                                     od.setComposite(0);
 //                                    od.setAvailable(available);
 //                                    out.add(od);
+                                    od.setWeight(weight);
                                     fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
 //                                startStep = false;
@@ -656,6 +664,7 @@ public class MergingProcessing {
                     od.setOldValue(id.getAttributeValue());
                     od.setOldAttribute(id.getAttribute());
 //                    out.add(od);
+                    od.setWeight(null);
                     fd.getOutputDataDAO().addOutputData(od);
                 }
                 bool = false;

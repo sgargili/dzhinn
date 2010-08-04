@@ -16,6 +16,8 @@ public interface RegexpDAO {
 
     public void addRegexp(Regexp regexp);
 
+    public void updateRegexpByNativeSQL(Regexp regexp);
+
     public void updateRegexpWeight(int atrAltId, int regId, int weight, int regxpLast);
 
     public void deleteRegexp(Regexp regexp);

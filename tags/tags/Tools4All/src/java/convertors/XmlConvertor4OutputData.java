@@ -117,6 +117,14 @@ public class XmlConvertor4OutputData implements Converter {
                 }
                 writer.endNode();
 
+                 writer.startNode("weight");
+                if (od.getWeight() == null) {
+                    writer.setValue("");
+                } else {
+                    writer.setValue(od.getWeight()+"");
+                }
+                writer.endNode();
+
                 writer.endNode();
 
             } catch (Exception ex) {

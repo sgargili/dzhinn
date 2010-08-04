@@ -40,5 +40,8 @@
         <property name="composite" type="java.lang.Integer">
             <column name="composite" />
         </property>
+        <property name="weight" type="java.lang.Integer">
+            <column name="weight" />
+        </property>
     </class>
 </hibernate-mapping>

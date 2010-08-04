@@ -225,7 +225,7 @@ public class GrabliPro {
             } else {
                 reg.setDataUsage((byte) 0);
             }
-            fd.getRegexpDAO().addRegexp(reg);
+            fd.getRegexpDAO().updateRegexpByNativeSQL(reg);
             return "Done";
         }
     }

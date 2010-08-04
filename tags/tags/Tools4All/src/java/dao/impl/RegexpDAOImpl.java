@@ -275,4 +275,32 @@ public class RegexpDAOImpl implements RegexpDAO {
             }
         });
     }
+
+    @Override
+    public void updateRegexpByNativeSQL(final Regexp regexp) {
+
+        final String request =
+                "  update "
+                + "    grabli.regexp  "
+                + "set "
+                + "    regexp_type=:type, "
+                + "    regexp_pattern=:pattern, "
+                + "    regexp_replacement=:replacement, "
+                + "    data_usage=:data "
+                + "where "
+                + "    regexp_id=:id";
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setString("type", regexp.getRegexpType());
+                query.setString("pattern", regexp.getRegexpPattern());
+                query.setString("replacement", regexp.getRegexpReplacement());
+                query.setByte("data", regexp.getDataUsage());
+                query.setInteger("id", regexp.getRegexpId());
+                return query.executeUpdate();
+            }
+        });
+    }
 }

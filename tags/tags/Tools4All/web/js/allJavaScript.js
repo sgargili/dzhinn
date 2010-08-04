@@ -1145,6 +1145,9 @@ var storeRegexpPreviewAfter = new Ext.data.Store({
     }, {
         name:'composite',
         mapping:'Composite'
+    },{
+        name:'weight',
+        mapping:'Weight'
     }
     ])
 });
@@ -1169,6 +1172,12 @@ var gridRegexpPreviewAfter = new Ext.grid.GridPanel({
         header: "Composite",
         width: 100,
         dataIndex: 'composite',
+        sortable: true
+    },
+    {
+        header: "Weight",
+        width: 70,
+        dataIndex: 'weight',
         sortable: true
     }
     ]
@@ -1356,6 +1365,9 @@ var storeAtrPreview = new Ext.data.Store({
     }, {
         name:'composite',
         mapping:'composite'
+    }, {
+        name:'weight',
+        mapping:'weight'
     }
     ])
 });
@@ -1380,6 +1392,12 @@ var gridStoreAtrPreview = new Ext.grid.GridPanel({
         header: "Composite",
         width: 100,
         dataIndex: 'composite',
+        sortable: true
+    },
+    {
+        header: "Weight",
+        width: 100,
+        dataIndex: 'weight',
         sortable: true
     }
     ]
@@ -2033,10 +2051,12 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
     {
         text: 'Sample',
         handler: function(){
-            if(atrMultiAlt.getValue()==null||atrMultiAlt.getValue()==""){
+            if(atrMultiAlt.getValue()==null||atrMultiAlt.getValue()==""||
+                comboGroupes.getValue()==null||comboGroupes.getValue()==""||
+                Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""){
                 Ext.Msg.show({
                     title:'Внимание!',
-                    msg: 'Выберите алиас...',
+                    msg: 'Выберите группу, атрибут и алиас...',
                     buttons: Ext.Msg.OK,
                     width:250,
                     icon: Ext.MessageBox.ERROR
@@ -4608,6 +4628,9 @@ var outputDataStore = new Ext.data.GroupingStore({
         }, {
             name:'composite',
             mapping:'composite'
+        }, {
+            name:'weight',
+            mapping:'weight'
         }
         ]
     })
@@ -4683,6 +4706,12 @@ var cm = new Ext.grid.ColumnModel({
         editor: new fm.TextField({
             allowBlank: false
         })
+    },
+    {
+        header: "Weight",
+        width: 5,
+        sortable: true,
+        dataIndex: 'weight'
     }
     ]
 });

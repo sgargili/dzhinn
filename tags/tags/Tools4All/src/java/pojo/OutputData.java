@@ -18,6 +18,7 @@ public class OutputData implements java.io.Serializable {
     private String oldAttribute;
     private String oldValue;
     private Integer composite;
+    private Integer weight;
 
     public OutputData() {
     }
@@ -127,5 +128,13 @@ public class OutputData implements java.io.Serializable {
 
     public void setComposite(Integer composite) {
         this.composite = composite;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }

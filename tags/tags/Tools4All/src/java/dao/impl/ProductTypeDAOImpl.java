@@ -299,7 +299,8 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
                 + "  reg.regexp_pattern, " //7
                 + "  reg.regexp_replacement, " //8
                 + "  reg.data_usage, " //9
-                + "  reg.regexp_last " //10
+                + "  reg.regexp_last, " //10
+                + "  reg.weight " //11
                 + "from "
                 + "  product_type as pt "
                 + "  inner join groupe as groupe "
@@ -352,7 +353,8 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
                 + "  reg.regexp_pattern, " //7
                 + "  reg.regexp_replacement, " //8
                 + "  reg.data_usage, " //9
-                + "  reg.regexp_last " //10
+                + "  reg.regexp_last, " //10
+                + "  reg.weight " //11
                 + "from "
                 + "  product_type as pt "
                 + "  inner join groupe as groupe "
