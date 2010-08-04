@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 import pojo.InputData;
 import pojo.OutputData;
 import pojo.ProductType;
-import pojo.Unit;
 import pojo.UnitAlternativeName;
 
 /**
@@ -362,7 +361,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    od.setComposite(compInt++);
+//                                    od.setComposite(compInt++);
+                                    if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
+                                        od.setComposite(compInt++);
+                                    }
                                     out.add(od);
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                 } else {
@@ -410,11 +412,11 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     if (match.find()) {
                                         firstStep = false;
                                         if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                         } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute().trim());
                                         } else {
-                                            tempValue4Elab = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = id.getAttributeValue().trim();
                                         }
                                     } else {
                                         tempValue4Elab = "";
@@ -452,8 +454,14 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 }
                                             }
                                             od.setValue(tempValue4Elab);
+                                            if (tempValue4Elab.equals("")) {
+                                                od.setAvailable((byte) 0);
+                                            } else {
+                                                od.setAvailable(available);
+                                            }
                                         } catch (Exception ex) {
                                             tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            od.setAvailable((byte) 0);
                                         }
                                     } else {
                                         try {
@@ -468,9 +476,15 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                             tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
+                                        if (tempValue4Elab.equals("")) {
+                                            od.setAvailable((byte) 0);
+                                        } else {
+                                            od.setAvailable(available);
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    od.setAvailable((byte) 0);
                                 }
                                 if (regexpLast != null && regexpLast) {
                                     od.setArticle(id.getArticle().trim());
@@ -494,8 +508,11 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    od.setComposite(compInt++);
-                                    od.setAvailable(available);
+//                                    od.setComposite(compInt++);
+                                    if (od.getAvailable() != (byte) 0) {
+                                        od.setComposite(compInt++);
+                                    }
+//                                    od.setAvailable(available);
                                     out.add(od);
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
@@ -667,11 +684,11 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     if (match.find()) {
                                         firstStep = false;
                                         if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                         } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute().trim());
                                         } else {
-                                            tempValue4Elab = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = id.getAttributeValue().trim();
                                         }
                                     } else {
                                         tempValue4Elab = "";
@@ -708,9 +725,15 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                     tempValue4Elab = "";
                                                 }
                                                 od.setValue(tempValue4Elab);
+                                                if (tempValue4Elab.equals("")) {
+                                                    od.setAvailable((byte) 0);
+                                                } else {
+                                                    od.setAvailable(available);
+                                                }
                                             }
                                         } catch (Exception ex) {
                                             tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            od.setAvailable((byte) 0);
                                         }
                                     } else {
                                         try {
@@ -725,9 +748,15 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                             tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
+                                        if (tempValue4Elab.equals("")) {
+                                            od.setAvailable((byte) 0);
+                                        } else {
+                                            od.setAvailable(available);
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    od.setAvailable((byte) 0);
                                 }
                                 if (regexpLast != null && regexpLast) {
                                     od.setArticle(id.getArticle().trim());
@@ -752,7 +781,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
-                                    od.setAvailable(available);
+//                                    od.setAvailable(available);
                                     out.add(od);
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
@@ -813,7 +842,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 writer.endNode();
 
                 writer.startNode("Composite");
-                if (od.getComposite() == 0) {
+                if (od.getComposite() == null || od.getComposite() == 0) {
                     writer.setValue("");
                 } else {
                     writer.setValue(od.getComposite() + "");

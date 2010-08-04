@@ -113,7 +113,8 @@ public class RegExpXML {
             } else {
                 tempValue += "Attribute+Value";
             }
-            tempValue+="</b>";
+            tempValue += "</b>";
+            tempValue += " Weight: <b>" + ((Integer) objs[7]) + "</b>";
             reg.setRegexpPattern(tempValue);
 //                    + (((Byte) objs[4]).toString().equals("1") ? "true" : "false")
 //                    + "</b>");

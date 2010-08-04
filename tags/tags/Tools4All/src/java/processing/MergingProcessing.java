@@ -209,7 +209,10 @@ public class MergingProcessing {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    od.setComposite(compInt++);
+                                    if (od.getAvailable() != (byte) 0) {
+                                        od.setComposite(compInt++);
+                                    }
+//                                    od.setComposite(compInt++);
 //                                    out.add(od);
                                     fd.getOutputDataDAO().addOutputData(od);
                                 } else {
@@ -257,11 +260,11 @@ public class MergingProcessing {
                                     if (match.find()) {
                                         firstStep = false;
                                         if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                         } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute().trim());
                                         } else {
-                                            tempValue4Elab = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = id.getAttributeValue().trim();
                                         }
                                     } else {
                                         tempValue4Elab = "";
@@ -275,7 +278,7 @@ public class MergingProcessing {
                                                 objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
                                                 pat = Pattern.compile(((String) objs[7]).trim());
 
-                                                match = pat.matcher(tempValue4Elab); 
+                                                match = pat.matcher(tempValue4Elab);
 
                                                 if (match.find()) {
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
@@ -299,8 +302,14 @@ public class MergingProcessing {
                                                 }
                                             }
                                             od.setValue(tempValue4Elab);
+                                            if (tempValue4Elab.equals("")) {
+                                                od.setAvailable((byte) 0);
+                                            } else {
+                                                od.setAvailable(available);
+                                            }
                                         } catch (Exception ex) {
                                             tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            od.setAvailable((byte) 0);
                                         }
                                     } else {
                                         try {
@@ -314,10 +323,16 @@ public class MergingProcessing {
                                         } catch (Exception ex) {
                                             tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
                                         }
-                                       od.setValue(tempValue4Elab);
+                                        od.setValue(tempValue4Elab);
+                                        if (tempValue4Elab.equals("")) {
+                                            od.setAvailable((byte) 0);
+                                        } else {
+                                            od.setAvailable(available);
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    od.setAvailable((byte) 0);
                                 }
                                 if (regexpLast != null && regexpLast) {
                                     od.setArticle(id.getArticle().trim());
@@ -341,8 +356,11 @@ public class MergingProcessing {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    od.setComposite(compInt++);
-                                    od.setAvailable(available);
+                                    if (od.getAvailable() != (byte) 0) {
+                                        od.setComposite(compInt++);
+                                    }
+//                                    od.setComposite(compInt++);
+//                                    od.setAvailable(available);
 //                                    out.add(od);
                                     fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
@@ -514,11 +532,11 @@ public class MergingProcessing {
                                     if (match.find()) {
                                         firstStep = false;
                                         if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                         } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = (id.getAttribute().trim());
                                         } else {
-                                            tempValue4Elab = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                            tempValue4Elab = id.getAttributeValue().trim();
                                         }
                                     } else {
                                         tempValue4Elab = "";
@@ -555,9 +573,15 @@ public class MergingProcessing {
                                                     tempValue4Elab = "";
                                                 }
                                                 od.setValue(tempValue4Elab);
+                                                if (tempValue4Elab.equals("")) {
+                                                    od.setAvailable((byte) 0);
+                                                } else {
+                                                    od.setAvailable(available);
+                                                }
                                             }
                                         } catch (Exception ex) {
                                             tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            od.setAvailable((byte) 0);
                                         }
                                     } else {
                                         try {
@@ -572,9 +596,15 @@ public class MergingProcessing {
                                             tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
+                                        if (tempValue4Elab.equals("")) {
+                                            od.setAvailable((byte) 0);
+                                        } else {
+                                            od.setAvailable(available);
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    od.setAvailable((byte) 0);
                                 }
                                 if (regexpLast != null && regexpLast) {
                                     od.setArticle(id.getArticle().trim());
@@ -599,7 +629,7 @@ public class MergingProcessing {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
-                                    od.setAvailable(available);
+//                                    od.setAvailable(available);
 //                                    out.add(od);
                                     fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
