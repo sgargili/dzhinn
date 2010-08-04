@@ -4639,7 +4639,7 @@ var cm = new Ext.grid.ColumnModel({
         editor: comboAtrsToOut
     },{
         header: "Composite",
-        width: 10,
+        width: 6,
         sortable: true,
         dataIndex: 'composite'
     },

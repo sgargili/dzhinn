@@ -5,6 +5,7 @@
 package service;
 
 import com.thoughtworks.xstream.XStream;
+import convertors.XmlConvertor4OutputData;
 import convertors.XmlConvertor4RegexpAfter;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
@@ -52,6 +53,8 @@ public class OutputDataXML {
     public String getOutputDataBySessionId(long id) {
         List<OutputData> odList = fd.getOutputDataDAO().getOutputDataBySessionId(id);
         initXstream();
+        //XmlConvertor4OutputData
+        xstream.registerConverter(new XmlConvertor4OutputData());
         xml = xstream.toXML(odList);
         return xml;
     }

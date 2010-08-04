@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Some Java Tools. (v.1.2)</title>
+        <title>Some Java Tools. (v.2.0)</title>
         <link rel="stylesheet" type="text/css" href="css/ext-all.css" />
         <link rel="stylesheet" type="text/css" href="css/CenterLayout.css" />
         <link rel="stylesheet" type="text/css" href="css/layout-browser.css"/>

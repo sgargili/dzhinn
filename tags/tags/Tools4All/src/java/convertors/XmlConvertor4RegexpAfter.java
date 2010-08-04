@@ -189,7 +189,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
 //            }
 //        }
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
-        List inputData = fd.getInputDataDAO().getInputDataAtributeName(attrAltName);
+        List inputData = fd.getInputDataDAO().getInputDataAtributeName(attrAltName, limit);
         List outputData = new ArrayList();
         List out = new ArrayList();
         ProductType pt;
