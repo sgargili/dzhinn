@@ -123,7 +123,7 @@ public class Service extends HttpServlet {
                 //System.out.println("Before: --->>> " + attributeId + " ||| " + attributeValue);
                 OutputDataXML odXML = new OutputDataXML();
                 if (attrAltId != null) {
-                    out.println(odXML.getOutputDataByAttributeAltIdAfter(attrAltId, regexpLimit));
+                    out.println(odXML.getOutputDataByAttributeAltIdAfter(attrAltId, groupeId, attributeId, regexpLimit));
                 } else if (id != null) {
                     out.println(odXML.getOutputDataBySessionId(Long.parseLong(id)));
                 } else if (article != null) {

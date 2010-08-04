@@ -322,6 +322,7 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
                 + "  pt.product_type_id = :value "
                 + "order by "
                 + "  pt.product_type_name, "
+                + "  attribute.attribute_name, "
                 + "  reg.weight";
 
         result = (List) getHibernateTemplate().execute(new HibernateCallback() {
@@ -330,6 +331,63 @@ public class ProductTypeDAOImpl implements ProductTypeDAO {
             public Object doInHibernate(Session session) throws HibernateException {
                 SQLQuery query = session.createSQLQuery(request);
                 query.setInteger("value", productTypeId);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public List getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByGroupeByAttributeByNativeSQL(final int productTypeId, final int groupeId, final int attributeId) {
+        List result = null;
+        final String request =
+                "select "
+                + "  pt.product_type_name, " //0
+                + "  groupe.groupe_name, " //1
+                + "  attribute.attribute_name, " //2
+                + "  com.composite_value, " //3
+                + "  aan.attribute_alernative_name_value, " //4
+                + "  aan.regexp_elab_type, " //5
+                + "  reg.regexp_type, " //6
+                + "  reg.regexp_pattern, " //7
+                + "  reg.regexp_replacement, " //8
+                + "  reg.data_usage, " //9
+                + "  reg.regexp_last " //10
+                + "from "
+                + "  product_type as pt "
+                + "  inner join groupe as groupe "
+                + "  inner join attribute as attribute "
+                + "  inner join composite as com "
+                + "    on   com.groupe_id = groupe.groupe_id "
+                + "    and com.attribute_id = attribute.attribute_id "
+                + "  inner join pt2groupe as p2g "
+                + "    on   pt.product_type_id = p2g.product_type_id "
+                + "    and groupe.groupe_id = p2g.groupe_id "
+                + "  inner join groupe2atr as g2a "
+                + "    on   groupe.groupe_id = g2a.groupe_id "
+                + "    and attribute.attribute_id = g2a.attribute_id "
+                + "  inner join attribute_alternative_name as aan "
+                + "    on   attribute.attribute_id = aan.attribute_id "
+                + "and groupe.groupe_id = aan.groupe_id "
+                + "  inner join `regexp` as reg "
+                + "    on reg.attribute_alernative_name_id = aan.attribute_alernative_name_id "
+                + "where "
+                + "  pt.product_type_id = :pt "
+                + "  and groupe.groupe_id = :grp "
+                + "  and attribute.attribute_id = :attr "
+                + "order by "
+                + "  pt.product_type_name, "
+                + "  attribute.attribute_name, "
+                + "  reg.weight";
+
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setInteger("pt", productTypeId);
+                query.setInteger("grp", groupeId);
+                query.setInteger("attr", attributeId);
                 return query.list();
             }
         });

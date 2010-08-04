@@ -34,6 +34,8 @@ public class XmlConvertor4RegexpAfter implements Converter {
         Object[] input = (Object[]) o;
         attrAltName = (String) input[0];
         int limit = (Integer) input[1];
+        int groupeId = (Integer) input[2];
+        int attributeId = (Integer) input[3];
 //        Iterator iterator = regexps.iterator();
 //        int i = 0;
 //        while (iterator.hasNext()) {
@@ -189,7 +191,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
 //            }
 //        }
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
-        List inputData = fd.getInputDataDAO().getInputDataAtributeName(attrAltName, limit);
+        List inputData = fd.getInputDataDAO().getInputDataAtributeName(attrAltName);
         List outputData = new ArrayList();
         List out = new ArrayList();
         ProductType pt;
@@ -231,7 +233,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
 
                 if (!tempPT.equals(id.getProductType())) {
                     pt = fd.getProductTypeDAO().getProductTypeByName(id.getProductType());
-                    outputData = fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByNativeSQL(pt.getProductTypeId());
+                    outputData = fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByGroupeByAttributeByNativeSQL(pt.getProductTypeId(), groupeId, attributeId);
                 }
                 itOut = outputData.iterator();
                 while (itOut.hasNext()) {

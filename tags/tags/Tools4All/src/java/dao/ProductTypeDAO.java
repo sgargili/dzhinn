@@ -44,6 +44,8 @@ public interface ProductTypeDAO {
 
     public List getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByNativeSQL(final int productTypeId);
 
+    public List getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByGroupeByAttributeByNativeSQL(final int productTypeId, final int groupeId, final int attributeId);
+
     public ProductType getProductTypeById(int id);
 
     public ProductType getProductTypeByName(String productTypeName);

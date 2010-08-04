@@ -1029,7 +1029,7 @@ var atrMultiAlt = new Ext.ux.form.MultiSelect({
                 storeAtrAlt.clearData();
                 storeAtrAlt.load();
                 storeRegexp.removeAll();
-//                storeRegexp.commitChanges();
+            //                storeRegexp.commitChanges();
             });
         }
     },{
@@ -1209,6 +1209,10 @@ var regexpTestWinAfter = new Ext.Window({
                     storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/"
                         +"attrAltId="
                         +atrMultiAlt.getValue()
+                        +"/groupeId="
+                        +comboGroupes.getValue()
+                        +"/attributeId="
+                        +Ext.getCmp('multiG2ASel').getValue()
                         +"/regexpLimit="
                         +Ext.getCmp('regexpLimit').getValue());
                     storeRegexpPreviewAfter.clearData();
@@ -1222,6 +1226,10 @@ var regexpTestWinAfter = new Ext.Window({
             storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/"
                 +"attrAltId="
                 +atrMultiAlt.getValue()
+                +"/groupeId="
+                +comboGroupes.getValue()
+                +"/attributeId="
+                +Ext.getCmp('multiG2ASel').getValue()
                 +"/regexpLimit="
                 +Ext.getCmp('regexpLimit').getValue());
             storeRegexpPreviewAfter.clearData();
@@ -2038,6 +2046,10 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             storeRegexpPreviewAfterProxy.setUrl("Service.exml?request=outputData/"
                 +"attrAltId="
                 +atrMultiAlt.getValue()
+                +"/groupeId="
+                +comboGroupes.getValue()
+                +"/attributeId="
+                +Ext.getCmp('multiG2ASel').getValue()
                 +"/regexpLimit=20");
             storeRegexpPreviewAfter.clearData();
             storeRegexpPreviewAfter.load();
@@ -3778,7 +3790,7 @@ var comboPtsNew = new Ext.form.ComboBox({
 //            }
 //        //storeGroupes.reload();
 //        }
-    }
+}
 });
 
 
@@ -4242,7 +4254,7 @@ var grabliFile = new Ext.form.FormPanel({
                             //                                duration: 2
                             //                            });
                             //                            grabliGrid.show();
-//                            Ext.getCmp('SessionId').setValue(data);
+                            //                            Ext.getCmp('SessionId').setValue(data);
                             Ext.getCmp('SessionIdUp').setValue(data);
                             grabliPBar.getEl().fadeIn({
                                 duration: 1.5
@@ -4259,26 +4271,26 @@ var grabliFile = new Ext.form.FormPanel({
                 }
             }
         }
-//        ,{
-//            html:'<h1>Сессия:</h1>',
-//            style: {
-//                marginTop: '3px',
-//                marginRight: '7px',
-//                marginLeft: '7px'
-//            },
-//            bodyStyle: 'border: 0px'
-//        },{
-//            xtype: 'textfield',
-//            hideLabel: true,
-//            height:22,
-//            width:190,
-//            id:'SessionId',
-//            blankText:'Id Сессии...',
-//            allowBlank:true,
-//            style: {
-//        // marginTop: '1px'
-//        }
-//        }
+        //        ,{
+        //            html:'<h1>Сессия:</h1>',
+        //            style: {
+        //                marginTop: '3px',
+        //                marginRight: '7px',
+        //                marginLeft: '7px'
+        //            },
+        //            bodyStyle: 'border: 0px'
+        //        },{
+        //            xtype: 'textfield',
+        //            hideLabel: true,
+        //            height:22,
+        //            width:190,
+        //            id:'SessionId',
+        //            blankText:'Id Сессии...',
+        //            allowBlank:true,
+        //            style: {
+        //        // marginTop: '1px'
+        //        }
+        //        }
         ,{
             html:'<h1>Использовать Proxy:</h1>',
             style: {
