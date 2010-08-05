@@ -219,10 +219,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     }
                                     od.setWeight(weight);
 //                                    out.add(od);
-                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                         out.add(od);
-                                        regexpElab = true;
-                                    }
+//                                        regexpElab = true;
+//                                    }
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
@@ -252,10 +252,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(compInt++);
                                         od.setWeight(weight);
-                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                             out.add(od);
-                                            regexpElab = true;
-                                        }
+//                                            regexpElab = true;
+//                                        }
 //                                        fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
@@ -386,10 +386,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     }
 //                                    od.setAvailable(available);
                                     od.setWeight(weight);
-                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                         out.add(od);
-                                        regexpElab = true;
-                                    }
+//                                        regexpElab = true;
+//                                    }
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
 //                                startStep = false;
@@ -514,10 +514,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
                                     od.setWeight(weight);
-                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                         out.add(od);
-                                        regexpElab = true;
-                                    }
+//                                        regexpElab = true;
+//                                    }
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
@@ -547,10 +547,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(0);
                                         od.setWeight(weight);
-                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                             out.add(od);
-                                            regexpElab = true;
-                                        }
+//                                            regexpElab = true;
+//                                        }
 //                                        fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
@@ -677,10 +677,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setComposite(0);
 //                                    od.setAvailable(available);
                                     od.setWeight(weight);
-                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
+//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
                                         out.add(od);
-                                        regexpElab = true;
-                                    }
+//                                        regexpElab = true;
+//                                    }
 //                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
 //                                startStep = false;
@@ -698,14 +698,14 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 bool = false;
                 tempPT = id.getProductType();
                 tempAttribute = id.getAttribute();
-                if (regexpElab == false) {
-                    od = new OutputData();
-
-                    od.setOldValue(id.getAttributeValue());
-                    od.setValue("All Regexps is not working...");
-                    out.add(od);
-                }
-                regexpElab = false;
+//                if (regexpElab == false) {
+//                    od = new OutputData();
+//
+//                    od.setOldValue(id.getAttributeValue());
+//                    od.setValue("All Regexps is not working...");
+//                    out.add(od);
+//                }
+//                regexpElab = false;
             } catch (Exception ex) {
                 System.out.println(ex);
             }
