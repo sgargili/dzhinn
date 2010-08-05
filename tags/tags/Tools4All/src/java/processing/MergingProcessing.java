@@ -350,9 +350,9 @@ public class MergingProcessing {
                                         itUnitAlt = unit.getUnitAlternativeNames().iterator();
                                         while (itUnitAlt.hasNext()) {
                                             unitAlt = (UnitAlternativeName) itUnitAlt.next();
-                                            if (tempValue4Elab.contains(unitAlt.getUnitAlternativeNameValue())) {
+                                            if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
                                                 od.setUnit(unit.getUnitName());
-                                                od.setValue(tempValue4Elab.replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
+                                                od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
                                                 break;
                                             }
                                         }
@@ -625,9 +625,9 @@ public class MergingProcessing {
                                         itUnitAlt = unit.getUnitAlternativeNames().iterator();
                                         while (itUnitAlt.hasNext()) {
                                             unitAlt = (UnitAlternativeName) itUnitAlt.next();
-                                            if (tempValue4Elab.contains(unitAlt.getUnitAlternativeNameValue())) {
+                                            if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
                                                 od.setUnit(unit.getUnitName());
-                                                od.setValue(tempValue4Elab.replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
+                                                od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
                                                 break;
                                             }
                                         }
