@@ -2053,10 +2053,11 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
         handler: function(){
             if(atrMultiAlt.getValue()==null||atrMultiAlt.getValue()==""||
                 comboGroupes.getValue()==null||comboGroupes.getValue()==""||
-                Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""){
+                Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""||
+            comboPtsNew.getValue()==null||comboPtsNew.getValue()==""){
                 Ext.Msg.show({
                     title:'Внимание!',
-                    msg: 'Выберите группу, атрибут и алиас...',
+                    msg: 'Выберите ПТ, группу, атрибут и алиас...',
                     buttons: Ext.Msg.OK,
                     width:250,
                     icon: Ext.MessageBox.ERROR
@@ -2070,6 +2071,8 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 +comboGroupes.getValue()
                 +"/attributeId="
                 +Ext.getCmp('multiG2ASel').getValue()
+                +"/productTypeId="
+                +comboPtsNew.getValue()
                 +"/regexpLimit=20");
             storeRegexpPreviewAfter.clearData();
             storeRegexpPreviewAfter.load();

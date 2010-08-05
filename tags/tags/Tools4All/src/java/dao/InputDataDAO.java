@@ -29,6 +29,10 @@ public interface InputDataDAO {
 
     public List<InputData> getInputDataAtributeName(String attributeName, int limit);
 
+    public List<InputData> getInputDataByAtributeNameByPT(String attributeName, String productType);
+
+    public List<InputData> getInputDataByAtributeNameByPT(String attributeName, String productType, int limit);
+
     public List<InputData> getInputDataByArticle(String article);
 
     public boolean isInputDataPresent(InputData inputData);

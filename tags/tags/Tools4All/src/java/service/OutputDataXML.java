@@ -112,10 +112,10 @@ public class OutputDataXML {
         xml = xstream.toXML(objs);
         return xml;
     }
-    public String getOutputDataByAttributeAltIdAfter(String attrAltId, String groupeId, String attributeId, String regexpLimit) {
+    public String getOutputDataByAttributeAltIdAfter(String productTypeId, String attrAltId, String groupeId, String attributeId, String regexpLimit) {
         //System.out.println(attributeId + " ||| " + attribute);
 //        System.out.println(groupeId + "|||" + groupeName + "|||" + attributeId + "|||" + attributeName);
-        int limit, atrId, grpId;
+        int limit, atrId, grpId, ptId;
         try {
             limit = Integer.parseInt(regexpLimit);
         } catch (NumberFormatException ex) {
@@ -131,14 +131,20 @@ public class OutputDataXML {
         } catch (NumberFormatException ex) {
             return "groupeId is suxxxxxx....";
         }
+        try {
+            ptId = Integer.parseInt(productTypeId);
+        } catch (NumberFormatException ex) {
+            return "productTypeId is suxxxxxx....";
+        }
         AttributeAlternativeName alt = fd.getAttributeAlternativeNameDAO().getAttributeAlternativeNameById(Integer.parseInt(attrAltId));
 //        List odList = fd.getOutputDataDAO().getOutputDataByAttrAltName(alt.getAttributeAlernativeNameValue(), limit);
 //        List regList = fd.getRegexpDAO().getRegexpsByAttAltIdByNativeSQL(Integer.parseInt(attrAltId));
-        Object[] objs = new Object[4];
+        Object[] objs = new Object[5];
         objs[0] = alt.getAttributeAlernativeNameValue();
         objs[1] = limit;
         objs[2] = grpId;
         objs[3] = atrId;
+        objs[4] = ptId;
         initXstream();
         xstream.registerConverter(new XmlConvertor4RegexpAfter());
         xml = xstream.toXML(objs);

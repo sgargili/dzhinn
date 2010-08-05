@@ -87,6 +87,7 @@ public class Service extends HttpServlet {
                 String regexpPreview = null;
                 String regexpLimit = null;
                 String sessionId = null;
+                String productTypeId = null;
                 for (int i = 0; i < reqParams.length; i++) {
                     if (reqParams[i].contains("attrAltId")) {
                         attrAltId = reqParams[i].replaceFirst("attrAltId=", "");
@@ -119,11 +120,14 @@ public class Service extends HttpServlet {
                     if (reqParams[i].contains("session")) {
                         sessionId = new String(reqParams[i].replaceFirst("session=", "").getBytes(requestEnc), clientEnc);
                     }
+                    if (reqParams[i].contains("productTypeId")) {
+                        productTypeId = new String(reqParams[i].replaceFirst("productTypeId=", "").getBytes(requestEnc), clientEnc);
+                    }
                 }
                 //System.out.println("Before: --->>> " + attributeId + " ||| " + attributeValue);
                 OutputDataXML odXML = new OutputDataXML();
                 if (attrAltId != null) {
-                    out.println(odXML.getOutputDataByAttributeAltIdAfter(attrAltId, groupeId, attributeId, regexpLimit));
+                    out.println(odXML.getOutputDataByAttributeAltIdAfter(productTypeId, attrAltId, groupeId, attributeId, regexpLimit));
                 } else if (id != null) {
                     out.println(odXML.getOutputDataBySessionId(Long.parseLong(id)));
                 } else if (article != null) {

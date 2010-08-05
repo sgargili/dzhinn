@@ -106,4 +106,35 @@ public class InputDataDAOImpl implements InputDataDAO {
             return null;
         }
     }
+
+    @Override
+    public List<InputData> getInputDataByAtributeNameByPT(final String attributeName, final String productType) {
+        final String request = "from InputData id where id.attribute = :attribute and id.productType = :pt";
+        return (List<InputData>) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setString("attribute", attributeName);
+                query.setString("pt", productType);
+                return query.list();
+            }
+        });
+    }
+
+    @Override
+    public List<InputData> getInputDataByAtributeNameByPT(final String attributeName, final String productType, final int limit) {
+        final String request = "from InputData id where id.attribute = :attribute and id.productType = :pt";
+        return (List<InputData>) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createQuery(request);
+                query.setString("attribute", attributeName);
+                query.setString("pt", productType);
+                query.setMaxResults(limit);
+                return query.list();
+            }
+        });
+    }
 }
