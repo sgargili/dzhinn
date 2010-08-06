@@ -14,6 +14,7 @@ var tempValue="";
 var superGroupe = "";
 var xg = Ext.grid;
 var fm = Ext.form;
+var regexpBuffer = "";
 
 
 // Блок хранилищ...
@@ -1660,6 +1661,51 @@ var storeRegexpUsedData = new Ext.data.Store({
 });
 
 
+var editButton = new Ext.Button({
+    text: 'Edit',
+    menu: [{
+        text: 'Copy',
+        handler: function(){
+            if(atrRegexp.getValue()==null||atrRegexp.getValue()==""){
+                Ext.Msg.show({
+                    title:'Внимание!',
+                    msg: 'Выберите регекспы...',
+                    buttons: Ext.Msg.OK,
+                    width:250,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
+            regexpBuffer = atrRegexp.getValue();
+        }
+    },{
+        text: 'Paste',
+        handler: function(){
+            if(atrMultiAlt.getValue()==null||atrMultiAlt.getValue()==""){
+                Ext.Msg.show({
+                    title:'Внимание!',
+                    msg: 'Выберите алиас...',
+                    buttons: Ext.Msg.OK,
+                    width:250,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
+            if(regexpBuffer==null||regexpBuffer==""){
+                Ext.Msg.show({
+                    title:'Внимание!',
+                    msg: 'В буфере обмена пусто...',
+                    buttons: Ext.Msg.OK,
+                    width:250,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
+            alert(regexpBuffer);
+        }
+    }]
+
+});
 
 var atrRegexp = new Ext.ux.form.MultiSelect({
     name: 'multiselect',
@@ -2054,7 +2100,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             if(atrMultiAlt.getValue()==null||atrMultiAlt.getValue()==""||
                 comboGroupes.getValue()==null||comboGroupes.getValue()==""||
                 Ext.getCmp('multiG2ASel').getValue()==null||Ext.getCmp('multiG2ASel').getValue()==""||
-            comboPtsNew.getValue()==null||comboPtsNew.getValue()==""){
+                comboPtsNew.getValue()==null||comboPtsNew.getValue()==""){
                 Ext.Msg.show({
                     title:'Внимание!',
                     msg: 'Выберите ПТ, группу, атрибут и алиас...',
@@ -2078,7 +2124,8 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             storeRegexpPreviewAfter.load();
             regexpTestWinAfter.show(this);
         }
-    }
+    },
+    editButton
     ],
     ddReorder: true
 
