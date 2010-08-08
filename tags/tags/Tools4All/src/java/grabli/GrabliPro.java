@@ -175,7 +175,7 @@ public class GrabliPro {
             } else {
                 reg.setRegexpType("ReplaceFirst");
             }
-            if (!regexpReplacement.equals("") && regexpReplacement != null) {
+            if (regexpReplacement != null) {
                 reg.setRegexpReplacement(regexpReplacement);
             } else {
                 reg.setRegexpReplacement("$1");
@@ -209,7 +209,7 @@ public class GrabliPro {
             } else {
                 reg.setRegexpType("ReplaceFirst");
             }
-            if (!regexpReplacement.equals("") && regexpReplacement != null) {
+            if (regexpReplacement != null) {
                 reg.setRegexpReplacement(regexpReplacement);
             } else {
                 reg.setRegexpReplacement("$1");

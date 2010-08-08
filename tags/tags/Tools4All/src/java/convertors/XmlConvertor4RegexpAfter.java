@@ -19,7 +19,6 @@ import java.util.regex.Pattern;
 import pojo.InputData;
 import pojo.OutputData;
 import pojo.ProductType;
-import pojo.UnitAlternativeName;
 
 /**
  *
@@ -43,38 +42,28 @@ public class XmlConvertor4RegexpAfter implements Converter {
         List outputData = new ArrayList();
         List out = new ArrayList();
         ProductType pt;
-//        List units = fd.getUnitDAO().getAllUnitsWithAltNames();
         String tempPT = "@@@###!!!";
         byte available = new Byte("1");
-        Boolean bool = false;
         OutputData od;
         InputData id;
-//        Unit unit;
-        UnitAlternativeName unitAlt;
         Object[] objs = null;
         Iterator itIn = inputData.iterator();
         Iterator itOut;
-//        Iterator itUnit;
-//        Iterator itUnitAlt;
         String[] regexpMass;
         String tempValue;
         String tempValue4Elab = "ddd";
         String[] mass4Regexp;
         String tempDigitString;
-        String tempAttribute = "@@@###!!!";
-        String atrAltName = "@@@###!!!";
         double tempDigit = 1d;
         Pattern pat;
         Matcher match;
         int useAttribute = 0;
         boolean composite = false;
         boolean elabType = false;
-        boolean startStep = false;
-        boolean firstStep = true;
         Boolean regexpLast = false;
         int compInt = 1;
         int weight = 0;
-        boolean regexpElab = false;
+        boolean addEnable = true;
 
         while (itIn.hasNext()) {
 
@@ -87,18 +76,17 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 }
                 itOut = outputData.iterator();
                 while (itOut.hasNext()) {
+
                     objs = (Object[]) itOut.next();
-//                    if (!atrAltName.equals(((String) objs[4]).trim())) {
-//                        compInt = 1;
-//                    }
                     useAttribute = ((Byte) objs[9]);
                     weight = ((Integer) objs[11]);
+                    composite = ((Boolean) objs[3]);
+                    elabType = ((Boolean) objs[5]);
+                    regexpLast = ((Boolean) objs[10]);
+
                     if (id.getAttribute().trim().equalsIgnoreCase(((String) objs[4]).trim())) {
-                        bool = true;
+
                         od = new OutputData();
-                        composite = ((Boolean) objs[3]);
-                        elabType = ((Boolean) objs[5]);
-                        regexpLast = ((Boolean) objs[10]);
 
                         if (composite) {
                             if (elabType) {
@@ -197,33 +185,14 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    itUnit = units.iterator();
-//                                    while (itUnit.hasNext()) {
-//                                        unit = (Unit) itUnit.next();
-//                                        itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                        while (itUnitAlt.hasNext()) {
-//                                            unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                            if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                od.setUnit(unit.getUnitName());
-//                                                od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-//                                    od.setComposite(compInt++);
                                     if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
                                         od.setComposite(compInt++);
                                     }
                                     od.setWeight(weight);
-//                                    out.add(od);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        out.add(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    fd.getOutputDataDAO().addOutputData(od);
+                                    out.add(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
                                     for (int i = 0; i < regexpMass.length; i++) {
@@ -233,63 +202,24 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         od.setAttribute(((String) objs[2]).trim());
                                         od.setGroupe(((String) objs[1]).trim());
                                         od.setProductType(((String) objs[0]).trim());
-//                                        itUnit = units.iterator();
-//                                        while (itUnit.hasNext()) {
-//                                            unit = (Unit) itUnit.next();
-//                                            itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                            while (itUnitAlt.hasNext()) {
-//                                                unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                                if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                    od.setUnit(unit.getUnitName());
-//                                                    od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                    break;
-//                                                }
-//                                            }
-//                                        }
                                         od.setSessionId(id.getSessionId());
                                         od.setAvailable(available);
                                         od.setOldValue(id.getAttributeValue());
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(compInt++);
                                         od.setWeight(weight);
-//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                            out.add(od);
-//                                            regexpElab = true;
-//                                        }
-//                                        fd.getOutputDataDAO().addOutputData(od);
+                                        out.add(od);
                                     }
                                 }
                             } else {
-                                startStep = true;
-                                if (firstStep) {
-                                    pat = Pattern.compile(((String) objs[7]).trim());
+                                if (weight == 0) {
                                     if (useAttribute == 2) {
-                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                        tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                     } else if (useAttribute == 1) {
-                                        match = pat.matcher(id.getAttribute());
+                                        tempValue4Elab = (id.getAttribute().trim());
                                     } else {
-                                        match = pat.matcher(id.getAttributeValue());
+                                        tempValue4Elab = id.getAttributeValue().trim();
                                     }
-                                    if (match.find()) {
-                                        firstStep = false;
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    } else {
-//                                        tempValue4Elab = "";
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    }
-
                                 }
                                 try {
                                     if (((String) objs[6]).trim().equals("ReplaceFirst")) {
@@ -297,13 +227,10 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                             if (((String) objs[8]).trim().contains("^^^^")) {
                                                 objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
                                                 pat = Pattern.compile(((String) objs[7]).trim());
-
                                                 match = pat.matcher(tempValue4Elab);
-
                                                 if (match.find()) {
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 } else {
-//                                                    tempValue = "";
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
@@ -318,10 +245,6 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 match = pat.matcher(tempValue4Elab);
                                                 if (match.find()) {
                                                     tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                                } else {
-//                                                    tempValue4Elab = "";
-                                                    tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
-
                                                 }
                                             }
                                             od.setValue(tempValue4Elab);
@@ -331,21 +254,18 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 od.setAvailable(available);
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                             od.setAvailable((byte) 0);
                                         }
-                                    } else {
+                                    } else if (((String) objs[6]).trim().equals("ReplaceAll")) {
                                         try {
                                             pat = Pattern.compile(((String) objs[7]).trim());
                                             match = pat.matcher(tempValue4Elab);
                                             if (match.find()) {
                                                 tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                            } else {
-//                                                tempValue4Elab = "";
-                                                tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
                                         if (tempValue4Elab.equals("")) {
@@ -353,47 +273,43 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         } else {
                                             od.setAvailable(available);
                                         }
+                                    } else {
+                                        regexpMass = tempValue4Elab.split(((String) objs[7]).trim());
+                                        for (int i = 0; i < regexpMass.length; i++) {
+                                            od = new OutputData();
+                                            od.setValue(regexpMass[i].trim());
+                                            od.setArticle(id.getArticle().trim());
+                                            od.setAttribute(((String) objs[2]).trim());
+                                            od.setGroupe(((String) objs[1]).trim());
+                                            od.setProductType(((String) objs[0]).trim());
+                                            od.setSessionId(id.getSessionId());
+                                            od.setAvailable(available);
+                                            od.setOldValue(id.getAttributeValue());
+                                            od.setOldAttribute(id.getAttribute());
+                                            od.setComposite(compInt++);
+                                            od.setWeight(weight);
+                                            out.add(od);
+                                            addEnable = false;
+                                        }
                                     }
                                 } catch (Exception ex) {
                                     tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
                                     od.setAvailable((byte) 0);
                                 }
-                                if (regexpLast != null && regexpLast) {
+                                if (regexpLast != null && regexpLast && addEnable) {
                                     od.setArticle(id.getArticle().trim());
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    od.setValue(tempValue4Elab);
-//                                    itUnit = units.iterator();
-//                                    while (itUnit.hasNext()) {
-//                                        unit = (Unit) itUnit.next();
-//                                        itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                        while (itUnitAlt.hasNext()) {
-//                                            unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                            if (tempValue4Elab.contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                od.setUnit(unit.getUnitName());
-//                                                od.setValue(tempValue4Elab.replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-//                                    od.setComposite(compInt++);
-                                    if (od.getAvailable() != (byte) 0) {
+                                    if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
                                         od.setComposite(compInt++);
                                     }
-//                                    od.setAvailable(available);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        out.add(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    fd.getOutputDataDAO().addOutputData(od);
+                                    out.add(od);
                                     tempValue4Elab = "";
-//                                startStep = false;
-                                    firstStep = true;
                                 }
                             }
                             if (regexpLast != null && regexpLast) {
@@ -496,29 +412,12 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    itUnit = units.iterator();
-//                                    while (itUnit.hasNext()) {
-//                                        unit = (Unit) itUnit.next();
-//                                        itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                        while (itUnitAlt.hasNext()) {
-//                                            unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                            if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                od.setUnit(unit.getUnitName());
-//                                                od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        out.add(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    fd.getOutputDataDAO().addOutputData(od);
+                                    out.add(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
                                     for (int i = 0; i < regexpMass.length; i++) {
@@ -528,63 +427,24 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         od.setAttribute(((String) objs[2]).trim());
                                         od.setGroupe(((String) objs[1]).trim());
                                         od.setProductType(((String) objs[0]).trim());
-//                                        itUnit = units.iterator();
-//                                        while (itUnit.hasNext()) {
-//                                            unit = (Unit) itUnit.next();
-//                                            itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                            while (itUnitAlt.hasNext()) {
-//                                                unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                                if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                    od.setUnit(unit.getUnitName());
-//                                                    od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                    break;
-//                                                }
-//                                            }
-//                                        }
                                         od.setSessionId(id.getSessionId());
                                         od.setAvailable(available);
                                         od.setOldValue(id.getAttributeValue());
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(0);
                                         od.setWeight(weight);
-//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                            out.add(od);
-//                                            regexpElab = true;
-//                                        }
-//                                        fd.getOutputDataDAO().addOutputData(od);
+                                        out.add(od);
                                     }
                                 }
                             } else {
-                                startStep = true;
-                                if (firstStep) {
-                                    pat = Pattern.compile(((String) objs[7]).trim());
+                                if (weight == 0) {
                                     if (useAttribute == 2) {
-                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                        tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                     } else if (useAttribute == 1) {
-                                        match = pat.matcher(id.getAttribute());
+                                        tempValue4Elab = (id.getAttribute().trim());
                                     } else {
-                                        match = pat.matcher(id.getAttributeValue());
+                                        tempValue4Elab = id.getAttributeValue().trim();
                                     }
-                                    if (match.find()) {
-                                        firstStep = false;
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    } else {
-//                                        tempValue4Elab = "";
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    }
-
                                 }
                                 try {
                                     if (((String) objs[6]).trim().equals("ReplaceFirst")) {
@@ -598,7 +458,6 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 if (match.find()) {
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 } else {
-//                                                    tempValue = "";
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
@@ -613,9 +472,6 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 match = pat.matcher(tempValue4Elab);
                                                 if (match.find()) {
                                                     tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                                } else {
-//                                                    tempValue4Elab = "";
-                                                    tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 od.setValue(tempValue4Elab);
                                                 if (tempValue4Elab.equals("")) {
@@ -625,21 +481,18 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 }
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                             od.setAvailable((byte) 0);
                                         }
-                                    } else {
+                                    } else if (((String) objs[6]).trim().equals("ReplaceAll")) {
                                         try {
                                             pat = Pattern.compile(((String) objs[7]).trim());
                                             match = pat.matcher(tempValue4Elab);
                                             if (match.find()) {
                                                 tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                            } else {
-//                                                tempValue4Elab = "";
-                                                tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
                                         if (tempValue4Elab.equals("")) {
@@ -647,65 +500,49 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                         } else {
                                             od.setAvailable(available);
                                         }
+                                    } else {
+                                        regexpMass = tempValue4Elab.split(((String) objs[7]).trim());
+                                        for (int i = 0; i < regexpMass.length; i++) {
+                                            od = new OutputData();
+                                            od.setValue(regexpMass[i].trim());
+                                            od.setArticle(id.getArticle().trim());
+                                            od.setAttribute(((String) objs[2]).trim());
+                                            od.setGroupe(((String) objs[1]).trim());
+                                            od.setProductType(((String) objs[0]).trim());
+                                            od.setSessionId(id.getSessionId());
+                                            od.setAvailable(available);
+                                            od.setOldValue(id.getAttributeValue());
+                                            od.setOldAttribute(id.getAttribute());
+                                            od.setComposite(0);
+                                            od.setWeight(weight);
+                                            out.add(od);
+                                            addEnable = false;
+                                        }
                                     }
                                 } catch (Exception ex) {
-                                    tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                     od.setAvailable((byte) 0);
                                 }
-                                if (regexpLast != null && regexpLast) {
+                                if (regexpLast != null && regexpLast && addEnable) {
                                     od.setArticle(id.getArticle().trim());
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    od.setValue(tempValue4Elab);
-//                                    itUnit = units.iterator();
-//                                    while (itUnit.hasNext()) {
-//                                        unit = (Unit) itUnit.next();
-//                                        itUnitAlt = unit.getUnitAlternativeNames().iterator();
-//                                        while (itUnitAlt.hasNext()) {
-//                                            unitAlt = (UnitAlternativeName) itUnitAlt.next();
-//                                            if (tempValue4Elab.contains(unitAlt.getUnitAlternativeNameValue())) {
-//                                                od.setUnit(unit.getUnitName());
-//                                                od.setValue(tempValue4Elab.replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
-//                                                break;
-//                                            }
-//                                        }
-//                                    }
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
-//                                    od.setAvailable(available);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        out.add(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    fd.getOutputDataDAO().addOutputData(od);
+                                    out.add(od);
                                     tempValue4Elab = "";
-//                                startStep = false;
-                                    firstStep = true;
                                 }
                             }
-
-
                         }
                     }
                     tempDigit = 1d;
-                    atrAltName = ((String) objs[4]).trim();
+                    addEnable = true;
                 }
-
-                bool = false;
                 tempPT = id.getProductType();
-                tempAttribute = id.getAttribute();
-//                if (regexpElab == false) {
-//                    od = new OutputData();
-//
-//                    od.setOldValue(id.getAttributeValue());
-//                    od.setValue("All Regexps is not working...");
-//                    out.add(od);
-//                }
-//                regexpElab = false;
             } catch (Exception ex) {
                 System.out.println(ex);
             }
@@ -715,8 +552,9 @@ public class XmlConvertor4RegexpAfter implements Converter {
         while (iterator.hasNext()) {
             if (j < limit) {
                 od = (OutputData) iterator.next();
+
                 writer.startNode("Article");
-//
+
                 writer.startNode("Id");
                 writer.setValue(j++ + "");
                 writer.endNode();
@@ -750,6 +588,7 @@ public class XmlConvertor4RegexpAfter implements Converter {
                 writer.endNode();
 
                 writer.endNode();
+
             } else {
                 break;
             }
@@ -768,158 +607,3 @@ public class XmlConvertor4RegexpAfter implements Converter {
         return type.equals(Object[].class);
     }
 }
-//        Iterator iterator = regexps.iterator();
-//        int i = 0;
-//        while (iterator.hasNext()) {
-//            Object[] objects = (Object[]) iterator.next();
-//            Regexp reg = new Regexp();
-//            String tempValue;
-//            String tempDigitString;
-//            String[] mass4Regexp;
-//            int useAttribute = 0;
-////        int tempInt;
-//            double tempDigit = 1d;
-//            if (!regexps.isEmpty()) {
-//                reg.setRegexpType((String) objects[1]);
-//                reg.setRegexpPattern((String) objects[2]);
-//                reg.setRegexpReplacement((String) objects[3]);
-//                useAttribute = ((Byte) objects[4]);
-//            }
-//
-//            OutputData outData;
-////        Attribute atr = (Attribute) input[1];
-////        Regexp reg;
-//            Pattern pat;
-//            Matcher match;
-//            Iterator it = outDatas.iterator();
-//            while (it.hasNext()) {
-//                outData = (OutputData) it.next();
-//                writer.startNode("Article");
-//                try {
-//
-//                    writer.startNode("Id");
-//                    writer.setValue(i++ + "");
-//                    writer.endNode();
-//
-//                    writer.startNode("ValueBefore");
-//                    try {
-//                        if (useAttribute == 2) {
-//                            writer.setValue(outData.getOldAttribute() + " ||| " + outData.getOldValue());
-//                        } else if (useAttribute == 1) {
-//                            writer.setValue(outData.getOldAttribute());
-//                        } else {
-//                            writer.setValue(outData.getOldValue());
-//
-//                        }
-//                    } catch (Exception ex) {
-//                        writer.setValue("");
-//                    }
-//                    writer.endNode();
-//
-//                    writer.startNode("ValueAfter");
-//                    if (reg.getRegexpType().equals("ReplaceFirst")) {
-//                        try {
-//                            if (reg.getRegexpReplacement().contains("^^^^")) {
-//                                reg.setRegexpReplacement(reg.getRegexpReplacement().replaceFirst("^^^^", ""));
-//                                pat = Pattern.compile(reg.getRegexpPattern());
-//                                if (useAttribute == 2) {
-//                                    match = pat.matcher(outData.getOldAttribute() + " ||| " + outData.getOldValue());
-//                                } else if (useAttribute == 1) {
-//                                    match = pat.matcher(outData.getOldAttribute());
-//                                } else {
-//                                    match = pat.matcher(outData.getOldValue());
-//                                }
-//                                if (match.find()) {
-//                                    if (useAttribute == 2) {
-//                                        tempValue = (outData.getOldAttribute() + " ||| " + outData.getOldValue()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
-//                                    } else if (useAttribute == 1) {
-//                                        tempValue = (outData.getOldAttribute()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
-//                                    } else {
-//                                        tempValue = outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement());
-//                                    }
-//                                } else {
-//                                    tempValue = "";
-//                                }
-//                                tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
-//                                mass4Regexp = tempDigitString.split("[*]");
-//                                for (int j = 0; j < mass4Regexp.length; j++) {
-//                                    tempDigit *= Double.parseDouble(mass4Regexp[j]);
-//                                }
-//                                writer.setValue(tempValue.replaceFirst(".*?[}](.*)", tempDigit + "$1"));
-//                            } else {
-//                                pat = Pattern.compile(reg.getRegexpPattern());
-//                                if (useAttribute == 2) {
-//                                    match = pat.matcher(outData.getOldAttribute() + " ||| " + outData.getOldValue());
-//                                } else if (useAttribute == 1) {
-//                                    match = pat.matcher(outData.getOldAttribute());
-//                                } else {
-//                                    match = pat.matcher(outData.getOldValue());
-//                                }
-//                                if (match.find()) {
-//                                    if (useAttribute == 2) {
-//                                        writer.setValue((outData.getOldAttribute() + " ||| " + outData.getOldValue()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                    } else if (useAttribute == 1) {
-//                                        writer.setValue((outData.getOldAttribute()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                    } else {
-//                                        writer.setValue(outData.getOldValue().replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                    }
-//                                } else {
-//                                    writer.setValue("");
-//                                }
-//                            }
-//                        } catch (Exception ex) {
-//                            writer.setValue("Regexp Error: -> " + ex.getMessage());
-//                        }
-//
-//                    } else if (reg.getRegexpType().equals("ReplaceAll")) {
-//                        try {
-//                            pat = Pattern.compile(reg.getRegexpPattern());
-//                            if (useAttribute == 2) {
-//                                match = pat.matcher(outData.getOldAttribute() + " ||| " + outData.getOldValue());
-//                            } else if (useAttribute == 1) {
-//                                match = pat.matcher(outData.getOldAttribute());
-//                            } else {
-//                                match = pat.matcher(outData.getOldValue());
-//                            }
-//                            if (match.find()) {
-//                                if (useAttribute == 2) {
-//                                    writer.setValue((outData.getOldAttribute() + " ||| " + outData.getOldValue()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                } else if (useAttribute == 1) {
-//                                    writer.setValue((outData.getOldAttribute()).replaceFirst(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                } else {
-//                                    writer.setValue(outData.getOldValue().replaceAll(reg.getRegexpPattern(), reg.getRegexpReplacement()));
-//                                }
-//                            } else {
-//                                writer.setValue("");
-//                            }
-//                        } catch (Exception ex) {
-//                            writer.setValue("Regexp Error: -> " + ex.getMessage());
-//                        }
-//                    } else {
-//                        String[] mass;
-//                        if (useAttribute == 2) {
-//                            mass = (outData.getOldAttribute() + " ||| " + outData.getOldValue()).split(reg.getRegexpPattern());
-//                        } else if (useAttribute == 1) {
-//                            mass = (outData.getOldAttribute()).split(reg.getRegexpPattern());
-//                        } else {
-//                            mass = outData.getOldValue().split(reg.getRegexpPattern());
-//                        }
-//                        StringBuilder tmp = new StringBuilder();
-//                        for (int j = 0; j < mass.length; j++) {
-//                            if (j != mass.length - 1) {
-//                                tmp.append(mass[j] + "<br/>");
-//                            } else {
-//                                tmp.append(mass[j]);
-//                            }
-//                        }
-//                        writer.setValue(tmp.toString());
-//                    }
-//                    writer.endNode();
-//
-//                } catch (Exception ex) {
-//                }
-//                writer.endNode();
-//                tempDigit = 1d;
-//            }
-//        }
-

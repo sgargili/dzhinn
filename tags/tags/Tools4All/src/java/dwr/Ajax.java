@@ -430,16 +430,17 @@ public class Ajax {
     }
 
     public String deleteRegexp(String regexpId) {
-        Regexp reg = new Regexp();
-        try {
-            reg.setRegexpId(Integer.parseInt(regexpId));
-        } catch (NumberFormatException ex) {
-            ex.printStackTrace();
-            reg = null;
-            return "MultiSelectInRequest";
-        }
+        Regexp reg;
         GrabliPro gp = new GrabliPro();
-        gp.deleteRegexp(reg);
+        String[] mass = regexpId.split(",");
+        for (int i = 0; i < mass.length; i++) {
+            reg = new Regexp();
+            try {
+                reg.setRegexpId(Integer.parseInt(mass[i]));
+            } catch (Exception ex) {
+            }
+            gp.deleteRegexp(reg);
+        }
         return "Done";
     }
 
@@ -605,7 +606,7 @@ public class Ajax {
         atrAlt.setAttributeAlernativeNameValue(newAltName);
         atrAlt.setAttribute(atr);
         atrAlt.setGroupe(grp);
-        atrAlt.setRegexpElabType(false);
+        atrAlt.setRegexpElabType(true);
 //        System.out.println(atrAlt.getAttribute().getAttributeId()+"|||"+atrAlt.getAttributeAlernativeNameValue());
         GrabliPro gp = new GrabliPro();
         gp.addAttributeAltName(atrAlt);
@@ -759,7 +760,13 @@ public class Ajax {
     public String[] updateRegexp(String regexpId) {
         String[] mass = new String[4];
         GrabliPro gp = new GrabliPro();
-        Regexp reg = gp.updateRegexp(Integer.parseInt(regexpId));
+        int regId = 0;
+        try {
+            regId = Integer.parseInt(regexpId);
+        } catch (Exception ex) {
+            return null;
+        }
+        Regexp reg = gp.updateRegexp(regId);
         mass[0] = reg.getRegexpType();
         mass[1] = reg.getRegexpPattern();
         mass[2] = reg.getRegexpReplacement();
@@ -835,6 +842,39 @@ public class Ajax {
             } else {
                 FactoryDAO4Grabli.getInstance().getRegexpDAO().updateRegexpWeight(attributeAltId, regexpId, k++, 2);
             }
+        }
+        return "Done";
+    }
+
+    public String pasteRegexp(String atrAltId, String regId) {
+        int regexpId;
+        int attributeAltId;
+        Regexp reg, regNew;
+        try {
+            attributeAltId = Integer.parseInt(atrAltId);
+        } catch (Exception ex) {
+            return "AttributeAltId have not digital value...";
+        }
+        int k = 0;
+        String[] mass = regId.split(",");
+        AttributeAlternativeName atrAlt = new AttributeAlternativeName();
+        atrAlt.setAttributeAlernativeNameId(attributeAltId);
+        for (int i = 0; i < mass.length; i++) {
+            try {
+                regexpId = Integer.parseInt(mass[i]);
+            } catch (Exception ex) {
+                return "Regexp have not digital value...";
+            }
+            reg = FactoryDAO4Grabli.getInstance().getRegexpDAO().getRegexpById(regexpId);
+            regNew = new Regexp();
+            regNew.setAttributeAlternativeName(atrAlt);
+            regNew.setDataUsage(reg.getDataUsage());
+            regNew.setRegexpLast(reg.getRegexpLast());
+            regNew.setRegexpPattern(reg.getRegexpPattern());
+            regNew.setRegexpReplacement(reg.getRegexpReplacement());
+            regNew.setRegexpType(reg.getRegexpType());
+            regNew.setWeight(reg.getWeight());
+            FactoryDAO4Grabli.getInstance().getRegexpDAO().addRegexp(regNew);
         }
         return "Done";
     }

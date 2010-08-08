@@ -25,7 +25,7 @@ public class Test {
     public static void main(String[] args) {
 
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
-        List inputData = fd.getInputDataDAO().getInputDataBySessionId(83649862134296L);
+        List inputData = fd.getInputDataDAO().getInputDataBySessionId(1344641480981527L);
         List outputData = new ArrayList();
         List out = new ArrayList();
         ProductType pt;

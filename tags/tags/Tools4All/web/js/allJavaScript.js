@@ -1223,6 +1223,8 @@ var regexpTestWinAfter = new Ext.Window({
                         +comboGroupes.getValue()
                         +"/attributeId="
                         +Ext.getCmp('multiG2ASel').getValue()
+                        +"/productTypeId="
+                        +comboPtsNew.getValue()
                         +"/regexpLimit="
                         +Ext.getCmp('regexpLimit').getValue());
                     storeRegexpPreviewAfter.clearData();
@@ -1240,6 +1242,8 @@ var regexpTestWinAfter = new Ext.Window({
                 +comboGroupes.getValue()
                 +"/attributeId="
                 +Ext.getCmp('multiG2ASel').getValue()
+                +"/productTypeId="
+                +comboPtsNew.getValue()
                 +"/regexpLimit="
                 +Ext.getCmp('regexpLimit').getValue());
             storeRegexpPreviewAfter.clearData();
@@ -1701,7 +1705,12 @@ var editButton = new Ext.Button({
                 });
                 return;
             }
-            alert(regexpBuffer);
+            Ajax.pasteRegexp(atrMultiAlt.getValue(),regexpBuffer, function(data) {
+                storeRegexpProxy.setUrl("Service.exml?request=regexp/attrAltId="
+                    +atrMultiAlt.getValue());
+                storeRegexp.clearData();
+                storeRegexp.load();
+            });
         }
     }]
 
@@ -1727,17 +1736,12 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
     listeners: {
         click: function() {
             Ajax.updateRegexp(atrRegexp.getValue(), function(data) {
-                Ext.getCmp('regexpType').setValue(data[0]);
-                Ext.getCmp('regexpPattern').setValue(data[1]);
-                Ext.getCmp('regexpReplacement').setValue(data[2]);
-                //                if(data[3]=="0"){
-                //                    Ext.getCmp('regexpUsedData').setValue("Value");
-                //                } else if(data[3]=="1"){
-                //                    Ext.getCmp('regexpUsedData').setValue("Attribute");
-                //                } else {
-                //                    Ext.getCmp('regexpUsedData').setValue("Both");
-                //                }
-                Ext.getCmp('regexpUsedData').setValue(data[3]);
+                if(data!=null){
+                    Ext.getCmp('regexpType').setValue(data[0]);
+                    Ext.getCmp('regexpPattern').setValue(data[1]);
+                    Ext.getCmp('regexpReplacement').setValue(data[2]);
+                    Ext.getCmp('regexpUsedData').setValue(data[3]);
+                }
             });
             
         }
@@ -2094,6 +2098,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 });
         }
     },
+    editButton,
     {
         text: 'Sample',
         handler: function(){
@@ -2124,8 +2129,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
             storeRegexpPreviewAfter.load();
             regexpTestWinAfter.show(this);
         }
-    },
-    editButton
+    }
     ],
     ddReorder: true
 
@@ -4700,7 +4704,10 @@ var cm = new Ext.grid.ColumnModel({
         header: "Article",
         width: 7,
         sortable: true,
-        dataIndex: 'article'
+        dataIndex: 'article',
+        editor: new fm.TextField({
+            allowBlank: false
+        })
 
     },
     {

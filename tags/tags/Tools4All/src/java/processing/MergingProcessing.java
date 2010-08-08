@@ -37,7 +37,6 @@ public class MergingProcessing {
         FactoryDAO4Grabli fd = FactoryDAO4Grabli.getInstance();
         List inputData = fd.getInputDataDAO().getInputDataBySessionId(sessionId);
         List outputData = new ArrayList();
-//        List out = new ArrayList();
         ProductType pt;
         List units = fd.getUnitDAO().getAllUnitsWithAltNames();
         String tempPT = "@@@###!!!";
@@ -57,21 +56,16 @@ public class MergingProcessing {
         String tempValue4Elab = "ddd";
         String[] mass4Regexp;
         String tempDigitString;
-        String tempAttribute = "@@@###!!!";
-        String atrAltName = "@@@###!!!";
         double tempDigit = 1d;
         Pattern pat;
         Matcher match;
         int useAttribute = 0;
         boolean composite = false;
         boolean elabType = false;
-        boolean startStep = false;
-        boolean firstStep = true;
         Boolean regexpLast = false;
         int compInt = 1;
         int weight;
-        boolean regexpElab = false;
-        boolean errorElab = true;
+        boolean addEnable = true;
 
         while (itIn.hasNext()) {
 
@@ -85,20 +79,17 @@ public class MergingProcessing {
                 itOut = outputData.iterator();
                 while (itOut.hasNext()) {
                     objs = (Object[]) itOut.next();
-//                    if (!atrAltName.equals(((String) objs[4]).trim())) {
-//                        compInt = 1;
-//                    }
+
                     useAttribute = ((Byte) objs[9]);
                     weight = ((Integer) objs[11]);
+                    composite = ((Boolean) objs[3]);
+                    elabType = ((Boolean) objs[5]);
+                    regexpLast = ((Boolean) objs[10]);
+
                     if (id.getAttribute().trim().equalsIgnoreCase(((String) objs[4]).trim())) {
                         bool = true;
+
                         od = new OutputData();
-                        composite = ((Boolean) objs[3]);
-                        elabType = ((Boolean) objs[5]);
-                        regexpLast = ((Boolean) objs[10]);
-//                        if (regexpLast != null && !regexpLast) {
-//                            compInt = 1;
-//                        }
 
                         if (composite) {
                             if (elabType) {
@@ -213,23 +204,11 @@ public class MergingProcessing {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    if (od.getAvailable() != (byte) 0) {
+                                    if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
                                         od.setComposite(compInt++);
                                     }
-//                                    od.setComposite(compInt++);
-//                                    out.add(od);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    if (!regexpElab && errorElab) {
-//                                        od.setValue("All Regexps is not working...");
-//                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        errorElab = false;
-//                                    }
-//                                    regexpElab = false;
-
+                                    fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
                                     for (int i = 0; i < regexpMass.length; i++) {
@@ -257,50 +236,19 @@ public class MergingProcessing {
                                         od.setOldValue(id.getAttributeValue());
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(compInt++);
-//                                        out.add(od);
                                         od.setWeight(weight);
-//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                            fd.getOutputDataDAO().addOutputData(od);
-//                                            regexpElab = true;
-//                                        }
-//                                        if (!regexpElab && errorElab) {
-//                                            od.setValue("All Regexps is not working...");
-//                                            fd.getOutputDataDAO().addOutputData(od);
-//                                            errorElab = false;
-//                                        }
+                                        fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
                             } else {
-                                startStep = true;
-                                if (firstStep) {
-                                    pat = Pattern.compile(((String) objs[7]).trim());
+                                if (weight == 0) {
                                     if (useAttribute == 2) {
-                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                        tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                     } else if (useAttribute == 1) {
-                                        match = pat.matcher(id.getAttribute());
+                                        tempValue4Elab = (id.getAttribute().trim());
                                     } else {
-                                        match = pat.matcher(id.getAttributeValue());
+                                        tempValue4Elab = id.getAttributeValue().trim();
                                     }
-                                    if (match.find()) {
-                                        firstStep = false;
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    } else {
-//                                        tempValue4Elab = "";
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    }
-
                                 }
                                 try {
                                     if (((String) objs[6]).trim().equals("ReplaceFirst")) {
@@ -308,13 +256,10 @@ public class MergingProcessing {
                                             if (((String) objs[8]).trim().contains("^^^^")) {
                                                 objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
                                                 pat = Pattern.compile(((String) objs[7]).trim());
-
                                                 match = pat.matcher(tempValue4Elab);
-
                                                 if (match.find()) {
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 } else {
-//                                                    tempValue = "";
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
@@ -329,9 +274,6 @@ public class MergingProcessing {
                                                 match = pat.matcher(tempValue4Elab);
                                                 if (match.find()) {
                                                     tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                                } else {
-//                                                    tempValue4Elab = "";
-                                                    tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                             }
                                             od.setValue(tempValue4Elab);
@@ -341,21 +283,18 @@ public class MergingProcessing {
                                                 od.setAvailable(available);
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                             od.setAvailable((byte) 0);
                                         }
-                                    } else {
+                                    } else if (((String) objs[6]).trim().equals("ReplaceAll")) {
                                         try {
                                             pat = Pattern.compile(((String) objs[7]).trim());
                                             match = pat.matcher(tempValue4Elab);
                                             if (match.find()) {
                                                 tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                            } else {
-//                                                tempValue4Elab = "";
-                                                tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
                                         if (tempValue4Elab.equals("")) {
@@ -363,17 +302,47 @@ public class MergingProcessing {
                                         } else {
                                             od.setAvailable(available);
                                         }
+                                    } else {
+                                        regexpMass = tempValue4Elab.split(((String) objs[7]).trim());
+                                        for (int i = 0; i < regexpMass.length; i++) {
+                                            od = new OutputData();
+                                            od.setValue(regexpMass[i].trim());
+                                            od.setArticle(id.getArticle().trim());
+                                            od.setAttribute(((String) objs[2]).trim());
+                                            od.setGroupe(((String) objs[1]).trim());
+                                            od.setProductType(((String) objs[0]).trim());
+                                            itUnit = units.iterator();
+                                            while (itUnit.hasNext()) {
+                                                unit = (Unit) itUnit.next();
+                                                itUnitAlt = unit.getUnitAlternativeNames().iterator();
+                                                while (itUnitAlt.hasNext()) {
+                                                    unitAlt = (UnitAlternativeName) itUnitAlt.next();
+                                                    if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
+                                                        od.setUnit(unit.getUnitName());
+                                                        od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            od.setSessionId(id.getSessionId());
+                                            od.setAvailable(available);
+                                            od.setOldValue(id.getAttributeValue());
+                                            od.setOldAttribute(id.getAttribute());
+                                            od.setComposite(compInt++);
+                                            od.setWeight(weight);
+                                            fd.getOutputDataDAO().addOutputData(od);
+                                            addEnable = false;
+                                        }
                                     }
                                 } catch (Exception ex) {
-                                    tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                     od.setAvailable((byte) 0);
                                 }
-                                if (regexpLast != null && regexpLast) {
+                                if (regexpLast != null && regexpLast && addEnable) {
                                     od.setArticle(id.getArticle().trim());
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    od.setValue(tempValue4Elab);
                                     itUnit = units.iterator();
                                     while (itUnit.hasNext()) {
                                         unit = (Unit) itUnit.next();
@@ -390,25 +359,12 @@ public class MergingProcessing {
                                     od.setSessionId(id.getSessionId());
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
-                                    if (od.getAvailable() != (byte) 0) {
+                                    if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
                                         od.setComposite(compInt++);
                                     }
-//                                    od.setComposite(compInt++);
-//                                    od.setAvailable(available);
-//                                    out.add(od);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    if (!regexpElab && errorElab) {
-//                                        od.setValue("All Regexps is not working...");
-//                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        errorElab = false;
-//                                    }
+                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
-//                                startStep = false;
-                                    firstStep = true;
                                 }
                             }
                             if (regexpLast != null && regexpLast) {
@@ -528,17 +484,8 @@ public class MergingProcessing {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
-//                                    out.add(od);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    if (!regexpElab && errorElab) {
-//                                        od.setValue("All Regexps is not working...");
-//                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        errorElab = false;
-//                                    }
+                                    fd.getOutputDataDAO().addOutputData(od);
                                 } else {
                                     regexpMass = id.getAttributeValue().split(((String) objs[7]).trim());
                                     for (int i = 0; i < regexpMass.length; i++) {
@@ -566,50 +513,19 @@ public class MergingProcessing {
                                         od.setOldValue(id.getAttributeValue());
                                         od.setOldAttribute(id.getAttribute());
                                         od.setComposite(0);
-//                                        out.add(od);
                                         od.setWeight(weight);
-//                                        if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                            fd.getOutputDataDAO().addOutputData(od);
-//                                            regexpElab = true;
-//                                        }
-//                                        if (!regexpElab && errorElab) {
-//                                            od.setValue("All Regexps is not working...");
-//                                            fd.getOutputDataDAO().addOutputData(od);
-//                                            errorElab = false;
-//                                        }
+                                        fd.getOutputDataDAO().addOutputData(od);
                                     }
                                 }
                             } else {
-                                startStep = true;
-                                if (firstStep) {
-                                    pat = Pattern.compile(((String) objs[7]).trim());
+                                if (weight == 0) {
                                     if (useAttribute == 2) {
-                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                        tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
                                     } else if (useAttribute == 1) {
-                                        match = pat.matcher(id.getAttribute());
+                                        tempValue4Elab = (id.getAttribute().trim());
                                     } else {
-                                        match = pat.matcher(id.getAttributeValue());
+                                        tempValue4Elab = id.getAttributeValue().trim();
                                     }
-                                    if (match.find()) {
-                                        firstStep = false;
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    } else {
-//                                        tempValue4Elab = "";
-                                        if (useAttribute == 2) {
-                                            tempValue4Elab = (id.getAttribute() + " ||| " + id.getAttributeValue()).trim();
-                                        } else if (useAttribute == 1) {
-                                            tempValue4Elab = (id.getAttribute().trim());
-                                        } else {
-                                            tempValue4Elab = id.getAttributeValue().trim();
-                                        }
-                                    }
-
                                 }
                                 try {
                                     if (((String) objs[6]).trim().equals("ReplaceFirst")) {
@@ -623,7 +539,6 @@ public class MergingProcessing {
                                                 if (match.find()) {
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 } else {
-//                                                    tempValue = "";
                                                     tempValue = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 tempDigitString = tempValue.replaceFirst(".*?[{](.*?)[}].*", "$1");
@@ -638,9 +553,6 @@ public class MergingProcessing {
                                                 match = pat.matcher(tempValue4Elab);
                                                 if (match.find()) {
                                                     tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                                } else {
-//                                                    tempValue4Elab = "";
-                                                    tempValue4Elab = tempValue4Elab.replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                 }
                                                 od.setValue(tempValue4Elab);
                                                 if (tempValue4Elab.equals("")) {
@@ -650,21 +562,18 @@ public class MergingProcessing {
                                                 }
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 1-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                             od.setAvailable((byte) 0);
                                         }
-                                    } else {
+                                    } else if (((String) objs[6]).trim().equals("ReplaceAll")) {
                                         try {
                                             pat = Pattern.compile(((String) objs[7]).trim());
                                             match = pat.matcher(tempValue4Elab);
                                             if (match.find()) {
                                                 tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
-                                            } else {
-//                                                tempValue4Elab = "";
-                                                tempValue4Elab = tempValue4Elab.replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                             }
                                         } catch (Exception ex) {
-                                            tempValue4Elab = "Regexp Error 2-> " + ex.getMessage();
+                                            tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                         }
                                         od.setValue(tempValue4Elab);
                                         if (tempValue4Elab.equals("")) {
@@ -672,17 +581,47 @@ public class MergingProcessing {
                                         } else {
                                             od.setAvailable(available);
                                         }
+                                    } else {
+                                        regexpMass = tempValue4Elab.split(((String) objs[7]).trim());
+                                        for (int i = 0; i < regexpMass.length; i++) {
+                                            od = new OutputData();
+                                            od.setValue(regexpMass[i].trim());
+                                            od.setArticle(id.getArticle().trim());
+                                            od.setAttribute(((String) objs[2]).trim());
+                                            od.setGroupe(((String) objs[1]).trim());
+                                            od.setProductType(((String) objs[0]).trim());
+                                            itUnit = units.iterator();
+                                            while (itUnit.hasNext()) {
+                                                unit = (Unit) itUnit.next();
+                                                itUnitAlt = unit.getUnitAlternativeNames().iterator();
+                                                while (itUnitAlt.hasNext()) {
+                                                    unitAlt = (UnitAlternativeName) itUnitAlt.next();
+                                                    if (od.getValue().contains(unitAlt.getUnitAlternativeNameValue())) {
+                                                        od.setUnit(unit.getUnitName());
+                                                        od.setValue(od.getValue().replaceFirst(unitAlt.getUnitAlternativeNameValue().trim(), "").trim());
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                            od.setSessionId(id.getSessionId());
+                                            od.setAvailable(available);
+                                            od.setOldValue(id.getAttributeValue());
+                                            od.setOldAttribute(id.getAttribute());
+                                            od.setComposite(0);
+                                            od.setWeight(weight);
+                                            fd.getOutputDataDAO().addOutputData(od);
+                                            addEnable = false;
+                                        }
                                     }
                                 } catch (Exception ex) {
-                                    tempValue4Elab = "Regexp Error 3-> " + ex.getMessage();
+                                    tempValue4Elab = "Regexp Error -> " + ex.getMessage();
                                     od.setAvailable((byte) 0);
                                 }
-                                if (regexpLast != null && regexpLast) {
+                                if (regexpLast != null && regexpLast && addEnable) {
                                     od.setArticle(id.getArticle().trim());
                                     od.setAttribute(((String) objs[2]).trim());
                                     od.setGroupe(((String) objs[1]).trim());
                                     od.setProductType(((String) objs[0]).trim());
-//                                    od.setValue(tempValue4Elab);
                                     itUnit = units.iterator();
                                     while (itUnit.hasNext()) {
                                         unit = (Unit) itUnit.next();
@@ -700,21 +639,9 @@ public class MergingProcessing {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     od.setComposite(0);
-//                                    od.setAvailable(available);
-//                                    out.add(od);
                                     od.setWeight(weight);
-//                                    if (!od.getValue().equals("") && od.getAvailable() != (byte) 0) {
-                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        regexpElab = true;
-//                                    }
-//                                    if (!regexpElab && errorElab) {
-//                                        od.setValue("All Regexps is not working...");
-//                                        fd.getOutputDataDAO().addOutputData(od);
-//                                        errorElab = false;
-//                                    }
+                                    fd.getOutputDataDAO().addOutputData(od);
                                     tempValue4Elab = "";
-//                                startStep = false;
-                                    firstStep = true;
                                 }
                             }
 
@@ -722,7 +649,7 @@ public class MergingProcessing {
                         }
                     }
                     tempDigit = 1d;
-                    atrAltName = ((String) objs[4]).trim();
+                    addEnable = true;
                 }
                 if (!bool) {
                     od = new OutputData();
@@ -735,51 +662,14 @@ public class MergingProcessing {
                     od.setAvailable((byte) 0);
                     od.setOldValue(id.getAttributeValue());
                     od.setOldAttribute(id.getAttribute());
-//                    out.add(od);
                     od.setWeight(null);
                     fd.getOutputDataDAO().addOutputData(od);
                 }
-//                if (!regexpElab && bool) {
-//                    od = new OutputData();
-//                    od.setArticle(id.getArticle().trim());
-//                    od.setAttribute(((String) objs[2]).trim());
-//                    od.setGroupe(((String) objs[1]).trim());
-//                    od.setProductType(((String) objs[0]).trim());
-//                    od.setValue("All Regexps is not working...");
-//                    od.setSessionId(id.getSessionId());
-//                    od.setOldValue(id.getAttributeValue());
-//                    od.setOldAttribute(id.getAttribute());
-//                    od.setComposite(0);
-//                    od.setAvailable((byte) 0);
-//                    od.setWeight(0);
-//                    fd.getOutputDataDAO().addOutputData(od);
-//                }
-                
-                regexpElab = false;
                 bool = false;
                 tempPT = id.getProductType();
-                tempAttribute = id.getAttribute();
-                errorElab = true;
-
             } catch (Exception ex) {
             }
         }
-//        System.out.println(out.size());
-//        Iterator iterator = out.iterator();
-//        while (iterator.hasNext()) {
-//            od = (OutputData) iterator.next();
-//            System.out.println(od.getArticle() + " - "
-//                    + od.getProductType() + " - "
-//                    + od.getGroupe() + " - "
-//                    + od.getAttribute() + " - "
-//                    + od.getValue() + " - "
-//                    + od.getUnit() + " - "
-//                    + od.getAvailable() + " - "
-//                    + od.getComposite() + " - "
-//                    + od.getOldAttribute() + " - "
-//                    + od.getOldValue());
-//        }
-
     }
 
     public void merge(long sessionId) {

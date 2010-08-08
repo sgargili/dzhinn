@@ -32,7 +32,7 @@ public class OutputDataDAOImpl implements OutputDataDAO {
     }
 
     public void addOutputData(OutputData outputData) {
-        getHibernateTemplate().saveOrUpdate(outputData);
+        getHibernateTemplate().save(outputData);
     }
 
     public void deleteOutputData(OutputData outputData) {
