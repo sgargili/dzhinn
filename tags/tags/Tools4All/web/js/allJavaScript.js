@@ -1799,7 +1799,7 @@ var atrRegexp = new Ext.ux.form.MultiSelect({
                 buffer : 100,
                 fn     :function() {
 
-                    this.el.setWidth(250);
+                    this.el.setWidth(220);
                 }
             }
         //            'focus': function(){
