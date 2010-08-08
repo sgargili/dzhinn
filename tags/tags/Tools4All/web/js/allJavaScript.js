@@ -1154,32 +1154,44 @@ var storeRegexpPreviewAfter = new Ext.data.Store({
 });
 
 // create the grid
-var gridRegexpPreviewAfter = new Ext.grid.GridPanel({
+var gridRegexpPreviewAfter = new xg.EditorGridPanel({
     store: storeRegexpPreviewAfter,
     columns: [
     {
         header: "Attribute Value Before",
         width: 270,
         dataIndex: 'valueBefore',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Attribute Value After",
         width: 270,
         dataIndex: 'valueAfter',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Composite",
         width: 100,
         dataIndex: 'composite',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Weight",
         width: 70,
         dataIndex: 'weight',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     }
     ]
 });
@@ -1378,32 +1390,44 @@ var storeAtrPreview = new Ext.data.Store({
 });
 
 // create the grid
-var gridStoreAtrPreview = new Ext.grid.GridPanel({
+var gridStoreAtrPreview = new xg.EditorGridPanel({
     store: storeAtrPreview,
     columns: [
     {
         header: "Attribute Value Before",
         width: 270,
         dataIndex: 'valueBefore',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Attribute Value After",
         width: 270,
         dataIndex: 'valueAfter',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Composite",
         width: 100,
         dataIndex: 'composite',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "Weight",
         width: 100,
         dataIndex: 'weight',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     }
     ]
 });
@@ -1440,8 +1464,8 @@ var atrPreviewWinAfter = new Ext.Window({
         listeners: {
             specialkey: function(something,e){
                 if (e.getKey() == e.ENTER) {
-                    groupe = gridToOut.getSelectionModel().selection.record.data.groupe;
-                    attribute = gridToOut.getSelectionModel().selection.record.data.attribute;
+                    groupe = escape(gridToOut.getSelectionModel().selection.record.data.groupe);
+                    attribute = escape(gridToOut.getSelectionModel().selection.record.data.attribute);
                     storeAtrPreviewProxy.setUrl("Service.exml?request=outputData/attributeValue="
                         +attribute.replace("/","|||")
                         +"/groupeValue="
@@ -1515,7 +1539,10 @@ var gridSession = new xg.EditorGridPanel({
         header: "Article",
         width: 270,
         dataIndex: 'article',
-        sortable: true
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
     },
     {
         header: "SessionId",
@@ -1523,7 +1550,7 @@ var gridSession = new xg.EditorGridPanel({
         dataIndex: 'sessionId',
         sortable: true,
         editor: new fm.TextField({
-            allowBlank: false
+            allowBlank: true
         })
     }
     ]
@@ -4715,13 +4742,19 @@ var cm = new Ext.grid.ColumnModel({
         width: 10,
         sortable: true,
         editable: true,
-        dataIndex: 'pt'
+        dataIndex: 'pt',
+        editor: new fm.TextField({
+            allowBlank: false
+        })
     },
     {
         header: "Groupe",
         width: 20,
         sortable: true,
-        dataIndex: 'groupe'
+        dataIndex: 'groupe',
+        editor: new fm.TextField({
+            allowBlank: false
+        })
     },
     {
         header: "Attribute",
@@ -4733,7 +4766,10 @@ var cm = new Ext.grid.ColumnModel({
         header: "Composite",
         width: 6,
         sortable: true,
-        dataIndex: 'composite'
+        dataIndex: 'composite',
+        editor: new fm.TextField({
+            allowBlank: false
+        })
     },
 
     {
@@ -4768,7 +4804,10 @@ var cm = new Ext.grid.ColumnModel({
         header: "Weight",
         width: 5,
         sortable: true,
-        dataIndex: 'weight'
+        dataIndex: 'weight',
+        editor: new fm.TextField({
+            allowBlank: false
+        })
     }
     ]
 });
@@ -5008,8 +5047,7 @@ var gridToOut = new xg.EditorGridPanel({
                 +attribute.replace("/","|||")
                 +"/groupeValue="
                 +groupe+
-                "/regexpLimit="
-                + Ext.getCmp('regexpLimit2').getValue()
+                "/regexpLimit=20"
                 +"/session="
                 + Ext.getCmp('SessionIdUp').getValue()
                 +"/regexpPreview=before");

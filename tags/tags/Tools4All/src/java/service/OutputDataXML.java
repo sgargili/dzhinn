@@ -7,6 +7,7 @@ package service;
 import com.thoughtworks.xstream.XStream;
 import convertors.XmlConvertor4OutputData;
 import convertors.XmlConvertor4RegexpAfter;
+import convertors.XmlConvertor4RegexpBefore;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +89,7 @@ public class OutputDataXML {
 //        objs[0] = odList;
 //        objs[1] = regList;
         initXstream();
-//        xstream.registerConverter(new XmlConvertor4RegexpAfter());
+        xstream.registerConverter(new XmlConvertor4RegexpBefore());
         xml = xstream.toXML(odList);
         return xml;
     }
