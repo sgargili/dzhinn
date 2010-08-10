@@ -98,19 +98,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                     objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
                                                     pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
-                                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                        match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                     } else if (useAttribute == 1) {
-                                                        match = pat.matcher(id.getAttribute());
+                                                        match = pat.matcher(id.getAttribute().trim());
                                                     } else {
-                                                        match = pat.matcher(id.getAttributeValue());
+                                                        match = pat.matcher(id.getAttributeValue().trim());
                                                     }
                                                     if (match.find()) {
                                                         if (useAttribute == 2) {
-                                                            tempValue = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = ((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         } else if (useAttribute == 1) {
-                                                            tempValue = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = (id.getAttribute().trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         } else {
-                                                            tempValue = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = id.getAttributeValue().trim().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         }
                                                     } else {
                                                         tempValue = "";
@@ -125,19 +125,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 } else {
                                                     pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
-                                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                        match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                     } else if (useAttribute == 1) {
-                                                        match = pat.matcher(id.getAttribute());
+                                                        match = pat.matcher(id.getAttribute().trim());
                                                     } else {
-                                                        match = pat.matcher(id.getAttributeValue());
+                                                        match = pat.matcher(id.getAttributeValue().trim());
                                                     }
                                                     if (match.find()) {
                                                         if (useAttribute == 2) {
-                                                            od.setValue((id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue(((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         } else if (useAttribute == 1) {
-                                                            od.setValue((id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue((id.getAttribute()).trim().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         } else {
-                                                            od.setValue(id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue(id.getAttributeValue().trim().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         }
                                                         od.setAvailable(available);
                                                     } else {
@@ -153,19 +153,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                             try {
                                                 pat = Pattern.compile(((String) objs[7]).trim());
                                                 if (useAttribute == 2) {
-                                                    match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                    match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                 } else if (useAttribute == 1) {
-                                                    match = pat.matcher(id.getAttribute());
+                                                    match = pat.matcher(id.getAttribute().trim());
                                                 } else {
-                                                    match = pat.matcher(id.getAttributeValue());
+                                                    match = pat.matcher(id.getAttributeValue().trim());
                                                 }
                                                 if (match.find()) {
                                                     if (useAttribute == 2) {
-                                                        od.setValue((id.getAttribute() + " ||| " + id.getAttributeValue()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue(((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     } else if (useAttribute == 1) {
-                                                        od.setValue((id.getAttribute()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue((id.getAttribute().trim()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     } else {
-                                                        od.setValue(id.getAttributeValue().replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue(id.getAttributeValue().trim().replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     }
                                                     od.setAvailable(available);
                                                 } else {
@@ -325,19 +325,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                     objs[8] = (((String) objs[8]).trim().replaceFirst("^^^^", ""));
                                                     pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
-                                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                        match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                     } else if (useAttribute == 1) {
-                                                        match = pat.matcher(id.getAttribute());
+                                                        match = pat.matcher(id.getAttribute().trim());
                                                     } else {
-                                                        match = pat.matcher(id.getAttributeValue());
+                                                        match = pat.matcher(id.getAttributeValue().trim());
                                                     }
                                                     if (match.find()) {
                                                         if (useAttribute == 2) {
-                                                            tempValue = (id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = ((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         } else if (useAttribute == 1) {
-                                                            tempValue = (id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = (id.getAttribute().trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         } else {
-                                                            tempValue = id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
+                                                            tempValue = id.getAttributeValue().trim().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim());
                                                         }
                                                     } else {
                                                         tempValue = "";
@@ -352,19 +352,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                                 } else {
                                                     pat = Pattern.compile(((String) objs[7]).trim());
                                                     if (useAttribute == 2) {
-                                                        match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                        match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                     } else if (useAttribute == 1) {
-                                                        match = pat.matcher(id.getAttribute());
+                                                        match = pat.matcher(id.getAttribute().trim());
                                                     } else {
-                                                        match = pat.matcher(id.getAttributeValue());
+                                                        match = pat.matcher(id.getAttributeValue().trim());
                                                     }
                                                     if (match.find()) {
                                                         if (useAttribute == 2) {
-                                                            od.setValue((id.getAttribute() + " ||| " + id.getAttributeValue()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue(((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         } else if (useAttribute == 1) {
-                                                            od.setValue((id.getAttribute()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue((id.getAttribute().trim()).replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         } else {
-                                                            od.setValue(id.getAttributeValue().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                            od.setValue(id.getAttributeValue().trim().replaceFirst(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                         }
                                                         od.setAvailable(available);
                                                     } else {
@@ -380,19 +380,19 @@ public class XmlConvertor4RegexpAfter implements Converter {
                                             try {
                                                 pat = Pattern.compile(((String) objs[7]).trim());
                                                 if (useAttribute == 2) {
-                                                    match = pat.matcher(id.getAttribute() + " ||| " + id.getAttributeValue());
+                                                    match = pat.matcher((id.getAttribute() + " ||| " + id.getAttributeValue()).trim());
                                                 } else if (useAttribute == 1) {
-                                                    match = pat.matcher(id.getAttribute());
+                                                    match = pat.matcher(id.getAttribute().trim());
                                                 } else {
-                                                    match = pat.matcher(id.getAttributeValue());
+                                                    match = pat.matcher(id.getAttributeValue().trim());
                                                 }
                                                 if (match.find()) {
                                                     if (useAttribute == 2) {
-                                                        od.setValue((id.getAttribute() + " ||| " + id.getAttributeValue()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue(((id.getAttribute() + " ||| " + id.getAttributeValue()).trim()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     } else if (useAttribute == 1) {
-                                                        od.setValue((id.getAttribute()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue((id.getAttribute().trim()).replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     } else {
-                                                        od.setValue(id.getAttributeValue().replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
+                                                        od.setValue(id.getAttributeValue().trim().replaceAll(((String) objs[7]).trim(), ((String) objs[8]).trim()));
                                                     }
                                                     od.setAvailable(available);
                                                 } else {
