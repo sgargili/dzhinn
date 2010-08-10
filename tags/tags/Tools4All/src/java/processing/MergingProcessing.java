@@ -6,8 +6,10 @@ package processing;
 
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import pojo.InputData;
@@ -66,6 +68,9 @@ public class MergingProcessing {
         int compInt = 1;
         int weight;
         boolean addEnable = true;
+        String tempArticle = "%%%$$$%%%%%$$%";
+        Map alreadyUse = new HashMap();
+        String used = "";
 
         while (itIn.hasNext()) {
 
@@ -75,6 +80,9 @@ public class MergingProcessing {
                 if (!tempPT.equals(id.getProductType())) {
                     pt = fd.getProductTypeDAO().getProductTypeByName(id.getProductType());
                     outputData = fd.getProductTypeDAO().getProductTypeWithGroupesWithAttributesWithCompositWithRegexpByIdByNativeSQL(pt.getProductTypeId());
+                }
+                if (!tempArticle.equals(id.getArticle())) {
+                    alreadyUse.clear();
                 }
                 itOut = outputData.iterator();
                 while (itOut.hasNext()) {
@@ -92,6 +100,17 @@ public class MergingProcessing {
                         od = new OutputData();
 
                         if (composite) {
+                            used = ((String) objs[2]).trim();
+//                            if (!tempAttribute.equals(((String) objs[2]).trim())) {
+//                                compInt = 1;
+//                            }
+//                            if (!alreadyUse.containsKey(used)) {
+//                                alreadyUse.put(used, 1);
+//                                compInt = 1;
+//                            } else {
+//                                compInt = (Integer) alreadyUse.get(used) + 1;
+//                                alreadyUse.put(used, (Integer) alreadyUse.get(used) + 1);
+//                            }
                             if (elabType) {
                                 if (((String) objs[6]).trim().contains("Replace")) {
                                     try {
@@ -205,6 +224,13 @@ public class MergingProcessing {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
+                                        if (!alreadyUse.containsKey(used)) {
+                                            alreadyUse.put(used, 1);
+                                            compInt = 1;
+                                        } else {
+                                            compInt = (Integer) alreadyUse.get(used) + 1;
+                                            alreadyUse.put(used, (Integer) alreadyUse.get(used) + 1);
+                                        }
                                         od.setComposite(compInt++);
                                     }
                                     od.setWeight(weight);
@@ -235,6 +261,13 @@ public class MergingProcessing {
                                         od.setAvailable(available);
                                         od.setOldValue(id.getAttributeValue());
                                         od.setOldAttribute(id.getAttribute());
+                                        if (!alreadyUse.containsKey(used)) {
+                                            alreadyUse.put(used, 1);
+                                            compInt = 1;
+                                        } else {
+                                            compInt = (Integer) alreadyUse.get(used) + 1;
+                                            alreadyUse.put(used, (Integer) alreadyUse.get(used) + 1);
+                                        }
                                         od.setComposite(compInt++);
                                         od.setWeight(weight);
                                         fd.getOutputDataDAO().addOutputData(od);
@@ -328,6 +361,13 @@ public class MergingProcessing {
                                             od.setAvailable(available);
                                             od.setOldValue(id.getAttributeValue());
                                             od.setOldAttribute(id.getAttribute());
+                                            if (!alreadyUse.containsKey(used)) {
+                                                alreadyUse.put(used, 1);
+                                                compInt = 1;
+                                            } else {
+                                                compInt = (Integer) alreadyUse.get(used) + 1;
+                                                alreadyUse.put(used, (Integer) alreadyUse.get(used) + 1);
+                                            }
                                             od.setComposite(compInt++);
                                             od.setWeight(weight);
                                             fd.getOutputDataDAO().addOutputData(od);
@@ -360,6 +400,13 @@ public class MergingProcessing {
                                     od.setOldValue(id.getAttributeValue());
                                     od.setOldAttribute(id.getAttribute());
                                     if (od.getAvailable() != null && od.getAvailable() != (byte) 0) {
+                                        if (!alreadyUse.containsKey(used)) {
+                                            alreadyUse.put(used, 1);
+                                            compInt = 1;
+                                        } else {
+                                            compInt = (Integer) alreadyUse.get(used) + 1;
+                                            alreadyUse.put(used, (Integer) alreadyUse.get(used) + 1);
+                                        }
                                         od.setComposite(compInt++);
                                     }
                                     od.setWeight(weight);
@@ -367,9 +414,11 @@ public class MergingProcessing {
                                     tempValue4Elab = "";
                                 }
                             }
-                            if (regexpLast != null && regexpLast) {
-                                compInt = 1;
-                            }
+//                            if (regexpLast != null && regexpLast) {
+//                                compInt = 1;
+//                            }
+
+//                            tempAttribute = (((String) objs[2]).trim());
                         } else {
                             if (elabType) {
                                 if (((String) objs[6]).trim().contains("Replace")) {
@@ -667,6 +716,7 @@ public class MergingProcessing {
                 }
                 bool = false;
                 tempPT = id.getProductType();
+                tempArticle = id.getArticle();
             } catch (Exception ex) {
             }
         }
