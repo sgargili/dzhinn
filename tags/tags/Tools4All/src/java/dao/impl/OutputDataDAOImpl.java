@@ -5,6 +5,7 @@
 package dao.impl;
 
 import dao.OutputDataDAO;
+import java.math.BigInteger;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -186,6 +187,52 @@ public class OutputDataDAOImpl implements OutputDataDAO {
         return result;
     }
 
+    @Override
+    public List getSessiosnIdByArticleWOArticleByNativeSQL(final String article) {
+        List result = null;
+        final String request =
+                "select distinct "
+                + "    od.session_id "
+                + "from "
+                + "    output_data as od "
+                + "where "
+                + "      od.article like :article";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setParameter("article", article);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public List getSessiosnIdByArticleWithPTByNativeSQL(final String article) {
+        List result = null;
+        final String request =
+                "select distinct "
+                + "    od.session_id, "
+                + "    od.product_type "
+                + "from "
+                + "    output_data as od "
+                + "where "
+                + "      od.article like :article";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setParameter("article", article);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
     public void deleteAllOutputDataAndInputDataByNativeSQL() {
         final String request =
                 "delete from output_data";
@@ -243,4 +290,52 @@ public class OutputDataDAOImpl implements OutputDataDAO {
         return result;
     }
 
+    @Override
+    public List getPTBySessionIdByNativeSQL(final BigInteger sessionId) {
+        List result = null;
+        final String request =
+                "select distinct "
+                + "    od.product_type "
+                + "from "
+                + "    output_data as od "
+                + "where "
+                + "      od.session_id = :value";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setBigInteger("value", sessionId);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public int getCountArticlesBySessionIdByNativeSQL(final BigInteger sessionId) {
+        List result = null;
+        final String request =
+                "select count(distinct od.article)"
+                + "from "
+                + "    output_data as od "
+                + "where "
+                + "      od.session_id = :value";
+        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setBigInteger("value", sessionId);
+//                query.setParameter("attribute", attributeName);
+                return query.list();
+            }
+        });
+        if (!result.isEmpty()) {
+            return ((BigInteger) result.get(0)).intValue();
+        } else {
+            return 0;
+        }
+
+    }
 }

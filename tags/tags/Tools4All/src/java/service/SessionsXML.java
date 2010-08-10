@@ -6,6 +6,7 @@ package service;
 
 import com.thoughtworks.xstream.XStream;
 import convertors.XmlConvertor4Regexp;
+import convertors.XmlConvertor4Sessions;
 import factories.FactoryDAO4Grabli;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -44,7 +45,38 @@ public class SessionsXML {
         } else {
             article = "%" + article + "%";
         }
-        List sessionList = fd.getOutputDataDAO().getSessiosnIdByArticleByNativeSQL(article);
+        String[] mass = new String[3];
+        BigInteger session;
+        List<String[]> out = new ArrayList();
+        List sessionList = fd.getOutputDataDAO().getSessiosnIdByArticleWOArticleByNativeSQL(article);
+        List ptList;
+        int aCount;
+        String tempPt = "";
+        Iterator it = sessionList.iterator();
+        Iterator iter;
+        boolean first = true;
+        while (it.hasNext()) {
+            session = (BigInteger) it.next();
+            ptList = fd.getOutputDataDAO().getPTBySessionIdByNativeSQL(session);
+            iter = ptList.iterator();
+            first = true;
+            while (iter.hasNext()) {
+                if (first) {
+                    tempPt = (String) iter.next();
+                    first = false;
+                } else {
+                    tempPt = ", " + (String) iter.next();
+                }
+            }
+            aCount = fd.getOutputDataDAO().getCountArticlesBySessionIdByNativeSQL(session);
+            mass = new String[3];
+            mass[0] = session + "";
+            mass[1] = tempPt;
+            mass[2] = aCount + "";
+            out.add(mass);
+            tempPt = "";
+            aCount = 0;
+        }
 //        List out = new ArrayList();
 //        Object[] objs = new Long[2];
 //        Object obj;
@@ -57,8 +89,10 @@ public class SessionsXML {
 //        objs[1] = obj.toString();
 //        out.add(objs);
 //        }
+
         initXstream();
-        xml = xstream.toXML(sessionList);
+        xstream.registerConverter(new XmlConvertor4Sessions());
+        xml = xstream.toXML(out);
         return xml;
     }
 }

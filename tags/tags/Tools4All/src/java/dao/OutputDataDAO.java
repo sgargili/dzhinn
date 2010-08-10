@@ -4,6 +4,7 @@
  */
 package dao;
 
+import java.math.BigInteger;
 import java.util.List;
 import pojo.OutputData;
 
@@ -40,6 +41,14 @@ public interface OutputDataDAO {
     public void deleteAllOutputDataAndInputDataByNativeSQL();
 
     public List getSessiosnIdByArticleByNativeSQL(String article);
+
+    public List getSessiosnIdByArticleWOArticleByNativeSQL(String article);
+
+    public List getPTBySessionIdByNativeSQL(BigInteger sessionId);
+
+    public int getCountArticlesBySessionIdByNativeSQL(BigInteger sessionId);
+
+    public List getSessiosnIdByArticleWithPTByNativeSQL(String article);
 
     public boolean isOutputDataPresent(OutputData outputData);
 }
