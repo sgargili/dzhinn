@@ -1519,14 +1519,17 @@ var storeSession = new Ext.data.Store({
     // the return will be XML, so lets set up a reader
     reader: new Ext.data.XmlReader({
         record: 'Session',
-        id: 'Article'
+        id: 'SessionId'
     }, [
     {
         name: 'sessionId',
         mapping: 'SessionId'
     },{
-        name: 'article',
-        mapping: 'Article'
+        name: 'pt',
+        mapping: 'PT'
+    },{
+        name: 'count',
+        mapping: 'ArtCount'
     }
     ])
 });
@@ -1534,20 +1537,34 @@ var storeSession = new Ext.data.Store({
 // create the grid
 var gridSession = new xg.EditorGridPanel({
     store: storeSession,
+    listeners: {
+        rowclick: function(grid, rowIndex, e){
+            Ext.getCmp('SessionIdUp').setValue(grid.getStore().getAt(rowIndex).get('sessionId'));
+        }
+    },
     columns: [
     {
-        header: "Article",
-        width: 270,
-        dataIndex: 'article',
+        header: "SessionId",
+        width: 150,
+        dataIndex: 'sessionId',
         sortable: true,
         editor: new fm.TextField({
             allowBlank: true
         })
     },
     {
-        header: "SessionId",
+        header: "Product Types",
         width: 270,
-        dataIndex: 'sessionId',
+        dataIndex: 'pt',
+        sortable: true,
+        editor: new fm.TextField({
+            allowBlank: true
+        })
+    },
+    {
+        header: "Article Count",
+        width: 90,
+        dataIndex: 'count',
         sortable: true,
         editor: new fm.TextField({
             allowBlank: true
@@ -4816,7 +4833,7 @@ function colorByPercentAvailable(row){
     var allCount = row.length;
     var count = 0;
     for(i=0; i < allCount; i++){
-        if(row[i].data.available == true){
+        if(row[i].data.weight != '' && row[i].data.weight != null){
             count++;
         }
     }
