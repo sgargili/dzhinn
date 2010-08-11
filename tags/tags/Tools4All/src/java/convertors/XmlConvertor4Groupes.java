@@ -43,7 +43,7 @@ public class XmlConvertor4Groupes implements Converter {
                     writer.setValue("");
                 } else {
                     if (groupe.getGroupeComment() != null && !groupe.getGroupeComment().equals("")) {
-                        writer.setValue(groupe.getGroupeName() + " <b>(" + groupe.getGroupeComment() + ")</b> ");
+                        writer.setValue(groupe.getGroupeName() + " (" + groupe.getGroupeComment() + ")");
                     } else {
                         writer.setValue(groupe.getGroupeName());
                     }
