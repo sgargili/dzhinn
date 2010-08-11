@@ -2435,7 +2435,7 @@ var storeGrpProxyAlt = new Ext.data.HttpProxy({
 var storeGrpAlt = new Ext.data.Store({
     proxy: storeGrpProxyAlt,
     reader: new Ext.data.XmlReader({
-        record: 'AltName',
+        record: 'Groupe',
         id: 'Id'
     }, [
     {
@@ -2444,6 +2444,9 @@ var storeGrpAlt = new Ext.data.Store({
     }, {
         name:'id',
         mapping:'Id'
+    }, {
+        name:'comment',
+        mapping:'Comment'
     }
     ])
 });
@@ -2466,26 +2469,10 @@ var grpMulti = new Ext.ux.form.MultiSelect({
     },
     store: storeGrp,
     listeners: {
-        click: function() {
-        //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
-        //                if(data=="MultiSelectInRequest"){
-        //                    atrField.setValue("");
-        //                    Ext.Msg.show({
-        //                        title: 'Предупреждение!!!',
-        //                        msg: 'Выбирайте только одно значение!',
-        //                        buttons: Ext.MessageBox.OK,
-        //                        width: 300,
-        //                        icon: Ext.MessageBox.ERROR
-        //                    });
-        //                } else {
-        //                    atrField.setValue(data);
-        //                }
-        //            });
-        //            alert(atrMulti.getValue());
-        //            storeGrpProxyAlt.setUrl("Service.exml?request=unitAlt/unitId="+ atrMulti.getValue());
-        //            storeGrpAlt.clearData();
-        //            storeGrpAlt.load();
-        //atrField.setValue("");
+        click: function() {  
+            storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
+            storeGrpAlt.clearData();
+            storeGrpAlt.load();
         }
     },
     tbar:[{
@@ -2517,7 +2504,7 @@ var grpMulti = new Ext.ux.form.MultiSelect({
                     //                            storeGrpAlt.load();
                     //                        }
                     //                    });
-                    storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue());
+                    storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue()+"/after=true");
                     storeGrp.clearData();
                     storeGrp.load();
 
@@ -2541,7 +2528,7 @@ var grpMulti = new Ext.ux.form.MultiSelect({
             //            storeGrp.clearData();
             //            storeGrp.load();
             //            grpField.setValue("");
-            storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue());
+            storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue()+"/after=true");
             storeGrp.clearData();
             storeGrp.load();
         }
@@ -2600,12 +2587,12 @@ var grpMulti = new Ext.ux.form.MultiSelect({
 });
 
 var grpMultiAlt = new Ext.ux.form.MultiSelect({
-    name: 'multiselect',
+    name: 'multiselectNew',
     width: 400,
     height: 200,
     allowBlank:true,
     //autoScroll: true,
-    displayField:'name',
+    displayField:'comment',
     valueField: 'id',
     minSelections:1,
     minSelectionsText:'',
@@ -2616,49 +2603,11 @@ var grpMultiAlt = new Ext.ux.form.MultiSelect({
         marginBottom: '9px'
     },
     store: storeGrpAlt,
-    //    listeners: {
-    //        click: function() {
-    //            Ajax.getAttributeAltName(atrMulti.getValue(), function(data) {
-    //                if(data=="MultiSelectInRequest"){
-    //                    atrField.setValue("");
-    //                    Ext.Msg.show({
-    //                        title: 'Предупреждение!!!',
-    //                        msg: 'Выбирайте только одно значение!',
-    //                        buttons: Ext.MessageBox.OK,
-    //                        width: 300,
-    //                        icon: Ext.MessageBox.ERROR
-    //                    });
-    //                } else {
-    //                    atrField.setValue(data);
-    //                }
-    //            });
-    //        } atrForm.getForm().findField('newAtr').getValue()
-    //    },
     tbar:[{
-        text: 'Добавить значение',
-        handler: function(){
-            Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
-                if(data=="MultiSelectInRequest"){
-                    Ext.Msg.show({
-                        title: 'Предупреждение!!!',
-                        msg: 'Выбирайте только одно значение!',
-                        buttons: Ext.MessageBox.OK,
-                        width: 300,
-                        icon: Ext.MessageBox.ERROR
-                    });
-                } else {
-                    Ext.getCmp('atrAltName').setValue("");
-                    storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
-                    storeGrpAlt.clearData();
-                    storeGrpAlt.load();
-                }
-            });
-        }
-    },{
         xtype: 'textfield',
         hideLabel: true,
         height:22,
-        id:'atrAltName',
+        id:'grpAltName',
         blankText:'Введите что-нибудь...',
         allowBlank:true,
         style: {
@@ -2667,33 +2616,43 @@ var grpMultiAlt = new Ext.ux.form.MultiSelect({
         listeners: {
             specialkey: function(something,e){
                 if (e.getKey() == e.ENTER) {
-                    Ajax.addAttributeAltName(atrMulti.getValue(), Ext.getCmp('atrAltName').getValue(), function(data) {
-                        if(data=="MultiSelectInRequest"){
-                            Ext.Msg.show({
-                                title: 'Предупреждение!!!',
-                                msg: 'Выбирайте только одно значение!',
-                                buttons: Ext.MessageBox.OK,
-                                width: 300,
-                                icon: Ext.MessageBox.ERROR
-                            });
-                        } else {
-                            Ext.getCmp('atrAltName').setValue("");
-                            storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
-                            storeGrpAlt.clearData();
-                            storeGrpAlt.load();
-                        }
+                    Ajax.updateGroupeComment(grpMulti.getValue(), Ext.getCmp('grpAltName').getValue(), function(data) {
+                        Ext.getCmp('grpAltName').setValue("");
+                        storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
+                        storeGrpAlt.clearData();
+                        storeGrpAlt.load();
+                        storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue()+"/after=true");
+                        storeGrp.clearData();
+                        storeGrp.load();
                     });
 
                 }
             }
         }
     },{
-        text: 'Удалить значения',
+        text: 'Добавить',
         handler: function(){
-            Ajax.deleteAttributeAltName(atrMulti.getValue(), atrMultiAlt.getValue(), function(data) {
-                storeGrpProxyAlt.setUrl("AttributeAltName?attribute="+ atrMulti.getValue());
+            Ajax.updateGroupeComment(grpMulti.getValue(), Ext.getCmp('grpAltName').getValue(), function(data) {
+                Ext.getCmp('grpAltName').setValue("");
+                storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
                 storeGrpAlt.clearData();
                 storeGrpAlt.load();
+                storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue()+"/after=true");
+                storeGrp.clearData();
+                storeGrp.load();
+            });
+        }
+    },{
+        text: 'Удалить',
+        handler: function(){
+            Ajax.updateGroupeComment(grpMulti.getValue(), "", function(data) {
+                Ext.getCmp('grpAltName').setValue("");
+                storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
+                storeGrpAlt.clearData();
+                storeGrpAlt.load();
+                storeGrpProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('grpTemplate').getValue()+"/after=true");
+                storeGrp.clearData();
+                storeGrp.load();
             });
         }
     }
@@ -2893,7 +2852,8 @@ var grpForm = new Ext.form.FormPanel({
             bodyStyle: 'border:0px;',
             layout:'column',
             items: [
-            grpMulti
+            grpMulti,
+            grpMultiAlt
             ]
         }
         ]
@@ -3662,7 +3622,7 @@ var PT2GroupeForm = new Ext.form.FormPanel({
                     listeners: {
                         specialkey: function(something,e){
                             if (e.getKey() == e.ENTER) {
-                                storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue());
+                                storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue()+"/after=true");
                                 storeGroupeAll.clearData();
                                 storeGroupeAll.load();
                             }
@@ -3671,7 +3631,7 @@ var PT2GroupeForm = new Ext.form.FormPanel({
                 },{
                     text: 'Загрузить Группы',
                     handler:function(){
-                        storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue());
+                        storeGroupeAllProxy.setUrl("Service.exml?request=groupes/template=" + Ext.getCmp('groupeTemplate').getValue()+"/after=true");
                         storeGroupeAll.clearData();
                         storeGroupeAll.load();
                     }
@@ -6052,7 +6012,8 @@ var erow = {
                                         width:250,
                                         icon: Ext.MessageBox.ERROR
                                     });
-                                } else{
+                                }
+                                else{
                                     dwr.engine.openInDownload(data);
                                     //fibasic.destroy();
                                     fibasic = new Ext.ux.form.FileUploadField({
