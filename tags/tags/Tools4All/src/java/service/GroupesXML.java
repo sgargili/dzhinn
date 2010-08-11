@@ -5,6 +5,7 @@
 package service;
 
 import com.thoughtworks.xstream.XStream;
+import convertors.XmlConvertor4Groupes;
 import factories.FactoryDAO4Grabli;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class GroupesXML {
         xstream.alias("Groupes", List.class);
         xstream.alias("Groupe", Groupe.class);
         xstream.aliasField("Id", Groupe.class, "groupeId");
+        xstream.aliasField("Comment", Groupe.class, "groupeComment");
         xstream.aliasField("Name", Groupe.class, "groupeName");
         xstream.omitField(Groupe.class, "attributes");
         xstream.omitField(Groupe.class, "productTypes");
@@ -42,6 +44,7 @@ public class GroupesXML {
 
     public String getGroupesByPtId(int id) {
         groupeList = fd.getGroupeDAO().getGroupesOnlyByProductTypeId(id);
+        xstream.registerConverter(new XmlConvertor4Groupes());
         initXstream();
         xml = xstream.toXML(groupeList);
         return xml;
@@ -58,7 +61,25 @@ public class GroupesXML {
     public String getGroupesByTemplate(String template) {
         groupeList = fd.getGroupeDAO().getGroupesOnlyByTemplate(template);
         initXstream();
+//        xstream.registerConverter(new XmlConvertor4Groupes());
         xml = xstream.toXML(groupeList);
+        return xml;
+    }
+
+    public String getGroupesByTemplateAfter(String template) {
+        groupeList = fd.getGroupeDAO().getGroupesOnlyByTemplate(template);
+        initXstream();
+        xstream.registerConverter(new XmlConvertor4Groupes());
+        xml = xstream.toXML(groupeList);
+        return xml;
+    }
+
+    public String getGroupesById(int id) {
+        Groupe gp = fd.getGroupeDAO().getGroupeById(id);
+        List out = new ArrayList();
+        out.add(gp);
+        initXstream();
+        xml = xstream.toXML(out);
         return xml;
     }
 }

@@ -215,7 +215,9 @@ public class Service extends HttpServlet {
                 reqParams = reqParam.split("/");
                 String id = "";
                 String pt = "";
+                String groupeId = "";
                 String template = "";
+                String after = "";
                 for (int i = 0; i < reqParams.length; i++) {
                     if (reqParams[i].contains("ptId")) {
                         id = reqParams[i].replaceFirst("ptId=", "");
@@ -223,6 +225,12 @@ public class Service extends HttpServlet {
                             id = "0";
                         }
 //                        System.out.println(id);
+                    }
+                    if (reqParams[i].contains("groupeId")) {
+                        groupeId = new String(reqParams[i].replaceFirst("groupeId=", "").getBytes(requestEnc), clientEnc);
+                    }
+                    if (reqParams[i].contains("after")) {
+                        after = new String(reqParams[i].replaceFirst("after=", "").getBytes(requestEnc), clientEnc);
                     }
                     if (reqParams[i].contains("productType")) {
                         pt = new String(reqParams[i].replaceFirst("productType=", "").getBytes(requestEnc), clientEnc);
@@ -235,9 +243,16 @@ public class Service extends HttpServlet {
                 }
                 GroupesXML gpXML = new GroupesXML();
 //                System.out.println(id+" ---------------->>>>>> ID");
-                if (!template.equals("")) {
+                if (groupeId != null && !groupeId.equals("")) {
+                    out.println(gpXML.getGroupesById(Integer.parseInt(groupeId)));
+                } else if (!template.equals("")) {
 //                    System.out.println(template + "--->>> Template");
-                    out.println(gpXML.getGroupesByTemplate(template));
+                    if (after.equals("true")) {
+                        out.println(gpXML.getGroupesByTemplateAfter(template));
+                    } else {
+                        out.println(gpXML.getGroupesByTemplate(template));
+                    }
+//                    out.println(gpXML.getGroupesByTemplate(template));
                 } else if (id != null && !id.equals("0")) {
 //                    System.out.println(id + "--->>> ID");
                     out.println(gpXML.getGroupesByPtId(Integer.parseInt(id)));

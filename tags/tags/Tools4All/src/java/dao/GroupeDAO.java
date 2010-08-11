@@ -35,6 +35,8 @@ public interface GroupeDAO {
 
     public List getGroupesWithAttributesByNativeSQL();
 
+    public void updateGroupeCommentByNativeSQL(int id,String comment);
+
     public Groupe getGroupeById(int id);
 
     public Groupe getGroupeByName(String name);

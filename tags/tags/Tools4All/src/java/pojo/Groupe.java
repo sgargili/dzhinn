@@ -11,6 +11,7 @@ public class Groupe implements java.io.Serializable {
 
     private Integer groupeId;
     private String groupeName;
+    private String groupeComment;
     private List<Attribute> attributes = new ArrayList(0);
     private List<ProductType> productTypes = new ArrayList(0);
 
@@ -54,6 +55,12 @@ public class Groupe implements java.io.Serializable {
     public void setProductTypes(List<ProductType> productTypes) {
         this.productTypes = productTypes;
     }
+
+    public String getGroupeComment() {
+        return groupeComment;
+    }
+
+    public void setGroupeComment(String groupeComent) {
+        this.groupeComment = groupeComent;
+    }
 }
-
-

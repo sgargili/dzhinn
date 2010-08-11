@@ -509,9 +509,9 @@ public class Ajax {
         if (groupeName.replaceAll("\\s+|\\d+", "").equals("")) {
             return "Empty";
         }
-        if (FactoryDAO4Grabli.getInstance().getGroupeDAO().isGroupePresent(groupeName.trim())) {
-            return "Already Exist";
-        }
+//        if (FactoryDAO4Grabli.getInstance().getGroupeDAO().isGroupePresent(groupeName.trim())) {
+//            return "Already Exist";
+//        }
         GrabliPro gp = new GrabliPro();
         return gp.addGroupe(groupeName);
     }
@@ -876,6 +876,17 @@ public class Ajax {
             regNew.setWeight(reg.getWeight());
             FactoryDAO4Grabli.getInstance().getRegexpDAO().addRegexp(regNew);
         }
+        return "Done";
+    }
+
+    public String updateGroupeComment(String groupeId, String comment) {
+        int id;
+        try {
+            id = Integer.parseInt(groupeId);
+        } catch (Exception ex) {
+            return "groupeId is suxxxxxx...";
+        }
+        FactoryDAO4Grabli.getInstance().getGroupeDAO().updateGroupeCommentByNativeSQL(id, comment);
         return "Done";
     }
 }

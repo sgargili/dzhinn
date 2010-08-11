@@ -38,13 +38,13 @@ public class GroupeDAOImpl implements GroupeDAO {
     }
 
     public void addOrUpdateGroupeNameOnly(Groupe groupe) {
-        try {
-            Groupe newGroupe;
-            newGroupe = getGroupeByName(groupe.getGroupeName());
-            getHibernateTemplate().update(newGroupe);
-        } catch (Exception ex) {
-            getHibernateTemplate().save(groupe);
-        }
+//        try {
+//            Groupe newGroupe;
+//            newGroupe = getGroupeByName(groupe.getGroupeName());
+//            getHibernateTemplate().update(newGroupe);
+//        } catch (Exception ex) {
+        getHibernateTemplate().save(groupe);
+//        }
     }
 
     public void deleteGroupe(Groupe groupe) {
@@ -108,7 +108,7 @@ public class GroupeDAOImpl implements GroupeDAO {
 
     public List<Groupe> getGroupesOnlyByTemplate(String template) {
         template = "%" + template + "%";
-        String query = "from Groupe p where groupeName like :value";
+        String query = "from Groupe p where groupeName like :value order by groupeName";
         try {
             return getHibernateTemplate().findByNamedParam(query, "value", template);
         } catch (Exception ex) {
@@ -195,5 +195,27 @@ public class GroupeDAOImpl implements GroupeDAO {
             }
         });
         return result;
+    }
+
+    @Override
+    public void updateGroupeCommentByNativeSQL(final int id, final String comment) {
+        final String request =
+                "update "
+                + "    groupe as gp "
+                + "set "
+                + "    gp.groupe_comment = :value "
+                + "where "
+                + "gp.groupe_id = :id";
+
+        getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                query.setString("value", comment);
+                query.setInteger("id", id);
+                return query.executeUpdate();
+            }
+        });
     }
 }
