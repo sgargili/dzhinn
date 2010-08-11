@@ -2616,6 +2616,16 @@ var grpMultiAlt = new Ext.ux.form.MultiSelect({
         listeners: {
             specialkey: function(something,e){
                 if (e.getKey() == e.ENTER) {
+                    if(grpMulti.getValue()==""||grpMulti.getValue()==null||Ext.getCmp('grpAltName').getValue()==null||Ext.getCmp('grpAltName').getValue()==""){
+                        Ext.Msg.show({
+                            title: 'Предупреждение!!!',
+                            msg: 'Выберите группу и комментарий...',
+                            buttons: Ext.MessageBox.OK,
+                            width: 300,
+                            icon: Ext.MessageBox.ERROR
+                        });
+                        return;
+                    }
                     Ajax.updateGroupeComment(grpMulti.getValue(), Ext.getCmp('grpAltName').getValue(), function(data) {
                         Ext.getCmp('grpAltName').setValue("");
                         storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
@@ -2632,6 +2642,16 @@ var grpMultiAlt = new Ext.ux.form.MultiSelect({
     },{
         text: 'Добавить',
         handler: function(){
+            if(grpMulti.getValue()==""||grpMulti.getValue()==null||Ext.getCmp('grpAltName').getValue()==null||Ext.getCmp('grpAltName').getValue()==""){
+                Ext.Msg.show({
+                    title: 'Предупреждение!!!',
+                    msg: 'Выберите группу и комментарий...',
+                    buttons: Ext.MessageBox.OK,
+                    width: 300,
+                    icon: Ext.MessageBox.ERROR
+                });
+                return;
+            }
             Ajax.updateGroupeComment(grpMulti.getValue(), Ext.getCmp('grpAltName').getValue(), function(data) {
                 Ext.getCmp('grpAltName').setValue("");
                 storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
@@ -2645,6 +2665,16 @@ var grpMultiAlt = new Ext.ux.form.MultiSelect({
     },{
         text: 'Удалить',
         handler: function(){
+            if(grpMulti.getValue()==""||grpMulti.getValue()==null){
+                        Ext.Msg.show({
+                            title: 'Предупреждение!!!',
+                            msg: 'Выберите группу...',
+                            buttons: Ext.MessageBox.OK,
+                            width: 300,
+                            icon: Ext.MessageBox.ERROR
+                        });
+                        return;
+                    }
             Ajax.updateGroupeComment(grpMulti.getValue(), "", function(data) {
                 Ext.getCmp('grpAltName').setValue("");
                 storeGrpProxyAlt.setUrl("Service.exml?request=groupes/groupeId="+ grpMulti.getValue());
