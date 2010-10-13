@@ -12,5 +12,7 @@ public class Main {
         System.out.println("Привет!");
         int i = 0;
         String s = "";
+        long l = 1l;
+
     }
 }
