@@ -24,6 +24,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>ira.entity.Data</value>
+                <value>ira.entity.Link</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -32,6 +33,10 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.jdbc.batch_size">20</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/iradb</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
+                <prop key="hibernate.connection.username">root</prop>
+                <prop key="hibernate.connection.password">Pass4root</prop>
             </props>
         </property>
     </bean>

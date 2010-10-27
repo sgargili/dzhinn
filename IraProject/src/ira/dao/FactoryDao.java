@@ -17,6 +17,10 @@ public class FactoryDao {
         return (DataDao) appctx.getBean("dataDao");
     }
 
+    public LinkDao getLinkDao() {
+        return (LinkDao) appctx.getBean("linkDao");
+    }
+
     public static FactoryDao getInstance() {
         return ourInstance;
     }

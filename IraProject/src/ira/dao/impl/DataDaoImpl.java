@@ -44,12 +44,12 @@ public class DataDaoImpl implements DataDao {
     }
 
     public Data getDataById(Long id) {
-        return (Data) hibernateTemplate.get(Data.class, id);
+        return hibernateTemplate.get(Data.class, id);
 
     }
 
     public List<Data> getAllData() {
-        return (List<Data>) hibernateTemplate.find("from Data");
+        return hibernateTemplate.loadAll(Data.class);
     }
 
     public List<Data> getAllData(int start) {
