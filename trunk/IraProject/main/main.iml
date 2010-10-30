@@ -48,6 +48,7 @@
     <orderEntry type="library" name="Maven: xpp3:xpp3:1.1.4c" level="project" />
     <orderEntry type="library" name="Maven: org.ccil.cowan.tagsoup:tagsoup:0.9.7" level="project" />
     <orderEntry type="module" module-name="processing" />
+    <orderEntry type="module" module-name="csvcore" />
   </component>
 </module>
 

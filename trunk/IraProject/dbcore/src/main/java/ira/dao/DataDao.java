@@ -31,4 +31,6 @@ public interface DataDao {
     List<Data> getDataByArticle(String article);
 
     List<Data> getDataByAttribute(String attribute);
+
+    List<String> getArticles();
 }
