@@ -166,7 +166,6 @@ public class Descriptions {
                 dataNew.setArticle(article);
                 fd.getDataDao().saveData(dataNew);
             }
-            //getPics(article);
             System.out.println(cicle + " из " + count + " - Получили данные для артикля: " + article);
             datas.clear();
         }
@@ -215,17 +214,4 @@ public class Descriptions {
         fd.getDataDao().saveData(data);
     }
 
-    private void getPics(String article) {
-        try {
-            int i = 1;
-            boolean isDirCreated = new File("d://iraPics/" + article).mkdirs();
-            while (http.getHttpData().DownloadBinaryFile("http://belygorod.ru/book_images/" + article + "-" + i++ + ".jpg",
-                    true,
-                    "d://iraPics/" + article + "/стр." + (i - 1) + ".jpg")) {
-                System.out.println("Скачана картинка: " + (i - 1));
-            }
-        } catch (Exception ex) {
-            System.out.println(ex);
-        }
-    }
 }

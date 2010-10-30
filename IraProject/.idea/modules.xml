@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IraProject.iml" filepath="$PROJECT_DIR$/IraProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/csvcore/csvcore.iml" filepath="$PROJECT_DIR$/csvcore/csvcore.iml" />
       <module fileurl="file://$PROJECT_DIR$/dbcore/dbcore.iml" filepath="$PROJECT_DIR$/dbcore/dbcore.iml" />
       <module fileurl="file://$PROJECT_DIR$/httpcore/httpcore.iml" filepath="$PROJECT_DIR$/httpcore/httpcore.iml" />
       <module fileurl="file://$PROJECT_DIR$/main/main.iml" filepath="$PROJECT_DIR$/main/main.iml" />

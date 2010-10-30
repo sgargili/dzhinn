@@ -31,6 +31,12 @@
             <artifactId>processing</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>IraProject</groupId>
+            <artifactId>csvcore</artifactId>
+            <version>1.0</version>
+        </dependency>
+
     </dependencies>
     
 

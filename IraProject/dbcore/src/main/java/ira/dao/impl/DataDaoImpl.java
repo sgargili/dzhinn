@@ -2,8 +2,8 @@ package ira.dao.impl;
 
 import ira.dao.DataDao;
 import ira.entity.Data;
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
+import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -71,5 +71,20 @@ public class DataDaoImpl implements DataDao {
 
     public List<Data> getDataByAttribute(String attribute) {
         return (List<Data>) hibernateTemplate.findByNamedParam("from Data data where data.attribute = :attribute", "attribute", attribute);
+    }
+
+    public List<String> getArticles() {
+        List result = null;
+        final String request =
+                "select distinct data.article from data data order by data.article";
+
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
+
+            public Object doInHibernate(Session session) throws HibernateException {
+                SQLQuery query = session.createSQLQuery(request);
+                return query.list();
+            }
+        });
+        return result;
     }
 }
