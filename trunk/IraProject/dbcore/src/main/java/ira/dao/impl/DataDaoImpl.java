@@ -52,6 +52,10 @@ public class DataDaoImpl implements DataDao {
         return hibernateTemplate.loadAll(Data.class);
     }
 
+    public List<Data> getOrderedAllData() {
+        return (List<Data>) hibernateTemplate.find("from Data data order by data.article, data.attribute");
+    }
+
     public List<Data> getAllData(int start) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Data.class);
         criteria.setFirstResult(start);

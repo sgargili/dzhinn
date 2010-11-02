@@ -24,6 +24,8 @@ public interface DataDao {
 
     List<Data> getAllData();
 
+    List<Data> getOrderedAllData();
+
     List<Data> getAllData(int start);
 
     List<Data> getAllData(int start, int limit);
