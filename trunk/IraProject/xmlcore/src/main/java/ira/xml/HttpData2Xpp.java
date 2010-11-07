@@ -6,6 +6,8 @@ package ira.xml;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.io.File;
+
 /**
  *
  * @author Apopov
@@ -25,4 +27,6 @@ public interface HttpData2Xpp {
     public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding, boolean useProxy);
 
     public XmlPullParser getXpp(String url, String inputEncoding, String outputEncoding, boolean useProxy, String ip);
+
+    public XmlPullParser getXppByFile(File file, String outputEncoding);
 }
