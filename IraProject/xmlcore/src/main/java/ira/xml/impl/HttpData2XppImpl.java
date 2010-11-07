@@ -7,6 +7,7 @@ package ira.xml.impl;
 import ira.httpclient.FactoryHttpData;
 import ira.httpclient.HttpData;
 
+import java.io.File;
 import java.io.InputStreamReader;
 
 import org.apache.commons.io.FileUtils;
@@ -112,6 +113,18 @@ public class HttpData2XppImpl implements HttpData2Xpp {
             factory = XmlPullParserFactory.newInstance();
             xpp = factory.newPullParser();
             xpp.setInput(new InputStreamReader(FileUtils.openInputStream(html2Xml.convertHtml2Xml(http.downloadContentAsFile(url, inputEncoding, outputEncoding, useProxy, ip))), outputEncoding));
+        } catch (Exception ex) {
+        }
+        return xpp;
+    }
+
+    public XmlPullParser getXppByFile(File file, String outputEncoding) {
+        XmlPullParserFactory factory = null;
+        XmlPullParser xpp = null;
+        try {
+            factory = XmlPullParserFactory.newInstance();
+            xpp = factory.newPullParser();
+            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(file), outputEncoding));
         } catch (Exception ex) {
         }
         return xpp;

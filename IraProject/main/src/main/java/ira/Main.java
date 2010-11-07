@@ -34,6 +34,7 @@ public class Main {
     static String COL13 = "Формат (размер)";
     static String COL14 = "Цена";
     static String COL15 = "Язык издания";
+    static String COL16 = "Full Name";
 
     public static void main(String[] args) {
 
@@ -41,7 +42,7 @@ public class Main {
 //        FactoryHtml2Xml xml = FactoryHtml2Xml.getInstance();
 //        xml.getHttpData2Xpp().getXpp("http://localhost:8080");
 //        Descriptions desc = new Descriptions();
-//        desc.getProductDescription();
+//        desc.getProductDescriptionAfter();
 //        FactoryHttpData http =  FactoryHttpData.getInstance();
 //        System.out.println(http.getHttpData().DownloadBinaryFile("http://www.belygorod.ru/preface/N0010407229021.php", true, "C://temp/eee.jpg"));
         FactoryDao fd = FactoryDao.getInstance();
@@ -56,7 +57,7 @@ public class Main {
         String article = "";
         List<Data> datas = fd.getDataDao().getOrderedAllData();
         CsvWriter csv = FactoryCsv.getInstance().getCsvWriter("D:/iraData.csv", ",", "utf-8");
-        String[] column = new String[16];
+        String[] column = new String[17];
         for (Data data : datas) {
             if (!article.equals(data.getArticle())) {
                 try {
@@ -99,17 +100,12 @@ public class Main {
                 column[14] = data.getValue().replaceAll("\n", " ");
             } else if (data.getAttribute().equals(COL15)) {
                 column[15] = data.getValue().replaceAll("\n", " ");
+            } else if (data.getAttribute().equals(COL16)) {
+                column[16] = data.getValue().replaceAll("\n", " ");
             }
 
             article = data.getArticle();
-//            column[0] = data.getArticle();
-//            column[1] = data.getAttribute();
-//            column[2] = data.getValue().replaceAll("\n", " ");
-//            try {
-//                csv.writeRecord(column);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+
         }
         csv.close();
 
