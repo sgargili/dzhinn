@@ -53,9 +53,9 @@ public class Descriptions {
         int count = links.size();
 
         for (Link link : links) {
-            if (cicle++ <= 644) {
-                continue;
-            }
+//            if (cicle++ <= 0) {
+//                //continue;
+//            }
             try {
                 xpp = fXml.getHttpData2Xpp().getXpp(link.getUrl(), "Windows-1251", "UTF-8", true);
 
@@ -163,13 +163,19 @@ public class Descriptions {
             data.setAttribute("Описание книги");
             data.setValue(description);
             datas.add(data);
+            data = new Data();
+            data.setAttribute("Full Name");
+            data.setValue(fullName);
+            datas.add(data);
             int i = 0;
             for (Data dataNew : datas) {
                 dataNew.setArticle(article);
                 fd.getDataDao().saveData(dataNew);
             }
-            System.out.println(cicle + " из " + count + " - Получили данные для артикля: " + article);
+            System.out.println(cicle++ + " из " + count + " - Получили данные для артикля: " + article);
             datas.clear();
+            description = "";
+            fullName = "";
         }
     }
 

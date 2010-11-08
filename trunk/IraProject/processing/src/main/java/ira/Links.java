@@ -20,8 +20,8 @@ import java.util.regex.Pattern;
  * To change this template use File | Settings | File Templates.
  */
 public class Links {
-    FactoryDao fd = FactoryDao.getInstance();
-    FactoryHtml2Xml fXml = FactoryHtml2Xml.getInstance();
+    private FactoryDao fd = FactoryDao.getInstance();
+    private FactoryHtml2Xml fXml = FactoryHtml2Xml.getInstance();
 
     public void getDepartments() {
 
@@ -70,7 +70,7 @@ public class Links {
 
         for (Link department : departments) {
 
-            System.out.println("������� -> " + i++);
+            System.out.println("Продукт -> " + i++);
 
             xpp = fXml.getHttpData2Xpp().getXpp(department.getUrl(), "Windows-1251", "Windows-1251", true);
 
