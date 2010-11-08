@@ -38,11 +38,14 @@ public class Main {
 
     public static void main(String[] args) {
 
+//        Links links = new Links();
+//        links.getProductLinks();
+
 
 //        FactoryHtml2Xml xml = FactoryHtml2Xml.getInstance();
 //        xml.getHttpData2Xpp().getXpp("http://localhost:8080");
 //        Descriptions desc = new Descriptions();
-//        desc.getProductDescriptionAfter();
+//        desc.getProductDescription();
 //        FactoryHttpData http =  FactoryHttpData.getInstance();
 //        System.out.println(http.getHttpData().DownloadBinaryFile("http://www.belygorod.ru/preface/N0010407229021.php", true, "C://temp/eee.jpg"));
         FactoryDao fd = FactoryDao.getInstance();
