@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+"http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+
+	<!--Настройки параметров связи с базой данных -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+
+		<property name="dataSource" ref="dataSource" />
+
+		<property name="mappingResources">
+			<list>
+				<value>pojo/InputData.hbm.xml</value>
+				<value>pojo/Shop.hbm.xml</value>
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<value>
+				hibernate.dialect=org.hibernate.dialect.MySQLDialect
+				hibernate.connection.characterEncoding=UTF-8
+				hibernate.current_session_context_class=thread
+				hibernate.show_sql=true
+				hibernate.format_sql=true
+                hibernate.hbm2ddl.auto=update
+            </value>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+
+		<property name="url">
+			<value>jdbc:mysql://127.0.0.1:3306/grablidb?useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true</value>
+		</property>
+
+		<property name="username">
+			<value>root</value>
+		</property>
+
+		<property name="password">
+			<value>Pass4root</value>
+		</property>
+
+	</bean>
+
+	<!--Настройки параметров связи с базой данных - конец -->
+
+
+	<!--Декларация бинов для DAO -->
+
+	<bean id="InputDataDaoTemp" class="dao.impl.InputDataDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="ShopDaoTemp" class="dao.impl.ShopDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Декларация бинов для DAO - конец -->
+
+	<!-- Интерцепторы sessionFactory. Решение проблем с LazyLoading... -->
+
+	<bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor">
+
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+
+	</bean>
+
+
+	<bean id="InputDataDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+		<property name="target">
+			<ref bean="InputDataDaoTemp" />
+		</property>
+
+		<property name="proxyInterfaces">
+			<value>dao.InputDataDao</value>
+		</property>
+
+		<property name="interceptorNames">
+			<list>
+				<value>hibernateInterceptor</value>
+			</list>
+		</property>
+
+	</bean>
+
+	<bean id="ShopDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+
+		<property name="target">
+			<ref bean="ShopDaoTemp" />
+		</property>
+
+		<property name="proxyInterfaces">
+			<value>dao.ShopDao</value>
+		</property>
+
+		<property name="interceptorNames">
+			<list>
+				<value>hibernateInterceptor</value>
+			</list>
+		</property>
+
+	</bean>
+
+
+	<!--Интерцепторы sessionFactory. Решение проблем с LazyLoading... Конец. -->
+
+</beans>
