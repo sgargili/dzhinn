@@ -1,11 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package dao.impl;
 
 import dao.InputDataDao;
+
 import java.util.List;
+
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.hibernate.HibernateException;
@@ -16,7 +14,6 @@ import pojo.InputData;
 import pojo.Shop;
 
 /**
- *
  * @author PAV
  */
 public class InputDataDaoImpl implements InputDataDao {
@@ -146,6 +143,22 @@ public class InputDataDaoImpl implements InputDataDao {
                 query.setParameter("shop", shop);
                 query.setMaxResults(limit);
                 query.setFirstResult(first);
+                return query.list();
+            }
+        });
+        return result;
+    }
+
+    @Override
+    public List<String> getAllArticlesByShop(final int shopId) {
+        List<String> result = null;
+        final String request = "select distinct input.article from input_data input where input.shop_id = :shopId";
+        result = (List<String>) getHibernateTemplate().execute(new HibernateCallback() {
+
+            @Override
+            public Object doInHibernate(Session session) throws HibernateException {
+                Query query = session.createSQLQuery(request);
+                query.setParameter("shopId", shopId);
                 return query.list();
             }
         });

@@ -5,11 +5,11 @@
 package dao;
 
 import java.util.List;
+
 import pojo.InputData;
 import pojo.Shop;
 
 /**
- *
  * @author PAV
  */
 public interface InputDataDao {
@@ -35,5 +35,7 @@ public interface InputDataDao {
     List<InputData> getAllInputDataByShop(Shop shop, int limit);
 
     List<InputData> getAllInputDataByShop(Shop shop, int first, int limit);
+
+    List<String> getAllArticlesByShop(int shopId);
 
 }

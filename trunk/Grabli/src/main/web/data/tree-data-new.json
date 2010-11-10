@@ -1,0 +1,27 @@
+[
+    {
+        text:'Административные функции',
+        children:[
+            {
+                text:'Кандидаты ВОА',
+                id:'allCandidats',
+                leaf:true
+            },
+            {
+                text:'Члены ВОА',
+                id:'allMembers',
+                leaf:true
+            },
+            {
+                text:'Платежи',
+                id:'allPayments',
+                leaf:true
+            },
+            {
+                text:'Экстренная помощь',
+                id:'allTechSupport',
+                leaf:true
+            }
+        ]
+    }
+]

@@ -1,10 +1,13 @@
 package processing;
 
+import csv.CsvWriter;
+import csv.FactoryCsv;
 import factories.FactoryDao;
 import factories.FactoryHTTP;
 import factories.FactoryHTTPData2XmlParser;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -312,7 +315,7 @@ public class FcenterProcessing {
                         && xpp.getName().equals("img") //
                         && xpp.getAttributeCount() == 6) {
                     if (xpp.getAttributeValue(1).trim().contains(article)) {
-                        urls.add(xpp.getAttributeValue(1).trim().replaceAll("_S","_L"));
+                        urls.add(xpp.getAttributeValue(1).trim().replaceAll("_S", "_L"));
                     }
                 }
                 eventType = xpp.next();
@@ -328,5 +331,47 @@ public class FcenterProcessing {
         }
 
 
+    }
+
+    public File getFcenterDescriptionInCsv() {
+
+        File tempFile = null;
+
+        try {
+            tempFile = File.createTempFile("tempFcenterCsvFile", ".csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FactoryCsv csvFactory = FactoryCsv.getInstance();
+
+        CsvWriter csv = csvFactory.getCsvWriter(tempFile.getAbsolutePath(), ",", "UTF-8");
+
+        String[] mass = new String[8];
+
+        Shop fcenter = new Shop();
+        fcenter.setShopId(2);
+
+        List<InputData> datas = fd.getInputDataDao().getAllInputDataByShop(fcenter);
+
+        for (InputData data : datas) {
+            mass[0] = data.getArticle();
+            mass[1] = data.getFullName();
+            mass[2] = data.getManufacturer();
+            mass[3] = data.getProductType();
+            mass[4] = data.getAttribute();
+            mass[5] = data.getAttributeValue();
+            mass[6] = data.getPriceDealer();
+            mass[7] = data.getPriceRetail();
+            try {
+                csv.writeRecord(mass);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        
+        csv.close();
+
+        return tempFile;
     }
 }
