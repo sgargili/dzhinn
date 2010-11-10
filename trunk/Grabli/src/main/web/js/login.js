@@ -115,6 +115,39 @@ var grabliForm = new Ext.FormPanel({
     ],
     buttons: [
         {
+            text: 'Загрузить данные',
+            handler: function () {
+                if (statusCombo.isValid()) {
+                    Ext.Ajax.request({
+                        url: 'rest/csv.html',
+                        params: {
+                            shopId: "fcenter"
+                        },
+                        method: 'GET',
+                        success: function (response, opts) {
+                            response.responseData();
+//                            Ext.Msg.show({
+//                                title: 'Выполненно!',
+//                                msg: 'Статус процесса: ' + response.responseText,
+//                                buttons: Ext.MessageBox.OK,
+//                                width: 400,
+//                                icon: Ext.MessageBox.INFO
+//                            });
+                        },
+                        failure: function (response, opts) {
+//                            Ext.Msg.show({
+//                                title: 'Выполненно!',
+//                                msg: 'Ошибка... Что-то упало... См. тут: ' + response.responseText,
+//                                buttons: Ext.MessageBox.OK,
+//                                width: 400,
+//                                icon: Ext.MessageBox.INFO
+//                            });
+                        }
+                    });
+                }
+            }
+        },
+        {
             text: 'Проверить статус',
             handler: function () {
                 if (statusCombo.isValid()) {
