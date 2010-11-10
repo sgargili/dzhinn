@@ -43,6 +43,8 @@ public class CsvView extends AbstractView {
         }
         is.close();
 
+        reportFile.delete();
+
         ServletOutputStream outstream = httpServletResponse.getOutputStream();
         httpServletResponse.setContentType("text/csv");
         httpServletResponse.setContentLength(pdfasbytes.length);

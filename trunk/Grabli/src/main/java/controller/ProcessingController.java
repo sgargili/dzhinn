@@ -58,8 +58,6 @@ public class ProcessingController {
 
         CsvView csvView = new CsvView(fcenter.getFcenterDescriptionInCsv().getAbsolutePath(), shopId);
 
-        fcenter.getFcenterDescriptionInCsv().delete();
-
         return new ModelAndView(csvView, model);
     }
 }
