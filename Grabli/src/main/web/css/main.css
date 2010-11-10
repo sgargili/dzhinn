@@ -1,0 +1,229 @@
+body {
+    font-family: tahoma, arial, sans-serif;
+    font-size: 11px;
+    background-color: #dfe8f6;
+}
+
+a {
+    color: #15428B;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.header {
+    background: #7F99BE url(../images/layout-browser-hd-bg.gif) repeat-x center;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    font-size: 16px;
+    /*color: #fff;*/
+    /*font-weight: normal;*/
+    /*padding: 3px 10px;*/
+    /*font-family: Calibri;*/
+}
+
+#Wfont {
+    background: #7F99BE url(../images/layout-browser-hd-bg.gif) repeat-x center;
+}
+
+.header-h1 {
+    font-size: 16px;
+    color: #fff;
+    font-weight: normal;
+    padding: 3px 10px;
+    font-family: Calibri;
+}
+
+.start-page {
+    background: url(../images/voa-logo.png) no-repeat center;
+    background-color: #dfe8f6
+}
+
+
+#details-panel h2 {
+    padding: 10px 10px 0;
+    font-size: 12px;
+    color: #15428B;
+}
+
+#details-panel p {
+    padding: 10px 10px 0;
+}
+
+#details-panel pre {
+    border-top: 1px dotted #ddd;
+    border-bottom: 1px dotted #ddd;
+    margin-top: 10px;
+    padding: 0 5px;
+    background: #f5f5f5;
+}
+
+#details-panel .details-info {
+    margin: 15px;
+    padding: 15px;
+    border: 1px dotted #999;
+    color: #555;
+    background: #f9f9f9;
+}
+
+.x-tab-panel-header-plain .x-tab-strip-top {
+    background: #DFE8F6 url(../images/default/tabs/tab-strip-bg.gif) repeat-x scroll center bottom !important;
+}
+
+.custom-accordion .x-panel-body {
+    font-family: georgia, serif;
+    padding: 20px 80px !important;
+    background: #ffe;
+    font-size: 18px;
+    text-align: center;
+    color: #15428B;
+}
+
+.custom-accordion .x-panel-header-text {
+    font-weight: bold;
+    font-style: italic;
+    color: #555;
+}
+
+#form-panel .x-panel-footer {
+    background: #DFE8F6;
+    border-color: #99BBE8;
+    border-style: none solid solid;
+    border-width: 0pt 1px 1px;
+}
+
+#table-panel .x-table-layout {
+    padding: 5px;
+}
+
+#table-panel .x-table-layout td {
+    vertical-align: top;
+    padding: 5px;
+    font-size: 11px;
+}
+
+.icon-send {
+    background-image: url(../images/email_go.png) !important;
+}
+
+.icon-save {
+    background-image: url(../images/disk.png) !important;
+}
+
+.icon-print {
+    background-image: url(../images/printer.png) !important;
+}
+
+.icon-spell {
+    background-image: url(../images/spellcheck.png) !important;
+}
+
+.icon-attach {
+    background-image: url(../images/page_attach.png) !important;
+}
+
+.email-form .x-panel-mc .x-panel-tbar .x-toolbar {
+    border-top: 1px solid #C2D6EF;
+    border-left: 1px solid #C2D6EF;
+    border-bottom: 1px solid #99BBE8;
+    margin: -5px -4px 0;
+}
+
+.inner-tab-custom .x-border-layout-ct {
+    background: #fff;
+}
+
+.icon-add-record {
+    background-image: url(../images/table/table_add.png) ! important;
+}
+
+.icon-edit-record {
+    background-image: url(../images/table/table_edit.png) ! important;
+}
+
+.icon-find {
+    background-image: url(../images/table/zoom.png) ! important;
+}
+
+.icon-add-entity {
+    background-image: url(../images/table/add.gif) ! important;
+}
+
+.icon-remove-entity {
+    background-image: url(../images/table/remove.gif) ! important;
+}
+
+.icon-imp {
+    /*background-image: url(../images/ico-imp.gif) ! important;*/
+    vertical-align: super;
+    float: left;
+    color: red;
+}
+.float-left{
+   float: left; 
+}
+
+.details .x-btn-text {
+    background-image: url(../images/details.gif);
+}
+
+.ext-ie .x-row-editor .x-form-text {
+    margin:0 !important;
+}
+.x-row-editor-header {
+    height:2px;
+    overflow:hidden;
+    background: transparent url(../images/row-editor-bg.gif) repeat-x 0 0;
+}
+.x-row-editor-footer {
+    height:2px;
+    overflow:hidden;
+    background: transparent url(../images/row-editor-bg.gif) repeat-x 0 -2px;
+}
+.ext-ie .x-row-editor-footer {
+    margin-top:-1px;
+}
+
+.x-row-editor-body {
+    overflow:hidden;
+    zoom:1;
+    background: #ebf2fb;
+    padding-top:2px;
+}
+.x-row-editor .x-btns {
+    position:absolute;
+    top:28px;
+    left:20px;
+    padding-left:5px;
+    background: transparent url(../images/row-editor-btns.gif) no-repeat 0 0;
+}
+.x-row-editor .x-btns .x-plain-bwrap {
+    padding-right:5px;
+    background: transparent url(../images/row-editor-btns.gif) no-repeat right -31px;
+}
+.x-row-editor .x-btns .x-plain-body {
+    background: transparent url(../images/row-editor-btns.gif) repeat-x 0 -62px;
+    height:31px;
+}
+.x-row-editor .x-btns .x-table-layout-cell {
+    padding:3px;
+}
+
+/* Fixes for IE6/7 trigger fields */
+.ext-ie6 .x-row-editor .x-form-field-wrap .x-form-trigger, .ext-ie7 .x-row-editor .x-form-field-wrap .x-form-trigger {
+  top: 1px;
+}
+
+.ext-ie6 .x-row-editor .x-form-field-trigger-wrap, .ext-ie7 .x-row-editor .x-form-field-trigger-wrap {
+  margin-top: -1px;
+}
+
+.errorTip .x-tip-body ul{
+    list-style-type:disc;
+    margin-left:15px;
+}

@@ -21,6 +21,11 @@ public class Class4Test {
     public static void main(String[] args) {
 
 //        FactoryDao fd = FactoryDao.getInstance();
+//        List<String> list = fd.getInputDataDao().getAllArticlesByShop(2);
+//        for(String str : list){
+//            System.out.println(str);
+//        }
+//        System.out.println(fd.getInputDataDao().getAllArticlesByShop(2).size());
 //        fd.getInputDataDao().getAllInputData();
 
 //        NixProcessing shop = new NixProcessing();
@@ -37,20 +42,20 @@ public class Class4Test {
 //            products = shop.getLink4AllProductLinksByUrl("http://www.nix.ru/price/" + depUrl);
 //            articles = products.keySet();
 //            for (int article : articles) {
-//                //shop.getProductDescFromNixHTML(article + "", pts.get(depUrl), "Nix.ru", "http://www.nix.ru" + products.get(article), true, "127.0.0.1:8118");
-//                System.out.println(article);
+//                shop.getProductDescFromNixHTML(article + "", pts.get(depUrl), "Nix.ru", "http://www.nix.ru" + products.get(article), true, "127.0.0.1:8118");
+////                System.out.println(article);
 //               // shop.downloadPics(article + "", "c://temp/");
 //            }
 //        }
 
 
         FcenterProcessing fcenter = new FcenterProcessing();
-
+        System.out.println(fcenter.getFcenterDescriptionInCsv().getAbsolutePath());
 //        List<FcenterProduct> list = fcenter.getProductsLinks();
 //        for (FcenterProduct pro : list) {
 //            fcenter.getDescription(pro);
 //        }
-          fcenter.downloadPics("90039", "C://pics4Fcenter/");
+//          fcenter.downloadPics("90039", "C://pics4Fcenter/");
 
     }
 }

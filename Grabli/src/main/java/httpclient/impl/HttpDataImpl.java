@@ -23,7 +23,7 @@ public class HttpDataImpl implements HttpData {
     private HttpClient client = new HttpClient();
 
     private void setUserAgent() {
-        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)");
+        client.getParams().setParameter(HttpMethodParams.USER_AGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3");
     }
 
     @Override

@@ -112,7 +112,7 @@ public class NixProcessing {
     public Map<Integer, String> getLink4AllProductLinksByUrl(String url) {
         Map<Integer, String> out = new HashMap();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
 
         Pattern pat = Pattern.compile(".*_(\\d+).html");
         Matcher match;
@@ -175,9 +175,9 @@ public class NixProcessing {
 //            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             XmlPullParser xpp;
             if (proxyBool) {
-                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true, proxyIP);
+                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true, proxyIP);
             } else {
-                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", false);
+                xpp = http.getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", false);
             }
 //            xpp.setInput(new InputStreamReader(FileUtils.openInputStream(tempOutputData), "UTF-8"));
             int eventType = xpp.getEventType();
