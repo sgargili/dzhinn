@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package processing;
 
 import factories.FactoryDao;
 import factories.FactoryHTTP;
 import factories.FactoryHTTPData2XmlParser;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,25 +12,24 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import org.xmlpull.v1.XmlPullParser;
 import pojo.InputData;
 import pojo.Shop;
 
 /**
- *
  * @author PAV
  */
 public class NixProcessing {
 
     /**
-     * 
-     * @param url урля 
+     * @param url урля
      * @return Map, где ключ это урля, а значение это название ПТ...
      */
     public Map<String, String> getNixDepartments(String url) {
         Map<String, String> out = new HashMap();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
 
         Pattern pat = Pattern.compile(".*_all.html");
         Matcher match;
@@ -74,7 +70,7 @@ public class NixProcessing {
     public String getLink4AllProductsByDepartment(String url) {
         String out = "";
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
 
 
         boolean scilko = false;
@@ -110,7 +106,6 @@ public class NixProcessing {
     }
 
     /**
-     * Привет!
      * @param url урля
      * @return Map, где ключ это артикль, а значение это название урля на описание...
      */
@@ -359,10 +354,8 @@ public class NixProcessing {
 
     public void downloadPics(String article, String path) {
         String url = "http://www.nix.ru/include/show_detail_picture.html?good_id=" + article;
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "Windows-1251", false);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
         List<String> urls = new ArrayList();
-
-
         try {
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -382,7 +375,6 @@ public class NixProcessing {
         for (String str : urls) {
             FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile("http://www.nix.ru" + str, true, path + article + "/" + article + "_" + i++ + ".jpg");
         }
-
 
 
     }
