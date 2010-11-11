@@ -12,6 +12,8 @@ import java.io.Writer;
 import org.apache.commons.io.FileUtils;
 import org.ccil.cowan.tagsoup.Parser;
 import org.ccil.cowan.tagsoup.XMLWriter;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.XMLReader;
 import xml.Html2Xml;
@@ -20,6 +22,8 @@ import xml.Html2Xml;
  *
  * @author Apopov
  */
+@Repository
+@Service("html2Xml")
 public class Html2XmlImpl implements Html2Xml {
 
     public File convertHtml2Xml(File inputHtmlFile) {

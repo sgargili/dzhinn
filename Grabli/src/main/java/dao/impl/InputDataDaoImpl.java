@@ -10,33 +10,34 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import pojo.InputData;
 import pojo.Shop;
 
 /**
  * @author PAV
  */
+@Repository
+@Service("inputDataDao")
 public class InputDataDaoImpl implements InputDataDao {
 
     private HibernateTemplate hibernateTemplate;
 
-    public HibernateTemplate getHibernateTemplate() {
-        return hibernateTemplate;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.hibernateTemplate = new HibernateTemplate(sessionFactory);
     }
 
-    public void setSessionFactory(SessionFactory sf) {
-        this.hibernateTemplate = new HibernateTemplate(sf);
-    }
 
     @Override
     public void addInputData(InputData inputData) {
-        getHibernateTemplate().save(inputData);
+        hibernateTemplate.save(inputData);
     }
 
     @Override
     public Integer addInputData(InputData inputData, boolean returnId) {
         if (returnId) {
-            inputData = (InputData) getHibernateTemplate().save(inputData);
+            inputData = (InputData) hibernateTemplate.save(inputData);
             return inputData.getId();
         } else {
             return null;
@@ -45,31 +46,31 @@ public class InputDataDaoImpl implements InputDataDao {
 
     @Override
     public void updateInputData(InputData inputData) {
-        getHibernateTemplate().update(inputData);
+        hibernateTemplate.update(inputData);
     }
 
     @Override
     public void deleteInputData(InputData inputData) {
-        getHibernateTemplate().delete(inputData);
+        hibernateTemplate.delete(inputData);
     }
 
     @Override
     public void deleteInputData(int id) {
         InputData inputData = new InputData();
         inputData.setId(id);
-        getHibernateTemplate().delete(inputData);
+        hibernateTemplate.delete(inputData);
     }
 
     @Override
     public List<InputData> getAllInputData() {
-        return getHibernateTemplate().loadAll(InputData.class);
+        return hibernateTemplate.loadAll(InputData.class);
     }
 
     @Override
     public List<InputData> getAllInputData(final int limit) {
         List result = null;
         final String request = "from InputData inputData";
-        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
@@ -85,7 +86,7 @@ public class InputDataDaoImpl implements InputDataDao {
     public List<InputData> getAllInputData(final int first, final int limit) {
         List result = null;
         final String request = "from InputData inputData";
-        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
@@ -102,7 +103,7 @@ public class InputDataDaoImpl implements InputDataDao {
     public List<InputData> getAllInputDataByShop(final Shop shop) {
         List result = null;
         final String request = "from InputData inputData where inputData.shop = :shop";
-        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
@@ -118,7 +119,7 @@ public class InputDataDaoImpl implements InputDataDao {
     public List<InputData> getAllInputDataByShop(final Shop shop, final int limit) {
         List result = null;
         final String request = "from InputData inputData where inputData.shop = :shop";
-        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
@@ -135,7 +136,7 @@ public class InputDataDaoImpl implements InputDataDao {
     public List<InputData> getAllInputDataByShop(final Shop shop, final int first, final int limit) {
         List result = null;
         final String request = "from InputData inputData where inputData.shop = :shop";
-        result = (List) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {
@@ -153,7 +154,7 @@ public class InputDataDaoImpl implements InputDataDao {
     public List<String> getAllArticlesByShop(final int shopId) {
         List<String> result = null;
         final String request = "select distinct input.article from input_data input where input.shop_id = :shopId";
-        result = (List<String>) getHibernateTemplate().execute(new HibernateCallback() {
+        result = (List<String>) hibernateTemplate.execute(new HibernateCallback() {
 
             @Override
             public Object doInHibernate(Session session) throws HibernateException {

@@ -13,11 +13,15 @@ import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.commons.io.IOUtils;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Apopov
  */
+@Repository
+@Service("httpData")
 public class HttpDataImpl implements HttpData {
 
     private HttpClient client = new HttpClient();

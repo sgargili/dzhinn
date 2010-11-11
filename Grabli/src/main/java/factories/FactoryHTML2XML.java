@@ -14,7 +14,7 @@ import xml.Html2Xml;
  */
 public class FactoryHTML2XML {
 
-    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/Html2XmlSpringConfig.xml");
+    private ApplicationContext factory = new ClassPathXmlApplicationContext("Html2XmlSpringConfig.xml");
     private static FactoryHTML2XML instance = null;
 
     public static synchronized FactoryHTML2XML getInstance() {
@@ -25,6 +25,6 @@ public class FactoryHTML2XML {
     }
 
     public Html2Xml getHtml2Xml() {
-        return (Html2Xml) factory.getBean("Html2Xml");
+        return (Html2Xml) factory.getBean("html2Xml");
     }
 }

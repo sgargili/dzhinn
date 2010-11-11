@@ -19,10 +19,10 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class CsvView extends AbstractView {
-    private String shopName;
+    private int shopName;
     private String path;
 
-    public CsvView(String path, String shopName) {
+    public CsvView(String path, int shopName) {
         this.path = path;
         this.shopName = shopName;
     }
@@ -45,10 +45,18 @@ public class CsvView extends AbstractView {
 
         reportFile.delete();
 
+        String name;
+
+        if (shopName == 1) {
+            name = "Nix";
+        } else {
+            name = "Fcenter";
+        }
+
         ServletOutputStream outstream = httpServletResponse.getOutputStream();
-        httpServletResponse.setContentType("text/csv");
+        httpServletResponse.setContentType("application/octet-stream");
         httpServletResponse.setContentLength(pdfasbytes.length);
-        httpServletResponse.setHeader("Content-disposition", "inline; filename=\"" + shopName + ".csv\"");
+        httpServletResponse.setHeader("Content-disposition", "inline; filename=\"" + name + ".csv\"");
         outstream.write(pdfasbytes, 0, pdfasbytes.length);
         outstream.flush();
     }

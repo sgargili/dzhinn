@@ -333,7 +333,7 @@ public class FcenterProcessing {
 
     }
 
-    public File getFcenterDescriptionInCsv() {
+    public File getFcenterDescriptionInCsv(int shopId) {
 
         File tempFile = null;
 
@@ -350,7 +350,7 @@ public class FcenterProcessing {
         String[] mass = new String[8];
 
         Shop fcenter = new Shop();
-        fcenter.setShopId(2);
+        fcenter.setShopId(shopId);
 
         List<InputData> datas = fd.getInputDataDao().getAllInputDataByShop(fcenter);
 
