@@ -54,6 +54,133 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchMap">
+                <map>
+                  <entry key="https://dzhinn.googlecode.com/svn/Grabli">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/KeySoft">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/SpringTest">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/SqlFormatter">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/Tools">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/YandexMarket">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/branches">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/gKey">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/gNix">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jDBR">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jExport">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jImport">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jMerg">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jSpring">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/jWS">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/memberservice">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/romado.ru">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/tags">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://dzhinn.googlecode.com/svn/Grabli" />
+                  <option value="https://dzhinn.googlecode.com/svn/KeySoft" />
+                  <option value="https://dzhinn.googlecode.com/svn/SpringTest" />
+                  <option value="https://dzhinn.googlecode.com/svn/SqlFormatter" />
+                  <option value="https://dzhinn.googlecode.com/svn/Tools" />
+                  <option value="https://dzhinn.googlecode.com/svn/YandexMarket" />
+                  <option value="https://dzhinn.googlecode.com/svn/branches" />
+                  <option value="https://dzhinn.googlecode.com/svn/gKey" />
+                  <option value="https://dzhinn.googlecode.com/svn/gNix" />
+                  <option value="https://dzhinn.googlecode.com/svn/jDBR" />
+                  <option value="https://dzhinn.googlecode.com/svn/jExport" />
+                  <option value="https://dzhinn.googlecode.com/svn/jImport" />
+                  <option value="https://dzhinn.googlecode.com/svn/jMerg" />
+                  <option value="https://dzhinn.googlecode.com/svn/jSpring" />
+                  <option value="https://dzhinn.googlecode.com/svn/jWS" />
+                  <option value="https://dzhinn.googlecode.com/svn/memberservice" />
+                  <option value="https://dzhinn.googlecode.com/svn/romado.ru" />
+                  <option value="https://dzhinn.googlecode.com/svn/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://dzhinn.googlecode.com/svn/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />

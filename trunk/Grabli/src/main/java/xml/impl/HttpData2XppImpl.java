@@ -9,6 +9,8 @@ import factories.FactoryHTTP;
 import httpclient.HttpData;
 import java.io.InputStreamReader;
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 import xml.Html2Xml;
@@ -18,6 +20,8 @@ import xml.HttpData2Xpp;
  *
  * @author Apopov
  */
+@Repository
+@Service("httpData2Xpp")
 public class HttpData2XppImpl implements HttpData2Xpp {
 
     public XmlPullParser getXpp(String url) {

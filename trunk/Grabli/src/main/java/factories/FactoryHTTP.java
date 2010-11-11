@@ -14,7 +14,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class FactoryHTTP {
 
-    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/HttpSpringConfig.xml");
+    private ApplicationContext factory = new ClassPathXmlApplicationContext("HttpSpringConfig.xml");
     private static FactoryHTTP instance = null;
 
     public static synchronized FactoryHTTP getInstance() {
@@ -25,6 +25,6 @@ public class FactoryHTTP {
     }
 
     public HttpData getHttpData() {
-        return (HttpData) factory.getBean("HttpData");
+        return (HttpData) factory.getBean("httpData");
     }
 }

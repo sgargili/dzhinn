@@ -2,9 +2,9 @@ package factories;
 
 import dao.InputDataDao;
 
+import dao.ProcessDao;
 import dao.ShopDao;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -13,8 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class FactoryDao {
 
-	private ApplicationContext factory = new ClassPathXmlApplicationContext(
-			"config/DaoSpringConfig.xml");
+	private ClassPathXmlApplicationContext factory = new ClassPathXmlApplicationContext(
+            "DaoSpringConfig.xml");
 	private static FactoryDao instance = null;
 
 	public static synchronized FactoryDao getInstance() {
@@ -25,10 +25,14 @@ public class FactoryDao {
 	}
 
 	public InputDataDao getInputDataDao() {
-		return (InputDataDao) factory.getBean("InputDataDao");
+		return (InputDataDao) factory.getBean("inputDataDao");
 	}
 
 	public ShopDao getShopDao() {
-		return (ShopDao) factory.getBean("ShopDao");
+		return (ShopDao) factory.getBean("shopDao");
+	}
+
+    public ProcessDao getProcessDao() {
+		return (ProcessDao) factory.getBean("processDao");
 	}
 }

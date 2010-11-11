@@ -50,12 +50,16 @@ public class Class4Test {
 
 
         FcenterProcessing fcenter = new FcenterProcessing();
-        System.out.println(fcenter.getFcenterDescriptionInCsv().getAbsolutePath());
-//        List<FcenterProduct> list = fcenter.getProductsLinks();
+//        System.out.println(fcenter.getFcenterDescriptionInCsv().getAbsolutePath());
+        List<FcenterProduct> list = fcenter.getProductsLinks();
 //        for (FcenterProduct pro : list) {
 //            fcenter.getDescription(pro);
 //        }
 //          fcenter.downloadPics("90039", "C://pics4Fcenter/");
+        System.out.println("");
+        //System.out.println(FactoryDao.getInstance().getProcessDao().getProcessStatusById(2));
+//        FactoryDao.getInstance().getProcessDao().updateProcessStatusById("Off", 2);
+//        System.out.println(FactoryDao.getInstance().getProcessDao().getProcessStatusById(2));
 
     }
 }

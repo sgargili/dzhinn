@@ -5,6 +5,17 @@
  * Time: 17:26:30
  */
 
+//Дополнение для загрузки файлов...
+Ext.ux.Report = Ext.extend(Ext.Component, {
+    autoEl: {tag: 'iframe', cls: 'x-hidden', src: Ext.SSL_SECURE_URL},
+    load: function(config) {
+        this.getEl().dom.src = config.url + (config.params ? '?' + Ext.urlEncode(config.params) : '');
+    }
+});
+
+Ext.reg('ux.report', Ext.ux.Report);
+//Конец дополнения
+
 var proxyData = [
     ['true', 'Да'],
     ['false', 'Нет']
@@ -44,10 +55,10 @@ var proxyCombo = new Ext.form.ComboBox({
 });
 
 var statusData = [
-    ['fcDesc', 'Описания Fcenter'],
-    ['fcPics', 'Картинки Fcenter'],
-    ['nixDesc', 'Описания Nix'],
-    ['nixPics', 'Картинки Nix']
+    ['1', 'Описания Nix'],
+    ['2', 'Картинки Nix'],
+    ['3', 'Описания Fcenter'],
+    ['4', 'Картинки Fcenter']
 ];
 
 var statusStore = new Ext.data.ArrayStore({
@@ -92,6 +103,10 @@ var grabliForm = new Ext.FormPanel({
     defaultType: 'textfield',
 
     items: [
+        {
+            id: 'report',
+            xtype: 'ux.report'
+        },
         statusCombo,
         proxyCombo,
         {
@@ -118,32 +133,22 @@ var grabliForm = new Ext.FormPanel({
             text: 'Загрузить данные',
             handler: function () {
                 if (statusCombo.isValid()) {
-                    Ext.Ajax.request({
-                        url: 'rest/csv.html',
-                        params: {
-                            shopId: "fcenter"
-                        },
-                        method: 'GET',
-                        success: function (response, opts) {
-                            response.responseData();
-//                            Ext.Msg.show({
-//                                title: 'Выполненно!',
-//                                msg: 'Статус процесса: ' + response.responseText,
-//                                buttons: Ext.MessageBox.OK,
-//                                width: 400,
-//                                icon: Ext.MessageBox.INFO
-//                            });
-                        },
-                        failure: function (response, opts) {
-//                            Ext.Msg.show({
-//                                title: 'Выполненно!',
-//                                msg: 'Ошибка... Что-то упало... См. тут: ' + response.responseText,
-//                                buttons: Ext.MessageBox.OK,
-//                                width: 400,
-//                                icon: Ext.MessageBox.INFO
-//                            });
-                        }
-                    });
+                    if (statusCombo.getValue() == '3' ||
+                            statusCombo.getValue() == '4') {
+                        Ext.getCmp('report').load({
+                            url: 'rest/csv.html',
+                            params: {
+                                shopId: '2'
+                            }
+                        });
+                    } else {
+                        Ext.getCmp('report').load({
+                            url: 'rest/csv.html',
+                            params: {
+                                shopId: '1'
+                            }
+                        });
+                    }
                 }
             }
         },
@@ -154,7 +159,7 @@ var grabliForm = new Ext.FormPanel({
                     Ext.Ajax.request({
                         url: 'rest/status.html',
                         params: {
-                            process: statusCombo.getValue()
+                            processId: statusCombo.getValue()
                         },
                         method: 'POST',
                         success: function (response, opts) {

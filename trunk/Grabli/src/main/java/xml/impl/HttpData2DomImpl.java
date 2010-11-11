@@ -9,6 +9,8 @@ import factories.FactoryHTTP;
 import httpclient.HttpData;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import xml.Html2Xml;
 import xml.HttpData2Dom;
@@ -17,6 +19,8 @@ import xml.HttpData2Dom;
  *
  * @author APopov
  */
+@Repository
+@Service("httpData2Dom")
 public class HttpData2DomImpl implements HttpData2Dom {
 
     public Document getDom(String url) {

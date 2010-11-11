@@ -10,12 +10,11 @@ import xml.HttpData2Dom;
 import xml.HttpData2Xpp;
 
 /**
- *
  * @author Apopov
  */
 public class FactoryHTTPData2XmlParser {
 
-    private ApplicationContext factory = new ClassPathXmlApplicationContext("config/HttpData2XmlParsersSpringConfig.xml");
+    private ApplicationContext factory = new ClassPathXmlApplicationContext("Html2XmlSpringConfig.xml");
     private static FactoryHTTPData2XmlParser instance = null;
 
     public static synchronized FactoryHTTPData2XmlParser getInstance() {
@@ -26,10 +25,10 @@ public class FactoryHTTPData2XmlParser {
     }
 
     public HttpData2Xpp getHttpData2Xpp() {
-        return (HttpData2Xpp) factory.getBean("HttpData2Xpp");
+        return (HttpData2Xpp) factory.getBean("httpData2Xpp");
     }
 
     public HttpData2Dom getHttpData2Dom() {
-        return (HttpData2Dom) factory.getBean("HttpData2Dom");
+        return (HttpData2Dom) factory.getBean("httpData2Dom");
     }
 }

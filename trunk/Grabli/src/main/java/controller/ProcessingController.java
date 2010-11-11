@@ -1,5 +1,6 @@
 package controller;
 
+import factories.FactoryDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import java.util.Map;
 public class ProcessingController {
     private NixProcessing nix = new NixProcessing();
     private FcenterProcessing fcenter = new FcenterProcessing();
+    FactoryDao fd = FactoryDao.getInstance();
 
     @RequestMapping(value = "/process.html", method = RequestMethod.POST)
     @ResponseBody
@@ -39,24 +41,23 @@ public class ProcessingController {
 //        for (FcenterProduct fp : products) {
 //            fcenter.getDescription(fp);
 //        }
-        return process + " - " + useProxy + " - " + proxyIp + " - " + proxyPort;
+        return fd.getInputDataDao().getAllInputData().get(0).getFullName();
     }
 
-    @RequestMapping(value = "/status.html", method = RequestMethod.POST)
+    @RequestMapping(value = "/status.html", method = RequestMethod.GET)
     @ResponseBody
-    public String getStatus(@RequestParam("process") String process) {
-        return process;
+    public String getStatus(@RequestParam("processId") int processId) {
+        return fd.getProcessDao().getProcessStatusById(processId);
     }
 
 
     @RequestMapping("/csv.html")
     public ModelAndView getCsvByShop(HttpSession httpSession,
-                                     @RequestParam("shopId") String shopId) {
+                                     @RequestParam("shopId") int shopId) {
         FcenterProcessing fcenter = new FcenterProcessing();
-
         Map<String, Object> model = new HashMap<String, Object>();
 
-        CsvView csvView = new CsvView(fcenter.getFcenterDescriptionInCsv().getAbsolutePath(), shopId);
+        CsvView csvView = new CsvView(fcenter.getFcenterDescriptionInCsv(shopId).getAbsolutePath(), shopId);
 
         return new ModelAndView(csvView, model);
     }
