@@ -47,4 +47,6 @@ public interface HttpData {
     public File downloadContentAsFile(String url, String inputEncoding, String outputFileEncoding, File toFile, boolean useProxy);
 
     public void DownloadBinaryFile(String url, boolean useProxy, String fileName);
+
+    public void DownloadBinaryFile(String url, boolean useProxy, String ip, int port, String fileName);
 }

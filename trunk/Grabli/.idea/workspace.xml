@@ -2,35 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="fe57aaa0-cdc0-4980-9bc6-9937df2d9a49" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/CsvView.java" afterPath="$PROJECT_DIR$/src/main/java/controller/CsvView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/factories/FactoryHTTP.java" afterPath="$PROJECT_DIR$/src/main/java/factories/FactoryHTTP.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2DomImpl.java" afterPath="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2DomImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2XppImpl.java" afterPath="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2XppImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resource/HttpSpringConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/Class4Test.java" afterPath="$PROJECT_DIR$/src/main/java/test/Class4Test.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ProcessDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pojo/Shop.java" afterPath="$PROJECT_DIR$/src/main/java/pojo/Shop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/impl/ShopDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/ShopDaoImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/factories/FactoryHTTPData2XmlParser.java" afterPath="$PROJECT_DIR$/src/main/java/factories/FactoryHTTPData2XmlParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/src/main/web/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/js/login.js" afterPath="$PROJECT_DIR$/src/main/web/js/login.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/dao/ProcessDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pojo/InputData.java" afterPath="$PROJECT_DIR$/src/main/java/pojo/InputData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/pojo/Process.java" />
+      <change type="DELETED" beforePath="C:\java\Grabli\src\main\web\js\ux-all-debug.js" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml" afterPath="$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/factories/FactoryHTML2XML.java" afterPath="$PROJECT_DIR$/src/main/java/factories/FactoryHTML2XML.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/processing/NixProcessing.java" afterPath="$PROJECT_DIR$/src/main/java/processing/NixProcessing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/test/Class4Test.java" afterPath="$PROJECT_DIR$/src/main/java/test/Class4Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpclient/HttpData.java" afterPath="$PROJECT_DIR$/src/main/java/httpclient/HttpData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/controller/ProcessingController.java" afterPath="$PROJECT_DIR$/src/main/java/controller/ProcessingController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Grabli.iml" afterPath="$PROJECT_DIR$/Grabli.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/factories/FactoryDao.java" afterPath="$PROJECT_DIR$/src/main/java/factories/FactoryDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/processing/FcenterProcessing.java" afterPath="$PROJECT_DIR$/src/main/java/processing/FcenterProcessing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/xml/impl/Html2XmlImpl.java" afterPath="$PROJECT_DIR$/src/main/java/xml/impl/Html2XmlImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/dao/impl/InputDataDaoImpl.java" afterPath="$PROJECT_DIR$/src/main/java/dao/impl/InputDataDaoImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/js/main-script.js" afterPath="$PROJECT_DIR$/src/main/web/js/main-script.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/web/index.jsp" afterPath="$PROJECT_DIR$/src/main/web/index.jsp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java" afterPath="$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resource/Html2XmlSpringConfig.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/processing/Fcenter.java" />
+      <change type="DELETED" beforePath="C:\java\Grabli\src\main\web\js\login.js" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/processing/Nix.java" />
     </list>
     <ignored path="$USER_HOME_GRAILS$/" />
     <ignored path="$USER_HOME_GRIFFON$/" />
@@ -104,17 +89,7 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="Class4Test.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/test/Class4Test.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="53" selection-start="1076" selection-end="1076" vertical-scroll-proportion="0.103869654">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -124,22 +99,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/dao/impl/ProcessDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/dao/impl/InputDataDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pojo/Shop.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pojo/InputData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/config/HttpSpringConfig.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/xml/impl/Html2XmlImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/config/Html2XmlSpringConfig.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2XppImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/xml/impl/HttpData2DomImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/config/HttpData2XmlParsersSpringConfig.xml" />
-        <option value="$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/test/Class4Test.java" />
         <option value="$PROJECT_DIR$/src/main/java/factories/FactoryHTML2XML.java" />
         <option value="$PROJECT_DIR$/src/main/java/factories/FactoryHTTP.java" />
         <option value="$PROJECT_DIR$/src/main/java/factories/FactoryHTTPData2XmlParser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/httpclient/HttpData.java" />
+        <option value="$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/processing/Nix.java" />
+        <option value="$PROJECT_DIR$/src/main/java/test/Class4Test.java" />
+        <option value="$PROJECT_DIR$/src/main/java/processing/Fcenter.java" />
+        <option value="$PROJECT_DIR$/src/main/web/js/login.js" />
+        <option value="$PROJECT_DIR$/src/main/java/controller/ProcessingController.java" />
+        <option value="$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/processing/FcenterProcessing.java" />
+        <option value="$PROJECT_DIR$/src/main/java/processing/NixProcessing.java" />
+        <option value="$PROJECT_DIR$/src/main/web/js/main-script.js" />
       </list>
     </option>
   </component>
@@ -194,7 +169,7 @@
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
     <ConfirmationsSetting value="2" id="Add" />
-    <ConfirmationsSetting value="0" id="Remove" />
+    <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
@@ -218,70 +193,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Grabli" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Grabli" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -341,7 +252,7 @@
       <recent name="C:\java\Grabli\src\main\resource" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run4Test">
+  <component name="RunManager" selected="Tomcat Server.Tomcat">
     <configuration default="false" name="Default" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console" temporary="true">
       <option name="VM_PARAMETERS" value="" />
       <option name="USER_CFG_CLASS" />
@@ -675,7 +586,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28665787" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28665787" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -686,8 +597,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20431654" sideWeight="0.7040951" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.331572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20431654" sideWeight="0.659181" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.331572" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4002642" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2503597" sideWeight="0.4953765" order="2" side_tool="true" content_ui="tabs" />
@@ -732,119 +643,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pojo/InputData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="220" column="37" selection-start="6308" selection-end="6308" vertical-scroll-proportion="0.62739724">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pojo/Shop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="56" selection-start="2309" selection-end="2309" vertical-scroll-proportion="0.65068495">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="11" selection-start="629" selection-end="629" vertical-scroll-proportion="0.24390244">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/xml/impl/Html2XmlImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="11" selection-start="615" selection-end="615" vertical-scroll-proportion="0.23876405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/impl/InputDataDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="25" selection-start="489" selection-end="525" vertical-scroll-proportion="0.30136988">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resource/HttpSpringConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="581" vertical-scroll-proportion="-0.0">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/xml/impl/HttpData2XppImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="24" selection-start="539" selection-end="575" vertical-scroll-proportion="0.23776224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/xml/impl/HttpData2DomImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="22" selection-start="605" selection-end="605" vertical-scroll-proportion="0.23776224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resource/Html2XmlSpringConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="45" selection-start="561" selection-end="561" vertical-scroll-proportion="0.1915493">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/factories/FactoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="33" selection-start="221" selection-end="221" vertical-scroll-proportion="0.30273974">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1701" selection-end="1701" vertical-scroll-proportion="1.0066372">
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/csv/Ira.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="13" selection-start="279" selection-end="279" vertical-scroll-proportion="0.33262712">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/factories/FactoryHTTPData2XmlParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="48" selection-start="946" selection-end="946" vertical-scroll-proportion="0.90316206">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/factories/FactoryHTTP.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="44" selection-start="741" selection-end="741" vertical-scroll-proportion="0.73913044">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/factories/FactoryHTML2XML.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="44" selection-start="754" selection-end="754" vertical-scroll-proportion="0.73913044">
@@ -852,9 +650,126 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/httpclient/impl/HttpDataImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="340" column="115" selection-start="12273" selection-end="12281" vertical-scroll-proportion="0.22410148">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/httpclient/HttpData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="0" selection-start="1487" selection-end="1487" vertical-scroll-proportion="0.51229507">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/xml/impl/HttpData2XppImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="118" column="113" selection-start="5027" selection-end="5027" vertical-scroll-proportion="0.6089613">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/xml/HttpData2Xpp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="678" selection-end="678" vertical-scroll-proportion="0.7312253">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/processing/Fcenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="26" selection-start="1456" selection-end="1456" vertical-scroll-proportion="1.1178082">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/test/Class4Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="53" selection-start="1076" selection-end="1076" vertical-scroll-proportion="0.103869654">
+        <state line="56" column="11" selection-start="1723" selection-end="1879" vertical-scroll-proportion="0.6433566">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/processing/Nix.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="14" selection-start="1993" selection-end="2198" vertical-scroll-proportion="0.7622378">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/WEB-INF/web.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleGeneralEditorProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorReferencesProvider">
+        <state />
+      </provider>
+      <provider editor-type-id="com.intellij.javaee.module.view.web.viewlets.WebModuleAssemblyDescriptorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/WEB-INF/Grabli-servlet.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/processing/FcenterProcessing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="328" column="0" selection-start="12008" selection-end="12008" vertical-scroll-proportion="12.277778">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/processing/NixProcessing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="322" column="25" selection-start="13542" selection-end="13549" vertical-scroll-proportion="0.8055556">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resource/DaoSpringConfig.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="68" selection-start="1772" selection-end="1772" vertical-scroll-proportion="0.86504424">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/controller/ProcessingController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="24" selection-start="371" selection-end="371" vertical-scroll-proportion="0.2881356">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/js/main-script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="51" selection-start="422" selection-end="422" vertical-scroll-proportion="0.43220338">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/web/index.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

@@ -51,7 +51,7 @@ public class Class4Test {
 
         FcenterProcessing fcenter = new FcenterProcessing();
 //        System.out.println(fcenter.getFcenterDescriptionInCsv().getAbsolutePath());
-        List<FcenterProduct> list = fcenter.getProductsLinks();
+        //List<FcenterProduct> list = fcenter.getProductsLinks();
 //        for (FcenterProduct pro : list) {
 //            fcenter.getDescription(pro);
 //        }
