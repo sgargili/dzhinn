@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-import pojo.FcenterProduct;
-import pojo.Shop;
+
+import processing.Fcenter;
 import processing.FcenterProcessing;
+import processing.Nix;
 import processing.NixProcessing;
 
 import javax.servlet.http.HttpSession;
@@ -33,18 +34,23 @@ public class ProcessingController {
 
     @RequestMapping(value = "/process.html", method = RequestMethod.POST)
     @ResponseBody
-    public String setProcess(@RequestParam("process") String process,
+    public String setProcess(@RequestParam("processId") int processId,
+                             @RequestParam("picPath") String picPath,
                              @RequestParam("useProxy") boolean useProxy,
-                             @RequestParam("proxyIp") String proxyIp,
-                             @RequestParam("proxyPort") String proxyPort) {
-//        List<FcenterProduct> products = fcenter.getProductsLinks();
-//        for (FcenterProduct fp : products) {
-//            fcenter.getDescription(fp);
-//        }
-        return fd.getInputDataDao().getAllInputData().get(0).getFullName();
+                             @RequestParam("ip") String ip,
+                             @RequestParam("port") int port) {
+        if (processId == 1 || processId == 2) {
+            Nix nix = new Nix(processId, picPath, useProxy, ip, port);
+            nix.run();
+            return "Done!";
+        } else {
+            Fcenter fc = new Fcenter(processId, picPath, useProxy, ip, port);
+            fc.run();
+            return "Done!";
+        }
     }
 
-    @RequestMapping(value = "/status.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/status.html", method = RequestMethod.POST)
     @ResponseBody
     public String getStatus(@RequestParam("processId") int processId) {
         return fd.getProcessDao().getProcessStatusById(processId);

@@ -5,10 +5,12 @@
 package httpclient.impl;
 
 import httpclient.HttpData;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.params.HttpMethodParams;
@@ -17,7 +19,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 /**
- *
  * @author Apopov
  */
 @Repository
@@ -375,6 +376,29 @@ public class HttpDataImpl implements HttpData {
         setUserAgent();
         if (useProxy) {
             client.getHostConfiguration().setProxy("127.0.0.1", 8118);
+        }
+        GetMethod getMethod = new GetMethod(url);
+        try {
+            FileOutputStream fos = null;
+            File tempFile = new File(fileName);
+            int getResult = client.executeMethod(getMethod);
+            byte[] imageData = getMethod.getResponseBody();
+            fos = new FileOutputStream(tempFile);
+            fos.write(imageData);
+            fos.close();
+
+        } catch (Exception e) {
+            System.err.println(e);
+        } finally {
+            getMethod.releaseConnection();
+        }
+    }
+
+    @Override
+    public void DownloadBinaryFile(String url, boolean useProxy, String ip, int port, String fileName) {
+        setUserAgent();
+        if (useProxy) {
+            client.getHostConfiguration().setProxy(ip, port);
         }
         GetMethod getMethod = new GetMethod(url);
         try {

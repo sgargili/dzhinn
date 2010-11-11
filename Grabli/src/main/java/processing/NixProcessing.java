@@ -26,10 +26,10 @@ public class NixProcessing {
      * @param url урля
      * @return Map, где ключ это урля, а значение это название ПТ...
      */
-    public Map<String, String> getNixDepartments(String url) {
+    public Map<String, String> getNixDepartments(String url, boolean useProxy, String ip, int port) {
         Map<String, String> out = new HashMap();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
         Pattern pat = Pattern.compile(".*_all.html");
         Matcher match;
@@ -67,10 +67,10 @@ public class NixProcessing {
         return out;
     }
 
-    public String getLink4AllProductsByDepartment(String url) {
+    public String getLink4AllProductsByDepartment(String url, boolean useProxy, String ip, int port) {
         String out = "";
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
 
         boolean scilko = false;
@@ -109,10 +109,10 @@ public class NixProcessing {
      * @param url урля
      * @return Map, где ключ это артикль, а значение это название урля на описание...
      */
-    public Map<Integer, String> getLink4AllProductLinksByUrl(String url) {
+    public Map<Integer, String> getLink4AllProductLinksByUrl(String url, boolean useProxy, String ip, int port) {
         Map<Integer, String> out = new HashMap();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
         Pattern pat = Pattern.compile(".*_(\\d+).html");
         Matcher match;
@@ -305,7 +305,6 @@ public class NixProcessing {
                     nix.setPriceDealer(price3);
 //                    FactoryDao.getInstance().getInputDataDao().addInputData(nix);
                     data.add(nix);
-                    //System.out.println(tempArticle + " - " + productType + " - " + tempFullName + " - " + tempGroup + " - " + tempAttribute + " - " + tempValue);
                     tempValue = "";
                 }
                 if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("h1") && nameBool) {
@@ -352,10 +351,14 @@ public class NixProcessing {
 
     }
 
-    public void downloadPics(String article, String path) {
+    public void downloadPics(String article, String path, boolean useProxy, String ip, int port) {
+
         String url = "http://www.nix.ru/include/show_detail_picture.html?good_id=" + article;
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
+
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
+
         List<String> urls = new ArrayList();
+
         try {
             int eventType = xpp.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -373,7 +376,7 @@ public class NixProcessing {
         File dir = new File(path + article);
         dir.mkdirs();
         for (String str : urls) {
-            FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile("http://www.nix.ru" + str, true, path + article + "/" + article + "_" + i++ + ".jpg");
+            FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile("http://www.nix.ru" + str, useProxy, ip, port, path + article + "/" + article + "_" + i++ + ".jpg");
         }
 
 

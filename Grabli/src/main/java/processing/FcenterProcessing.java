@@ -25,10 +25,10 @@ public class FcenterProcessing {
     private FactoryDao fd = FactoryDao.getInstance();
 
 
-    public List<FcenterProduct> getProductsLinks() {
+    public List<FcenterProduct> getProductsLinks(boolean useProxy, String ip, int port) {
         List<FcenterProduct> out = new ArrayList();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp("http://www.fcenter.ru/products/price/price.html", "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp("http://www.fcenter.ru/products/price/price.html", "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
         FcenterProduct product;
 
@@ -180,9 +180,9 @@ public class FcenterProcessing {
         return out;
     }
 
-    public void getDescription(FcenterProduct fp) {
+    public void getDescription(FcenterProduct fp, boolean useProxy, String ip, int port) {
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(fp.getUrl(), "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(fp.getUrl(), "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
         Shop shop = new Shop();
         shop.setShopId(2);
@@ -299,11 +299,11 @@ public class FcenterProcessing {
         }
     }
 
-    public void downloadPics(String article, String path) {
+    public void downloadPics(String article, String path, boolean useProxy, String ip, int port) {
 
         String url = "http://www.fcenter.ru/foto.shtml?" + article;
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", true);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
 
         Set<String> urls = new HashSet();
 
@@ -326,8 +326,7 @@ public class FcenterProcessing {
         File dir = new File(path + article);
         dir.mkdirs();
         for (String str : urls) {
-            System.out.println(str);
-            FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile(str, true, path + article + "/" + article + "_" + i++ + ".jpg");
+            FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile(str, useProxy, ip, port, path + article + "/" + article + "_" + i++ + ".jpg");
         }
 
 
@@ -369,7 +368,7 @@ public class FcenterProcessing {
                 e.printStackTrace();
             }
         }
-        
+
         csv.close();
 
         return tempFile;

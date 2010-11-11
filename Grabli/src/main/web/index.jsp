@@ -14,7 +14,7 @@
     <script type="text/javascript" src="js/ext-base.js"></script>
     <script type="text/javascript" src="js/ext-all.js"></script>
     <script type="text/javascript" src="js/ux-all.js"></script>
-    <script type='text/javascript' src="js/login.js"></script>
+    <script type='text/javascript' src="js/main-script.js"></script>
 </head>
 <body>
 </body>
