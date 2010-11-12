@@ -118,7 +118,7 @@ public class HttpData2XppImpl implements HttpData2Xpp {
             xpp = factory.newPullParser();
             xpp.setInput(new InputStreamReader(FileUtils.openInputStream(xml.convertHtml2Xml(http.downloadContentAsFile(url, inputEncoding, outputEncoding, useProxy, ip))), outputEncoding));
         } catch (Exception ex) {
-        }
+           ex.printStackTrace();}
         return xpp;
     }
 }
