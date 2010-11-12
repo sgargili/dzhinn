@@ -12,6 +12,7 @@ import factories.FactoryDao;
 import pojo.FcenterProduct;
 import processing.FcenterProcessing;
 import processing.NixProcessing;
+import processing.OrionProcessing;
 
 /**
  * @author PAV
@@ -49,17 +50,19 @@ public class Class4Test {
 //        }
 
 
-        FcenterProcessing fcenter = new FcenterProcessing();
+//        FcenterProcessing fcenter = new FcenterProcessing();
 //        System.out.println(fcenter.getFcenterDescriptionInCsv().getAbsolutePath());
-        //List<FcenterProduct> list = fcenter.getProductsLinks();
+//        List<FcenterProduct> list = fcenter.getProductsLinks(false, "127.0.0.1", 8118);
 //        for (FcenterProduct pro : list) {
 //            fcenter.getDescription(pro);
 //        }
 //          fcenter.downloadPics("90039", "C://pics4Fcenter/");
-        System.out.println("");
+//        System.out.println("");
         //System.out.println(FactoryDao.getInstance().getProcessDao().getProcessStatusById(2));
 //        FactoryDao.getInstance().getProcessDao().updateProcessStatusById("Off", 2);
 //        System.out.println(FactoryDao.getInstance().getProcessDao().getProcessStatusById(2));
-
+        OrionProcessing orion = new OrionProcessing(true, "127.0.0.1", 8118);
+        orion.startGrabbing();
+//        System.out.println(orion.convertUrl("http://optvideo.com/new_design/new_kat/katalog.php?kategory=125643&grupp=АНТЕННЫ GSM&tab=1&selind_sort=2"));
     }
 }
