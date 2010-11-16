@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 08.04.2010 13:05:58 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="value4it" name="pojo.ValueLanguage" table="value_language">
+    <id name="id" type="java.lang.Integer">
+      <column name="id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="name" type="string">
+      <column length="10" name="name"/>
+    </property>
+    <property name="description" type="string">
+      <column length="256" name="description"/>
+    </property>
+  </class>
+</hibernate-mapping>
