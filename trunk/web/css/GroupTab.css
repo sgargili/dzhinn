@@ -1,0 +1,156 @@
+.x-grouptabs-panel {
+	BORDER-BOTTOM: #4e78b1 15px solid; BORDER-LEFT: #4e78b1 15px solid; BACKGROUND-COLOR: #4e78b1; BORDER-TOP: #4e78b1 15px solid; BORDER-RIGHT: #4e78b1 15px solid
+}
+.x-tab-panel-left .x-grouptabs-panel-header {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.x-tab-panel-right .x-grouptabs-panel-header {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; FLOAT: left; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.x-tab-panel-right .x-grouptabs-panel-header {
+	FLOAT: right
+}
+.x-tab-panel-left .x-grouptabs-bwrap {
+	POSITION: relative; FLOAT: right
+}
+.x-tab-panel-right .x-grouptabs-bwrap {
+	POSITION: relative; FLOAT: left
+}
+.x-tab-panel-left UL.x-grouptabs-strip {
+	WIDTH: auto; DISPLAY: block
+}
+.x-tab-panel-right UL.x-grouptabs-strip {
+	WIDTH: auto; DISPLAY: block
+}
+.x-tab-panel-left UL.x-grouptabs-strip LI {
+	POSITION: relative; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; FLOAT: none; CLEAR: both; PADDING-TOP: 6px
+}
+.x-tab-panel-right UL.x-grouptabs-strip LI {
+	POSITION: relative; PADDING-BOTTOM: 2px; MARGIN: 0px; PADDING-LEFT: 6px; PADDING-RIGHT: 0px; FLOAT: none; CLEAR: both; PADDING-TOP: 6px
+}
+.x-tab-panel-left .x-tab-panel-header UL.x-grouptabs-strip A.x-grouptabs-text {
+	LINE-HEIGHT: 18px; FONT-SIZE: 13px; CURSOR: pointer
+}
+.x-tab-panel-right .x-tab-panel-header UL.x-grouptabs-strip A.x-grouptabs-text {
+	LINE-HEIGHT: 18px; FONT-SIZE: 13px; CURSOR: pointer
+}
+.x-tab-panel-left .x-tab-panel-header UL.x-grouptabs-strip A.x-grouptabs-text {
+	PADDING-LEFT: 18px
+}
+.x-tab-panel-right .x-tab-panel-header UL.x-grouptabs-strip A.x-grouptabs-text {
+	PADDING-RIGHT: 18px
+}
+.x-tab-panel-left .x-tab-panel-header UL.x-grouptabs-sub A.x-grouptabs-text {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+.x-tab-panel-right .x-tab-panel-header UL.x-grouptabs-sub A.x-grouptabs-text {
+	PADDING-BOTTOM: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; FONT-SIZE: 12px; PADDING-TOP: 0px
+}
+.x-tab-panel-left .x-tab-panel-header UL.x-grouptabs-sub A.x-grouptabs-text {
+	MARGIN-LEFT: 4px
+}
+.x-tab-panel-right .x-tab-panel-header UL.x-grouptabs-sub A.x-grouptabs-text {
+	MARGIN-RIGHT: 4px
+}
+.x-grouptabs-panel .x-grouptabs-strip A.x-grouptabs-text {
+	DISPLAY: block; FONT-FAMILY: tahoma, arial, sans-serif; WHITE-SPACE: nowrap; COLOR: #dfe8f6; OVERFLOW: hidden; FONT-WEIGHT: bold; TEXT-DECORATION: none
+}
+.x-tab-panel-right .x-grouptabs-strip A.x-grouptabs-text {
+	TEXT-ALIGN: right
+}
+.x-grouptabs-panel .x-grouptabs-strip-active A.x-grouptabs-text {
+	COLOR: #395b8e
+}
+.x-grouptabs-panel UL.x-grouptabs-sub A.x-grouptabs-text {
+	FONT-WEIGHT: normal
+}
+.x-tab-joint {
+	Z-INDEX: 8999; POSITION: absolute; WIDTH: 3px; BACKGROUND: #fff; TOP: 1px
+}
+.x-grouptabs-panel .x-grouptabs-panel-body {
+	BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: #999 1px solid; BORDER-TOP: #999 1px solid; BORDER-RIGHT: #999 1px solid
+}
+.x-grouptabs-panel UL.x-grouptabs-strip LI {
+	BORDER-BOTTOM: transparent 1px solid; BORDER-LEFT: transparent 1px solid; BORDER-TOP: transparent 1px solid
+}
+.x-grouptabs-panel UL.x-grouptabs-strip LI.x-grouptabs-strip-active {
+	BORDER-BOTTOM: #999 1px solid; BORDER-LEFT: 0px; BACKGROUND: #fff; BORDER-TOP: #999 1px solid; BORDER-RIGHT: 0px
+}
+.x-tab-panel-left UL.x-grouptabs-strip LI.x-grouptabs-strip-active {
+	BORDER-LEFT: #999 1px solid
+}
+.x-tab-panel-right UL.x-grouptabs-strip LI.x-grouptabs-strip-active {
+	BORDER-RIGHT: #999 1px solid
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active UL.x-grouptabs-sub LI.x-grouptabs-strip-active {
+	BACKGROUND-COLOR: #edeef0
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active UL.x-grouptabs-sub {
+	BACKGROUND-COLOR: transparent
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active UL.x-grouptabs-sub LI {
+	BORDER-BOTTOM-COLOR: transparent; BORDER-TOP-COLOR: transparent; BORDER-RIGHT-COLOR: transparent; BORDER-LEFT-COLOR: transparent
+}
+.x-grouptabs-panel .x-grouptabs-corner {
+	BACKGROUND-IMAGE: url(../images/x-grouptabs-corners.gif); POSITION: absolute; LINE-HEIGHT: 6px; WIDTH: 11px; ZOOM: 1; DISPLAY: none; HEIGHT: 11px; FONT-SIZE: 1px; OVERFLOW: hidden
+}
+.x-grouptabs-panel .x-grouptabs-strip-active .x-grouptabs-corner {
+	DISPLAY: block
+}
+.x-grouptabs-panel .x-grouptabs-strip-active.x-grouptabs-main UL.x-grouptabs-sub .x-grouptabs-corner {
+	DISPLAY: none
+}
+.x-grouptabs-panel .x-grouptabs-corner-top-left {
+	BACKGROUND-POSITION: left top; TOP: 0px; LEFT: 0px
+}
+.x-grouptabs-panel .x-grouptabs-corner-bottom-left {
+	BOTTOM: 0px; BACKGROUND-POSITION: left bottom; LEFT: 0px
+}
+.x-grouptabs-panel .x-grouptabs-corner-top-right {
+	BACKGROUND-POSITION: right top; TOP: 0px; RIGHT: 0px
+}
+.x-grouptabs-panel .x-grouptabs-corner-bottom-right {
+	BOTTOM: 0px; BACKGROUND-POSITION: right bottom; RIGHT: 0px
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active .x-grouptabs-corner-bottom-left {
+	BOTTOM: -4px; LEFT: -4px
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active .x-grouptabs-corner-bottom-right {
+	BOTTOM: -4px; RIGHT: -4px
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active .x-grouptabs-corner-top-left {
+	TOP: -4px; LEFT: -4px
+}
+.x-grouptabs-panel LI.x-grouptabs-strip-active .x-grouptabs-corner-top-right {
+	TOP: -4px; RIGHT: -4px
+}
+.x-grouptabs-panel UL.x-grouptabs-sub LI.x-tab-with-icon A.x-grouptabs-text {
+	PADDING-LEFT: 20px; BACKGROUND-REPEAT: no-repeat
+}
+.x-grouptabs-panel .x-grouptabs-expand {
+	POSITION: absolute; WIDTH: 16px; BACKGROUND: url(../images/elbow-plus-nl.gif) no-repeat; HEIGHT: 16px; TOP: 6px; LEFT: 7px
+}
+.ext-ie6 .x-grouptabs-panel .x-grouptabs-expand {
+	LEFT: 0px
+}
+.ext-border-box .x-grouptabs-panel .x-grouptabs-expand {
+	LEFT: 0px
+}
+.x-grouptabs-expanded .x-grouptabs-expand {
+	BACKGROUND-IMAGE: url(../images/elbow-minus-nl.gif)
+}
+.x-grouptabs-sub {
+	MARGIN-TOP: 4px; DISPLAY: none
+}
+.x-grouptabs-expanded .x-grouptabs-sub {
+	DISPLAY: block
+}
+.x-grouptabs-panel UL.x-grouptabs-sub LI {
+	PADDING-BOTTOM: 0px; MARGIN: 0px 0px 2px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; HEIGHT: 18px; PADDING-TOP: 0px
+}
+.x-grouptabs-panel UL.x-grouptabs-sub .x-grouptabs-main-item {
+	DISPLAY: none
+}
+.x-tab-with-icon {
+	BORDER-BOTTOM-STYLE: none !important; BORDER-RIGHT-STYLE: none !important; BORDER-TOP-STYLE: none !important; BORDER-LEFT-STYLE: none !important
+}

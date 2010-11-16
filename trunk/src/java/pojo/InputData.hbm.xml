@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 14.07.2010 22:31:47 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="pojo.InputData" table="input_data" catalog="grabli">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="sessionId" type="long">
+            <column name="session_id" not-null="true" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="full_name" length="65535" />
+        </property>
+        <property name="manufacturer" type="string">
+            <column name="manufacturer" />
+        </property>
+        <property name="article" type="string">
+            <column name="article" />
+        </property>
+        <property name="productType" type="string">
+            <column name="product_type" />
+        </property>
+        <property name="picUrl" type="string">
+            <column name="pic_url" length="65535" />
+        </property>
+        <property name="groupe" type="string">
+            <column name="groupe" />
+        </property>
+        <property name="attribute" type="string">
+            <column name="attribute" />
+        </property>
+        <property name="attributeValue" type="string">
+            <column name="attribute_value" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

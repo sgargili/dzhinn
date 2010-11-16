@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 13.04.2010 15:07:42 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class catalog="grabli" name="pojo.ParentRelateElement" table="parent_relate_element">
+    <id name="parentRelateElementId" type="java.lang.Integer">
+      <column name="parent_relate_element_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="parentRelateElementName" type="string">
+      <column length="50" name="parent_relate_element_name"/>
+    </property>
+    <property name="parentRelateElementType" type="java.lang.Byte">
+      <column name="parent_relate_element_type"/>
+    </property>
+  </class>
+</hibernate-mapping>
