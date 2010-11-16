@@ -56,7 +56,7 @@ public class OrionProcessing {
 
         Map<String, String> links = new HashMap<String, String>();
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp("http://optvideo.com/new_design/new_kat/katalog.php", "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp("http://optvideo.com/new_design/new_kat/katalog.php", "Windows-1251", "Windows-1251", useProxy, ip + ":" + port);
 
         try {
             int eventType = xpp.getEventType();
@@ -91,7 +91,7 @@ public class OrionProcessing {
         boolean urlBool = false;
 
         for (String pt : pts) {
-            xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(convertUrl(ptLinks.get(pt)), "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
+            xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(convertUrl(ptLinks.get(pt)), "Windows-1251", "Windows-1251", useProxy, ip + ":" + port);
             process = true;
             try {
                 eventType = xpp.getEventType();
@@ -138,7 +138,7 @@ public class OrionProcessing {
 
         String url = "";
 
-        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(inputUrl, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
+        XmlPullParser xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(inputUrl, "Windows-1251", "Windows-1251", useProxy, ip + ":" + port);
 
         try {
             int eventType = xpp.getEventType();
