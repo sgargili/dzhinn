@@ -1,9 +1,15 @@
 package processing;
 
+import factories.FactoryDao;
+import factories.FactoryHTTP;
 import factories.FactoryHTTPData2XmlParser;
 import org.xmlpull.v1.XmlPullParser;
-import pojo.FcenterProduct;
+import pojo.InputData;
+import pojo.OrionProduct;
+import pojo.ProductSpec;
+import pojo.Shop;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.*;
@@ -21,6 +27,7 @@ public class OrionProcessing {
     private boolean useProxy;
     private String ip;
     private int port;
+    private FactoryDao fd = FactoryDao.getInstance();
 
     public OrionProcessing(boolean useProxy, String ip, int port) {
         this.useProxy = useProxy;
@@ -30,7 +37,7 @@ public class OrionProcessing {
 
     public String convertUrl(String inputUrl) {
         String url = "";
-        Pattern pat = Pattern.compile("(.*grupp=)(.+)(&tab.*)");
+        Pattern pat = Pattern.compile("(.*grupp=)(.+?)(&.*)");
         Matcher mat = pat.matcher(inputUrl);
         if (mat.find()) {
             try {
@@ -67,7 +74,6 @@ public class OrionProcessing {
             }
         } catch (Exception ex) {
         }
-        System.gc();
         return links;
     }
 
@@ -123,7 +129,6 @@ public class OrionProcessing {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            System.out.println("");
         }
         return links;
     }
@@ -157,8 +162,282 @@ public class OrionProcessing {
         return links;
     }
 
+    private void getDescription(String url, String productType) {
+
+        XmlPullParser xpp = null;
+        int eventType;
+
+        OrionProduct orion = new OrionProduct();
+        Map<String, String> aData = new HashMap<String, String>();
+        ProductSpec spec;
+
+        InputData input;
+
+        Shop shop = new Shop();
+        shop.setShopId(3);
+
+        String price = "";
+
+        String name = "";
+        boolean nameBool = false;
+
+        String fullName = "";
+        boolean fullNameBool = false;
+        boolean processFullName = true;
+
+        String article = "";
+        boolean articleBool = false;
+
+        String aDataKey = "";
+        boolean aDataKeyBool = false;
+        String aDataValue = "";
+        boolean aDataValueBool = false;
+
+        String group = "";
+        boolean groupBool = false;
+        String attribute = "";
+        boolean attributeBool = false;
+        String value = "";
+        boolean valueBool = false;
+
+
+        xpp = FactoryHTTPData2XmlParser.getInstance().getHttpData2Xpp().getXpp(url, "Windows-1251", "UTF-8", useProxy, ip + ":" + port);
+        try {
+            eventType = xpp.getEventType();
+            while (eventType != XmlPullParser.END_DOCUMENT) {
+                //name
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("p")
+                        && xpp.getAttributeCount() == 1
+                        && xpp.getAttributeName(0).equals("style")) {
+                    nameBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && nameBool) {
+                    name += xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("p") && nameBool) {
+                    nameBool = false;
+                    orion.setName(name);
+                }
+                //name - end
+
+                //fullName
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("p")
+                        && xpp.getAttributeCount() == 2
+                        && xpp.getAttributeName(0).equals("class")
+                        && xpp.getAttributeValue(0).equals("txt")
+                        && xpp.getAttributeName(1).equals("style")
+                        && processFullName) {
+                    fullNameBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && fullNameBool) {
+                    fullName += xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("p") && fullNameBool) {
+                    fullNameBool = false;
+                    processFullName = false;
+                    orion.setFullName(fullName.replaceAll("Краткое описание:", "").trim());
+                }
+                //fullName - end
+
+                //article
+                if (eventType == XmlPullParser.TEXT
+                        && xpp.getText().trim().equals("Код товара")) {
+                    articleBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && articleBool) {
+                    article = xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("span") && articleBool) {
+                    articleBool = false;
+                    orion.setArticle(article);
+                }
+                //article - end
+
+                //group
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("td")
+                        && xpp.getAttributeCount() == 4
+                        && xpp.getAttributeName(0).equals("align")
+                        && xpp.getAttributeValue(0).equals("left")
+                        && xpp.getAttributeName(1).equals("colspan")
+                        && xpp.getAttributeName(2).equals("rowspan")) {
+                    groupBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && groupBool) {
+                    group = xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && groupBool) {
+                    groupBool = false;
+                }
+                //group - end
+
+                //attribute
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("td")
+                        && xpp.getAttributeCount() == 4
+                        && xpp.getAttributeName(0).equals("colspan")
+                        && xpp.getAttributeValue(0).equals("1")
+                        && xpp.getAttributeName(1).equals("rowspan")
+                        && xpp.getAttributeName(2).equals("width")) {
+                    attributeBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && attributeBool) {
+                    attribute = xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && attributeBool) {
+                    attributeBool = false;
+                }
+                //attribute - end
+
+                //value
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("td")
+                        && xpp.getAttributeCount() == 3
+                        && xpp.getAttributeName(0).equals("colspan")
+                        && xpp.getAttributeValue(0).equals("1")
+                        && xpp.getAttributeName(1).equals("rowspan")
+                        && xpp.getAttributeName(2).equals("style")) {
+                    valueBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && valueBool) {
+                    value = xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && valueBool) {
+                    valueBool = false;
+                    if (!attribute.equals("")) {
+                        spec = new ProductSpec();
+                        spec.setGroup(group);
+                        spec.setAttribute(attribute);
+                        spec.setValue(value);
+                        orion.addSpec(spec);
+                    }
+                }
+                //value - end
+
+                //aData
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("td")
+                        && xpp.getAttributeCount() == 3
+                        && xpp.getAttributeName(0).equals("align")
+                        && xpp.getAttributeValue(0).equals("left")
+                        && xpp.getAttributeName(1).equals("colspan")
+                        && xpp.getAttributeName(2).equals("rowspan")) {
+                    aDataKeyBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && aDataKeyBool) {
+                    aDataKey = xpp.getText().replaceAll(":", "").trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && aDataKeyBool) {
+                    aDataKeyBool = false;
+                }
+
+                if (eventType == XmlPullParser.START_TAG
+                        && xpp.getName().equals("td")
+                        && (xpp.getAttributeCount() == 3
+                        || xpp.getAttributeCount() == 4)
+                        && xpp.getAttributeName(0).equals("align")
+                        && xpp.getAttributeValue(0).equals("right")
+                        && xpp.getAttributeName(1).equals("colspan")
+                        && xpp.getAttributeName(2).equals("rowspan")) {
+                    aDataValueBool = true;
+                }
+
+                if (eventType == XmlPullParser.TEXT && aDataValueBool) {
+                    aDataValue += xpp.getText().trim();
+                }
+
+                if (eventType == XmlPullParser.END_TAG && xpp.getName().equals("td") && aDataValueBool) {
+                    if (!aDataKey.equals("")) {
+                        aData.put(aDataKey, aDataValue);
+                    }
+                    if (aDataKey.equals("Цена")) {
+                        price = aDataValue;
+                    }
+                    aDataKey = "";
+                    aDataValue = "";
+                    aDataValueBool = false;
+                }
+                //aData - end
+                eventType = xpp.next();
+
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        orion.setaData(aData);
+
+        Set<String> aDataKeys = aData.keySet();
+
+        for (String key : aDataKeys) {
+            input = new InputData();
+            input.setArticle(orion.getArticle());
+            input.setFullName(orion.getFullName());
+            input.setProductType(productType);
+            input.setGroupe("Additional Info");
+            input.setAttribute(key);
+            input.setAttributeValue(aData.get(key));
+            input.setShop(shop);
+            input.setPriceRetail(price);
+            fd.getInputDataDao().addInputData(input);
+        }
+
+        for (ProductSpec specif : orion.getSpecs()) {
+            input = new InputData();
+            input.setArticle(orion.getArticle());
+            input.setFullName(orion.getFullName());
+            input.setProductType(productType);
+            input.setGroupe(specif.getGroup());
+            input.setAttribute(specif.getAttribute());
+            input.setAttributeValue(specif.getValue());
+            input.setShop(shop);
+            input.setPriceRetail(price);
+            fd.getInputDataDao().addInputData(input);
+        }
+    }
+
+    public void downloadPics(String article, String path) {
+
+        String url = "http://optvideo.com/images/" + article + ".jpg";
+        File dir = new File(path + article);
+        dir.mkdirs();
+        FactoryHTTP.getInstance().getHttpData().DownloadBinaryFile(url, useProxy, ip, port, path + article + "/" + article + ".jpg");
+
+    }
+
     public boolean startGrabbing() {
         Map<String, String> ptLinks = getPtFullLinks(getPtLinks());
+
+        Map<String, List<String>> productsLink = new HashMap<String, List<String>>();
+
+        Set<String> pts = ptLinks.keySet();
+        for (String pt : pts) {
+            productsLink.put(pt, getProductLinksBYUrl(ptLinks.get(pt)));
+        }
+
+        pts = productsLink.keySet();
+
+        for (String pt : pts) {
+            for (String url : productsLink.get(pt)) {
+                getDescription(url, pt);
+            }
+        }
+
         return true;
     }
 }

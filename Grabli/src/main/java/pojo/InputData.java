@@ -219,7 +219,7 @@ public class InputData {
     private Shop shop;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shop_id", referencedColumnName = "shop_id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "shop_id", referencedColumnName = "shop_id", nullable = false, insertable = true, updatable = true)
     public Shop getShop() {
         return shop;
     }

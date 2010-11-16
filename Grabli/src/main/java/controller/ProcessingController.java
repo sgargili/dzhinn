@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import processing.Fcenter;
-import processing.FcenterProcessing;
-import processing.Nix;
-import processing.NixProcessing;
+import processing.*;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -43,9 +40,13 @@ public class ProcessingController {
             Nix nix = new Nix(processId, picPath, useProxy, ip, port);
             nix.run();
             return "Done!";
-        } else {
+        } else if (processId == 3 || processId == 4) {
             Fcenter fc = new Fcenter(processId, picPath, useProxy, ip, port);
             fc.run();
+            return "Done!";
+        } else {
+            Orion orion = new Orion(processId, picPath, useProxy, ip, port);
+            orion.run();
             return "Done!";
         }
     }
