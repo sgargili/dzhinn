@@ -58,7 +58,9 @@ var statusData = [
     ['1', 'Описания Nix'],
     ['2', 'Картинки Nix'],
     ['3', 'Описания Fcenter'],
-    ['4', 'Картинки Fcenter']
+    ['4', 'Картинки Fcenter'],
+    ['5', 'Описания Orion'],
+    ['6', 'Картинки Orion']
 ];
 
 var statusStore = new Ext.data.ArrayStore({
@@ -83,7 +85,9 @@ var statusCombo = new Ext.form.ComboBox({
     listeners: {
         'select': function() {
             proxyCombo.setDisabled(false);
-            if (statusCombo.getValue() == '2' || statusCombo.getValue() == '4') {
+            if (statusCombo.getValue() == '2'
+                    || statusCombo.getValue() == '4'
+                    || statusCombo.getValue() == '6') {
                 Ext.getCmp('picPath').setDisabled(false);
             } else {
                 Ext.getCmp('picPath').setDisabled(true);
@@ -116,8 +120,8 @@ var grabliForm = new Ext.FormPanel({
         {
             fieldLabel: 'Путь для картинок',
             name: 'picPath',
-            regex: /^\d{1,5}$/,
-            maxLength: 5,
+            regex: /\/$/,
+            regexText: 'В конце пути должен стоять слеш "/"...',
             id:'picPath',
             disabled: true,
             value: 'C:/tempPic4Shop/'
@@ -127,6 +131,7 @@ var grabliForm = new Ext.FormPanel({
             fieldLabel: 'IP прокси',
             name: 'ip',
             regex: /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/,
+            regexText: 'Не верный формат IP...',
             id:'ip',
             disabled: true,
             value: '127.0.0.1'
@@ -238,3 +243,4 @@ var grabliForm = new Ext.FormPanel({
 });
 
 grabliForm.render(Ext.getBody());
+Ext.QuickTips.init();
