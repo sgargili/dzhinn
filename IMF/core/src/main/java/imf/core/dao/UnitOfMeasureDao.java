@@ -1,6 +1,5 @@
 package imf.core.dao;
 
-import imf.core.entity.UnitGroup;
 import imf.core.entity.UnitOfMeasure;
 
 import java.util.List;

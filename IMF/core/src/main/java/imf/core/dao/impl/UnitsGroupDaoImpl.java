@@ -1,7 +1,7 @@
 package imf.core.dao.impl;
 
-import imf.core.dao.UnitGroupDao;
-import imf.core.entity.UnitGroup;
+import imf.core.dao.UnitsGroupDao;
+import imf.core.entity.UnitsGroup;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -19,8 +19,8 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 @Repository
-@Service("unitGroupDao")
-public class UnitGroupDaoImpl implements UnitGroupDao {
+@Service("unitsGroupDao")
+public class UnitsGroupDaoImpl implements UnitsGroupDao {
     private HibernateTemplate hibernateTemplate;
 
     @Autowired
@@ -29,28 +29,28 @@ public class UnitGroupDaoImpl implements UnitGroupDao {
     }
 
     @Override
-    public UnitGroup saveUnitGroup(UnitGroup unitGroup) {
-        unitGroup.setId((Long) hibernateTemplate.save(unitGroup));
-        return unitGroup;
+    public UnitsGroup saveUnitsGroup(UnitsGroup unitsGroup) {
+        unitsGroup.setId((Long) hibernateTemplate.save(unitsGroup));
+        return unitsGroup;
     }
 
     @Override
-    public void saveOrUpdateUnitGroup(UnitGroup unitGroup) {
-        hibernateTemplate.saveOrUpdate(unitGroup);
+    public void saveOrUpdateUnitsGroup(UnitsGroup unitsGroup) {
+        hibernateTemplate.saveOrUpdate(unitsGroup);
     }
 
     @Override
-    public void updateUnitGroup(UnitGroup unitGroup) {
-        hibernateTemplate.update(unitGroup);
+    public void updateUnitsGroup(UnitsGroup unitsGroup) {
+        hibernateTemplate.update(unitsGroup);
     }
 
     @Override
-    public void deleteUnitGroup(UnitGroup unitGroup) {
-        hibernateTemplate.delete(unitGroup);
+    public void deleteUnitsGroup(UnitsGroup unitsGroup) {
+        hibernateTemplate.delete(unitsGroup);
     }
 
     @Override
-    public void deleteUnitGroupById(final Long id) {
+    public void deleteUnitsGroupById(final Long id) {
         final String request = "delete from UnitGroup ug where ug.id = :id";
         hibernateTemplate.execute(new HibernateCallback() {
 
@@ -63,28 +63,28 @@ public class UnitGroupDaoImpl implements UnitGroupDao {
     }
 
     @Override
-    public List<UnitGroup> getAllUnitGroups() {
-        return hibernateTemplate.loadAll(UnitGroup.class);
+    public List<UnitsGroup> getAllUnitsGroups() {
+        return hibernateTemplate.loadAll(UnitsGroup.class);
     }
 
     @Override
-    public List<UnitGroup> getUnitGroups(int firstResult) {
-        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitGroup.class);
+    public List<UnitsGroup> getUnitsGroups(int firstResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
         criteria.setFirstResult(firstResult);
         return criteria.list();
 
     }
 
     @Override
-    public List<UnitGroup> getUnitGroups(final int firstResult, final int maxResult) {
-        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitGroup.class);
+    public List<UnitsGroup> getUnitsGroups(final int firstResult, final int maxResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
         criteria.setFirstResult(firstResult);
         criteria.setMaxResults(maxResult);
         return criteria.list();
     }
 
     @Override
-    public UnitGroup getUnitGroupById(Long id) {
-        return hibernateTemplate.get(UnitGroup.class, id);
+    public UnitsGroup getUnitsGroupById(Long id) {
+        return hibernateTemplate.get(UnitsGroup.class, id);
     }
 }

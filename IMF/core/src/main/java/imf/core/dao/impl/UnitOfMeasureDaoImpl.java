@@ -1,12 +1,13 @@
 package imf.core.dao.impl;
 
 import imf.core.dao.UnitOfMeasureDao;
-import imf.core.entity.UnitGroup;
 import imf.core.entity.UnitOfMeasure;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  * Date: 18.11.2010
  * Time: 11:12:42
  */
+@Repository
+@Service("unitOfMeasureDao")
 public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
 
     private HibernateTemplate hibernateTemplate;
