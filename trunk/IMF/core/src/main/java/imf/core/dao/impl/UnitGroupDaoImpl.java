@@ -30,7 +30,7 @@ public class UnitGroupDaoImpl implements UnitGroupDao {
 
     @Override
     public UnitGroup saveUnitGroup(UnitGroup unitGroup) {
-        unitGroup = (UnitGroup) hibernateTemplate.save(unitGroup);
+        unitGroup.setId((Long) hibernateTemplate.save(unitGroup));
         return unitGroup;
     }
 
