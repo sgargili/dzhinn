@@ -2,6 +2,7 @@ package imf.core.dao.impl;
 
 import imf.core.dao.UnitOfMeasureDao;
 import imf.core.entity.UnitOfMeasure;
+import imf.core.entity.UnitsGroup;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -79,6 +80,12 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
         criteria.setFirstResult(firstResult);
         criteria.setMaxResults(maxResult);
         return criteria.list();
+    }
+
+    @Override
+    public List<UnitOfMeasure> getUnitOfMeasuresByUnitsGroup(UnitsGroup ug) {
+        String request = "from UnitOfMeasure um where um.unitsGroup = :ug";
+        return (List<UnitOfMeasure>) hibernateTemplate.findByNamedParam(request, "ug", ug);
     }
 
     @Override

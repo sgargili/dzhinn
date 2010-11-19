@@ -60,11 +60,11 @@ public class UnitOfMeasure implements java.io.Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ug_id")
-    public UnitsGroup getUnitsGroupe() {
+    public UnitsGroup getUnitsGroup() {
         return this.unitsGroup;
     }
 
-    public void setUnitsGroupe(UnitsGroup unitsGroup) {
+    public void setUnitsGroup(UnitsGroup unitsGroup) {
         this.unitsGroup = unitsGroup;
     }
 

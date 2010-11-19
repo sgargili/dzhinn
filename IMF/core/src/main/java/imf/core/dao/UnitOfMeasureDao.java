@@ -1,6 +1,7 @@
 package imf.core.dao;
 
 import imf.core.entity.UnitOfMeasure;
+import imf.core.entity.UnitsGroup;
 
 import java.util.List;
 
@@ -25,6 +26,8 @@ public interface UnitOfMeasureDao {
     List<UnitOfMeasure> getUnitOfMeasures(int firstResult);
 
     List<UnitOfMeasure> getUnitOfMeasures(int firstResult, int maxResult);
+
+    List<UnitOfMeasure> getUnitOfMeasuresByUnitsGroup(UnitsGroup ug);
 
     UnitOfMeasure getUnitOfMeasureById(Long id);
 }

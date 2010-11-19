@@ -70,7 +70,7 @@ public class UnitsGroup implements java.io.Serializable {
         this.comment = comment;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "unitsGroupe", targetEntity = UnitOfMeasure.class)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "unitsGroup", targetEntity = UnitOfMeasure.class)
     public List getUnitOfMeasures() {
         return this.unitOfMeasures;
     }
