@@ -20,9 +20,9 @@ public class UnitsGroupController {
     @Autowired
     private UnitsGroupService unitsGroupService;
 
-    @RequestMapping(value = "/units", method = RequestMethod.GET)
+    @RequestMapping(value = "/units.json", method = RequestMethod.GET)
     @ResponseBody
-    public UnitsGroup getUnitGroups() {
-        return unitsGroupService.getUnitsGroupById(1L);
+    public UnitsGroupDto getUnitGroups() {
+        return unitsGroupService.getUnitsGroupWithUnitsById(1L);
     }
 }

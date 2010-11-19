@@ -18,9 +18,9 @@ public class Main {
     private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
 
     public static void main(String[] args) {
-        UnitsGroup ug = dao.getUnitsGroupById(1l);
-        ug.setUnitOfMeasures(null);
-        System.out.println(ug.getName());
+//        UnitsGroup ug = dao.getUnitsGroupById(1l);
+//        ug.setUnitOfMeasures(null);
+        System.out.println(dao.getUnitsGroupWithUnitsById(1L).getName());
 //        System.out.println(service.getAllUnitsGroups().getUnitsGroup().get(0).getName());
     }
 }

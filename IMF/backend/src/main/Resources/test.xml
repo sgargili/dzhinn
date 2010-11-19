@@ -1,0 +1,2766 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table width="100%" class="back" cellspacing="1" cellpadding="2" border="1">
+    <tr>
+        <td class="td">
+            <table id="UnitsTable" class="back" cellspacing="1" cellpadding="1" border="1">
+                <tr>
+                    <td width="30%" class="tablehd">&nbsp;</td>
+                    <td width="30%" class="tablehd">&nbsp;Name&nbsp;</td>
+                    <td width="30%" class="tablehd">&nbsp;Prefix&nbsp;</td>
+                    <td width="30%" class="tablehd">&nbsp;Ratio of Unit measurement&nbsp;</td>
+                    <td width="5%" class="tablehd">&nbsp;Default&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('77')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="77" type="hidden" name="UNIT_LIST_ID">
+                        <input value="candela per square meter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="cd/m^2" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue1" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="77" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('78')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="78" type="hidden" name="UNIT_LIST_ID">
+                        <input value="million per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue2" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="78" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('45')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="45" type="hidden" name="UNIT_LIST_ID">
+                        <input value="images" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="images" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue3" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="45" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('46')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="46" type="hidden" name="UNIT_LIST_ID">
+                        <input value="points per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="pps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue4" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="46" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('62')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="62" type="hidden" name="UNIT_LIST_ID">
+                        <input value="year" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="year" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="12.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue5" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="62" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('64')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="64" type="hidden" name="UNIT_LIST_ID">
+                        <input value="rack unit" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="U" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue6" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="64" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('69')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="69" type="hidden" name="UNIT_LIST_ID">
+                        <input value="X" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="x" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue7" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="69" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('1')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="1" type="hidden" name="UNIT_LIST_ID">
+                        <input value="second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="s" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue8" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="1" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('17')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="17" type="hidden" name="UNIT_LIST_ID">
+                        <input value="centimeter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="cm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="10.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue9" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="17" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('19')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="19" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilobyte" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="KB" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="0.00100000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue10" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="19" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('39')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="39" type="hidden" name="UNIT_LIST_ID">
+                        <input value="packets per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="pps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue11" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="39" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('41')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="41" type="hidden" name="UNIT_LIST_ID">
+                        <input value="byte" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="B" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="0.00000100" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue12" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="41" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('85')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="85" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Ampere per hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Ah" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue13" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="85" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('86')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="86" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gram" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="g" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue14" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="86" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('31')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="31" type="hidden" name="UNIT_LIST_ID">
+                        <input value="percent" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="%" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue15" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="31" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('33')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="33" type="hidden" name="UNIT_LIST_ID">
+                        <input value="bits per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="bps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue16" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="33" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('50')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="50" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilogram" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kg" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue17" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="50" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('52')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="52" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pound" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lb" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue18" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="52" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('67')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="67" type="hidden" name="UNIT_LIST_ID">
+                        <input value="min" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="min" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue19" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="67" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('68')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="68" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Centi-Call Second/port" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="CCS/port" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue20" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="68" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('47')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="47" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Ampere" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="A" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue21" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="47" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('51')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="51" type="hidden" name="UNIT_LIST_ID">
+                        <input value="nanometer" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="nm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue22" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="51" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70706082920784021')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70706082920784021" type="hidden" name="UNIT_LIST_ID">
+                        <input value="G" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="G" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue23" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70706082920784021" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70709131906482733')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70709131906482733" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Week" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="week" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue24" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70709131906482733" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('80')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="80" type="hidden" name="UNIT_LIST_ID">
+                        <input value="millilitre" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ml" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue25" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="80" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('81')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="81" type="hidden" name="UNIT_LIST_ID">
+                        <input value="lines" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lines" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue26" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="81" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('5')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="5" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Ohm" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Ω" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue27" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="5" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('6')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="6" type="hidden" name="UNIT_LIST_ID">
+                        <input value="lux" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lux" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue28" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="6" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('25')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="25" type="hidden" name="UNIT_LIST_ID">
+                        <input value="dots per inch" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dpi" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue29" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="25" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('18')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="18" type="hidden" name="UNIT_LIST_ID">
+                        <input value="lumens" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lum" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue30" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="18" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('59')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="59" type="hidden" name="UNIT_LIST_ID">
+                        <input value="scans/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="scan/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue31" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="59" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('63')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="63" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Degree Fahrenheit" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&deg;F" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue32" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="63" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('51001063517556874')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="51001063517556874" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kiloampere/metre" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kA/m" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue33" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="51001063517556874" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('60130155256818560')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="60130155256818560" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megapixel" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Mpixel" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue34" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="60130155256818560" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71003090300475919')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71003090300475919" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Diopter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dpt" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue35" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71003090300475919" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('60619065607516859')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="60619065607516859" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gigabyte/hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="GB/hr" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="0.27700000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue36" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="60619065607516859" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71107134758339999')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71107134758339999" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Mach" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Mach" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue37" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71107134758339999" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('61017065554309808')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="61017065554309808" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilometre" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="km" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue38" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="61017065554309808" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71012094319084238')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71012094319084238" type="hidden" name="UNIT_LIST_ID">
+                        <input value="grams on square decimeter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="g/dm&sup2;" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue39" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71012094319084238" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71012094441934299')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71012094441934299" type="hidden" name="UNIT_LIST_ID">
+                        <input value="square decimeter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dm&sup2;" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="100.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue40" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71012094441934299" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('90724054128065141')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="90724054128065141" type="hidden" name="UNIT_LIST_ID">
+                        <input value="milliseconds per line" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="msec/line" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue41" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="90724054128065141" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('90727110527485638')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="90727110527485638" type="hidden" name="UNIT_LIST_ID">
+                        <input value="decibel (milliWatt)" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dBm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue42" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="90727110527485638" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('100831121315657511')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="100831121315657511" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gigabits per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Gbps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue43" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="100831121315657511" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('100831121315667413')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="100831121315667413" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Kiloohm" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kΩ" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue44" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="100831121315667413" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('14')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="14" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pounds per square inch" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lb/in^2" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue45" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="14" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('15')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="15" type="hidden" name="UNIT_LIST_ID">
+                        <input value="hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="hr" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue46" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="15" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('3')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="3" type="hidden" name="UNIT_LIST_ID">
+                        <input value="inch" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&quot;" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue47" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="3" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('7')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="7" type="hidden" name="UNIT_LIST_ID">
+                        <input value="decibel" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dB" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue48" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="7" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('21')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="21" type="hidden" name="UNIT_LIST_ID">
+                        <input value="bit" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="bit" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue49" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="21" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('23')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="23" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pages per minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ppm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue50" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="23" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('42')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="42" type="hidden" name="UNIT_LIST_ID">
+                        <input value="British Thermal Unit" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="BTU" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue51" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="42" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('74')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="74" type="hidden" name="UNIT_LIST_ID">
+                        <input value="rotations per minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="RPM" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue52" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="74" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('87')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="87" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Litre per hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="L/hr" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue53" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="87" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('27')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="27" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megabytes/minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MB/min" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue54" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="27" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('34')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="34" type="hidden" name="UNIT_LIST_ID">
+                        <input value="meter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="m" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue55" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="34" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('35')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="35" type="hidden" name="UNIT_LIST_ID">
+                        <input value="feet" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ft" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue56" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="35" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('54')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="54" type="hidden" name="UNIT_LIST_ID">
+                        <input value="milliampere" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mA" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="0.00100000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue57" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="54" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('55')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="55" type="hidden" name="UNIT_LIST_ID">
+                        <input value="minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="min" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue58" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="55" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('32')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="32" type="hidden" name="UNIT_LIST_ID">
+                        <input value="flux transitions per inch" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ftpi" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue59" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="32" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('38')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="38" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megabyte" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MB" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue60" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="38" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('53')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="53" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Degree Centigrade" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&deg;C" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue61" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="53" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('61205104318672003')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="61205104318672003" type="hidden" name="UNIT_LIST_ID">
+                        <input value="watt-hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="WHr" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue62" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="61205104318672003" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70716134008021144')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70716134008021144" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Carat" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="crt" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue63" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70716134008021144" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71023132316787928')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71023132316787928" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pages per day" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ppday" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue64" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71023132316787928" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('82')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="82" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megapixel" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Mpixel" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue65" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="82" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('83')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="83" type="hidden" name="UNIT_LIST_ID">
+                        <input value="milliampere hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mAh" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue66" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="83" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('8')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="8" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilohertz" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kHz" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue67" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="8" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('9')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="9" type="hidden" name="UNIT_LIST_ID">
+                        <input value="f/" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="f/" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue68" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="9" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('22')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="22" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Oersted" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Oe" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue69" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="22" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('24')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="24" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pages per month" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ppmonth" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue70" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="24" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70" type="hidden" name="UNIT_LIST_ID">
+                        <input value="square feet/hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="sq ft/hr" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue71" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71" type="hidden" name="UNIT_LIST_ID">
+                        <input value="CPU" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="CPU" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue72" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('60130155419425227')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="60130155419425227" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilopixel" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kpixel" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue73" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="60130155419425227" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('60516123907094295')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="60516123907094295" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megatransfers per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MT/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue74" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="60516123907094295" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71031075541467825')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71031075541467825" type="hidden" name="UNIT_LIST_ID">
+                        <input value="horsepower" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="hp" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue75" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71031075541467825" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71102122922294439')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71102122922294439" type="hidden" name="UNIT_LIST_ID">
+                        <input value="brake horsepower" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="bhp" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue76" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71102122922294439" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71123084323148355')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71123084323148355" type="hidden" name="UNIT_LIST_ID">
+                        <input value="tea ball" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="tb" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue77" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71123084323148355" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71009063906978448')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71009063906978448" type="hidden" name="UNIT_LIST_ID">
+                        <input value="milliradian" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mrad" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue78" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71009063906978448" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('80506105107029997')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="80506105107029997" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Billion per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="B/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue79" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="80506105107029997" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('81125072411431839')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="81125072411431839" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Gigatransfers per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="GT/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue80" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="81125072411431839" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('90916115551952878')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="90916115551952878" type="hidden" name="UNIT_LIST_ID">
+                        <input value="millimeter per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mm/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue81" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="90916115551952878" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('100114121957891967')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="100114121957891967" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Characters per Second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="cps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue82" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="100114121957891967" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('57')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="57" type="hidden" name="UNIT_LIST_ID">
+                        <input value="revolutions per minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="rpm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue83" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="57" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('76')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="76" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Degree Centigrade/Watt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&deg;C/W" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue84" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="76" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('79')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="79" type="hidden" name="UNIT_LIST_ID">
+                        <input value="volt-ampere" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="VA" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue85" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="79" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('20')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="20" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pages" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="pages" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue86" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="20" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('16')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="16" type="hidden" name="UNIT_LIST_ID">
+                        <input value="" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue87" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="16" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('43')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="43" type="hidden" name="UNIT_LIST_ID">
+                        <input value="pixel" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="pixel" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue88" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="43" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('60')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="60" type="hidden" name="UNIT_LIST_ID">
+                        <input value="inches/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="in/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue89" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="60" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('61')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="61" type="hidden" name="UNIT_LIST_ID">
+                        <input value="micrometer" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&micro;m" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue90" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="61" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('65')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="65" type="hidden" name="UNIT_LIST_ID">
+                        <input value="micron" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="micron" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue91" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="65" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('58')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="58" type="hidden" name="UNIT_LIST_ID">
+                        <input value="centimeter/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="cm/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue92" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="58" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('10')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="10" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megabits per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Mbps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue93" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="10" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('13')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="13" type="hidden" name="UNIT_LIST_ID">
+                        <input value="grams per meter squared" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="g/m^2" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue94" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="13" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('36')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="36" type="hidden" name="UNIT_LIST_ID">
+                        <input value="watt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="W" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue95" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="36" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('37')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="37" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilovolt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kv" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue96" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="37" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('75')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="75" type="hidden" name="UNIT_LIST_ID">
+                        <input value="cubic feet per minute" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="CFM" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue97" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="75" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('84')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="84" type="hidden" name="UNIT_LIST_ID">
+                        <input value="month" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="month" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue98" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="84" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('28')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="28" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gigabyte" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="GB" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue99" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="28" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('30')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="30" type="hidden" name="UNIT_LIST_ID">
+                        <input value="American Wire Gauge" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="AWG" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue100" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="30" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('48')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="48" type="hidden" name="UNIT_LIST_ID">
+                        <input value="volt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="V" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue101" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="48" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('49')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="49" type="hidden" name="UNIT_LIST_ID">
+                        <input value="degree" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="&deg;" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue102" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="49" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('56')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="56" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megabytes/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MB/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue103" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="56" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('66')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="66" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Joule" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="J" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue104" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="66" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('40')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="40" type="hidden" name="UNIT_LIST_ID">
+                        <input value="frames per second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="fps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue105" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="40" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('44')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="44" type="hidden" name="UNIT_LIST_ID">
+                        <input value="hertz" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Hz" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue106" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="44" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70703122815181302')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70703122815181302" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gigabytes/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="GB/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue107" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70703122815181302" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70705100326800248')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70705100326800248" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Litre" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="L" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue108" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70705100326800248" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71030081418550689')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71030081418550689" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kiloWatt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kW" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue109" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71030081418550689" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71030111254542068')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71030111254542068" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilopond" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kp" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue110" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71030111254542068" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('2')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="2" type="hidden" name="UNIT_LIST_ID">
+                        <input value="millisecond" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ms" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue111" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="2" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('4')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="4" type="hidden" name="UNIT_LIST_ID">
+                        <input value="nanosecond" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="ns" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue112" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="4" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('11')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="11" type="hidden" name="UNIT_LIST_ID">
+                        <input value="megahertz" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MHz" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue113" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="11" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('12')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="12" type="hidden" name="UNIT_LIST_ID">
+                        <input value="millimeter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="mm" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue114" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="12" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('26')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="26" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilobytes/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="KB/sec" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue115" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="26" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('29')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="29" type="hidden" name="UNIT_LIST_ID">
+                        <input value="thousand circular mils" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="MCM" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue116" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="29" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('72')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="72" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilobits/second" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="Kbps" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="0.00100000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue117" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="72" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('73')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="73" type="hidden" name="UNIT_LIST_ID">
+                        <input value="gigahertz" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="GHz" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue118" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="73" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70313122347845224')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70313122347845224" type="hidden" name="UNIT_LIST_ID">
+                        <input value="terabyte" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="TB" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1000000.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue119" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70313122347845224" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('70824064855029255')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="70824064855029255" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Decibel/milliWatt" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="dB/mW" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue120" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="70824064855029255" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71102140726844797')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71102140726844797" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilogram push" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kg push" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue121" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71102140726844797" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71106134239609017')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71106134239609017" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilonewtons" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="kN" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue122" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71106134239609017" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71012064830337140')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71012064830337140" type="hidden" name="UNIT_LIST_ID">
+                        <input value="kilometer/hour" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="km/h" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue123" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71012064830337140" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('71012065630495124')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="71012065630495124" type="hidden" name="UNIT_LIST_ID">
+                        <input value="cubic centimeter" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="cm&sup3;" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue124" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="71012065630495124" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td">
+                        <a href="javascript:deleteUnit('90709080056345904')">
+                            <img src="/img/bt_del.gif" border="0" alt="">
+                        </a>
+                    </td>
+                    <td class="td">
+                        <input value="90709080056345904" type="hidden" name="UNIT_LIST_ID">
+                        <input value="Lines per inch" type="text" name="UNIT_LIST_NAME" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="lpi" type="text" name="UNIT_LIST_PREFIX" class="flat">
+                    </td>
+                    <td class="td">
+                        <input value="1.00000000" vValidateMsg="Achtung dtFloat." vValidate="True" vRequired="Yes"
+                               vRequireMsg="Achtung dtFloat required" vDataType="dtFloat" type="text" name="UNIT_RATIO"
+                               id="floatValue125" class="float" _onblur="javascript:checkElement(this)">
+                    </td>
+                    <td class="td">
+                        <input value="90709080056345904" type="radio" name="IS_DEFAULT" checked>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
