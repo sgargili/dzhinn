@@ -1,6 +1,7 @@
 package imf.core.dao.impl;
 
 import imf.core.dao.UnitsGroupDao;
+import imf.core.dto.UnitsGroupDto;
 import imf.core.entity.UnitsGroup;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,11 @@ public class UnitsGroupDaoImpl implements UnitsGroupDao {
     @Override
     public UnitsGroup getUnitsGroupById(Long id) {
         return hibernateTemplate.get(UnitsGroup.class, id);
+    }
+
+    @Override
+    public UnitsGroup getUnitsGroupWithUnitsById(Long id) {
+        String request = "from UnitsGroup ug join fetch ug.unitOfMeasures as unit where ug.id = :id";
+        return (UnitsGroup) hibernateTemplate.findByNamedParam(request, "id", id).get(0);
     }
 }

@@ -29,4 +29,6 @@ public interface UnitsGroupDao {
     List<UnitsGroup> getUnitsGroups(int firstResult, int maxResult);
 
     UnitsGroup getUnitsGroupById(Long id);
+
+    UnitsGroup getUnitsGroupWithUnitsById(Long id);
 }

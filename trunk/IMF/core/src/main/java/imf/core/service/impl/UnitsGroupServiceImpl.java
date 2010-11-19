@@ -2,6 +2,7 @@ package imf.core.service.impl;
 
 import imf.core.dao.UnitOfMeasureDao;
 import imf.core.dao.UnitsGroupDao;
+import imf.core.dto.UnitOfMeasureDto;
 import imf.core.dto.UnitsGroupDto;
 import imf.core.entity.UnitOfMeasure;
 import imf.core.entity.UnitsGroup;
@@ -28,23 +29,41 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     @Autowired
     private UnitOfMeasureDao unitOfMeasureDao;
 
-    private UnitsGroup unitsGroupWP;
-    private UnitsGroup unitsGroupWOP;
+    private UnitsGroup unitsGroup;
     private List<UnitOfMeasure> units;
-    int i;
-//    private List<UnitOfMeasure> units2 = new ArrayList<UnitOfMeasure>();
+    private UnitsGroupDto unitsGroupDto;
+    private UnitOfMeasureDto unitOfMeasureDto;
 
+    private UnitOfMeasureDto convertUnitOfMeasureToDto(UnitOfMeasure unit) {
+        UnitOfMeasureDto dto = new UnitOfMeasureDto();
+        dto.setComment(unit.getComment());
+        dto.setDefaultValue(unit.isDefaultValue());
+        dto.setId(unit.getId());
+        dto.setName(unit.getName());
+        dto.setPrefix(unit.getPrefix());
+        dto.setRatio(unit.getRatio());
+        return dto;
+    }
+
+    private UnitsGroupDto convertUnitsGroupToDto(UnitsGroup ug) {
+        UnitsGroupDto dto = new UnitsGroupDto();
+        dto.setComment(ug.getComment());
+        dto.setId(ug.getId());
+        dto.setName(ug.getName());
+        return dto;
+    }
 
     @Override
-    public UnitsGroup getUnitsGroupById(Long id) {
-        i = 0;
-        unitsGroupWP = unitsGroupDao.getUnitsGroupById(id);
-        units = unitOfMeasureDao.getAllUnitOfMeasures();
-        for (UnitOfMeasure unit : units) {
-            unit.setUnitsGroupe(null);
-            units.set(i++, unit);
+    public UnitsGroupDto getUnitsGroupWithUnitsById(Long id) {
+        unitsGroup = unitsGroupDao.getUnitsGroupById(id);
+        unitsGroupDto = convertUnitsGroupToDto(unitsGroup);
+
+        units = unitOfMeasureDao.getUnitOfMeasuresByUnitsGroup(unitsGroup);
+        for (UnitOfMeasure um : units) {
+            unitOfMeasureDto = convertUnitOfMeasureToDto(um);
+            unitsGroupDto.addUnitOfMeasureDto(unitOfMeasureDto);
         }
-        unitsGroupWP.setUnitOfMeasures(units);
-        return unitsGroupWP;
+
+        return unitsGroupDto;
     }
 }
