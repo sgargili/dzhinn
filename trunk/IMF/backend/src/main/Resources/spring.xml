@@ -24,8 +24,12 @@
             <list>
                 <value>imf.core.entity.UnitsGroup</value>
                 <value>imf.core.entity.UnitOfMeasure</value>
-                <!--<value>imf.core.entity.Attribute</value>-->
-                <!--<value>imf.core.entity.SubsGroup</value>-->
+                <value>imf.core.entity.Substitute</value>
+                <value>imf.core.entity.SubsGroup</value>
+                <value>imf.core.entity.Attribute</value>
+                <value>imf.core.entity.Group</value>
+                <value>imf.core.entity.Attribute2Group</value>
+                <value>imf.core.entity.Template</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -33,7 +37,7 @@
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
                 <prop key="hibernate.default_schema">imf</prop>
             </props>
         </property>
