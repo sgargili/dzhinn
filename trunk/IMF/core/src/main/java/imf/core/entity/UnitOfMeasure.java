@@ -47,10 +47,11 @@ public class UnitOfMeasure implements java.io.Serializable {
 //    }
 
     @Id
-    @SequenceGenerator(name = "units_of_measure_seq", sequenceName = "units_of_measure_id", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "units_of_measure_seq")
-    @Column(name = "id", unique = true, nullable = false)
-    public Long getId() {
+//    @SequenceGenerator(name = "units_of_measure_seq", sequenceName = "units_of_measure_id", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "units_of_measure_seq")
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id", unique = true, nullable = false)
+public Long getId() {
         return this.id;
     }
 
