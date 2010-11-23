@@ -40,11 +40,12 @@ public class UnitsGroup implements java.io.Serializable {
 //    }
 
     @Id
-    @SequenceGenerator(name = "units_group_seq", sequenceName = "units_group_id", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "units_group_seq")
-    @Column(name = "id", unique = true, nullable = false)
+//    @SequenceGenerator(name = "units_group_seq", sequenceName = "units_group_id", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "units_group_seq")
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "id", unique = true, nullable = false)
 
-    public Long getId() {
+public Long getId() {
         return this.id;
     }
 
