@@ -6,11 +6,14 @@
         xmlns:tns="person">
 
     <element name="personRequest">
-        <simpleType>
-            <restriction base="integer">
-                <pattern value="(\d)+"/>
-            </restriction>
-        </simpleType>
+        <complexType>
+            <sequence>
+                <element name="id" type="integer"/>
+                <element name="name" type="string"/>
+                <element name="surname" type="string"/>
+                <element name="age" type="string"/>
+            </sequence>
+        </complexType>
     </element>
 
     <element name="personResponse" type="string"/>
