@@ -25,9 +25,9 @@ public class PersonEndPoint {
         this.personService = personService;
     }
 
-    @PayloadRoot(localPart = "", namespace = "")
+    @PayloadRoot(localPart = "person", namespace = "person")
     @ResponsePayload
-    public Person getPerson(@RequestPayload Element requestElement) {
+    public Person getPerson() {
         Person person = personService.getPersonById(12);
         return person;
     }
