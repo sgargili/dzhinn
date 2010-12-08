@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+
+    <bean id="payloadMapping"
+          class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+        <property name="interceptors">
+            <list>
+                <ref local="validatingInterceptor"/>
+                <ref local="loggingInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="validatingInterceptor"
+          class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+        <property name="xsdSchema" ref="schema"/>
+        <property name="validateRequest" value="true"/>
+        <property name="validateResponse" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.DefaultMethodEndpointAdapter"/>
+
+    <bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+        <description>
+            This interceptor logs the message payload.
+        </description>
+    </bean>
+
+    <bean id="personEndpoint" class="wst.ws.PersonEndPoint">
+        <constructor-arg ref="personService"/>
+    </bean>
+
+    <bean id="person" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+        <description>
+            This bean definition represents a WSDL definition that is generated at runtime. It can be retrieved by
+            going to /echo/echo.wsdl (i.e. the bean name corresponds to the filename).
+        </description>
+        <property name="schema" ref="schema"/>
+        <property name="portTypeName" value="Person"/>
+        <property name="locationUri" value="http://localhost:8080/person/services"/>
+    </bean>
+
+    <bean id="schema" class="org.springframework.xml.xsd.SimpleXsdSchema">
+        <description>
+            This bean definition contains the XSD schema.
+        </description>
+        <property name="xsd" value="/WEB-INF/echo.xsd"/>
+    </bean>
+
+    <bean id="personService" class="wst.service.impl.PersonServiceImpl">
+    </bean>
+
+</beans>

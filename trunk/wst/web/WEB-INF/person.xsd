@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="qualified"
+        targetNamespace="person"
+        xmlns:tns="person">
+
+    <element name="personRequest">
+        <simpleType>
+            <restriction base="integer">
+                <pattern value="(\d)+"/>
+            </restriction>
+        </simpleType>
+    </element>
+
+    <element name="personResponse" type="string"/>
+</schema>
