@@ -7,6 +7,7 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import wst.model.Person;
 import wst.service.PersonService;
+import org.w3c.dom.Element;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -26,8 +27,8 @@ public class PersonEndPoint {
 
     @PayloadRoot(localPart = "", namespace = "")
     @ResponsePayload
-    public Person getPerson(@RequestPayload int id) {
-        Person person = personService.getPersonById(id);
+    public Person getPerson(@RequestPayload Element requestElement) {
+        Person person = personService.getPersonById(12);
         return person;
     }
 }

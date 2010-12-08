@@ -23,7 +23,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="WS" level="application" />
+    <orderEntry type="library" exported="" name="WS4Tomcat" level="application" />
   </component>
 </module>
 
