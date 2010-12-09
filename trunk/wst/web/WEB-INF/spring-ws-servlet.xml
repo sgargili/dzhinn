@@ -7,10 +7,10 @@
     <bean id="payloadMapping"
           class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
         <!--<property name="interceptors">-->
-            <!--<list>-->
-                <!--<ref local="validatingInterceptor"/>-->
-                <!--<ref local="loggingInterceptor"/>-->
-            <!--</list>-->
+        <!--<list>-->
+        <!--<ref local="validatingInterceptor"/>-->
+        <!--<ref local="loggingInterceptor"/>-->
+        <!--</list>-->
         <!--</property>-->
     </bean>
 
@@ -29,17 +29,39 @@
         </description>
     </bean>
 
-    <bean class="org.springframework.ws.server.endpoint.adapter.">
-        <constructor-arg ref="marshaller"/>
+    <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+        <constructor-arg index="0" ref="marshaller"/>
+        <constructor-arg index="1" ref="marshaller"/>
     </bean>
 
-    <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <property name="classesToBeBound">
+
+    <bean id="marshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+        <property name="annotatedClasses">
             <list>
                 <value>wst.model.Person</value>
             </list>
         </property>
-
+        <property name="aliases">
+            <map>
+                <entry>
+                    <key>
+                        <value>per:personRequest</value>
+                    </key>
+                    <value>wst.model.Person</value>
+                </entry>
+            </map>
+        </property>
+        <property name="fieldAliases">
+            <map>
+                <entry key="wst.model.Person.id" value="per:id"/>
+                <entry key="wst.model.Person.name" value="per:name"/>
+                <entry key="wst.model.Person.surname" value="per:surname"/>
+                <entry key="wst.model.Person.age" value="per:age"/>
+            </map>
+        </property>
+        <property name="streamDriver">
+            <bean class="com.thoughtworks.xstream.io.xml.Dom4JDriver"/>
+        </property>
     </bean>
 
     <bean id="personEndPoint" class="wst.ws.PersonEndPoint">
