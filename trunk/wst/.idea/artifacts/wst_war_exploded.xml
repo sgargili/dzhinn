@@ -8,7 +8,7 @@
           <element id="module-output" name="wst" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="application" name="WS4Tomcat" />
+          <element id="library" level="application" name="WS" />
         </element>
       </element>
     </root>
