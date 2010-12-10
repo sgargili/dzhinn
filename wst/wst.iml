@@ -9,7 +9,6 @@
         <webroots>
           <root url="file://$MODULE_DIR$/web" relative="/" />
         </webroots>
-        <context-artifact name="wst:war exploded" />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -23,7 +22,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="WS4Tomcat" level="application" />
+    <orderEntry type="library" name="WS" level="application" />
+    <orderEntry type="library" name="Tomcat 7" level="application_server_libraries" />
   </component>
 </module>
 
