@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        elementFormDefault="qualified"
+        attributeFormDefault="qualified"
+        targetNamespace="http://www.persons.pav/persons">
+
+    <element name="personRequest">
+        <complexType>
+            <sequence>
+                <element name="id" type="integer"/>
+                <element name="name" type="string"/>
+                <element name="surname" type="string"/>
+                <element name="age" type="string"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="personResponse" type="string"/>
+</schema>
