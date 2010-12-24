@@ -49,10 +49,6 @@
             </list>
         </property>
     </bean>
-    <!--<bean id="m" class="">-->
-
-    <!--</bean>-->
-
 
     <bean id="contentNegotiatingViewResolver"
           class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
@@ -71,27 +67,27 @@
         </property>
         <property name="defaultViews">
             <list>
+
                 <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
                     <property name="marshaller">
                         <ref bean="xmlMarshaller"/>
                     </property>
-
                 </bean>
+
                 <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView">
                     <property name="url" value="WEB-INF/test.jrxml"/>
-                    <!--<property name=""-->
                 </bean>
-                 <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView">
+
+                <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView">
                     <property name="url" value="WEB-INF/test.jrxml"/>
-                    <!--<property name=""-->
                 </bean>
-                 <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsCsvView">
+
+                <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsCsvView">
                     <property name="url" value="WEB-INF/test.jrxml"/>
-                    <!--<property name=""-->
                 </bean>
-                 <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
+
+                <bean class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView">
                     <property name="url" value="WEB-INF/test.jrxml"/>
-                    <!--<property name=""-->
                 </bean>
                 <bean class="mvc.controller.view.word.WordView">
                     <property name="url" value="WEB-INF/hello"/>
@@ -104,40 +100,12 @@
                         </list>
                     </constructor-arg>
                 </bean>
+
                 <bean class="mvc.controller.view.ExcelView"/>
 
             </list>
         </property>
-        <!--<property name="viewResolvers">-->
-        <!--<list>-->
-        <!--<bean class="org.springframework.web.servlet.view.BeanNameViewResolver">-->
-        <!--</bean>-->
-        <!--</list>-->
-        <!--</property>-->
         <property name="ignoreAcceptHeader" value="true"/>
-        <!--<property name="defaultContentType" value="text/html"/>-->
     </bean>
-
-    <!--<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">-->
-    <!--<property name="order" value="1"/>-->
-    <!--<property name="mediaTypes">-->
-    <!--<map>-->
-    <!--<entry key="json" value="application/json"/>-->
-    <!--<entry key="xml" value="application/xml"/>-->
-    <!--</map>-->
-    <!--</property>-->
-    <!--&lt;!&ndash;<property name="defaultViews">&ndash;&gt;-->
-    <!--&lt;!&ndash;<list>&ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.web.servlet.view.xml.MarshallingView">&ndash;&gt;-->
-    <!--&lt;!&ndash;<constructor-arg>&ndash;&gt;-->
-    <!--&lt;!&ndash;<bean class="org.springframework.oxm.xstream.XStreamMarshaller"/>&ndash;&gt;-->
-    <!--&lt;!&ndash;</constructor-arg>&ndash;&gt;-->
-    <!--&lt;!&ndash;</bean>&ndash;&gt;-->
-    <!--&lt;!&ndash;</list>&ndash;&gt;-->
-    <!--&lt;!&ndash;</property>&ndash;&gt;-->
-    <!--&lt;!&ndash;<property name="ignoreAcceptHeader" value="true"/>&ndash;&gt;-->
-    <!--</bean>-->
-
 
 </beans>
