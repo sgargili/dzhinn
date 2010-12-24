@@ -58,4 +58,11 @@ public class DataController {
         return dataDao.getDataByArticle("N00104079026");
     }
 
+    @RequestMapping(value = "/word", method = RequestMethod.GET)
+//    @ResponseBody
+    public void getWord() throws Exception {
+//        BusinessPlan businessPlan = new BusinessPlan();
+//        return (HSSFWorkbook) businessPlan.getWorkbook();
+    }
+
 }
