@@ -1,7 +1,9 @@
 package imf.core.dto;
 
-import imf.core.entity.UnitsGroup;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,10 +12,13 @@ import java.util.List;
  * Date: 17.11.2010
  * Time: 17:59:53
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UnitsGroupDto {
     private Long id;
     private String name;
     private String comment;
+    @XmlElement(name = "unitOfMeasure")
     private List<UnitOfMeasureDto> unitOfMeasures = new ArrayList<UnitOfMeasureDto>();
 
     public UnitsGroupDto() {
