@@ -2,8 +2,13 @@ package imf.core.service.impl;
 
 import imf.core.dao.UnitOfMeasureDao;
 import imf.core.dao.UnitsGroupDao;
-import imf.core.dto.UnitOfMeasureDto;
 import imf.core.dto.UnitsGroupDto;
+import imf.core.dto.UnitsOfMeasureDto;
+import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.response.UnitsGroupResponse;
+import imf.core.dto.web.response.UnitsGroupTreeResponse;
+import imf.core.dto.web.response.UnitsOfMeasureResponse;
+import imf.core.dto.web.response.tree.UnitsGroupTreeNode;
 import imf.core.entity.UnitOfMeasure;
 import imf.core.entity.UnitsGroup;
 import imf.core.service.UnitsGroupService;
@@ -32,10 +37,10 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     private UnitsGroup unitsGroup;
     private List<UnitOfMeasure> units;
     private UnitsGroupDto unitsGroupDto;
-    private UnitOfMeasureDto unitOfMeasureDto;
+    private UnitsOfMeasureDto unitOfMeasureDto;
 
-    private UnitOfMeasureDto convertUnitOfMeasureToDto(UnitOfMeasure unit) {
-        UnitOfMeasureDto dto = new UnitOfMeasureDto();
+    private UnitsOfMeasureDto convertUnitOfMeasureToDto(UnitOfMeasure unit) {
+        UnitsOfMeasureDto dto = new UnitsOfMeasureDto();
         dto.setComment(unit.getComment());
         dto.setDefaultValue(unit.isDefaultValue());
         dto.setId(unit.getId());
@@ -53,6 +58,70 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
         return dto;
     }
 
+    private List<UnitsGroupDto> convertUnitsGroupListToDtoList(List<UnitsGroup> unitsGroups) {
+        List<UnitsGroupDto> unitsGroupDtos = new ArrayList<UnitsGroupDto>();
+        UnitsGroupDto dto;
+        for (UnitsGroup unitsGroup : unitsGroups) {
+            dto = new UnitsGroupDto();
+            dto.setComment(unitsGroup.getComment());
+            dto.setId(unitsGroup.getId());
+            dto.setName(unitsGroup.getName());
+            unitsGroupDtos.add(dto);
+        }
+        return unitsGroupDtos;
+    }
+
+    private List<UnitsGroupTreeNode> convertUnitsGroupListToTreeNodes(List<UnitsGroup> unitsGroups) {
+        List<UnitsGroupTreeNode> treeNodes = new ArrayList<UnitsGroupTreeNode>();
+        UnitsGroupTreeNode node;
+        for (UnitsGroup unitsGroup : unitsGroups) {
+            node = new UnitsGroupTreeNode();
+            node.setId(unitsGroup.getId());
+            node.setText(unitsGroup.getName());
+            node.setLeaf(true);
+            treeNodes.add(node);
+        }
+        return treeNodes;
+    }
+
+    private List<UnitsOfMeasureDto> convertUnitsOfMeasureListToDtoList(List<UnitOfMeasure> unitOfMeasures) {
+        List<UnitsOfMeasureDto> unitsOfMeasureDtos = new ArrayList<UnitsOfMeasureDto>();
+        UnitsOfMeasureDto dto;
+        for (UnitOfMeasure unitOfMeasure : unitOfMeasures) {
+            dto = new UnitsOfMeasureDto();
+            dto.setComment(unitOfMeasure.getComment());
+            dto.setId(unitOfMeasure.getId());
+            dto.setName(unitOfMeasure.getName());
+            dto.setDefaultValue(unitOfMeasure.isDefaultValue());
+            dto.setPrefix(unitOfMeasure.getPrefix());
+            dto.setRatio(unitOfMeasure.getRatio());
+            unitsOfMeasureDtos.add(dto);
+        }
+        return unitsOfMeasureDtos;
+    }
+
+    @Override
+    public void addUnitsGroup(UnitsGroupAddRequest request) {
+        unitsGroup = new UnitsGroup();
+        unitsGroup.setName(request.getName());
+        unitsGroup.setComment(request.getComment());
+        unitsGroupDao.saveUnitsGroup(unitsGroup);
+    }
+
+    @Override
+    public void updateUnitsGroup(UnitsGroupAddRequest request) {
+        unitsGroup = new UnitsGroup();
+        unitsGroup.setId(request.getId());
+        unitsGroup.setName(request.getName());
+        unitsGroup.setComment(request.getComment());
+        unitsGroupDao.updateUnitsGroup(unitsGroup);
+    }
+
+    @Override
+    public void deleteUnitsGroup(UnitsGroupAddRequest request) {
+        unitsGroupDao.deleteUnitsGroupById(request.getId());
+    }
+
     @Override
     public UnitsGroupDto getUnitsGroupWithUnitsById(Long id) {
         unitsGroup = unitsGroupDao.getUnitsGroupById(id);
@@ -66,4 +135,41 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
 
         return unitsGroupDto;
     }
+
+    @Override
+    public List<UnitsGroupDto> getAllUnitsGroup() {
+        return convertUnitsGroupListToDtoList(unitsGroupDao.getAllUnitsGroups());
+    }
+
+    @Override
+    public List<UnitsGroupDto> getUnitsGroup(int firstResult, int maxResult) {
+        return convertUnitsGroupListToDtoList(unitsGroupDao.getUnitsGroups(firstResult, maxResult));
+    }
+
+    @Override
+    public UnitsGroupResponse getUnitsGroupResponse(int firstResult, int maxResult) {
+        UnitsGroupResponse response = new UnitsGroupResponse();
+        response.setTotalRowsCount(unitsGroupDao.getTotalRowsCount());
+        response.setUnitsGroupDtos(convertUnitsGroupListToDtoList(unitsGroupDao.getUnitsGroups(firstResult, maxResult)));
+        return response;
+    }
+
+    @Override
+    public UnitsGroupTreeResponse getUnitsGroupTreeResponse() {
+        UnitsGroupTreeResponse response = new UnitsGroupTreeResponse();
+        response.setNodes(convertUnitsGroupListToTreeNodes(unitsGroupDao.getAllUnitsGroups()));
+        return response;
+    }
+
+    @Override
+    public UnitsOfMeasureResponse getUnitsOfMeasureResponse(Long id) {
+        UnitsGroup ug = new UnitsGroup();
+        ug.setId(id);
+        UnitsOfMeasureResponse response = new UnitsOfMeasureResponse();
+        response.setTotalRowsCount(unitOfMeasureDao.getTotalRowsById(id));
+        response.setUnitsOfMeasureDtos(convertUnitsOfMeasureListToDtoList(unitOfMeasureDao.getUnitOfMeasuresByUnitsGroup(ug)));
+        return response;
+    }
+
+
 }
