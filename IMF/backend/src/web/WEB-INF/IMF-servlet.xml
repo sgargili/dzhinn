@@ -85,6 +85,7 @@
             </list>
         </property>
     </bean>-->
+    <bean id="jsonObjectMapper" class="imf.core.additional.JaxbJacksonObjectMapper"/>
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="ignoreAcceptHeader" value="true"/>
@@ -102,6 +103,7 @@
                 </bean>
                 <bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView">
                     <property name="encoding" value="UTF8"/>
+                    <property name="objectMapper" ref="jsonObjectMapper"/>
                 </bean>
             </list>
         </property>
