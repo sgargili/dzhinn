@@ -1,4 +1,5 @@
 var unitsGroupId;
+
 Ext.onReady(function() {
     var mask = new Ext.LoadMask('tree', {
         msg:"Пожалуйста, подождите..."

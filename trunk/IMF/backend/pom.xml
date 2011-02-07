@@ -61,7 +61,7 @@
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
-            <version>1.5.2</version>
+            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>com.thoughtworks.xstream</groupId>
@@ -73,7 +73,11 @@
             <artifactId>core</artifactId>
             <version>1.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-xc</artifactId>
+            <version>1.6.4</version>
+        </dependency>
     </dependencies>
 
 </project>
