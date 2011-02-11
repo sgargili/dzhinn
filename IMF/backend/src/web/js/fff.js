@@ -6,7 +6,7 @@ Ext.onReady(function() {
     });
 
     var unitsOfMeasureReader = new Ext.data.JsonReader({
-        root: 'unitsOfMeasureResponse.unitsOfMeasureDtos',
+        root: 'unitsOfMeasureResponse.unitOfMeasure',
         totalProperty: 'unitsOfMeasureResponse.totalRowsCount',
         idProperty: 'id',
         fields: [
@@ -65,12 +65,12 @@ Ext.onReady(function() {
                 sortable: true,
                 align: 'left'
             },
-            {
-                header: "Default",
+            new Ext.ux.SingleSelectCheckColumn({
+                header: 'Is Default Unit?',
                 dataIndex: 'defaultValue',
                 sortable: true,
                 align: 'left'
-            }
+            })
         ],
         //Конфигурация представления таблицы...
         viewConfig: {
@@ -179,7 +179,7 @@ Ext.onReady(function() {
                     dataUrl:'rest/unitsGroupTree.json',
                     nodeParameter:'unitsGroupTreeNodeList',
                     requestMethod: 'GET',
-                    rootNode: 'unitsGroupTreeResponse.nodes'
+                    rootNode: 'unitsGroupTreeResponse.node'
 
                 }),
                 tbar:[
@@ -216,13 +216,13 @@ Ext.onReady(function() {
                                 unitsGroupId = Ext.getCmp('tree-panel').getSelectionModel().getSelectedNode().id;
                                 Ext.Msg.confirm('Подтверждение',
                                         'Вы уверены, что хотите удалить единицу измерения?',
-                                               function(btn, text) {
-                                                   if (btn == 'yes') {
-                                                       var unitsGroup = new UnitsGroup();
-                                                       unitsGroup.setId(unitsGroupId);
-                                                       action4UnitsGroup('delete', unitsGroup);
-                                                   }
-                                               });
+                                        function(btn, text) {
+                                            if (btn == 'yes') {
+                                                var unitsGroup = new UnitsGroup();
+                                                unitsGroup.setId(unitsGroupId);
+                                                action4UnitsGroup('delete', unitsGroup);
+                                            }
+                                        });
                             }
                         }
                     }
@@ -401,4 +401,42 @@ Ext.onReady(function() {
         plain: true,
         items: unitsGroupUpdateForm
     });
+
+/*
+    var store = new Ext.data.SimpleStore({
+        fields: ['question', 'answer'],
+        data: [
+            ['Staff', 3],
+            ['Services', 3],
+            ['Clean', 3],
+            ['Comfort', 3],
+            ['Value for money', 3]
+        ]
+    });
+    var answers = [
+        new Ext.grid.RadioColumn({
+            header: 'Very poor',
+            inputValue: 1,
+            dataIndex: 'answer',
+            width: 75,
+            align: 'center',
+            sortable: true
+        }),
+        new Ext.grid.RadioColumn({header: 'Poor', inputValue: 2, dataIndex: 'answer', width: 75, align: 'center', sortable: true}),
+        new Ext.grid.RadioColumn({header: 'Average', inputValue: 3, dataIndex: 'answer', width: 75, align: 'center', sortable: true}),
+        new Ext.grid.RadioColumn({header: 'Good', inputValue: 4, dataIndex: 'answer', width: 75, align: 'center', sortable: true}),
+        new Ext.grid.RadioColumn({header: 'Very good', inputValue: 5, dataIndex: 'answer', width: 75, align: 'center', sortable: true})
+    ];
+    var columns = [
+        {header: 'Review your stay', dataIndex: 'question', width: 100, sortable: true}
+    ].concat(answers);
+    var grid = new Ext.grid.EditorGridPanel({
+        store: store,
+        plugins: answers,
+        columns: columns,
+        width: 475,
+        autoHeight: true,
+        renderTo: document.body
+    });*/
+
 });

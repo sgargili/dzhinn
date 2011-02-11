@@ -1,12 +1,8 @@
 package imf.core.dto.web.response;
 
 import imf.core.dto.web.response.tree.UnitsGroupTreeNode;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonView;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
@@ -15,10 +11,11 @@ import java.util.List;
  * Date: 05.02.11
  * Time: 0:00
  */
-@XmlRootElement
-//@JsonIgnoreProperties(value = "nodes")
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "tree")
 public class UnitsGroupTreeResponse {
-    @JsonView
+    @XmlElement(name = "node")
     private List<UnitsGroupTreeNode> nodes;
 
     public UnitsGroupTreeResponse() {
