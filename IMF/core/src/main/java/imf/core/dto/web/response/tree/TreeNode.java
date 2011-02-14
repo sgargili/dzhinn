@@ -1,6 +1,6 @@
 package imf.core.dto.web.response.tree;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -9,15 +9,15 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Time: 23:53
  */
 @XmlRootElement
-public class UnitsGroupTreeNode {
+public class TreeNode {
     private Long id;
     private String text;
     private Boolean leaf;
 
-    public UnitsGroupTreeNode() {
+    public TreeNode() {
     }
 
-    public UnitsGroupTreeNode(Long id, Boolean leaf, String text) {
+    public TreeNode(Long id, Boolean leaf, String text) {
         this.id = id;
         this.leaf = leaf;
         this.text = text;

@@ -1,13 +1,11 @@
 package imf.backend;
 
-import imf.core.dto.UnitsGroupDto;
 import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsGroupResponse;
-import imf.core.dto.web.response.UnitsGroupTreeResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
 import imf.core.service.UnitsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,7 +48,7 @@ public class UnitsGroupController {
     }
 
     @RequestMapping(value = "/unitsGroupTree", method = RequestMethod.GET)
-    public UnitsGroupTreeResponse getUnitsGroupTree() {
+    public TreeResponse getUnitsGroupTree() {
         return unitsGroupService.getUnitsGroupTreeResponse();
     }
 
