@@ -3,7 +3,7 @@ package imf.core.service;
 import imf.core.dto.UnitsGroupDto;
 import imf.core.dto.web.request.UnitsGroupAddRequest;
 import imf.core.dto.web.response.UnitsGroupResponse;
-import imf.core.dto.web.response.UnitsGroupTreeResponse;
+import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public interface UnitsGroupService {
 
     UnitsGroupResponse getUnitsGroupResponse(int firstResult, int maxResult);
 
-    UnitsGroupTreeResponse getUnitsGroupTreeResponse();
+    TreeResponse getUnitsGroupTreeResponse();
 
     UnitsOfMeasureResponse getUnitsOfMeasureResponse(Long id);
 }

@@ -23,8 +23,8 @@
                 <value>imf.core.dto.UnitsOfMeasureDto</value>
                 <value>imf.core.dto.UnitsGroupDto</value>
                 <value>imf.core.dto.web.response.UnitsGroupResponse</value>
-                <value>imf.core.dto.web.response.UnitsGroupTreeResponse</value>
-                <value>imf.core.dto.web.response.tree.UnitsGroupTreeNode</value>
+                <value>imf.core.dto.web.response.TreeResponse</value>
+                <value>imf.core.dto.web.response.tree.TreeNode</value>
             </list>
         </property>
     </bean>
@@ -40,9 +40,7 @@
                 <value>imf.core.dto.UnitsOfMeasureDtoo</value>
                 <value>imf.core.dto.UnitsGroupDto</value>
                 <value>imf.core.dto.web.response.UnitsGroupResponse</value>
-                <value>imf.core.dto.web.response.UnitsGroupTreeResponse</value>
-                <value>imf.core.dto.web.response.tree.UnitsGroupTreeNode</value>
-            </list>
+                <value>imf.core.dto.web.response.TreeResponse               <value>imf.core.dto.web.response.tree.TreeNode           </list>
         </property>
     </bean>-->
 

@@ -1,11 +1,16 @@
 package imf.backend;
 
+import imf.core.dao.SubsGroupDao;
 import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.UnitsGroupDto;
+import imf.core.dto.web.response.TreeResponse;
+import imf.core.entity.SubsGroup;
 import imf.core.entity.UnitsGroup;
+import imf.core.service.SubsGroupService;
 import imf.core.service.UnitsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,17 +21,21 @@ import java.util.Map;
  * Time: 13:08:43
  */
 public class Main {
-//    private static ClassPathXmlApplicationContext appctx = new ClassPathXmlApplicationContext("spring.xml");
-//    private static UnitsGroupService service = (UnitsGroupService) appctx.getBean("unitsGroupService");
-//    private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
+    private static ClassPathXmlApplicationContext appctx = new ClassPathXmlApplicationContext("spring.xml");
+    private static UnitsGroupService service = (UnitsGroupService) appctx.getBean("unitsGroupService");
+    private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
+    private static SubsGroupDao subsGroupDao = (SubsGroupDao) appctx.getBean("subsGroupDao");
+    private static SubsGroupService subsGroupService = (SubsGroupService) appctx.getBean("subsGroupService");
 
     public static void main(String[] args) {
 //        UnitsGroup ug = dao.getUnitsGroupById(1l);
 //        ug.setUnitOfMeasures(null);
 //        System.out.println(dao.getUnitsGroupWithUnitsById(2L).getName());
 //        System.out.println(service.getAllUnitsGroups().getUnitsGroup().get(0).getName());
-        Map<String, String> map = new HashMap<String, String>();
-
+//        Map<String, String> map = new HashMap<String, String>();
+//        SubsGroup subsGroup =  subsGroupDao.getSubsGroupWithSubstitutesById(1l);
+        TreeResponse tree =  subsGroupService.getSubsGroupTreeResponse();
+        System.out.println(tree.getNodes().size());
 
 
     }

@@ -5,10 +5,10 @@ import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.UnitsGroupDto;
 import imf.core.dto.UnitsOfMeasureDto;
 import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsGroupResponse;
-import imf.core.dto.web.response.UnitsGroupTreeResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
-import imf.core.dto.web.response.tree.UnitsGroupTreeNode;
+import imf.core.dto.web.response.tree.TreeNode;
 import imf.core.entity.UnitOfMeasure;
 import imf.core.entity.UnitsGroup;
 import imf.core.service.UnitsGroupService;
@@ -71,11 +71,11 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
         return unitsGroupDtos;
     }
 
-    private List<UnitsGroupTreeNode> convertUnitsGroupListToTreeNodes(List<UnitsGroup> unitsGroups) {
-        List<UnitsGroupTreeNode> treeNodes = new ArrayList<UnitsGroupTreeNode>();
-        UnitsGroupTreeNode node;
+    private List<TreeNode> convertUnitsGroupListToTreeNodes(List<UnitsGroup> unitsGroups) {
+        List<TreeNode> treeNodes = new ArrayList<TreeNode>();
+        TreeNode node;
         for (UnitsGroup unitsGroup : unitsGroups) {
-            node = new UnitsGroupTreeNode();
+            node = new TreeNode();
             node.setId(unitsGroup.getId());
             node.setText(unitsGroup.getName());
             node.setLeaf(true);
@@ -155,8 +155,8 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     }
 
     @Override
-    public UnitsGroupTreeResponse getUnitsGroupTreeResponse() {
-        UnitsGroupTreeResponse response = new UnitsGroupTreeResponse();
+    public TreeResponse getUnitsGroupTreeResponse() {
+        TreeResponse response = new TreeResponse();
         response.setNodes(convertUnitsGroupListToTreeNodes(unitsGroupDao.getAllUnitsGroups()));
         return response;
     }
