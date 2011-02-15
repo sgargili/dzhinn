@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.*;
  * Date: 04.02.11
  * Time: 23:53
  */
-@XmlRootElement
 public class BaseTreeNode {
     private Long id;
     private String text;
