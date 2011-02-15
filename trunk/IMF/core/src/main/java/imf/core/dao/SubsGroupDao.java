@@ -24,7 +24,7 @@ public interface SubsGroupDao {
 
     List<SubsGroup> getSubsGroups(int firstResult);
 
-    List<SubsGroup> getSubsGroups(int firstResult, int maxResult);
+    List getSubsGroups(int firstResult, int maxResult);
 
     SubsGroup getSubsGroupById(Long id);
 

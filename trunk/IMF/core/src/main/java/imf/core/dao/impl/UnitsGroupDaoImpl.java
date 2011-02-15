@@ -2,10 +2,7 @@ package imf.core.dao.impl;
 
 import imf.core.dao.UnitsGroupDao;
 import imf.core.entity.UnitsGroup;
-import org.hibernate.HibernateException;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -53,6 +50,7 @@ public class UnitsGroupDaoImpl implements UnitsGroupDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void deleteUnitsGroupById(final Long id) {
         final String request = "delete from UnitsGroup ug where ug.id = :id";
         hibernateTemplate.execute(new HibernateCallback() {
@@ -71,38 +69,21 @@ public class UnitsGroupDaoImpl implements UnitsGroupDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<UnitsGroup> getUnitsGroups(final int firstResult) {
-        /*Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
         criteria.setFirstResult(firstResult);
-        return criteria.list();*/
-        final String request = "from UnitsGroup";
-        return (List<UnitsGroup>) hibernateTemplate.execute(new HibernateCallback() {
-
-            public Object doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery(request);
-                query.setFirstResult(firstResult);
-                return query.list();
-            }
-        });
+        return criteria.list();
 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<UnitsGroup> getUnitsGroups(final int firstResult, final int maxResult) {
-        /* Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
-       criteria.setFirstResult(firstResult);
-       criteria.setMaxResults(maxResult);
-       return criteria.list();*/
-        final String request = "from UnitsGroup";
-        return (List<UnitsGroup>) hibernateTemplate.execute(new HibernateCallback() {
-
-            public Object doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery(request);
-                query.setFirstResult(firstResult);
-                query.setMaxResults(maxResult);
-                return query.list();
-            }
-        });
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitsGroup.class);
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResult);
+        return criteria.list();
     }
 
     @Override
@@ -117,6 +98,7 @@ public class UnitsGroupDaoImpl implements UnitsGroupDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Long getTotalRowsCount() {
         return ((List<Long>) hibernateTemplate.findByNamedQuery("UnitsGroup.findAllUnitsGroupsCount")).get(0);
     }

@@ -2,13 +2,12 @@ package imf.core.dao.impl;
 
 import imf.core.dao.SubsGroupDao;
 import imf.core.entity.SubsGroup;
-import org.hibernate.*;
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -53,30 +52,20 @@ public class SubsGroupDaoImpl implements SubsGroupDao {
     }
 
     @Override
-    public List<SubsGroup> getSubsGroups(final int firstResult) {
-        final String request = "from SubsGroup";
-        return (List<SubsGroup>) hibernateTemplate.execute(new HibernateCallback() {
-
-            public Object doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery(request);
-                query.setFirstResult(firstResult);
-                return query.list();
-            }
-        });
+    @SuppressWarnings("unchecked")
+    public List<SubsGroup> getSubsGroups(int firstResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(SubsGroup.class);
+        criteria.setFirstResult(firstResult);
+        return criteria.list();
     }
 
     @Override
-    public List<SubsGroup> getSubsGroups(final int firstResult, final int maxResult) {
-        final String request = "from SubsGroup";
-        return (List<SubsGroup>) hibernateTemplate.execute(new HibernateCallback() {
-
-            public Object doInHibernate(Session session) throws HibernateException {
-                Query query = session.createQuery(request);
-                query.setFirstResult(firstResult);
-                query.setMaxResults(maxResult);
-                return query.list();
-            }
-        });
+    @SuppressWarnings("unchecked")
+    public List<SubsGroup> getSubsGroups(int firstResult, int maxResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(SubsGroup.class);
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResult);
+        return criteria.list();
     }
 
     @Override
@@ -85,19 +74,18 @@ public class SubsGroupDaoImpl implements SubsGroupDao {
     }
 
     @Override
-//    @Transactional(readOnly = true)
     public SubsGroup getSubsGroupWithSubstitutesById(Long id) {
         //HQL версия для одного запроса...
-//        String request = "from SubsGroup sg join fetch sg.substitutes as substitute where sg.id = :id";
-//        return (SubsGroup) hibernateTemplate.findByNamedParam(request, "id", id).get(0);
+        String request = "from SubsGroup sg join fetch sg.substitutes as substitute where sg.id = :id";
+        return (SubsGroup) hibernateTemplate.findByNamedParam(request, "id", id).get(0);
 
         //Транзакционная версия с 2-мя запросами...
-        SubsGroup group = hibernateTemplate.get(SubsGroup.class, id);
-//        System.out.println(group.getSubstitutes().size());
-        return group;
+//        SubsGroup group = hibernateTemplate.get(SubsGroup.class, id);
+//        return group;
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Long getTotalRowsCount() {
         return ((List<Long>) hibernateTemplate.findByNamedQuery("SubsGroup.findAllSubsGroupsCount")).get(0);
     }

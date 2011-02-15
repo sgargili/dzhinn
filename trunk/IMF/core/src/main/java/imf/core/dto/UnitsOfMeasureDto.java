@@ -6,32 +6,15 @@ package imf.core.dto;
  * Date: 19.11.2010
  * Time: 10:37:30
  */
-public class UnitsOfMeasureDto {
-    private Long id;
-    private String name;
+public class UnitsOfMeasureDto extends BaseDto {
+
     private String prefix;
     private float ratio;
-    private String comment;
     private boolean defaultValue;
 
     public UnitsOfMeasureDto() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getPrefix() {
         return prefix;
@@ -47,14 +30,6 @@ public class UnitsOfMeasureDto {
 
     public void setRatio(float ratio) {
         this.ratio = ratio;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public boolean isDefaultValue() {

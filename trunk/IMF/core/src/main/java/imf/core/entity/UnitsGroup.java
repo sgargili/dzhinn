@@ -14,7 +14,6 @@ import java.util.List;
 })
 public class UnitsGroup implements java.io.Serializable {
 
-
     private Long id;
     private String name;
     private String comment;

@@ -12,40 +12,11 @@ import java.util.List;
  * Date: 17.11.2010
  * Time: 17:59:53
  */
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
-public class UnitsGroupDto {
-    private Long id;
-    private String name;
-    private String comment;
-    @XmlElement(name = "unitOfMeasure")
+public class UnitsGroupDto extends BaseDto {
+
     private List<UnitsOfMeasureDto> unitOfMeasures = new ArrayList<UnitsOfMeasureDto>();
 
     public UnitsGroupDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public List<UnitsOfMeasureDto> getUnitOfMeasures() {
@@ -57,6 +28,6 @@ public class UnitsGroupDto {
     }
 
     public void addUnitOfMeasureDto(UnitsOfMeasureDto unitOfMeasureDto) {
-        unitOfMeasures.add(unitOfMeasureDto);
+        this.unitOfMeasures.add(unitOfMeasureDto);
     }
 }
