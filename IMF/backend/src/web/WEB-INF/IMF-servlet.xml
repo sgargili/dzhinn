@@ -20,11 +20,12 @@
     <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
-                <value>imf.core.dto.UnitsOfMeasureDto</value>
                 <value>imf.core.dto.UnitsGroupDto</value>
+                <value>imf.core.dto.UnitsOfMeasureDto</value>
+                <value>imf.core.dto.web.response.tree.BaseTreeNode</value>
                 <value>imf.core.dto.web.response.UnitsGroupResponse</value>
+                <value>imf.core.dto.web.response.UnitsOfMeasureResponse</value>
                 <value>imf.core.dto.web.response.TreeResponse</value>
-                <value>imf.core.dto.web.response.tree.TreeNode</value>
             </list>
         </property>
     </bean>
@@ -40,7 +41,7 @@
                 <value>imf.core.dto.UnitsOfMeasureDtoo</value>
                 <value>imf.core.dto.UnitsGroupDto</value>
                 <value>imf.core.dto.web.response.UnitsGroupResponse</value>
-                <value>imf.core.dto.web.response.TreeResponse               <value>imf.core.dto.web.response.tree.TreeNode           </list>
+                <value>imf.core.dto.web.response.TreeResponse               <value>imf.core.dto.web.response.tree.BaseTreeNodeNode           </list>
         </property>
     </bean>-->
 
@@ -69,5 +70,6 @@
         </property>
     </bean>
 
-
+    <!--Вяжем транзакции...-->
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 </beans>

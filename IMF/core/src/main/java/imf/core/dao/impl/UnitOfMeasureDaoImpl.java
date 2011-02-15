@@ -50,6 +50,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void deleteUnitOfMeasureById(final Long id) {
         final String request = "delete from UnitOfMeasure um where um.id = :id";
         hibernateTemplate.execute(new HibernateCallback() {
@@ -68,6 +69,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<UnitOfMeasure> getUnitOfMeasures(int firstResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitOfMeasure.class);
         criteria.setFirstResult(firstResult);
@@ -75,6 +77,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<UnitOfMeasure> getUnitOfMeasures(int firstResult, int maxResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(UnitOfMeasure.class);
         criteria.setFirstResult(firstResult);
@@ -83,6 +86,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<UnitOfMeasure> getUnitOfMeasuresByUnitsGroup(UnitsGroup ug) {
         String request = "from UnitOfMeasure um where um.unitsGroup = :ug";
         return (List<UnitOfMeasure>) hibernateTemplate.findByNamedParam(request, "ug", ug);
@@ -94,11 +98,13 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Long getTotalRows() {
         return ((List<Long>) hibernateTemplate.findByNamedQuery("UnitOfMeasure.findAllUnitsOfMeasureCount")).get(0);
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Long getTotalRowsById(Long id) {
         return ((List<Long>) hibernateTemplate.findByNamedQueryAndNamedParam("UnitOfMeasure.findAllUnitsOfMeasureCountById", "id", id)).get(0);
     }

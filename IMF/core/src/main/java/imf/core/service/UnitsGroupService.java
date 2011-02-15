@@ -1,7 +1,7 @@
 package imf.core.service;
 
 import imf.core.dto.UnitsGroupDto;
-import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.request.BaseRequest;
 import imf.core.dto.web.response.UnitsGroupResponse;
 import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
@@ -14,11 +14,11 @@ import java.util.List;
  * Time: 18:02:18
  */
 public interface UnitsGroupService {
-    void addUnitsGroup(UnitsGroupAddRequest request);
+    void addUnitsGroup(BaseRequest request);
 
-    void updateUnitsGroup(UnitsGroupAddRequest request);
+    void updateUnitsGroup(BaseRequest request);
 
-    void deleteUnitsGroup(UnitsGroupAddRequest request);
+    void deleteUnitsGroup(BaseRequest request);
 
     UnitsGroupDto getUnitsGroupWithUnitsById(Long id);
 

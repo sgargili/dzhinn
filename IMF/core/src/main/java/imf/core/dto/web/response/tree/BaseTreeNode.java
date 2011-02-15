@@ -3,21 +3,20 @@ package imf.core.dto.web.response.tree;
 import javax.xml.bind.annotation.*;
 
 /**
- * Created by IntelliJ IDEA.
  * User: Andrey Popov
  * Date: 04.02.11
  * Time: 23:53
  */
 @XmlRootElement
-public class TreeNode {
+public class BaseTreeNode {
     private Long id;
     private String text;
     private Boolean leaf;
 
-    public TreeNode() {
+    public BaseTreeNode() {
     }
 
-    public TreeNode(Long id, Boolean leaf, String text) {
+    public BaseTreeNode(Long id, Boolean leaf, String text) {
         this.id = id;
         this.leaf = leaf;
         this.text = text;

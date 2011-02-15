@@ -4,27 +4,26 @@ import imf.core.dao.UnitOfMeasureDao;
 import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.UnitsGroupDto;
 import imf.core.dto.UnitsOfMeasureDto;
-import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.request.BaseRequest;
 import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsGroupResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
-import imf.core.dto.web.response.tree.TreeNode;
+import imf.core.dto.web.response.tree.BaseTreeNode;
 import imf.core.entity.UnitOfMeasure;
 import imf.core.entity.UnitsGroup;
 import imf.core.service.UnitsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: Andrey Popov
  * Date: 17.11.2010
  * Time: 18:03:19
- * To change this template use File | Settings | File Templates.
  */
 @Repository
 @Service("unitsGroupService")
@@ -71,11 +70,11 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
         return unitsGroupDtos;
     }
 
-    private List<TreeNode> convertUnitsGroupListToTreeNodes(List<UnitsGroup> unitsGroups) {
-        List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-        TreeNode node;
+    private List<BaseTreeNode> convertUnitsGroupListToTreeNodes(List<UnitsGroup> unitsGroups) {
+        List<BaseTreeNode> treeNodes = new ArrayList<BaseTreeNode>();
+        BaseTreeNode node;
         for (UnitsGroup unitsGroup : unitsGroups) {
-            node = new TreeNode();
+            node = new BaseTreeNode();
             node.setId(unitsGroup.getId());
             node.setText(unitsGroup.getName());
             node.setLeaf(true);
@@ -101,7 +100,8 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     }
 
     @Override
-    public void addUnitsGroup(UnitsGroupAddRequest request) {
+    @Transactional
+    public void addUnitsGroup(BaseRequest request) {
         unitsGroup = new UnitsGroup();
         unitsGroup.setName(request.getName());
         unitsGroup.setComment(request.getComment());
@@ -109,7 +109,8 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     }
 
     @Override
-    public void updateUnitsGroup(UnitsGroupAddRequest request) {
+    @Transactional
+    public void updateUnitsGroup(BaseRequest request) {
         unitsGroup = new UnitsGroup();
         unitsGroup.setId(request.getId());
         unitsGroup.setName(request.getName());
@@ -118,11 +119,13 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     }
 
     @Override
-    public void deleteUnitsGroup(UnitsGroupAddRequest request) {
+    @Transactional
+    public void deleteUnitsGroup(BaseRequest request) {
         unitsGroupDao.deleteUnitsGroupById(request.getId());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UnitsGroupDto getUnitsGroupWithUnitsById(Long id) {
         unitsGroup = unitsGroupDao.getUnitsGroupById(id);
         unitsGroupDto = convertUnitsGroupToDto(unitsGroup);
@@ -137,39 +140,42 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UnitsGroupDto> getAllUnitsGroup() {
         return convertUnitsGroupListToDtoList(unitsGroupDao.getAllUnitsGroups());
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UnitsGroupDto> getUnitsGroup(int firstResult, int maxResult) {
         return convertUnitsGroupListToDtoList(unitsGroupDao.getUnitsGroups(firstResult, maxResult));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UnitsGroupResponse getUnitsGroupResponse(int firstResult, int maxResult) {
         UnitsGroupResponse response = new UnitsGroupResponse();
         response.setTotalRowsCount(unitsGroupDao.getTotalRowsCount());
-        response.setUnitsGroupDtos(convertUnitsGroupListToDtoList(unitsGroupDao.getUnitsGroups(firstResult, maxResult)));
+        response.setDtos(convertUnitsGroupListToDtoList(unitsGroupDao.getUnitsGroups(firstResult, maxResult)));
         return response;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public TreeResponse getUnitsGroupTreeResponse() {
         TreeResponse response = new TreeResponse();
-        response.setNodes(convertUnitsGroupListToTreeNodes(unitsGroupDao.getAllUnitsGroups()));
+        response.setDtos(convertUnitsGroupListToTreeNodes(unitsGroupDao.getAllUnitsGroups()));
         return response;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UnitsOfMeasureResponse getUnitsOfMeasureResponse(Long id) {
         UnitsGroup ug = new UnitsGroup();
         ug.setId(id);
         UnitsOfMeasureResponse response = new UnitsOfMeasureResponse();
         response.setTotalRowsCount(unitOfMeasureDao.getTotalRowsById(id));
-        response.setUnitsOfMeasureDtos(convertUnitsOfMeasureListToDtoList(unitOfMeasureDao.getUnitOfMeasuresByUnitsGroup(ug)));
+        response.setDtos(convertUnitsOfMeasureListToDtoList(unitOfMeasureDao.getUnitOfMeasuresByUnitsGroup(ug)));
         return response;
     }
-
-
 }

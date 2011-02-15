@@ -1,35 +1,27 @@
 package imf.core.dto.web.response;
 
-import imf.core.dto.web.response.tree.TreeNode;
+import imf.core.dto.web.response.tree.BaseTreeNode;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: Andrey Popov
  * Date: 05.02.11
  * Time: 0:00
  */
 
-@XmlAccessorType(XmlAccessType.FIELD)
+//Обзавем класс деревом...
 @XmlRootElement(name = "tree")
-public class TreeResponse {
-    @XmlElement(name = "nodes")
-    private List<TreeNode> nodes;
+public class TreeResponse extends BaseResponse {
 
-    public TreeResponse() {
-    }
-
-    public TreeResponse(List<TreeNode> nodes) {
-        this.nodes = nodes;
-    }
-
-    public List<TreeNode> getNodes() {
-        return nodes;
-    }
-
-    public void setNodes(List<TreeNode> nodes) {
-        this.nodes = nodes;
+    @Override
+    //Поместим элементы коллекции dtos в элемент nodes...
+    @XmlElementWrapper(name = "nodes")
+    //Отобразим элементы коллекции dtos под мненем "node"..., а тип данных коллекции dto - BaseTreeNode...
+    //Элемент type нужен для того, чтобы избавиться от ненужных нейспеймов для отображения generic классов...
+    @XmlElement(name = "node", type = BaseTreeNode.class)
+    public List getDtos() {
+        return super.getDtos();
     }
 }

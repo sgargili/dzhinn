@@ -1,21 +1,24 @@
 package imf.core.dto.web.request;
 
 /**
- * Created by IntelliJ IDEA.
- * User: Администратор
+ * User: Andrey Popov
  * Date: 30.01.11
  * Time: 16:57
- * To change this template use File | Settings | File Templates.
  */
-public class UnitsGroupAddRequest {
+
+/**
+ * Базовый класс описывающий объект запроса на добавление/обновление данных...
+ */
+public class BaseRequest {
+    //Основа, которая находится в составе любой из сущностей данных...
     private Long id;
     private String name;
     private String comment;
 
-    public UnitsGroupAddRequest() {
+    public BaseRequest() {
     }
 
-    public UnitsGroupAddRequest(String name, String comment) {
+    public BaseRequest(String name, String comment) {
         this.name = name;
         this.comment = comment;
     }

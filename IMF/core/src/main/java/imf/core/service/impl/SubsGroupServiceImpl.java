@@ -1,11 +1,9 @@
 package imf.core.service.impl;
 
 import imf.core.dao.SubsGroupDao;
-import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.web.response.TreeResponse;
-import imf.core.dto.web.response.tree.TreeNode;
+import imf.core.dto.web.response.tree.BaseTreeNode;
 import imf.core.entity.SubsGroup;
-import imf.core.entity.UnitsGroup;
 import imf.core.service.SubsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,11 +23,11 @@ public class SubsGroupServiceImpl implements SubsGroupService {
     @Autowired
     private SubsGroupDao subsGroupDao;
 
-    private List<TreeNode> convertSubsGroupListToTreeNodes(List<SubsGroup> subsGroups) {
-        List<TreeNode> treeNodes = new ArrayList<TreeNode>();
-        TreeNode node;
+    private List<BaseTreeNode> convertSubsGroupListToTreeNodes(List<SubsGroup> subsGroups) {
+        List<BaseTreeNode> treeNodes = new ArrayList<BaseTreeNode>();
+        BaseTreeNode node;
         for (SubsGroup subsGroup : subsGroups) {
-            node = new TreeNode();
+            node = new BaseTreeNode();
             node.setId(subsGroup.getId());
             node.setText(subsGroup.getName());
             node.setLeaf(true);
@@ -41,10 +39,8 @@ public class SubsGroupServiceImpl implements SubsGroupService {
     @Override
     @Transactional(readOnly = true)
     public TreeResponse getSubsGroupTreeResponse() {
-        SubsGroup subsGroup =  subsGroupDao.getSubsGroupWithSubstitutesById(1L);
-        System.out.println(subsGroup.getSubstitutes().size());
         TreeResponse response = new TreeResponse();
-        response.setNodes(convertSubsGroupListToTreeNodes(subsGroupDao.getAllSubsGroups()));
+        response.setDtos(convertSubsGroupListToTreeNodes(subsGroupDao.getAllSubsGroups()));
         return response;
     }
 }

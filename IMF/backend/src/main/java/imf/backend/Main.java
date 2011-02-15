@@ -34,8 +34,9 @@ public class Main {
 //        System.out.println(service.getAllUnitsGroups().getUnitsGroup().get(0).getName());
 //        Map<String, String> map = new HashMap<String, String>();
 //        SubsGroup subsGroup =  subsGroupDao.getSubsGroupWithSubstitutesById(1l);
-        TreeResponse tree =  subsGroupService.getSubsGroupTreeResponse();
-        System.out.println(tree.getNodes().size());
+//        TreeResponse tree =  subsGroupService.getSubsGroupTreeResponse();
+//        @Transactional
+        subsGroupDao.getSubsGroups(0).size();
 
 
     }

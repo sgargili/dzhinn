@@ -1,11 +1,12 @@
 package imf.backend;
 
-import imf.core.dto.web.request.UnitsGroupAddRequest;
+import imf.core.dto.web.request.BaseRequest;
 import imf.core.dto.web.response.TreeResponse;
 import imf.core.dto.web.response.UnitsGroupResponse;
 import imf.core.dto.web.response.UnitsOfMeasureResponse;
 import imf.core.service.UnitsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UnitsGroupController {
 
+    @Qualifier("unitsGroupService")
     @Autowired
     private UnitsGroupService unitsGroupService;
 
@@ -28,21 +30,21 @@ public class UnitsGroupController {
 
     @RequestMapping(value = "/addUnitsGroup", method = RequestMethod.POST)
     @ResponseBody
-    public boolean addUnitsGroup(@RequestBody UnitsGroupAddRequest request) {
+    public boolean addUnitsGroup(@RequestBody BaseRequest request) {
         unitsGroupService.addUnitsGroup(request);
         return true;
     }
 
     @RequestMapping(value = "/updateUnitsGroup", method = RequestMethod.POST)
     @ResponseBody
-    public boolean updateUnitsGroup(@RequestBody UnitsGroupAddRequest request) {
+    public boolean updateUnitsGroup(@RequestBody BaseRequest request) {
         unitsGroupService.updateUnitsGroup(request);
         return true;
     }
 
     @RequestMapping(value = "/deleteUnitsGroup", method = RequestMethod.POST)
     @ResponseBody
-    public boolean deleteUnitsGroup(@RequestBody UnitsGroupAddRequest request) {
+    public boolean deleteUnitsGroup(@RequestBody BaseRequest request) {
         unitsGroupService.deleteUnitsGroup(request);
         return true;
     }
