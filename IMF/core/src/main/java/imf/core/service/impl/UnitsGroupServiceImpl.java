@@ -174,7 +174,7 @@ public class UnitsGroupServiceImpl implements UnitsGroupService {
         UnitsGroup ug = new UnitsGroup();
         ug.setId(id);
         UnitsOfMeasureResponse response = new UnitsOfMeasureResponse();
-        response.setTotalRowsCount(unitOfMeasureDao.getTotalRowsById(id));
+        response.setTotalRowsCount(unitOfMeasureDao.getTotalRowsByGroupId(id));
         response.setDtos(convertUnitsOfMeasureListToDtoList(unitOfMeasureDao.getUnitOfMeasuresByUnitsGroup(ug)));
         return response;
     }

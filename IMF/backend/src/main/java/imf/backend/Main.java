@@ -1,9 +1,12 @@
 package imf.backend;
 
+import imf.core.dao.AttributeDao;
 import imf.core.dao.SubsGroupDao;
+import imf.core.dao.SubstituteDao;
 import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.UnitsGroupDto;
 import imf.core.dto.web.response.TreeResponse;
+import imf.core.entity.Group;
 import imf.core.entity.SubsGroup;
 import imf.core.entity.UnitsGroup;
 import imf.core.service.SubsGroupService;
@@ -26,7 +29,8 @@ public class Main {
     private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
     private static SubsGroupDao subsGroupDao = (SubsGroupDao) appctx.getBean("subsGroupDao");
     private static SubsGroupService subsGroupService = (SubsGroupService) appctx.getBean("subsGroupService");
-
+    private static SubstituteDao substituteDao = (SubstituteDao) appctx.getBean("substituteDao");
+    private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attributeDao");
     public static void main(String[] args) {
 //        UnitsGroup ug = dao.getUnitsGroupById(1l);
 //        ug.setUnitOfMeasures(null);
@@ -36,8 +40,12 @@ public class Main {
 //        SubsGroup subsGroup =  subsGroupDao.getSubsGroupWithSubstitutesById(1l);
 //        TreeResponse tree =  subsGroupService.getSubsGroupTreeResponse();
 //        @Transactional
-        subsGroupDao.getSubsGroups(0).size();
-
+//        subsGroupDao.getSubsGroups(0).size();
+//        SubsGroup subsGroup = new SubsGroup();
+//        subsGroup.setId(1L);
+        Group group = new Group();
+        group.setId(1l);
+        System.out.println(attributeDao.getAllAttributesByGroup(group).get(0).getAttribute2Groups().get(0).getComment());
 
     }
 }
