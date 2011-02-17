@@ -1,20 +1,16 @@
 package imf.core.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 
 @Entity
 @Table(name = "substitute", catalog = "imf")
+@NamedQueries({
+        @NamedQuery(name = "Substitute.findAllSubstitutesCount", query = "select count(*) from Substitute"),
+        @NamedQuery(name = "Substitute.findAllSubstitutesCountById", query = "select count(*) from Substitute sub where sub.subsGroup.id = :id")
+})
 public class Substitute implements java.io.Serializable {
 
 
@@ -43,7 +39,6 @@ public class Substitute implements java.io.Serializable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-
     @Column(name = "id", unique = true, nullable = false)
     public Long getId() {
         return this.id;

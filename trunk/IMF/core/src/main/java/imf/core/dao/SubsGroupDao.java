@@ -1,7 +1,6 @@
 package imf.core.dao;
 
 import imf.core.entity.SubsGroup;
-import imf.core.entity.UnitsGroup;
 
 import java.util.List;
 

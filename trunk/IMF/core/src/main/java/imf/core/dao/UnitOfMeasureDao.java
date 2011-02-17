@@ -33,5 +33,5 @@ public interface UnitOfMeasureDao {
 
     Long getTotalRows();
 
-    Long getTotalRowsById(Long id);
+    Long getTotalRowsByGroupId(Long id);
 }

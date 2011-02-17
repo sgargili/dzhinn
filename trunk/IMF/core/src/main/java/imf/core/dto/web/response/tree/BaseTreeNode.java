@@ -1,7 +1,5 @@
 package imf.core.dto.web.response.tree;
 
-import javax.xml.bind.annotation.*;
-
 /**
  * User: Andrey Popov
  * Date: 04.02.11

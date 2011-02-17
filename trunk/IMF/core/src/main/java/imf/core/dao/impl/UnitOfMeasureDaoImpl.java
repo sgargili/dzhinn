@@ -31,7 +31,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
     @Override
     public UnitOfMeasure saveUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
         unitOfMeasure.setId((Long) hibernateTemplate.save(unitOfMeasure));
-        return null;
+        return unitOfMeasure;
     }
 
     @Override
@@ -105,7 +105,7 @@ public class UnitOfMeasureDaoImpl implements UnitOfMeasureDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Long getTotalRowsById(Long id) {
+    public Long getTotalRowsByGroupId(Long id) {
         return ((List<Long>) hibernateTemplate.findByNamedQueryAndNamedParam("UnitOfMeasure.findAllUnitsOfMeasureCountById", "id", id)).get(0);
     }
 }
