@@ -11,6 +11,12 @@
 
     <artifactId>core</artifactId>
 
+    <repositories>
+        <repository>
+        <id>JBoss</id>
+        <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+    </repository>
+    </repositories>
 
     <build>
         <resources>
@@ -107,7 +113,7 @@
         <dependency>
             <groupId>jboss</groupId>
             <artifactId>javassist</artifactId>
-            <version>3.4.ga</version>
+            <version>3.8.0.GA</version>
         </dependency>
         <dependency>
             <groupId>postgresql</groupId>

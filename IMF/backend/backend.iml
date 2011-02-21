@@ -22,6 +22,13 @@
         </sourceRoots>
       </configuration>
     </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="sessionFactory" value="f243d5b4-f9c6-4f79-9652-75bcf24a410b" />
+        </datasource-map>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -71,7 +78,7 @@
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-commons-annotations:3.2.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: jboss:javassist:3.4.ga" level="project" />
+    <orderEntry type="library" name="Maven: jboss:javassist:3.8.0.GA" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-ws-core:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.ws:spring-xml:2.0.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: wsdl4j:wsdl4j:1.6.1" level="project" />

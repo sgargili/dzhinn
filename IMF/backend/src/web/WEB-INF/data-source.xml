@@ -18,6 +18,10 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="annotatedClasses">
             <list>
+                <value>imf.core.entity.Attribute</value>
+                <value>imf.core.entity.Attribute2Group</value>
+                <value>imf.core.entity.Group</value>
+                <value>imf.core.entity.Template</value>
                 <value>imf.core.entity.UnitsGroup</value>
                 <value>imf.core.entity.UnitOfMeasure</value>
                 <value>imf.core.entity.SubsGroup</value>
