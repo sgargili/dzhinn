@@ -9,6 +9,7 @@ import imf.core.dto.web.response.TreeResponse;
 import imf.core.entity.Group;
 import imf.core.entity.SubsGroup;
 import imf.core.entity.UnitsGroup;
+import imf.core.service.AttributeService;
 import imf.core.service.SubsGroupService;
 import imf.core.service.UnitsGroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,13 @@ import java.util.Map;
  */
 public class Main {
     private static ClassPathXmlApplicationContext appctx = new ClassPathXmlApplicationContext("spring.xml");
-    private static UnitsGroupService service = (UnitsGroupService) appctx.getBean("unitsGroupService");
+    /*private static UnitsGroupService service = (UnitsGroupService) appctx.getBean("unitsGroupService");
     private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
     private static SubsGroupDao subsGroupDao = (SubsGroupDao) appctx.getBean("subsGroupDao");
     private static SubsGroupService subsGroupService = (SubsGroupService) appctx.getBean("subsGroupService");
     private static SubstituteDao substituteDao = (SubstituteDao) appctx.getBean("substituteDao");
-    private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attributeDao");
+    private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attributeDao");*/
+    private static AttributeService attributeService = (AttributeService) appctx.getBean("attributeService");
     public static void main(String[] args) {
 //        UnitsGroup ug = dao.getUnitsGroupById(1l);
 //        ug.setUnitOfMeasures(null);
@@ -45,7 +47,7 @@ public class Main {
 //        subsGroup.setId(1L);
         Group group = new Group();
         group.setId(1l);
-        System.out.println(attributeDao.getAllAttributesByGroup(group).get(0).getAttribute2Groups().get(0).getComment());
+        System.out.println(attributeService.getAttributesByGroupId(1L).getDtos().size());
 
     }
 }
