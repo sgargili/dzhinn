@@ -1,13 +1,5 @@
 package imf.core.dto;
 
-import javax.xml.bind.annotation.XmlTransient;
-import java.util.ArrayList;
-import java.util.List;
-
-import imf.core.entity.Attribute2Group;
-import imf.core.entity.SubsGroup;
-import imf.core.entity.UnitOfMeasure;
-import imf.core.entity.UnitsGroup;
 
 /**
  * Developed by: Andrey Popov
@@ -15,34 +7,35 @@ import imf.core.entity.UnitsGroup;
  */
 
 public class AttributeDto extends BaseDto {
-    private UnitsGroup unitsGroup;
-    private SubsGroup subsGroup;
-    private UnitOfMeasure unitOfMeasure;
+    private Long unitsGroup;
+    private Long subsGroup;
+    private Long unitOfMeasure;
     private Byte type;
     private Byte typeOfValues;
-    private List<Attribute2Group> attribute2Groups;
+    private Boolean require;
+    private Boolean composite;
 
-    public UnitsGroup getUnitsGroup() {
+    public Long getUnitsGroup() {
         return unitsGroup;
     }
 
-    public void setUnitsGroup(UnitsGroup unitsGroup) {
+    public void setUnitsGroup(Long unitsGroup) {
         this.unitsGroup = unitsGroup;
     }
 
-    public SubsGroup getSubsGroup() {
+    public Long getSubsGroup() {
         return subsGroup;
     }
 
-    public void setSubsGroup(SubsGroup subsGroup) {
+    public void setSubsGroup(Long subsGroup) {
         this.subsGroup = subsGroup;
     }
 
-    public UnitOfMeasure getUnitOfMeasure() {
+    public Long getUnitOfMeasure() {
         return unitOfMeasure;
     }
 
-    public void setUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
+    public void setUnitOfMeasure(Long unitOfMeasure) {
         this.unitOfMeasure = unitOfMeasure;
     }
 
@@ -62,11 +55,19 @@ public class AttributeDto extends BaseDto {
         this.typeOfValues = typeOfValues;
     }
 
-    public List<Attribute2Group> getAttribute2Groups() {
-        return attribute2Groups;
+    public Boolean getRequire() {
+        return require;
     }
 
-    public void setAttribute2Groups(List<Attribute2Group> attribute2Groups) {
-        this.attribute2Groups = attribute2Groups;
+    public void setRequire(Boolean require) {
+        this.require = require;
+    }
+
+    public Boolean getComposite() {
+        return composite;
+    }
+
+    public void setComposite(Boolean composite) {
+        this.composite = composite;
     }
 }

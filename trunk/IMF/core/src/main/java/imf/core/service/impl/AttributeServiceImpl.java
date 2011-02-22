@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Developed by: Andrey Popov
  * Date (time): 21.02.11 (12:50)
  */
- @Repository
+@Repository
 @Service("attributeService")
 public class AttributeServiceImpl implements AttributeService {
     @Autowired
@@ -28,14 +28,24 @@ public class AttributeServiceImpl implements AttributeService {
         List<AttributeDto> attributeDtos = new ArrayList<AttributeDto>();
         AttributeDto dto;
         for (Attribute attribute : attributes) {
+
             dto = new AttributeDto();
             dto.setComment(attribute.getComment());
             dto.setId(attribute.getId());
             dto.setName(attribute.getName());
-            dto.setSubsGroup(attribute.getSubsGroup());
-            dto.setUnitsGroup(attribute.getUnitsGroup());
-            dto.setUnitOfMeasure(attribute.getUnitOfMeasure());
-            dto.setAttribute2Groups(attribute.getAttribute2Groups());
+            System.out.println(attribute.getAttribute2Groups());
+//            dto.setRequire(attribute.getAttribute2Groups().get(0).isRequare());
+//            dto.setComposite(attribute.getAttribute2Groups().get(0).isComposite());
+//            try {
+//                dto.setSubsGroup(attribute.getSubsGroup().getId());
+//                dto.setUnitOfMeasure(attribute.getUnitOfMeasure().getId());
+//                dto.setUnitsGroup(attribute.getUnitsGroup().getId());
+//            } catch (NullPointerException ex) {
+//            }
+//            dto.setSubsGroup(attribute.getSubsGroup());
+//            dto.setUnitsGroup(attribute.getUnitsGroup());
+//            dto.setUnitOfMeasure(attribute.getUnitOfMeasure());
+//            dto.setAttribute2Groups(attribute.getAttribute2Groups());
             dto.setType(attribute.getType());
             dto.setTypeOfValues(attribute.getType());
             attributeDtos.add(dto);
