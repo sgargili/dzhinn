@@ -94,15 +94,16 @@ public class AttributeDaoImpl implements AttributeDao {
     public List<Attribute> getAllAttributesByGroup(Group group) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
         criteria.setFetchMode("subsGroup", FetchMode.JOIN);
-        criteria.setFetchMode("subsGroup.substitutes", FetchMode.JOIN);
         criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
         criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
         criteria.setFetchMode("attribute2Groups", FetchMode.JOIN);
-        criteria.setFetchMode("attribute2Groups.group", FetchMode.JOIN);
-//        criteria.setFlushMode(FlushMode.COMMIT);
         criteria.createAlias("attribute2Groups", "a2g");
+        criteria.setFetchMode("a2g.group", FetchMode.JOIN);
+        criteria.setFetchMode("a2g.attribute", FetchMode.JOIN);
         criteria.add(Restrictions.eq("a2g.group",group));
-        return criteria.list();
+        List<Attribute> list = criteria.list();
+        System.out.println(list.get(0).getUnitOfMeasure());
+        return list;
     }
 
     @Override

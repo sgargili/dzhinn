@@ -20,7 +20,7 @@ public class Attribute implements java.io.Serializable {
     private String comment;
     private Byte type;
     private Byte typeOfValues;
-    private List<Attribute2Group> attribute2Groups = new ArrayList(0);
+    private List<Attribute2Group> attribute2Groups;
 
     public Attribute() {
     }

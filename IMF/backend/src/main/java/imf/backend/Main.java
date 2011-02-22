@@ -45,9 +45,9 @@ public class Main {
 //        subsGroupDao.getSubsGroups(0).size();
 //        SubsGroup subsGroup = new SubsGroup();
 //        subsGroup.setId(1L);
-        Group group = new Group();
-        group.setId(1l);
-        System.out.println(attributeService.getAttributesByGroupId(1L).getDtos().size());
+//        Group group = new Group();
+//        group.setId(1l);
+        System.out.println(attributeService.getAttributesByGroupId(50L));
 
     }
 }
