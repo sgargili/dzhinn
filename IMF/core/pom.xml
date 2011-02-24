@@ -13,9 +13,9 @@
 
     <repositories>
         <repository>
-        <id>JBoss</id>
-        <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-    </repository>
+            <id>JBoss</id>
+            <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+        </repository>
     </repositories>
 
     <build>
