@@ -98,8 +98,8 @@ public class AttributeDaoImpl implements AttributeDao {
         criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
         criteria.setFetchMode("attribute2Groups", FetchMode.JOIN);
         criteria.createAlias("attribute2Groups", "a2g");
-        criteria.setFetchMode("a2g.group", FetchMode.JOIN);
-        criteria.setFetchMode("a2g.attribute", FetchMode.JOIN);
+//        criteria.setFetchMode("a2g.group", FetchMode.JOIN);
+//        criteria.setFetchMode("a2g.attribute", FetchMode.JOIN);
         criteria.add(Restrictions.eq("a2g.group",group));
         List<Attribute> list = criteria.list();
         System.out.println(list.get(0).getUnitOfMeasure());
