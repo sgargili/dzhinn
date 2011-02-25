@@ -25,6 +25,11 @@
                 <value>hbt.model.Attribute</value>
                 <value>hbt.model.Group</value>
                 <value>hbt.model.Attribute2Group</value>
+                <value>hbt.model.Template</value>
+                <value>hbt.model.Item</value>
+                <value>hbt.model.Product</value>
+                <value>hbt.model.ProductItem</value>
+                <!--<value>hbt.model.Template</value>-->
             </list>
         </property>
         <property name="hibernateProperties">

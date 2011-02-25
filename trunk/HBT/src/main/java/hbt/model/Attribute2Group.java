@@ -47,7 +47,8 @@ public class Attribute2Group implements java.io.Serializable {
     @EmbeddedId
     @AttributeOverrides({
             @AttributeOverride(name = "attributeId", column = @Column(name = "attribute_id", nullable = false)),
-            @AttributeOverride(name = "groupId", column = @Column(name = "group_id", nullable = false))})
+            @AttributeOverride(name = "groupId", column = @Column(name = "group_id", nullable = false))
+    })
     public Attribute2GroupId getId() {
         return this.id;
     }
