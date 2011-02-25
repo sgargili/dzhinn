@@ -8,6 +8,8 @@ import hbt.model.Group;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Example;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -29,6 +31,10 @@ public class AttributeDaoImpl implements AttributeDao {
         this.hibernateTemplate = new HibernateTemplate(sessionFactory);
     }
 
+    public Attribute getAttributeById(Long id) {
+        return hibernateTemplate.get(Attribute.class, id);
+    }
+
     public List<Attribute> getAttributes() {
         return hibernateTemplate.loadAll(Attribute.class);
     }
@@ -36,11 +42,16 @@ public class AttributeDaoImpl implements AttributeDao {
     @SuppressWarnings("unchecked")
     @Transactional(readOnly = true)
     public List<Attribute> getAllAttributesByGroup(Group group) {
-        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Group.class);
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
+//        criteria.setFetchMode("attribute2Group", FetchMode.JOIN);
+        criteria.createCriteria("attribute2Group");
+//        criteria.createAlias("group", "group");
+        criteria.add(Restrictions.eq("attribute2Group.group.id", group.getId()));
 
-        /*criteria.setFetchMode("attribute2Groups", FetchMode.JOIN); */
-        criteria.createAlias("attribute2Groups", "a2g");
-        criteria.add(Restrictions.eq("a2g.group", group));
+        criteria.createCriteria("groups");
+//        criteria.createAlias("groups", "group");
+        criteria.add(Restrictions.eq("id", group.getId()));
+
         List<Attribute> list = criteria.list();
         return list;
     }

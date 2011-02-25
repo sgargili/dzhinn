@@ -11,6 +11,7 @@ import hbt.model.Group;
  */
 
 public interface AttributeDao {
+    Attribute getAttributeById(Long id);
     List<Attribute> getAttributes();
     List<Attribute> getAllAttributesByGroup(Group group);
 }
