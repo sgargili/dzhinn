@@ -17,8 +17,6 @@ public class Attribute2Group implements java.io.Serializable {
 
 
     private Attribute2GroupId id;
-    private Group group;
-    private Attribute attribute;
     private boolean composite;
     private boolean requare;
     private String comment;
@@ -26,28 +24,11 @@ public class Attribute2Group implements java.io.Serializable {
     public Attribute2Group() {
     }
 
-
-    public Attribute2Group(Attribute2GroupId id, Group group, Attribute attribute, boolean composite, boolean requare) {
-        this.id = id;
-        this.group = group;
-        this.attribute = attribute;
-        this.composite = composite;
-        this.requare = requare;
-    }
-
-    public Attribute2Group(Attribute2GroupId id, Group group, Attribute attribute, boolean composite, boolean requare, String comment) {
-        this.id = id;
-        this.group = group;
-        this.attribute = attribute;
-        this.composite = composite;
-        this.requare = requare;
-        this.comment = comment;
-    }
-
     @EmbeddedId
     @AttributeOverrides({
             @AttributeOverride(name = "attributeId", column = @Column(name = "attribute_id", nullable = false)),
-            @AttributeOverride(name = "groupId", column = @Column(name = "group_id", nullable = false))})
+            @AttributeOverride(name = "groupId", column = @Column(name = "group_id", nullable = false))
+    })
     public Attribute2GroupId getId() {
         return this.id;
     }
@@ -56,25 +37,6 @@ public class Attribute2Group implements java.io.Serializable {
         this.id = id;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false, insertable = false, updatable = false)
-    public Group getGroup() {
-        return this.group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attribute_id", nullable = false, insertable = false, updatable = false)
-    public Attribute getAttribute() {
-        return this.attribute;
-    }
-
-    public void setAttribute(Attribute attribute) {
-        this.attribute = attribute;
-    }
 
     @Column(name = "composite", nullable = false)
     public boolean isComposite() {
@@ -102,8 +64,6 @@ public class Attribute2Group implements java.io.Serializable {
     public void setComment(String comment) {
         this.comment = comment;
     }
-
-
 }
 
 

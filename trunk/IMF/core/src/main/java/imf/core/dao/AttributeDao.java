@@ -2,6 +2,7 @@ package imf.core.dao;
 
 import java.util.List;
 
+import imf.core.dto.AttributeDto;
 import imf.core.entity.Attribute;
 import imf.core.entity.Group;
 
@@ -27,11 +28,11 @@ public interface AttributeDao {
 
     List<Attribute> getAttributes(int firstResult, int maxResult);
 
-    List<Attribute> getAllAttributesByGroup(Group group);
+    List<AttributeDto> getAllAttributesDtoByGroup(Group group);
 
-    List<Attribute> getAttributesByGroup(Group group, int firstResult);
+    List<AttributeDto> getAttributesDtoByGroup(Group group, int firstResult);
 
-    List<Attribute> getAttributesByGroup(Group group, int firstResult, int maxResult);
+    List<AttributeDto> getAttributesDtoByGroup(Group group, int firstResult, int maxResult);
 
     Attribute getAttributeById(Long id);
 

@@ -2,15 +2,21 @@ package imf.core.entity;
 
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "attribute", catalog = "imf")
+@NamedQueries({
+        @NamedQuery(name = "Attribute.findAllAttributesCount",
+                query = "select count(*) from Attribute"
+        ),
+        @NamedQuery(name = "Attribute.findAllAttributesCountById",
+                query = "select count(attribute.id) from Attribute attribute join attribute.groups as group where group.id = :id"
+        )
+})
 public class Attribute implements java.io.Serializable {
-
 
     private Long id;
     private UnitsGroup unitsGroup;
@@ -20,7 +26,13 @@ public class Attribute implements java.io.Serializable {
     private String comment;
     private Byte type;
     private Byte typeOfValues;
-    private List<Attribute2Group> attribute2Groups;
+    private Set<Group> groups;
+
+    //Transient fields....
+    private boolean composite;
+    private boolean requare;
+    private String comment4Group;
+
 
     public Attribute() {
     }
@@ -31,16 +43,6 @@ public class Attribute implements java.io.Serializable {
         this.type = type;
     }
 
-    public Attribute(UnitsGroup unitsGroup, SubsGroup subsGroup, UnitOfMeasure unitOfMeasure, String name, String comment, byte type, Byte typeOfValues, List<Attribute2Group> attribute2Groups) {
-        this.unitsGroup = unitsGroup;
-        this.subsGroup = subsGroup;
-        this.unitOfMeasure = unitOfMeasure;
-        this.name = name;
-        this.comment = comment;
-        this.type = type;
-        this.typeOfValues = typeOfValues;
-        this.attribute2Groups = attribute2Groups;
-    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -119,16 +121,44 @@ public class Attribute implements java.io.Serializable {
         this.typeOfValues = typeOfValues;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "attribute")
-    public List<Attribute2Group> getAttribute2Groups() {
-        return this.attribute2Groups;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinTable(name = "attribute_2_group", catalog = "imf", joinColumns = {
+            @JoinColumn(name = "attribute_id", nullable = false, updatable = false)}, inverseJoinColumns = {
+            @JoinColumn(name = "group_id", nullable = false, updatable = false)})
+    public Set<Group> getGroups() {
+        return groups;
     }
 
-    public void setAttribute2Groups(List<Attribute2Group> attribute2Groups) {
-        this.attribute2Groups = attribute2Groups;
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
+    @Transient
+    public boolean isComposite() {
+        return composite;
+    }
 
+    public void setComposite(boolean composite) {
+        this.composite = composite;
+    }
+
+    @Transient
+    public boolean isRequare() {
+        return requare;
+    }
+
+    public void setRequare(boolean requare) {
+        this.requare = requare;
+    }
+
+    @Transient
+    public String getComment4Group() {
+        return comment4Group;
+    }
+
+    public void setComment4Group(String comment4Group) {
+        this.comment4Group = comment4Group;
+    }
 }
 
 

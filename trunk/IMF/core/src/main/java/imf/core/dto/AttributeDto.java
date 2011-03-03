@@ -14,6 +14,7 @@ public class AttributeDto extends BaseDto {
     private Byte typeOfValues;
     private Boolean require;
     private Boolean composite;
+    private String comment4Group;
 
     public Long getUnitsGroup() {
         return unitsGroup;
@@ -69,5 +70,13 @@ public class AttributeDto extends BaseDto {
 
     public void setComposite(Boolean composite) {
         this.composite = composite;
+    }
+
+    public String getComment4Group() {
+        return comment4Group;
+    }
+
+    public void setComment4Group(String comment4Group) {
+        this.comment4Group = comment4Group;
     }
 }

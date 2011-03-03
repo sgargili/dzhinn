@@ -1,24 +1,10 @@
 package imf.core.entity;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import javax.persistence.*;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
 
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
 @Entity
@@ -29,7 +15,7 @@ public class Template implements java.io.Serializable {
     private Long id;
     private String name;
     private String comment;
-    private List<Group> groups = new ArrayList(0);
+    private Set<Group> groups;
 //    private Set bisinessModels = new HashSet(0);
 
     public Template() {
@@ -40,12 +26,6 @@ public class Template implements java.io.Serializable {
         this.name = name;
     }
 
-//    public Template(String name, String comment, Set groups, Set bisinessModels) {
-//        this.name = name;
-//        this.comment = comment;
-//        this.groups = groups;
-//        this.bisinessModels = bisinessModels;
-//    }
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -81,23 +61,13 @@ public class Template implements java.io.Serializable {
     @JoinTable(name = "group_2_template", catalog = "imf", joinColumns = {
             @JoinColumn(name = "template_id", nullable = false, updatable = false)}, inverseJoinColumns = {
             @JoinColumn(name = "group_id", nullable = false, updatable = false)})
-    public List<Group> getGroups() {
+    public Set<Group> getGroups() {
         return this.groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
-
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "template")
-//    public Set getBisinessModels() {
-//        return this.bisinessModels;
-//    }
-//
-//    public void setBisinessModels(Set bisinessModels) {
-//        this.bisinessModels = bisinessModels;
-//    }
-
 
 }
 
