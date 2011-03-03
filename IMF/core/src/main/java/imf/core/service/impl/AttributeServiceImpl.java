@@ -33,7 +33,7 @@ public class AttributeServiceImpl implements AttributeService {
             dto.setComment(attribute.getComment());
             dto.setId(attribute.getId());
             dto.setName(attribute.getName());
-            System.out.println(attribute.getAttribute2Groups());
+//            System.out.println(attribute.getAttribute2Groups());
 //            dto.setRequire(attribute.getAttribute2Groups().get(0).isRequare());
 //            dto.setComposite(attribute.getAttribute2Groups().get(0).isComposite());
 //            try {
@@ -59,7 +59,34 @@ public class AttributeServiceImpl implements AttributeService {
         Group group = new Group();
         group.setId(groupId);
         AttributeResponse response = new AttributeResponse();
-        response.setDtos(convertAttributeListToDto(attributeDao.getAllAttributesByGroup(group)));
+        response.setDtos(attributeDao.getAllAttributesDtoByGroup(group));
+        response.setTotalRowsCount(attributeDao.getTotalRowsByGroupId(groupId));
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public AttributeResponse getAttributesByGroupId(Long groupId, Integer firstResult) {
+        Group group = new Group();
+        group.setId(groupId);
+
+        AttributeResponse response = new AttributeResponse();
+        response.setDtos(attributeDao.getAttributesDtoByGroup(group, firstResult));
+        response.setTotalRowsCount(attributeDao.getTotalRowsByGroupId(groupId));
+
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public AttributeResponse getAttributesByGroupId(Long groupId, Integer firstResult, Integer maxResult) {
+        Group group = new Group();
+        group.setId(groupId);
+
+        AttributeResponse response = new AttributeResponse();
+        response.setDtos(attributeDao.getAttributesDtoByGroup(group, firstResult, maxResult));
+        response.setTotalRowsCount(attributeDao.getTotalRowsByGroupId(groupId));
+
         return response;
     }
 }

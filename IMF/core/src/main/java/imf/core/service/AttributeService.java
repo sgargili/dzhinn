@@ -9,4 +9,8 @@ import imf.core.dto.web.response.AttributeResponse;
 
 public interface AttributeService {
     AttributeResponse getAttributesByGroupId(Long groupId);
+
+    AttributeResponse getAttributesByGroupId(Long groupId, Integer firstResult);
+
+    AttributeResponse getAttributesByGroupId(Long groupId, Integer firstResult, Integer maxResult);
 }

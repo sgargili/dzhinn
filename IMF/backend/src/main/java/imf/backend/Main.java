@@ -47,7 +47,7 @@ public class Main {
 //        subsGroup.setId(1L);
 //        Group group = new Group();
 //        group.setId(1l);
-        System.out.println(attributeService.getAttributesByGroupId(50L));
+        System.out.println(attributeService.getAttributesByGroupId(50L).getTotalRowsCount());
 
     }
 }

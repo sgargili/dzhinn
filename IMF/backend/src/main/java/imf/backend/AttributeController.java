@@ -24,8 +24,10 @@ public class AttributeController {
     private AttributeService attributeService;
 
     @RequestMapping(value = "/attributes", method = RequestMethod.GET)
-    public AttributeResponse getAllUnitGroups(@RequestParam Long groupId) {
-        AttributeResponse response = attributeService.getAttributesByGroupId(groupId);
+    public AttributeResponse getAllUnitGroups(@RequestParam Long groupId,
+                                              @RequestParam Integer firstResult,
+                                              @RequestParam Integer maxResult) {
+        AttributeResponse response = attributeService.getAttributesByGroupId(groupId, firstResult, maxResult);
         return response;
     }
 }
