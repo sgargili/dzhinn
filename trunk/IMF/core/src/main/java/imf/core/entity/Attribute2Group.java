@@ -1,15 +1,7 @@
 package imf.core.entity;
 
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "attribute_2_group", catalog = "imf")
@@ -17,8 +9,7 @@ public class Attribute2Group implements java.io.Serializable {
 
 
     private Attribute2GroupId id;
-    private boolean composite;
-    private boolean requare;
+    private Integer weight;
     private String comment;
 
     public Attribute2Group() {
@@ -38,7 +29,7 @@ public class Attribute2Group implements java.io.Serializable {
     }
 
 
-    @Column(name = "composite", nullable = false)
+    /*  @Column(name = "composite", nullable = false)
     public boolean isComposite() {
         return this.composite;
     }
@@ -54,6 +45,15 @@ public class Attribute2Group implements java.io.Serializable {
 
     public void setRequare(boolean requare) {
         this.requare = requare;
+    }*/
+
+    @Column(name = "weight", nullable = false)
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 
     @Column(name = "comment", length = 1024)

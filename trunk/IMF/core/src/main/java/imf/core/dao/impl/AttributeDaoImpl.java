@@ -42,8 +42,8 @@ public class AttributeDaoImpl implements AttributeDao {
         sqlBuffer.append("  atr.subs_group_id as subsGroup, ");
         sqlBuffer.append("  atr.unit_id as unitOfMeasure, ");
         sqlBuffer.append("  atr.unit_group_id as unitsGroup,");
-        sqlBuffer.append("  a2g.composite as composite, ");
-        sqlBuffer.append("  a2g.requare as require, ");
+        sqlBuffer.append("  a2g.weight as weight, ");
+//        sqlBuffer.append("  a2g.requare as require, ");
         sqlBuffer.append("  a2g.comment as comment4Group ");
         sqlBuffer.append("from ");
         sqlBuffer.append("  imf.attribute atr ");
@@ -54,7 +54,9 @@ public class AttributeDaoImpl implements AttributeDao {
         sqlBuffer.append("  imf.group grp ");
         sqlBuffer.append("  on grp.id = a2g.group_id ");
         sqlBuffer.append("where ");
-        sqlBuffer.append("  grp.id = :groupId");
+        sqlBuffer.append("  grp.id = :groupId ");
+        sqlBuffer.append("order by ");
+        sqlBuffer.append("  a2g.weight");
 
         return sqlBuffer.toString();
     }
@@ -71,8 +73,8 @@ public class AttributeDaoImpl implements AttributeDao {
         query.addScalar("unitOfMeasure", Hibernate.LONG);
         query.addScalar("type", Hibernate.BYTE);
         query.addScalar("typeOfValues", Hibernate.BYTE);
-        query.addScalar("composite", Hibernate.BOOLEAN);
-        query.addScalar("require", Hibernate.BOOLEAN);
+        query.addScalar("weight", Hibernate.INTEGER);
+//        query.addScalar("require", Hibernate.BOOLEAN);
         query.addScalar("comment4Group", Hibernate.STRING);
 
         return query;
@@ -201,8 +203,9 @@ public class AttributeDaoImpl implements AttributeDao {
 
     @Override
     public Long getTotalRows() {
-        return ((List<Long>) hibernateTemplate.findByNamedQuery("Attribute.findAllAttributesCount")).get(0);
-
+        return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
+                getNamedQuery("Attribute.findAllAttributesCount").
+                uniqueResult();
     }
 
     @Override

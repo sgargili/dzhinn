@@ -26,12 +26,13 @@ import java.util.Map;
  */
 public class Main {
     private static ClassPathXmlApplicationContext appctx = new ClassPathXmlApplicationContext("spring.xml");
+
     /*private static UnitsGroupService service = (UnitsGroupService) appctx.getBean("unitsGroupService");
-    private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
-    private static SubsGroupDao subsGroupDao = (SubsGroupDao) appctx.getBean("subsGroupDao");
-    private static SubsGroupService subsGroupService = (SubsGroupService) appctx.getBean("subsGroupService");
-    private static SubstituteDao substituteDao = (SubstituteDao) appctx.getBean("substituteDao");
-    private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attributeDao");*/
+private static UnitsGroupDao dao = (UnitsGroupDao) appctx.getBean("unitsGroupDao");
+private static SubsGroupDao subsGroupDao = (SubsGroupDao) appctx.getBean("subsGroupDao");
+private static SubsGroupService subsGroupService = (SubsGroupService) appctx.getBean("subsGroupService");
+private static SubstituteDao substituteDao = (SubstituteDao) appctx.getBean("substituteDao");
+private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attributeDao");*/
     private static AttributeService attributeService = (AttributeService) appctx.getBean("attributeService");
     public static void main(String[] args) {
 //        UnitsGroup ug = dao.getUnitsGroupById(1l);
@@ -45,9 +46,86 @@ public class Main {
 //        subsGroupDao.getSubsGroups(0).size();
 //        SubsGroup subsGroup = new SubsGroup();
 //        subsGroup.setId(1L);
-//        Group group = new Group();
-//        group.setId(1l);
+        Group group = new Group();
+        group.setId(1l);
         System.out.println(attributeService.getAttributesByGroupId(50L).getTotalRowsCount());
+        /*TestService service = (TestService) appctx.getBean("testService");
 
+        Long start = System.nanoTime();
+        System.out.print(service.getInteger(10));
+        Long end = System.nanoTime();
+        System.out.println(" 6 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(20));
+        end = System.nanoTime();
+        System.out.println(" 7 - "+(end - start));
+
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(30));
+        end = System.nanoTime();
+        System.out.println(" 8 - "+(end - start));
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(10));
+        end = System.nanoTime();
+        System.out.println(" 6 - "+(end - start));
+
+        service.clear();
+
+        start = System.nanoTime();
+        System.out.print(service.getInteger(10));
+        end = System.nanoTime();
+        System.out.println(" 6 - "+(end - start));*/
     }
 }

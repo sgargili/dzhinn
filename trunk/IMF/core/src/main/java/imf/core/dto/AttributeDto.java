@@ -15,6 +15,7 @@ public class AttributeDto extends BaseDto {
     private Boolean require;
     private Boolean composite;
     private String comment4Group;
+    private Integer weight;
 
     public Long getUnitsGroup() {
         return unitsGroup;
@@ -78,5 +79,13 @@ public class AttributeDto extends BaseDto {
 
     public void setComment4Group(String comment4Group) {
         this.comment4Group = comment4Group;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }

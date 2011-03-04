@@ -25,13 +25,27 @@ public interface GroupDao {
 
     List<Group> getGroups(int firstResult, int maxResult);
 
+    List<Group> getAllGroupsWithAttributes();
+
+    List<Group> getGroupsWithAttributes(int firstResult);
+
+    List<Group> getGroupsWithAttributes(int firstResult, int maxResult);
+
     List<Group> getAllGroupByTemplate(Template template);
 
     List<Group> getAllGroupByTemplate(Template template, int firstResult);
 
     List<Group> getAllGroupByTemplate(Template template, int firstResult, int maxResult);
 
+    List<Group> getAllGroupWithAttributesByTemplate(Template template);
+
+    List<Group> getAllGroupWithAttributesByTemplate(Template template, int firstResult);
+
+    List<Group> getAllGroupWithAttributesByTemplate(Template template, int firstResult, int maxResult);
+
     Group getGroupById(Long id);
+
+    Group getGroupWithAttributesById(Long id);
 
     Long getTotalRows();
 

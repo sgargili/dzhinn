@@ -15,6 +15,20 @@
         <repository>
             <id>JBoss</id>
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -48,7 +62,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
@@ -58,32 +72,32 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>3.0.3.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-oxm</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -120,11 +134,11 @@
             <artifactId>postgresql</artifactId>
             <version>9.0-801.jdbc4</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.ws</groupId>
             <artifactId>spring-ws-core</artifactId>
             <version>2.0.0.RELEASE</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
@@ -135,7 +149,16 @@
             <artifactId>jackson-xc</artifactId>
             <version>1.7.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.1.0.M1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>3.5.4-Final</version>
+        </dependency>
     </dependencies>
 
 </project>
