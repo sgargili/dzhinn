@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd"
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
        default-autowire="byName">
     <context:annotation-config/>
+    <cache:annotation-driven/>
     <context:component-scan base-package="imf"/>
+
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <!--<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="default"/>-->
+                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="integers"
+                      id="integers"/>
+            </set>
+        </property>
+    </bean>
 
     <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
@@ -17,9 +33,18 @@
         <property name="password" value="Pass4im"/>
     </bean>
 
+    <bean id="c3po" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+        <property name="driverClass" value="org.postgresql.Driver"/>
+        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/imf"/>
+        <property name="user" value="imuser"/>
+        <property name="password" value="Pass4im"/>
+        <property name="maxPoolSize" value="50"/>
+    </bean>
+
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="myDataSource"/>
+        <property name="dataSource" ref="c3po"/>
         <property name="annotatedClasses">
             <list>
                 <value>imf.core.entity.UnitsGroup</value>
@@ -29,6 +54,7 @@
                 <value>imf.core.entity.Attribute</value>
                 <value>imf.core.entity.Group</value>
                 <value>imf.core.entity.Attribute2Group</value>
+                <value>imf.core.entity.Group2Template</value>
                 <value>imf.core.entity.Template</value>
             </list>
         </property>
@@ -51,6 +77,6 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 
 </beans>

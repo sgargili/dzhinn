@@ -12,20 +12,28 @@
     <artifactId>backend</artifactId>
 
     <repositories>
-        <!--<repository>
+        <repository>
             <id>JBoss</id>
             <url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+        </repository>
+        <!--<repository>
+            <id>jboss2</id>
+            <url>http://repository.jboss.com/maven2</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>-->
         <repository>
-                <id>jboss2</id>
-                <url>http://repository.jboss.com/maven2</url>
-                <releases>
-                    <enabled>true</enabled>
-                </releases>
-                <snapshots>
-                    <enabled>false</enabled>
-                </snapshots>
-            </repository>
+            <id>org.springframework.maven.milestone</id>
+            <name>Spring Maven Milestone Repository</name>
+            <url>http://maven.springframework.org/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
 
     </repositories>
 
@@ -64,7 +72,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>3.0.5.RELEASE</version>
+            <version>3.1.0.M1</version>
         </dependency>
         <!--        <dependency>
             <groupId>org.springframework</groupId>
@@ -106,6 +114,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.0.2.GA</version>
         </dependency>
+
     </dependencies>
 
 </project>
