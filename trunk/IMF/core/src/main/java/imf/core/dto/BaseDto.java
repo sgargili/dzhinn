@@ -6,7 +6,7 @@ package imf.core.dto;
  */
 
 
- /*Базовый класс Dto...*/
+/*Базовый класс Dto...*/
 public class BaseDto {
     private Long id;
     private String name;
@@ -43,5 +43,25 @@ public class BaseDto {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BaseDto)) return false;
+
+        BaseDto baseDto = (BaseDto) o;
+
+        if (id != null ? !id.equals(baseDto.id) : baseDto.id != null) return false;
+        if (name != null ? !name.equals(baseDto.name) : baseDto.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
 }

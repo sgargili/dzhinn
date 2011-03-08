@@ -1,8 +1,22 @@
 package imf.core.entity;
 
 
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -14,6 +28,9 @@ import static javax.persistence.GenerationType.IDENTITY;
         ),
         @NamedQuery(name = "Attribute.findAllAttributesCountById",
                 query = "select count(attribute.id) from Attribute attribute join attribute.groups as group where group.id = :id"
+        ),
+        @NamedQuery(name = "Attribute.findAllAttributesCountByName",
+                query = "select count(attribute.id) from Attribute attribute where attribute.name like :attributeName"
         )
 })
 public class Attribute implements java.io.Serializable {

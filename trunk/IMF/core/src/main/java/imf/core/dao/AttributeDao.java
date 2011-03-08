@@ -28,6 +28,12 @@ public interface AttributeDao {
 
     List<Attribute> getAttributes(int firstResult, int maxResult);
 
+    List<Attribute> getAllAttributesByName(String attributeName);
+
+    List<Attribute> getAttributesByName(String attributeName, int firstResult);
+
+    List<Attribute> getAttributesByName(String attributeName, int firstResult, int maxResult);
+
     List<AttributeDto> getAllAttributesDtoByGroup(Group group);
 
     List<AttributeDto> getAttributesDtoByGroup(Group group, int firstResult);
@@ -36,7 +42,11 @@ public interface AttributeDao {
 
     Attribute getAttributeById(Long id);
 
+    Boolean isAttributePresentByName(String name);
+
     Long getTotalRows();
+
+    Long getTotalRowsByAttributeName(String attributeName);
 
     Long getTotalRowsByGroupId(Long id);
 }
