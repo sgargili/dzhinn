@@ -1,7 +1,12 @@
 package imf.core.dto.web.response;
 
-import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Developed by: Andrey Popov
@@ -14,7 +19,7 @@ public class BaseResponse {
     @XmlElement(nillable = false) //Если элемент null, то не отображать его...
     private Long totalRowsCount;
     @XmlTransient //Убрали отображение этого поля, но в дочерних классах покажем его под "нормальными" именами...
-    private List dtos;
+    private List dtos = new ArrayList();
 
     public BaseResponse() {
     }
@@ -38,5 +43,9 @@ public class BaseResponse {
 
     public void setDtos(List dtos) {
         this.dtos = dtos;
+    }
+
+    public void addDto(Object o) {
+        this.dtos.add(o);
     }
 }

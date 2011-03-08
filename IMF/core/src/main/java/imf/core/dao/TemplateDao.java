@@ -1,7 +1,6 @@
 package imf.core.dao;
 
-import java.util.List;
-
+import imf.core.dto.TemplateDto;
 import imf.core.entity.Template;
 
 /**
@@ -10,24 +9,26 @@ import imf.core.entity.Template;
  */
 
 public interface TemplateDao {
-    Template saveTemplate(Template template);
+//    Template saveTemplate(Template template);
+//
+//    void saveOrUpdateTemplate(Template template);
+//
+//    void updateTemplate(Template template);
+//
+//    void deleteTemplate(Template template);
+//
+//    List<Template> getAllTemplates();
+//
+//    List<Template> getTemplates(int firstResult);
+//
+//    List<Template> getTemplates(int firstResult, int maxResult);
 
-    void saveOrUpdateTemplate(Template template);
+    TemplateDto getTemplateDto(Template template);
 
-    void updateTemplate(Template template);
-
-    void deleteTemplate(Template template);
-
-    List<Template> getAllTemplates();
-
-    List<Template> getTemplates(int firstResult);
-
-    List<Template> getTemplates(int firstResult, int maxResult);
-
-    Template getTemplateById(Long id);
-
-    Template getTemplateWithGroupsAndAttributesById(Long id);
-
-    Long getTotalRows();
+//    Template getTemplateById(Long id);
+//
+//    Template getTemplateWithGroupsAndAttributesById(Long id);
+//
+//    Long getTotalRows();
 
 }

@@ -1,16 +1,14 @@
 package imf.backend;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
-import imf.core.entity.UnitsGroup;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.map.AnnotationIntrospector;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
+
+import imf.core.entity.UnitsGroup;
 
 public class JsonExample {
     public static void main(String argv[]) {
@@ -28,7 +26,7 @@ public class JsonExample {
         final AnnotationIntrospector introspector = new JaxbAnnotationIntrospector();
         mapper.getDeserializationConfig().setAnnotationIntrospector(introspector);
         mapper.getSerializationConfig().setAnnotationIntrospector(introspector);
-        mapper.configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, true);
+        mapper.configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, false);
         UnitsGroup group = new UnitsGroup();
         group.setId(1L);
         group.setComment("Comment");
@@ -37,5 +35,4 @@ public class JsonExample {
 
         System.out.println(mapper.writeValueAsString(group));
     }
-
 }

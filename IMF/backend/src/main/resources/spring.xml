@@ -8,8 +8,10 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd"
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+        http://www.springframework.org/schema/cache
+        http://www.springframework.org/schema/cache/spring-cache.xsd"
        default-autowire="byName">
     <context:annotation-config/>
     <cache:annotation-driven/>
@@ -18,9 +20,9 @@
     <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
         <property name="caches">
             <set>
-                <!--<bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="default"/>-->
-                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="integers"
-                      id="integers"/>
+                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="default"/>
+                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="values"
+                      id="values"/>
             </set>
         </property>
     </bean>
@@ -78,5 +80,33 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
+
+    <bean id="longType" class="org.hibernate.type.LongType"/>
+    <bean id="stringType" class="org.hibernate.type.StringType"/>
+    <bean id="integerType" class="org.hibernate.type.IntegerType"/>
+    <bean id="booleanType" class="org.hibernate.type.BooleanType"/>
+
+
+    <bean id="sqlScalarTypesConfig" class="imf.core.config.SqlScalarTypesConfig">
+        <property name="scalarMap">
+            <map>
+                <entry key="ScalarTypes4TemplatesDto">
+                    <map>
+                        <entry key="templateId" value-ref="longType"/>
+                        <entry key="templateName" value-ref="stringType"/>
+                        <entry key="groupId" value-ref="longType"/>
+                        <entry key="groupName" value-ref="stringType"/>
+                        <entry key="attributeId" value-ref="longType"/>
+                        <entry key="attributeName" value-ref="stringType"/>
+                        <entry key="attributeWeight" value-ref="integerType"/>
+                        <entry key="groupWeight" value-ref="integerType"/>
+                        <entry key="attributeRequire" value-ref="booleanType"/>
+                        <entry key="attributeComposite" value-ref="booleanType"/>
+                    </map>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
 
 </beans>

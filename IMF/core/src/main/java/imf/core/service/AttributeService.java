@@ -1,6 +1,8 @@
 package imf.core.service;
 
+import imf.core.dto.web.request.AttributeRequest;
 import imf.core.dto.web.response.AttributeResponse;
+import imf.core.entity.Attribute;
 
 /**
  * Developed by: Andrey Popov
@@ -8,6 +10,17 @@ import imf.core.dto.web.response.AttributeResponse;
  */
 
 public interface AttributeService {
+
+    Attribute addAttribute(AttributeRequest attributeRequest);
+
+    Boolean isAttributePresentByName(String attributeName);
+
+    AttributeResponse getAttributesByName(String attributeName);
+
+    AttributeResponse getAttributesByName(String attributeName, Integer firstResult);
+
+    AttributeResponse getAttributesByName(String attributeName, Integer firstResult, Integer maxResult);
+
     AttributeResponse getAttributesByGroupId(Long groupId);
 
     AttributeResponse getAttributesByGroupId(Long groupId, Integer firstResult);

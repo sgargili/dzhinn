@@ -2,11 +2,8 @@ package imf.core.dao.impl;
 
 import java.util.List;
 
-import imf.core.dao.AttributeDao;
-import imf.core.dto.AttributeDto;
-import imf.core.entity.Attribute;
-import imf.core.entity.Group;
 import org.hibernate.*;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +12,11 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import imf.core.dao.AttributeDao;
+import imf.core.dto.AttributeDto;
+import imf.core.entity.Attribute;
+import imf.core.entity.Group;
 
 /**
  * Developed by: Andrey Popov
@@ -141,6 +143,42 @@ public class AttributeDaoImpl implements AttributeDao {
 
     @Override
     @SuppressWarnings("unchecked")
+    public List<Attribute> getAllAttributesByName(String attributeName) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
+        criteria.add(Restrictions.like("name", attributeName));
+        criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("subsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
+        return criteria.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Attribute> getAttributesByName(String attributeName, int firstResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
+        criteria.add(Restrictions.like("name", attributeName));
+        criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("subsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
+        criteria.setFirstResult(firstResult);
+        return criteria.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Attribute> getAttributesByName(String attributeName, int firstResult, int maxResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
+        criteria.add(Restrictions.like("name", attributeName));
+        criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("subsGroup", FetchMode.JOIN);
+        criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResult);
+        return criteria.list();
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public List<AttributeDto> getAllAttributesDtoByGroup(Group group) {
 
         log.info("Building DAO request getAllAttributesDtoByGroup(Group group) with groupId: {}", group.getId());
@@ -202,9 +240,24 @@ public class AttributeDaoImpl implements AttributeDao {
     }
 
     @Override
+    public Boolean isAttributePresentByName(String name) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
+        criteria.add(Restrictions.eq("name", name));
+        return criteria.list().size() > 0;
+    }
+
+    @Override
     public Long getTotalRows() {
         return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
                 getNamedQuery("Attribute.findAllAttributesCount").
+                uniqueResult();
+    }
+
+    @Override
+    public Long getTotalRowsByAttributeName(String attributeName) {
+        return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
+                getNamedQuery("Attribute.findAllAttributesCountByName").
+                setString("attributeName", attributeName).
                 uniqueResult();
     }
 

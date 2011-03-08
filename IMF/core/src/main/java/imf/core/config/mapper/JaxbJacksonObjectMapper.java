@@ -1,4 +1,4 @@
-package imf.core.dto.mapper;
+package imf.core.config.mapper;
 
 /**
  * User: Andrey Popov
@@ -7,9 +7,7 @@ package imf.core.dto.mapper;
  */
 
 import org.codehaus.jackson.map.AnnotationIntrospector;
-import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.xc.JaxbAnnotationIntrospector;
 
 //Промежуточный класс для Spring-настройки Json-маппера с помощью Jaxb аннотаций.

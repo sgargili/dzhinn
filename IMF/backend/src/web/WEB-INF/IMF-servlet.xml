@@ -31,6 +31,7 @@
                 <value>imf.core.dto.web.response.UnitsGroupResponse</value>
                 <value>imf.core.dto.web.response.UnitsOfMeasureResponse</value>
                 <value>imf.core.dto.web.response.TreeResponse</value>
+                <value>imf.core.dto.web.response.TemplateResponse</value>
             </list>
         </property>
     </bean>
@@ -51,7 +52,7 @@
     </bean>-->
 
 
-    <bean id="jsonObjectMapper" class="imf.core.dto.mapper.JaxbJacksonObjectMapper"/>
+    <bean id="jsonObjectMapper" class="imf.core.config.mapper.JaxbJacksonObjectMapper"/>
 
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="ignoreAcceptHeader" value="true"/>
