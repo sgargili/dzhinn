@@ -1,8 +1,12 @@
 package imf.backend;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import imf.core.dao.GroupDao;
+import imf.core.dto.GroupDto;
 
 /**
  * User: Andrey Popov
@@ -24,28 +28,30 @@ private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attrib
 
 //    private static SqlScalarTypesConfig config = (SqlScalarTypesConfig) appctx.getBean("sqlScalarTypesConfig");
 
-    private static CsvService csvService = (CsvService) appctx.getBean("csvService");
+//    private static CsvService csvService = (CsvService) appctx.getBean("csvService");
 
+    private static GroupDao dao = (GroupDao) appctx.getBean("groupDao");
 
     public static void main(String[] args) throws IOException {
 
-
-        Long start = System.nanoTime();
-        System.out.println(csvService.getValueByKey("Ключ 199997"));
-        Long end = System.nanoTime();
-        System.out.println((end - start));
-
-
-         start = System.nanoTime();
-        System.out.println(csvService.getValueByKey("Ключ 199997"));
-         end = System.nanoTime();
-        System.out.println((end - start));
-
-         csvService.clear();
-         start = System.nanoTime();
-        System.out.println(csvService.getValueByKey("Ключ 199997"));
-         end = System.nanoTime();
-        System.out.println((end - start));
+        List<GroupDto> dtos = dao.getGroupsWithAttributes(0, 20);
+        System.out.println(dtos.size());
+//        Long start = System.nanoTime();
+//        System.out.println(csvService.getValueByKey("Ключ 199997"));
+//        Long end = System.nanoTime();
+//        System.out.println((end - start));
+//
+//
+//         start = System.nanoTime();
+//        System.out.println(csvService.getValueByKey("Ключ 199997"));
+//         end = System.nanoTime();
+//        System.out.println((end - start));
+//
+//         csvService.clear();
+//         start = System.nanoTime();
+//        System.out.println(csvService.getValueByKey("Ключ 199997"));
+//         end = System.nanoTime();
+//        System.out.println((end - start));
 
 
 //        UnitsGroup ug = dao.getUnitsGroupById(1l);

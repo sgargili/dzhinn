@@ -1,87 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:cache="http://www.springframework.org/schema/cache"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
-        http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache.xsd"
-       default-autowire="byName">
-    <context:annotation-config/>
-    <cache:annotation-driven/>
-    <context:component-scan base-package="imf"/>
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="default"/>
-                <bean class="org.springframework.cache.concurrent.ConcurrentCacheFactoryBean" name="values"
-                      id="values"/>
-            </set>
-        </property>
-    </bean>
-
-    <bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/imf"/>
-        <property name="username" value="imuser"/>
-        <property name="password" value="Pass4im"/>
-    </bean>
-
-    <bean id="c3po" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass" value="org.postgresql.Driver"/>
-        <property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/imf"/>
-        <property name="user" value="imuser"/>
-        <property name="password" value="Pass4im"/>
-        <property name="maxPoolSize" value="50"/>
-    </bean>
-
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="c3po"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>imf.core.entity.UnitsGroup</value>
-                <value>imf.core.entity.UnitOfMeasure</value>
-                <value>imf.core.entity.Substitute</value>
-                <value>imf.core.entity.SubsGroup</value>
-                <value>imf.core.entity.Attribute</value>
-                <value>imf.core.entity.Group</value>
-                <value>imf.core.entity.Attribute2Group</value>
-                <value>imf.core.entity.Group2Template</value>
-                <value>imf.core.entity.Template</value>
-            </list>
-        </property>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <!--<prop key="hibernate.hbm2ddl.auto">update</prop>-->
-                <prop key="hibernate.default_schema">imf</prop>
-            </props>
-        </property>
-    </bean>
-
-    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
-
-     <bean id="longType" class="org.hibernate.type.LongType"/>
+    <bean id="longType" class="org.hibernate.type.LongType"/>
     <bean id="stringType" class="org.hibernate.type.StringType"/>
     <bean id="integerType" class="org.hibernate.type.IntegerType"/>
     <bean id="byteType" class="org.hibernate.type.ByteType"/>
@@ -233,6 +156,5 @@
             </map>
         </property>
     </bean>
-
 
 </beans>

@@ -2,6 +2,7 @@ package imf.core.entity;
 
 
 import javax.persistence.*;
+
 import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
@@ -17,6 +18,10 @@ public class Group implements java.io.Serializable {
     private String comment;
     private Set<Template> templates;
     private Set<Attribute> attributes;
+
+    //Transient fields....
+    private Integer weight;
+    private String comment4Group;
 
     public Group() {
     }
@@ -77,6 +82,24 @@ public class Group implements java.io.Serializable {
 
     public void setAttributes(Set<Attribute> attributes) {
         this.attributes = attributes;
+    }
+
+    @Transient
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    @Transient
+    public String getComment4Group() {
+        return comment4Group;
+    }
+
+    public void setComment4Group(String comment4Group) {
+        this.comment4Group = comment4Group;
     }
 }
 

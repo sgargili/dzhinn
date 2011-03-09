@@ -21,11 +21,7 @@ public class AttributeController {
     @RequestMapping(value = "/addAttribute", method = RequestMethod.POST)
     @ResponseBody
     public Boolean addAttribute(@RequestBody AttributeRequest attributeRequest) {
-        if (attributeService.addAttribute(attributeRequest) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return (attributeService.addAttribute(attributeRequest) != null);
     }
 
     @RequestMapping(value = "/isAttributePresent", method = RequestMethod.GET)
@@ -38,15 +34,13 @@ public class AttributeController {
     public AttributeResponse getAttributesByGroup(@RequestParam Long groupId,
                                                   @RequestParam Integer firstResult,
                                                   @RequestParam Integer maxResult) {
-        AttributeResponse response = attributeService.getAttributesByGroupId(groupId, firstResult, maxResult);
-        return response;
+        return attributeService.getAttributesByGroupId(groupId, firstResult, maxResult);
     }
 
     @RequestMapping(value = "/attributesByName", method = RequestMethod.GET)
     public AttributeResponse getAttributesByName(@RequestParam String attributeName,
                                                  @RequestParam Integer firstResult,
                                                  @RequestParam Integer maxResult) {
-        AttributeResponse response = attributeService.getAttributesByName(attributeName, firstResult, maxResult);
-        return response;
+        return attributeService.getAttributesByName(attributeName, firstResult, maxResult);
     }
 }

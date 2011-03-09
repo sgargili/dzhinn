@@ -2,6 +2,7 @@ package imf.core.dao;
 
 import java.util.List;
 
+import imf.core.dto.GroupDto;
 import imf.core.entity.Group;
 import imf.core.entity.Template;
 
@@ -25,23 +26,23 @@ public interface GroupDao {
 
     List<Group> getGroups(int firstResult, int maxResult);
 
-    List<Group> getAllGroupsWithAttributes();
+    List<GroupDto> getAllGroupsWithAttributes();
 
-    List<Group> getGroupsWithAttributes(int firstResult);
+    List<GroupDto> getGroupsWithAttributes(int firstResult);
 
-    List<Group> getGroupsWithAttributes(int firstResult, int maxResult);
+    List<GroupDto> getGroupsWithAttributes(int firstResult, int maxResult);
 
-    List<Group> getAllGroupByTemplate(Template template);
+    List<GroupDto> getAllGroupByTemplate(Template template);
 
-    List<Group> getAllGroupByTemplate(Template template, int firstResult);
+    List<GroupDto> getAllGroupByTemplate(Template template, int firstResult);
 
-    List<Group> getAllGroupByTemplate(Template template, int firstResult, int maxResult);
+    List<GroupDto> getAllGroupByTemplate(Template template, int firstResult, int maxResult);
 
-    List<Group> getAllGroupWithAttributesByTemplate(Template template);
+    List<GroupDto> getAllGroupWithAttributesByTemplate(Template template);
 
-    List<Group> getAllGroupWithAttributesByTemplate(Template template, int firstResult);
+    List<GroupDto> getAllGroupWithAttributesByTemplate(Template template, int firstResult);
 
-    List<Group> getAllGroupWithAttributesByTemplate(Template template, int firstResult, int maxResult);
+    List<GroupDto> getAllGroupWithAttributesByTemplate(Template template, int firstResult, int maxResult);
 
     Group getGroupById(Long id);
 

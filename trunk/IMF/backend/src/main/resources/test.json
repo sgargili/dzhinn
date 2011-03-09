@@ -1,0 +1,11 @@
+{
+    "AttributeRequest":{
+        "name":"New Name",
+        "comment":"NewComment",
+        "type":0,
+        "unitsGroupId":null,
+        "subsGroupId":null,
+        "unitOfMeasureId":null,
+        "typeOfValues":null
+    }
+}

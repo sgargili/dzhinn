@@ -48,6 +48,7 @@ public class Attribute implements java.io.Serializable {
     //Transient fields....
     private boolean composite;
     private boolean requare;
+    private Integer weight;
     private String comment4Group;
 
 
@@ -175,6 +176,15 @@ public class Attribute implements java.io.Serializable {
 
     public void setComment4Group(String comment4Group) {
         this.comment4Group = comment4Group;
+    }
+
+    @Transient
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }
 

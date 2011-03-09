@@ -11,7 +11,7 @@ package imf.core.dto.web.request;
  */
 public class BaseRequest {
     //Основа, которая находится в составе любой из сущностей данных...
-//    private Long id;
+    private Long id;
     private String name;
     private String comment;
 
@@ -39,11 +39,11 @@ public class BaseRequest {
         this.comment = comment;
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
