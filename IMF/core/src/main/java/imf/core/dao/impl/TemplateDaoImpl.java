@@ -38,45 +38,6 @@ public class TemplateDaoImpl implements TemplateDao {
 
         log.info("Getting SqlString for AttributesDto query...");
 
-        /*StringBuffer sqlBuffer = new StringBuffer();
-
-        sqlBuffer.append("select");
-        sqlBuffer.append("    tpl.id as \"templateId\",");
-        sqlBuffer.append("    tpl.\"name\" as \"templateName\",");
-        sqlBuffer.append("    grp.id as \"groupId\",");
-        sqlBuffer.append("    grp.\"name\" as \"groupName\",");
-        sqlBuffer.append("    atr.id as \"attributeId\",");
-        sqlBuffer.append("    atr.\"name\" as \"attributeName\",");
-        sqlBuffer.append("    g2t.weight as \"attributeWeight\",");
-        sqlBuffer.append("    a2g.weight as \"groupWeight\",");
-        sqlBuffer.append("    a2g2t.required as \"attributeRequire\",");
-        sqlBuffer.append("    a2g2t.composite as \"attributeComposite\" ");
-        sqlBuffer.append("from ");
-        sqlBuffer.append("    imf.attribute atr ");
-        sqlBuffer.append("inner join ");
-        sqlBuffer.append("    imf.attribute_2_group a2g");
-        sqlBuffer.append("        on a2g.attribute_id = atr.id ");
-        sqlBuffer.append("inner join");
-        sqlBuffer.append("    imf.\"group\" grp");
-        sqlBuffer.append("        on grp.id = a2g.group_id ");
-        sqlBuffer.append("inner join");
-        sqlBuffer.append("    imf.group_2_template g2t");
-        sqlBuffer.append("        on g2t.group_id = grp.id ");
-        sqlBuffer.append("inner join");
-        sqlBuffer.append("    imf.\"template\" tpl");
-        sqlBuffer.append("        on tpl.id = g2t.template_id ");
-        sqlBuffer.append("inner join");
-        sqlBuffer.append("    imf.attribute_2_group_2_template a2g2t");
-        sqlBuffer.append("        on a2g2t.attribute_id = atr.id");
-        sqlBuffer.append("        and a2g2t.group_id = grp.id");
-        sqlBuffer.append("        and a2g2t.template_id = tpl.id ");
-        sqlBuffer.append("where");
-        sqlBuffer.append("    tpl.id = :templateId ");
-        sqlBuffer.append("order by");
-        sqlBuffer.append("    g2t.weight,");
-        sqlBuffer.append("    a2g.weight");
-
-        return sqlBuffer.toString();*/
         return sqlScalarTypesConfig.getSqlMap().get("sql4TemplatesDto");
     }
 
@@ -84,7 +45,7 @@ public class TemplateDaoImpl implements TemplateDao {
 
         log.info("Setting Scalar Values for TemplatesDto query...");
 
-        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4TemplatesDto");
+        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4AttributesDto");
 
         for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
             query.addScalar(entry.getKey(), entry.getValue());
@@ -112,7 +73,7 @@ public class TemplateDaoImpl implements TemplateDao {
             attributeDto.setComposite((Boolean) map.get("attributeComposite"));
             attributeDto.setRequire((Boolean) map.get("attributeRequire"));
 
-            if (!((Long) map.get("groupId")).equals(groupDto.getId())) {
+            if (!(map.get("groupId")).equals(groupDto.getId())) {
                 groupDto = new GroupDto();
             }
 
@@ -138,6 +99,7 @@ public class TemplateDaoImpl implements TemplateDao {
 
 
     @Override
+      @SuppressWarnings("unchecked")
     public TemplateDto getTemplateDto(Template template) {
         log.info("Building DAO request getAllTemplatesDtos(Template template) with templateId: {}", template.getId());
 

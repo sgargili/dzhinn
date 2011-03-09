@@ -1,10 +1,12 @@
 package imf.core.dao.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.NullableType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import imf.core.config.SqlScalarTypesConfig;
 import imf.core.dao.AttributeDao;
 import imf.core.dto.AttributeDto;
 import imf.core.entity.Attribute;
@@ -28,56 +31,26 @@ public class AttributeDaoImpl implements AttributeDao {
 
     private Logger log = LoggerFactory.getLogger(AttributeDaoImpl.class);
 
+    @Autowired
+    private SqlScalarTypesConfig sqlScalarTypesConfig;
+
 
     private String getSqlQuery4AttributesDto() {
 
         log.info("Getting SqlString for AttributesDto query...");
 
-        StringBuffer sqlBuffer = new StringBuffer();
-
-        sqlBuffer.append("select ");
-        sqlBuffer.append("  atr.id, ");
-        sqlBuffer.append("  atr.comment, ");
-        sqlBuffer.append("  atr.name, ");
-        sqlBuffer.append("  atr.type, ");
-        sqlBuffer.append("  atr.type_of_values as typeOfValues, ");
-        sqlBuffer.append("  atr.subs_group_id as subsGroup, ");
-        sqlBuffer.append("  atr.unit_id as unitOfMeasure, ");
-        sqlBuffer.append("  atr.unit_group_id as unitsGroup,");
-        sqlBuffer.append("  a2g.weight as weight, ");
-//        sqlBuffer.append("  a2g.requare as require, ");
-        sqlBuffer.append("  a2g.comment as comment4Group ");
-        sqlBuffer.append("from ");
-        sqlBuffer.append("  imf.attribute atr ");
-        sqlBuffer.append("inner join ");
-        sqlBuffer.append("  imf.attribute_2_group a2g ");
-        sqlBuffer.append("  on a2g.attribute_id = atr.id ");
-        sqlBuffer.append("inner join ");
-        sqlBuffer.append("  imf.group grp ");
-        sqlBuffer.append("  on grp.id = a2g.group_id ");
-        sqlBuffer.append("where ");
-        sqlBuffer.append("  grp.id = :groupId ");
-        sqlBuffer.append("order by ");
-        sqlBuffer.append("  a2g.weight");
-
-        return sqlBuffer.toString();
+        return sqlScalarTypesConfig.getSqlMap().get("sql4AttributesDto");
     }
 
     private SQLQuery setScalarTypes4AttributesDto(SQLQuery query) {
 
         log.info("Setting Scalar Values for AttributesDto query...");
 
-        query.addScalar("id", Hibernate.LONG);
-        query.addScalar("name", Hibernate.STRING);
-        query.addScalar("comment", Hibernate.STRING);
-        query.addScalar("unitsGroup", Hibernate.LONG);
-        query.addScalar("subsGroup", Hibernate.LONG);
-        query.addScalar("unitOfMeasure", Hibernate.LONG);
-        query.addScalar("type", Hibernate.BYTE);
-        query.addScalar("typeOfValues", Hibernate.BYTE);
-        query.addScalar("weight", Hibernate.INTEGER);
-//        query.addScalar("require", Hibernate.BOOLEAN);
-        query.addScalar("comment4Group", Hibernate.STRING);
+        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4TemplatesDto");
+
+        for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
+            query.addScalar(entry.getKey(), entry.getValue());
+        }
 
         return query;
     }
@@ -102,7 +75,7 @@ public class AttributeDaoImpl implements AttributeDao {
 
     @Override
     public void updateAttribute(Attribute attribute) {
-        hibernateTemplate.save(attribute);
+        hibernateTemplate.update(attribute);
     }
 
     @Override
