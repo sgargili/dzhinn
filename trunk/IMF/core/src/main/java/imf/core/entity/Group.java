@@ -10,6 +10,17 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "group", catalog = "imf")
+@NamedQueries({
+        @NamedQuery(name = "Group.findAllGroupsCount",
+                query = "select count(*) from Group"
+        ),
+        @NamedQuery(name = "Group.findAllGroupsCountByTemplateId",
+                query = "select count(grp.id) from Group grp join grp.templates as template where template.id = :id"
+        ),
+        @NamedQuery(name = "Group.findAllGroupsCountByName",
+                query = "select count(grp.id) from Group grp where lower(grp.name) like lower(:groupName)"
+        )
+})
 public class Group implements java.io.Serializable {
 
 

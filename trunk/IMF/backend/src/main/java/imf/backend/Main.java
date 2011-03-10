@@ -1,12 +1,12 @@
 package imf.backend;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import imf.core.dao.GroupDao;
-import imf.core.dto.GroupDto;
+import imf.core.dto.web.request.AttributeRequest;
+import imf.core.dto.web.request.GroupRequest;
+import imf.core.service.Attribute2GroupService;
 
 /**
  * User: Andrey Popov
@@ -30,12 +30,34 @@ private static AttributeDao attributeDao = (AttributeDao) appctx.getBean("attrib
 
 //    private static CsvService csvService = (CsvService) appctx.getBean("csvService");
 
-    private static GroupDao dao = (GroupDao) appctx.getBean("groupDao");
+    //    private static GroupService groupService = (GroupService) appctx.getBean("groupService");
+    private static Attribute2GroupService attribute2GroupService = (Attribute2GroupService) appctx.getBean("attribute2GroupService");
 
     public static void main(String[] args) throws IOException {
+        GroupRequest request = new GroupRequest();
+        request.setId(2L);
+        AttributeRequest attributeRequest = new AttributeRequest();
+        attributeRequest.setComment("New Relation 4 Group 1");
+        attributeRequest.setId(3L);
+        attributeRequest.setWeight(0);
+        request.addAttributeRequests(attributeRequest);
 
-        List<GroupDto> dtos = dao.getGroupsWithAttributes(0, 20);
-        System.out.println(dtos.size());
+        attributeRequest = new AttributeRequest();
+        attributeRequest.setComment("New Relation 4 Group 2");
+        attributeRequest.setId(4L);
+        attributeRequest.setWeight(1);
+        request.addAttributeRequests(attributeRequest);
+
+        attributeRequest = new AttributeRequest();
+        attributeRequest.setComment("New Relation 4 Group 3");
+        attributeRequest.setId(5L);
+        attributeRequest.setWeight(2);
+        request.addAttributeRequests(attributeRequest);
+
+        attribute2GroupService.deleteAttribute2Group(request);
+
+//        GroupResponse groupResponse = groupService.getGroupsWithAttributesByName("", 1000);
+//        System.out.println(groupResponse.getDtos().size());
 //        Long start = System.nanoTime();
 //        System.out.println(csvService.getValueByKey("Ключ 199997"));
 //        Long end = System.nanoTime();

@@ -21,7 +21,7 @@
         <property name="classesToBeBound">
             <list>
                 <value>imf.core.dto.web.response.AttributeResponse</value>
-               <!-- <value>imf.core.dto.web.response.TreeResponse</value>
+                <!-- <value>imf.core.dto.web.response.TreeResponse</value>
                 <value>imf.core.dto.web.response.TreeResponse</value>
                 <value>imf.core.dto.web.response.TreeResponse</value>-->
                 <value>imf.core.dto.AttributeDto</value>
@@ -58,6 +58,12 @@
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="ignoreAcceptHeader" value="true"/>
         <property name="favorPathExtension" value="true"/>
+        <property name="defaultContentType">
+            <bean class="org.springframework.http.MediaType">
+                <constructor-arg value="application" index="0"/>
+                <constructor-arg value="json" index="1"/>
+            </bean>
+        </property>
         <property name="mediaTypes">
             <map>
                 <entry key="xml" value="application/xml"/>

@@ -22,15 +22,17 @@ public interface GroupDao {
 
     List<Group> getAllGroups();
 
-    List<Group> getGroups(int firstResult);
+    List<Group> getGroupsByName(String groupName, int firstResult);
 
-    List<Group> getGroups(int firstResult, int maxResult);
+    List<Group> getGroupsByName(String groupName, int firstResult, int maxResult);
 
     List<GroupDto> getAllGroupsWithAttributes();
 
-    List<GroupDto> getGroupsWithAttributes(int firstResult);
+    List<GroupDto> getGroupsWithAttributesByName(String groupName);
 
-    List<GroupDto> getGroupsWithAttributes(int firstResult, int maxResult);
+    List<GroupDto> getGroupsWithAttributesByName(String groupName, int firstResult);
+
+    List<GroupDto> getGroupsWithAttributesByName(String groupName, int firstResult, int maxResult);
 
     List<GroupDto> getAllGroupByTemplate(Template template);
 
@@ -48,7 +50,11 @@ public interface GroupDao {
 
     Group getGroupWithAttributesById(Long id);
 
+    Boolean isGroupPresentByName(String groupName);
+
     Long getTotalRows();
+
+    Long getTotalRowsByName(String groupName);
 
     Long getTotalRowsByTemplateId(Long id);
 }
