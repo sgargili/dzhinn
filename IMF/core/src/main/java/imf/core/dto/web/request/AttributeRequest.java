@@ -11,6 +11,7 @@ public class AttributeRequest extends BaseRequest {
     private Long unitOfMeasureId;
     private Byte type;
     private Byte typeOfValues;
+    private Integer weight;
 
     public Long getUnitsGroupId() {
         return unitsGroupId;
@@ -50,5 +51,13 @@ public class AttributeRequest extends BaseRequest {
 
     public void setTypeOfValues(Byte typeOfValues) {
         this.typeOfValues = typeOfValues;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
     }
 }

@@ -24,6 +24,20 @@ public class AttributeController {
         return (attributeService.addAttribute(attributeRequest) != null);
     }
 
+    @RequestMapping(value = "/updateAttribute", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean updateAttribute(@RequestBody AttributeRequest attributeRequest) {
+        attributeService.updateAttribute(attributeRequest);
+        return true;
+    }
+
+    @RequestMapping(value = "/deleteAttribute", method = RequestMethod.POST)
+    @ResponseBody
+    public Boolean deleteAttribute(@RequestBody AttributeRequest attributeRequest) {
+        attributeService.deleteAttribute(attributeRequest);
+        return true;
+    }
+
     @RequestMapping(value = "/isAttributePresent", method = RequestMethod.GET)
     @ResponseBody
     public Boolean isAttributePresent(@RequestParam String attributeName) {

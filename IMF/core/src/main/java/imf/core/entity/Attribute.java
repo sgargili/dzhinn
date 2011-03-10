@@ -30,7 +30,7 @@ import static javax.persistence.GenerationType.IDENTITY;
                 query = "select count(attribute.id) from Attribute attribute join attribute.groups as group where group.id = :id"
         ),
         @NamedQuery(name = "Attribute.findAllAttributesCountByName",
-                query = "select count(attribute.id) from Attribute attribute where attribute.name like :attributeName"
+                query = "select count(attribute.id) from Attribute attribute where lower(attribute.name) like lower(:attributeName)"
         )
 })
 public class Attribute implements java.io.Serializable {

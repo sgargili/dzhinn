@@ -81,7 +81,7 @@
 
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
 
-     <bean id="longType" class="org.hibernate.type.LongType"/>
+    <bean id="longType" class="org.hibernate.type.LongType"/>
     <bean id="stringType" class="org.hibernate.type.StringType"/>
     <bean id="integerType" class="org.hibernate.type.IntegerType"/>
     <bean id="byteType" class="org.hibernate.type.ByteType"/>
@@ -188,6 +188,12 @@
                                  		on   a2g.attribute_id = atr.id
                                  	inner join imf.group grp
                                  		on   grp.id = a2g.group_id
+                                 		     and grp.id in (select
+                                 		                    	g.id
+                                 		                    from
+                                 		                    	imf.group g
+                                 		                    where
+		                    	                                g.name like :groupName limit :maxResult offset :firstResult)
                                  order by
                                  	grp.name,
                                  	a2g.weight

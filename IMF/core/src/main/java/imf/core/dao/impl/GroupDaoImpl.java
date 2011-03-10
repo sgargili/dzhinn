@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.NullableType;
 import org.slf4j.Logger;
@@ -90,6 +92,14 @@ public class GroupDaoImpl implements GroupDao {
         return groupDtos;
     }
 
+    private String getLikePattern(String keyWord) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("%");
+        buffer.append(keyWord);
+        buffer.append("%");
+        return buffer.toString();
+    }
+
     private HibernateTemplate hibernateTemplate;
 
     @Autowired
@@ -125,16 +135,18 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Group> getGroups(int firstResult) {
+    public List<Group> getGroupsByName(String groupName, int firstResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Group.class);
+        criteria.add(Restrictions.ilike("name", getLikePattern(groupName)));
         criteria.setFirstResult(firstResult);
         return criteria.list();
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Group> getGroups(int firstResult, int maxResult) {
+    public List<Group> getGroupsByName(String groupName, int firstResult, int maxResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Group.class);
+        criteria.add(Restrictions.ilike("name", getLikePattern(groupName)));
         criteria.setFirstResult(firstResult);
         criteria.setMaxResults(maxResult);
         return criteria.list();
@@ -149,6 +161,10 @@ public class GroupDaoImpl implements GroupDao {
 
         query = setScalarTypes4GroupsDto(query);
 
+        query.setParameter("firstResult", 0);
+        query.setParameter("maxResult", Integer.MAX_VALUE);
+        query.setString("groupName", "%");
+
         query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 
         return getListGroupDtoFromNativeDataList(query.list());
@@ -156,7 +172,7 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<GroupDto> getGroupsWithAttributes(int firstResult) {
+    public List<GroupDto> getGroupsWithAttributesByName(String groupName) {
         String sql = getSqlQuery4GroupsDto();
 
         SQLQuery query = hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql);
@@ -165,14 +181,16 @@ public class GroupDaoImpl implements GroupDao {
 
         query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 
-        query.setFirstResult(firstResult);
+        query.setInteger("firstResult", 0);
+        query.setInteger("maxResult", Integer.MAX_VALUE);
+        query.setString("groupName", getLikePattern(groupName));
 
         return getListGroupDtoFromNativeDataList(query.list());
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<GroupDto> getGroupsWithAttributes(int firstResult, int maxResult) {
+    public List<GroupDto> getGroupsWithAttributesByName(String groupName, int firstResult) {
         String sql = getSqlQuery4GroupsDto();
 
         SQLQuery query = hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql);
@@ -181,9 +199,27 @@ public class GroupDaoImpl implements GroupDao {
 
         query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 
-        query.setFirstResult(firstResult);
+        query.setParameter("firstResult", firstResult);
+        query.setParameter("maxResult", Integer.MAX_VALUE);
+        query.setString("groupName", getLikePattern(groupName));
 
-        query.setMaxResults(maxResult);
+        return getListGroupDtoFromNativeDataList(query.list());
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<GroupDto> getGroupsWithAttributesByName(String groupName, int firstResult, int maxResult) {
+        String sql = getSqlQuery4GroupsDto();
+
+        SQLQuery query = hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql);
+
+        query = setScalarTypes4GroupsDto(query);
+
+        query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
+
+        query.setParameter("firstResult", firstResult);
+        query.setParameter("maxResult", maxResult);
+        query.setString("groupName", getLikePattern(groupName));
 
         return getListGroupDtoFromNativeDataList(query.list());
     }
@@ -220,21 +256,44 @@ public class GroupDaoImpl implements GroupDao {
 
     @Override
     public Group getGroupById(Long id) {
-        return null;
+        return hibernateTemplate.get(Group.class, id);
     }
 
     @Override
     public Group getGroupWithAttributesById(Long id) {
-        return null;
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Group.class);
+        criteria.setFetchMode("attributes", FetchMode.JOIN);
+        criteria.add(Restrictions.eq("id", id));
+        return (Group) criteria.uniqueResult();
+    }
+
+    @Override
+    public Boolean isGroupPresentByName(String groupName) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Group.class);
+        criteria.add(Restrictions.eq("name", groupName));
+        return criteria.list().size() > 0;
     }
 
     @Override
     public Long getTotalRows() {
-        return null;
+        return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
+                getNamedQuery("Group.findAllGroupsCount").
+                uniqueResult();
+    }
+
+    @Override
+    public Long getTotalRowsByName(String groupName) {
+        return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
+                getNamedQuery("Group.findAllGroupsCountByName").
+                setString("groupName", getLikePattern(groupName)).
+                uniqueResult();
     }
 
     @Override
     public Long getTotalRowsByTemplateId(Long id) {
-        return null;
+        return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
+                getNamedQuery("Attribute.findAllAttributesCountById").
+                setLong("id", id).
+                uniqueResult();
     }
 }

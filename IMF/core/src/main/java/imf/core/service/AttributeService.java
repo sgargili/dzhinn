@@ -13,6 +13,10 @@ public interface AttributeService {
 
     Attribute addAttribute(AttributeRequest attributeRequest);
 
+    void updateAttribute(AttributeRequest attributeRequest);
+
+    void deleteAttribute(AttributeRequest attributeRequest);
+
     Boolean isAttributePresentByName(String attributeName);
 
     AttributeResponse getAttributesByName(String attributeName);

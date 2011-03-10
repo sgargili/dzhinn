@@ -55,6 +55,14 @@ public class AttributeDaoImpl implements AttributeDao {
         return query;
     }
 
+     private String getLikePattern(String keyWord) {
+        StringBuffer buffer = new StringBuffer();
+        buffer.append("%");
+        buffer.append(keyWord);
+        buffer.append("%");
+        return buffer.toString();
+    }
+
     private HibernateTemplate hibernateTemplate;
 
     @Autowired
@@ -118,7 +126,7 @@ public class AttributeDaoImpl implements AttributeDao {
     @SuppressWarnings("unchecked")
     public List<Attribute> getAllAttributesByName(String attributeName) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
-        criteria.add(Restrictions.like("name", attributeName));
+        criteria.add(Restrictions.ilike("name", getLikePattern(attributeName)));
         criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
         criteria.setFetchMode("subsGroup", FetchMode.JOIN);
         criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
@@ -129,7 +137,7 @@ public class AttributeDaoImpl implements AttributeDao {
     @SuppressWarnings("unchecked")
     public List<Attribute> getAttributesByName(String attributeName, int firstResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
-        criteria.add(Restrictions.like("name", attributeName));
+        criteria.add(Restrictions.ilike("name", getLikePattern(attributeName)));
         criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
         criteria.setFetchMode("subsGroup", FetchMode.JOIN);
         criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
@@ -141,7 +149,7 @@ public class AttributeDaoImpl implements AttributeDao {
     @SuppressWarnings("unchecked")
     public List<Attribute> getAttributesByName(String attributeName, int firstResult, int maxResult) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Attribute.class);
-        criteria.add(Restrictions.like("name", attributeName));
+        criteria.add(Restrictions.ilike("name", getLikePattern(attributeName)));
         criteria.setFetchMode("unitsGroup", FetchMode.JOIN);
         criteria.setFetchMode("subsGroup", FetchMode.JOIN);
         criteria.setFetchMode("unitOfMeasure", FetchMode.JOIN);
@@ -230,14 +238,14 @@ public class AttributeDaoImpl implements AttributeDao {
     public Long getTotalRowsByAttributeName(String attributeName) {
         return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
                 getNamedQuery("Attribute.findAllAttributesCountByName").
-                setString("attributeName", attributeName).
+                setString("attributeName", getLikePattern(attributeName)).
                 uniqueResult();
     }
 
     @Override
     public Long getTotalRowsByGroupId(Long id) {
         return (Long) hibernateTemplate.getSessionFactory().getCurrentSession().
-                getNamedQuery("Attribute.findAllAttributesCountById").
+                getNamedQuery("Group.findAllGroupsCountByTemplateId").
                 setLong("id", id).
                 uniqueResult();
     }

@@ -23,7 +23,7 @@ import imf.core.service.AttributeService;
 @Service("attributeService")
 public class AttributeServiceImpl implements AttributeService {
     @Autowired
-    AttributeDao attributeDao;
+    private AttributeDao attributeDao;
 
     private List<AttributeDto> convertAttributeListToDto(List<Attribute> attributes) {
         List<AttributeDto> attributeDtos = new ArrayList<AttributeDto>();
@@ -57,7 +57,7 @@ public class AttributeServiceImpl implements AttributeService {
     private Attribute convertAttributeRequestToAttribute(AttributeRequest attributeRequest) {
         Attribute attribute = new Attribute();
 
-//        attribute.setId(attributeRequest.getId());
+        attribute.setId(attributeRequest.getId());
         attribute.setName(attributeRequest.getName());
         attribute.setComment(attributeRequest.getComment());
         attribute.setType(attributeRequest.getType());
@@ -107,6 +107,16 @@ public class AttributeServiceImpl implements AttributeService {
     @Override
     public Attribute addAttribute(AttributeRequest attributeRequest) {
         return attributeDao.saveAttribute(convertAttributeRequestToAttribute(attributeRequest));
+    }
+
+    @Override
+    public void updateAttribute(AttributeRequest attributeRequest) {
+        attributeDao.updateAttribute(convertAttributeRequestToAttribute(attributeRequest));
+    }
+
+    @Override
+    public void deleteAttribute(AttributeRequest attributeRequest) {
+        attributeDao.deleteAttribute(convertAttributeRequestToAttribute(attributeRequest));
     }
 
     @Override
