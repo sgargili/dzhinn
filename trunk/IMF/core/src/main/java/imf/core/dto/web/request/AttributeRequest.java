@@ -12,6 +12,8 @@ public class AttributeRequest extends BaseRequest {
     private Byte type;
     private Byte typeOfValues;
     private Integer weight;
+    private Boolean composite;
+    private Boolean require;
 
     public Long getUnitsGroupId() {
         return unitsGroupId;
@@ -59,5 +61,21 @@ public class AttributeRequest extends BaseRequest {
 
     public void setWeight(Integer weight) {
         this.weight = weight;
+    }
+
+    public Boolean getComposite() {
+        return composite;
+    }
+
+    public void setComposite(Boolean composite) {
+        this.composite = composite;
+    }
+
+    public Boolean getRequire() {
+        return require;
+    }
+
+    public void setRequire(Boolean require) {
+        this.require = require;
     }
 }

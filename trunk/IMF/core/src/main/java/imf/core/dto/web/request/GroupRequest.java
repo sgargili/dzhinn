@@ -9,7 +9,16 @@ import java.util.List;
  */
 
 public class GroupRequest extends BaseRequest {
+    private Integer weight;
     private List<AttributeRequest> attributeRequests = new ArrayList<AttributeRequest>();
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
 
     public List<AttributeRequest> getAttributeRequests() {
         return attributeRequests;
@@ -22,5 +31,6 @@ public class GroupRequest extends BaseRequest {
     public void addAttributeRequests(AttributeRequest attributeRequest) {
         this.attributeRequests.add(attributeRequest);
     }
+
 
 }
