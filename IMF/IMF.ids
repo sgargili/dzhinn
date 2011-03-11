@@ -1,0 +1,200 @@
+<?xml version="1.0"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="" version="" jdbc-version="" driver-version="" uuid="1ef2032d-f7f9-46d1-b48a-135f72ad1929">
+    <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+    <jdbc-url>jdbc:postgresql://localhost:5432/imf</jdbc-url>
+    <user-name>imuser</user-name>
+    <user-password>dffadfcbdfd9dfd9df9edfc3dfc7</user-password>
+    <libraries>
+      <library>
+        <url>file://$PROJECT_DIR$/../postgresql-9.0-801.jdbc4.jar</url>
+      </library>
+    </libraries>
+    <table name="attribute" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="type" sqlType="int2" length="5" precision="0" nullable="false" jdbcType="5" />
+      <column name="type_of_values" sqlType="int2" length="5" precision="0" nullable="true" jdbcType="5" />
+      <column name="subs_group_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="unit_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="unit_group_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="attribute_pkey" columns="id" />
+      <foreign-key name="fkc7aa9cd7276c4b" columns="subs_group_id" ref-table="subs_group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fkc7aa9c8a1f68f1" columns="unit_id" ref-table="unit_of_measure" ref-schema="imf" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fkc7aa9cd7fdb9ae" columns="unit_group_id" ref-table="units_group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="attribute_2_group" schema="imf" catalog="" type="TABLE">
+      <column name="attribute_id" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="group_id" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="composite" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="requare" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <primary-key name="attribute_2_group_pkey" columns="attribute_id,group_id" />
+      <foreign-key name="fk9eb5e18ff507bd12" columns="attribute_id" ref-table="attribute" ref-schema="imf" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fk9eb5e18f12c93a32" columns="group_id" ref-table="group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="attribute_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="group" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="group_pkey" columns="id" />
+    </table>
+    <table name="group_2_template" schema="imf" catalog="" type="TABLE">
+      <column name="template_id" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="group_id" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <foreign-key name="fkc200bfa712c93a32" columns="group_id" ref-table="group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fkc200bfa7e27a4ba2" columns="template_id" ref-table="template" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="group_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="subs_group" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="type" sqlType="int2" length="5" precision="0" nullable="true" jdbcType="5" />
+      <column name="ug_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="subs_group_pkey" columns="id" />
+      <foreign-key name="fkafe1b173a7bf7860" columns="ug_id" ref-table="units_group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="subs_group_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="substitute" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="real_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="subs_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <column name="unit_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="substitute_pkey" columns="id" />
+      <foreign-key name="fkd3d4a49adeab5b8b" columns="subs_id" ref-table="subs_group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+      <foreign-key name="fkd3d4a49a8a1f68f1" columns="unit_id" ref-table="unit_of_measure" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="substitute_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="template" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="template_pkey" columns="id" />
+    </table>
+    <table name="template_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="unit_of_measure" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="default_value" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <column name="prefix" sqlType="varchar" length="32" precision="0" nullable="true" jdbcType="12" />
+      <column name="ratio" sqlType="float4" length="8" precision="8" nullable="false" jdbcType="7" />
+      <column name="ug_id" sqlType="int8" length="19" precision="0" nullable="true" jdbcType="-5" />
+      <primary-key name="unit_of_measure_pkey" columns="id" />
+      <foreign-key name="fk7348b491a7bf7860" columns="ug_id" ref-table="units_group" ref-schema="imf" ref-catalog="" ref-columns="id" />
+    </table>
+    <table name="unit_of_measure_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="units_group" schema="imf" catalog="" type="TABLE">
+      <column name="id" sqlType="bigserial" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="comment" sqlType="varchar" length="1024" precision="0" nullable="true" jdbcType="12" />
+      <column name="name" sqlType="varchar" length="512" precision="0" nullable="false" jdbcType="12" />
+      <primary-key name="units_group_pkey" columns="id" />
+    </table>
+    <table name="units_group_id" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="units_group_id_seq" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+    <table name="units_of_measure_id" schema="imf" catalog="" type="SEQUENCE">
+      <column name="sequence_name" sqlType="name" length="2147483647" precision="0" nullable="false" jdbcType="12" />
+      <column name="last_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="start_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="increment_by" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="max_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="min_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="cache_value" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="log_cnt" sqlType="int8" length="19" precision="0" nullable="false" jdbcType="-5" />
+      <column name="is_cycled" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+      <column name="is_called" sqlType="bool" length="1" precision="0" nullable="false" jdbcType="-7" />
+    </table>
+  </data-source>
+</component>
