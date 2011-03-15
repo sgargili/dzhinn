@@ -26,6 +26,10 @@
                 <value>imf.core.entity.UnitOfMeasure</value>
                 <value>imf.core.entity.SubsGroup</value>
                 <value>imf.core.entity.Substitute</value>
+                <value>imf.core.entity.Industry</value>
+                <value>imf.core.entity.Category</value>
+                <value>imf.core.entity.ProductType</value>
+                <value>imf.core.entity.Vendor</value>
             </list>
         </property>
         <property name="hibernateProperties">

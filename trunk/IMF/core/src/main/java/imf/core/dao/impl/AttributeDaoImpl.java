@@ -46,7 +46,7 @@ public class AttributeDaoImpl implements AttributeDao {
 
         log.info("Setting Scalar Values for AttributesDto query...");
 
-        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4TemplatesDto");
+        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("scalarTypes4TemplatesDto");
 
         for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
             query.addScalar(entry.getKey(), entry.getValue());

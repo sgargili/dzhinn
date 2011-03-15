@@ -14,21 +14,21 @@
     <bean id="sqlScalarTypesConfig" class="imf.core.config.SqlScalarTypesConfig">
         <property name="scalarMap">
             <map>
-                <entry key="ScalarTypes4AttributesDto">
+                <entry key="scalarTypes4AttributesDto">
                     <map>
-                        <entry key="id" value-ref="longType"/>
-                        <entry key="name" value-ref="stringType"/>
-                        <entry key="comment" value-ref="stringType"/>
-                        <entry key="unitsGroup" value-ref="longType"/>
-                        <entry key="subsGroup" value-ref="longType"/>
-                        <entry key="unitOfMeasure" value-ref="longType"/>
-                        <entry key="type" value-ref="byteType"/>
-                        <entry key="typeOfValues" value-ref="byteType"/>
-                        <entry key="weight" value-ref="integerType"/>
-                        <entry key="comment4Group" value-ref="stringType"/>
+                        <entry key="templateId" value-ref="longType"/>
+                        <entry key="templateName" value-ref="stringType"/>
+                        <entry key="groupId" value-ref="longType"/>
+                        <entry key="groupName" value-ref="stringType"/>
+                        <entry key="attributeId" value-ref="longType"/>
+                        <entry key="attributeName" value-ref="stringType"/>
+                        <entry key="attributeWeight" value-ref="integerType"/>
+                        <entry key="groupWeight" value-ref="integerType"/>
+                        <entry key="attributeRequire" value-ref="booleanType"/>
+                        <entry key="attributeComposite" value-ref="booleanType"/>
                     </map>
                 </entry>
-                <entry key="ScalarTypes4GroupsDto">
+                <entry key="scalarTypes4GroupsDto">
                     <map>
                         <entry key="groupId" value-ref="longType"/>
                         <entry key="groupName" value-ref="stringType"/>
@@ -44,7 +44,7 @@
                         <entry key="comment4Group" value-ref="stringType"/>
                     </map>
                 </entry>
-                <entry key="ScalarTypes4TemplatesDto">
+                <entry key="scalarTypes4TemplatesDto">
                     <map>
                         <entry key="templateId" value-ref="longType"/>
                         <entry key="templateName" value-ref="stringType"/>
