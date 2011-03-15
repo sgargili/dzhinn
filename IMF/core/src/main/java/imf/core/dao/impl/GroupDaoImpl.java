@@ -50,7 +50,7 @@ public class GroupDaoImpl implements GroupDao {
 
         log.info("Setting Scalar Values for AttributesDto query...");
 
-        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4GroupsDto");
+        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("scalarTypes4GroupsDto");
 
         for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
             query.addScalar(entry.getKey(), entry.getValue());

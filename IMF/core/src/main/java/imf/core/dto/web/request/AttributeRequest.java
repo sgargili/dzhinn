@@ -1,7 +1,7 @@
 package imf.core.dto.web.request;
 
 /**
- * Developed by: Администратор
+ * Developed by: Andrey Popov
  * Date (time): 07.03.11 (13:53)
  */
 

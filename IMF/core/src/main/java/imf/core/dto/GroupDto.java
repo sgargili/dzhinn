@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
- * Developed by: Администратор
+ * Developed by: Andrey Popov
  * Date (time): 06.03.11 (19:10)
  */
 

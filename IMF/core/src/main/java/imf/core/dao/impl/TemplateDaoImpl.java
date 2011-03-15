@@ -3,8 +3,10 @@ package imf.core.dao.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.NullableType;
 import org.slf4j.Logger;
@@ -22,7 +24,7 @@ import imf.core.dto.TemplateDto;
 import imf.core.entity.Template;
 
 /**
- * Developed by: Администратор
+ * Developed by: Andrey Popov
  * Date (time): 06.03.11 (19:15)
  */
 @Repository
@@ -45,7 +47,7 @@ public class TemplateDaoImpl implements TemplateDao {
 
         log.info("Setting Scalar Values for TemplatesDto query...");
 
-        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("ScalarTypes4AttributesDto");
+        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("scalarTypes4AttributesDto");
 
         for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
             query.addScalar(entry.getKey(), entry.getValue());
@@ -99,7 +101,28 @@ public class TemplateDaoImpl implements TemplateDao {
 
 
     @Override
-      @SuppressWarnings("unchecked")
+    public Template saveTemplate(Template template) {
+        template.setId((Long) hibernateTemplate.save(template));
+        return template;
+    }
+
+    @Override
+    public void saveOrUpdateTemplate(Template template) {
+        hibernateTemplate.saveOrUpdate(template);
+    }
+
+    @Override
+    public void updateTemplate(Template template) {
+        hibernateTemplate.update(template);
+    }
+
+    @Override
+    public void deleteTemplate(Template template) {
+        hibernateTemplate.delete(template);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
     public TemplateDto getTemplateDto(Template template) {
         log.info("Building DAO request getAllTemplatesDtos(Template template) with templateId: {}", template.getId());
 
@@ -113,5 +136,12 @@ public class TemplateDaoImpl implements TemplateDao {
         query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 
         return getTemplateDtoFromList(query.list());
+    }
+
+    @Override
+    public Boolean isTemplatePresentByName(String templateName) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(Template.class);
+        criteria.add(Restrictions.eq("name", templateName));
+        return criteria.list().size() > 0;
     }
 }

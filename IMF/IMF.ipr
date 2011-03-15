@@ -4,9 +4,9 @@
     <defaultAnt bundledAnt="true" />
   </component>
   <component name="ArtifactManager">
-    <artifact type="war" build-on-make="true" name="imf">
+    <artifact type="exploded-war" build-on-make="true" name="imf">
       <output-path>$PROJECT_DIR$/classes/artifacts/imf</output-path>
-      <root id="archive" name="imf.war">
+      <root id="root">
         <element id="directory" name="WEB-INF">
           <element id="directory" name="classes">
             <element id="module-output" name="IMF" />
@@ -70,9 +70,9 @@
         <element id="javaee-facet-resources" facet="backend/web/Web" />
       </root>
     </artifact>
-    <artifact type="ear" build-on-make="true" name="JavaEE">
+    <artifact type="exploded-ear" build-on-make="true" name="JavaEE">
       <output-path>$PROJECT_DIR$/classes/artifacts/JavaEE</output-path>
-      <root id="archive" name="JavaEE.ear">
+      <root id="root">
         <element id="javaee-facet-resources" facet="backend/javaeeApplication/JavaEE" />
         <element id="artifact" artifact-name="imf" />
       </root>
@@ -732,6 +732,37 @@
     <output url="file://$PROJECT_DIR$/classes" />
   </component>
   <component name="SvnBranchConfigurationManager">
+    <option name="myConfigurationMap">
+      <map>
+        <entry key="$PROJECT_DIR$">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchMap">
+                <map>
+                  <entry key="https://dzhinn.googlecode.com/svn/branches">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                  <entry key="https://dzhinn.googlecode.com/svn/tags">
+                    <value>
+                      <list />
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://dzhinn.googlecode.com/svn/branches" />
+                  <option value="https://dzhinn.googlecode.com/svn/tags" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://dzhinn.googlecode.com/svn/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="mySupportsUserInfoFilter" value="true" />
   </component>
   <component name="VcsDirectoryMappings">
@@ -1298,6 +1329,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: xpp3:xpp3:1.1.4c">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.4c/xpp3-1.1.4c.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/xpp3/xpp3/1.1.4c/xpp3-1.1.4c-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: xpp3:xpp3_min:1.1.4c">

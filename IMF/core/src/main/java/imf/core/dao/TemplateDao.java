@@ -9,13 +9,14 @@ import imf.core.entity.Template;
  */
 
 public interface TemplateDao {
-//    Template saveTemplate(Template template);
-//
-//    void saveOrUpdateTemplate(Template template);
-//
-//    void updateTemplate(Template template);
-//
-//    void deleteTemplate(Template template);
+    Template saveTemplate(Template template);
+
+    void saveOrUpdateTemplate(Template template);
+
+    void updateTemplate(Template template);
+
+    //
+    void deleteTemplate(Template template);
 //
 //    List<Template> getAllTemplates();
 //
@@ -24,6 +25,8 @@ public interface TemplateDao {
 //    List<Template> getTemplates(int firstResult, int maxResult);
 
     TemplateDto getTemplateDto(Template template);
+
+    Boolean isTemplatePresentByName(String templateName);
 
 //    Template getTemplateById(Long id);
 //

@@ -33,6 +33,7 @@
                 <value>imf.core.dto.web.response.TreeResponse</value>
                 <value>imf.core.dto.web.response.TemplateResponse</value>
                 <value>imf.core.dto.web.response.GroupResponse</value>
+                 <value>imf.core.dto.web.response.IndustryResponse</value>
             </list>
         </property>
     </bean>

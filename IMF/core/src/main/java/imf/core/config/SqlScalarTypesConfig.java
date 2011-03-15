@@ -6,7 +6,7 @@ import java.util.Map;
 import org.hibernate.type.NullableType;
 
 /**
- * Developed by: Администратор
+ * Developed by: Andrey Popov
  * Date (time): 06.03.11 (23:13)
  */
 
