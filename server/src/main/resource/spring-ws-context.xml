@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="sws"/>
+
+    <import resource="spring-db.xml"/>
+
+
+    <bean id="payloadMapping"
+          class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+        <!--<property name="interceptors">--><!--<list>--><!--<ref local="validatingInterceptor"/>--><!--<ref local="loggingInterceptor"/>--><!--</list>--><!--</property>-->
+    </bean>
+
+    <bean id="validatingInterceptor"
+          class="org.springframework.ws.soap.server.endpoint.interceptor.PayloadValidatingInterceptor">
+        <property name="xsdSchema" ref="schema"/>
+        <property name="validateRequest" value="true"/>
+        <property name="validateResponse" value="true"/>
+    </bean>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.DefaultMethodEndpointAdapter"/>
+
+    <bean id="loggingInterceptor" class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor">
+        <description>
+            This interceptor logs the message payload.
+        </description>
+    </bean>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+        <constructor-arg index="0" ref="marshaller"/>
+        <constructor-arg index="1" ref="marshaller"/>
+    </bean>
+
+
+
+    <!--<bean id="personEndPoint" class="wst.ws.PersonEndPoint">-->
+        <!--<constructor-arg ref="personService"/>-->
+    <!--</bean>-->
+
+    <bean id="user" class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
+        <property name="schema" ref="schema"/>
+        <property name="portTypeName" value="user"/>
+        <property name="locationUri" value="http://localhost:8080/sws/soap/services"/>
+    </bean>
+
+    <bean id="schema" class="org.springframework.xml.xsd.SimpleXsdSchema">
+        <description>
+            This bean definition contains the XSD schema.
+        </description>
+        <property name="xsd" value="classpath:user.xsd"/>
+    </bean>
+
+    <!--<bean id="personService" class="wst.service.impl.PersonServiceImpl">-->
+    <!--</bean>-->
+
+
+    <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>sws.model.User</value>
+                <value>sws.dto.UserDto</value>
+            </list>
+        </property>
+    </bean>
+
+</beans>
