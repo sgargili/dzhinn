@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<schema version="1.0"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="user">
+
+    <element name="userRequest">
+        <complexType>
+            <sequence>
+                <element name="id" type="long" minOccurs="0"/>
+                <element name="name" type="string" minOccurs="0"/>
+                <element name="password" type="string" minOccurs="0"/>
+                <element name="surname" type="string" minOccurs="0"/>
+                <element name="login" type="string" minOccurs="0"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="userResponse" type="string"/>
+
+    <element name="usersByNameRequest"/>
+        <!--<complexType>
+            <sequence>
+                <element name="name" type="string" minOccurs="0" />
+            </sequence>
+        </complexType>
+    </element>-->
+
+    <element name="usersByNameResponse" type="string"/>
+
+</schema>
