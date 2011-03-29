@@ -1,6 +1,9 @@
 package sws.service;
 
+import java.util.List;
+
 import sws.dto.UserDto;
+import sws.model.User;
 
 /**
  * Developed by: Andrey Popov
@@ -9,4 +12,6 @@ import sws.dto.UserDto;
 
 public interface UserService {
     UserDto getUserDtoByName(String name);
+
+    void batchSaveUsers(List<User> users);
 }
