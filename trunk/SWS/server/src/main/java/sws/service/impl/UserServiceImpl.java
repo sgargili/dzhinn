@@ -29,8 +29,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+    @Transactional //Оборачиваем метод в транзакцию
     public UserDto getUserDtoByName(String name) {
         return convertUserListToUserDto(userDao.getUsersByName(name));
+    }
+
+    @Override
+    @Transactional
+    public void batchSaveUsers(List<User> users) {
+        userDao.batchSaveUser(users);
     }
 }

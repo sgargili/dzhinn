@@ -11,7 +11,7 @@ public class UserClient {
 
     public static void main(String[] args) {
         User user = new User();
-        user.setLogin("pav");
+        user.setLogin("Login 1936");
         System.out.println(((User) webServiceTemplate.marshalSendAndReceive(user)).getName());
     }
 

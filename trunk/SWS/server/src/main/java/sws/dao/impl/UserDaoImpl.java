@@ -3,11 +3,11 @@ package sws.dao.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import sws.dao.UserDao;
 import sws.model.User;
@@ -28,6 +28,26 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void batchSaveUser(List<User> users) {
+        Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+        Integer index = 0;
+        System.out.println(users.size());
+        for (User user : users) {
+            session.save(user);
+            synchronized (index) {
+                index++;
+            }
+            if (index % 100 == 0) {
+                session.flush();
+                session.clear();
+            }
+        }
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Override
     public void updateUser(User user) {
         hibernateTemplate.update(user);
     }
@@ -38,7 +58,6 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public User getUserByLogin(String login) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(User.class);
         criteria.add(Restrictions.eq("login", login));
@@ -51,6 +70,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public List<User> getUsersByName(String name) {
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(User.class);
         criteria.add(Restrictions.like("name", "%" + name + "%"));

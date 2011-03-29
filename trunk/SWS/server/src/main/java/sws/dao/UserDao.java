@@ -12,6 +12,8 @@ import sws.model.User;
 public interface UserDao {
     User saveUser(User user);
 
+    void batchSaveUser(List<User> users);
+
     void updateUser(User user);
 
     void deleteUser(User user);
