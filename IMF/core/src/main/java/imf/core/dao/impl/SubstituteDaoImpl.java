@@ -1,8 +1,7 @@
 package imf.core.dao.impl;
 
-import imf.core.dao.SubstituteDao;
-import imf.core.entity.SubsGroup;
-import imf.core.entity.Substitute;
+import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -10,17 +9,17 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import imf.core.dao.SubstituteDao;
+import imf.core.entity.SubsGroup;
+import imf.core.entity.Substitute;
 
 /**
  * Developed by: Andrey Popov
  * Date (time): 17.02.11 (10:46)
  */
-@Repository
-@Service("substituteDao")
+@Repository("substituteDao")
 public class SubstituteDaoImpl implements SubstituteDao {
     private HibernateTemplate hibernateTemplate;
 

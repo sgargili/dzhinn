@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import imf.core.dao.Attribute2Group2TemplateDao;
 import imf.core.entity.Attribute2Group2Template;
@@ -16,8 +15,7 @@ import imf.core.entity.Attribute2Group2Template;
  * Date (time): 11.03.11 (16:27)
  */
 
-@Repository
-@Service("attribute2Group2TemplateDao")
+@Repository("attribute2Group2TemplateDao")
 public class Attribute2Group2TemplateDaoImpl implements Attribute2Group2TemplateDao {
     private Logger log = LoggerFactory.getLogger(Attribute2Group2TemplateDaoImpl.class);
 

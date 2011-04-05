@@ -59,7 +59,7 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
             <version>3.1.0.M1</version>
@@ -83,7 +83,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
             <version>3.1.0.M1</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
@@ -99,7 +99,7 @@
             <artifactId>spring-oxm</artifactId>
             <version>3.1.0.M1</version>
         </dependency>
-        <dependency>
+       <!-- <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
@@ -108,7 +108,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
             <version>3.5.4-Final</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
@@ -117,7 +117,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>3.5.4-Final</version>
+            <version>3.6.2.Final</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>

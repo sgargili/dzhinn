@@ -1,5 +1,12 @@
 package imf.core.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import imf.core.dao.UnitOfMeasureDao;
 import imf.core.dao.UnitsGroupDao;
 import imf.core.dto.UnitsGroupDto;
@@ -12,20 +19,12 @@ import imf.core.dto.web.response.tree.BaseTreeNode;
 import imf.core.entity.UnitOfMeasure;
 import imf.core.entity.UnitsGroup;
 import imf.core.service.UnitsGroupService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: Andrey Popov
  * Date: 17.11.2010
  * Time: 18:03:19
  */
-@Repository
 @Service("unitsGroupService")
 public class UnitsGroupServiceImpl implements UnitsGroupService {
     @Autowired

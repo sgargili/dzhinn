@@ -3,7 +3,7 @@ package imf.core.config;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.hibernate.type.NullableType;
+import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 
 /**
  * Developed by: Andrey Popov
@@ -12,17 +12,17 @@ import org.hibernate.type.NullableType;
 
 public class SqlScalarTypesConfig {
 
-    private Map<String, Map<String, NullableType>> scalarMap = new HashMap<String, Map<String, NullableType>>();
+    private Map<String, Map<String, AbstractSingleColumnStandardBasicType>> scalarMap = new HashMap<String, Map<String, AbstractSingleColumnStandardBasicType>>();
     private Map<String, String> sqlMap = new HashMap<String, String>();
 
     public SqlScalarTypesConfig() {
     }
 
-    public Map<String, Map<String, NullableType>> getScalarMap() {
+    public Map<String, Map<String, AbstractSingleColumnStandardBasicType>> getScalarMap() {
         return scalarMap;
     }
 
-    public void setScalarMap(Map<String, Map<String, NullableType>> scalarMap) {
+    public void setScalarMap(Map<String, Map<String, AbstractSingleColumnStandardBasicType>> scalarMap) {
         this.scalarMap = scalarMap;
     }
 

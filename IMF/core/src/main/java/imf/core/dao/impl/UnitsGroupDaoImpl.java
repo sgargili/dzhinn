@@ -1,15 +1,15 @@
 package imf.core.dao.impl;
 
-import imf.core.dao.UnitsGroupDao;
-import imf.core.entity.UnitsGroup;
+import java.util.List;
+
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
-import java.util.List;
+import imf.core.dao.UnitsGroupDao;
+import imf.core.entity.UnitsGroup;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,8 +18,7 @@ import java.util.List;
  * Time: 15:55:25
  * To change this template use File | Settings | File Templates.
  */
-@Repository
-@Service("unitsGroupDao")
+@Repository("unitsGroupDao")
 public class UnitsGroupDaoImpl implements UnitsGroupDao {
     private HibernateTemplate hibernateTemplate;
 

@@ -15,8 +15,7 @@ import java.util.List;
  * Developed by: Andrey Popov
  * Date (time): 14.02.11 (16:25)
  */
-@Repository
-@Service("subsGroupDao")
+@Repository("subsGroupDao")
 public class SubsGroupDaoImpl implements SubsGroupDao {
     private HibernateTemplate hibernateTemplate;
 
