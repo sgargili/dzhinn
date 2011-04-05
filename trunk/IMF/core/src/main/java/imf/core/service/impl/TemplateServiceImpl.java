@@ -1,7 +1,6 @@
 package imf.core.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +14,6 @@ import imf.core.service.TemplateService;
  * Developed by: Andrey Popov
  * Date (time): 06.03.11 (19:26)
  */
-@Repository
 @Service("templateService")
 public class TemplateServiceImpl implements TemplateService {
     @Autowired

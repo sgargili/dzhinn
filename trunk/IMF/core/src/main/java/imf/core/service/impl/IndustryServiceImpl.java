@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +19,6 @@ import imf.core.service.IndustryService;
  * Date (time): 15.03.11 (16:40)
  */
 
-@Repository
 @Service("industryService")
 public class IndustryServiceImpl implements IndustryService {
     @Autowired

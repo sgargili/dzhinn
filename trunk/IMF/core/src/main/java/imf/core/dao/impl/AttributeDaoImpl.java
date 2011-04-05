@@ -6,13 +6,12 @@ import java.util.Map;
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.transform.Transformers;
-import org.hibernate.type.NullableType;
+import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import imf.core.config.SqlScalarTypesConfig;
@@ -25,8 +24,7 @@ import imf.core.entity.Group;
  * Developed by: Andrey Popov
  * Date (time): 17.02.11 (16:13)
  */
-@Repository
-@Service("attributeDao")
+@Repository("attributeDao")
 public class AttributeDaoImpl implements AttributeDao {
 
     private Logger log = LoggerFactory.getLogger(AttributeDaoImpl.class);
@@ -46,9 +44,9 @@ public class AttributeDaoImpl implements AttributeDao {
 
         log.info("Setting Scalar Values for AttributesDto query...");
 
-        Map<String, NullableType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("scalarTypes4TemplatesDto");
+        Map<String, AbstractSingleColumnStandardBasicType> scalarMap = sqlScalarTypesConfig.getScalarMap().get("scalarTypes4TemplatesDto");
 
-        for (Map.Entry<String, NullableType> entry : scalarMap.entrySet()) {
+        for (Map.Entry<String, AbstractSingleColumnStandardBasicType> entry : scalarMap.entrySet()) {
             query.addScalar(entry.getKey(), entry.getValue());
         }
 

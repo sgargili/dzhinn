@@ -1,7 +1,6 @@
 package imf.core.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,6 @@ import imf.core.service.Attribute2Group2TemplateService;
  * Developed by: Andrey Popov
  * Date (time): 11.03.11 (17:32)
  */
-@Repository
 @Service("attribute2Group2TemplateService")
 public class Attribute2Group2TemplateServiceImpl implements Attribute2Group2TemplateService {
     @Autowired

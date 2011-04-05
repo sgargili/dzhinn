@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import imf.core.dao.IndustryDao;
 import imf.core.entity.Industry;
@@ -19,8 +18,7 @@ import imf.core.entity.Industry;
  * Developed by: Andrey Popov
  * Date (time): 15.03.11 (16:13)
  */
-@Repository
-@Service("industryDao")
+@Repository("industryDao")
 public class IndustryDaoImpl implements IndustryDao {
 
     private Logger log = LoggerFactory.getLogger(IndustryDaoImpl.class);

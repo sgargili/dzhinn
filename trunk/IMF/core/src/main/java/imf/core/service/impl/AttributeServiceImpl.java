@@ -19,7 +19,6 @@ import imf.core.service.AttributeService;
  * Developed by: Andrey Popov
  * Date (time): 21.02.11 (12:50)
  */
-@Repository
 @Service("attributeService")
 public class AttributeServiceImpl implements AttributeService {
     @Autowired

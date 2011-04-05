@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import imf.core.dao.Attribute2GroupDao;
 import imf.core.entity.Attribute2Group;
@@ -15,8 +14,7 @@ import imf.core.entity.Attribute2Group;
  * Developed by: Andrey Popov
  * Date (time): 10.03.11 (17:53)
  */
-@Repository
-@Service("attribute2GroupDao")
+@Repository("attribute2GroupDao")
 public class Attribute2GroupDaoImpl implements Attribute2GroupDao {
 
     private Logger log = LoggerFactory.getLogger(Attribute2GroupDaoImpl.class);
