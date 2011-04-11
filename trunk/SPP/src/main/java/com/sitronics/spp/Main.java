@@ -32,6 +32,6 @@ public class Main {
 //            System.out.println(FilenameUtils.concat("C://test/test/text.xml", "dddddd"));
 
 //        }
-        fileService.copy("", "");
+        fileService.copy("C://test", "C://1");
     }
 }
