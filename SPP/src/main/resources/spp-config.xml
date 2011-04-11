@@ -2,13 +2,21 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
 
     <context:component-scan base-package="com.sitronics.spp"/>
 
+    <!--<bean id="additionList" class="java.util.ArrayList<java.lang.String>">--><!--<constructor-arg>--><!--<list>--><!--<value>blue</value>--><!--<value>red</value>--><!--<value>green</value>--><!--</list>--><!--</constructor-arg>--><!--</bean>-->
+    <util:list id="additionList" value-type="java.lang.String" list-class="java.util.ArrayList">
+        <value>foo</value>
+        <value>bar</value>
+    </util:list>
 
     <!--<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
