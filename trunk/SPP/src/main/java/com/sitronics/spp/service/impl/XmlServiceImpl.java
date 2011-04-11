@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 
-import com.sitronics.spp.service.MarshallerService;
+import com.sitronics.spp.service.XmlService;
 
 /**
  * @author Andrey Popov creates on 11.04.11 (16:02)
  */
 @Service("marshallerService")
-public class MarshallerServiceImpl implements MarshallerService {
-    Logger logger = LoggerFactory.getLogger(MarshallerServiceImpl.class);
+public class XmlServiceImpl implements XmlService {
+    Logger logger = LoggerFactory.getLogger(XmlServiceImpl.class);
 
     @Autowired(required = false)
     Jaxb2Marshaller jaxb2Marshaller;
