@@ -12,18 +12,93 @@
 
     <context:component-scan base-package="com.sitronics.spp"/>
 
-    <!--<bean id="additionList" class="java.util.ArrayList<java.lang.String>">--><!--<constructor-arg>--><!--<list>--><!--<value>blue</value>--><!--<value>red</value>--><!--<value>green</value>--><!--</list>--><!--</constructor-arg>--><!--</bean>-->
-    <util:list id="additionList" value-type="java.lang.String" list-class="java.util.ArrayList">
-        <value>foo</value>
-        <value>bar</value>
-    </util:list>
-
-    <!--<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <property name="classesToBeBound">
-            <list>
-                <value>com.sitronics.spp.model.Pojo</value>
-            </list>
-        </property>
-    </bean>-->
+    <util:map id="additionList" map-class="java.util.HashMap" value-type="java.lang.String"
+              key-type="java.lang.String">
+        <entry key="Москва" value="МРЦ"/>
+        <entry key="Владимир" value="МРЦ"/>
+        <entry key="Иваново" value="МРЦ"/>
+        <entry key="Калуга" value="МРЦ"/>
+        <entry key="Кострома" value="МРЦ"/>
+        <entry key="Рязань" value="МРЦ"/>
+        <entry key="Смоленск" value="МРЦ"/>
+        <entry key="Тамбов" value="МРЦ"/>
+        <entry key="Тверь" value="МРЦ"/>
+        <entry key="Тула" value="МРЦ"/>
+        <entry key="Ярославль" value="МРЦ"/>
+        <entry key="Орловская область" value="МРЦ"/>
+        <entry key="Брянская область" value="МРЦ"/>
+        <entry key="Воронежская область" value="МРЦ"/>
+        <entry key="Курская область" value="МРЦ"/>
+        <entry key="Липецкая область" value="МРЦ"/>
+        <entry key="Белгородская область" value="МРЦ"/>
+        <entry key="Северо-Запад" value="МРСЗ"/>
+        <entry key="Санкт-Петербург" value="МРСЗ"/>
+        <entry key="Вологодская область" value="МРСЗ"/>
+        <entry key="Калининградская область" value="МРСЗ"/>
+        <entry key="Мурманская область" value="МРСЗ"/>
+        <entry key="Новгородская область (Великий Новгород)" value="МРСЗ"/>
+        <entry key="Псков" value="МРСЗ"/>
+        <entry key="Республика Карелия (Петрозаводск)" value="МРСЗ"/>
+        <entry key="Сыктывкар, Республика Коми" value="МРСЗ"/>
+        <entry key="Архангельская область" value="МРСЗ"/>
+        <entry key="Поволжье" value="МРП"/>
+        <entry key="Нижний Новгород" value="МРП"/>
+        <entry key="Киров" value="МРП"/>
+        <entry key="Республика Марий Эл (Йошкар-Ола)" value="МРП"/>
+        <entry key="Республика Мордовия (Саранск)" value="МРП"/>
+        <entry key="Республика Татарстан" value="МРП"/>
+        <entry key="Удмуртская республика (ИЖЕВСК)" value="МРП"/>
+        <entry key="Чувашская Республика - Чувашии (Чебоксары)" value="МРП"/>
+        <entry key="Самара" value="МРП"/>
+        <entry key="Оренбург" value="МРП"/>
+        <entry key="Республика Башкортостан" value="МРП"/>
+        <entry key="Саратов" value="МРП"/>
+        <entry key="Ульяновская область" value="МРП"/>
+        <entry key="Краснодар" value="МРЮ"/>
+        <entry key="Краснодарский край" value="МРЮ"/>
+        <entry key="Волгоградская область" value="МРЮ"/>
+        <entry key="Кабардино-Балкарская Республика (Нальчик)" value="МРЮ"/>
+        <entry key="Карачаево-Черкесская Республика (Черкесск)" value="МРЮ"/>
+        <entry key="Астраханская область" value="МРЮ"/>
+        <entry key="Республика Адыгея" value="МРЮ"/>
+        <entry key="Республика Дагестан (Махачкала)" value="МРЮ"/>
+        <entry key="Республика Ингушетия (Магас, Назрань)" value="МРЮ"/>
+        <entry key="Республика Калмыкия (Элиста)" value="МРЮ"/>
+        <entry key="Республика Северная Осетия - Алания (Владикавказ)" value="МРЮ"/>
+        <entry key="Ростовская область" value="МРЮ"/>
+        <entry key="Ставропольский край" value="МРЮ"/>
+        <entry key="Чеченская Республика" value="МРЮ"/>
+        <entry key="Сочи" value="МРЮ"/>
+        <entry key="Новороссийск" value="МРЮ"/>
+        <entry key="Екатеринбург" value="МРУ"/>
+        <entry key="Свердловская область" value="МРУ"/>
+        <entry key="Курган" value="МРУ"/>
+        <entry key="Тюменская область" value="МРУ"/>
+        <entry key="Ханты-Мансийский АО - Югре (ХМАО, Сургут)" value="МРУ"/>
+        <entry key="Челябинск" value="МРУ"/>
+        <entry key="Ямало-Ненецкий АО (ЯНАО)" value="МРУ"/>
+        <entry key="Пермский край" value="МРУ"/>
+        <entry key="Новосибирск" value="МРС"/>
+        <entry key="Новосибирская область" value="МРС"/>
+        <entry key="Красноярский край" value="МРС"/>
+        <entry key="Республика Хакасия" value="МРС"/>
+        <entry key="Республика Алтай" value="МРС"/>
+        <entry key="Омская область" value="МРС"/>
+        <entry key="Томская область" value="МРС"/>
+        <entry key="Республика Тыва" value="МРС"/>
+        <entry key="Кемеровская область" value="МРС"/>
+        <entry key="Алтайский край" value="МРС"/>
+        <entry key="Владивосток" value="МР ДВ"/>
+        <entry key="Приморский край" value="МР ДВ"/>
+        <entry key="Благовещенск (Амурская область)" value="МР ДВ"/>
+        <entry key="Камчатский край" value="МР ДВ"/>
+        <entry key="Магаданская область" value="МР ДВ"/>
+        <entry key="Республика Саха (Якутия)" value="МР ДВ"/>
+        <entry key="Сахалинская область" value="МР ДВ"/>
+        <entry key="Хабаровский край" value="МР ДВ"/>
+        <entry key="Иркутская область" value="МР ДВ"/>
+        <entry key="Республика Бурятия (Улан-Удэ)" value="МР ДВ"/>
+        <entry key="Забайкальский край (Чита)" value="МР ДВ"/>
+    </util:map>
 
 </beans>
