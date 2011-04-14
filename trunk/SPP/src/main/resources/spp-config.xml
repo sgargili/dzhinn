@@ -12,6 +12,26 @@
 
     <context:component-scan base-package="com.sitronics.spp"/>
 
+    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>com.sitronics.spp.model.BatchTypes</value>
+            </list>
+        </property>
+        <property name="marshallerProperties">
+            <map>
+                <!--Сделаем форматированный вывод...-->
+                <entry key="jaxb.formatted.output">
+                    <value type="boolean">true</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="simpleDateFormat" class="java.text.SimpleDateFormat">
+        <constructor-arg value="dd mm dd HH:mm:ss"/>
+    </bean>
+
     <util:map id="additionList" map-class="java.util.HashMap" value-type="java.lang.String"
               key-type="java.lang.String">
         <entry key="Москва" value="МРЦ"/>
@@ -88,17 +108,257 @@
         <entry key="Республика Тыва" value="МРС"/>
         <entry key="Кемеровская область" value="МРС"/>
         <entry key="Алтайский край" value="МРС"/>
-        <entry key="Владивосток" value="МР ДВ"/>
-        <entry key="Приморский край" value="МР ДВ"/>
-        <entry key="Благовещенск (Амурская область)" value="МР ДВ"/>
-        <entry key="Камчатский край" value="МР ДВ"/>
-        <entry key="Магаданская область" value="МР ДВ"/>
-        <entry key="Республика Саха (Якутия)" value="МР ДВ"/>
-        <entry key="Сахалинская область" value="МР ДВ"/>
-        <entry key="Хабаровский край" value="МР ДВ"/>
-        <entry key="Иркутская область" value="МР ДВ"/>
-        <entry key="Республика Бурятия (Улан-Удэ)" value="МР ДВ"/>
-        <entry key="Забайкальский край (Чита)" value="МР ДВ"/>
+        <entry key="Владивосток" value="МРДВ"/>
+        <entry key="Приморский край" value="МРДВ"/>
+        <entry key="Благовещенск (Амурская область)" value="МРДВ"/>
+        <entry key="Камчатский край" value="МРДВ"/>
+        <entry key="Магаданская область" value="МРДВ"/>
+        <entry key="Республика Саха (Якутия)" value="МРДВ"/>
+        <entry key="Сахалинская область" value="МРДВ"/>
+        <entry key="Хабаровский край" value="МРДВ"/>
+        <entry key="Иркутская область" value="МРДВ"/>
+        <entry key="Республика Бурятия (Улан-Удэ)" value="МРДВ"/>
+        <entry key="Забайкальский край (Чита)" value="МРДВ"/>
     </util:map>
+
+    <util:map id="regionList" map-class="java.util.HashMap" value-type="java.lang.String"
+              key-type="java.lang.String">
+        <entry key="Москва" value="Макро-регион &quot;Центр&quot;, г. Москва"/>
+        <entry key="Владимир" value="ОАО &quot;МТС&quot; в г. Владимир"/>
+        <entry key="Иваново" value="ОАО &quot;МТС&quot; в г. Иваново"/>
+        <entry key="Калуга" value="ОАО &quot;МТС&quot; в г. Калуга"/>
+        <entry key="Кострома" value="ОАО &quot;МТС&quot; в г. Кострома"/>
+        <entry key="Рязань" value="ОАО &quot;МТС&quot; в г. Рязань"/>
+        <entry key="Смоленск" value="ОАО &quot;МТС&quot; в г. Смоленск"/>
+        <entry key="Тамбов" value="ОАО &quot;МТС&quot; в г. Тамбов"/>
+        <entry key="Тверь" value="ОАО &quot;МТС&quot; в г. Тверь"/>
+        <entry key="Тула" value="ОАО &quot;МТС&quot; в г. Тула"/>
+        <entry key="Ярославль" value="ОАО &quot;МТС&quot; в г. Ярославль"/>
+        <entry key="Орловская область" value="ОАО &quot;МТС&quot; в Орловской области"/>
+        <entry key="Брянская область" value="ОАО &quot;МТС&quot; в Брянской области"/>
+        <entry key="Воронежская область" value="ОАО &quot;МТС&quot; в Воронежской области"/>
+        <entry key="Курская область" value="ОАО &quot;МТС&quot; в Курской области"/>
+        <entry key="Липецкая область" value="ОАО &quot;МТС&quot; в Липецкой области"/>
+        <entry key="Белгородская область" value="ОАО &quot;МТС&quot; в Белгородской области"/>
+        <entry key="Северо-Запад"
+               value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Северо-Запад&quot; (г. Санкт-Петербург)"/>
+        <entry key="Санкт-Петербург" value="ОАО &quot;МТС&quot; в г. Санкт-Петербург"/>
+        <entry key="Вологодская область" value="ОАО &quot;МТС&quot; в Вологодской области"/>
+        <entry key="Калининградская область" value="ОАО &quot;МТС&quot; в Калининградской области"/>
+        <entry key="Мурманская область" value="ОАО &quot;МТС&quot; в Мурманской области"/>
+        <entry key="Новгородская область (Великий Новгород)"
+               value="ОАО &quot;МТС&quot; в Новгородской области (Великий Новгород)"/>
+        <entry key="Псков" value="ОАО &quot;МТС&quot; в г. Псков"/>
+        <entry key="Республика Карелия (Петрозаводск)" value="ОАО &quot;МТС&quot; в Республике Карелия (Петрозаводск)"/>
+        <entry key=" Сыктывкар, Республика Коми" value="ОАО &quot;МТС&quot; в г. Сыктывкар, Республика Коми"/>
+        <entry key="Архангельская область" value="ОАО &quot;МТС&quot; в Архангельской области"/>
+        <entry key="Поволжье" value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Поволжье&quot; (г. Нижний Новгород)"/>
+        <entry key="Нижний Новгород" value="ОАО &quot;МТС&quot; в г. Нижний Новгород"/>
+        <entry key="Киров" value="ОАО &quot;МТС&quot; в г. Киров"/>
+        <entry key="Республика Марий Эл (Йошкар-Ола)" value="ОАО &quot;МТС&quot; в Республике Марий Эл (Йошкар-Ола)"/>
+        <entry key="Республика Мордовия (Саранск)" value="ОАО &quot;МТС&quot; в Республике Мордовия (Саранск)"/>
+        <entry key="Республика Татарстан" value="ОАО &quot;МТС&quot; в Республике Татарстан"/>
+        <entry key="Удмуртская республика (ИЖЕВСК)" value="ОАО &quot;МТС&quot; в Удмуртской республике (ИЖЕВСК)"/>
+        <entry key="Чувашская Республика - Чувашии (Чебоксары)"
+               value="ОАО &quot;МТС&quot; в Чувашской Республике - Чувашии (Чебоксары)"/>
+        <entry key="Самара" value="ОАО &quot;МТС&quot; в г. Самара"/>
+        <entry key="Оренбург" value="ОАО &quot;МТС&quot; в г. Оренбург"/>
+        <entry key="Республика Башкортостан" value="ОАО &quot;МТС&quot; в Республике Башкортостан"/>
+        <entry key="Саратов" value="ОАО &quot;МТС&quot; в г. Саратов"/>
+        <entry key="Ульяновская область" value="ОАО &quot;МТС&quot; в Ульяновской области"/>
+        <entry key="Краснодар" value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Юг&quot;, (Краснодар)"/>
+        <entry key="Краснодарский край" value="ОАО &quot;МТС&quot; в Краснодарском крае"/>
+        <entry key="Волгоградская область" value="ОАО &quot;МТС&quot; в Волгоградской области"/>
+        <entry key="Кабардино-Балкарская Республика (Нальчик)"
+               value="ОАО &quot;МТС&quot; в Кабардино-Балкарской Республике (Нальчик)"/>
+        <entry key="Карачаево-Черкесская Республика (Черкесск)"
+               value="ОАО &quot;МТС&quot; в Карачаево-Черкесской Республике (Черкесск)"/>
+        <entry key="Астраханская область" value="ОАО &quot;МТС&quot; в Астраханской области"/>
+        <entry key="Республика Адыгея" value="ОАО &quot;МТС&quot; в Республике Адыгея"/>
+        <entry key="Республика Дагестан (Махачкала)" value="ОАО &quot;МТС&quot; в Республике Дагестан (Махачкала)"/>
+        <entry key="Республика Ингушетия (Магас, Назрань)"
+               value="ОАО &quot;МТС&quot; в Республике Ингушетия (Магас, Назрань)"/>
+        <entry key="Республика Калмыкия (Элиста)" value="ОАО &quot;МТС&quot; в Республике Калмыкия (Элиста)"/>
+        <entry key="Республика Северная Осетия - Алания (Владикавказ)"
+               value="ОАО &quot;МТС&quot; в Республике Северная Осетия - Алания (Владикавказ)"/>
+        <entry key="Ростовская область" value="ОАО &quot;МТС&quot; в Ростовской области"/>
+        <entry key="Ставропольский край" value="ОАО &quot;МТС&quot; в Ставропольском крае"/>
+        <entry key="Чеченская Республика" value="ОАО &quot;МТС&quot; в Чеченской Республике"/>
+        <entry key=" Сочи" value="ОАО &quot;МТС&quot; в г. Сочи"/>
+        <entry key=" Новороссийск" value="ОАО &quot;МТС&quot; в г. Новороссийск"/>
+        <entry key="Екатеринбург"
+               value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Урал&quot; (Екатеринбург, Свердловская область)"/>
+        <entry key="Свердловская область" value="ОАО &quot;МТС&quot; в Свердловской области"/>
+        <entry key="Курган" value="ОАО &quot;МТС&quot; в г. Курган"/>
+        <entry key="Тюменская область" value="ОАО &quot;МТС&quot; в Тюменской области"/>
+        <entry key="Ханты-Мансийский АО - Югре (ХМАО, Сургут)"
+               value="ОАО &quot;МТС&quot; в Ханты-Мансийском АО - Югре (ХМАО, Сургут)"/>
+        <entry key="Челябинск" value="ОАО &quot;МТС&quot; в г. Челябинск"/>
+        <entry key="Ямало-Ненецкий АО (ЯНАО)" value="ОАО &quot;МТС&quot; в Ямало-Ненецком АО (ЯНАО)"/>
+        <entry key="Пермский край" value="ОАО &quot;МТС&quot; в Пермском крае"/>
+        <entry key="Новосибирск" value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Сибирь&quot; (Новосибирск)"/>
+        <entry key="Новосибирская область" value="ОАО &quot;МТС&quot; в Новосибирской области"/>
+        <entry key="Красноярский край" value="ОАО &quot;МТС&quot; в Красноярском крае"/>
+        <entry key="Республика Хакасия" value="ОАО &quot;МТС&quot; в Республике Хакасия"/>
+        <entry key="Республика Алтай" value="ОАО &quot;МТС&quot; в Республике Алтай"/>
+        <entry key="Омская область" value="ОАО &quot;МТС&quot; в Омской области"/>
+        <entry key="Томская область" value="ОАО &quot;МТС&quot; в Томской области"/>
+        <entry key="Республика Тыва" value="ОАО &quot;МТС&quot; в Республике Тыва"/>
+        <entry key="Кемеровская область" value="ОАО &quot;МТС&quot; в Кемеровской области"/>
+        <entry key="Алтайский край" value="ОАО &quot;МТС&quot; в Алтайском крае"/>
+        <entry key="Владивосток"
+               value="ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Дальний Восток&quot; (Владивосток, Приморский Край)"/>
+        <entry key="Приморский край" value="ОАО &quot;МТС&quot; в Приморском крае"/>
+        <entry key="Благовещенск (Амурская область)" value="ОАО &quot;МТС&quot; в г. Благовещенск (Амурская область)"/>
+        <entry key="Камчатский край" value="ОАО &quot;МТС&quot; в Камчатском крае"/>
+        <entry key="Магаданская область" value="ОАО &quot;МТС&quot; в Магаданской области"/>
+        <entry key="Республика Саха (Якутия)" value="ОАО &quot;МТС&quot; в Республике Саха (Якутия)"/>
+        <entry key="Сахалинская область" value="ОАО &quot;МТС&quot; в Сахалинской области"/>
+        <entry key="Хабаровский край" value="ОАО &quot;МТС&quot; в Хабаровском крае"/>
+        <entry key="Иркутская область" value="ОАО &quot;МТС&quot; в Иркутской области"/>
+        <entry key="Республика Бурятия (Улан-Удэ)" value="ОАО &quot;МТС&quot; в Республике Бурятия (Улан-Удэ)"/>
+        <entry key="Забайкальский край (Чита)" value="ОАО &quot;МТС&quot; в Забайкальском крае (Чита)"/>
+    </util:map>
+
+    <util:list id="packagesList">
+        <value>Гарантийное_письмо_контрагента</value>
+        <value>Договор_приобретения_НМА</value>
+        <value>Договор_РБП</value>
+        <value>Заказ_Общий релиз</value>
+        <value>Общий пакет</value>
+        <value>Письмо</value>
+        <value>Письмо_о_согласии_со_штрафом</value>
+        <value>Связанные_Договор</value>
+        <value>Связанные_Инвойс</value>
+        <value>Сценарий4</value>
+    </util:list>
+
+    <bean id="publication" class="com.sitronics.spp.model.publicationrecords.Publication">
+        <property name="operator" value="Administrator"/>
+        <property name="path" value="http://localhost/BatchTypes.xml"/>
+        <property name="station" value="TESTWAS"/>
+        <property name="time" value="2011-04-14T13:32:42.998+04:00"/>
+    </bean>
+
+    <bean id="separationOptionsInside" class="com.sitronics.spp.model.type.SeparationOptions">
+        <property name="autodetectKernelRect" value="true"/>
+
+    </bean>
+
+    <bean id="separationOptions" class="com.sitronics.spp.model.type.SeparationOptions">
+        <property name="separationOptions" ref="separationOptionsInside"/>
+        <property name="barcodeType" value="262144"/>
+        <property name="barcodeValue" value=""/>
+        <property name="batchNamingSchema" value=""/>
+        <property name="batchSeparationEvent" value="NewBatch"/>
+        <property name="batchSeparationType" value="ScanningIsInitiated"/>
+        <property name="deleteSeparationPages" value="false"/>
+        <property name="docSeparationEvent" value="Remote"/>
+        <property name="docSeparationType" value="Never"/>
+        <property name="documentNamingSchema" value=""/>
+        <property name="pagesInBatchCount" value="0"/>
+    </bean>
+
+    <bean id="imageProcessingOptions" class="com.sitronics.spp.model.type.ImageProcessingOptions">
+        <property name="convertToBW" value="false"/>
+        <property name="deskew" value="false"/>
+        <property name="deskewBySeparators" value="false"/>
+        <property name="deskewBySquares" value="false"/>
+        <property name="despeckle" value="false"/>
+        <property name="imageRotationType" value="Clockwise"/>
+        <property name="rotateImages" value="false"/>
+    </bean>
+
+    <bean id="imageSavingOptions" class="com.sitronics.spp.model.type.exportoptions.ImageSavingOptions">
+        <property name="asMultipageFile" value="AsMultipageFile"/>
+        <property name="color" value="BlackWhite"/>
+        <property name="format" value="Tif"/>
+        <property name="quality" value="Best"/>
+    </bean>
+
+    <bean id="toFolder" class="com.sitronics.spp.model.type.exportoptions.ToFolder">
+        <property name="batchTypeName" value=""/>
+        <property name="imageSavingOptions" ref="imageSavingOptions"/>
+        <property name="path" value=""/>
+        <property name="showBeforeExport" value="true"/>
+    </bean>
+
+    <bean id="toFTP" class="com.sitronics.spp.model.type.exportoptions.ToFTP">
+        <property name="batchTypeName" value=""/>
+        <property name="showBeforeExport" value="true"/>
+        <property name="loginType" value="Anonymous"/>
+        <property name="login" value=""/>
+        <property name="password" value=""/>
+        <property name="uRL" value="ftp://"/>
+        <property name="imageSavingOptions" ref="imageSavingOptions"/>
+    </bean>
+
+    <bean id="toFlexiCapture" class="com.sitronics.spp.model.type.exportoptions.ToFlexiCapture">
+        <property name="batchTypeName" value=""/>
+        <property name="showBeforeExport" value="true"/>
+        <property name="batchDescription" value=""/>
+        <property name="batchName" value=""/>
+        <property name="batchTypeID" value="1"/>
+        <property name="localProjectPath" value="https://10.35.42.13/4D4AE3A0-559D-4E10-ADDA-A09CAC4BC1A1/mts_eco;;"/>
+        <property name="specifyRegistrationParameters" value="false"/>
+    </bean>
+
+    <bean id="toRecognitionServer" class="com.sitronics.spp.model.type.exportoptions.ToRecognitionServer">
+        <property name="batchTypeName" value=""/>
+        <property name="showBeforeExport" value="true"/>
+        <property name="serverLocation" value=""/>
+        <property name="workflow" value=""/>
+    </bean>
+
+    <util:list id="exportOptions">
+        <ref local="toFlexiCapture"/>
+        <ref local="toFolder"/>
+        <ref local="toRecognitionServer"/>
+        <ref local="toFTP"/>
+    </util:list>
+
+    <bean id="regParam1" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
+        <property name="required" value="true"/>
+        <property name="value" value="&lt;I&gt;&lt;D&gt;&lt;T&gt;"/>
+        <property name="name" value="PackageID"/>
+        <property name="type" value="Text"/>
+    </bean>
+    <bean id="regParam2" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
+        <property name="required" value="true"/>
+        <property name="value" value=""/>
+        <property name="name" value="Region"/>
+        <property name="type" value="Text"/>
+    </bean>
+
+    <util:list id="registrationParameters">
+        <!--<ref local="regParam1"/>-->
+        <!--<ref local="regParam2"/>-->
+    </util:list>
+
+    <bean id="pageSizeCheckingOptions" class="com.sitronics.spp.model.type.PageSizeCheckingOptions">
+        <property name="checkHeight" value="false"/>
+        <property name="checkResolution" value="false"/>
+        <property name="checkWidth" value="false"/>
+        <property name="maxHeight" value="6400"/>
+        <property name="maxResolution" value="600"/>
+        <property name="maxWidth" value="6400"/>
+        <property name="minHeight" value="1600"/>
+        <property name="minResolution" value="200"/>
+        <property name="minWidth" value="1600"/>
+    </bean>
+
+    <bean id="type" class="com.sitronics.spp.model.type.Type">
+        <property name="sourceName" value="C:\Release"/>
+        <property name="removeLoadedFiles" value="false"/>
+        <property name="separationOptions" ref="separationOptions"/>
+        <property name="imageProcessingOptions" ref="imageProcessingOptions"/>
+        <property name="exportOptions" ref="exportOptions"/>
+        <!--<property name="registrationParameters" ref="registrationParameters"/>-->
+        <property name="pageSizeCheckingOptions" ref="pageSizeCheckingOptions"/>
+        <property name="exportType" value="FC"/>
+        <property name="sourceType" value="VirtualScan"/>
+        <property name="UseTypeExportOptions" value="true"/>
+    </bean>
+
 
 </beans>
