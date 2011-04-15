@@ -19,6 +19,8 @@ public class BatchTypes {
 
     @XmlElement(name = "Type")
     private List<Type> types;
+    @XmlElement(name = "Tag")
+    private String tag;
 
     public BatchTypes() {
     }
@@ -39,6 +41,14 @@ public class BatchTypes {
         this.types = types;
     }
 
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,6 +58,7 @@ public class BatchTypes {
 
         if (publicationRecords != null ? !publicationRecords.equals(that.publicationRecords) : that.publicationRecords != null)
             return false;
+        if (tag != null ? !tag.equals(that.tag) : that.tag != null) return false;
         if (types != null ? !types.equals(that.types) : that.types != null) return false;
 
         return true;
@@ -57,6 +68,7 @@ public class BatchTypes {
     public int hashCode() {
         int result = publicationRecords != null ? publicationRecords.hashCode() : 0;
         result = 31 * result + (types != null ? types.hashCode() : 0);
+        result = 31 * result + (tag != null ? tag.hashCode() : 0);
         return result;
     }
 }
