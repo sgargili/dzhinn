@@ -1,6 +1,7 @@
 package com.sitronics.spp.model.publicationrecords;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import javax.xml.bind.annotation.*;
 
@@ -26,6 +27,12 @@ public class Publication {
     private String station;
 
     public Publication() {
+        if (simpleDateFormat != null) {
+            time = simpleDateFormat.format(Calendar.getInstance().getTime());
+        } else {
+            simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+            time = simpleDateFormat.format(Calendar.getInstance().getTime());
+        }
     }
 
     public String getTime() {
@@ -69,6 +76,8 @@ public class Publication {
 
         if (operator != null ? !operator.equals(that.operator) : that.operator != null) return false;
         if (path != null ? !path.equals(that.path) : that.path != null) return false;
+        if (simpleDateFormat != null ? !simpleDateFormat.equals(that.simpleDateFormat) : that.simpleDateFormat != null)
+            return false;
         if (station != null ? !station.equals(that.station) : that.station != null) return false;
         if (time != null ? !time.equals(that.time) : that.time != null) return false;
 
@@ -77,7 +86,8 @@ public class Publication {
 
     @Override
     public int hashCode() {
-        int result = time != null ? time.hashCode() : 0;
+        int result = simpleDateFormat != null ? simpleDateFormat.hashCode() : 0;
+        result = 31 * result + (time != null ? time.hashCode() : 0);
         result = 31 * result + (path != null ? path.hashCode() : 0);
         result = 31 * result + (operator != null ? operator.hashCode() : 0);
         result = 31 * result + (station != null ? station.hashCode() : 0);
