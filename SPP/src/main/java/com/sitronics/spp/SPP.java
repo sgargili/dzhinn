@@ -18,8 +18,8 @@ public class SPP {
 
     private static void printUsage() {
         System.err.println();
-        System.err.println("Usage: java -jar SPP-1.0.jar {-i, --inFolder} a_inFolder {-o, --outFolder} a_outFolder {-e, --fileExtension} a_extension");
-        System.err.println("Example: java -jar SPP-1.0.jar -i C://testFolder -o C://testOutputFolder -e .fcbat");
+        System.err.println("Usage: java -jar SPP-1.0.jar {-i, --inFolder} a_inFolder {-o, --outFolder} a_outFolder {-e, --fileExtension} a_extension {-x, --createXml}");
+        System.err.println("Example: java -jar SPP-1.0.jar -i C://testFolder -o C://testOutputFolder -e .fcbat -x");
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +29,7 @@ public class SPP {
         Option inFolderOption = parser.addStringOption('i', "inFolder");
         Option outFolderOption = parser.addStringOption('o', "outFolder");
         Option extensionOption = parser.addStringOption('e', "fileExtension");
+        Option createXmlOption = parser.addBooleanOption('x', "createXml");
 
         try {
             parser.parse(args);
@@ -39,10 +40,17 @@ public class SPP {
         }
 
         String inFolder = (String) parser.getOptionValue(inFolderOption);
-        String outFolder = (String) parser.getOptionValue(outFolderOption);
-        String fileExtension = (String) parser.getOptionValue(extensionOption);
 
-        if (inFolder == null || outFolder == null || fileExtension == null) {
+        //По-умолчанию бедем работать с папкой inFolder+"/Output"
+        String outFolder = (String) parser.getOptionValue(outFolderOption, inFolder + "/Output");
+
+        //По-умолчанию бедем работать с расширением файлов .fcbat
+        String fileExtension = (String) parser.getOptionValue(extensionOption, ".fcbat");
+
+        //По-умолчанию не будем создавать Xml...
+        Boolean isCreateXml = (Boolean) parser.getOptionValue(createXmlOption, false);
+
+        if (inFolder == null || outFolder == null || fileExtension == null || isCreateXml == null) {
             printUsage();
         } else {
             ApplicationContext context = new ClassPathXmlApplicationContext("spp-config.xml");
@@ -50,14 +58,16 @@ public class SPP {
             //Достаем файловый сервис из контекста...
             FileService fileService = (FileService) context.getBean("fileService");
 
-            //Достаем xml сервис из контекста...
-            XmlService xmlService = (XmlService) context.getBean("xmlService");
-
             //Копируем пакетные файлы...
             fileService.copy(inFolder, outFolder, fileExtension);
 
-            //Создаем Xml файл...
-            xmlService.createXml(outFolder);
+            if (isCreateXml) {
+                //Достаем xml сервис из контекста...
+                XmlService xmlService = (XmlService) context.getBean("xmlService");
+
+                //Создаем Xml файл...
+                xmlService.createXml(outFolder);
+            }
 
             System.out.println();
             System.out.println("Job is Done! See content in: " + outFolder);
