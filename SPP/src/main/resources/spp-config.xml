@@ -1086,16 +1086,15 @@
 
     <!--<bean id="calendar" class="java.util.Calendar" factory-method="getInstance"/>-->
 
-    <bean id="publication" class="com.sitronics.spp.model.publicationrecords.Publication">
-        <property name="operator" value="Administrator"/>
-        <property name="path" value="http://localhost/BatchTypes.xml"/>
-        <property name="station" value="TESTWAS"/>
-        <!--<property name="calendar" ref="calendar"/>-->
-    </bean>
+    <!--<bean id="publication" class="com.sitronics.spp.model.publicationrecords.Publication">-->
+        <!--<property name="operator" value="Administrator"/>-->
+        <!--<property name="path" value="http://localhost/BatchTypes.xml"/>-->
+        <!--<property name="station" value="TESTWAS"/>-->
+        <!--&lt;!&ndash;<property name="calendar" ref="calendar"/>&ndash;&gt;-->
+    <!--</bean>-->
 
     <bean id="separationOptionsInside" class="com.sitronics.spp.model.type.SeparationOptions">
         <property name="autodetectKernelRect" value="true"/>
-
     </bean>
 
     <bean id="separationOptions" class="com.sitronics.spp.model.type.SeparationOptions">
@@ -1173,13 +1172,12 @@
     <bean id="regParam1" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
         <property name="required" value="true"/>
         <property name="value">
-            <value>
-                <![CDATA[<I><D><T>]]>
-            </value>
+            <value><![CDATA[<I><D><T>]]></value>
         </property>
         <property name="name" value="PackageID"/>
         <property name="type" value="Text"/>
     </bean>
+
     <bean id="regParam2" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
         <property name="required" value="true"/>
         <property name="value" value=""/>

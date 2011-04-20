@@ -13,10 +13,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.sitronics.spp.model.BatchTypes;
 import com.sitronics.spp.model.publicationrecords.Publication;
+import com.sitronics.spp.model.type.*;
 import com.sitronics.spp.model.type.ImageProcessingOptions;
-import com.sitronics.spp.model.type.PageSizeCheckingOptions;
-import com.sitronics.spp.model.type.SeparationOptions;
-import com.sitronics.spp.model.type.Type;
 import com.sitronics.spp.model.type.exportoptions.*;
 import com.sitronics.spp.model.type.registrationparameters.RegParam;
 import com.sitronics.spp.service.XmlService;
@@ -32,10 +30,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         SeparationOptions separationOptions = (SeparationOptions) context.getBean("separationOptions");
         ImageProcessingOptions imageProcessingOptions = (ImageProcessingOptions) context.getBean("imageProcessingOptions");
-        List<ExportOptionBase> exportOptions = (List<ExportOptionBase>) context.getBean("exportOptions");
+        List<ExportOptionBase> exportOptions;
         List<RegParam> registrationParameters = (List<RegParam>) context.getBean("registrationParameters");
         PageSizeCheckingOptions pageSizeCheckingOptions = (PageSizeCheckingOptions) context.getBean("pageSizeCheckingOptions");
-
 
         Map<String, String> additionList = (Map<String, String>) context.getBean("additionList");
         Map<String, String> regionList = (Map<String, String>) context.getBean("regionList");
@@ -51,7 +48,6 @@ public class Main {
         ToFolder toFolder;
         ToFTP toFTP;
         ToRecognitionServer toRecognitionServer;
-//        List exportOptions;
 
         RegParam regParam;
         RegParam regParam1;
@@ -125,6 +121,7 @@ public class Main {
                 exportOptions.add(toFTP);
                 exportOptions.add(toFlexiCapture);
                 exportOptions.add(toRecognitionServer);
+
                 type.setExportOptions(exportOptions);
 
                 types.add(type);
@@ -143,13 +140,10 @@ public class Main {
         batchTypes.setPublicationRecords(publications);
         batchTypes.setTypes(types);
         String tag = (String) context.getBean("tag");
-//        System.out.println(StringEscapeUtils.unescapeHtml(tag));
         batchTypes.setTag(tag);
-        //&lt;scrp&gt;&amp;#14;&lt;/scrp&gt;T"DûtK&lt;scrp&gt;&amp;#27;&lt;/scrp&gt;ÃowV"KTÒh#(00000000000000000000
 
         xmlService = (XmlService) context.getBean("xmlService");
         IOUtils.write(xmlService.marshal(batchTypes), new FileOutputStream("C://XML.xml"));
-        System.out.println(xmlService.marshal(batchTypes).toString());
 
     }
 }
