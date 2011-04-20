@@ -1084,14 +1084,13 @@
         <value>Сценарий4</value>
     </util:list>
 
-    <!--<bean id="calendar" class="java.util.Calendar" factory-method="getInstance"/>-->
 
-    <!--<bean id="publication" class="com.sitronics.spp.model.publicationrecords.Publication">-->
-        <!--<property name="operator" value="Administrator"/>-->
-        <!--<property name="path" value="http://localhost/BatchTypes.xml"/>-->
-        <!--<property name="station" value="TESTWAS"/>-->
-        <!--&lt;!&ndash;<property name="calendar" ref="calendar"/>&ndash;&gt;-->
-    <!--</bean>-->
+    <bean id="publication" class="com.sitronics.spp.model.publicationrecords.Publication">
+        <property name="operator" value="Administrator"/>
+        <property name="path" value="http://localhost/BatchTypes.xml"/>
+        <property name="station" value="TESTWAS"/>
+        <!--<property name="calendar" ref="calendar"/>-->
+    </bean>
 
     <bean id="separationOptionsInside" class="com.sitronics.spp.model.type.SeparationOptions">
         <property name="autodetectKernelRect" value="true"/>
@@ -1149,10 +1148,14 @@
         <property name="batchTypeName" value=""/>
         <property name="showBeforeExport" value="true"/>
         <property name="batchDescription" value=""/>
-        <property name="batchName" value=""/>
-        <property name="batchTypeID" value="1"/>
+        <!--<property name="batchName" value=""/>
+        <property name="batchTypeID" value="1"/>-->
         <property name="localProjectPath" value="https://10.35.42.13/4D4AE3A0-559D-4E10-ADDA-A09CAC4BC1A1/mts_eco;;"/>
         <property name="specifyRegistrationParameters" value="false"/>
+    </bean>
+
+    <bean id="defaultBatchTypeID" class="java.lang.Integer">
+        <constructor-arg value="1"/>
     </bean>
 
     <bean id="toRecognitionServer" class="com.sitronics.spp.model.type.exportoptions.ToRecognitionServer">
@@ -1169,7 +1172,7 @@
         <ref local="toFTP"/>
     </util:list>
 
-    <bean id="regParam1" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
+    <bean id="regParamPackageID" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
         <property name="required" value="true"/>
         <property name="value">
             <value><![CDATA[<I><D><T>]]></value>
@@ -1178,16 +1181,12 @@
         <property name="type" value="Text"/>
     </bean>
 
-    <bean id="regParam2" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
+    <bean id="regParamRegion" class="com.sitronics.spp.model.type.registrationparameters.RegParam">
         <property name="required" value="true"/>
-        <property name="value" value=""/>
+        <!--<property name="value" value=""/>-->
         <property name="name" value="Region"/>
         <property name="type" value="Text"/>
     </bean>
-
-    <util:list id="registrationParameters">
-        <!--<ref local="regParam1"/>--><!--<ref local="regParam2"/>-->
-    </util:list>
 
     <bean id="pageSizeCheckingOptions" class="com.sitronics.spp.model.type.PageSizeCheckingOptions">
         <property name="checkHeight" value="false"/>
@@ -1206,7 +1205,8 @@
         <property name="removeLoadedFiles" value="false"/>
         <property name="separationOptions" ref="separationOptions"/>
         <property name="imageProcessingOptions" ref="imageProcessingOptions"/>
-        <!--<property name="exportOptions" ref="exportOptions"/>--><!--<property name="registrationParameters" ref="registrationParameters"/>-->
+        <!--<property name="exportOptions" ref="exportOptions"/>
+        <property name="registrationParameters" ref="registrationParameters"/>-->
         <property name="pageSizeCheckingOptions" ref="pageSizeCheckingOptions"/>
         <property name="exportType" value="FC"/>
         <property name="sourceType" value="VirtualScan"/>

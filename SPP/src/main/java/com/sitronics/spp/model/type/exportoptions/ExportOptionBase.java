@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
  * @author Andrey Popov creates on 14.04.11 (11:26)
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class ExportOptionBase {
+public class ExportOptionBase implements Cloneable {
     @XmlElement(name = "BatchTypeName")
     private String batchTypeName;
     @XmlAttribute(name = "ShowBeforeExport")
@@ -32,6 +32,15 @@ public class ExportOptionBase {
 
     public void setShowBeforeExport(Boolean showBeforeExport) {
         this.showBeforeExport = showBeforeExport;
+    }
+
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     @Override

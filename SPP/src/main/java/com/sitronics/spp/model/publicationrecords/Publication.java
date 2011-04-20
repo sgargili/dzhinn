@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  * @author Andrey Popov creates on 14.04.11 (11:05)
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@Service("publication")
 public class Publication {
     @Autowired(required = false)
     @XmlTransient

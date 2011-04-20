@@ -145,6 +145,8 @@ public class Type implements Cloneable {
         PageSizeCheckingOptions = pageSizeCheckingOptions;
     }
 
+    // Паблик Морозов..........
+    @Override
     public Object clone() {
         try {
             return super.clone();
