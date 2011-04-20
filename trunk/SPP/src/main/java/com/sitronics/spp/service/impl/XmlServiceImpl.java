@@ -80,7 +80,11 @@ public class XmlServiceImpl implements XmlService {
     @Autowired
     private Type type;
     @Autowired
+    @Qualifier("tag")
     private String tag;
+    @Autowired
+    @Qualifier("defaultEncoding")
+    private String defaultEncoding;
 
     private String marshal(BatchTypes batchTypes) {
         if (jaxb2Marshaller == null) {
@@ -181,7 +185,7 @@ public class XmlServiceImpl implements XmlService {
 
         try {
             //Маршалим объект типов и суем его в файл...
-            IOUtils.write(marshal(batchTypes), new FileOutputStream(outputFolder.replaceFirst("/$", "") + "/BatchTypes.xml"));
+            IOUtils.write(marshal(batchTypes), new FileOutputStream(outputFolder.replaceFirst("/$", "") + "/BatchTypes.xml"), defaultEncoding);
         } catch (IOException e) {
             logger.error(e.getMessage());
         }

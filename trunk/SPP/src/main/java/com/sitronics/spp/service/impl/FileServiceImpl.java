@@ -45,7 +45,7 @@ public class FileServiceImpl implements FileService {
             suffixFileFilter = new SuffixFileFilter(".fcbat");
         }
 
-        // Берем коллекцию файлов во входной директории
+        // Берем коллекцию файлов во входной директории.
         inputFolder = new File(inFolder);
         if (inputFolder.isDirectory()) {
             // Берем только файлы в указаной входной директории с указанным расширением файлов и без поддиректорий.
@@ -71,7 +71,7 @@ public class FileServiceImpl implements FileService {
                     try {
                         FileUtils.copyFile(file, new File(FilenameUtils.concat(outFolder, outFileName.toString())));
                     } catch (IOException e) {
-                        logger.error("Error: ", e);
+                        logger.error(e.getMessage());
                     }
                 }
                 // Опустошаем буфер...
