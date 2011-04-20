@@ -17,9 +17,9 @@ import jargs.gnu.CmdLineParser.Option;
 public class SPP {
 
     private static void printUsage() {
-        System.err.println(
-                "Usage: java -jar SPP.jar {-i, --inFolder} a_inFolder {-o, --outFolder} a_outFolder {-e, --fileExtension} a_extension \n" +
-                        "Example: java -jar SPP.jar -i C://testFolder -o C://testOutputFolder -e .fcbat");
+        System.err.println();
+        System.err.println("Usage: java -jar SPP-1.0.jar {-i, --inFolder} a_inFolder {-o, --outFolder} a_outFolder {-e, --fileExtension} a_extension");
+        System.err.println("Example: java -jar SPP-1.0.jar -i C://testFolder -o C://testOutputFolder -e .fcbat");
     }
 
     @SuppressWarnings("unchecked")
@@ -59,6 +59,7 @@ public class SPP {
             //Создаем Xml файл...
             xmlService.createXml(outFolder);
 
+            System.out.println();
             System.out.println("Job is Done! See content in: " + outFolder);
         }
     }
