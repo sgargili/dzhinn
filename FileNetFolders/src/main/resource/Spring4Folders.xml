@@ -12,6 +12,8 @@
 
     <context:component-scan base-package="com.sitronics.filenet.folders"/>
 
+    <context:property-placeholder location="classpath:data.properties"/>
+
     <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
@@ -28,7 +30,112 @@
         </property>
     </bean>
 
-    <bean id="defaultEncoding" class="java.lang.String">
-        <constructor-arg value="UTF-8"/>
+    <util:list id="regions" list-class="java.util.ArrayList" value-type="java.lang.String">
+        <value>Корпоративный центр Группы &quot;МТС&quot;, г. Москва</value>
+        <value>&quot;Макро-регион &quot;Москва&quot;, г. Москва</value>
+        <value>&quot;Бизнес-единица &quot;МТС Зарубежные компании&quot;, г. Москва</value>
+        <value>&quot;Бизнес-единица &quot;МТС Россия&quot;, г. Москва</value>
+        <value>&quot;Макро-регион &quot;Центр&quot;, г. Москва</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Владимир</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Иваново</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Калуга</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Кострома</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Рязань</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Смоленск</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Тамбов</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Тверь</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Тула</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Ярославль</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Орловской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Брянской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Воронежской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Курской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Липецкой области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Белгородской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Северо-Запад&quot; (г. Санкт-Петербург)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Санкт-Петербург</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Вологодской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Калининградской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Мурманской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Новгородской области (Великий Новгород)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Псков</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Карелия (Петрозаводск)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Сыктывкар, Республика Коми</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Архангельской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Поволжье&quot; (г. Нижний Новгород)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Нижний Новгород</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Киров</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Марий Эл (Йошкар-Ола)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Мордовия (Саранск)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Татарстан</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Удмуртской республике (ИЖЕВСК)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Чувашской Республике - Чувашии (Чебоксары)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Самара</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Оренбург</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Башкортостан</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Саратов</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Ульяновской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Юг&quot;, (Краснодар)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Краснодарском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Волгоградской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Кабардино-Балкарской Республике (Нальчик)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Карачаево-Черкесской Республике (Черкесск)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Астраханской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Адыгея</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Дагестан (Махачкала)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Ингушетия (Магас, Назрань)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Калмыкия (Элиста)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Северная Осетия - Алания (Владикавказ)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Ростовской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Ставропольском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Чеченской Республике</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Сочи</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Новороссийск</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Урал&quot; (Екатеринбург, Свердловская область)
+        </value>
+        <value>Филиал ОАО &quot;МТС&quot; в Свердловской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Курган</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Тюменской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Ханты-Мансийском АО - Югре (ХМАО, Сургут)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Челябинск</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Ямало-Ненецком АО (ЯНАО)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Пермском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Сибирь&quot; (Новосибирск)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Новосибирской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Красноярском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Хакасия</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Алтай</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Омской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Томской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Тыва</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Кемеровской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Алтайском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Дальний Восток&quot; (Владивосток, Приморский Край)
+        </value>
+        <value>Филиал ОАО &quot;МТС&quot; в Приморском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в г. Благовещенск (Амурская область)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Камчатском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Магаданской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Саха (Якутия)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Сахалинской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Хабаровском крае</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Иркутской области</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Республике Бурятия (Улан-Удэ)</value>
+        <value>Филиал ОАО &quot;МТС&quot; в Забайкальском крае (Чита)</value>
+    </util:list>
+
+    <bean id="folderProperties" class="com.sitronics.filenet.folders.model.FolderProperties">
+        <property name="objectType" value="${objectType}"/>
+        <property name="securityPolicy" value=""/>
+        <property name="creator" value="${creator}"/>
+        <property name="dateLastModified" value="2011-04-11T06:41:58.0Z"/>
+        <property name="dateCreated" value="2011-04-11T06:41:58.0Z"/>
+        <property name="replicationGroup" value=""/>
+        <property name="containerType" value=""/>
+        <property name="externalReplicaIdentities" value=""/>
+        <property name="lastModifier" value="${creator}"/>
+        <property name="hiddenContainer" value="${isHiddenContainer}"/>
+        <property name="inheritParentPermissions" value="${inheritParentPermissions}"/>
     </bean>
+
 </beans>

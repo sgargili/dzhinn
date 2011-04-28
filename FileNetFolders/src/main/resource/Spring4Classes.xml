@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:component-scan base-package="com.sitronics.filenet.classes"/>
+
+    <context:property-placeholder location="classpath:data4Classes.properties"/>
+
+    <util:map id="regions" map-class="java.util.HashMap" value-type="java.lang.String"
+              key-type="java.lang.String">
+        <entry key="KorpCentrGruppyMTS" value="Корпоративный центр Группы &quot;МТС&quot;, г. Москва"/>
+        <entry key="MR_Moskva" value="&quot;Макро-регион &quot;Москва&quot;, г. Москва"/>
+        <entry key="BE_ZarubejnyeKompanii" value="&quot;Бизнес-единица &quot;МТС Зарубежные компании&quot;, г. Москва"/>
+        <entry key="BE_MTSRossiya" value="&quot;Бизнес-единица &quot;МТС Россия&quot;, г. Москва"/>
+        <entry key="MR_Centr" value="&quot;Макро-регион &quot;Центр&quot;, г. Москва"/>
+        <entry key="Vladimir" value="Филиал ОАО &quot;МТС&quot; в г. Владимир"/>
+        <entry key="Ivanovo" value="Филиал ОАО &quot;МТС&quot; в г. Иваново"/>
+        <entry key="Kaluga" value="Филиал ОАО &quot;МТС&quot; в г. Калуга"/>
+        <entry key="Kostroma" value="Филиал ОАО &quot;МТС&quot; в г. Кострома"/>
+        <entry key="Ryazan" value="Филиал ОАО &quot;МТС&quot; в г. Рязань"/>
+        <entry key="Smolensk" value="Филиал ОАО &quot;МТС&quot; в г. Смоленск"/>
+        <entry key="Tambov" value="Филиал ОАО &quot;МТС&quot; в г. Тамбов"/>
+        <entry key="Tver" value="Филиал ОАО &quot;МТС&quot; в г. Тверь"/>
+        <entry key="Tula" value="Филиал ОАО &quot;МТС&quot; в г. Тула"/>
+        <entry key="YAroslavl" value="Филиал ОАО &quot;МТС&quot; в г. Ярославль"/>
+        <entry key="Orlovskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Орловской области"/>
+        <entry key="Bryanskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Брянской области"/>
+        <entry key="Voronejskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Воронежской области"/>
+        <entry key="Kurskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Курской области"/>
+        <entry key="Lipeckoy_obl" value="Филиал ОАО &quot;МТС&quot; в Липецкой области"/>
+        <entry key="Belgorodskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Белгородской области"/>
+        <entry key="MR_SeveroZapad"
+               value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Северо-Запад&quot; (г. Санкт-Петербург)"/>
+        <entry key="SanktPeterburg" value="Филиал ОАО &quot;МТС&quot; в г. Санкт-Петербург"/>
+        <entry key="Vologodskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Вологодской области"/>
+        <entry key="Kaliningradskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Калининградской области"/>
+        <entry key="Murmanskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Мурманской области"/>
+        <entry key="Novgorodskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Новгородской области (Великий Новгород)"/>
+        <entry key="Pskov" value="Филиал ОАО &quot;МТС&quot; в г. Псков"/>
+        <entry key="Kareliya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Карелия (Петрозаводск)"/>
+        <entry key="Syktyvkar" value="Филиал ОАО &quot;МТС&quot; в г. Сыктывкар, Республика Коми"/>
+        <entry key="Arhangelskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Архангельской области"/>
+        <entry key="MR_Povolje"
+               value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Поволжье&quot; (г. Нижний Новгород)"/>
+        <entry key="Nijniy Novgorod" value="Филиал ОАО &quot;МТС&quot; в г. Нижний Новгород"/>
+        <entry key="Kirov" value="Филиал ОАО &quot;МТС&quot; в г. Киров"/>
+        <entry key="MariyEl_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Марий Эл (Йошкар-Ола)"/>
+        <entry key="Mordoviya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Мордовия (Саранск)"/>
+        <entry key="Tatarstan_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Татарстан"/>
+        <entry key="Udmurtskaya_rr" value="Филиал ОАО &quot;МТС&quot; в Удмуртской республике (ИЖЕВСК)"/>
+        <entry key="CHuvashskaya_rr" value="Филиал ОАО &quot;МТС&quot; в Чувашской Республике - Чувашии (Чебоксары)"/>
+        <entry key="Samara" value="Филиал ОАО &quot;МТС&quot; в г. Самара"/>
+        <entry key="Orenburg" value="Филиал ОАО &quot;МТС&quot; в г. Оренбург"/>
+        <entry key="Bashkortostan_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Башкортостан"/>
+        <entry key="Saratov" value="Филиал ОАО &quot;МТС&quot; в г. Саратов"/>
+        <entry key="Ulyanovskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Ульяновской области"/>
+        <entry key="MR_YUg" value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Юг&quot;, (Краснодар)"/>
+        <entry key="Krasnodarskom_kr" value="Филиал ОАО &quot;МТС&quot; в Краснодарском крае"/>
+        <entry key="Volgogradskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Волгоградской области"/>
+        <entry key="KabardinoBalkarskaya_rr"
+               value="Филиал ОАО &quot;МТС&quot; в Кабардино-Балкарской Республике (Нальчик)"/>
+        <entry key="KarachaevoCHerkesskaya_rr"
+               value="Филиал ОАО &quot;МТС&quot; в Карачаево-Черкесской Республике (Черкесск)"/>
+        <entry key="Astrahanskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Астраханской области"/>
+        <entry key="Adygeya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Адыгея"/>
+        <entry key="Dagestan_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Дагестан (Махачкала)"/>
+        <entry key="Ingushetiya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Ингушетия (Магас, Назрань)"/>
+        <entry key="Kalmykiya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Калмыкия (Элиста)"/>
+        <entry key="SevernayaOsetiya_Alaniya_rr"
+               value="Филиал ОАО &quot;МТС&quot; в Республике Северная Осетия - Алания (Владикавказ)"/>
+        <entry key="Rostovskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Ростовской области"/>
+        <entry key="Stavropolskom_kr" value="Филиал ОАО &quot;МТС&quot; в Ставропольском крае"/>
+        <entry key="CHechenskoy Respublike" value="Филиал ОАО &quot;МТС&quot; в Чеченской Республике"/>
+        <entry key="Sochi" value="Филиал ОАО &quot;МТС&quot; в г. Сочи"/>
+        <entry key="Novorossiysk" value="Филиал ОАО &quot;МТС&quot; в г. Новороссийск"/>
+        <entry key="MR_Ural"
+               value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Урал&quot; (Екатеринбург, Свердловская область)"/>
+        <entry key="Sverdlovskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Свердловской области"/>
+        <entry key="Kurgan" value="Филиал ОАО &quot;МТС&quot; в г. Курган"/>
+        <entry key="Tyumenskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Тюменской области"/>
+        <entry key="HantyMansiyskom AO" value="Филиал ОАО &quot;МТС&quot; в Ханты-Мансийском АО - Югре (ХМАО, Сургут)"/>
+        <entry key="CHelyabinsk" value="Филиал ОАО &quot;МТС&quot; в г. Челябинск"/>
+        <entry key="YAmaloNeneckom AO" value="Филиал ОАО &quot;МТС&quot; в Ямало-Ненецком АО (ЯНАО)"/>
+        <entry key="Permskom_kr" value="Филиал ОАО &quot;МТС&quot; в Пермском крае"/>
+        <entry key="MR_Sibir" value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Сибирь&quot; (Новосибирск)"/>
+        <entry key="Novosibirskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Новосибирской области"/>
+        <entry key="Krasnoyarskom_kr" value="Филиал ОАО &quot;МТС&quot; в Красноярском крае"/>
+        <entry key="Hakasiya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Хакасия"/>
+        <entry key="Altay_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Алтай"/>
+        <entry key="Omskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Омской области"/>
+        <entry key="Tomskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Томской области"/>
+        <entry key="Tyva_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Тыва"/>
+        <entry key="Kemerovskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Кемеровской области"/>
+        <entry key="Altayskom_kr" value="Филиал ОАО &quot;МТС&quot; в Алтайском крае"/>
+        <entry key="MR_Dalniy Vostok"
+               value="Филиал ОАО &quot;МТС&quot; &quot;Макро-регион &quot;Дальний Восток&quot; (Владивосток, Приморский Край)"/>
+        <entry key="Primorskom_kr" value="Филиал ОАО &quot;МТС&quot; в Приморском крае"/>
+        <entry key="Blagoveschensk" value="Филиал ОАО &quot;МТС&quot; в г. Благовещенск (Амурская область)"/>
+        <entry key="Kamchatskom_kr" value="Филиал ОАО &quot;МТС&quot; в Камчатском крае"/>
+        <entry key="Magadanskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Магаданской области"/>
+        <entry key="Saha_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Саха (Якутия)"/>
+        <entry key="Sahalinskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Сахалинской области"/>
+        <entry key="Habarovskom_kr" value="Филиал ОАО &quot;МТС&quot; в Хабаровском крае"/>
+        <entry key="Irkutskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Иркутской области"/>
+        <entry key="Buryatiya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Бурятия (Улан-Удэ)"/>
+        <entry key="Zabaykalskom_kr" value="Филиал ОАО &quot;МТС&quot; в Забайкальском крае (Чита)"/>
+    </util:map>
+
+    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>com.sitronics.filenet.classes.model.ExportedObjects</value>
+            </list>
+        </property>
+        <property name="marshallerProperties">
+            <map>
+                <!--Сделаем форматированный вывод...-->
+                <entry key="jaxb.formatted.output">
+                    <value type="boolean">true</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="localizedString" class="com.sitronics.filenet.classes.model.LocalizedString">
+        <property name="localeName" value="${localizedString.localeName}"/>
+        <property name="objectType" value="${localizedString.objectType}"/>
+    </bean>
+
+
+    <bean id="replicableClassDefinitionProperties"
+          class="com.sitronics.filenet.classes.model.property.ReplicableClassDefinitionProperties">
+        <property name="objectType" value="${objectType}"/>
+        <property name="creator" value="${creator}"/>
+        <property name="lastModifier" value="${lastModifier}"/>
+        <property name="propertyDefinitions">
+            <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitions">
+                <property name="propertyDefinitions">
+                    <util:list list-class="java.util.ArrayList" value-type="java.lang.String">
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.replicationGroup.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.replicationGroup.requiredClassId}"/>
+                            <property name="reflectivePropertyId" value=""/>
+                            <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.replicationGroup.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.auditedEvents.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.auditedEvents.requiredClassId}"/>
+                            <property name="reflectivePropertyId" value=""/>
+                            <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.auditedEvents.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.containers.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.containers.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.containers.reflectivePropertyId}"/>
+                            <property name="deletionAction"
+                                      value="${propertyDefinitionObject.containers.deletionAction}"/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.containers.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.annotations.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.annotations.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.annotations.reflectivePropertyId}"/>
+                            <property name="deletionAction"
+                                      value="${propertyDefinitionObject.annotations.deletionAction}"/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.annotations.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.securityPolicy.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.securityPolicy.requiredClassId}"/>
+                            <property name="reflectivePropertyId" value=""/>
+                            <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.securityPolicy.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.parent.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.parent.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.parent.reflectivePropertyId}"/>
+                            <property name="deletionAction" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.parent.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.containees.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.containees.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.containees.reflectivePropertyId}"/>
+                            <property name="deletionAction" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.containees.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.subfolders.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.subfolders.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.subfolders.reflectivePropertyId}"/>
+                            <property name="deletionAction"
+                                      value="${propertyDefinitionObject.subfolders.deletionAction}"/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId" value="${propertyDefinitionObject.subfolders.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionBoolean">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionBoolean.inheritParentPermissions.name}"/>
+                            <property name="primaryId"
+                                      value="${propertyDefinitionBoolean.inheritParentPermissions.primaryId}"/>
+                            <property name="propertyDefaultBoolean"
+                                      value="${propertyDefinitionBoolean.inheritParentPermissions.propertyDefaultBoolean}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.containedDocuments.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.containedDocuments.requiredClassId}"/>
+                            <property name="reflectivePropertyId" value=""/>
+                            <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId"
+                                      value="${propertyDefinitionObject.containedDocuments.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionObject.workflowSubscriptions.name}"/>
+                            <property name="requiredClassId"
+                                      value="${propertyDefinitionObject.workflowSubscriptions.requiredClassId}"/>
+                            <property name="reflectivePropertyId"
+                                      value="${propertyDefinitionObject.workflowSubscriptions.reflectivePropertyId}"/>
+                            <property name="deletionAction"
+                                      value="${propertyDefinitionObject.workflowSubscriptions.deletionAction}"/>
+                            <property name="propertyDefaultObject" value=""/>
+                            <property name="primaryId"
+                                      value="${propertyDefinitionObject.workflowSubscriptions.primaryId}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionBoolean">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionBoolean.isHiddenContainer.name}"/>
+                            <property name="nameProperty"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.isNameProperty}"/>
+                            <property name="settability"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.propertyDefaultBoolean}"/>
+                            <property name="valueRequired"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.isValueRequired}"/>
+                            <property name="copyToReservation"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.copyToReservation}"/>
+                            <property name="primaryId"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.primaryId}"/>
+                            <property name="propertyDefaultBoolean"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.propertyDefaultBoolean}"/>
+                            <property name="hidden"
+                                      value="${propertyDefinitionBoolean.isHiddenContainer.isHidden}"/>
+                        </bean>
+                        <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionString">
+                            <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
+                            <property name="name" value="${propertyDefinitionString.containerType.name}"/>
+                            <property name="nameProperty"
+                                      value="${propertyDefinitionString.containerType.isNameProperty}"/>
+                            <property name="maximumLengthString"
+                                      value="${propertyDefinitionString.containerType.maximumLengthString}"/>
+                            <property name="settability"
+                                      value="${propertyDefinitionString.containerType.settability}"/>
+                            <property name="valueRequired"
+                                      value="${propertyDefinitionString.containerType.isValueRequired}"/>
+                            <property name="primaryId"
+                                      value="${propertyDefinitionString.containerType.primaryId}"/>
+                            <property name="copyToReservation"
+                                      value="${propertyDefinitionString.containerType.copyToReservation}"/>
+                            <property name="hidden"
+                                      value="${propertyDefinitionString.containerType.isHidden}"/>
+                        </bean>
+                    </util:list>
+                </property>
+            </bean>
+        </property>
+        <property name="CBREnabled" value="${isCBREnabled}"/>
+        <property name="hidden" value="${isHidden}"/>
+        <property name="superclassDefinition">
+            <bean class="com.sitronics.filenet.classes.model.SuperclassDefinition">
+                <property name="objectRef">
+                    <bean class="com.sitronics.filenet.classes.model.ObjectRef">
+                        <property name="classId" value="${objectRef.classId}"/>
+                        <property name="objectId" value="${objectRef.objectId}"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="dateLastModified" value="${date}"/>
+        <property name="allowsInstances" value="${allowsInstances}"/>
+    </bean>
+
+</beans>

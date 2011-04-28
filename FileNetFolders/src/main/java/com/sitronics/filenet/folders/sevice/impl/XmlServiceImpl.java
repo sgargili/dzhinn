@@ -4,13 +4,17 @@ package com.sitronics.filenet.folders.sevice.impl;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.List;
+import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +31,24 @@ public class XmlServiceImpl implements XmlService {
     @Autowired(required = false)
     private Jaxb2Marshaller jaxb2Marshaller;
 
-    @Autowired
+    @Resource
+    private FolderProperties folderProperties;
+
+    @Value("${defaultEncoding}")
     private String defaultEncoding;
+
+    @Value("${eMVersion}")
+    private String eMVersion;
+
+    @Value("${rootObjectId}")
+    private String rootObjectId;
+
+    @Value("${defaultClassId}")
+    private String defaultClassId;
+
+    @Resource
+    List<String> regions;
+
 
     private String marshal(ExportedObjects exportedObjects) {
         if (jaxb2Marshaller == null) {
@@ -43,41 +63,38 @@ public class XmlServiceImpl implements XmlService {
     }
 
     @Override
-    public void createXml(String outputFolder) {
+    public void createXml(String outputFile) {
 
-        ObjectRef objectRef = new ObjectRef("0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0","01a3a8ca-7aec-11d1-a31b-0020af9fbb1c");
+        ObjectRef objectRef = new ObjectRef(rootObjectId, defaultClassId);
 
         Parent parent = new Parent(objectRef);
 
-        FolderProperties folderProperties = new FolderProperties();
-        folderProperties.setObjectType("2");
-        folderProperties.setName("Регион_7776");
-        folderProperties.setSecurityPolicy("");
-        folderProperties.setCreator("p8admin");
-        folderProperties.setDateLastModified("2011-04-11T06:41:58.0Z");
-        folderProperties.setDateCreated("2011-04-11T06:41:58.0Z");
-        folderProperties.setFolderName("Регион_1957776");
-        folderProperties.setReplicationGroup("");
-        folderProperties.setId("5aab44ee-60d9-4370-a6a9-6b3ec75cf011");
-        folderProperties.setContainerType("");
-        folderProperties.setExternalReplicaIdentities("");
-        folderProperties.setLastModifier("p8admin");
-        folderProperties.setHiddenContainer("0");
-        folderProperties.setInheritParentPermissions("1");
-        folderProperties.setParent(parent);
-
-        Folder folder = new Folder(folderProperties);
+        Folder folder;
 
         Folders folders = new Folders();
-        folders.addFolder(folder);
+
+        for (String region : regions) {
+
+            folderProperties.setName(region);
+            folderProperties.setFolderName(region);
+            folderProperties.setId(UUID.randomUUID().toString());
+            folderProperties.setParent(parent);
+
+            folder = new Folder(folderProperties);
+
+            folders.addFolder(folder);
+
+            folderProperties = (FolderProperties) folderProperties.clone();
+        }
 
         ExportedObjects exportedObjects = new ExportedObjects();
+
         exportedObjects.setFolders(folders);
-        exportedObjects.seteMVersion("4.51.0.100");
+        exportedObjects.seteMVersion(eMVersion);
+
         try {
-            logger.info(marshal(exportedObjects));
             //Маршалим объект типов и суем его в файл...
-            //IOUtils.write(marshal(exportedObjects), new FileOutputStream(outputFolder.replaceFirst("/$", "") + "/BatchTypes.xml"), defaultEncoding);
+            IOUtils.write(marshal(exportedObjects), new FileOutputStream(outputFile), defaultEncoding);
         } catch (Exception e) {
             logger.error(e.getMessage());
         }

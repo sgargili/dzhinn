@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
  * @author Andrey Popov creates on 27.04.11 (18:03)
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class FolderProperties {
+public class FolderProperties implements Cloneable {
     @XmlElement(name = "ObjectType")
     private String objectType;
     @XmlElement(name = "Name")
@@ -161,6 +161,16 @@ public class FolderProperties {
 
     public void setParent(Parent parent) {
         this.parent = parent;
+    }
+
+    // Паблик Морозов..........
+    @Override
+    public Object clone() {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            return null;
+        }
     }
 
     @Override
