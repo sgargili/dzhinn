@@ -1,0 +1,1139 @@
+<ExportedObjects EMVersion="4.51.0.100">
+    <LifeCycleActions/>
+    <LifeCyclePolicies/>
+    <ChoiceLists/>
+    <PropertyTemplates/>
+    <ClassDefinitions>
+        <ReplicableClassDefinition>
+            <ReplicableClassDefinitionProperties>
+                <ObjectType>1027</ObjectType>
+                <SymbolicName>Folder</SymbolicName>
+                <Creator/>
+                <LastModifier>waseco</LastModifier>
+                <PropertyDefinitions>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Replication Group</Name>
+                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Audited Events</Name>
+                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containers</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Annotations</Name>
+                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
+                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Security Policy</Name>
+                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Parent</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containees</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Subfolders</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>1</DeletionAction>
+                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Inherit Parent Permissions</Name>
+                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
+                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Contained Documents</Name>
+                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Workflow Subscriptions</Name>
+                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
+                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>IsHiddenContainer</Name>
+                        <IsNameProperty>0</IsNameProperty>
+                        <Settability>0</Settability>
+                        <ExternalAliases/>
+                        <ModificationAccessRequired/>
+                        <IsValueRequired>1</IsValueRequired>
+                        <CopyToReservation>1</CopyToReservation>
+                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <PropertyDefaultBoolean>0</PropertyDefaultBoolean>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionString>
+                        <ObjectType>1077</ObjectType>
+                        <IsNameProperty>0</IsNameProperty>
+                        <MaximumLengthString>64</MaximumLengthString>
+                        <PropertyDefaultString/>
+                        <Settability>0</Settability>
+                        <Name>Container Type</Name>
+                        <ExternalAliases/>
+                        <IsValueRequired>0</IsValueRequired>
+                        <IsCBREnabled/>
+                        <ModificationAccessRequired/>
+                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
+                        <CopyToReservation>1</CopyToReservation>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionString>
+                </PropertyDefinitions>
+                <ReplicationGroup/>
+                <IsCBREnabled/>
+                <DisplayNames/>
+                <AuditDefinitions/>
+                <AliasIds/>
+                <Id>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</Id>
+                <DateCreated>2010-12-03T13:09:15.0Z</DateCreated>
+                <DescriptiveTexts/>
+                <ExternalAliases/>
+                <IsHidden>0</IsHidden>
+                <ExternalReplicaIdentities/>
+                <SuperclassDefinition/>
+                <DateLastModified>2010-12-03T13:09:55.0Z</DateLastModified>
+                <Name>Folder</Name>
+                <AllowsInstances>1</AllowsInstances>
+            </ReplicableClassDefinitionProperties>
+        </ReplicableClassDefinition>
+        <ReplicableClassDefinition>
+            <ReplicableClassDefinitionProperties>
+                <ObjectType>1027</ObjectType>
+                <SymbolicName>FormProxyFolder</SymbolicName>
+                <Creator>waseco</Creator>
+                <LastModifier>waseco</LastModifier>
+                <PropertyDefinitions>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Replication Group</Name>
+                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Audited Events</Name>
+                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containers</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Annotations</Name>
+                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
+                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Security Policy</Name>
+                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Parent</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containees</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Subfolders</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>1</DeletionAction>
+                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Inherit Parent Permissions</Name>
+                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
+                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Contained Documents</Name>
+                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Workflow Subscriptions</Name>
+                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
+                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>IsHiddenContainer</Name>
+                        <IsNameProperty>0</IsNameProperty>
+                        <Settability>0</Settability>
+                        <ExternalAliases/>
+                        <ModificationAccessRequired/>
+                        <IsValueRequired>1</IsValueRequired>
+                        <CopyToReservation>1</CopyToReservation>
+                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <PropertyDefaultBoolean>0</PropertyDefaultBoolean>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionString>
+                        <ObjectType>1077</ObjectType>
+                        <IsNameProperty>0</IsNameProperty>
+                        <MaximumLengthString>64</MaximumLengthString>
+                        <PropertyDefaultString/>
+                        <Settability>0</Settability>
+                        <Name>Container Type</Name>
+                        <ExternalAliases/>
+                        <IsValueRequired>0</IsValueRequired>
+                        <IsCBREnabled/>
+                        <ModificationAccessRequired/>
+                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
+                        <CopyToReservation>1</CopyToReservation>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionString>
+                </PropertyDefinitions>
+                <ReplicationGroup/>
+                <IsCBREnabled>0</IsCBREnabled>
+                <DisplayNames>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>Form Proxy Folder</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ar</LocaleName>
+                        <LocalizedText>????? Proxy ???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>bg</LocaleName>
+                        <LocalizedText>Прокси папка на формуляр</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ca</LocaleName>
+                        <LocalizedText>Carpeta de proxy del formulari</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>cs</LocaleName>
+                        <LocalizedText>Slozka proxy formulare</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>de</LocaleName>
+                        <LocalizedText>Formular-Proxy-Ordner</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>es</LocaleName>
+                        <LocalizedText>Carpeta proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fi</LocaleName>
+                        <LocalizedText>Lomakkeen valityskansio</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fr</LocaleName>
+                        <LocalizedText>Dossier proxy du formulaire</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hr</LocaleName>
+                        <LocalizedText>Folder Proxy obrasca</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hu</LocaleName>
+                        <LocalizedText>Urlaptovabbito mappa</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>it</LocaleName>
+                        <LocalizedText>Cartella proxy modulo</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ja</LocaleName>
+                        <LocalizedText>????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ko</LocaleName>
+                        <LocalizedText>?? ??? ??</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>nl</LocaleName>
+                        <LocalizedText>Map voor formulierproxy's</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pl</LocaleName>
+                        <LocalizedText>Folder formularzy proxy</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt</LocaleName>
+                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt-br</LocaleName>
+                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ro</LocaleName>
+                        <LocalizedText>Folder proxy formular</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ru</LocaleName>
+                        <LocalizedText>Папка прокси формы</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sk</LocaleName>
+                        <LocalizedText>Proxy priecinok formulara</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sv</LocaleName>
+                        <LocalizedText>Mapp for formularproxy</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>th</LocaleName>
+                        <LocalizedText>???????????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>tr</LocaleName>
+                        <LocalizedText>Form Yetkili Klasoru</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-cn</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-tw</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                </DisplayNames>
+                <AuditDefinitions/>
+                <AliasIds/>
+                <Id>d2d9e2ec-7635-4cca-8781-0d63a68c1382</Id>
+                <DateCreated>2010-12-03T13:09:37.0Z</DateCreated>
+                <DescriptiveTexts>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>Form Proxy Folder</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ar</LocaleName>
+                        <LocalizedText>????? Proxy ???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>bg</LocaleName>
+                        <LocalizedText>Прокси папка на формуляр</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ca</LocaleName>
+                        <LocalizedText>Carpeta de proxy del formulari</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>cs</LocaleName>
+                        <LocalizedText>Slozka proxy formulare</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>de</LocaleName>
+                        <LocalizedText>Formular-Proxy-Ordner</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>es</LocaleName>
+                        <LocalizedText>Carpeta proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fi</LocaleName>
+                        <LocalizedText>Lomakkeen valityskansio</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fr</LocaleName>
+                        <LocalizedText>Dossier proxy du formulaire</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hr</LocaleName>
+                        <LocalizedText>Folder Proxy obrasca</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hu</LocaleName>
+                        <LocalizedText>Urlaptovabbito mappa</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>it</LocaleName>
+                        <LocalizedText>Cartella proxy modulo</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ja</LocaleName>
+                        <LocalizedText>????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ko</LocaleName>
+                        <LocalizedText>?? ??? ??</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>nl</LocaleName>
+                        <LocalizedText>Map voor formulierproxy's</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pl</LocaleName>
+                        <LocalizedText>Folder formularzy proxy</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt</LocaleName>
+                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt-br</LocaleName>
+                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ro</LocaleName>
+                        <LocalizedText>Folder proxy formular</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ru</LocaleName>
+                        <LocalizedText>Папка прокси формы</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sk</LocaleName>
+                        <LocalizedText>Proxy priecinok formulara</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sv</LocaleName>
+                        <LocalizedText>Mapp for formularproxy</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>th</LocaleName>
+                        <LocalizedText>???????????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>tr</LocaleName>
+                        <LocalizedText>Form Yetkili Klasoru</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-cn</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-tw</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                </DescriptiveTexts>
+                <ExternalAliases/>
+                <IsHidden>1</IsHidden>
+                <ExternalReplicaIdentities/>
+                <SuperclassDefinition>
+                    <ObjectRef>
+                        <ObjectId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</ObjectId>
+                        <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
+                    </ObjectRef>
+                </SuperclassDefinition>
+                <DateLastModified>2010-12-03T13:09:55.0Z</DateLastModified>
+                <Name>Form Proxy Folder</Name>
+                <AllowsInstances>1</AllowsInstances>
+            </ReplicableClassDefinitionProperties>
+        </ReplicableClassDefinition>
+        <ReplicableClassDefinition>
+            <ReplicableClassDefinitionProperties>
+                <ObjectType>1027</ObjectType>
+                <SymbolicName>pass</SymbolicName>
+                <Creator>ceadmeco</Creator>
+                <LastModifier>ceadmeco</LastModifier>
+                <PropertyDefinitions>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Replication Group</Name>
+                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Audited Events</Name>
+                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containers</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Annotations</Name>
+                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
+                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Security Policy</Name>
+                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Parent</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containees</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Subfolders</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>1</DeletionAction>
+                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Inherit Parent Permissions</Name>
+                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
+                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Contained Documents</Name>
+                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Workflow Subscriptions</Name>
+                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
+                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>IsHiddenContainer</Name>
+                        <IsNameProperty>0</IsNameProperty>
+                        <Settability>0</Settability>
+                        <ExternalAliases/>
+                        <ModificationAccessRequired/>
+                        <IsValueRequired>1</IsValueRequired>
+                        <CopyToReservation>1</CopyToReservation>
+                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <PropertyDefaultBoolean>0</PropertyDefaultBoolean>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionString>
+                        <ObjectType>1077</ObjectType>
+                        <IsNameProperty>0</IsNameProperty>
+                        <MaximumLengthString>64</MaximumLengthString>
+                        <PropertyDefaultString/>
+                        <Settability>0</Settability>
+                        <Name>Container Type</Name>
+                        <ExternalAliases/>
+                        <IsValueRequired>0</IsValueRequired>
+                        <IsCBREnabled/>
+                        <ModificationAccessRequired/>
+                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
+                        <CopyToReservation>1</CopyToReservation>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionString>
+                </PropertyDefinitions>
+                <ReplicationGroup/>
+                <IsCBREnabled>0</IsCBREnabled>
+                <DisplayNames>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>пароль</LocalizedText>
+                    </LocalizedString>
+                </DisplayNames>
+                <AuditDefinitions/>
+                <AliasIds/>
+                <Id>022c6d75-726a-4964-8cc0-d65c9b3dcc0a</Id>
+                <DateCreated>2011-04-28T09:53:54.0Z</DateCreated>
+                <DescriptiveTexts>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>пароль</LocalizedText>
+                    </LocalizedString>
+                </DescriptiveTexts>
+                <ExternalAliases/>
+                <IsHidden>0</IsHidden>
+                <ExternalReplicaIdentities/>
+                <SuperclassDefinition>
+                    <ObjectRef>
+                        <ObjectId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</ObjectId>
+                        <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
+                    </ObjectRef>
+                </SuperclassDefinition>
+                <DateLastModified>2011-04-28T09:53:54.0Z</DateLastModified>
+                <Name>пароль</Name>
+                <AllowsInstances>1</AllowsInstances>
+            </ReplicableClassDefinitionProperties>
+        </ReplicableClassDefinition>
+        <ReplicableClassDefinition>
+            <ReplicableClassDefinitionProperties>
+                <ObjectType>1027</ObjectType>
+                <SymbolicName>PreferencesFolder</SymbolicName>
+                <Creator>waseco</Creator>
+                <LastModifier>waseco</LastModifier>
+                <PropertyDefinitions>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Replication Group</Name>
+                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Audited Events</Name>
+                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction/>
+                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containers</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Annotations</Name>
+                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
+                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Security Policy</Name>
+                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction>0</DeletionAction>
+                        <PropertyDefaultObject/>
+                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Parent</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Containees</Name>
+                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction/>
+                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Subfolders</Name>
+                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
+                        <DeletionAction>1</DeletionAction>
+                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Inherit Parent Permissions</Name>
+                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
+                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Contained Documents</Name>
+                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
+                        <ReflectivePropertyId/>
+                        <DeletionAction>0</DeletionAction>
+                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionObject>
+                        <ObjectType>1077</ObjectType>
+                        <Name>Workflow Subscriptions</Name>
+                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
+                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
+                        <DeletionAction>2</DeletionAction>
+                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
+                    </PropertyDefinitionObject>
+                    <PropertyDefinitionBoolean>
+                        <ObjectType>1077</ObjectType>
+                        <Name>IsHiddenContainer</Name>
+                        <IsNameProperty>0</IsNameProperty>
+                        <Settability>0</Settability>
+                        <ExternalAliases/>
+                        <ModificationAccessRequired/>
+                        <IsValueRequired>1</IsValueRequired>
+                        <CopyToReservation>1</CopyToReservation>
+                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionBoolean>
+                    <PropertyDefinitionString>
+                        <ObjectType>1077</ObjectType>
+                        <IsNameProperty>0</IsNameProperty>
+                        <MaximumLengthString>64</MaximumLengthString>
+                        <PropertyDefaultString/>
+                        <Settability>0</Settability>
+                        <Name>Container Type</Name>
+                        <ExternalAliases/>
+                        <IsValueRequired>0</IsValueRequired>
+                        <IsCBREnabled/>
+                        <ModificationAccessRequired/>
+                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
+                        <CopyToReservation>1</CopyToReservation>
+                        <ChoiceList/>
+                        <AliasIds/>
+                        <IsHidden>1</IsHidden>
+                    </PropertyDefinitionString>
+                </PropertyDefinitions>
+                <ReplicationGroup/>
+                <IsCBREnabled>0</IsCBREnabled>
+                <DisplayNames>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>Preferences Folder</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ar</LocaleName>
+                        <LocalizedText>????? ?????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>bg</LocaleName>
+                        <LocalizedText>Папка на предпочитания</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ca</LocaleName>
+                        <LocalizedText>Carpeta de preferencies</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>cs</LocaleName>
+                        <LocalizedText>Slozka predvoleb</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>de</LocaleName>
+                        <LocalizedText>Ordner mit Vorgaben</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>es</LocaleName>
+                        <LocalizedText>Carpeta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fi</LocaleName>
+                        <LocalizedText>Maarityskansio</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fr</LocaleName>
+                        <LocalizedText>Dossier des preferences</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hr</LocaleName>
+                        <LocalizedText>Folder preferenci</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hu</LocaleName>
+                        <LocalizedText>Beallitasok mappa</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>it</LocaleName>
+                        <LocalizedText>Cartella Preferenze</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ja</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ko</LocaleName>
+                        <LocalizedText>???? ??</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>nl</LocaleName>
+                        <LocalizedText>Voorkeursinstellingen map</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pl</LocaleName>
+                        <LocalizedText>Folder preferencji</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt</LocaleName>
+                        <LocalizedText>Pasta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt-br</LocaleName>
+                        <LocalizedText>Pasta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ro</LocaleName>
+                        <LocalizedText>Folder de preferinte</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ru</LocaleName>
+                        <LocalizedText>Папка предпочтений</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sk</LocaleName>
+                        <LocalizedText>Priecinok preferencii</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sv</LocaleName>
+                        <LocalizedText>Installningsmapp</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>th</LocaleName>
+                        <LocalizedText>???????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>tr</LocaleName>
+                        <LocalizedText>Tercih Klasoru</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-cn</LocaleName>
+                        <LocalizedText>??????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-tw</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                </DisplayNames>
+                <AuditDefinitions/>
+                <AliasIds/>
+                <Id>60cfad68-024c-4489-9d04-87ccb989d0a2</Id>
+                <DateCreated>2010-12-03T13:09:56.0Z</DateCreated>
+                <DescriptiveTexts>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>en-us</LocaleName>
+                        <LocalizedText>Preferences Folder</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ar</LocaleName>
+                        <LocalizedText>????? ?????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>bg</LocaleName>
+                        <LocalizedText>Папка на предпочитания</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ca</LocaleName>
+                        <LocalizedText>Carpeta de preferencies</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>cs</LocaleName>
+                        <LocalizedText>Slozka predvoleb</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>de</LocaleName>
+                        <LocalizedText>Ordner mit Vorgaben</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>es</LocaleName>
+                        <LocalizedText>Carpeta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fi</LocaleName>
+                        <LocalizedText>Maarityskansio</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>fr</LocaleName>
+                        <LocalizedText>Dossier des preferences</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hr</LocaleName>
+                        <LocalizedText>Folder preferenci</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>hu</LocaleName>
+                        <LocalizedText>Beallitasok mappa</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>it</LocaleName>
+                        <LocalizedText>Cartella Preferenze</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ja</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ko</LocaleName>
+                        <LocalizedText>???? ??</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>nl</LocaleName>
+                        <LocalizedText>Voorkeursinstellingen map</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pl</LocaleName>
+                        <LocalizedText>Folder preferencji</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt</LocaleName>
+                        <LocalizedText>Pasta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>pt-br</LocaleName>
+                        <LocalizedText>Pasta de preferencias</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ro</LocaleName>
+                        <LocalizedText>Folder de preferinte</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>ru</LocaleName>
+                        <LocalizedText>Папка предпочтений</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sk</LocaleName>
+                        <LocalizedText>Priecinok preferencii</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>sv</LocaleName>
+                        <LocalizedText>Installningsmapp</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>th</LocaleName>
+                        <LocalizedText>???????????????????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>tr</LocaleName>
+                        <LocalizedText>Tercih Klasoru</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-cn</LocaleName>
+                        <LocalizedText>??????</LocalizedText>
+                    </LocalizedString>
+                    <LocalizedString>
+                        <ObjectType>1075</ObjectType>
+                        <LocaleName>zh-tw</LocaleName>
+                        <LocalizedText>???????</LocalizedText>
+                    </LocalizedString>
+                </DescriptiveTexts>
+                <ExternalAliases/>
+                <IsHidden>1</IsHidden>
+                <ExternalReplicaIdentities/>
+                <SuperclassDefinition>
+                    <ObjectRef>
+                        <ObjectId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</ObjectId>
+                        <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
+                    </ObjectRef>
+                </SuperclassDefinition>
+                <DateLastModified>2010-12-03T13:09:56.0Z</DateLastModified>
+                <Name>Preferences Folder</Name>
+                <AllowsInstances>1</AllowsInstances>
+            </ReplicableClassDefinitionProperties>
+        </ReplicableClassDefinition>
+    </ClassDefinitions>
+</ExportedObjects>
