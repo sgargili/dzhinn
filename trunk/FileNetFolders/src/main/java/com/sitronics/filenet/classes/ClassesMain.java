@@ -12,6 +12,6 @@ public class ClassesMain {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath:Spring4Classes.xml");
         XmlService xmlService = (XmlService) context.getBean("xmlService");
-        xmlService.createXml("D://Classes.xml");
+        xmlService.createXml("D:\\JavaProject\\FileNetFolders\\src\\test\\java\\Test.xml");
     }
 }

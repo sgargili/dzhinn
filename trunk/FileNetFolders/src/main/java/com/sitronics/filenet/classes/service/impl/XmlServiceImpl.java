@@ -22,6 +22,10 @@ import org.springframework.stereotype.Service;
 
 import com.sitronics.filenet.classes.model.*;
 import com.sitronics.filenet.classes.model.property.ReplicableClassDefinitionProperties;
+import com.sitronics.filenet.classes.model.security.AccessPermission;
+import com.sitronics.filenet.classes.model.security.Grantee;
+import com.sitronics.filenet.classes.model.security.Permissions;
+import com.sitronics.filenet.classes.model.security.ReplicableClassDefinitionSecurity;
 import com.sitronics.filenet.classes.service.XmlService;
 
 
@@ -38,21 +42,41 @@ public class XmlServiceImpl implements XmlService {
 
     @Autowired
     private LocalizedString localizedString;
+    @Autowired
+    private ReplicableClassDefinitionProperties replicableClassDefinitionProperties;
+    @Autowired
+    private ReplicableClassDefinitionSecurity replicableClassDefinitionSecurity;
+
+    @Value("${defaultEncoding}")
+    private String defaultEncoding;
+    @Value("${eMVersion}")
+    private String eMVersion;
+
+    @Value("${defaultOwner.accessType}")
+    private String accessType;
+    @Value("${defaultOwner.inheritableDepth}")
+    private String inheritableDepth;
+    @Value("${defaultOwner.accessMask}")
+    private String accessMask;
+    @Value("${defaultOwner.permissionSource}")
+    private String permissionSource;
+    @Value("${defaultDomainNamePrefix}")
+    private String defaultDomainNamePrefix;
+    @Value("${defaultDomainNameSuffix}")
+    private String defaultDomainNameSuffix;
+
+    @Resource
+    Map<String, String> regions;
+
+    @Resource
+    Map<String, String> domainGroup;
 
     private DisplayNames displayNames;
     private DescriptiveTexts descriptiveTexts;
 
-    @Resource
-    private ReplicableClassDefinitionProperties replicableClassDefinitionProperties;
-
-    @Value("${defaultEncoding}")
-    private String defaultEncoding;
-
-    @Value("${eMVersion}")
-    private String eMVersion;
-
-    @Resource
-    Map<String, String> regions;
+    private Permissions permissions;
+    private AccessPermission accessPermission;
+    private Grantee grantee;
 
     private String marshal(ExportedObjects exportedObjects) {
         if (jaxb2Marshaller == null) {
@@ -81,6 +105,9 @@ public class XmlServiceImpl implements XmlService {
 
 
         for (Map.Entry<String, String> region : regions.entrySet()) {
+            if (region.getKey().equals("Folder")) {
+                replicableClassDefinitionProperties.setSuperclassDefinition(null);
+            }
             replicableClassDefinitionProperties.setSymbolicName(region.getKey());
             replicableClassDefinitionProperties.setName(region.getValue());
 
@@ -95,14 +122,41 @@ public class XmlServiceImpl implements XmlService {
             replicableClassDefinitionProperties.setDescriptiveTexts(descriptiveTexts);
             replicableClassDefinitionProperties.setId(UUID.randomUUID().toString());
 
+//            localizedString = (LocalizedString) localizedString.clone();
+//
+//            replicableClassDefinitionProperties = (ReplicableClassDefinitionProperties) replicableClassDefinitionProperties.clone();
+
+            grantee = new Grantee();
+            grantee.setsID(domainGroup.get(region.getKey()));
+            grantee.setName(defaultDomainNamePrefix + " " + region.getKey() + defaultDomainNameSuffix);
+            grantee.setShortName(defaultDomainNamePrefix + " " + region.getKey());
+            grantee.setDisplayName(defaultDomainNamePrefix + " " + region.getKey());
+            grantee.setPrincipalType("1");
+
+            accessPermission = new AccessPermission();
+            accessPermission.setGrantee(grantee);
+            accessPermission.setAccessType(accessType);
+            accessPermission.setInheritableDepth(inheritableDepth);
+            accessPermission.setAccessMask(accessMask);
+            accessPermission.setPermissionSource(permissionSource);
+
+            permissions = new Permissions();
+            permissions.addAccessPermission(accessPermission);
+
+            replicableClassDefinitionSecurity.setPermissions(permissions);
+            replicableClassDefinitionSecurity.setDefaultInstancePermissions(permissions);
+
+            replicableClassDefinition = new ReplicableClassDefinition();
+            replicableClassDefinition.setReplicableClassDefinitionProperties(replicableClassDefinitionProperties);
+            replicableClassDefinition.setReplicableClassDefinitionSecurity(replicableClassDefinitionSecurity);
+
+            replicableClassDefinitionSecurity = (ReplicableClassDefinitionSecurity) replicableClassDefinitionSecurity.clone();
+
             localizedString = (LocalizedString) localizedString.clone();
 
             replicableClassDefinitionProperties = (ReplicableClassDefinitionProperties) replicableClassDefinitionProperties.clone();
 
-            replicableClassDefinition = new ReplicableClassDefinition(replicableClassDefinitionProperties);
-
             classDefinitions.addReplicableClassDefinition(replicableClassDefinition);
-
 
         }
 

@@ -112,6 +112,98 @@
         <entry key="Irkutskoy_obl" value="Филиал ОАО &quot;МТС&quot; в Иркутской области"/>
         <entry key="Buryatiya_rr" value="Филиал ОАО &quot;МТС&quot; в Республике Бурятия (Улан-Удэ)"/>
         <entry key="Zabaykalskom_kr" value="Филиал ОАО &quot;МТС&quot; в Забайкальском крае (Чита)"/>
+        <!--<entry key="Folder" value="Folder"/>-->
+    </util:map>
+
+    <util:map id="domainGroup" map-class="java.util.HashMap" value-type="java.lang.String"
+              key-type="java.lang.String">
+        <entry key="KorpCentrGruppyMTS" value="S-1-5-21-685724207-866877060-2473498247-55389"/>
+        <entry key="MR_Moskva" value="S-1-5-21-685724207-866877060-2473498247-55390"/>
+        <entry key="BE_ZarubejnyeKompanii"
+               value="S-1-5-21-685724207-866877060-2473498247-55391"/>
+        <entry key="BE_MTSRossiya" value="S-1-5-21-685724207-866877060-2473498247-55392"/>
+        <entry key="Vladimir" value="S-1-5-21-685724207-866877060-2473498247-55393"/>
+        <entry key="Ivanovo" value="S-1-5-21-685724207-866877060-2473498247-55394"/>
+        <entry key="Kaluga" value="S-1-5-21-685724207-866877060-2473498247-55395"/>
+        <entry key="Kostroma" value="S-1-5-21-685724207-866877060-2473498247-55396"/>
+        <entry key="Ryazan" value="S-1-5-21-685724207-866877060-2473498247-55397"/>
+        <entry key="Smolensk" value="S-1-5-21-685724207-866877060-2473498247-55398"/>
+        <entry key="Tambov" value="S-1-5-21-685724207-866877060-2473498247-55399"/>
+        <entry key="Tver" value="S-1-5-21-685724207-866877060-2473498247-55400"/>
+        <entry key="Tula" value="S-1-5-21-685724207-866877060-2473498247-55401"/>
+        <entry key="YAroslavl" value="S-1-5-21-685724207-866877060-2473498247-55402"/>
+        <entry key="Orlovskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55403"/>
+        <entry key="Bryanskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55404"/>
+        <entry key="Voronejskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55405"/>
+        <entry key="Kurskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55406"/>
+        <entry key="Lipeckoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55407"/>
+        <entry key="Belgorodskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55408"/>
+        <entry key="SanktPeterburg" value="S-1-5-21-685724207-866877060-2473498247-55409"/>
+        <entry key="Vologodskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55410"/>
+        <entry key="Kaliningradskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55411"/>
+        <entry key="Murmanskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55412"/>
+        <entry key="Novgorodskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55413"/>
+        <entry key="Pskov" value="S-1-5-21-685724207-866877060-2473498247-55414"/>
+        <entry key="Kareliya_rr" value="S-1-5-21-685724207-866877060-2473498247-55415"/>
+        <entry key="Syktyvkar" value="S-1-5-21-685724207-866877060-2473498247-55416"/>
+        <entry key="Arhangelskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55417"/>
+        <entry key="Nijniy Novgorod" value="S-1-5-21-685724207-866877060-2473498247-55418"/>
+        <entry key="Kirov" value="S-1-5-21-685724207-866877060-2473498247-55419"/>
+        <entry key="MariyEl_rr" value="S-1-5-21-685724207-866877060-2473498247-55420"/>
+        <entry key="Mordoviya_rr" value="S-1-5-21-685724207-866877060-2473498247-55421"/>
+        <entry key="Tatarstan_rr" value="S-1-5-21-685724207-866877060-2473498247-55422"/>
+        <entry key="Udmurtskaya_rr" value="S-1-5-21-685724207-866877060-2473498247-55423"/>
+        <entry key="CHuvashskaya_rr" value="S-1-5-21-685724207-866877060-2473498247-55424"/>
+        <entry key="Samara" value="S-1-5-21-685724207-866877060-2473498247-55425"/>
+        <entry key="Orenburg" value="S-1-5-21-685724207-866877060-2473498247-55426"/>
+        <entry key="Bashkortostan_rr" value="S-1-5-21-685724207-866877060-2473498247-55427"/>
+        <entry key="Saratov" value="S-1-5-21-685724207-866877060-2473498247-55428"/>
+        <entry key="Ulyanovskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55429"/>
+        <entry key="Krasnodarskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55430"/>
+        <entry key="Volgogradskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55431"/>
+        <entry key="KabardinoBalkarskaya_rr"
+               value="S-1-5-21-685724207-866877060-2473498247-55432"/>
+        <entry key="KarachaevoCHerkesskaya_rr"
+               value="S-1-5-21-685724207-866877060-2473498247-55433"/>
+        <entry key="Astrahanskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55434"/>
+        <entry key="Adygeya_rr" value="S-1-5-21-685724207-866877060-2473498247-55435"/>
+        <entry key="Dagestan_rr" value="S-1-5-21-685724207-866877060-2473498247-55436"/>
+        <entry key="Ingushetiya_rr" value="S-1-5-21-685724207-866877060-2473498247-55437"/>
+        <entry key="Kalmykiya_rr" value="S-1-5-21-685724207-866877060-2473498247-55438"/>
+        <entry key="SevernayaOsetiya_Alaniya_rr"
+               value="S-1-5-21-685724207-866877060-2473498247-55439"/>
+        <entry key="Rostovskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55440"/>
+        <entry key="Stavropolskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55441"/>
+        <entry key="CHechenskoy Respublike"
+               value="S-1-5-21-685724207-866877060-2473498247-55442"/>
+        <entry key="Sochi" value="S-1-5-21-685724207-866877060-2473498247-55443"/>
+        <entry key="Novorossiysk" value="S-1-5-21-685724207-866877060-2473498247-55444"/>
+        <entry key="Sverdlovskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55445"/>
+        <entry key="Kurgan" value="S-1-5-21-685724207-866877060-2473498247-55446"/>
+        <entry key="Tyumenskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55447"/>
+        <entry key="HantyMansiyskom AO" value="S-1-5-21-685724207-866877060-2473498247-55448"/>
+        <entry key="CHelyabinsk" value="S-1-5-21-685724207-866877060-2473498247-55449"/>
+        <entry key="YAmaloNeneckom AO" value="S-1-5-21-685724207-866877060-2473498247-55450"/>
+        <entry key="Permskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55451"/>
+        <entry key="Novosibirskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55452"/>
+        <entry key="Krasnoyarskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55453"/>
+        <entry key="Hakasiya_rr" value="S-1-5-21-685724207-866877060-2473498247-55454"/>
+        <entry key="Altay_rr" value="S-1-5-21-685724207-866877060-2473498247-55455"/>
+        <entry key="Omskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55456"/>
+        <entry key="Tomskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55457"/>
+        <entry key="Tyva_rr" value="S-1-5-21-685724207-866877060-2473498247-55458"/>
+        <entry key="Kemerovskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55459"/>
+        <entry key="Altayskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55460"/>
+        <entry key="Primorskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55461"/>
+        <entry key="Blagoveschensk" value="S-1-5-21-685724207-866877060-2473498247-55462"/>
+        <entry key="Kamchatskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55463"/>
+        <entry key="Magadanskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55464"/>
+        <entry key="Saha_rr" value="S-1-5-21-685724207-866877060-2473498247-55465"/>
+        <entry key="Sahalinskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55466"/>
+        <entry key="Habarovskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55467"/>
+        <entry key="Irkutskoy_obl" value="S-1-5-21-685724207-866877060-2473498247-55468"/>
+        <entry key="Buryatiya_rr" value="S-1-5-21-685724207-866877060-2473498247-55469"/>
+        <entry key="Zabaykalskom_kr" value="S-1-5-21-685724207-866877060-2473498247-55470"/>
     </util:map>
 
     <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
@@ -207,6 +299,7 @@
                             <property name="reflectivePropertyId"
                                       value="${propertyDefinitionObject.parent.reflectivePropertyId}"/>
                             <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
                             <property name="primaryId" value="${propertyDefinitionObject.parent.primaryId}"/>
                         </bean>
                         <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
@@ -217,6 +310,7 @@
                             <property name="reflectivePropertyId"
                                       value="${propertyDefinitionObject.containees.reflectivePropertyId}"/>
                             <property name="deletionAction" value=""/>
+                            <property name="propertyDefaultObject" value=""/>
                             <property name="primaryId" value="${propertyDefinitionObject.containees.primaryId}"/>
                         </bean>
                         <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
@@ -238,6 +332,15 @@
                                       value="${propertyDefinitionBoolean.inheritParentPermissions.primaryId}"/>
                             <property name="propertyDefaultBoolean"
                                       value="${propertyDefinitionBoolean.inheritParentPermissions.propertyDefaultBoolean}"/>
+                            <property name="nameProperty" value=""/>
+                            <property name="settability" value=""/>
+                            <property name="externalAliases" value=""/>
+                            <property name="modificationAccessRequired" value=""/>
+                            <property name="valueRequired" value=""/>
+                            <property name="copyToReservation" value=""/>
+                            <property name="choiceList" value=""/>
+                            <property name="aliasIds" value=""/>
+                            <property name="hidden" value=""/>
                         </bean>
                         <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionObject">
                             <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
@@ -280,6 +383,10 @@
                                       value="${propertyDefinitionBoolean.isHiddenContainer.propertyDefaultBoolean}"/>
                             <property name="hidden"
                                       value="${propertyDefinitionBoolean.isHiddenContainer.isHidden}"/>
+                            <property name="externalAliases" value=""/>
+                            <property name="modificationAccessRequired" value=""/>
+                            <property name="choiceList" value=""/>
+                            <property name="aliasIds" value=""/>
                         </bean>
                         <bean class="com.sitronics.filenet.classes.model.property.PropertyDefinitionString">
                             <property name="objectType" value="${propertyDefinitionBase.objectType}"/>
@@ -298,12 +405,24 @@
                                       value="${propertyDefinitionString.containerType.copyToReservation}"/>
                             <property name="hidden"
                                       value="${propertyDefinitionString.containerType.isHidden}"/>
+                            <property name="propertyDefaultString" value=""/>
+                            <property name="externalAliases" value=""/>
+                            <property name="CBREnabled" value=""/>
+                            <property name="modificationAccessRequired" value=""/>
+                            <property name="choiceList" value=""/>
+                            <property name="aliasIds" value=""/>
                         </bean>
                     </util:list>
                 </property>
             </bean>
         </property>
+        <property name="replicationGroup" value=""/>
         <property name="CBREnabled" value="${isCBREnabled}"/>
+        <property name="auditDefinitions" value=""/>
+        <property name="aliasIds" value=""/>
+        <property name="dateCreated" value="${date}"/>
+        <property name="externalAliases" value=""/>
+        <property name="externalReplicaIdentities" value=""/>
         <property name="hidden" value="${isHidden}"/>
         <property name="superclassDefinition">
             <bean class="com.sitronics.filenet.classes.model.SuperclassDefinition">
@@ -317,6 +436,25 @@
         </property>
         <property name="dateLastModified" value="${date}"/>
         <property name="allowsInstances" value="${allowsInstances}"/>
+    </bean>
+
+    <bean id="replicableClassDefinitionSecurity"
+          class="com.sitronics.filenet.classes.model.security.ReplicableClassDefinitionSecurity">
+        <property name="owner">
+            <bean class="com.sitronics.filenet.classes.model.security.Grantee">
+                <property name="sID" value="${owner.sid}"/>
+                <property name="name" value="${owner.name}"/>
+                <property name="shortName" value="${owner.shortName}"/>
+                <property name="displayName" value="${owner.displayName}"/>
+                <property name="principalType" value="${owner.principalType}"/>
+            </bean>
+        </property>
+        <property name="defaultInstanceOwner">
+            <bean class="com.sitronics.filenet.classes.model.security.Grantee">
+                <property name="sID" value="${defaultOwner.sid}"/>
+                <property name="name" value="${defaultOwner.name}"/>
+            </bean>
+        </property>
     </bean>
 
 </beans>
