@@ -148,418 +148,108 @@
                 <Name>Folder</Name>
                 <AllowsInstances>1</AllowsInstances>
             </ReplicableClassDefinitionProperties>
-        </ReplicableClassDefinition>
-        <ReplicableClassDefinition>
-            <ReplicableClassDefinitionProperties>
-                <ObjectType>1027</ObjectType>
-                <SymbolicName>FormProxyFolder</SymbolicName>
-                <Creator>waseco</Creator>
-                <LastModifier>waseco</LastModifier>
-                <PropertyDefinitions>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Replication Group</Name>
-                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PropertyDefaultObject/>
-                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Audited Events</Name>
-                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Containers</Name>
-                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Annotations</Name>
-                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
-                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Security Policy</Name>
-                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PropertyDefaultObject/>
-                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Parent</Name>
-                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
-                        <DeletionAction/>
-                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Containees</Name>
-                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction/>
-                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Subfolders</Name>
-                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction>1</DeletionAction>
-                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionBoolean>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Inherit Parent Permissions</Name>
-                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
-                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
-                    </PropertyDefinitionBoolean>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Contained Documents</Name>
-                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Workflow Subscriptions</Name>
-                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
-                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionBoolean>
-                        <ObjectType>1077</ObjectType>
-                        <Name>IsHiddenContainer</Name>
-                        <IsNameProperty>0</IsNameProperty>
-                        <Settability>0</Settability>
-                        <ExternalAliases/>
-                        <ModificationAccessRequired/>
-                        <IsValueRequired>1</IsValueRequired>
-                        <CopyToReservation>1</CopyToReservation>
-                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
-                        <ChoiceList/>
-                        <AliasIds/>
-                        <PropertyDefaultBoolean>0</PropertyDefaultBoolean>
-                        <IsHidden>1</IsHidden>
-                    </PropertyDefinitionBoolean>
-                    <PropertyDefinitionString>
-                        <ObjectType>1077</ObjectType>
-                        <IsNameProperty>0</IsNameProperty>
-                        <MaximumLengthString>64</MaximumLengthString>
-                        <PropertyDefaultString/>
-                        <Settability>0</Settability>
-                        <Name>Container Type</Name>
-                        <ExternalAliases/>
-                        <IsValueRequired>0</IsValueRequired>
-                        <IsCBREnabled/>
-                        <ModificationAccessRequired/>
-                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
-                        <CopyToReservation>1</CopyToReservation>
-                        <ChoiceList/>
-                        <AliasIds/>
-                        <IsHidden>1</IsHidden>
-                    </PropertyDefinitionString>
-                </PropertyDefinitions>
-                <ReplicationGroup/>
-                <IsCBREnabled>0</IsCBREnabled>
-                <DisplayNames>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>en-us</LocaleName>
-                        <LocalizedText>Form Proxy Folder</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ar</LocaleName>
-                        <LocalizedText>????? Proxy ???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>bg</LocaleName>
-                        <LocalizedText>Прокси папка на формуляр</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ca</LocaleName>
-                        <LocalizedText>Carpeta de proxy del formulari</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>cs</LocaleName>
-                        <LocalizedText>Slozka proxy formulare</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>de</LocaleName>
-                        <LocalizedText>Formular-Proxy-Ordner</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>es</LocaleName>
-                        <LocalizedText>Carpeta proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fi</LocaleName>
-                        <LocalizedText>Lomakkeen valityskansio</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fr</LocaleName>
-                        <LocalizedText>Dossier proxy du formulaire</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hr</LocaleName>
-                        <LocalizedText>Folder Proxy obrasca</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hu</LocaleName>
-                        <LocalizedText>Urlaptovabbito mappa</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>it</LocaleName>
-                        <LocalizedText>Cartella proxy modulo</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ja</LocaleName>
-                        <LocalizedText>????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ko</LocaleName>
-                        <LocalizedText>?? ??? ??</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>nl</LocaleName>
-                        <LocalizedText>Map voor formulierproxy's</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pl</LocaleName>
-                        <LocalizedText>Folder formularzy proxy</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt</LocaleName>
-                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt-br</LocaleName>
-                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ro</LocaleName>
-                        <LocalizedText>Folder proxy formular</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ru</LocaleName>
-                        <LocalizedText>Папка прокси формы</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sk</LocaleName>
-                        <LocalizedText>Proxy priecinok formulara</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sv</LocaleName>
-                        <LocalizedText>Mapp for formularproxy</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>th</LocaleName>
-                        <LocalizedText>???????????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>tr</LocaleName>
-                        <LocalizedText>Form Yetkili Klasoru</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-cn</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-tw</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                </DisplayNames>
-                <AuditDefinitions/>
-                <AliasIds/>
-                <Id>d2d9e2ec-7635-4cca-8781-0d63a68c1382</Id>
-                <DateCreated>2010-12-03T13:09:37.0Z</DateCreated>
-                <DescriptiveTexts>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>en-us</LocaleName>
-                        <LocalizedText>Form Proxy Folder</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ar</LocaleName>
-                        <LocalizedText>????? Proxy ???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>bg</LocaleName>
-                        <LocalizedText>Прокси папка на формуляр</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ca</LocaleName>
-                        <LocalizedText>Carpeta de proxy del formulari</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>cs</LocaleName>
-                        <LocalizedText>Slozka proxy formulare</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>de</LocaleName>
-                        <LocalizedText>Formular-Proxy-Ordner</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>es</LocaleName>
-                        <LocalizedText>Carpeta proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fi</LocaleName>
-                        <LocalizedText>Lomakkeen valityskansio</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fr</LocaleName>
-                        <LocalizedText>Dossier proxy du formulaire</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hr</LocaleName>
-                        <LocalizedText>Folder Proxy obrasca</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hu</LocaleName>
-                        <LocalizedText>Urlaptovabbito mappa</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>it</LocaleName>
-                        <LocalizedText>Cartella proxy modulo</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ja</LocaleName>
-                        <LocalizedText>????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ko</LocaleName>
-                        <LocalizedText>?? ??? ??</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>nl</LocaleName>
-                        <LocalizedText>Map voor formulierproxy's</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pl</LocaleName>
-                        <LocalizedText>Folder formularzy proxy</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt</LocaleName>
-                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt-br</LocaleName>
-                        <LocalizedText>Pasta de proxy de formulario</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ro</LocaleName>
-                        <LocalizedText>Folder proxy formular</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ru</LocaleName>
-                        <LocalizedText>Папка прокси формы</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sk</LocaleName>
-                        <LocalizedText>Proxy priecinok formulara</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sv</LocaleName>
-                        <LocalizedText>Mapp for formularproxy</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>th</LocaleName>
-                        <LocalizedText>???????????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>tr</LocaleName>
-                        <LocalizedText>Form Yetkili Klasoru</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-cn</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-tw</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                </DescriptiveTexts>
-                <ExternalAliases/>
-                <IsHidden>1</IsHidden>
-                <ExternalReplicaIdentities/>
-                <SuperclassDefinition>
-                    <ObjectRef>
-                        <ObjectId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</ObjectId>
-                        <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
-                    </ObjectRef>
-                </SuperclassDefinition>
-                <DateLastModified>2010-12-03T13:09:55.0Z</DateLastModified>
-                <Name>Form Proxy Folder</Name>
-                <AllowsInstances>1</AllowsInstances>
-            </ReplicableClassDefinitionProperties>
+            <ReplicableClassDefinitionSecurity>
+                <Permissions>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-3-0</SID>
+                            <Name>#CREATOR-OWNER</Name>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>983827</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-11</SID>
+                            <Name>#AUTHENTICATED-USERS</Name>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131329</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-67144</SID>
+                            <Name>ceadmeco@msk.mts.ru</Name>
+                            <ShortName>ceadmeco</ShortName>
+                            <DisplayName>ceadmeco</DisplayName>
+                            <PrincipalType>0</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>983827</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-67145</SID>
+                            <Name>waseco@msk.mts.ru</Name>
+                            <ShortName>waseco</ShortName>
+                            <DisplayName>waseco</DisplayName>
+                            <PrincipalType>0</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>983827</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                </Permissions>
+                <DefaultInstancePermissions>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-3-0</SID>
+                            <Name>#CREATOR-OWNER</Name>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>999415</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-11</SID>
+                            <Name>#AUTHENTICATED-USERS</Name>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-67144</SID>
+                            <Name>ceadmeco@msk.mts.ru</Name>
+                            <ShortName>ceadmeco</ShortName>
+                            <DisplayName>ceadmeco</DisplayName>
+                            <PrincipalType>0</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>999415</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-67145</SID>
+                            <Name>waseco@msk.mts.ru</Name>
+                            <ShortName>waseco</ShortName>
+                            <DisplayName>waseco</DisplayName>
+                            <PrincipalType>0</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>999415</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                </DefaultInstancePermissions>
+                <DefaultInstanceOwner>
+                    <SID>S-1-3-0</SID>
+                    <Name>#CREATOR-OWNER</Name>
+                </DefaultInstanceOwner>
+            </ReplicableClassDefinitionSecurity>
         </ReplicableClassDefinition>
         <ReplicableClassDefinition>
             <ReplicableClassDefinitionProperties>
@@ -574,7 +264,6 @@
                         <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
                         <ReflectivePropertyId/>
                         <DeletionAction/>
-                        <PropertyDefaultObject/>
                         <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
                     </PropertyDefinitionObject>
                     <PropertyDefinitionObject>
@@ -607,7 +296,6 @@
                         <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
                         <ReflectivePropertyId/>
                         <DeletionAction/>
-                        <PropertyDefaultObject/>
                         <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
                     </PropertyDefinitionObject>
                     <PropertyDefinitionObject>
@@ -634,12 +322,6 @@
                         <DeletionAction>1</DeletionAction>
                         <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
                     </PropertyDefinitionObject>
-                    <PropertyDefinitionBoolean>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Inherit Parent Permissions</Name>
-                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
-                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
-                    </PropertyDefinitionBoolean>
                     <PropertyDefinitionObject>
                         <ObjectType>1077</ObjectType>
                         <Name>Contained Documents</Name>
@@ -718,422 +400,2159 @@
                         <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
                     </ObjectRef>
                 </SuperclassDefinition>
-                <DateLastModified>2011-04-28T09:53:54.0Z</DateLastModified>
+                <DateLastModified>2011-04-29T08:26:52.0Z</DateLastModified>
                 <Name>пароль</Name>
                 <AllowsInstances>1</AllowsInstances>
             </ReplicableClassDefinitionProperties>
-        </ReplicableClassDefinition>
-        <ReplicableClassDefinition>
-            <ReplicableClassDefinitionProperties>
-                <ObjectType>1027</ObjectType>
-                <SymbolicName>PreferencesFolder</SymbolicName>
-                <Creator>waseco</Creator>
-                <LastModifier>waseco</LastModifier>
-                <PropertyDefinitions>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Replication Group</Name>
-                        <RequiredClassId>d78c19ad-a74a-4c43-ad9b-46d4a9b2d843</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PropertyDefaultObject/>
-                        <PrimaryId>9d16626d-306b-4a86-aa99-9480adb310c4</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Audited Events</Name>
-                        <RequiredClassId>63a15878-f36a-4902-a6ea-e31c1721c1f2</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction/>
-                        <PrimaryId>3530db98-411e-40d5-a52b-fbf4b7cd90a0</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Containers</Name>
-                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c3750-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>045c374f-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Annotations</Name>
-                        <RequiredClassId>d54a3e9c-0704-11d3-8a0e-00104b6cb1da</RequiredClassId>
-                        <ReflectivePropertyId>f3d71838-0704-11d3-8a0e-00104b6cb1da</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>eba06b78-0704-11d3-8a0e-00104b6cb1da</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Security Policy</Name>
-                        <RequiredClassId>9c78f00d-e098-419a-ae10-5d854757ec79</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction>0</DeletionAction>
-                        <PropertyDefaultObject/>
-                        <PrimaryId>23244d4c-34d9-4dba-a805-e25c2e099a29</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Parent</Name>
-                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>d32e5053-afb2-11d2-8bd6-00e0290f729a</ReflectivePropertyId>
-                        <DeletionAction/>
-                        <PrimaryId>045c3776-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Containees</Name>
-                        <RequiredClassId>01a3a8ce-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c374d-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction/>
-                        <PrimaryId>045c374e-7aad-11d1-85e5-00a024e8a452</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Subfolders</Name>
-                        <RequiredClassId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId>045c3776-7aad-11d1-85e5-00a024e8a452</ReflectivePropertyId>
-                        <DeletionAction>1</DeletionAction>
-                        <PrimaryId>d32e5053-afb2-11d2-8bd6-00e0290f729a</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionBoolean>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Inherit Parent Permissions</Name>
-                        <PrimaryId>6f95a17b-d4bd-4563-9d47-2162bf81bb1c</PrimaryId>
-                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
-                    </PropertyDefinitionBoolean>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Contained Documents</Name>
-                        <RequiredClassId>01a3a8c2-7aec-11d1-a31b-0020af9fbb1c</RequiredClassId>
-                        <ReflectivePropertyId/>
-                        <DeletionAction>0</DeletionAction>
-                        <PrimaryId>4ef45ec9-57b8-4238-b8c3-f339c86f258a</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionObject>
-                        <ObjectType>1077</ObjectType>
-                        <Name>Workflow Subscriptions</Name>
-                        <RequiredClassId>c4984168-0059-4fdd-9826-979d44c7e3d2</RequiredClassId>
-                        <ReflectivePropertyId>7eab7695-d859-4fc1-8fe5-9adfe4c0f823</ReflectivePropertyId>
-                        <DeletionAction>2</DeletionAction>
-                        <PrimaryId>3bf3b281-7525-4cc6-8e80-4ccee112eb23</PrimaryId>
-                    </PropertyDefinitionObject>
-                    <PropertyDefinitionBoolean>
-                        <ObjectType>1077</ObjectType>
-                        <Name>IsHiddenContainer</Name>
-                        <IsNameProperty>0</IsNameProperty>
-                        <Settability>0</Settability>
-                        <ExternalAliases/>
-                        <ModificationAccessRequired/>
-                        <IsValueRequired>1</IsValueRequired>
-                        <CopyToReservation>1</CopyToReservation>
-                        <PrimaryId>24a43e2b-6dc4-4e3b-93de-21e31326d5f3</PrimaryId>
-                        <ChoiceList/>
-                        <AliasIds/>
-                        <PropertyDefaultBoolean>1</PropertyDefaultBoolean>
-                        <IsHidden>1</IsHidden>
-                    </PropertyDefinitionBoolean>
-                    <PropertyDefinitionString>
-                        <ObjectType>1077</ObjectType>
-                        <IsNameProperty>0</IsNameProperty>
-                        <MaximumLengthString>64</MaximumLengthString>
-                        <PropertyDefaultString/>
-                        <Settability>0</Settability>
-                        <Name>Container Type</Name>
-                        <ExternalAliases/>
-                        <IsValueRequired>0</IsValueRequired>
-                        <IsCBREnabled/>
-                        <ModificationAccessRequired/>
-                        <PrimaryId>16170118-c33c-41d7-a921-1bcfc8eecabf</PrimaryId>
-                        <CopyToReservation>1</CopyToReservation>
-                        <ChoiceList/>
-                        <AliasIds/>
-                        <IsHidden>1</IsHidden>
-                    </PropertyDefinitionString>
-                </PropertyDefinitions>
-                <ReplicationGroup/>
-                <IsCBREnabled>0</IsCBREnabled>
-                <DisplayNames>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>en-us</LocaleName>
-                        <LocalizedText>Preferences Folder</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ar</LocaleName>
-                        <LocalizedText>????? ?????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>bg</LocaleName>
-                        <LocalizedText>Папка на предпочитания</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ca</LocaleName>
-                        <LocalizedText>Carpeta de preferencies</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>cs</LocaleName>
-                        <LocalizedText>Slozka predvoleb</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>de</LocaleName>
-                        <LocalizedText>Ordner mit Vorgaben</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>es</LocaleName>
-                        <LocalizedText>Carpeta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fi</LocaleName>
-                        <LocalizedText>Maarityskansio</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fr</LocaleName>
-                        <LocalizedText>Dossier des preferences</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hr</LocaleName>
-                        <LocalizedText>Folder preferenci</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hu</LocaleName>
-                        <LocalizedText>Beallitasok mappa</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>it</LocaleName>
-                        <LocalizedText>Cartella Preferenze</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ja</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ko</LocaleName>
-                        <LocalizedText>???? ??</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>nl</LocaleName>
-                        <LocalizedText>Voorkeursinstellingen map</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pl</LocaleName>
-                        <LocalizedText>Folder preferencji</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt</LocaleName>
-                        <LocalizedText>Pasta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt-br</LocaleName>
-                        <LocalizedText>Pasta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ro</LocaleName>
-                        <LocalizedText>Folder de preferinte</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ru</LocaleName>
-                        <LocalizedText>Папка предпочтений</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sk</LocaleName>
-                        <LocalizedText>Priecinok preferencii</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sv</LocaleName>
-                        <LocalizedText>Installningsmapp</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>th</LocaleName>
-                        <LocalizedText>???????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>tr</LocaleName>
-                        <LocalizedText>Tercih Klasoru</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-cn</LocaleName>
-                        <LocalizedText>??????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-tw</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                </DisplayNames>
-                <AuditDefinitions/>
-                <AliasIds/>
-                <Id>60cfad68-024c-4489-9d04-87ccb989d0a2</Id>
-                <DateCreated>2010-12-03T13:09:56.0Z</DateCreated>
-                <DescriptiveTexts>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>en-us</LocaleName>
-                        <LocalizedText>Preferences Folder</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ar</LocaleName>
-                        <LocalizedText>????? ?????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>bg</LocaleName>
-                        <LocalizedText>Папка на предпочитания</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ca</LocaleName>
-                        <LocalizedText>Carpeta de preferencies</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>cs</LocaleName>
-                        <LocalizedText>Slozka predvoleb</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>de</LocaleName>
-                        <LocalizedText>Ordner mit Vorgaben</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>es</LocaleName>
-                        <LocalizedText>Carpeta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fi</LocaleName>
-                        <LocalizedText>Maarityskansio</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>fr</LocaleName>
-                        <LocalizedText>Dossier des preferences</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hr</LocaleName>
-                        <LocalizedText>Folder preferenci</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>hu</LocaleName>
-                        <LocalizedText>Beallitasok mappa</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>it</LocaleName>
-                        <LocalizedText>Cartella Preferenze</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ja</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ko</LocaleName>
-                        <LocalizedText>???? ??</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>nl</LocaleName>
-                        <LocalizedText>Voorkeursinstellingen map</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pl</LocaleName>
-                        <LocalizedText>Folder preferencji</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt</LocaleName>
-                        <LocalizedText>Pasta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>pt-br</LocaleName>
-                        <LocalizedText>Pasta de preferencias</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ro</LocaleName>
-                        <LocalizedText>Folder de preferinte</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>ru</LocaleName>
-                        <LocalizedText>Папка предпочтений</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sk</LocaleName>
-                        <LocalizedText>Priecinok preferencii</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>sv</LocaleName>
-                        <LocalizedText>Installningsmapp</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>th</LocaleName>
-                        <LocalizedText>???????????????????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>tr</LocaleName>
-                        <LocalizedText>Tercih Klasoru</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-cn</LocaleName>
-                        <LocalizedText>??????</LocalizedText>
-                    </LocalizedString>
-                    <LocalizedString>
-                        <ObjectType>1075</ObjectType>
-                        <LocaleName>zh-tw</LocaleName>
-                        <LocalizedText>???????</LocalizedText>
-                    </LocalizedString>
-                </DescriptiveTexts>
-                <ExternalAliases/>
-                <IsHidden>1</IsHidden>
-                <ExternalReplicaIdentities/>
-                <SuperclassDefinition>
-                    <ObjectRef>
-                        <ObjectId>01a3a8ca-7aec-11d1-a31b-0020af9fbb1c</ObjectId>
-                        <ClassId>f249f133-e244-4e96-93c8-b94cbd198c6b</ClassId>
-                    </ObjectRef>
-                </SuperclassDefinition>
-                <DateLastModified>2010-12-03T13:09:56.0Z</DateLastModified>
-                <Name>Preferences Folder</Name>
-                <AllowsInstances>1</AllowsInstances>
-            </ReplicableClassDefinitionProperties>
+            <ReplicableClassDefinitionSecurity>
+                <Owner>
+                    <SID>S-1-5-21-685724207-866877060-2473498247-67144</SID>
+                    <Name>ceadmeco@msk.mts.ru</Name>
+                    <ShortName>ceadmeco</ShortName>
+                    <DisplayName>ceadmeco</DisplayName>
+                    <PrincipalType>0</PrincipalType>
+                </Owner>
+                <Permissions>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55389</SID>
+                            <Name>0099 dl filenet region KorpCentrGruppyMTS@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KorpCentrGruppyMTS</ShortName>
+                            <DisplayName>0099 dl filenet region KorpCentrGruppyMTS</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55390</SID>
+                            <Name>0099 dl filenet region MR_Moskva@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region MR_Moskva</ShortName>
+                            <DisplayName>0099 dl filenet region MR_Moskva</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55391</SID>
+                            <Name>0099 dl filenet region BE_ZarubejnyeKompanii@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region BE_ZarubejnyeKompanii</ShortName>
+                            <DisplayName>0099 dl filenet region BE_ZarubejnyeKompanii</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55392</SID>
+                            <Name>0099 dl filenet region BE_MTSRossiya@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region BE_MTSRossiya</ShortName>
+                            <DisplayName>0099 dl filenet region BE_MTSRossiya</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55393</SID>
+                            <Name>0099 dl filenet region Vladimir@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Vladimir</ShortName>
+                            <DisplayName>0099 dl filenet region Vladimir</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55394</SID>
+                            <Name>0099 dl filenet region Ivanovo@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ivanovo</ShortName>
+                            <DisplayName>0099 dl filenet region Ivanovo</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55395</SID>
+                            <Name>0099 dl filenet region Kaluga@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kaluga</ShortName>
+                            <DisplayName>0099 dl filenet region Kaluga</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55396</SID>
+                            <Name>0099 dl filenet region Kostroma@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kostroma</ShortName>
+                            <DisplayName>0099 dl filenet region Kostroma</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55397</SID>
+                            <Name>0099 dl filenet region Ryazan@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ryazan</ShortName>
+                            <DisplayName>0099 dl filenet region Ryazan</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55398</SID>
+                            <Name>0099 dl filenet region Smolensk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Smolensk</ShortName>
+                            <DisplayName>0099 dl filenet region Smolensk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55399</SID>
+                            <Name>0099 dl filenet region Tambov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tambov</ShortName>
+                            <DisplayName>0099 dl filenet region Tambov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55400</SID>
+                            <Name>0099 dl filenet region Tver@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tver</ShortName>
+                            <DisplayName>0099 dl filenet region Tver</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55401</SID>
+                            <Name>0099 dl filenet region Tula@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tula</ShortName>
+                            <DisplayName>0099 dl filenet region Tula</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55402</SID>
+                            <Name>0099 dl filenet region YAroslavl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region YAroslavl</ShortName>
+                            <DisplayName>0099 dl filenet region YAroslavl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55403</SID>
+                            <Name>0099 dl filenet region Orlovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Orlovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Orlovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55404</SID>
+                            <Name>0099 dl filenet region Bryanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Bryanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Bryanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55405</SID>
+                            <Name>0099 dl filenet region Voronejskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Voronejskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Voronejskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55406</SID>
+                            <Name>0099 dl filenet region Kurskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kurskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kurskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55407</SID>
+                            <Name>0099 dl filenet region Lipeckoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Lipeckoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Lipeckoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55408</SID>
+                            <Name>0099 dl filenet region Belgorodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Belgorodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Belgorodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55409</SID>
+                            <Name>0099 dl filenet region SanktPeterburg@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region SanktPeterburg</ShortName>
+                            <DisplayName>0099 dl filenet region SanktPeterburg</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55410</SID>
+                            <Name>0099 dl filenet region Vologodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Vologodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Vologodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55411</SID>
+                            <Name>0099 dl filenet region Kaliningradskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kaliningradskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kaliningradskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55412</SID>
+                            <Name>0099 dl filenet region Murmanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Murmanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Murmanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55413</SID>
+                            <Name>0099 dl filenet region Novgorodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novgorodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Novgorodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55414</SID>
+                            <Name>0099 dl filenet region Pskov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Pskov</ShortName>
+                            <DisplayName>0099 dl filenet region Pskov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55415</SID>
+                            <Name>0099 dl filenet region Kareliya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kareliya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Kareliya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55416</SID>
+                            <Name>0099 dl filenet region Syktyvkar@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Syktyvkar</ShortName>
+                            <DisplayName>0099 dl filenet region Syktyvkar</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55417</SID>
+                            <Name>0099 dl filenet region Arhangelskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Arhangelskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Arhangelskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55418</SID>
+                            <Name>0099 dl filenet region Nijniy Novgorod@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Nijniy Novgorod</ShortName>
+                            <DisplayName>0099 dl filenet region Nijniy Novgorod</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55419</SID>
+                            <Name>0099 dl filenet region Kirov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kirov</ShortName>
+                            <DisplayName>0099 dl filenet region Kirov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55420</SID>
+                            <Name>0099 dl filenet region MariyEl_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region MariyEl_rr</ShortName>
+                            <DisplayName>0099 dl filenet region MariyEl_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55421</SID>
+                            <Name>0099 dl filenet region Mordoviya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Mordoviya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Mordoviya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55422</SID>
+                            <Name>0099 dl filenet region Tatarstan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tatarstan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Tatarstan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55423</SID>
+                            <Name>0099 dl filenet region Udmurtskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Udmurtskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Udmurtskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55424</SID>
+                            <Name>0099 dl filenet region CHuvashskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHuvashskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region CHuvashskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55425</SID>
+                            <Name>0099 dl filenet region Samara@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Samara</ShortName>
+                            <DisplayName>0099 dl filenet region Samara</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55426</SID>
+                            <Name>0099 dl filenet region Orenburg@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Orenburg</ShortName>
+                            <DisplayName>0099 dl filenet region Orenburg</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55427</SID>
+                            <Name>0099 dl filenet region Bashkortostan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Bashkortostan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Bashkortostan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55428</SID>
+                            <Name>0099 dl filenet region Saratov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Saratov</ShortName>
+                            <DisplayName>0099 dl filenet region Saratov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55429</SID>
+                            <Name>0099 dl filenet region Ulyanovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ulyanovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Ulyanovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55430</SID>
+                            <Name>0099 dl filenet region Krasnodarskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Krasnodarskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Krasnodarskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55431</SID>
+                            <Name>0099 dl filenet region Volgogradskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Volgogradskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Volgogradskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55432</SID>
+                            <Name>0099 dl filenet region KabardinoBalkarskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KabardinoBalkarskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region KabardinoBalkarskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55433</SID>
+                            <Name>0099 dl filenet region KarachaevoCHerkesskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KarachaevoCHerkesskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region KarachaevoCHerkesskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55434</SID>
+                            <Name>0099 dl filenet region Astrahanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Astrahanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Astrahanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55435</SID>
+                            <Name>0099 dl filenet region Adygeya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Adygeya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Adygeya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55436</SID>
+                            <Name>0099 dl filenet region Dagestan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Dagestan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Dagestan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55437</SID>
+                            <Name>0099 dl filenet region Ingushetiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ingushetiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Ingushetiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55438</SID>
+                            <Name>0099 dl filenet region Kalmykiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kalmykiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Kalmykiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55439</SID>
+                            <Name>0099 dl filenet region SevernayaOsetiya_Alaniya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region SevernayaOsetiya_Alaniya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region SevernayaOsetiya_Alaniya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55440</SID>
+                            <Name>0099 dl filenet region Rostovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Rostovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Rostovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55441</SID>
+                            <Name>0099 dl filenet region Stavropolskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Stavropolskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Stavropolskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55442</SID>
+                            <Name>0099 dl filenet region CHechenskoy Respublike@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHechenskoy Respublike</ShortName>
+                            <DisplayName>0099 dl filenet region CHechenskoy Respublike</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55443</SID>
+                            <Name>0099 dl filenet region Sochi@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sochi</ShortName>
+                            <DisplayName>0099 dl filenet region Sochi</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55444</SID>
+                            <Name>0099 dl filenet region Novorossiysk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novorossiysk</ShortName>
+                            <DisplayName>0099 dl filenet region Novorossiysk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55445</SID>
+                            <Name>0099 dl filenet region Sverdlovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sverdlovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Sverdlovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55446</SID>
+                            <Name>0099 dl filenet region Kurgan@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kurgan</ShortName>
+                            <DisplayName>0099 dl filenet region Kurgan</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55447</SID>
+                            <Name>0099 dl filenet region Tyumenskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tyumenskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Tyumenskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55448</SID>
+                            <Name>0099 dl filenet region HantyMansiyskom AO@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region HantyMansiyskom AO</ShortName>
+                            <DisplayName>0099 dl filenet region HantyMansiyskom AO</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55449</SID>
+                            <Name>0099 dl filenet region CHelyabinsk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHelyabinsk</ShortName>
+                            <DisplayName>0099 dl filenet region CHelyabinsk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55450</SID>
+                            <Name>0099 dl filenet region YAmaloNeneckom AO@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region YAmaloNeneckom AO</ShortName>
+                            <DisplayName>0099 dl filenet region YAmaloNeneckom AO</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55451</SID>
+                            <Name>0099 dl filenet region Permskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Permskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Permskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55452</SID>
+                            <Name>0099 dl filenet region Novosibirskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novosibirskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Novosibirskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55453</SID>
+                            <Name>0099 dl filenet region Krasnoyarskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Krasnoyarskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Krasnoyarskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55454</SID>
+                            <Name>0099 dl filenet region Hakasiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Hakasiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Hakasiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55455</SID>
+                            <Name>0099 dl filenet region Altay_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Altay_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Altay_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55456</SID>
+                            <Name>0099 dl filenet region Omskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Omskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Omskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55457</SID>
+                            <Name>0099 dl filenet region Tomskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tomskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Tomskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55458</SID>
+                            <Name>0099 dl filenet region Tyva_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tyva_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Tyva_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55459</SID>
+                            <Name>0099 dl filenet region Kemerovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kemerovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kemerovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55460</SID>
+                            <Name>0099 dl filenet region Altayskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Altayskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Altayskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55461</SID>
+                            <Name>0099 dl filenet region Primorskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Primorskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Primorskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55462</SID>
+                            <Name>0099 dl filenet region Blagoveschensk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Blagoveschensk</ShortName>
+                            <DisplayName>0099 dl filenet region Blagoveschensk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55463</SID>
+                            <Name>0099 dl filenet region Kamchatskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kamchatskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Kamchatskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55464</SID>
+                            <Name>0099 dl filenet region Magadanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Magadanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Magadanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55465</SID>
+                            <Name>0099 dl filenet region Saha_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Saha_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Saha_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55466</SID>
+                            <Name>0099 dl filenet region Sahalinskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sahalinskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Sahalinskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55467</SID>
+                            <Name>0099 dl filenet region Habarovskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Habarovskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Habarovskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55468</SID>
+                            <Name>0099 dl filenet region Irkutskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Irkutskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Irkutskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55469</SID>
+                            <Name>0099 dl filenet region Buryatiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Buryatiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Buryatiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55470</SID>
+                            <Name>0099 dl filenet region Zabaykalskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Zabaykalskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Zabaykalskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                </Permissions>
+                <DefaultInstancePermissions>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55389</SID>
+                            <Name>0099 dl filenet region KorpCentrGruppyMTS@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KorpCentrGruppyMTS</ShortName>
+                            <DisplayName>0099 dl filenet region KorpCentrGruppyMTS</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55390</SID>
+                            <Name>0099 dl filenet region MR_Moskva@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region MR_Moskva</ShortName>
+                            <DisplayName>0099 dl filenet region MR_Moskva</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55391</SID>
+                            <Name>0099 dl filenet region BE_ZarubejnyeKompanii@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region BE_ZarubejnyeKompanii</ShortName>
+                            <DisplayName>0099 dl filenet region BE_ZarubejnyeKompanii</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55392</SID>
+                            <Name>0099 dl filenet region BE_MTSRossiya@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region BE_MTSRossiya</ShortName>
+                            <DisplayName>0099 dl filenet region BE_MTSRossiya</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55393</SID>
+                            <Name>0099 dl filenet region Vladimir@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Vladimir</ShortName>
+                            <DisplayName>0099 dl filenet region Vladimir</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55394</SID>
+                            <Name>0099 dl filenet region Ivanovo@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ivanovo</ShortName>
+                            <DisplayName>0099 dl filenet region Ivanovo</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55395</SID>
+                            <Name>0099 dl filenet region Kaluga@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kaluga</ShortName>
+                            <DisplayName>0099 dl filenet region Kaluga</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55396</SID>
+                            <Name>0099 dl filenet region Kostroma@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kostroma</ShortName>
+                            <DisplayName>0099 dl filenet region Kostroma</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55397</SID>
+                            <Name>0099 dl filenet region Ryazan@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ryazan</ShortName>
+                            <DisplayName>0099 dl filenet region Ryazan</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55398</SID>
+                            <Name>0099 dl filenet region Smolensk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Smolensk</ShortName>
+                            <DisplayName>0099 dl filenet region Smolensk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55399</SID>
+                            <Name>0099 dl filenet region Tambov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tambov</ShortName>
+                            <DisplayName>0099 dl filenet region Tambov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55400</SID>
+                            <Name>0099 dl filenet region Tver@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tver</ShortName>
+                            <DisplayName>0099 dl filenet region Tver</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55401</SID>
+                            <Name>0099 dl filenet region Tula@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tula</ShortName>
+                            <DisplayName>0099 dl filenet region Tula</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55402</SID>
+                            <Name>0099 dl filenet region YAroslavl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region YAroslavl</ShortName>
+                            <DisplayName>0099 dl filenet region YAroslavl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55403</SID>
+                            <Name>0099 dl filenet region Orlovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Orlovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Orlovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55404</SID>
+                            <Name>0099 dl filenet region Bryanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Bryanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Bryanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55405</SID>
+                            <Name>0099 dl filenet region Voronejskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Voronejskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Voronejskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55406</SID>
+                            <Name>0099 dl filenet region Kurskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kurskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kurskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55407</SID>
+                            <Name>0099 dl filenet region Lipeckoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Lipeckoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Lipeckoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55408</SID>
+                            <Name>0099 dl filenet region Belgorodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Belgorodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Belgorodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55409</SID>
+                            <Name>0099 dl filenet region SanktPeterburg@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region SanktPeterburg</ShortName>
+                            <DisplayName>0099 dl filenet region SanktPeterburg</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55410</SID>
+                            <Name>0099 dl filenet region Vologodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Vologodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Vologodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55411</SID>
+                            <Name>0099 dl filenet region Kaliningradskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kaliningradskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kaliningradskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55412</SID>
+                            <Name>0099 dl filenet region Murmanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Murmanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Murmanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55413</SID>
+                            <Name>0099 dl filenet region Novgorodskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novgorodskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Novgorodskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55414</SID>
+                            <Name>0099 dl filenet region Pskov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Pskov</ShortName>
+                            <DisplayName>0099 dl filenet region Pskov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55415</SID>
+                            <Name>0099 dl filenet region Kareliya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kareliya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Kareliya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55416</SID>
+                            <Name>0099 dl filenet region Syktyvkar@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Syktyvkar</ShortName>
+                            <DisplayName>0099 dl filenet region Syktyvkar</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55417</SID>
+                            <Name>0099 dl filenet region Arhangelskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Arhangelskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Arhangelskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55418</SID>
+                            <Name>0099 dl filenet region Nijniy Novgorod@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Nijniy Novgorod</ShortName>
+                            <DisplayName>0099 dl filenet region Nijniy Novgorod</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55419</SID>
+                            <Name>0099 dl filenet region Kirov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kirov</ShortName>
+                            <DisplayName>0099 dl filenet region Kirov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55420</SID>
+                            <Name>0099 dl filenet region MariyEl_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region MariyEl_rr</ShortName>
+                            <DisplayName>0099 dl filenet region MariyEl_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55421</SID>
+                            <Name>0099 dl filenet region Mordoviya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Mordoviya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Mordoviya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55422</SID>
+                            <Name>0099 dl filenet region Tatarstan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tatarstan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Tatarstan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55423</SID>
+                            <Name>0099 dl filenet region Udmurtskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Udmurtskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Udmurtskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55424</SID>
+                            <Name>0099 dl filenet region CHuvashskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHuvashskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region CHuvashskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55425</SID>
+                            <Name>0099 dl filenet region Samara@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Samara</ShortName>
+                            <DisplayName>0099 dl filenet region Samara</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55426</SID>
+                            <Name>0099 dl filenet region Orenburg@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Orenburg</ShortName>
+                            <DisplayName>0099 dl filenet region Orenburg</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55427</SID>
+                            <Name>0099 dl filenet region Bashkortostan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Bashkortostan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Bashkortostan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55428</SID>
+                            <Name>0099 dl filenet region Saratov@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Saratov</ShortName>
+                            <DisplayName>0099 dl filenet region Saratov</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55429</SID>
+                            <Name>0099 dl filenet region Ulyanovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ulyanovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Ulyanovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55430</SID>
+                            <Name>0099 dl filenet region Krasnodarskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Krasnodarskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Krasnodarskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55431</SID>
+                            <Name>0099 dl filenet region Volgogradskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Volgogradskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Volgogradskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55432</SID>
+                            <Name>0099 dl filenet region KabardinoBalkarskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KabardinoBalkarskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region KabardinoBalkarskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55433</SID>
+                            <Name>0099 dl filenet region KarachaevoCHerkesskaya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region KarachaevoCHerkesskaya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region KarachaevoCHerkesskaya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55434</SID>
+                            <Name>0099 dl filenet region Astrahanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Astrahanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Astrahanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55435</SID>
+                            <Name>0099 dl filenet region Adygeya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Adygeya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Adygeya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55436</SID>
+                            <Name>0099 dl filenet region Dagestan_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Dagestan_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Dagestan_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55437</SID>
+                            <Name>0099 dl filenet region Ingushetiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Ingushetiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Ingushetiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55438</SID>
+                            <Name>0099 dl filenet region Kalmykiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kalmykiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Kalmykiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55439</SID>
+                            <Name>0099 dl filenet region SevernayaOsetiya_Alaniya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region SevernayaOsetiya_Alaniya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region SevernayaOsetiya_Alaniya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55440</SID>
+                            <Name>0099 dl filenet region Rostovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Rostovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Rostovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55441</SID>
+                            <Name>0099 dl filenet region Stavropolskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Stavropolskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Stavropolskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55442</SID>
+                            <Name>0099 dl filenet region CHechenskoy Respublike@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHechenskoy Respublike</ShortName>
+                            <DisplayName>0099 dl filenet region CHechenskoy Respublike</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55443</SID>
+                            <Name>0099 dl filenet region Sochi@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sochi</ShortName>
+                            <DisplayName>0099 dl filenet region Sochi</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55444</SID>
+                            <Name>0099 dl filenet region Novorossiysk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novorossiysk</ShortName>
+                            <DisplayName>0099 dl filenet region Novorossiysk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55445</SID>
+                            <Name>0099 dl filenet region Sverdlovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sverdlovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Sverdlovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55446</SID>
+                            <Name>0099 dl filenet region Kurgan@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kurgan</ShortName>
+                            <DisplayName>0099 dl filenet region Kurgan</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55447</SID>
+                            <Name>0099 dl filenet region Tyumenskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tyumenskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Tyumenskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55448</SID>
+                            <Name>0099 dl filenet region HantyMansiyskom AO@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region HantyMansiyskom AO</ShortName>
+                            <DisplayName>0099 dl filenet region HantyMansiyskom AO</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55449</SID>
+                            <Name>0099 dl filenet region CHelyabinsk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region CHelyabinsk</ShortName>
+                            <DisplayName>0099 dl filenet region CHelyabinsk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55450</SID>
+                            <Name>0099 dl filenet region YAmaloNeneckom AO@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region YAmaloNeneckom AO</ShortName>
+                            <DisplayName>0099 dl filenet region YAmaloNeneckom AO</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55451</SID>
+                            <Name>0099 dl filenet region Permskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Permskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Permskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55452</SID>
+                            <Name>0099 dl filenet region Novosibirskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Novosibirskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Novosibirskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55453</SID>
+                            <Name>0099 dl filenet region Krasnoyarskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Krasnoyarskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Krasnoyarskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55454</SID>
+                            <Name>0099 dl filenet region Hakasiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Hakasiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Hakasiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55455</SID>
+                            <Name>0099 dl filenet region Altay_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Altay_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Altay_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55456</SID>
+                            <Name>0099 dl filenet region Omskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Omskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Omskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55457</SID>
+                            <Name>0099 dl filenet region Tomskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tomskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Tomskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55458</SID>
+                            <Name>0099 dl filenet region Tyva_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Tyva_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Tyva_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55459</SID>
+                            <Name>0099 dl filenet region Kemerovskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kemerovskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Kemerovskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55460</SID>
+                            <Name>0099 dl filenet region Altayskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Altayskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Altayskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55461</SID>
+                            <Name>0099 dl filenet region Primorskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Primorskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Primorskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55462</SID>
+                            <Name>0099 dl filenet region Blagoveschensk@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Blagoveschensk</ShortName>
+                            <DisplayName>0099 dl filenet region Blagoveschensk</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55463</SID>
+                            <Name>0099 dl filenet region Kamchatskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Kamchatskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Kamchatskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55464</SID>
+                            <Name>0099 dl filenet region Magadanskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Magadanskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Magadanskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55465</SID>
+                            <Name>0099 dl filenet region Saha_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Saha_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Saha_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55466</SID>
+                            <Name>0099 dl filenet region Sahalinskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Sahalinskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Sahalinskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55467</SID>
+                            <Name>0099 dl filenet region Habarovskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Habarovskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Habarovskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55468</SID>
+                            <Name>0099 dl filenet region Irkutskoy_obl@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Irkutskoy_obl</ShortName>
+                            <DisplayName>0099 dl filenet region Irkutskoy_obl</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55469</SID>
+                            <Name>0099 dl filenet region Buryatiya_rr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Buryatiya_rr</ShortName>
+                            <DisplayName>0099 dl filenet region Buryatiya_rr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                    <AccessPermission>
+                        <Grantee>
+                            <SID>S-1-5-21-685724207-866877060-2473498247-55470</SID>
+                            <Name>0099 dl filenet region Zabaykalskom_kr@msk.mts.ru</Name>
+                            <ShortName>0099 dl filenet region Zabaykalskom_kr</ShortName>
+                            <DisplayName>0099 dl filenet region Zabaykalskom_kr</DisplayName>
+                            <PrincipalType>1</PrincipalType>
+                        </Grantee>
+                        <AccessType>1</AccessType>
+                        <InheritableDepth>0</InheritableDepth>
+                        <AccessMask>131073</AccessMask>
+                        <PermissionSource>0</PermissionSource>
+                    </AccessPermission>
+                </DefaultInstancePermissions>
+                <DefaultInstanceOwner>
+                    <SID>S-1-3-0</SID>
+                    <Name>#CREATOR-OWNER</Name>
+                </DefaultInstanceOwner>
+            </ReplicableClassDefinitionSecurity>
         </ReplicableClassDefinition>
     </ClassDefinitions>
 </ExportedObjects>

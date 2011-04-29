@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.*;
  * @author Andrey Popov creates on 28.04.11 (15:40)
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
+@XmlRootElement(name = "ExportedObjects")
 public class ExportedObjects {
     @XmlAttribute(name = "EMVersion")
     private String eMVersion;
