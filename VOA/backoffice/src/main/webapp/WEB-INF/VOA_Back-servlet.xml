@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+				http://www.springframework.org/schema/mvc
+				http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+				http://www.springframework.org/schema/tx
+				http://www.springframework.org/schema/tx/spring-tx.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context.xsd
+				http://www.springframework.org/schema/security
+           		http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<mvc:annotation-driven />
+
+	<security:global-method-security
+		secured-annotations="enabled" />
+
+	<context:component-scan base-package="com.sitronics.voa" />
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions" value="/WEB-INF/tiles-defs/templates.xml" />
+	</bean>
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles2.TilesView" />
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!--<bean id="myDataSource"	class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="jdbc/voa" />
+		<property name="resourceRef" value="true" />
+	</bean>-->
+
+	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@rosno:1521:HABIT" />
+		<property name="username" value="VOA" />
+		<property name="password" value="voa" />
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="myDataSource" />
+		<!--<property name="annotatedClasses">-->
+			<!--<list>-->
+				<!--<value>com.sitronics.voa.core.entity.Car</value>-->
+				<!--<value>com.sitronics.voa.core.entity.CarBrand</value>-->
+				<!--<value>com.sitronics.voa.core.entity.CarModel</value>-->
+				<!--<value>com.sitronics.voa.core.entity.InsuarancePolicy</value>-->
+				<!--<value>com.sitronics.voa.core.entity.Member</value>-->
+				<!--<value>com.sitronics.voa.core.entity.Region</value>-->
+				<!--<value>com.sitronics.voa.core.entity.MemberCard</value>-->
+				<!--<value>com.sitronics.voa.core.entity.Payment</value>-->
+				<!--<value>com.sitronics.voa.core.entity.TechnicalSupport</value>-->
+				<!--<value>com.sitronics.voa.core.entity.TechnicalRecourse</value>-->
+			<!--</list>-->
+		<!--</property>-->
+        <property name="packagesToScan">
+            <list>
+                <value>com.sitronics.voa.core.entity</value>
+            </list>
+        </property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</prop>
+
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.provider_class">net.sf.ehcache.hibernate.SingletonEhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.provider_configuration">/ehcache.xml</prop>
+				<prop key="hibhibernate.jdbc.batch_size">20</prop>
+				<prop key="log4j.logger.org.hibernate.type">debug</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"
+		mode="proxy" />
+
+</beans>

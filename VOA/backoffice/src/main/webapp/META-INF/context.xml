@@ -1,0 +1,6 @@
+<Context>
+	<Resource name="jdbc/voa" auth="Container" type="javax.sql.DataSource"
+		maxActive="100" maxIdle="30" maxWait="10000"
+		username="voa" password="voadb" driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@81.195.85.101:1521:voadb"/>
+</Context>
