@@ -56,15 +56,24 @@ public class XmlServiceImpl implements XmlService {
     @Resource
     private Map<String, Integer> regionCodeList;
     @Resource
-    private List<String> packagesList;
+    private Map<String, String> packagesList;
     @Autowired
     private ImageSavingOptions imageSavingOptions;
     @Autowired
     @Qualifier("regParamPackageID")
     private RegParam regParamPackageID;
     @Autowired
+    @Qualifier("regParamOperator")
+    private RegParam regParamOperator;
+    @Autowired
+    @Qualifier("regParamDocScanDate")
+    private RegParam regParamDocScanDate;
+    @Autowired
     @Qualifier("regParamRegion")
     private RegParam regParamRegion;
+    @Autowired
+    @Qualifier("regParamProject")
+    private RegParam regParamProject;
     @Autowired
     private ToFlexiCapture toFlexiCapture;
     @Autowired
@@ -126,7 +135,7 @@ public class XmlServiceImpl implements XmlService {
         BatchTypes batchTypes = new BatchTypes();
 
         //Бежим по коллекции типов пакетов...
-        for (String pack : packagesList) {
+        for (Map.Entry<String, String> pack : packagesList.entrySet()) {
             //Бежим по регионам...
             for (Map.Entry<String, String> entry : additionList.entrySet()) {
                 //Клонируем тип из базового...
@@ -135,7 +144,7 @@ public class XmlServiceImpl implements XmlService {
                 type.setUID(UUID.randomUUID().toString());
 
                 //Собираем имя типа, аля 'Гарантийное_письмо_контрагента_МРДВ_Иркутская область'...
-                builder.append(pack).append("_").append(entry.getValue()).append("_").append(entry.getKey());
+                builder.append(pack.getKey()).append("_").append(entry.getValue()).append("_").append(entry.getKey());
 
                 type.setName(builder.toString());
 
@@ -143,9 +152,16 @@ public class XmlServiceImpl implements XmlService {
                 regParamRegion = (RegParam) regParamRegion.clone();
                 regParamRegion.setValue(regionList.get(entry.getKey()));
 
+                //Клонируем регистрационный параметр из базового...
+                regParamProject = (RegParam) regParamProject.clone();
+                regParamProject.setValue(pack.getValue());
+
                 regParams = new ArrayList<RegParam>();
                 regParams.add(regParamPackageID);
                 regParams.add(regParamRegion);
+                regParams.add(regParamProject);
+                regParams.add(regParamOperator);
+                regParams.add(regParamDocScanDate);
 
                 type.setRegistrationParameters(regParams);
 

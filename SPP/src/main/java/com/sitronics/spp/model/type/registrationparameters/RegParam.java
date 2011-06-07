@@ -12,9 +12,10 @@ import javax.xml.bind.annotation.XmlElement;
 public class RegParam implements Cloneable {
     @XmlAttribute(name = "Type")
     private String type;
+    @XmlAttribute(name = "IsReadOnly")
+    private Boolean isReadOnly;
     @XmlAttribute(name = "IsRequired")
     private Boolean isRequired;
-
     @XmlElement(name = "Name")
     private String name;
     @XmlElement(name = "Value")
@@ -29,6 +30,14 @@ public class RegParam implements Cloneable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getReadOnly() {
+        return isReadOnly;
+    }
+
+    public void setReadOnly(Boolean readOnly) {
+        isReadOnly = readOnly;
     }
 
     public Boolean getRequired() {
@@ -70,6 +79,7 @@ public class RegParam implements Cloneable {
 
         RegParam regParam = (RegParam) o;
 
+        if (isReadOnly != null ? !isReadOnly.equals(regParam.isReadOnly) : regParam.isReadOnly != null) return false;
         if (isRequired != null ? !isRequired.equals(regParam.isRequired) : regParam.isRequired != null) return false;
         if (name != null ? !name.equals(regParam.name) : regParam.name != null) return false;
         if (type != null ? !type.equals(regParam.type) : regParam.type != null) return false;
@@ -81,6 +91,7 @@ public class RegParam implements Cloneable {
     @Override
     public int hashCode() {
         int result = type != null ? type.hashCode() : 0;
+        result = 31 * result + (isReadOnly != null ? isReadOnly.hashCode() : 0);
         result = 31 * result + (isRequired != null ? isRequired.hashCode() : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (value != null ? value.hashCode() : 0);
