@@ -10,5 +10,6 @@ import org.apache.maven.plugin.MojoFailureException;
 public class First extends AbstractMojo {
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Hello, world.");
+        System.out.println("HHHHHHHHHHHHHHHHHH");
     }
 }

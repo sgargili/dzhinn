@@ -21,7 +21,7 @@
           <execution>
             <phase>compile</phase>
             <goals>
-              <goal>sayhi</goal>
+              <goal>Andrey</goal>
             </goals>
           </execution>
         </executions>
