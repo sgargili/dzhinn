@@ -17,6 +17,14 @@
         <groupId>Maven4ExtJs</groupId>
         <artifactId>Plugin</artifactId>
         <version>1.0</version>
+          <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>sayhi</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
