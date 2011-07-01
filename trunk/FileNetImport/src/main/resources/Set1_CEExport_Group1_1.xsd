@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="DataType" type="xs:byte"/>
+  <xs:element name="LifeCycleActions" type="xs:string"/>
+  <xs:element name="DescriptiveTexts">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="LocalizedString" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LocalizedText" type="xs:string"/>
+  <xs:element name="ModificationAccessRequired">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyTemplateObjectProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="SecurityProxyType"/>
+        <xs:element ref="AllowsForeignObject"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="DateLastModified"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Cardinality">
+    <xs:simpleType>
+      <xs:restriction base="xs:byte">
+        <xs:enumeration value="0"/>
+        <xs:enumeration value="2"/>
+        <xs:enumeration value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DateLastModified" type="xs:dateTime"/>
+  <xs:element name="AuditSuccess" type="xs:byte"/>
+  <xs:element name="PropertyDefaultBoolean">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="0"/>
+        <xs:enumeration value=""/>
+        <xs:enumeration value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="UsesLongColumn" type="xs:byte"/>
+  <xs:element name="ObjectId" type="xs:string"/>
+  <xs:element name="PropertyTemplateString">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateStringProperties"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsNameProperty">
+    <xs:simpleType>
+      <xs:restriction base="xs:byte">
+        <xs:enumeration value="0"/>
+        <xs:enumeration value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="AuditDefinition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="AuditFailure"/>
+        <xs:element ref="IncludeSubclassesRequested"/>
+        <xs:element ref="AuditSuccess"/>
+        <xs:element ref="EventClass"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="ObjectStateRecordingLevel"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyTemplateStringProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="MarkingSet"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="UsesLongColumn"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="MaximumLengthString"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DateLastModified"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PropertyDefaultString"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="IsValueRequired"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MaximumLengthBinary" type="xs:string"/>
+  <xs:element name="PropertyTemplates">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="PropertyTemplateString" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateBoolean"/>
+        <xs:element ref="PropertyTemplateObject"/>
+        <xs:element ref="PropertyTemplateInteger32"/>
+        <xs:element ref="PropertyTemplateDateTime" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateId"/>
+        <xs:element ref="PropertyTemplateBinary"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AliasIds" type="xs:string"/>
+  <xs:element name="PropertyTemplateBooleanProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="PropertyDefaultBoolean"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="DateLastModified"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PrimaryId" type="xs:string"/>
+  <xs:element name="PropertyDefinitions">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="PropertyDefinitionObject"/>
+        <xs:element ref="PropertyDefinitionBoolean"/>
+        <xs:element ref="PropertyDefinitionInteger32"/>
+        <xs:element ref="PropertyDefinitionString"/>
+        <xs:element ref="PropertyDefinitionId"/>
+        <xs:element ref="PropertyDefinitionBinary"/>
+        <xs:element ref="PropertyDefinitionDateTime"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AllowsForeignObject">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="MarkingSet" type="xs:string"/>
+  <xs:element name="PersistenceType" type="xs:byte"/>
+  <xs:element name="LastModifier" type="xs:string"/>
+  <xs:element name="DeletionAction">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="2"/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ExportedObjects">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="LifeCycleActions"/>
+        <xs:element ref="LifeCyclePolicies"/>
+        <xs:element ref="ChoiceLists"/>
+        <xs:element ref="PropertyTemplates"/>
+        <xs:element ref="ClassDefinitions"/>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="EMVersion"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyTemplateDateTime">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateDateTimeProperties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateStringProperties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChoiceLists">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ChoiceList" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Choice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ChoiceType"/>
+        <xs:element ref="ChoiceStringValue"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="ChoiceIntegerValue"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyDefinitionBinary">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="MaximumLengthBinary"/>
+        <xs:element ref="CopyToReservation"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PropertyDefaultBinary"/>
+        <xs:element ref="ExternalAliases"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="TargetAccessRequired"/>
+        <xs:element ref="RequiredClassId"/>
+        <xs:element ref="ReflectivePropertyId"/>
+        <xs:element ref="DeletionAction"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReflectivePropertyId">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="045c3750-7aad-11d1-85e5-00a024e8a452"/>
+        <xs:enumeration value="f3d71838-0704-11d3-8a0e-00104b6cb1da"/>
+        <xs:enumeration value="d32e5078-afb2-11d2-8bd6-00e0290f729a"/>
+        <xs:enumeration value="7eab7695-d859-4fc1-8fe5-9adfe4c0f823"/>
+        <xs:enumeration value="2311c51e-03a4-46f7-b424-fd3d4c2120f0"/>
+        <xs:enumeration value="cec77868-6bed-4506-bc47-6ab8d16de08b"/>
+        <xs:enumeration value="3868ed67-e646-40be-a115-6393c3738b2a"/>
+        <xs:enumeration value="bdb5285c-61d0-42bf-9112-dcf5f9c3e3a4"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefaultString" type="xs:string"/>
+  <xs:element name="ExternalAliases" type="xs:string"/>
+  <xs:element name="ObjectStateRecordingLevel" type="xs:byte"/>
+  <xs:element name="ClassId">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="d32e4f70-afb2-11d2-8bd6-00e0290f729a"/>
+        <xs:enumeration value="d32e4f78-afb2-11d2-8bd6-00e0290f729a"/>
+        <xs:enumeration value="b59016f0-c7cd-4a49-a4e6-37ad4e7d51d8"/>
+        <xs:enumeration value="c57469a4-1592-4428-b7ee-0c970e4db76a"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyTemplateBinaryProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="MaximumLengthBinary"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="PropertyDefaultBinary"/>
+        <xs:element ref="DateLastModified"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyDefaultBinary" type="xs:string"/>
+  <xs:element name="DocumentClassDefinitionProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="PropertyDefinitions"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsCBREnabled"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="AuditDefinitions"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="ExternalAliases"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="SuperclassDefinition"/>
+        <xs:element ref="DateLastModified"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="AllowsInstances"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuditDefinitions">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="AuditDefinition" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuditFailure" type="xs:byte"/>
+  <xs:element name="PropertyTemplateId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateIdProperties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateInteger32Properties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequiredClassId" type="xs:string"/>
+  <xs:element name="PropertyTemplateObject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateObjectProperties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateStringProperties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayNames">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="LocalizedString" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChoiceType" type="xs:byte"/>
+  <xs:element name="PropertyDefinitionObject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="RequiredClassId"/>
+        <xs:element ref="ReflectivePropertyId"/>
+        <xs:element ref="DeletionAction"/>
+        <xs:element ref="PropertyDefaultObject" minOccurs="0"/>
+        <xs:element ref="PrimaryId"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyTemplateIdProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="PropertyDefaultId"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="DateLastModified"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SecurityProxyType" type="xs:string"/>
+  <xs:element name="SuperclassDefinition">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="ObjectRef" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LifeCyclePolicies" type="xs:string"/>
+  <xs:element name="IsValueRequired">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="0"/>
+        <xs:enumeration value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefinitionBoolean">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="RequiredClassId" minOccurs="0"/>
+        <xs:element ref="ReflectivePropertyId" minOccurs="0"/>
+        <xs:element ref="DeletionAction" minOccurs="0"/>
+        <xs:element ref="PropertyDefaultObject" minOccurs="0"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="PropertyDefaultBoolean" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ExternalReplicaIdentities" type="xs:string"/>
+  <xs:element name="PropertyDefinitionInteger32">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="PropertyDefaultInteger32"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyMinimumInteger32" type="xs:string"/>
+  <xs:element name="SymbolicName" type="xs:string"/>
+  <xs:element name="MaximumLengthString">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="64"/>
+        <xs:enumeration value="200"/>
+        <xs:enumeration value=""/>
+        <xs:enumeration value="255"/>
+        <xs:enumeration value="400"/>
+        <xs:enumeration value="100"/>
+        <xs:enumeration value="80"/>
+        <xs:enumeration value="50"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DateCreated" type="xs:dateTime"/>
+  <xs:element name="CopyToReservation">
+    <xs:simpleType>
+      <xs:restriction base="xs:byte">
+        <xs:enumeration value="1"/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefaultDateTime" type="xs:string"/>
+  <xs:element name="PropertyDefaultInteger32">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="0"/>
+        <xs:enumeration value=""/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ChoiceIntegerValue" type="xs:string"/>
+  <xs:element name="PropertyDisplayCategory">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="ContentEngineExtension"/>
+        <xs:enumeration value="FoundationExtensions-Publishing"/>
+        <xs:enumeration value="Workplace System"/>
+        <xs:enumeration value="FoundationExtensions-StoredSearch"/>
+        <xs:enumeration value="Content Engine Specific"/>
+        <xs:enumeration value="FoundationExtensions-EntryTemplate"/>
+        <xs:enumeration value="FoundationExtensions-Preferences"/>
+        <xs:enumeration value="FoundationExtensions-General"/>
+        <xs:enumeration value="FoundationExtensions"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefaultId" type="xs:string"/>
+  <xs:element name="Id" type="xs:string"/>
+  <xs:element name="ObjectRef">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectId"/>
+        <xs:element ref="ClassId"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LocaleName" type="xs:string"/>
+  <xs:element name="PropertyMaximumInteger32" type="xs:string"/>
+  <xs:element name="PropertyTemplateInteger32Properties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="PropertyDefaultInteger32"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="PropertyMinimumInteger32"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DateLastModified"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="PropertyMaximumInteger32"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AllowsInstances" type="xs:byte"/>
+  <xs:element name="IsHidden">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="0"/>
+        <xs:enumeration value="1"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyMinimumDateTime" type="xs:string"/>
+  <xs:element name="PropertyDefaultObject">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="ObjectRef" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="TargetAccessRequired">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="2048"/>
+        <xs:enumeration value="16"/>
+        <xs:enumeration value=""/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ReplicationGroup" type="xs:string"/>
+  <xs:element name="ChoiceValues">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Choice" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IncludeSubclassesRequested" type="xs:byte"/>
+  <xs:element name="RequiresUniqueElements">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="1"/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefinitionId">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PropertyDefaultId"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="ExternalAliases"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="CopyToReservation"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="TargetAccessRequired"/>
+        <xs:element ref="RequiredClassId"/>
+        <xs:element ref="ReflectivePropertyId"/>
+        <xs:element ref="DeletionAction"/>
+        <xs:element ref="PropertyDefaultObject"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyTemplateDateTimeProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="SymbolicName"/>
+        <xs:element ref="PersistenceType"/>
+        <xs:element ref="Cardinality"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PropertyMinimumDateTime"/>
+        <xs:element ref="DisplayNames"/>
+        <xs:element ref="PropertyDefaultDateTime"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="PropertyMaximumDateTime"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="DescriptiveTexts"/>
+        <xs:element ref="RequiresUniqueElements"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DateLastModified"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="PropertyDisplayCategory"/>
+        <xs:element ref="IsValueRequired"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ClassDefinitions">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DocumentClassDefinition" maxOccurs="unbounded" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EventClass">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectRef"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DescriptiveText">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="Regions"/>
+        <xs:enumeration value="Оператор – МТС, либо дочерние компании МТС"/>
+        <xs:enumeration value="Тип сети"/>
+        <xs:enumeration value="Macroregions_Old"/>
+        <xs:enumeration value="Form Types"/>
+        <xs:enumeration value="Regions_Old"/>
+        <xs:enumeration value="Statuses"/>
+        <xs:enumeration value="Entry Choices"/>
+        <xs:enumeration value="Preference Type"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Creator">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="p8admin"/>
+        <xs:enumeration value=""/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyDefinitionDateTime">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="PropertyMaximumDateTime"/>
+        <xs:element ref="PropertyMinimumDateTime"/>
+        <xs:element ref="CopyToReservation"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ExternalAliases"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="PropertyDefaultDateTime"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="IsHidden"/>
+        <xs:element ref="MaximumLengthString"/>
+        <xs:element ref="PropertyDefaultString"/>
+        <xs:element ref="IsCBREnabled"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyMaximumDateTime" type="xs:string"/>
+  <xs:element name="PropertyTemplateBoolean">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateBooleanProperties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateStringProperties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyTemplateBinary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateBinaryProperties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateStringProperties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Settability">
+    <xs:simpleType>
+      <xs:restriction base="xs:byte">
+        <xs:enumeration value="0"/>
+        <xs:enumeration value="2"/>
+        <xs:enumeration value="1"/>
+        <xs:enumeration value="3"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="LocalizedString">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded" minOccurs="0">
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="LocalizedText"/>
+        <xs:element ref="LocaleName"/>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisplayName">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="Regions"/>
+        <xs:enumeration value="Operators"/>
+        <xs:enumeration value="NetworkTypes"/>
+        <xs:enumeration value="Macroregions_Old"/>
+        <xs:enumeration value="Form Types"/>
+        <xs:enumeration value="Regions_Old"/>
+        <xs:enumeration value="Statuses"/>
+        <xs:enumeration value="Entry Choices"/>
+        <xs:enumeration value="Preference Type"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ChoiceListProperties">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="ChoiceValues"/>
+        <xs:element ref="DataType"/>
+        <xs:element ref="Creator"/>
+        <xs:element ref="DateCreated"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ReplicationGroup"/>
+        <xs:element ref="Id"/>
+        <xs:element ref="LastModifier"/>
+        <xs:element ref="ExternalReplicaIdentities"/>
+        <xs:element ref="DisplayName"/>
+        <xs:element ref="DescriptiveText"/>
+        <xs:element ref="DateLastModified"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ChoiceStringValue" type="xs:string"/>
+  <xs:element name="Name" type="xs:string"/>
+  <xs:element name="ChoiceList">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="ChoiceListProperties" minOccurs="0"/>
+        <xs:element ref="ObjectRef" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="IsCBREnabled">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value=""/>
+        <xs:enumeration value="0"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ObjectType">
+    <xs:simpleType>
+      <xs:restriction base="xs:short">
+        <xs:enumeration value="1075"/>
+        <xs:enumeration value="1025"/>
+        <xs:enumeration value="1026"/>
+        <xs:enumeration value="1055"/>
+        <xs:enumeration value="1077"/>
+        <xs:enumeration value="1027"/>
+        <xs:enumeration value="1181"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PropertyTemplateInteger32">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PropertyTemplateInteger32Properties" minOccurs="0"/>
+        <xs:element ref="PropertyTemplateStringProperties" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PropertyDefinitionString">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ObjectType"/>
+        <xs:element ref="IsNameProperty"/>
+        <xs:element ref="MaximumLengthString"/>
+        <xs:element ref="PropertyDefaultString"/>
+        <xs:element ref="Settability"/>
+        <xs:element ref="Name"/>
+        <xs:element ref="ExternalAliases"/>
+        <xs:element ref="IsValueRequired"/>
+        <xs:element ref="IsCBREnabled"/>
+        <xs:element ref="ModificationAccessRequired"/>
+        <xs:element ref="PrimaryId"/>
+        <xs:element ref="CopyToReservation"/>
+        <xs:element ref="ChoiceList"/>
+        <xs:element ref="AliasIds"/>
+        <xs:element ref="IsHidden"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DocumentClassDefinition">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DocumentClassDefinitionProperties"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
