@@ -7,23 +7,23 @@
 
     <context:component-scan base-package="com.sitronics.filenet"/>
 
-    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+    <!--<bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
-                <value>com.sitronics.filenet.imports.model.ExportDescriptor</value>
+                &lt;!&ndash;<value>com.sitronics.filenet.imports.model.ExportDescriptor</value>&ndash;&gt;
             </list>
         </property>
         <property name="marshallerProperties">
             <map>
-                <!--Сделаем форматированный вывод...-->
+                &lt;!&ndash;Сделаем форматированный вывод...&ndash;&gt;
                 <entry key="jaxb.formatted.output">
                     <value type="boolean">true</value>
                 </entry>
             </map>
         </property>
-    </bean>
+    </bean>-->
 
-    <bean id="sourceObjectStore" class="com.sitronics.filenet.imports.model.SourceObjectStore">
+   <!-- <bean id="sourceObjectStore" class="com.sitronics.filenet.imports.model.SourceObjectStore">
         <property name="id" value="222"/>
         <property name="required" value="true"/>
         <property name="name" value="Привет! Как дела?"/>
@@ -48,7 +48,7 @@
         <property name="sourceObjectStore" ref="sourceObjectStore"/>
         <property name="contentLocation" ref="contentLocation"/>
         <property name="importData" ref="importData"/>
-    </bean>
+    </bean>-->
 
     <bean id="fileNetStorage" class="com.sitronics.filenet.core.storage.impl.FileNetStorageImpl">
         <property name="username" value="p8admin"/>
@@ -59,7 +59,15 @@
     </bean>
 
     <bean id="classBaseSql" class="java.lang.String">
-        <constructor-arg value="SELECT id, name FROM DocumentClassDefinition WHERE SymbolicName = '{0}'"/>
+        <constructor-arg value="SELECT id FROM DocumentClassDefinition WHERE symbolicname = '{0}'"/>
+    </bean>
+
+    <bean id="choiceListBaseSql" class="java.lang.String">
+        <constructor-arg value="SELECT id FROM DocumentClassDefinition WHERE symbolicname = '{0}'"/>
+    </bean>
+
+    <bean id="PropertyBaseSql" class="java.lang.String">
+        <constructor-arg value="SELECT id FROM DocumentClassDefinition WHERE symbolicname = '{0}'"/>
     </bean>
 
 </beans>

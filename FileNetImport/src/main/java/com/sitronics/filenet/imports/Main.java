@@ -1,40 +1,36 @@
 package com.sitronics.filenet.imports;
 
-import java.io.StringWriter;
-import java.util.Iterator;
-
-import javax.xml.transform.stream.StreamResult;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
-import com.filenet.api.admin.Choice;
-import com.filenet.api.admin.ChoiceList;
 import com.filenet.api.admin.DocumentClassDefinition;
-import com.filenet.api.collection.IndependentObjectSet;
-import com.filenet.api.core.*;
-import com.filenet.api.property.PropertyFilter;
-import com.filenet.api.query.SearchSQL;
-import com.filenet.api.query.SearchScope;
-import com.sitronics.filenet.core.repository.FileNetService;
-import com.sitronics.filenet.core.search.FileNetSearch;
-import com.sitronics.filenet.core.storage.FileNetStorage;
-import com.sitronics.filenet.imports.model.ExportDescriptor;
+import com.sitronics.filenet.core.model.ExcelClassDefinition;
+import com.sitronics.filenet.core.service.ExcelService;
+import com.sitronics.filenet.core.service.FileNetService;
 
 /**
  * @author Andrey Popov creates on 30.06.11 (13:08)
  */
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 //        FileNetSearch search = (FileNetSearch) context.getBean("fileNetSearch");
 //        System.out.println(search.isDocumentClassDefinitionPresent("KC3"));
 //        System.out.println(search.isDocumentClassDefinitionPresent("M45555555"));
 
         FileNetService service = (FileNetService) context.getBean("fileNetService");
-
-        service.createDocumentClassDefinition();
+//        PropertyTemplateSet set = (PropertyTemplateSet) service.getObjectCollection(PropertyTemplate.class);
+//        Iterator iterator = set.iterator();
+//        while(iterator.hasNext()){
+//            PropertyTemplate template = (PropertyTemplate) iterator.next();
+//            System.out.println(template.get_Name() + " - " +template.get_Id().toString());
+//        }
+//        service.getObjectBySymbolicName(DocumentClassDefinition.class, "GTD");
+//        service.createDocumentClassDefinition();
 //        Jaxb2Marshaller marshaller = (Jaxb2Marshaller) context.getBean("jaxb2Marshaller");
 //        ExportDescriptor exportDescriptor = (ExportDescriptor) context.getBean("exportDescriptor");
 //        final StringWriter out = new StringWriter();
@@ -56,5 +52,13 @@ public class Main {
 //            }
 //
 //        }
+
+        ExcelService excelService = (ExcelService) context.getBean("excelService");
+        FileInputStream inputStream = new FileInputStream("C://Test.xlsx");
+       List<ExcelClassDefinition> list = excelService.getExcelClassDefinitions(inputStream);
+
+        service.storeObject2FileNet(list);
+
+        System.out.println(list.size());
     }
 }

@@ -3,6 +3,7 @@ package com.sitronics.filenet.core.search.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.filenet.api.collection.IndependentObjectSet;
@@ -22,6 +23,7 @@ public class FileNetSearchImpl implements FileNetSearch {
 
     @Autowired
     private FileNetStorage fileNetStorage;
+    @Qualifier("classBaseSql")
     @Autowired
     private String classBaseSql;
 //    @Autowired
