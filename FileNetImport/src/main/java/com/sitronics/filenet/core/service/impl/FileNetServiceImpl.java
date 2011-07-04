@@ -52,42 +52,52 @@ public class FileNetServiceImpl implements FileNetService {
     @Override
     @SuppressWarnings("unchecked")
     public void storeObjects2FileNet(List<ExcelClassDefinition> excelClassDefinitions) {
-        PropertyTemplateSet set = (PropertyTemplateSet) getObjectCollection(PropertyTemplate.class);
+        //Достаем все проперти темплейты из системы...
+        PropertyTemplateSet propertyTemplateSet = (PropertyTemplateSet) getObjectCollection(PropertyTemplate.class);
 
+        //Бежим по данным выдранным из экселя...
         for (ExcelClassDefinition excelClassDefinition : excelClassDefinitions) {
 
+            //Достаем из системы родительский класс в которым мы будем впоследствии вставлять новые классы.
             DocumentClassDefinition documentClassDefinition = (DocumentClassDefinition) getObjectBySymbolicName(DocumentClassDefinition.class, excelClassDefinition.getSuperClassSymbolicName());
 
+            //Создаем описание для новых классов, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
             LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
             LocalizedString string = Factory.LocalizedString.createInstance();
             string.set_LocaleName("en-us");
             string.set_LocalizedText(excelClassDefinition.getNewClassName());
             localizedStringList.add(string);
 
+            //Айдишник для нового класса.
             Id id = new Id(UUID.randomUUID().toString());
 
+            //Создаем новый класс как наследника родителю определенному выше.
             ClassDefinition clazz = documentClassDefinition.createSubclass(id);
 
+            //Заполняем новый класс...
             clazz.set_SymbolicName(excelClassDefinition.getNewClassSymbolicName());
             clazz.set_DisplayNames(localizedStringList);
             clazz.set_DescriptiveTexts(localizedStringList);
 
-            Iterator iterator = set.iterator();
+            //Итератор для всех пропертей системы.
+            Iterator iterator;
 
-            while (iterator.hasNext()) {
-                PropertyTemplate template = (PropertyTemplate) iterator.next();
-                for (Map.Entry<String, String> entry : excelClassDefinition.getProperties().entrySet()) {
+            for (Map.Entry<String, String> entry : excelClassDefinition.getProperties().entrySet()) {
+                iterator = propertyTemplateSet.iterator();
+                while (iterator.hasNext()) {
+                    PropertyTemplate template = (PropertyTemplate) iterator.next();
                     if (template.get_SymbolicName().equals(entry.getKey()) && !containsIn(entry.getKey(), clazz.get_PropertyDefinitions())) {
                         clazz.get_PropertyDefinitions().add(template.createClassProperty());
 
                     }
+
                 }
             }
-                clazz.save(RefreshMode.REFRESH);
 
-            closeConnection();
+            clazz.save(RefreshMode.REFRESH);
         }
 
+        closeConnection();
     }
 
 
@@ -132,6 +142,7 @@ public class FileNetServiceImpl implements FileNetService {
                     return true;
                 }
             } catch (EngineRuntimeException exception) {
+                logger.error(exception.getMessage());
             }
         }
         return false;
