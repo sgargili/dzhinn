@@ -13,16 +13,18 @@ import org.springframework.stereotype.Service;
 
 import com.filenet.api.admin.*;
 import com.filenet.api.collection.*;
+import com.filenet.api.constants.Cardinality;
 import com.filenet.api.constants.RefreshMode;
 import com.filenet.api.core.Factory;
 import com.filenet.api.core.ObjectStore;
-import com.filenet.api.exception.EngineRuntimeException;
-import com.filenet.api.property.Properties;
 import com.filenet.api.query.SearchSQL;
 import com.filenet.api.query.SearchScope;
 import com.filenet.api.util.Id;
 import com.filenet.api.util.UserContext;
 import com.sitronics.filenet.core.model.ExcelClassDefinition;
+import com.sitronics.filenet.core.model.ExcelProperty;
+import com.sitronics.filenet.core.model.Status;
+import com.sitronics.filenet.core.model.Type;
 import com.sitronics.filenet.core.service.FileNetService;
 import com.sitronics.filenet.core.storage.FileNetStorage;
 
@@ -34,6 +36,7 @@ import com.sitronics.filenet.core.storage.FileNetStorage;
 public class FileNetServiceImpl implements FileNetService {
     final Logger logger = LoggerFactory.getLogger(FileNetServiceImpl.class);
 
+    @Qualifier("fileNetStorage")
     @Autowired
     private FileNetStorage fileNetStorage;
 
@@ -52,6 +55,16 @@ public class FileNetServiceImpl implements FileNetService {
     @Override
     @SuppressWarnings("unchecked")
     public void storeObjects2FileNet(List<ExcelClassDefinition> excelClassDefinitions) {
+        openConnection();
+        //Создадим-ка новые проперти...
+        for (ExcelClassDefinition excelClassDefinition : excelClassDefinitions) {
+            for (Map.Entry<String, ExcelProperty> entry : excelClassDefinition.getProperties().entrySet()) {
+                if (entry.getValue().getStatus().equals(Status.NEW)) {
+                    storePropertyTemplate(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+
         //Достаем все проперти темплейты из системы...
         PropertyTemplateSet propertyTemplateSet = (PropertyTemplateSet) getObjectCollection(PropertyTemplate.class);
 
@@ -82,16 +95,19 @@ public class FileNetServiceImpl implements FileNetService {
             //Итератор для всех пропертей системы.
             Iterator iterator;
 
-            for (Map.Entry<String, String> entry : excelClassDefinition.getProperties().entrySet()) {
-                iterator = propertyTemplateSet.iterator();
-                while (iterator.hasNext()) {
-                    PropertyTemplate template = (PropertyTemplate) iterator.next();
-                    if (template.get_SymbolicName().equals(entry.getKey()) && !containsIn(entry.getKey(), clazz.get_PropertyDefinitions())) {
-                        clazz.get_PropertyDefinitions().add(template.createClassProperty());
+            for (Map.Entry<String, ExcelProperty> entry : excelClassDefinition.getProperties().entrySet()) {
+//                if (entry.getValue().getStatus().equals(Status.NEW)) {
+//                    clazz.get_PropertyDefinitions().add(storePropertyTemplate(entry.getKey(), entry.getValue()));
+//                } else {
+                    iterator = propertyTemplateSet.iterator();
+                    while (iterator.hasNext()) {
+                        PropertyTemplate template = (PropertyTemplate) iterator.next();
+                        if (template.get_SymbolicName().equals(entry.getKey()) && !containsIn(entry.getKey(), clazz.get_PropertyDefinitions())) {
+                            clazz.get_PropertyDefinitions().add(template.createClassProperty());
+                        }
 
                     }
-
-                }
+//                }
             }
 
             clazz.save(RefreshMode.REFRESH);
@@ -133,15 +149,52 @@ public class FileNetServiceImpl implements FileNetService {
         return iterator.hasNext() ? iterator.next() : null;
     }
 
+    private PropertyTemplate storePropertyTemplate(String symbolicName, ExcelProperty excelProperty) {
+        PropertyTemplate propertyTemplate;
+        PropertyTemplateString propertyTemplateString = null;
+        //Айдишник для новой проперти.
+        Id id = new Id(UUID.randomUUID().toString());
+        Type type = excelProperty.getType();
+
+        if (type.equals(Type.STRING)) {
+             propertyTemplateString = Factory.PropertyTemplateString.createInstance(OBJECT_STORE, id);
+        } else if (type.equals(Type.DATE)) {
+             propertyTemplate = Factory.PropertyTemplateDateTime.createInstance(OBJECT_STORE, id);
+        } else {
+            propertyTemplate = Factory.PropertyTemplateInteger32.createInstance(OBJECT_STORE, id);
+        }
+
+        //Создаем описание для новых пропертей, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
+        LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
+        LocalizedString string = Factory.LocalizedString.createInstance();
+        string.set_LocaleName("en-us");
+        string.set_LocalizedText(excelProperty.getPropertyName());
+        localizedStringList.add(string);
+
+        //Заполняем новую проперти...
+        propertyTemplateString.set_SymbolicName(symbolicName);
+        propertyTemplateString.set_DisplayNames(localizedStringList);
+        propertyTemplateString.set_DescriptiveTexts(localizedStringList);
+
+        propertyTemplateString.set_Cardinality(Cardinality.SINGLE);
+
+        propertyTemplateString.set_MaximumLengthString(64);
+
+        //Сохраняем ее...
+        propertyTemplateString.save(RefreshMode.REFRESH);
+        return propertyTemplateString;
+    }
+
     private boolean containsIn(String pattern, PropertyDefinitionList list) {
         Iterator iterator = list.iterator();
         while (iterator.hasNext()) {
-            PropertyDefinition definition = (PropertyDefinition) iterator.next();
+//            PropertyDefinition definition = (PropertyDefinition) iterator.next();
             try {
+                PropertyDefinition definition = (PropertyDefinition) iterator.next();
                 if (pattern.equals(definition.get_SymbolicName())) {
                     return true;
                 }
-            } catch (EngineRuntimeException exception) {
+            } catch (Exception exception) {
                 logger.error(exception.getMessage());
             }
         }

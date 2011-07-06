@@ -14,6 +14,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
 import com.sitronics.filenet.core.model.ExcelClassDefinition;
+import com.sitronics.filenet.core.model.ExcelProperty;
+import com.sitronics.filenet.core.model.Status;
+import com.sitronics.filenet.core.model.Type;
 import com.sitronics.filenet.core.service.ExcelService;
 
 /**
@@ -50,6 +53,7 @@ public class ExcelServiceImpl implements ExcelService {
                 XSSFCell newClassSymbolicNameCell = row.getCell(2, cellPolicy);
                 XSSFCell newClassPropertyNameCell = row.getCell(3, cellPolicy);
                 XSSFCell newClassPropertySymbolicNameCell = row.getCell(4, cellPolicy);
+                XSSFCell newClassPropertyTypeCell = row.getCell(5, cellPolicy);
 
                 //Задаем для всех ячеек тип "Строка"...
                 superClassSymbolicNameCell.setCellType(Cell.CELL_TYPE_STRING);
@@ -57,6 +61,7 @@ public class ExcelServiceImpl implements ExcelService {
                 newClassSymbolicNameCell.setCellType(Cell.CELL_TYPE_STRING);
                 newClassPropertyNameCell.setCellType(Cell.CELL_TYPE_STRING);
                 newClassPropertySymbolicNameCell.setCellType(Cell.CELL_TYPE_STRING);
+                newClassPropertyTypeCell.setCellType(Cell.CELL_TYPE_STRING);
 
                 //Если присуствует обозначение SymbolicName родительского класса, то создаем новый объект ExcelClassDefinition.
                 if (!"".equals(superClassSymbolicNameCell.getStringCellValue())) {
@@ -68,9 +73,9 @@ public class ExcelServiceImpl implements ExcelService {
                     excelClassDefinition.setSuperClassSymbolicName(superClassSymbolicNameCell.getStringCellValue());
                     excelClassDefinition.setNewClassName(newClassNameCell.getStringCellValue());
                     excelClassDefinition.setNewClassSymbolicName(newClassSymbolicNameCell.getStringCellValue());
-                    excelClassDefinition.addProperties(newClassPropertySymbolicNameCell.getStringCellValue(), newClassPropertyNameCell.getStringCellValue());
+                    excelClassDefinition.addProperties(newClassPropertySymbolicNameCell.getStringCellValue(), convert(newClassPropertyNameCell.getStringCellValue(), newClassPropertyTypeCell.getStringCellValue()));
                 } else if (excelClassDefinition != null) {
-                    excelClassDefinition.addProperties(newClassPropertySymbolicNameCell.getStringCellValue(), newClassPropertyNameCell.getStringCellValue());
+                    excelClassDefinition.addProperties(newClassPropertySymbolicNameCell.getStringCellValue(), convert(newClassPropertyNameCell.getStringCellValue(), newClassPropertyTypeCell.getStringCellValue()));
                 }
 
             }
@@ -84,5 +89,23 @@ public class ExcelServiceImpl implements ExcelService {
             e.printStackTrace();
         }
         return excelClassDefinitions;
+    }
+
+    private ExcelProperty convert(String propertyName, String propertyType) {
+        ExcelProperty excelProperty = new ExcelProperty();
+        excelProperty.setPropertyName(propertyName);
+        if ("".equals(propertyType)) {
+            excelProperty.setStatus(Status.EXIST);
+        } else {
+            excelProperty.setStatus(Status.NEW);
+            if ("String".equals(propertyType)) {
+                excelProperty.setType(Type.STRING);
+            } else if ("Date".equals(propertyType)) {
+                excelProperty.setType(Type.DATE);
+            } else {
+                excelProperty.setType(Type.INTEGER);
+            }
+        }
+        return excelProperty;
     }
 }
