@@ -13,7 +13,7 @@ public class ExcelClassDefinition {
     private String superClassSymbolicName;
     private String newClassName;
     private String newClassSymbolicName;
-    private Map<String, String> properties = new HashMap<String, String>();
+    private Map<String, ExcelProperty> properties = new HashMap<String, ExcelProperty>();
 
     public ExcelClassDefinition() {
     }
@@ -42,15 +42,15 @@ public class ExcelClassDefinition {
         this.newClassSymbolicName = newClassSymbolicName;
     }
 
-    public Map<String, String> getProperties() {
+    public Map<String, ExcelProperty> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, String> properties) {
+    public void setProperties(Map<String, ExcelProperty> properties) {
         this.properties = properties;
     }
 
-    public void addProperties(String key, String value) {
+    public void addProperties(String key, ExcelProperty value) {
         this.properties.put(key, value);
     }
 }
