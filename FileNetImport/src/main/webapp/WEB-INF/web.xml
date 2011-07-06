@@ -6,19 +6,21 @@
          version="2.5">
     <display-name>FileNet Import</display-name>
 
-
-
     <servlet>
         <servlet-name>FileNetImport</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <servlet-mapping>
+    <!--<servlet-mapping>
         <servlet-name>FileNetImport</servlet-name>
-        <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>-->
 
+    <servlet-mapping>
+		<servlet-name>FileNetImport</servlet-name>
+		<url-pattern>/upload/*</url-pattern>
+	</servlet-mapping>
 
 
     <welcome-file-list>
