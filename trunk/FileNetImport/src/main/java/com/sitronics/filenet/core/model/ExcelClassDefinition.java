@@ -1,9 +1,7 @@
 package com.sitronics.filenet.core.model;
 
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -13,7 +11,7 @@ public class ExcelClassDefinition {
     private String superClassSymbolicName;
     private String newClassName;
     private String newClassSymbolicName;
-    private Map<String, ExcelProperty> properties = new HashMap<String, ExcelProperty>();
+    private Map<String, FieldDefinition> properties = new HashMap<String, FieldDefinition>();
 
     public ExcelClassDefinition() {
     }
@@ -42,15 +40,15 @@ public class ExcelClassDefinition {
         this.newClassSymbolicName = newClassSymbolicName;
     }
 
-    public Map<String, ExcelProperty> getProperties() {
+    public Map<String, FieldDefinition> getProperties() {
         return properties;
     }
 
-    public void setProperties(Map<String, ExcelProperty> properties) {
+    public void setProperties(Map<String, FieldDefinition> properties) {
         this.properties = properties;
     }
 
-    public void addProperties(String key, ExcelProperty value) {
+    public void addProperties(String key, FieldDefinition value) {
         this.properties.put(key, value);
     }
 }

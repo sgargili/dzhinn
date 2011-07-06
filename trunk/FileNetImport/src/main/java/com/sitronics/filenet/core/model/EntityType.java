@@ -6,14 +6,14 @@ import java.util.List;
 /**
  * @author Andrey Popov creates on 05.07.11 (16:31)
  */
-public enum Type {
-    STRING("String"),
-    DATE("Date"),
-    INTEGER("Integer");
+public enum EntityType {
+    CHOICELIST("ChoiceList"),
+    PROPERTY("Property"),
+    CLASS("Class");
 
     private String value;
 
-    Type(String value) {
+    EntityType(String value) {
         this.value = value;
     }
 
@@ -23,16 +23,16 @@ public enum Type {
 
     public static List<String> getValues() {
         List<String> result = new ArrayList<String>();
-        for (Type type : Type.values()) {
-            result.add(type.getValue());
+        for (EntityType entityType : EntityType.values()) {
+            result.add(entityType.getValue());
         }
         return result;
     }
 
-    public static Type getFromString(String str) {
-        for (Type type : Type.values()) {
-            if (str.equals(type.getValue())) {
-                return type;
+    public static EntityType getFromString(String str) {
+        for (EntityType entityType : EntityType.values()) {
+            if (str.equals(entityType.getValue())) {
+                return entityType;
             }
         }
         return null;
