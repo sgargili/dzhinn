@@ -31,12 +31,13 @@ public class UploadController {
     @RequestMapping(value = "/uploadForm", method = RequestMethod.POST)
     @ResponseBody
     public String create(UploadItem uploadItem, BindingResult result) throws IOException {
-        if (result.hasErrors()) {
-            return "{\"success\": false}";
-        } else {
-            List<ExcelClassDefinition> list = excelService.getExcelClassDefinitions((FileInputStream) uploadItem.getFileData().getInputStream());
-            fileNetService.storeObjects2FileNet(list);
-            return "{\"success\": true}";
-        }
+//        if (result.hasErrors()) {
+//            return "{\"success\": false}";
+//        } else {
+//            List<ExcelClassDefinition> list = excelService.getExcelClassDefinitions((FileInputStream) uploadItem.getFileData().getInputStream());
+//            fileNetService.storeObjects2FileNet(list);
+//            return "{\"success\": true}";
+//        }
+        return "";
     }
 }

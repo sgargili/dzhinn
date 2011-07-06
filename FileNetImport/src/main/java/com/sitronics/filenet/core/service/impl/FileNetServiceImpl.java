@@ -9,22 +9,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.filenet.api.admin.*;
+import com.filenet.api.admin.ChoiceList;
 import com.filenet.api.collection.*;
 import com.filenet.api.constants.Cardinality;
+import com.filenet.api.constants.ChoiceType;
 import com.filenet.api.constants.RefreshMode;
+import com.filenet.api.constants.TypeID;
 import com.filenet.api.core.Factory;
 import com.filenet.api.core.ObjectStore;
 import com.filenet.api.query.SearchSQL;
 import com.filenet.api.query.SearchScope;
 import com.filenet.api.util.Id;
 import com.filenet.api.util.UserContext;
-import com.sitronics.filenet.core.model.ExcelClassDefinition;
-import com.sitronics.filenet.core.model.ExcelProperty;
-import com.sitronics.filenet.core.model.Status;
-import com.sitronics.filenet.core.model.Type;
+import com.sitronics.filenet.core.model.*;
 import com.sitronics.filenet.core.service.FileNetService;
 import com.sitronics.filenet.core.storage.FileNetStorage;
 
@@ -44,87 +45,207 @@ public class FileNetServiceImpl implements FileNetService {
     @Autowired
     private String classBaseSql;
 
-    private static ObjectStore OBJECT_STORE = null;
-    private SearchSQL sql;
-    private SearchScope scope;
-    private IndependentObjectSet set;
+    @Value("${string.Length}")
+    private Integer stringLength;
+
+    private static ObjectStore objectStore = null;
 
     private StringBuffer buffer = new StringBuffer();
 
-
     @Override
-    @SuppressWarnings("unchecked")
-    public void storeObjects2FileNet(List<ExcelClassDefinition> excelClassDefinitions) {
+    public void storeEntityDefinition(EntityDefinition entityDefinition) {
         openConnection();
-        //Создадим-ка новые проперти...
-        for (ExcelClassDefinition excelClassDefinition : excelClassDefinitions) {
-            for (Map.Entry<String, ExcelProperty> entry : excelClassDefinition.getProperties().entrySet()) {
-                if (entry.getValue().getStatus().equals(Status.NEW)) {
-                    storePropertyTemplate(entry.getKey(), entry.getValue());
+        if (entityDefinition != null) {
+            if (entityDefinition.getEntityType().equals(EntityType.CHOICELIST)) {
+                storeChoiceList(entityDefinition);
+            } else if (entityDefinition.getEntityType().equals(EntityType.PROPERTY)) {
+                storePropertyTemplate(entityDefinition);
+            } else if (entityDefinition.getEntityType().equals(EntityType.CLASS)) {
+                storeClassDefinition(entityDefinition);
+            }
+        } else {
+            logger.debug("EntityDefinition is null...");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void storeChoiceList(EntityDefinition entityDefinition) {
+        //Айдишник для новой проперти.
+        Id id = new Id(UUID.randomUUID().toString());
+
+        //Создаем описание для новых пропертей, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
+        LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
+        LocalizedString string = Factory.LocalizedString.createInstance();
+        string.set_LocaleName("en-us");
+
+        ChoiceList choiceList = Factory.ChoiceList.createInstance(objectStore, id);
+
+        choiceList.set_DescriptiveText(entityDefinition.getEntityName());
+        choiceList.set_DisplayName(entityDefinition.getEntityName());
+        choiceList.set_DataType(TypeID.STRING);
+
+        com.filenet.api.collection.ChoiceList choiceListValues = Factory.Choice.createList();
+
+        Choice choice;
+
+        for (Map.Entry<String, FieldDefinition> entry : entityDefinition.getProperties().entrySet()) {
+            choice = Factory.Choice.createInstance();
+
+            choice.set_ChoiceStringValue(entry.getValue().getFieldName());
+            choice.set_ChoiceType(ChoiceType.STRING);
+
+            string.set_LocalizedText(entry.getValue().getFieldName());
+            localizedStringList.add(string);
+
+            choice.set_DisplayNames(localizedStringList);
+
+            choiceListValues.add(choice);
+        }
+
+        choiceList.set_ChoiceValues(choiceListValues);
+        choiceList.save(RefreshMode.NO_REFRESH);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void storePropertyTemplate(EntityDefinition entityDefinition) {
+        //Айдишник для новой проперти.
+        Id id = new Id(UUID.randomUUID().toString());
+
+        //Создаем описание для новых пропертей, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
+        LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
+        LocalizedString string = Factory.LocalizedString.createInstance();
+        string.set_LocaleName("en-us");
+        string.set_LocalizedText(entityDefinition.getEntityName());
+        localizedStringList.add(string);
+
+
+        FieldType fieldType = getFieldType(entityDefinition);
+
+        if (fieldType.equals(FieldType.STRING) || fieldType.equals(FieldType.CHOICELIST)) {
+
+            PropertyTemplateString propertyTemplateString = Factory.PropertyTemplateString.createInstance(objectStore, id);
+
+            propertyTemplateString.set_SymbolicName(entityDefinition.getEntitySymbolicName());
+            propertyTemplateString.set_DisplayNames(localizedStringList);
+            propertyTemplateString.set_DescriptiveTexts(localizedStringList);
+            propertyTemplateString.set_Cardinality(Cardinality.SINGLE);
+
+            propertyTemplateString.set_MaximumLengthString(stringLength);
+
+            if (fieldType.equals(FieldType.CHOICELIST)) {
+                ChoiceListSet set = (ChoiceListSet) getObjectCollection(ChoiceList.class);
+                Iterator iterator = set.iterator();
+                while (iterator.hasNext()) {
+                    ChoiceList choiceList = (ChoiceList) iterator.next();
+                    if (choiceList.get_Name().equals(entityDefinition.getParentEntitySymbolicName())) {
+                        propertyTemplateString.set_ChoiceList(choiceList);
+                        break;
+                    }
                 }
             }
+
+            //Сохраняем ее...
+            propertyTemplateString.save(RefreshMode.NO_REFRESH);
+        } else if (fieldType.equals(FieldType.DATE)) {
+            PropertyTemplateDateTime propertyTemplateDateTime = Factory.PropertyTemplateDateTime.createInstance(objectStore, id);
+
+            propertyTemplateDateTime.set_SymbolicName(entityDefinition.getEntitySymbolicName());
+            propertyTemplateDateTime.set_DisplayNames(localizedStringList);
+            propertyTemplateDateTime.set_DescriptiveTexts(localizedStringList);
+            propertyTemplateDateTime.set_Cardinality(Cardinality.SINGLE);
+
+            //Сохраняем ее...
+            propertyTemplateDateTime.save(RefreshMode.NO_REFRESH);
+        } else if (fieldType.equals(FieldType.INTEGER)) {
+            PropertyTemplateInteger32 propertyTemplateInteger32 = Factory.PropertyTemplateInteger32.createInstance(objectStore, id);
+
+            propertyTemplateInteger32.set_SymbolicName(entityDefinition.getEntitySymbolicName());
+            propertyTemplateInteger32.set_DisplayNames(localizedStringList);
+            propertyTemplateInteger32.set_DescriptiveTexts(localizedStringList);
+            propertyTemplateInteger32.set_Cardinality(Cardinality.SINGLE);
+
+            //Сохраняем ее...
+            propertyTemplateInteger32.save(RefreshMode.NO_REFRESH);
+        } else {
+            PropertyTemplateBoolean propertyTemplateBoolean = Factory.PropertyTemplateBoolean.createInstance(objectStore, id);
+
+            propertyTemplateBoolean.set_SymbolicName(entityDefinition.getEntitySymbolicName());
+            propertyTemplateBoolean.set_DisplayNames(localizedStringList);
+            propertyTemplateBoolean.set_DescriptiveTexts(localizedStringList);
+            propertyTemplateBoolean.set_Cardinality(Cardinality.SINGLE);
+
+            //Сохраняем ее...
+            propertyTemplateBoolean.save(RefreshMode.NO_REFRESH);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void storeClassDefinition(EntityDefinition entityDefinition) {
+        openConnection();
 
         //Достаем все проперти темплейты из системы...
         PropertyTemplateSet propertyTemplateSet = (PropertyTemplateSet) getObjectCollection(PropertyTemplate.class);
 
-        //Бежим по данным выдранным из экселя...
-        for (ExcelClassDefinition excelClassDefinition : excelClassDefinitions) {
+        //Достаем из системы родительский класс в которым мы будем впоследствии вставлять новые классы.
+        DocumentClassDefinition documentClassDefinition = (DocumentClassDefinition) getObjectBySymbolicName(DocumentClassDefinition.class, entityDefinition.getParentEntitySymbolicName());
 
-            //Достаем из системы родительский класс в которым мы будем впоследствии вставлять новые классы.
-            DocumentClassDefinition documentClassDefinition = (DocumentClassDefinition) getObjectBySymbolicName(DocumentClassDefinition.class, excelClassDefinition.getSuperClassSymbolicName());
+        //Создаем описание для новых классов, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
+        LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
+        LocalizedString string = Factory.LocalizedString.createInstance();
+        string.set_LocaleName("en-us");
+        string.set_LocalizedText(entityDefinition.getEntityName());
+        localizedStringList.add(string);
 
-            //Создаем описание для новых классов, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
-            LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
-            LocalizedString string = Factory.LocalizedString.createInstance();
-            string.set_LocaleName("en-us");
-            string.set_LocalizedText(excelClassDefinition.getNewClassName());
-            localizedStringList.add(string);
+        //Айдишник для нового класса.
+        Id id = new Id(UUID.randomUUID().toString());
 
-            //Айдишник для нового класса.
-            Id id = new Id(UUID.randomUUID().toString());
+        //Создаем новый класс как наследника родителю определенному выше.
+        ClassDefinition clazz = documentClassDefinition.createSubclass(id);
 
-            //Создаем новый класс как наследника родителю определенному выше.
-            ClassDefinition clazz = documentClassDefinition.createSubclass(id);
+        //Заполняем новый класс...
+        clazz.set_SymbolicName(entityDefinition.getEntitySymbolicName());
+        clazz.set_DisplayNames(localizedStringList);
+        clazz.set_DescriptiveTexts(localizedStringList);
 
-            //Заполняем новый класс...
-            clazz.set_SymbolicName(excelClassDefinition.getNewClassSymbolicName());
-            clazz.set_DisplayNames(localizedStringList);
-            clazz.set_DescriptiveTexts(localizedStringList);
+        //Итератор для всех пропертей системы.
+        Iterator iterator;
 
-            //Итератор для всех пропертей системы.
-            Iterator iterator;
+        for (Map.Entry<String, FieldDefinition> entry : entityDefinition.getProperties().entrySet()) {
+            iterator = propertyTemplateSet.iterator();
+            while (iterator.hasNext()) {
+                PropertyTemplate template = (PropertyTemplate) iterator.next();
+                if (template.get_SymbolicName().equals(entry.getKey()) && !containsIn(entry.getKey(), clazz.get_PropertyDefinitions())) {
+                    clazz.get_PropertyDefinitions().add(template.createClassProperty());
+                }
 
-            for (Map.Entry<String, ExcelProperty> entry : excelClassDefinition.getProperties().entrySet()) {
-//                if (entry.getValue().getStatus().equals(Status.NEW)) {
-//                    clazz.get_PropertyDefinitions().add(storePropertyTemplate(entry.getKey(), entry.getValue()));
-//                } else {
-                    iterator = propertyTemplateSet.iterator();
-                    while (iterator.hasNext()) {
-                        PropertyTemplate template = (PropertyTemplate) iterator.next();
-                        if (template.get_SymbolicName().equals(entry.getKey()) && !containsIn(entry.getKey(), clazz.get_PropertyDefinitions())) {
-                            clazz.get_PropertyDefinitions().add(template.createClassProperty());
-                        }
-
-                    }
-//                }
             }
 
-            clazz.save(RefreshMode.REFRESH);
         }
+
+        clazz.save(RefreshMode.NO_REFRESH);
+
 
         closeConnection();
     }
 
+    private FieldType getFieldType(EntityDefinition entityDefinition) {
+        for (Map.Entry<String, FieldDefinition> entry : entityDefinition.getProperties().entrySet()) {
+            if (entry.getValue().getFieldType() != null) {
+                return entry.getValue().getFieldType();
+            }
+        }
+        return null;
+
+    }
 
     private Object getObjectCollection(Class aClass) {
 
         openConnection();
 
         if (aClass.equals(PropertyTemplate.class)) {
-            return OBJECT_STORE.get_PropertyTemplates();
-        } else if (aClass.equals(ChoiceListSet.class)) {
-            return OBJECT_STORE.get_ChoiceLists();
+            return objectStore.get_PropertyTemplates();
+        } else if (aClass.equals(ChoiceList.class)) {
+            return objectStore.get_ChoiceLists();
         }
 
         return null;
@@ -138,9 +259,9 @@ public class FileNetServiceImpl implements FileNetService {
 
         logger.debug("Serch SQL Code for DocumentClassDefinition with Name \"{}\" is \"{}\"", name, buffer.toString());
 
-        scope = new SearchScope(OBJECT_STORE);
-        sql = new SearchSQL(buffer.toString());
-        set = scope.fetchObjects(sql, null, null, false);
+        SearchScope scope = new SearchScope(objectStore);
+        SearchSQL sql = new SearchSQL(buffer.toString());
+        IndependentObjectSet set = scope.fetchObjects(sql, null, null, false);
 
         buffer.delete(0, buffer.length());
 
@@ -149,48 +270,12 @@ public class FileNetServiceImpl implements FileNetService {
         return iterator.hasNext() ? iterator.next() : null;
     }
 
-    private PropertyTemplate storePropertyTemplate(String symbolicName, ExcelProperty excelProperty) {
-        PropertyTemplate propertyTemplate;
-        PropertyTemplateString propertyTemplateString = null;
-        //Айдишник для новой проперти.
-        Id id = new Id(UUID.randomUUID().toString());
-        Type type = excelProperty.getType();
-
-        if (type.equals(Type.STRING)) {
-             propertyTemplateString = Factory.PropertyTemplateString.createInstance(OBJECT_STORE, id);
-        } else if (type.equals(Type.DATE)) {
-             propertyTemplate = Factory.PropertyTemplateDateTime.createInstance(OBJECT_STORE, id);
-        } else {
-            propertyTemplate = Factory.PropertyTemplateInteger32.createInstance(OBJECT_STORE, id);
-        }
-
-        //Создаем описание для новых пропертей, это для полей DisplayName и DescriptiveText, делаем их одинаковыми.
-        LocalizedStringList localizedStringList = Factory.LocalizedString.createList();
-        LocalizedString string = Factory.LocalizedString.createInstance();
-        string.set_LocaleName("en-us");
-        string.set_LocalizedText(excelProperty.getPropertyName());
-        localizedStringList.add(string);
-
-        //Заполняем новую проперти...
-        propertyTemplateString.set_SymbolicName(symbolicName);
-        propertyTemplateString.set_DisplayNames(localizedStringList);
-        propertyTemplateString.set_DescriptiveTexts(localizedStringList);
-
-        propertyTemplateString.set_Cardinality(Cardinality.SINGLE);
-
-        propertyTemplateString.set_MaximumLengthString(64);
-
-        //Сохраняем ее...
-        propertyTemplateString.save(RefreshMode.REFRESH);
-        return propertyTemplateString;
-    }
 
     private boolean containsIn(String pattern, PropertyDefinitionList list) {
-        Iterator iterator = list.iterator();
-        while (iterator.hasNext()) {
+        for (Object aList : list) {
 //            PropertyDefinition definition = (PropertyDefinition) iterator.next();
             try {
-                PropertyDefinition definition = (PropertyDefinition) iterator.next();
+                PropertyDefinition definition = (PropertyDefinition) aList;
                 if (pattern.equals(definition.get_SymbolicName())) {
                     return true;
                 }
@@ -202,13 +287,14 @@ public class FileNetServiceImpl implements FileNetService {
     }
 
     private void openConnection() {
-        if (OBJECT_STORE == null) {
-            OBJECT_STORE = fileNetStorage.getObjectStore();
-            OBJECT_STORE.refresh();
+        if (objectStore == null) {
+            objectStore = fileNetStorage.getObjectStore();
+            objectStore.refresh();
         }
     }
 
     private void closeConnection() {
         UserContext.get().popSubject();
+        objectStore = null;
     }
 }
