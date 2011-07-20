@@ -10,8 +10,8 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/imf"/>
-        <property name="username" value="imuser"/>
-        <property name="password" value="Pass4im"/>
+        <property name="username" value="imf"/>
+        <property name="password" value="imf"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
