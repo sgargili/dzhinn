@@ -7,8 +7,6 @@
     <groupId>Grabli</groupId>
     <artifactId>Grabli</artifactId>
     <version>1.0</version>
-
-
     <build>
         <resources>
             <resource>
