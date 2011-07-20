@@ -11,19 +11,6 @@ import com.sitronics.imf.persistance.UnitsOfMeasureGroupRepository;
  * @author Andrey Popov creates on 19.07.11 (18:18)
  */
 @Repository("UnitsOfMeasureGroupRepository")
-public class UnitsOfMeasureGroupRepositoryHibernate implements UnitsOfMeasureGroupRepository {
-    @Autowired
-    HibernateTemplate hibernateTemplate;
+public class UnitsOfMeasureGroupRepositoryHibernate extends BaseRepositoryHibernate<UnitsOfMeasureGroup> implements UnitsOfMeasureGroupRepository {
 
-    public void store(UnitsOfMeasureGroup unitsOfMeasureGroup) {
-        hibernateTemplate.saveOrUpdate(unitsOfMeasureGroup);
-    }
-
-    public UnitsOfMeasureGroup getUnitsOfMeasureGroup(Long id) {
-        return hibernateTemplate.get(UnitsOfMeasureGroup.class, id);
-    }
-
-    public void remove(UnitsOfMeasureGroup unitsOfMeasureGroup) {
-        hibernateTemplate.delete(unitsOfMeasureGroup);
-    }
 }

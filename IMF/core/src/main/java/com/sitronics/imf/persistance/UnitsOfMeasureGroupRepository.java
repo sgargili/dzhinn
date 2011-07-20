@@ -5,10 +5,6 @@ import com.sitronics.imf.UnitsOfMeasureGroup;
 /**
  * @author Andrey Popov creates on 19.07.11 (18:16)
  */
-public interface UnitsOfMeasureGroupRepository {
-    void store(UnitsOfMeasureGroup unitsOfMeasureGroup);
+public interface UnitsOfMeasureGroupRepository extends BaseRepository {
 
-    UnitsOfMeasureGroup getUnitsOfMeasureGroup(Long id);
-
-    void remove(UnitsOfMeasureGroup unitsOfMeasureGroup);
 }
