@@ -1,9 +1,6 @@
-package com.sitronics.imf.persistance.impl;
+package com.pav4it.imf.persistance.impl;
 
 import java.io.File;
-import java.util.Random;
-
-import javax.activation.MimetypesFileTypeMap;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.google.common.io.Files;
-import com.google.common.primitives.Bytes;
-import com.sitronics.imf.Document;
+import com.pav4it.imf.Document;
 
 /**
  * @author Andrey Popov creates on 20.07.11 (10:49)

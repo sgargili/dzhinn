@@ -1,4 +1,4 @@
-package com.sitronics.imf.persistance.impl;
+package com.pav4it.imf.persistance.impl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sitronics.imf.persistance.UnitOfMeasureRepository;
+import com.pav4it.imf.persistance.UnitOfMeasureRepository;
 
 /**
  * @author Andrey Popov creates on 20.07.11 (17:32)
