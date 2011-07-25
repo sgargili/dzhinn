@@ -18,7 +18,7 @@ public class Substitute<T> extends BaseEntity {
 //    @Generated(GenerationTime.INSERT)
     private Long realValue;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     private UnitOfMeasure unitOfMeasure;
 
     @Column(name = "orderIndex")
@@ -26,6 +26,7 @@ public class Substitute<T> extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "substitutes_group_id")
+//    @XmlInverseReference(mappedBy = "substitute")
     private SubstitutesGroup substitutesGroup;
 
     public T getValue() {

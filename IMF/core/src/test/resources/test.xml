@@ -1,0 +1,43 @@
+<SubstituteGroup>
+    <substitutesGroups>
+        <comment>Группа Автозамен 0 Комментарий</comment>
+        <id>1</id>
+        <name>Группа Автозамен 0</name>
+        <substitutes>
+            <comment>ChoiceList0 Value Comment</comment>
+            <id>4</id>
+            <name>ChoiceList0 Value</name>
+            <orderIndex>0</orderIndex>
+            <realValue>0</realValue>
+            <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">0.1
+            </value>
+        </substitutes>
+        <substitutes>
+            <comment>ChoiceList1 Value Comment</comment>
+            <id>5</id>
+            <name>ChoiceList1 Value</name>
+            <orderIndex>1</orderIndex>
+            <realValue>1</realValue>
+            <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">1.1
+            </value>
+        </substitutes>
+        <substitutes>
+            <comment>ChoiceList2 Value Comment</comment>
+            <id>6</id>
+            <name>ChoiceList2 Value</name>
+            <orderIndex>2</orderIndex>
+            <realValue>2</realValue>
+            <value xsi:type="xs:double" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">2.1
+            </value>
+        </substitutes>
+        <unitsOfMeasureGroup>
+            <comment>Group Comment</comment>
+            <id>1</id>
+            <name>Group</name>
+        </unitsOfMeasureGroup>
+        <valueType>Decimal</valueType>
+    </substitutesGroups>
+</SubstituteGroup>

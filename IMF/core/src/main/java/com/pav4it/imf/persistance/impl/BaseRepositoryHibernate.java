@@ -1,7 +1,10 @@
 package com.pav4it.imf.persistance.impl;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,23 @@ public class BaseRepositoryHibernate<T> implements BaseRepository {
     public Object getEntity(Long id) {
         logger.error("Get Entity Instance: {} with id: {}", getClazz().getSimpleName(), id);
         return hibernateTemplate.get(getClazz(), id);
+    }
+
+    @Override
+    public List getAllEntities(int firstResult, int maxResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(getClazz());
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResult);
+        return criteria.list();
+    }
+
+    @Override
+    public List getAllEntitiesByName(String name, int firstResult, int maxResult) {
+        Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(getClazz());
+        criteria.setFirstResult(firstResult);
+        criteria.setMaxResults(maxResult);
+        criteria.add(Restrictions.ilike("name", name));
+        return criteria.list();
     }
 
     @Override
