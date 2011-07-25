@@ -532,6 +532,18 @@
         <inspection_tool class="JavadocReference" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="JpaQlInspection" enabled="true" level="WARNING" enabled_by_default="true" />
         <inspection_tool class="JpaQueryApiInspection" enabled="true" level="WARNING" enabled_by_default="true" />
+        <inspection_tool class="SSBasedInspection" enabled="true" level="ERROR" enabled_by_default="true">
+          <replaceConfiguration name="StringCheck" text="$variable$.equals(&quot;$string$&quot;)" recursive="false" caseInsensitive="false" type="JAVA" extension="java" reformatAccordingToStyle="true" shortenFQN="true" replacement="&quot;$string$&quot;.equals($variable$)">
+            <constraint name="packa" within="" contains="" />
+            <constraint name="package" within="" contains="" />
+            <constraint name="class" script="&quot;&quot;" within="" contains="" />
+            <constraint name="__context__" script="&quot;&quot;" within="" contains="" />
+            <constraint name="string" within="" contains="" />
+            <constraint name="vari" within="" contains="" />
+            <constraint name="varia" within="" contains="" />
+            <constraint name="variable" within="" contains="" />
+          </replaceConfiguration>
+        </inspection_tool>
         <inspection_tool class="SpringModelInspection" enabled="true" level="WARNING" enabled_by_default="true" />
       </profile>
     </profiles>
@@ -917,15 +929,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final">
+    <library name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.0.Final/hibernate-jpa-2.0-api-1.0.0.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/javax/persistence/hibernate-jpa-2.0-api/1.0.1.Final/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.hibernate:hibernate-c3p0:3.5.4-Final">
@@ -950,15 +962,15 @@
         <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-commons-annotations/3.2.0.Final/hibernate-commons-annotations-3.2.0.Final-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.hibernate:hibernate-core:3.6.5.Final">
+    <library name="Maven: org.hibernate:hibernate-core:3.6.6.Final">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.5.Final/hibernate-core-3.6.5.Final.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.6.Final/hibernate-core-3.6.6.Final.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.5.Final/hibernate-core-3.6.5.Final-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.6.Final/hibernate-core-3.6.6.Final-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.5.Final/hibernate-core-3.6.5.Final-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-core/3.6.6.Final/hibernate-core-3.6.6.Final-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.junit:com.springsource.org.junit:4.7.0">

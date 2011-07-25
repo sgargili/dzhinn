@@ -14,8 +14,24 @@
         http://www.springframework.org/schema/cache/spring-cache.xsd"
        default-autowire="byName">
     <context:annotation-config/>
-    <context:component-scan base-package="com.sitronics"/>
+    <context:component-scan base-package="com.pav4it"/>
 
+
+    <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="classesToBeBound">
+            <list>
+                <value>com.pav4it.imf.SubstitutesGroup</value>
+            </list>
+        </property>
+        <property name="marshallerProperties">
+            <map>
+                <!--Сделаем форматированный вывод...-->
+                <entry key="jaxb.formatted.output">
+                    <value type="boolean">true</value>
+                </entry>
+            </map>
+        </property>
+    </bean>
 
     <bean id="c3po" class="com.mchange.v2.c3p0.ComboPooledDataSource"
           destroy-method="close">
@@ -31,11 +47,11 @@
         <property name="dataSource" ref="c3po"/>
         <!--<property name="annotatedClasses">-->
             <!--<list>-->
-                <!--<value>com.sitronics.imf.UnitOfMeasure</value>-->
-                <!--<value>com.sitronics.imf.UnitsOfMeasureGroup</value>-->
+                <!--<value>com.pav4itf.UnitOfMeasure</value>-->
+                <!--<value>com.pav4itf.UnitsOfMeasureGroup</value>-->
             <!--</list>-->
         <!--</property>-->
-        <property name="packagesToScan" value="com.sitronics.imf"/>
+        <property name="packagesToScan" value="com.pav4it.imf"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
