@@ -25,23 +25,11 @@
         </sourceRoots>
       </configuration>
     </facet>
-    <facet type="hibernate" name="Hibernate">
-      <configuration>
-        <datasource-map>
-          <unit-entry name="sessionFactory" value="f7f34820-8455-4711-9398-438f896337bd" />
-        </datasource-map>
-      </configuration>
-    </facet>
     <facet type="javaeeApplication" name="JavaEE">
       <configuration>
         <descriptors>
           <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/src/web/META-INF/application.xml" />
         </descriptors>
-      </configuration>
-    </facet>
-    <facet type="JRebel" name="JRebel">
-      <configuration>
-        <option name="generateRebel" value="true" />
       </configuration>
     </facet>
   </component>
@@ -75,11 +63,11 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:3.1.0.M2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-commons-annotations:3.2.0.Final" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:3.6.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-core:3.6.6.Final" level="project" />
     <orderEntry type="library" name="Maven: antlr:antlr:2.7.6" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.1" level="project" />
     <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" level="project" />
     <orderEntry type="library" name="Maven: javax.transaction:jta:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
@@ -92,6 +80,7 @@
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-c3p0:3.5.4-Final" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.junit:com.springsource.org.junit:4.7.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:r09" level="project" />
     <orderEntry type="library" name="Maven: postgresql:postgresql:9.0-801.jdbc4" level="project" />
   </component>
 </module>
