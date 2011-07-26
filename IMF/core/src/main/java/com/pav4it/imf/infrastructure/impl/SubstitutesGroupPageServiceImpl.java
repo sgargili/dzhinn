@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.pav4it.imf.Substitute;
 import com.pav4it.imf.SubstitutesGroup;
 import com.pav4it.imf.infrastructure.SubstitutesGroupPageService;
-import com.pav4it.imf.infrastructure.page.SubstitutesGroupPage;
+import com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage;
 import com.pav4it.imf.persistance.SubstituteRepository;
 import com.pav4it.imf.persistance.SubstitutesGroupRepository;
 

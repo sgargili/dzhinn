@@ -2,7 +2,7 @@ package com.pav4it.imf.infrastructure;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.pav4it.imf.infrastructure.page.SubstitutesGroupPage;
+import com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage;
 
 /**
  * @author Andrey Popov creates on 25.07.11 (16:02)

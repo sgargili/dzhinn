@@ -519,6 +519,88 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="GeneratorPluginComponent">
+    <option name="variableInitializers">
+      <TypeToTextMapping>
+        <option name="mapping">
+          <map>
+            <entry key="java.util.ArrayList">
+              <value>
+                <Entry>
+                  <option name="text" value="new java.util.ArrayList$&lt;&gt;$()" />
+                  <option name="type" value="java.util.ArrayList" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.Collection">
+              <value>
+                <Entry>
+                  <option name="text" value="java.util.Collections.$&lt;&gt;$emptySet()" />
+                  <option name="type" value="java.util.Collection" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.HashMap">
+              <value>
+                <Entry>
+                  <option name="text" value="new java.util.HashMap$&lt;&gt;$()" />
+                  <option name="type" value="java.util.HashMap" />
+                  <option name="isAddRemoveMethodRequested" value="false" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.HashSet">
+              <value>
+                <Entry>
+                  <option name="text" value="new java.util.HashSet$&lt;&gt;$()" />
+                  <option name="type" value="java.util.HashSet" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.LinkedHashSet">
+              <value>
+                <Entry>
+                  <option name="text" value="new java.util.LinkedHashSet$&lt;&gt;$()" />
+                  <option name="type" value="java.util.LinkedHashSet" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.List">
+              <value>
+                <Entry>
+                  <option name="text" value="java.util.Collections.$&lt;&gt;$emptyList()" />
+                  <option name="type" value="java.util.List" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.Set">
+              <value>
+                <Entry>
+                  <option name="text" value="java.util.Collections.$&lt;&gt;$emptySet()" />
+                  <option name="type" value="java.util.Set" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+            <entry key="java.util.SortedSet">
+              <value>
+                <Entry>
+                  <option name="text" value="new java.util.TreeSet$&lt;&gt;$()" />
+                  <option name="type" value="java.util.SortedSet" />
+                  <option name="isAddRemoveMethodRequested" value="true" />
+                </Entry>
+              </value>
+            </entry>
+          </map>
+        </option>
+      </TypeToTextMapping>
+    </option>
+  </component>
   <component name="IdProvider" IDEtalkID="F0F08F07F17B9B617B6EE466A6E473FB" />
   <component name="InspectionProjectProfileManager">
     <profiles>
@@ -786,6 +868,17 @@
         <root url="jar://$MAVEN_REPOSITORY$/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Maven: ar.com.fdvs:bean2bean:0.9">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/ar/com/fdvs/bean2bean/0.9/bean2bean-0.9.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/ar/com/fdvs/bean2bean/0.9/bean2bean-0.9-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/ar/com/fdvs/bean2bean/0.9/bean2bean-0.9-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Maven: asm:asm:3.3.1">
       <CLASSES>
         <root url="jar://$MAVEN_REPOSITORY$/asm/asm/3.3.1/asm-3.3.1.jar!/" />
@@ -828,6 +921,17 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/r09/guava-r09-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Maven: com.opensymphony:xwork:2.1.0">
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/opensymphony/xwork/2.1.0/xwork-2.1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$MAVEN_REPOSITORY$/com/opensymphony/xwork/2.1.0/xwork-2.1.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/opensymphony/xwork/2.1.0/xwork-2.1.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: commons-collections:commons-collections:3.1">
@@ -949,50 +1053,6 @@
       </JAVADOC>
       <SOURCES>
         <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.eclipse.persistence:org.eclipse.persistence.antlr:2.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.antlr/2.0.0/org.eclipse.persistence.antlr-2.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.antlr/2.0.0/org.eclipse.persistence.antlr-2.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.antlr/2.0.0/org.eclipse.persistence.antlr-2.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.asm/2.0.0/org.eclipse.persistence.asm-2.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.asm/2.0.0/org.eclipse.persistence.asm-2.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.asm/2.0.0/org.eclipse.persistence.asm-2.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.core/2.0.0/org.eclipse.persistence.core-2.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.core/2.0.0/org.eclipse.persistence.core-2.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.core/2.0.0/org.eclipse.persistence.core-2.0.0-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="Maven: org.eclipse.persistence:org.eclipse.persistence.moxy:2.0.0">
-      <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.moxy/2.0.0/org.eclipse.persistence.moxy-2.0.0.jar!/" />
-      </CLASSES>
-      <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.moxy/2.0.0/org.eclipse.persistence.moxy-2.0.0-javadoc.jar!/" />
-      </JAVADOC>
-      <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/eclipse/persistence/org.eclipse.persistence.moxy/2.0.0/org.eclipse.persistence.moxy-2.0.0-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final">
