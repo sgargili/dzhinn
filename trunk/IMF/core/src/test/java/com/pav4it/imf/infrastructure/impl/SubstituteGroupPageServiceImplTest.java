@@ -4,6 +4,7 @@ import java.io.StringWriter;
 
 import javax.xml.transform.stream.StreamResult;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,7 +17,8 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pav4it.imf.infrastructure.SubstitutesGroupPageService;
-import com.pav4it.imf.infrastructure.page.SubstitutesGroupPage;
+import com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage;
+
 
 /**
  * @author Andrey Popov creates on 25.07.11 (17:19)
@@ -36,9 +38,10 @@ public class SubstituteGroupPageServiceImplTest {
     @Test
     public void testGetSubstituteGroupPage() throws Exception {
         SubstitutesGroupPage group = service.getSubstituteGroupPage(0, 10);
-        final StringWriter out = new StringWriter();
-        jaxb2Marshaller.marshal(group, new StreamResult(out));
-        logger.error(out.getBuffer().toString());
+//        final StringWriter out = new StringWriter();
+//        jaxb2Marshaller.marshal(group, new StreamResult(out));
+        ObjectMapper mapper = new ObjectMapper();
+        logger.error(mapper.writeValueAsString(group));
     }
 
     @Test

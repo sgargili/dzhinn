@@ -20,7 +20,8 @@
     <bean id="jaxb2Marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
-                <value>com.pav4it.imf.infrastructure.page.SubstitutesGroupPage</value>
+                <value>com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage</value>
+                <value>com.pav4it.imf.infrastructure.transfer.SubstitutesGroupDto</value>
             </list>
         </property>
         <property name="marshallerProperties">
@@ -31,6 +32,10 @@
                 </entry>
             </map>
         </property>
+    </bean>
+
+    <bean id="bean2Bean" class="ar.com.fdvs.bean2bean.Bean2Bean" factory-method="getInstance">
+        <property name="typeConverter"
     </bean>
 
     <bean id="c3po" class="com.mchange.v2.c3p0.ComboPooledDataSource"

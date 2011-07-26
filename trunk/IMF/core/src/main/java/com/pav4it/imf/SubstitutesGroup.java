@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Andrey Popov creates on 22.07.11 (16:16)
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "substitutes_group")
 public class SubstitutesGroup extends BaseEntity {
