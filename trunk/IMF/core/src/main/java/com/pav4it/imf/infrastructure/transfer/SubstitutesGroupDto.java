@@ -1,11 +1,13 @@
 package com.pav4it.imf.infrastructure.transfer;
 
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.pav4it.imf.Substitute;
 import com.pav4it.imf.SubstitutesGroup;
 import com.pav4it.imf.UnitsOfMeasureGroup;
 import com.pav4it.imf.ValueType;
+import com.sun.xml.internal.bind.CycleRecoverable;
 
 import ar.com.fdvs.bean2bean.annotations.CopyFromAndTo;
 
@@ -13,7 +15,7 @@ import ar.com.fdvs.bean2bean.annotations.CopyFromAndTo;
  * @author Andrey Popov creates on 26.07.11 (18:08)
  */
 @XmlRootElement
-public class SubstitutesGroupDto extends SubstitutesGroup {
+public class SubstitutesGroupDto implements CycleRecoverable {
     @CopyFromAndTo
     private ValueType valueType;
     @CopyFromAndTo
@@ -23,6 +25,7 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
     @CopyFromAndTo
     private Long id;
     @CopyFromAndTo
+    @OneToOne
     private String name;
     @CopyFromAndTo
     private String comment;
@@ -39,7 +42,6 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
     public SubstitutesGroupDto() {
     }
 
-    @Override
     public ValueType getValueType() {
         return this.valueType;
     }
@@ -48,7 +50,6 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
         this.valueType = valueType;
     }
 
-    @Override
     public UnitsOfMeasureGroup getUnitsOfMeasureGroup() {
         return this.unitsOfMeasureGroup;
     }
@@ -57,7 +58,6 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
         this.unitsOfMeasureGroup = unitsOfMeasureGroup;
     }
 
-    @Override
     public java.util.Set<Substitute> getSubstitutes() {
         return this.substitutes;
     }
@@ -76,7 +76,6 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
         return this;
     }
 
-    @Override
     public Long getId() {
         return this.id;
     }
@@ -85,7 +84,6 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
         this.id = id;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
@@ -94,12 +92,16 @@ public class SubstitutesGroupDto extends SubstitutesGroup {
         this.name = name;
     }
 
-    @Override
     public String getComment() {
         return this.comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public Object onCycleDetected(Context context) {
+        return null;
     }
 }

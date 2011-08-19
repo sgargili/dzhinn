@@ -1,15 +1,11 @@
 package com.pav4it.imf;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 
 /**
  * @author Andrey Popov creates on 19.07.11 (17:29)
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-
 @Entity
 @Table(name = "unit_of_measure")
 public class UnitOfMeasure extends BaseEntity {
@@ -27,6 +23,9 @@ public class UnitOfMeasure extends BaseEntity {
 //    @JoinColumn(name = "unit_group_id")
     @PrimaryKeyJoinColumn
     private UnitsOfMeasureGroup unitsOfMeasureGroup;
+
+//    @OneToOne(fetch = FetchType.EAGER)
+//    private Security security;
 
     public String getPrefix() {
         return prefix;
@@ -59,4 +58,12 @@ public class UnitOfMeasure extends BaseEntity {
     public void setUnitsOfMeasureGroup(UnitsOfMeasureGroup unitsOfMeasureGroup) {
         this.unitsOfMeasureGroup = unitsOfMeasureGroup;
     }
+
+//    public Security getSecurity() {
+//        return security;
+//    }
+//
+//    public void setSecurity(Security security) {
+//        this.security = security;
+//    }
 }

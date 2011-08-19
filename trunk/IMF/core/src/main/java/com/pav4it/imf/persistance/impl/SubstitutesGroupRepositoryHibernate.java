@@ -18,6 +18,8 @@ public class SubstitutesGroupRepositoryHibernate extends BaseRepositoryHibernate
         Criteria criteria = hibernateTemplate.getSessionFactory().getCurrentSession().createCriteria(getClazz());
         criteria.add(Restrictions.eq("id", id));
         criteria.setFetchMode("substitutes", FetchMode.JOIN);
+        criteria.setFetchMode("unitsOfMeasureGroup", FetchMode.JOIN);
+        criteria.setFetchMode("unitsOfMeasure", FetchMode.JOIN);
         return criteria.uniqueResult();
     }
 }

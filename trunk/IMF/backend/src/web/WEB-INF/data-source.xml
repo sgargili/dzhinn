@@ -9,14 +9,14 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/imf"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/testimf"/>
         <property name="username" value="imf"/>
         <property name="password" value="imf"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
+        <!--<property name="annotatedClasses">
             <list>
                 <value>imf.core.entity.Attribute</value>
                 <value>imf.core.entity.Attribute2Group</value>
@@ -31,7 +31,8 @@
                 <value>imf.core.entity.ProductType</value>
                 <value>imf.core.entity.Vendor</value>
             </list>
-        </property>
+        </property>-->
+        <property name="packagesToScan" value="com.pav4it.imf"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
@@ -39,7 +40,7 @@
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.jdbc.batch_size">20</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.default_schema">imf</prop>
+                <!--<prop key="hibernate.default_schema">imf</prop>-->
             </props>
         </property>
     </bean>

@@ -22,6 +22,7 @@
             <list>
                 <value>com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage</value>
                 <value>com.pav4it.imf.infrastructure.transfer.SubstitutesGroupDto</value>
+                <value>com.pav4it.imf.AttributeGroupingInfo</value>
             </list>
         </property>
         <property name="marshallerProperties">
@@ -35,7 +36,6 @@
     </bean>
 
     <bean id="bean2Bean" class="ar.com.fdvs.bean2bean.Bean2Bean" factory-method="getInstance">
-        <property name="typeConverter"
     </bean>
 
     <bean id="c3po" class="com.mchange.v2.c3p0.ComboPooledDataSource"
@@ -47,33 +47,26 @@
         <property name="maxPoolSize" value="50"/>
     </bean>
 
-    <bean id="sessionFactory"
-          class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="dataSource" ref="c3po"/>
-        <!--<property name="annotatedClasses">-->
-            <!--<list>-->
-                <!--<value>com.pav4itf.UnitOfMeasure</value>-->
-                <!--<value>com.pav4itf.UnitsOfMeasureGroup</value>-->
-            <!--</list>-->
-        <!--</property>-->
-        <property name="packagesToScan" value="com.pav4it.imf"/>
-        <property name="hibernateProperties">
-            <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <!--<prop key="hibernate.default_schema">imf</prop>-->
-            </props>
-        </property>
-    </bean>
-
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="c3po"/>
+        <property name="packagesToScan" value="com.pav4it.imf"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.jdbc.batch_size">20</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--<prop key="hibernate.default_schema">imf</prop>-->
+            </props>
+        </property>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" mode="proxy"/>
