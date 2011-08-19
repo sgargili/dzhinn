@@ -29,25 +29,30 @@
             <element id="library" level="project" name="Maven: org.springframework:spring-orm:3.1.0.M2" />
             <element id="library" level="project" name="Maven: org.springframework:spring-oxm:3.1.0.M2" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-commons-annotations:3.2.0.Final" />
-            <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.6.5.Final" />
+            <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.1" />
+            <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:3.6.6.Final" />
             <element id="library" level="project" name="Maven: antlr:antlr:2.7.6" />
             <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.1" />
             <element id="library" level="project" name="Maven: dom4j:dom4j:1.6.1" />
-            <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.0.Final" />
+            <element id="library" level="project" name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final" />
             <element id="library" level="project" name="Maven: javax.transaction:jta:1.1" />
             <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" />
             <element id="library" level="project" name="Maven: log4j:log4j:1.2.16" />
             <element id="library" level="project" name="Maven: jboss:javassist:3.8.0.GA" />
-            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.3" />
-            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.3" />
-            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.3" />
-            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-xc:1.8.3" />
+            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.5" />
+            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.5" />
+            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.5" />
+            <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-xc:1.8.5" />
             <element id="library" level="project" name="Maven: org.springframework:spring-test:3.1.0.M2" />
             <element id="library" level="project" name="Maven: org.hibernate:hibernate-c3p0:3.5.4-Final" />
             <element id="library" level="project" name="Maven: c3p0:c3p0:0.9.1" />
             <element id="library" level="project" name="Maven: org.junit:com.springsource.org.junit:4.7.0" />
+            <element id="library" level="project" name="Maven: com.google.guava:guava:r09" />
+            <element id="library" level="project" name="Maven: cglib:cglib:2.2.2" />
+            <element id="library" level="project" name="Maven: asm:asm:3.3.1" />
+            <element id="library" level="project" name="Maven: ar.com.fdvs:bean2bean:0.9" />
+            <element id="library" level="project" name="Maven: com.opensymphony:xwork:2.1.0" />
             <element id="library" level="project" name="Maven: postgresql:postgresql:9.0-801.jdbc4" />
-            <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.1" />
           </element>
         </element>
         <element id="javaee-facet-resources" facet="backend/web/Web" />
@@ -657,6 +662,28 @@
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
   </component>
+  <component name="LogSupport">
+    <option name="logConfigurations">
+      <ProjectLogConfigurations>
+        <option name="defaultLogConfiguration">
+          <DefaultLogConfiguration>
+            <option name="defaultFrameworkName" value="slf4j" />
+            <option name="logIdName" value="&lt;html&gt;&lt;i&gt;Disabled&lt;/i&gt;&lt;/html&gt;" />
+          </DefaultLogConfiguration>
+        </option>
+        <option name="targetedLogConfigurations">
+          <list>
+            <TargetedLogConfiguration>
+              <option name="defaultFrameworkName" value="slf4j" />
+              <option name="logIdName" value="Default" />
+              <option name="logIdSequenceValue" value="170" />
+              <option name="targetScopeName" value="Project Files" />
+            </TargetedLogConfiguration>
+          </list>
+        </option>
+      </ProjectLogConfigurations>
+    </option>
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -1011,48 +1038,48 @@
         <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.16/log4j-1.2.16-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.3">
+    <library name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.5">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.3/jackson-core-asl-1.8.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.5/jackson-core-asl-1.8.5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.3/jackson-core-asl-1.8.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.5/jackson-core-asl-1.8.5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.3/jackson-core-asl-1.8.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-core-asl/1.8.5/jackson-core-asl-1.8.5-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.3">
+    <library name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.5">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.3/jackson-jaxrs-1.8.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.5/jackson-jaxrs-1.8.5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.3/jackson-jaxrs-1.8.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.5/jackson-jaxrs-1.8.5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.3/jackson-jaxrs-1.8.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-jaxrs/1.8.5/jackson-jaxrs-1.8.5-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.3">
+    <library name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.5">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.3/jackson-mapper-asl-1.8.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.5/jackson-mapper-asl-1.8.5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.3/jackson-mapper-asl-1.8.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.5/jackson-mapper-asl-1.8.5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.3/jackson-mapper-asl-1.8.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.8.5/jackson-mapper-asl-1.8.5-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Maven: org.codehaus.jackson:jackson-xc:1.8.3">
+    <library name="Maven: org.codehaus.jackson:jackson-xc:1.8.5">
       <CLASSES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.5/jackson-xc-1.8.5.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3-javadoc.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.5/jackson-xc-1.8.5-javadoc.jar!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.3/jackson-xc-1.8.3-sources.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-xc/1.8.5/jackson-xc-1.8.5-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Maven: org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final">

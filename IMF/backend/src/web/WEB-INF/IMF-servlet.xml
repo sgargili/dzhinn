@@ -15,25 +15,15 @@
 
     <mvc:annotation-driven/>
 
-    <context:component-scan base-package="imf"/>
+    <context:component-scan base-package="com.pav4it"/>
 
     <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="classesToBeBound">
             <list>
-                <value>imf.core.dto.web.response.AttributeResponse</value>
-                <!-- <value>imf.core.dto.web.response.TreeResponse</value>
+                <!--<value>imf.core.dto.web.response.AttributeResponse</value>--><!-- <value>imf.core.dto.web.response.TreeResponse</value>
                 <value>imf.core.dto.web.response.TreeResponse</value>
-                <value>imf.core.dto.web.response.TreeResponse</value>-->
-                <value>imf.core.dto.AttributeDto</value>
-                <value>imf.core.dto.UnitsGroupDto</value>
-                <value>imf.core.dto.UnitsOfMeasureDto</value>
-                <value>imf.core.dto.web.response.tree.BaseTreeNode</value>
-                <value>imf.core.dto.web.response.UnitsGroupResponse</value>
-                <value>imf.core.dto.web.response.UnitsOfMeasureResponse</value>
-                <value>imf.core.dto.web.response.TreeResponse</value>
-                <value>imf.core.dto.web.response.TemplateResponse</value>
-                <value>imf.core.dto.web.response.GroupResponse</value>
-                <value>imf.core.dto.web.response.IndustryResponse</value>
+                <value>imf.core.dto.web.response.TreeResponse</value>--><!--<value>imf.core.dto.AttributeDto</value>--><!--<value>imf.core.dto.UnitsGroupDto</value>--><!--<value>imf.core.dto.UnitsOfMeasureDto</value>--><!--<value>imf.core.dto.web.response.tree.BaseTreeNode</value>--><!--<value>imf.core.dto.web.response.UnitsGroupResponse</value>--><!--<value>imf.core.dto.web.response.UnitsOfMeasureResponse</value>--><!--<value>imf.core.dto.web.response.TreeResponse</value>--><!--<value>imf.core.dto.web.response.TemplateResponse</value>--><!--<value>imf.core.dto.web.response.GroupResponse</value>--><!--<value>imf.core.dto.web.response.IndustryResponse</value>-->
+                <value>com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage</value>
             </list>
         </property>
     </bean>

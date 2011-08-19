@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pav4it.imf.Substitute;
 import com.pav4it.imf.SubstitutesGroup;
 import com.pav4it.imf.infrastructure.SubstitutesGroupPageService;
 import com.pav4it.imf.infrastructure.transfer.page.SubstitutesGroupPage;
@@ -48,12 +47,12 @@ public class SubstitutesGroupPageServiceImpl implements SubstitutesGroupPageServ
     public SubstitutesGroupPage getSubstituteGroupPageWithDependenciesById(Long id) {
         SubstitutesGroupPage page = new SubstitutesGroupPage();
         page.addSubstitutesGroup((SubstitutesGroup) substitutesGroupRepository.getEntityWithDependencies(id));
-        for (SubstitutesGroup group : page.getSubstitutesGroups()) {
-            group.getUnitsOfMeasureGroup().setUnitsOfMeasure(null);
-            for (Substitute substitute : group.getSubstitutes()) {
-                substitute.setSubstitutesGroup(null);
-            }
-        }
+//        for (SubstitutesGroup group : page.getSubstitutesGroups()) {
+//            group.getUnitsOfMeasureGroup().setUnitsOfMeasure(null);
+//            for (Substitute substitute : group.getSubstitutes()) {
+//                substitute.setSubstitutesGroup(null);
+//            }
+//        }
         return page;
     }
 }

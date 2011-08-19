@@ -11,6 +11,13 @@
         </fileset>
       </configuration>
     </facet>
+    <facet type="hibernate" name="Hibernate">
+      <configuration>
+        <datasource-map>
+          <unit-entry name="sessionFactory" value="bf3a0b72-22af-4dda-8bc1-7f9c886d720f" />
+        </datasource-map>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -47,10 +54,10 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.1" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.16" level="project" />
     <orderEntry type="library" name="Maven: jboss:javassist:3.8.0.GA" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-xc:1.8.3" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.8.5" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.8.5" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.8.5" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-xc:1.8.5" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:3.1.0.M2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-c3p0:3.5.4-Final" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1" level="project" />

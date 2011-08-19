@@ -1,22 +1,24 @@
 package com.pav4it.imf;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 import org.hibernate.annotations.Type;
 
 /**
  * @author Andrey Popov creates on 22.07.11 (16:15)
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "substitute")
 public class Substitute<T> extends BaseEntity {
     @Column(name = "value", nullable = false)
     @Type(type = "com.pav4it.imf.GenericValue")
+    @XmlElements({
+            @XmlElement(nillable = false, type = String.class),
+            @XmlElement(nillable = false, type = Integer.class),
+            @XmlElement(nillable = false, type = Double.class)
+    })
     private T value;
 
     @Column(name = "realValue")
@@ -32,8 +34,6 @@ public class Substitute<T> extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "substitutes_group_id")
     @PrimaryKeyJoinColumn
-    @XmlInverseReference(mappedBy="substitute")
-    @JsonIgnore
     private SubstitutesGroup substitutesGroup;
 
     public T getValue() {

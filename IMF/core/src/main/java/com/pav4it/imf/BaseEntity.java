@@ -1,12 +1,19 @@
 package com.pav4it.imf;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.sun.xml.internal.bind.CycleRecoverable;
 
 /**
  * @author Andrey Popov creates on 19.07.11 (17:49)
  */
 @MappedSuperclass
-public class BaseEntity {
+//Для XML сделаем уровень доступа - поле - для всех потомков...
+@XmlAccessorType(XmlAccessType.FIELD)
+//Реализуем интерфейс CycleRecoverable для того, чтобы Jaxb не говорил, что цикличность мешает серриализации...
+public class BaseEntity implements CycleRecoverable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -40,5 +47,10 @@ public class BaseEntity {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public Object onCycleDetected(Context context) {
+        return null;
     }
 }

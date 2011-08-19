@@ -55,5 +55,9 @@ public class SubstituteGroupPageServiceImplTest {
         final StringWriter out = new StringWriter();
         jaxb2Marshaller.marshal(group, new StreamResult(out));
         logger.error(out.getBuffer().toString());
+//        ObjectMapper mapper = new ObjectMapper(); // can reuse, share globally
+//        mapper.writeValueAsString(group);
+//        System.out.println("Hello!");
+//        logger.error(mapper.writeValueAsString(group));
     }
 }

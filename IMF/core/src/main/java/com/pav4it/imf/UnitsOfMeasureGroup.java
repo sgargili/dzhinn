@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
 
 /**
  * @author Andrey Popov creates on 19.07.11 (17:44)
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "units_group")
 public class UnitsOfMeasureGroup extends BaseEntity {
