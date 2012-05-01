@@ -24,7 +24,11 @@ public class SelectableTree extends JFrame implements TreeSelectionListener {
     }
 
     private JTree tree;
+
     private JTextField currentSelectionField;
+
+
+
 
     public SelectableTree() {
         super("Persons");
