@@ -1,0 +1,28 @@
+<equipment>
+    <computers>
+        <computer id="1">
+            <hardware>
+                <cpu>intel</cpu>
+                <soundcard>sound</soundcard>
+                <hdd>100</hdd>
+            </hardware>
+            <software>windows xp</software>
+        </computer>
+        <computer id="2">
+            <hardware>
+                <cpu>amd</cpu>
+                <soundcard>sound10</soundcard>
+                <hdd>200</hdd>
+            </hardware>
+            <software>linux</software>
+        </computer>
+        <computer id="3">
+            <hardware>
+                <cpu>intel core i5</cpu>
+                <soundcard>sound20</soundcard>
+                <hdd>500</hdd>
+            </hardware>
+            <software>mac os</software>
+        </computer>
+    </computers>
+</equipment>

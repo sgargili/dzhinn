@@ -1,0 +1,37 @@
+<project name="Task2" default="dist" basedir=".">
+    <description>
+        Task2 Build File
+    </description>
+
+    <property name="src" location="src"/>
+    <property name="output" location="out"/>
+
+    <target name="init">
+        <mkdir dir="${output}/build"/>
+        <mkdir dir="${output}/dist"/>
+    </target>
+
+    <target name="compile" depends="init" description="compile the source">
+        <javac srcdir="${src}" destdir="${output}/build"/>
+        <copy todir="${output}/build/task2/resources">
+            <fileset dir="${src}/task2/resources"/>
+        </copy>
+    </target>
+
+    <target name="dist" depends="compile" description="generate the distribution">
+        <jar jarfile="${output}/dist/Task2.jar" basedir="${output}/build">
+            <manifest>
+                <attribute name="Main-Class" value="task2.SelectionTreeTest"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="run">
+        <java jar="${output}/dist/Task2.jar" fork="true"/>
+    </target>
+
+    <target name="clean" description="clean up">
+        <delete dir="${output}/build"/>
+        <delete dir="${output}/dist"/>
+    </target>
+</project>
